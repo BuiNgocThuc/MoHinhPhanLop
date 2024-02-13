@@ -4,30 +4,31 @@
  */
 package DAL;
 
-import java.util.ArrayList;
-import DTO.OnlineCourseDTO;
-import java.sql.PreparedStatement;
+import DTO.OnsiteCourseDTO;
+import java.sql.Time;
 import java.sql.Connection;
-import java.sql.SQLException;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author buing
  */
-public class OnlineCourseDAL {
+public class OnsiteCourseDAL {
 
     private Connection conn;
     private PreparedStatement preStm;
 
-    public OnlineCourseDAL() {
+    public OnsiteCourseDAL() {
         ConnectDB connectDB = new ConnectDB();
         conn = (Connection) connectDB.getConnectDB();
     }
 
-    public List<OnlineCourseDTO> selectAll() {
-        List<OnlineCourseDTO> listOnlCourses = new ArrayList<>();
+    public List<OnsiteCourseDTO> selectAll() {
+        List<OnsiteCourseDTO> listOnsCourses = new ArrayList<>();
         String query = "SELECT * FROM onlinecourse";
         try
         {
@@ -36,34 +37,42 @@ public class OnlineCourseDAL {
             while (rs.next())
             {
                 int CourseID = rs.getInt("CourseID");
-                String url = rs.getString("url");
+                String Location = rs.getString("Location");
+                String Days = rs.getString("Days");
+                Time time = rs.getTime("Time");
 
-                OnlineCourseDTO OnlCourse = new OnlineCourseDTO();
-                OnlCourse.setCourseID(CourseID);
-                OnlCourse.setUrl(url);
+                OnsiteCourseDTO OnsCourse = new OnsiteCourseDTO();
+                OnsCourse.setCourseID(CourseID);
+                OnsCourse.setDays(Days);
+                OnsCourse.setLocation(Location);
+                OnsCourse.setTime(time);
 
-                listOnlCourses.add(OnlCourse);
+                listOnsCourses.add(OnsCourse);
             }
         } catch (SQLException e)
         {
             e.printStackTrace();
         }
 
-        return listOnlCourses;
+        return listOnsCourses;
     }
-    
-    public boolean insertOnlineCourse(OnlineCourseDTO onlCourse) {
-        int result = -1;
-        
-        int CourseID = onlCourse.getCourseID();
-        String url = onlCourse.getUrl();
 
-        String query = "INSERT INTO onlinecourse(CourseID, url) VALUES (?,?)";
+    public boolean insertOnsiteCourse(OnsiteCourseDTO onsCourse) {
+        int result = -1;
+
+        int CourseID = onsCourse.getCourseID();
+        String Location = onsCourse.getLocation();
+        String Days = onsCourse.getDays();
+        Time Time = onsCourse.getTime();
+
+        String query = "INSERT INTO onsitecourse(CourseID, Location, Days, Time) VALUES (?,?,?,?)";
         try
         {
             preStm = conn.prepareStatement(query);
             preStm.setInt(1, CourseID);
-            preStm.setString(2, url);
+            preStm.setString(2, Location);
+            preStm.setString(3, Days);
+             preStm.setTime(4, Time);
 
             result = preStm.executeUpdate();
             if (result != 0)
@@ -76,20 +85,24 @@ public class OnlineCourseDAL {
         }
         return false;
     }
-    
-    public boolean updateOnlineCourse(OnlineCourseDTO onlCourse) {
-         int result = -1;
-        
-        int CourseID = onlCourse.getCourseID();
-        String url = onlCourse.getUrl();
 
-        String query = "UPDATE onlinecourse SET url = ? WHERE CourseID = ?";
+    public boolean updateOnsiteCourse(OnsiteCourseDTO onsCourse) {
+        int result = -1;
+
+        int CourseID = onsCourse.getCourseID();
+        String Location = onsCourse.getLocation();
+        String Days = onsCourse.getDays();
+        Time Time = onsCourse.getTime();
+
+        String query = "UPDATE onlinecourse SET Location = ?, Days = ?, Time = ? WHERE CourseID = ?";
         try
         {
             preStm = conn.prepareStatement(query);
             preStm.setInt(4, CourseID);
-            preStm.setString(1, url);
-            
+            preStm.setString(1, Location);
+            preStm.setString(2, Days);
+            preStm.setTime(3, Time);
+
             result = preStm.executeUpdate();
             if (result != 0)
             {
@@ -101,16 +114,16 @@ public class OnlineCourseDAL {
         }
         return false;
     }
-    
-    public boolean deleteOnlineCourse(int CourseID) {
-         int result = -1;
 
-        String query = "DELETE FROM onlinecourse WHERE CourseID = ?";
+    public boolean deleteOnsiteCourse(int CourseID) {
+        int result = -1;
+
+        String query = "DELETE FROM onsitecourse WHERE CourseID = ?";
         try
         {
             preStm = conn.prepareStatement(query);
             preStm.setInt(1, CourseID);
-            
+
             result = preStm.executeUpdate();
             if (result != 0)
             {

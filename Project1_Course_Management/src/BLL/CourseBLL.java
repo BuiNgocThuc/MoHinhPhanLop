@@ -4,10 +4,32 @@
  */
 package BLL;
 
+import DAL.CourseDAL;
+import DTO.CourseDTO;
+import DTO.OnlineCourseDTO;
+import DTO.OnsiteCourseDTO;
+import java.util.List;
+
 /**
  *
  * @author buing
  */
 public class CourseBLL {
+    private CourseDAL courseDAL;
     
+    public CourseBLL() {
+        courseDAL = new CourseDAL();
+    }
+    
+    public boolean insertCourse(CourseDTO course) {
+        return courseDAL.insertCourse(course);
+    }
+    
+    public boolean updateCourse(CourseDTO course) {
+        return courseDAL.updateCourse(course);
+    }
+    
+    public boolean deleteCourse(int CourseID) {
+        return courseDAL.deleteCourse(CourseID);
+    }
 }

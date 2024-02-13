@@ -4,10 +4,37 @@
  */
 package BLL;
 
+import DAL.CourseDAL;
+import DAL.OnsiteCourseDAL;
+import DTO.OnsiteCourseDTO;
+import java.util.List;
+
 /**
  *
  * @author buing
  */
 public class OnsiteCourseBLL {
+    private CourseDAL courseDAL;
+    private OnsiteCourseDAL onsCourseDAL;
+
+    public OnsiteCourseBLL() {
+        courseDAL = new CourseDAL();
+        onsCourseDAL = new OnsiteCourseDAL();
+    }
+
+    public List<OnsiteCourseDTO> selectAllOnsiteCourse() {
+        return courseDAL.selectAllOnsiteCourse();
+    }
     
+        public boolean insertOnsiteCourse(OnsiteCourseDTO onsCourse) {
+        return onsCourseDAL.insertOnsiteCourse(onsCourse);
+    }
+    
+    public boolean updateOnsiteCourse(OnsiteCourseDTO onsCourse) {
+        return onsCourseDAL.updateOnsiteCourse(onsCourse);
+    }
+    
+    public  boolean deleteOnsiteCourse(int CourseID) {
+        return onsCourseDAL.deleteOnsiteCourse(CourseID);
+    }
 }

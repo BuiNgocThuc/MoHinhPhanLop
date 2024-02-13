@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package DTO;
+
 import java.sql.Time;
 
 /**
@@ -10,8 +11,12 @@ import java.sql.Time;
  * @author buing
  */
 public class OnsiteCourseDTO extends CourseDTO {
+
     private String Location, Days;
     private Time Time;
+
+    public OnsiteCourseDTO() {
+    }
 
     public OnsiteCourseDTO(String Location, String Days, Time Time, int courseID, int departmentID, int credits, String title) {
         super(courseID, departmentID, credits, title);
@@ -48,6 +53,5 @@ public class OnsiteCourseDTO extends CourseDTO {
     public String toString() {
         return "OnsiteCourseDTO{" + "Location=" + Location + ", Days=" + Days + ", Time=" + Time + '}';
     }
-    
-    
+
 }
