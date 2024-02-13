@@ -6,6 +6,7 @@ package BLL;
 
 import DAL.CourseDAL;
 import DAL.OnlineCourseDAL;
+import DTO.CourseDTO;
 import DTO.OnlineCourseDTO;
 import java.util.List;
 
@@ -17,24 +18,52 @@ public class OnlineCourseBLL {
 
     private CourseDAL courseDAL;
     private OnlineCourseDAL onlCourseDAL;
+    private CourseBLL courseBLL = new CourseBLL();
 
     public OnlineCourseBLL() {
         courseDAL = new CourseDAL();
+        onlCourseDAL = new OnlineCourseDAL();
     }
 
     public List<OnlineCourseDTO> selectAllOnlineCourse() {
         return courseDAL.selectAllOnlineCourse();
     }
-    
+
     public boolean insertOnlineCourse(OnlineCourseDTO onlCourse) {
-        return onlCourseDAL.insertOnlineCourse(onlCourse);
+        boolean success = courseBLL.insertCourse(onlCourse);
+        if (success)
+        {
+            return onlCourseDAL.insertOnlineCourse(onlCourse);
+        } else
+        {
+            System.out.println("Them khoa hoc online that bai");
+        }
+        return false;
     }
-    
+
     public boolean updateOnlineCourse(OnlineCourseDTO onlCourse) {
-        return onlCourseDAL.updateOnlineCourse(onlCourse);
+        boolean success = courseBLL.updateCourse(onlCourse);
+        if (success)
+        {
+            return onlCourseDAL.updateOnlineCourse(onlCourse);
+        } else {
+            System.out.println("Sua khoa hoc online that bai");
+        }
+        return false;
+    }
+
+    public boolean deleteOnlineCourse(int CourseID) {
+        boolean success =  onlCourseDAL.deleteOnlineCourse(CourseID);
+        if (success)
+        {
+            return courseBLL.deleteCourse(CourseID);
+        } else {
+            System.out.println("Xoa khoa hoc online that bai");
+        }
+        return false;
     }
     
-    public  boolean deleteOnlineCourse(int CourseID) {
-        return onlCourseDAL.deleteOnlineCourse(CourseID);
+    public List<OnlineCourseDTO> searchOnlineCourse(String sequenceChar) {
+        return onlCourseDAL.searchOnlineCourse(sequenceChar);
     }
 }

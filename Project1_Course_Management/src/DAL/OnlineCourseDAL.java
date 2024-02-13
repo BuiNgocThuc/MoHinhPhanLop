@@ -20,14 +20,15 @@ public class OnlineCourseDAL {
 
     private Connection conn;
     private PreparedStatement preStm;
+    private List<OnlineCourseDTO> listOnlCourses = new ArrayList<>();
 
     public OnlineCourseDAL() {
         ConnectDB connectDB = new ConnectDB();
         conn = (Connection) connectDB.getConnectDB();
     }
 
+    // xem danh sách
     public List<OnlineCourseDTO> selectAll() {
-        List<OnlineCourseDTO> listOnlCourses = new ArrayList<>();
         String query = "SELECT * FROM onlinecourse";
         try
         {
@@ -51,10 +52,22 @@ public class OnlineCourseDAL {
 
         return listOnlCourses;
     }
-    
+
+    // xem chi tiết
+    public OnlineCourseDTO selectByID(int CourseID) {
+        for (OnlineCourseDTO onlCourse : listOnlCourses)
+        {
+            if (onlCourse.getCourseID() == CourseID)
+            {
+                return onlCourse;
+            }
+        }
+        return null;
+    }
+
     public boolean insertOnlineCourse(OnlineCourseDTO onlCourse) {
         int result = -1;
-        
+
         int CourseID = onlCourse.getCourseID();
         String url = onlCourse.getUrl();
 
@@ -76,10 +89,10 @@ public class OnlineCourseDAL {
         }
         return false;
     }
-    
+
     public boolean updateOnlineCourse(OnlineCourseDTO onlCourse) {
-         int result = -1;
-        
+        int result = -1;
+
         int CourseID = onlCourse.getCourseID();
         String url = onlCourse.getUrl();
 
@@ -89,7 +102,7 @@ public class OnlineCourseDAL {
             preStm = conn.prepareStatement(query);
             preStm.setInt(4, CourseID);
             preStm.setString(1, url);
-            
+
             result = preStm.executeUpdate();
             if (result != 0)
             {
@@ -101,16 +114,16 @@ public class OnlineCourseDAL {
         }
         return false;
     }
-    
+
     public boolean deleteOnlineCourse(int CourseID) {
-         int result = -1;
+        int result = -1;
 
         String query = "DELETE FROM onlinecourse WHERE CourseID = ?";
         try
         {
             preStm = conn.prepareStatement(query);
             preStm.setInt(1, CourseID);
-            
+
             result = preStm.executeUpdate();
             if (result != 0)
             {
@@ -121,5 +134,21 @@ public class OnlineCourseDAL {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public List<OnlineCourseDTO> searchOnlineCourse(String sequenceChar) {
+        List<OnlineCourseDTO> listOnlCoursesFiltered = new ArrayList<>();
+        if (sequenceChar == null || sequenceChar.isEmpty())
+        {
+            return listOnlCourses;
+        }
+        for (OnlineCourseDTO onlCourse : listOnlCourses)
+        {
+            if (onlCourse.getTitle().toLowerCase().contains(sequenceChar.toLowerCase()))
+            {
+                listOnlCoursesFiltered.add(onlCourse);
+            }
+        }
+        return listOnlCoursesFiltered;
     }
 }

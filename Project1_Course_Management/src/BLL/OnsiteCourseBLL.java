@@ -14,6 +14,7 @@ import java.util.List;
  * @author buing
  */
 public class OnsiteCourseBLL {
+
     private CourseDAL courseDAL;
     private OnsiteCourseDAL onsCourseDAL;
 
@@ -25,16 +26,16 @@ public class OnsiteCourseBLL {
     public List<OnsiteCourseDTO> selectAllOnsiteCourse() {
         return courseDAL.selectAllOnsiteCourse();
     }
-    
-        public boolean insertOnsiteCourse(OnsiteCourseDTO onsCourse) {
+
+    public boolean insertOnsiteCourse(OnsiteCourseDTO onsCourse) {
         return onsCourseDAL.insertOnsiteCourse(onsCourse);
     }
-    
+
     public boolean updateOnsiteCourse(OnsiteCourseDTO onsCourse) {
         return onsCourseDAL.updateOnsiteCourse(onsCourse);
     }
-    
-    public  boolean deleteOnsiteCourse(int CourseID) {
+
+    public boolean deleteOnsiteCourse(int CourseID) {
         return onsCourseDAL.deleteOnsiteCourse(CourseID);
     }
 }

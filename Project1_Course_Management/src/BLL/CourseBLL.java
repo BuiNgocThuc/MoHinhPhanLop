@@ -6,8 +6,6 @@ package BLL;
 
 import DAL.CourseDAL;
 import DTO.CourseDTO;
-import DTO.OnlineCourseDTO;
-import DTO.OnsiteCourseDTO;
 import java.util.List;
 
 /**
@@ -19,6 +17,10 @@ public class CourseBLL {
     
     public CourseBLL() {
         courseDAL = new CourseDAL();
+    }
+    
+    public List<CourseDTO> selectAllCourse() {
+        return courseDAL.selectAll();
     }
     
     public boolean insertCourse(CourseDTO course) {

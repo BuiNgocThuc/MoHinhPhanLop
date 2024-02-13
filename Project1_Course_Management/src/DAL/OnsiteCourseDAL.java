@@ -21,6 +21,7 @@ public class OnsiteCourseDAL {
 
     private Connection conn;
     private PreparedStatement preStm;
+    private List<OnsiteCourseDTO> listOnsCourses = new ArrayList<>();
 
     public OnsiteCourseDAL() {
         ConnectDB connectDB = new ConnectDB();
@@ -28,7 +29,7 @@ public class OnsiteCourseDAL {
     }
 
     public List<OnsiteCourseDTO> selectAll() {
-        List<OnsiteCourseDTO> listOnsCourses = new ArrayList<>();
+        
         String query = "SELECT * FROM onlinecourse";
         try
         {
@@ -55,6 +56,18 @@ public class OnsiteCourseDAL {
         }
 
         return listOnsCourses;
+    }
+    
+    // xem chi tiết
+    public OnsiteCourseDTO selectByID(int CourseID) {
+        for (OnsiteCourseDTO onsCourse : listOnsCourses)
+        {
+            if (onsCourse.getCourseID() == CourseID)
+            {
+                return onsCourse;
+            }
+        }
+        return null;
     }
 
     public boolean insertOnsiteCourse(OnsiteCourseDTO onsCourse) {
@@ -134,5 +147,21 @@ public class OnsiteCourseDAL {
             e.printStackTrace();
         }
         return false;
+    }
+    
+        public List<OnsiteCourseDTO> searchOnsiteCourse(String sequenceChar) {
+        List<OnsiteCourseDTO> listOnlCoursesFiltered = new ArrayList<>();
+        if (sequenceChar == null || sequenceChar.isEmpty())
+        {
+            return listOnsCourses;
+        }
+        for (OnsiteCourseDTO onsCourse : listOnsCourses)
+        {
+            if (onsCourse.getTitle().toLowerCase().contains(sequenceChar.toLowerCase()))
+            {
+                listOnlCoursesFiltered.add(onsCourse);
+            }
+        }
+        return listOnlCoursesFiltered;
     }
 }

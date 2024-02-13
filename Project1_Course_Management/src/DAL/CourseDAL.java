@@ -13,8 +13,6 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -26,34 +24,43 @@ public class CourseDAL {
     private PreparedStatement preStm;
     private OnlineCourseDAL onlCourseDAL = new OnlineCourseDAL();
     private OnsiteCourseDAL onsCourseDAL = new OnsiteCourseDAL();
+    private List<CourseDTO> listCourses = new ArrayList<>();
 
     public CourseDAL() {
         ConnectDB connectDB = new ConnectDB();
         conn = (Connection) connectDB.getConnectDB();
     }
-
-    public CourseDTO selectCourseByID(int CourseID) {
-        String query = "SELECT * FROM course WHERE CourseID = ?";
-
+    
+    public List<CourseDTO> selectAll() {
+         String query = "SELECT * FROM course";
         try
         {
             preStm = conn.prepareStatement(query);
-            preStm.setInt(1, CourseID);
-
             ResultSet rs = preStm.executeQuery();
             while (rs.next())
             {
+                int CourseID = rs.getInt("CourseID");
                 String Title = rs.getString("Title");
                 int Credits = rs.getInt("Credits");
                 int DepartmentID = rs.getInt("DepartmentID");
 
                 CourseDTO course = new CourseDTO(CourseID, DepartmentID, Credits, Title);
-
-                return course;
+                
+                listCourses.add(course);
             }
         } catch (SQLException e)
         {
             e.printStackTrace();
+        }
+
+        return listCourses;
+    }
+
+    public CourseDTO selectCourseByID(int CourseID) {
+        for(CourseDTO course : listCourses) {
+            if(course.getCourseID() == CourseID) {
+                return course;
+            }
         }
         return null;
     }
@@ -176,4 +183,5 @@ public class CourseDAL {
         }
         return false;
     }
+   
 }
