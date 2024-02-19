@@ -38,4 +38,8 @@ public class OnsiteCourseBLL {
     public boolean deleteOnsiteCourse(int CourseID) {
         return onsCourseDAL.deleteOnsiteCourse(CourseID);
     }
+    
+    public List<OnsiteCourseDTO> searchOnlineCourse(String sequenceChar) {
+        return onsCourseDAL.searchOnsiteCourse(sequenceChar);
+    }
 }

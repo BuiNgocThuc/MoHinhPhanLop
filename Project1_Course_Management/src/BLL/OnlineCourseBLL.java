@@ -6,7 +6,6 @@ package BLL;
 
 import DAL.CourseDAL;
 import DAL.OnlineCourseDAL;
-import DTO.CourseDTO;
 import DTO.OnlineCourseDTO;
 import java.util.List;
 
