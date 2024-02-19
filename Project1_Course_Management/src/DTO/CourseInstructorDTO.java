@@ -2,6 +2,8 @@ package DTO;
 
 public class CourseInstructorDTO {
     private int CourseID, PersonID;
+    public CourseDTO courseDTO;
+    public PersonDTO personDTO;
 
     public CourseInstructorDTO(int courseID, int personID) {
         CourseID = courseID;

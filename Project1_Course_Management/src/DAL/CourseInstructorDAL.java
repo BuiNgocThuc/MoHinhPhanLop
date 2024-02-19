@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package DAL;
+import DTO.CourseInstructorDTO;
+import java.util.List;
 
 /**
  *
@@ -10,4 +12,21 @@ package DAL;
  */
 public class CourseInstructorDAL {
     
+    
+    
+    public void populate(CourseInstructorDTO courseInstructorDTO, String[] fields) {
+        
+        // create SQL query and map result to object
+        for(String field: fields) {
+            // Mapping data
+        }
+    }
+    
+    public void populate(List<CourseInstructorDTO> courseInstructorDTOs, String[] fields) {
+        // get list ids
+        
+        // create query with ids
+        
+        // mapping all elements
+    }
 }
