@@ -20,8 +20,6 @@ import java.util.Arrays;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.Timer;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -346,23 +344,6 @@ public class Home extends javax.swing.JFrame {
         courseBtn.setIcon(new ImageIcon(getClass().getResource("/assets/icons8-arrow-down-20.png")));
         dropdownToggle = false;
         closeMenu();
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    UIManager.setLookAndFeel(new FlatLightLaf());
-                } catch (Exception ex) {
-                    System.err.println("Failed to initialize LaF");
-                }
-                new Home().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
