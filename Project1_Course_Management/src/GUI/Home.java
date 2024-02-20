@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.Timer;
 import GUI.MainPanel.OnsiteCoursePanel;
 import javax.swing.BorderFactory;
+import javax.swing.border.EmptyBorder;
 /**
  *
  * @author ASUS
@@ -29,6 +30,7 @@ public class Home extends javax.swing.JFrame {
     private final Color yellow = new Color(255, 188, 0);
     private final Color lightBlue = new Color(0, 158, 248);
     private final Color darkBlue = new Color(0, 158, 248);
+    private final Color lightGray = new Color(242,242,242);
     private final OnsiteCoursePanel onsiteCoursePanel = new OnsiteCoursePanel();
     private boolean dropdownToggle = false;
     private JButton currentBtn = null;
@@ -66,10 +68,10 @@ public class Home extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Course Management");
 
-        sidebarMenu.setBackground(new java.awt.Color(255, 255, 255));
         sidebarMenu.setPreferredSize(new java.awt.Dimension(250, 653));
         sidebarMenu.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0));
 
+        courseBtn.setBackground(new java.awt.Color(242, 242, 242));
         courseBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         courseBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8-arrow-down-20.png"))); // NOI18N
         courseBtn.setText("Các khóa học");
@@ -127,6 +129,7 @@ public class Home extends javax.swing.JFrame {
 
         sidebarMenu.add(dropdownCourses);
 
+        scheduleBtn.setBackground(new java.awt.Color(242, 242, 242));
         scheduleBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         scheduleBtn.setText("Lịch phân công");
         scheduleBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 15));
@@ -140,6 +143,7 @@ public class Home extends javax.swing.JFrame {
         });
         sidebarMenu.add(scheduleBtn);
 
+        resultBtn.setBackground(new java.awt.Color(242, 242, 242));
         resultBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         resultBtn.setText("Kết quả khóa học");
         resultBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 15));
@@ -293,7 +297,7 @@ public class Home extends javax.swing.JFrame {
 
     public void setBackgroundDefaultAllButton() {
         for (JButton btn : allBtnLeftBar) {
-            btn.setBackground(Color.WHITE);
+            btn.setBackground(lightGray);
         }
         for (JButton btn : allBtnLeftSubBar) {
             btn.setBackground(Color.BLACK);
