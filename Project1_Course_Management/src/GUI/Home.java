@@ -4,14 +4,9 @@
  */
 package GUi;
 
-import com.formdev.flatlaf.FlatDarkLaf;
-import com.formdev.flatlaf.FlatIntelliJLaf;
-import com.formdev.flatlaf.FlatLightLaf;
-import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,7 +15,8 @@ import java.util.Arrays;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.Timer;
-
+import GUI.MainPanel.OnsiteCoursePanel;
+import javax.swing.BorderFactory;
 /**
  *
  * @author ASUS
@@ -33,6 +29,7 @@ public class Home extends javax.swing.JFrame {
     private final Color yellow = new Color(255, 188, 0);
     private final Color lightBlue = new Color(0, 158, 248);
     private final Color darkBlue = new Color(0, 158, 248);
+    private final OnsiteCoursePanel onsiteCoursePanel = new OnsiteCoursePanel();
     private boolean dropdownToggle = false;
     private JButton currentBtn = null;
     private final ArrayList<JButton> allBtnLeftBar = new ArrayList<>();
@@ -63,7 +60,6 @@ public class Home extends javax.swing.JFrame {
         resultBtn = new javax.swing.JButton();
         cardPanel = new javax.swing.JPanel();
         schedulePanel = new javax.swing.JPanel();
-        onSiteCoursePanel = new javax.swing.JPanel();
         onlineCoursePanel = new javax.swing.JPanel();
         resultPanel = new javax.swing.JPanel();
 
@@ -176,21 +172,6 @@ public class Home extends javax.swing.JFrame {
 
         cardPanel.add(schedulePanel, "card5");
 
-        onSiteCoursePanel.setBackground(new java.awt.Color(0, 51, 255));
-
-        javax.swing.GroupLayout onSiteCoursePanelLayout = new javax.swing.GroupLayout(onSiteCoursePanel);
-        onSiteCoursePanel.setLayout(onSiteCoursePanelLayout);
-        onSiteCoursePanelLayout.setHorizontalGroup(
-            onSiteCoursePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 911, Short.MAX_VALUE)
-        );
-        onSiteCoursePanelLayout.setVerticalGroup(
-            onSiteCoursePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
-        );
-
-        cardPanel.add(onSiteCoursePanel, "card2");
-
         onlineCoursePanel.setBackground(new java.awt.Color(255, 51, 51));
 
         javax.swing.GroupLayout onlineCoursePanelLayout = new javax.swing.GroupLayout(onlineCoursePanel);
@@ -247,7 +228,7 @@ public class Home extends javax.swing.JFrame {
     private void onsiteCourseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onsiteCourseBtnActionPerformed
         // TODO add your handling code here:
         cardPanel.removeAll();
-        cardPanel.add(onSiteCoursePanel);
+        cardPanel.add(onsiteCoursePanel);
         cardPanel.repaint();
         cardPanel.revalidate();
         setBackgroundDefaultAllButton();
@@ -310,10 +291,6 @@ public class Home extends javax.swing.JFrame {
         timer.start();
     }
 
-    private void hoverButton(JButton button, Color color) {
-        button.setBackground(color);
-    }
-
     public void setBackgroundDefaultAllButton() {
         for (JButton btn : allBtnLeftBar) {
             btn.setBackground(Color.WHITE);
@@ -350,7 +327,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel cardPanel;
     private javax.swing.JButton courseBtn;
     private javax.swing.JPanel dropdownCourses;
-    private javax.swing.JPanel onSiteCoursePanel;
     private javax.swing.JButton onlineCourseBtn;
     private javax.swing.JPanel onlineCoursePanel;
     private javax.swing.JButton onsiteCourseBtn;
