@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <Properties>
+    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+    </Property>
+  </Properties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="jScrollPane1" pref="851" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="jTextField1" min="-2" pref="360" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <Component id="jTextField1" min="-2" pref="53" max="-2" attributes="0"/>
+              <EmptySpace pref="57" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="452" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTable" name="onsiteCourseTable">
+          <Properties>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+              <Table columnCount="7" rowCount="5">
+                <Column editable="false" title="CourseID" type="java.lang.Object">
+                  <Data value="1045"/>
+                  <Data value="1046"/>
+                  <Data value="1061"/>
+                  <Data value="2042"/>
+                  <Data value="4022"/>
+                </Column>
+                <Column editable="false" title="CourseName" type="java.lang.Object">
+                  <Data value="Calculus"/>
+                  <Data value="Chemistry"/>
+                  <Data value="Physics"/>
+                  <Data value="Literature"/>
+                  <Data value="Microeconomics"/>
+                </Column>
+                <Column editable="false" title="Credit" type="java.lang.Object">
+                  <Data value="4"/>
+                  <Data value="4"/>
+                  <Data value="4"/>
+                  <Data value="4"/>
+                  <Data value="3"/>
+                </Column>
+                <Column editable="false" title="Department Name" type="java.lang.Object">
+                  <Data value="Mathematics"/>
+                  <Data value="Engineering"/>
+                  <Data value="Enginerring"/>
+                  <Data value="English"/>
+                  <Data value="Economics"/>
+                </Column>
+                <Column editable="false" title="Location" type="java.lang.Object">
+                  <Data value="121 Smith"/>
+                  <Data value="123 Smith"/>
+                  <Data value="234 Smith"/>
+                  <Data value="225 Adams"/>
+                  <Data value="23 Williams"/>
+                </Column>
+                <Column editable="false" title="Days" type="java.lang.Object">
+                  <Data value="MWHF"/>
+                  <Data value="MTWH"/>
+                  <Data value="TWHF"/>
+                  <Data value="MTWH"/>
+                  <Data value="MWF"/>
+                </Column>
+                <Column editable="false" title="Time" type="java.lang.Object">
+                  <Data value="15:30:00"/>
+                  <Data value="16:30:00"/>
+                  <Data value="13:15:00"/>
+                  <Data value="11:00:00"/>
+                  <Data value="09:00:00"/>
+                </Column>
+              </Table>
+            </Property>
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+              <TableColumnModel selectionModel="0">
+                <Column maxWidth="70" minWidth="70" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="150" minWidth="150" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="70" minWidth="70" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="100" minWidth="100" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="100" minWidth="100" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="120" minWidth="120" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+              </TableColumnModel>
+            </Property>
+            <Property name="rowHeight" type="int" value="35"/>
+            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+              <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="onsiteCourseTable.getTableHeader().setFont(new Font(&quot;Segoe UI&quot;, 0, 14));&#xa;DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();&#xa;onsiteCourseTable.setFont(new Font(&quot;Segoe UI&quot;, 0, 14));&#xa;leftRenderer.setHorizontalAlignment(JLabel.CENTER);&#xa;((DefaultTableCellRenderer)onsiteCourseTable.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);&#xa;        // Iterate over each column and set cell renderer and font&#xa;for (int i = 0; i &lt; onsiteCourseTable.getColumnCount(); i++) {&#xa;    onsiteCourseTable.getColumnModel().getColumn(i).setCellRenderer(leftRenderer);&#xa;}"/>
+          </AuxValues>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JTextField" name="jTextField1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jTextField1"/>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>
