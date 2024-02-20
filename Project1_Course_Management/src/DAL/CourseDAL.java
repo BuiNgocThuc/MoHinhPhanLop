@@ -14,10 +14,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author buing
- */
 public class CourseDAL {
 
     private Connection conn;

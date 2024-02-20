@@ -3,38 +3,36 @@ package BLL;
 import DAL.CourseInstructorDAL;
 import DTO.CourseInstructorDTO;
 import java.util.List;
+import DTO.CourseInstructorDTO;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
 
 public class CourseInstructorBLL {
 
-    public void addCourse(CourseInstructorDTO courseInstructorDTO) throws Exception{
-        try {
-            // Validation data
-            // throw if incorrect
+    private CourseInstructorDAL courseInstructorDAL;
 
-            // Call to CourseInstructorBLL to check exist relationship
-            // if exist throw Exception;
-
-            // insert relationship -> call to CourseInstrcutorDAL
-            // if error, throw SQLException;
-
-            // Done
-        } catch (Exception e) {
-            throw e;
-        }
+    public CourseInstructorBLL(Connection connection) {
+        this.courseInstructorDAL = new CourseInstructorDAL(connection);
     }
-    
-    public List<CourseInstructorDTO> getAllCourseInstructor() {
-        /**
-         * CourseInstructorDTO { personId, courseId }
-         */
-        List<CourseInstructorDTO> courseInstructorDTOs = null;
-        
-        new CourseInstructorDAL().populate(courseInstructorDTOs, new String[] {"person"});
-        
-        return null;
+
+    public List<CourseInstructorDTO> getAllCourseInstructors() throws SQLException {
+        return courseInstructorDAL.selectAll();
     }
-    
-    public List<CourseInstructorDTO> getAllCourseInstructorByPersonId() {
-        return null;
+
+    public CourseInstructorDTO getCourseInstructorByID(int courseID) throws SQLException {
+        return courseInstructorDAL.selectByID(courseID);
+    }
+
+    public void insertCourseInstructor(CourseInstructorDTO courseInstructor) throws SQLException {
+        courseInstructorDAL.insertCourseInstructor(courseInstructor);
+    }
+
+    public boolean updateCourseInstructor(CourseInstructorDTO courseInstructor) throws SQLException {
+        return courseInstructorDAL.updateCourseInstructor(courseInstructor);
+    }
+
+    public void deleteCourseInstructor(int courseID) throws SQLException {
+        courseInstructorDAL.deleteCourseInstructor(courseID);
     }
 }
