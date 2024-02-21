@@ -16,9 +16,16 @@ public class CourseInstructorBLL {
         this.courseInstructorDAL = new CourseInstructorDAL(connection);
     }
 
-    public List<CourseInstructorDTO> getAllCourseInstructors() throws SQLException {
+   public List<CourseInstructorDTO> getAllCourseInstructors() {
+    try {
         return courseInstructorDAL.selectAll();
+    } catch (SQLException e) {
+        // Xử lý ngoại lệ, ví dụ: in ra thông báo hoặc ghi log
+        e.printStackTrace();
+        return null;
     }
+}
+
 
     public CourseInstructorDTO getCourseInstructorByID(int courseID) throws SQLException {
         return courseInstructorDAL.selectByID(courseID);
