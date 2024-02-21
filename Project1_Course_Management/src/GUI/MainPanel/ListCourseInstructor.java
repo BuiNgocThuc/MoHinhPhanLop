@@ -17,6 +17,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 import static java.awt.FlowLayout.LEFT;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.net.URL;
 import java.sql.Connection;
 import static javax.swing.SwingConstants.RIGHT;
 import javax.swing.border.MatteBorder;
@@ -46,22 +47,15 @@ public class ListCourseInstructor extends JPanel {
         topPanel = new JPanel();
         topPanel.setPreferredSize(new Dimension(1000, 100));
         topPanel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(255, 255, 255)));
-        topPanel.setBackground(new Color(0, 38, 77));
-
         topPanel.setLayout(new GridLayout(0, 2, 0, 0));
 
-//        JPanel panelAction_1 = new JPanel();
-//        panelAction_1.setBackground(new Color(0, 38, 77));
-//        topPanel.add(panelAction_1);
-//        panelAction_1.setLayout(new BorderLayout(0, 0));
         JLabel titleLabel = new JLabel("  Quản lý phân công");
-//        titleLabel.setForeground(new Color(255, 255, 255));
         titleLabel.setFont(new Font("Arial", Font.PLAIN, 30));
         topPanel.add(titleLabel);
 
         JPanel panelAction = new JPanel();
         panelAction.setPreferredSize(new Dimension(20, 20));
-//        panelAction.setBackground(new Color(0, 38, 77));
+        // panelAction.setBackground(new Color(0, 38, 77));
         FlowLayout flowLayout = new FlowLayout(LEFT);
         flowLayout.setAlignOnBaseline(true);
         panelAction.setLayout(flowLayout);
@@ -75,7 +69,7 @@ public class ListCourseInstructor extends JPanel {
         addButton.setPreferredSize(new java.awt.Dimension(100, 45));
         addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                // gọi form thêm 
+                // gọi form thêm
             }
         });
         panelAction.add(addButton);
@@ -112,14 +106,13 @@ public class ListCourseInstructor extends JPanel {
         JTextField searchValue = new JTextField();
         JButton searchButton = new JButton();
 
-        searchPanel.setBorder(BorderFactory.createEmptyBorder(11, 1, 11, 1));
-//        searchPanel.setPreferredSize(new Dimension(360, 50));
-//        searchPanel.setLayout(new f());
+        searchPanel.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
         FlowLayout flowLayout1 = new FlowLayout(RIGHT);
         flowLayout.setAlignOnBaseline(true);
         searchPanel.setLayout(flowLayout1);
-        searchValue.setBorder(null);
-        searchValue.setPreferredSize(new Dimension(200, 50));
+
+        searchValue.setPreferredSize(new Dimension(200, 40));
+        searchValue.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         searchValue.setText("Nhập thông tin cần tìm");
         searchValue.addFocusListener(new FocusListener() {
             @Override
@@ -137,10 +130,10 @@ public class ListCourseInstructor extends JPanel {
             }
         });
         searchPanel.add(searchValue);
-
-//        searchButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8-search-24.png"))); 
         searchButton.setBorder(null);
+        searchButton.setText("tìm kiếm");
         searchButton.setBackground(Color.WHITE);
+        searchPanel.add(searchButton);
 
         topPanel.add(searchPanel);
         topPanel.add(panelAction);
@@ -159,7 +152,14 @@ public class ListCourseInstructor extends JPanel {
         table = new JTable();
         DefaultTableModel model = new DefaultTableModel(
                 new Object[][]{},
-                new String[]{"STT", "Mã GV", "Tên GV", "Tên Lớp", "Mã Lớp"});
+                new String[]{"STT", "Mã GV", "Tên GV", "Tên Lớp", "Mã Lớp"}) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // Ngăn chặn việc chỉnh sửa ô
+                return false;
+            }
+        };
+
         table = new JTable(model);
         int stt = 1;
         for (CourseInstructorDTO dto : listCourseInstructorDTO) {
@@ -173,8 +173,6 @@ public class ListCourseInstructor extends JPanel {
         }
 
         table.setModel(model);
-        // table.setShowGrid(false);
-
         scrollPane = new JScrollPane(table);
         table.getTableHeader().setReorderingAllowed(false);
 
