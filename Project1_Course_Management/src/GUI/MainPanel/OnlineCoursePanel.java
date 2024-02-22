@@ -4,25 +4,21 @@
  */
 package GUI.MainPanel;
 
-import java.awt.Color;
 import java.awt.Font;
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.table.*;
+import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
  * @author ASUS
  */
-public class OnsiteCoursePanel extends javax.swing.JPanel {
+public class OnlineCoursePanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form CoursesPanel
+     * Creates new form OnlineCoursePanel
      */
-    private final OnsiteCourseAddForm onsiteCourseAddForm = new OnsiteCourseAddForm();
-    
-    public OnsiteCoursePanel() {
+    public OnlineCoursePanel() {
         initComponents();
     }
 
@@ -35,28 +31,25 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jSeparator2 = new javax.swing.JSeparator();
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         onsiteCourseTable = new javax.swing.JTable();
-        jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
         searchOnsiteCourseValue = new javax.swing.JTextField();
         searchOnsiteCourseBtn = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
-        jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
         addCourseBtn = new javax.swing.JButton();
         editCourseBtn = new javax.swing.JButton();
         deleteCourseBtn = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
 
-        jButton1.setText("jButton1");
-
-        setBackground(new java.awt.Color(255, 255, 255));
-        setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         onsiteCourseTable.getTableHeader().setFont(new Font("Segoe UI", 0, 14));
         DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
@@ -91,38 +84,24 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
         onsiteCourseTable.setRowHeight(35);
         onsiteCourseTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(onsiteCourseTable);
-        if (onsiteCourseTable.getColumnModel().getColumnCount() > 0) {
-            onsiteCourseTable.getColumnModel().getColumn(0).setMinWidth(70);
-            onsiteCourseTable.getColumnModel().getColumn(0).setMaxWidth(70);
-            onsiteCourseTable.getColumnModel().getColumn(1).setMinWidth(150);
-            onsiteCourseTable.getColumnModel().getColumn(1).setMaxWidth(150);
-            onsiteCourseTable.getColumnModel().getColumn(2).setMinWidth(70);
-            onsiteCourseTable.getColumnModel().getColumn(2).setMaxWidth(70);
-            onsiteCourseTable.getColumnModel().getColumn(4).setMinWidth(100);
-            onsiteCourseTable.getColumnModel().getColumn(4).setMaxWidth(100);
-            onsiteCourseTable.getColumnModel().getColumn(5).setMinWidth(100);
-            onsiteCourseTable.getColumnModel().getColumn(5).setMaxWidth(100);
-            onsiteCourseTable.getColumnModel().getColumn(6).setMinWidth(120);
-            onsiteCourseTable.getColumnModel().getColumn(6).setMaxWidth(120);
-        }
-
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel1.setText("QUẢN LÝ KHÓA HỌC ONSITE");
+        jLabel1.setText("QUẢN LÝ KHÓA HỌC ONLINE");
         jLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 5, 0, 0));
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 5, 0);
         flowLayout1.setAlignOnBaseline(true);
-        jPanel3.setLayout(flowLayout1);
+        jPanel4.setLayout(flowLayout1);
 
         searchOnsiteCourseValue.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         searchOnsiteCourseValue.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         searchOnsiteCourseValue.setPreferredSize(new java.awt.Dimension(300, 45));
-        jPanel3.add(searchOnsiteCourseValue);
+        jPanel4.add(searchOnsiteCourseValue);
 
         searchOnsiteCourseBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8-search-24.png"))); // NOI18N
         searchOnsiteCourseBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -132,29 +111,29 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
                 searchOnsiteCourseBtnActionPerformed(evt);
             }
         });
-        jPanel3.add(searchOnsiteCourseBtn);
+        jPanel4.add(searchOnsiteCourseBtn);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(216, 216, 216)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE))
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
-        jPanel4.setPreferredSize(new java.awt.Dimension(0, 62));
-        java.awt.FlowLayout flowLayout2 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT);
-        flowLayout2.setAlignOnBaseline(true);
-        jPanel4.setLayout(flowLayout2);
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
+        jPanel5.setPreferredSize(new java.awt.Dimension(0, 62));
+        java.awt.FlowLayout flowLayout3 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT);
+        flowLayout3.setAlignOnBaseline(true);
+        jPanel5.setLayout(flowLayout3);
 
         addCourseBtn.setBackground(new java.awt.Color(155, 207, 83));
         addCourseBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -167,7 +146,7 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
                 addCourseBtnActionPerformed(evt);
             }
         });
-        jPanel4.add(addCourseBtn);
+        jPanel5.add(addCourseBtn);
 
         editCourseBtn.setBackground(new java.awt.Color(64, 162, 227));
         editCourseBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -175,7 +154,7 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
         editCourseBtn.setText("Sửa");
         editCourseBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(187, 226, 236)));
         editCourseBtn.setPreferredSize(new java.awt.Dimension(100, 45));
-        jPanel4.add(editCourseBtn);
+        jPanel5.add(editCourseBtn);
 
         deleteCourseBtn.setBackground(new java.awt.Color(255, 104, 104));
         deleteCourseBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -188,13 +167,13 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
                 deleteCourseBtnActionPerformed(evt);
             }
         });
-        jPanel4.add(deleteCourseBtn);
+        jPanel5.add(deleteCourseBtn);
 
-        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel5.setPreferredSize(new java.awt.Dimension(813, 45));
-        java.awt.FlowLayout flowLayout3 = new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 0, 0);
-        flowLayout3.setAlignOnBaseline(true);
-        jPanel5.setLayout(flowLayout3);
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.setPreferredSize(new java.awt.Dimension(813, 45));
+        java.awt.FlowLayout flowLayout2 = new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 0, 0);
+        flowLayout2.setAlignOnBaseline(true);
+        jPanel6.setLayout(flowLayout2);
 
         jButton2.setBackground(new java.awt.Color(64, 162, 227));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -202,42 +181,63 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
         jButton2.setText("Xem chi tiết");
         jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(187, 226, 236)));
         jButton2.setPreferredSize(new java.awt.Dimension(120, 45));
-        jPanel5.add(jButton2);
+        jPanel6.add(jButton2);
 
-        jPanel4.add(jPanel5);
+        jPanel5.add(jPanel6);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jSeparator1)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jSeparator1)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 1161, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE))
+            .addGap(0, 676, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -246,7 +246,7 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_searchOnsiteCourseBtnActionPerformed
 
     private void addCourseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCourseBtnActionPerformed
-       onsiteCourseAddForm.setVisible(true);
+//        onsiteCourseAddForm.setVisible(true);
     }//GEN-LAST:event_addCourseBtnActionPerformed
 
     private void deleteCourseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCourseBtnActionPerformed
@@ -258,7 +258,6 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
     private javax.swing.JButton addCourseBtn;
     private javax.swing.JButton deleteCourseBtn;
     private javax.swing.JButton editCourseBtn;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
@@ -266,9 +265,9 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable onsiteCourseTable;
     private javax.swing.JButton searchOnsiteCourseBtn;
     private javax.swing.JTextField searchOnsiteCourseValue;
