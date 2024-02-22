@@ -131,7 +131,7 @@ public class ListCourseInstructor extends JPanel {
         });
         searchPanel.add(searchValue);
         searchButton.setBorder(null);
-        searchButton.setText("tìm kiếm");
+        searchButton.setIcon(new ImageIcon(getClass().getResource("/assets/icons8-search-24.png")));
         searchButton.setBackground(Color.WHITE);
         searchPanel.add(searchButton);
 
