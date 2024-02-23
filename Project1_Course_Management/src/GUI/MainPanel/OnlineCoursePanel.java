@@ -31,7 +31,6 @@ public class OnlineCoursePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         onsiteCourseTable = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
@@ -46,10 +45,8 @@ public class OnlineCoursePanel extends javax.swing.JPanel {
         editCourseBtn = new javax.swing.JButton();
         deleteCourseBtn = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        setBackground(new java.awt.Color(255, 255, 255));
 
         onsiteCourseTable.getTableHeader().setFont(new Font("Segoe UI", 0, 14));
         DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
@@ -63,18 +60,18 @@ public class OnlineCoursePanel extends javax.swing.JPanel {
         onsiteCourseTable.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         onsiteCourseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"1045", "Calculus", "4", "Mathematics", "121 Smith", "MWHF", "15:30:00"},
-                {"1046", "Chemistry", "4", "Engineering", "123 Smith", "MTWH", "16:30:00"},
-                {"1061", "Physics", "4", "Enginerring", "234 Smith", "TWHF", "13:15:00"},
-                {"2042", "Literature", "4", "English", "225 Adams", "MTWH", "11:00:00"},
-                {"4022", "Microeconomics", "3", "Economics", "23 Williams", "MWF", "09:00:00"}
+                {"1045", "Calculus", "4", "Mathematics", "url"},
+                {"1046", "Chemistry", "4", "Engineering", "url"},
+                {"1061", "Physics", "4", "Enginerring", "url"},
+                {"2042", "Literature", "4", "English", "url"},
+                {"4022", "Microeconomics", "3", "Economics", "url"}
             },
             new String [] {
-                "CourseID", "CourseName", "Credit", "Department Name", "Location", "Days", "Time"
+                "CourseID", "CourseName", "Credit", "Department Name", "URL"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -84,6 +81,16 @@ public class OnlineCoursePanel extends javax.swing.JPanel {
         onsiteCourseTable.setRowHeight(35);
         onsiteCourseTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(onsiteCourseTable);
+        if (onsiteCourseTable.getColumnModel().getColumnCount() > 0) {
+            onsiteCourseTable.getColumnModel().getColumn(0).setMinWidth(70);
+            onsiteCourseTable.getColumnModel().getColumn(0).setMaxWidth(70);
+            onsiteCourseTable.getColumnModel().getColumn(1).setMinWidth(150);
+            onsiteCourseTable.getColumnModel().getColumn(1).setMaxWidth(150);
+            onsiteCourseTable.getColumnModel().getColumn(2).setMinWidth(70);
+            onsiteCourseTable.getColumnModel().getColumn(2).setMaxWidth(70);
+            onsiteCourseTable.getColumnModel().getColumn(4).setMinWidth(320);
+            onsiteCourseTable.getColumnModel().getColumn(4).setMaxWidth(320);
+        }
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -174,15 +181,6 @@ public class OnlineCoursePanel extends javax.swing.JPanel {
         java.awt.FlowLayout flowLayout2 = new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 0, 0);
         flowLayout2.setAlignOnBaseline(true);
         jPanel6.setLayout(flowLayout2);
-
-        jButton2.setBackground(new java.awt.Color(64, 162, 227));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Xem chi tiết");
-        jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(187, 226, 236)));
-        jButton2.setPreferredSize(new java.awt.Dimension(120, 45));
-        jPanel6.add(jButton2);
-
         jPanel5.add(jPanel6);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -204,21 +202,6 @@ public class OnlineCoursePanel extends javax.swing.JPanel {
                 .addGap(0, 0, 0))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -226,18 +209,22 @@ public class OnlineCoursePanel extends javax.swing.JPanel {
             .addGap(0, 1161, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(10, 10, 10)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGap(10, 10, 10)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 676, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(10, 10, 10)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
+                    .addGap(10, 10, 10)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -258,9 +245,7 @@ public class OnlineCoursePanel extends javax.swing.JPanel {
     private javax.swing.JButton addCourseBtn;
     private javax.swing.JButton deleteCourseBtn;
     private javax.swing.JButton editCourseBtn;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
