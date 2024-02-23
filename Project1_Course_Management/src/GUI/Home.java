@@ -4,6 +4,7 @@
  */
 package GUi;
 
+import GUI.MainPanel.OnlineCoursePanel;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -32,6 +33,7 @@ public class Home extends javax.swing.JFrame {
     private final Color darkBlue = new Color(0, 158, 248);
     private final Color lightGray = new Color(242,242,242);
     private final OnsiteCoursePanel onsiteCoursePanel = new OnsiteCoursePanel();
+    private final OnlineCoursePanel onlineCoursePanel = new OnlineCoursePanel();
     private boolean dropdownToggle = false;
     private JButton currentBtn = null;
     private final ArrayList<JButton> allBtnLeftBar = new ArrayList<>();
@@ -62,11 +64,11 @@ public class Home extends javax.swing.JFrame {
         resultBtn = new javax.swing.JButton();
         cardPanel = new javax.swing.JPanel();
         schedulePanel = new javax.swing.JPanel();
-        onlineCoursePanel = new javax.swing.JPanel();
         resultPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Course Management");
+        setPreferredSize(new java.awt.Dimension(1330, 700));
 
         sidebarMenu.setPreferredSize(new java.awt.Dimension(250, 653));
         sidebarMenu.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0));
@@ -167,7 +169,7 @@ public class Home extends javax.swing.JFrame {
         schedulePanel.setLayout(schedulePanelLayout);
         schedulePanelLayout.setHorizontalGroup(
             schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 911, Short.MAX_VALUE)
+            .addGap(0, 1080, Short.MAX_VALUE)
         );
         schedulePanelLayout.setVerticalGroup(
             schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,28 +178,13 @@ public class Home extends javax.swing.JFrame {
 
         cardPanel.add(schedulePanel, "card5");
 
-        onlineCoursePanel.setBackground(new java.awt.Color(255, 51, 51));
-
-        javax.swing.GroupLayout onlineCoursePanelLayout = new javax.swing.GroupLayout(onlineCoursePanel);
-        onlineCoursePanel.setLayout(onlineCoursePanelLayout);
-        onlineCoursePanelLayout.setHorizontalGroup(
-            onlineCoursePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 911, Short.MAX_VALUE)
-        );
-        onlineCoursePanelLayout.setVerticalGroup(
-            onlineCoursePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
-        );
-
-        cardPanel.add(onlineCoursePanel, "card3");
-
         resultPanel.setBackground(new java.awt.Color(0, 255, 153));
 
         javax.swing.GroupLayout resultPanelLayout = new javax.swing.GroupLayout(resultPanel);
         resultPanel.setLayout(resultPanelLayout);
         resultPanelLayout.setHorizontalGroup(
             resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 911, Short.MAX_VALUE)
+            .addGap(0, 1080, Short.MAX_VALUE)
         );
         resultPanelLayout.setVerticalGroup(
             resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,6 +222,7 @@ public class Home extends javax.swing.JFrame {
         cardPanel.add(onsiteCoursePanel);
         cardPanel.repaint();
         cardPanel.revalidate();
+        onsiteCoursePanel.getEditOnsiteCoursePanel().setVisible(false);
         setBackgroundDefaultAllButton();
         onsiteCourseBtn.setBackground(lightBlue);
     }//GEN-LAST:event_onsiteCourseBtnActionPerformed
@@ -332,7 +320,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton courseBtn;
     private javax.swing.JPanel dropdownCourses;
     private javax.swing.JButton onlineCourseBtn;
-    private javax.swing.JPanel onlineCoursePanel;
     private javax.swing.JButton onsiteCourseBtn;
     private javax.swing.JButton resultBtn;
     private javax.swing.JPanel resultPanel;
