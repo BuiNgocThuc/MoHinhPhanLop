@@ -64,6 +64,7 @@ public class CourseDAL {
     public List<OnlineCourseDTO> selectAllOnlineCourse() {
         List<OnlineCourseDTO> listOnlCourses = onlCourseDAL.selectAll();
 
+        listCourses = selectAll();
         for (OnlineCourseDTO onlCourse : listOnlCourses)
         {
             int CourseID = onlCourse.getCourseID();
@@ -84,6 +85,7 @@ public class CourseDAL {
     public List<OnsiteCourseDTO> selectAllOnsiteCourse() {
         List<OnsiteCourseDTO> listOnsCourses = onsCourseDAL.selectAll();
 
+        listCourses = selectAll();
         for (OnsiteCourseDTO onsCourse : listOnsCourses)
         {
             int CourseID = onsCourse.getCourseID();

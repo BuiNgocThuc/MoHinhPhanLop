@@ -51,7 +51,7 @@ public class OnsiteCourseDTO extends CourseDTO {
 
     @Override
     public String toString() {
-        return "OnsiteCourseDTO{" + "Location=" + Location + ", Days=" + Days + ", Time=" + Time + '}';
+        return "OnsiteCourseDTO{" + "Location=" + Location + ", Days=" + Days + ", Time=" + Time + '}' + super.toString();
     }
 
 }

@@ -104,14 +104,14 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="16" style="1"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="QU&#x1ea2;N L&#xdd; KH&#xd3;A H&#x1ecc;C ONSITE"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
                     <EmptyBorder bottom="0" left="5" right="0" top="0"/>
                   </Border>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="16" style="1"/>
                 </Property>
               </Properties>
             </Component>
@@ -563,56 +563,14 @@
               </Border>
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="7" rowCount="5">
-                <Column editable="false" title="CourseID" type="java.lang.Object">
-                  <Data value="1045"/>
-                  <Data value="1046"/>
-                  <Data value="1061"/>
-                  <Data value="2042"/>
-                  <Data value="4022"/>
-                </Column>
-                <Column editable="false" title="CourseName" type="java.lang.Object">
-                  <Data value="Calculus"/>
-                  <Data value="Chemistry"/>
-                  <Data value="Physics"/>
-                  <Data value="Literature"/>
-                  <Data value="Microeconomics"/>
-                </Column>
-                <Column editable="false" title="Credit" type="java.lang.Object">
-                  <Data value="4"/>
-                  <Data value="4"/>
-                  <Data value="4"/>
-                  <Data value="4"/>
-                  <Data value="3"/>
-                </Column>
-                <Column editable="false" title="Department Name" type="java.lang.Object">
-                  <Data value="Mathematics"/>
-                  <Data value="Engineering"/>
-                  <Data value="Enginerring"/>
-                  <Data value="English"/>
-                  <Data value="Economics"/>
-                </Column>
-                <Column editable="false" title="Location" type="java.lang.Object">
-                  <Data value="121 Smith"/>
-                  <Data value="123 Smith"/>
-                  <Data value="234 Smith"/>
-                  <Data value="225 Adams"/>
-                  <Data value="23 Williams"/>
-                </Column>
-                <Column editable="false" title="Days" type="java.lang.Object">
-                  <Data value="MWHF"/>
-                  <Data value="MTWH"/>
-                  <Data value="TWHF"/>
-                  <Data value="MTWH"/>
-                  <Data value="MWF"/>
-                </Column>
-                <Column editable="false" title="Time" type="java.lang.Object">
-                  <Data value="15:30:00"/>
-                  <Data value="16:30:00"/>
-                  <Data value="13:15:00"/>
-                  <Data value="11:00:00"/>
-                  <Data value="09:00:00"/>
-                </Column>
+              <Table columnCount="7" rowCount="0">
+                <Column editable="false" title="CourseID" type="java.lang.Object"/>
+                <Column editable="false" title="Title" type="java.lang.Object"/>
+                <Column editable="false" title="Credits" type="java.lang.Object"/>
+                <Column editable="false" title="Department" type="java.lang.Object"/>
+                <Column editable="false" title="Location" type="java.lang.Object"/>
+                <Column editable="false" title="Days" type="java.lang.Object"/>
+                <Column editable="false" title="Time" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -730,7 +688,7 @@
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jButton1" max="32767" attributes="0"/>
+                          <Component id="btnUpdate" max="32767" attributes="0"/>
                           <Component id="jButton2" pref="112" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -755,7 +713,7 @@
                           <Component id="jPanel9" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jButton1" min="-2" pref="40" max="-2" attributes="0"/>
+                                  <Component id="btnUpdate" min="-2" pref="40" max="-2" attributes="0"/>
                                   <Component id="jPanel14" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -1720,18 +1678,12 @@
                 </CodeStatement>
               </LayoutCode>
             </Container>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="btnUpdate">
               <Properties>
+                <Property name="text" type="java.lang.String" value="L&#x1b0;u"/>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="df" green="7a" red="38" type="rgb"/>
                 </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="12" style="1"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="L&#x1b0;u"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                     <LineBorder>
@@ -1739,7 +1691,16 @@
                     </LineBorder>
                   </Border>
                 </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="12" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButton2">
               <Properties>
