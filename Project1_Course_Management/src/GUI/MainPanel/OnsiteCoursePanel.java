@@ -5,8 +5,10 @@
 package GUI.MainPanel;
 
 import BLL.CourseBLL;
+import BLL.DepartmentBLL;
 import BLL.OnsiteCourseBLL;
 import DTO.CourseDTO;
+import DTO.DepartmentDTO;
 import DTO.OnsiteCourseDTO;
 import java.awt.Color;
 import java.awt.Font;
@@ -18,6 +20,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.*;
 import java.sql.Time;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -30,10 +36,14 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
      */
     private final OnsiteCourseAddForm onsiteCourseAddForm = new OnsiteCourseAddForm();
     private OnsiteCourseBLL onsiteCourseBLL = new OnsiteCourseBLL();
+    private DepartmentBLL departmentBLL = new DepartmentBLL();
 
     public OnsiteCoursePanel() {
         initComponents();
+        createCbDepartment();
         createOnsiteCourseTable();
+        
+
     }
 
     public void createOnsiteCourseTable() {
@@ -46,15 +56,26 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
             String title = onsiteCourseDTO.getTitle();
             int credits = onsiteCourseDTO.getCredits();
             int departmentID = onsiteCourseDTO.getDepartmentID();
+            String departmentName = departmentBLL.selectByID(departmentID).getName();
             String location = onsiteCourseDTO.getLocation();
             String days = onsiteCourseDTO.getDays();
             Time time = onsiteCourseDTO.getTime();
 
             Object[] row =
             {
-                courseID, title, credits, departmentID, location, days, time
+                courseID, title, credits, departmentName, location, days, time
             };
             model.addRow(row);
+        }
+    }
+    
+    public void createCbDepartment() {
+        List<DepartmentDTO> listDepartment = departmentBLL.selectAll();
+        
+        for (DepartmentDTO departmentDTO : listDepartment)
+        {
+            String name = departmentDTO.getName();
+            cbDepartment.addItem(name);
         }
     }
 
@@ -97,16 +118,16 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
         txtCourseID = new javax.swing.JTextField();
         jPanel8 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtTitle = new javax.swing.JTextField();
         jPanel9 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         txtCredit = new javax.swing.JTextField();
         jPanel10 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbDepartment = new javax.swing.JComboBox<>();
         jPanel11 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtLocation = new javax.swing.JTextField();
         jPanel12 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
@@ -118,9 +139,9 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
         txtSaturday = new javax.swing.JCheckBox();
         jPanel14 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        timePicker1 = new com.github.lgooddatepicker.components.TimePicker();
+        tpTime = new com.github.lgooddatepicker.components.TimePicker();
         btnUpdate = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        txtClear = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -252,7 +273,7 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
         onsiteCourseTable.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         onsiteCourseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null, null, null}
             },
             new String [] {
                 "CourseID", "Title", "Credits", "Department", "Location", "Days", "Time"
@@ -317,8 +338,8 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
         jLabel3.setPreferredSize(new java.awt.Dimension(75, 45));
         jPanel8.add(jLabel3);
 
-        jTextField1.setPreferredSize(new java.awt.Dimension(205, 40));
-        jPanel8.add(jTextField1);
+        txtTitle.setPreferredSize(new java.awt.Dimension(205, 40));
+        jPanel8.add(txtTitle);
 
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
         jPanel9.setPreferredSize(new java.awt.Dimension(164, 55));
@@ -339,10 +360,9 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
         jLabel5.setPreferredSize(new java.awt.Dimension(70, 45));
         jPanel10.add(jLabel5);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
-        jComboBox1.setPreferredSize(new java.awt.Dimension(200, 40));
-        jPanel10.add(jComboBox1);
+        cbDepartment.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
+        cbDepartment.setPreferredSize(new java.awt.Dimension(200, 40));
+        jPanel10.add(cbDepartment);
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
         java.awt.FlowLayout flowLayout4 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT);
@@ -353,10 +373,9 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
         jLabel6.setPreferredSize(new java.awt.Dimension(75, 40));
         jPanel11.add(jLabel6);
 
-        jTextField2.setText("jTextField2");
-        jTextField2.setPreferredSize(new java.awt.Dimension(200, 40));
-        jTextField2.setRequestFocusEnabled(false);
-        jPanel11.add(jTextField2);
+        txtLocation.setPreferredSize(new java.awt.Dimension(200, 40));
+        txtLocation.setRequestFocusEnabled(false);
+        jPanel11.add(txtLocation);
 
         jPanel12.setBackground(new java.awt.Color(255, 255, 255));
         java.awt.FlowLayout flowLayout5 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT);
@@ -425,8 +444,8 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
         jLabel8.setPreferredSize(new java.awt.Dimension(75, 45));
         jPanel14.add(jLabel8);
 
-        timePicker1.setPreferredSize(new java.awt.Dimension(200, 40));
-        jPanel14.add(timePicker1);
+        tpTime.setPreferredSize(new java.awt.Dimension(200, 40));
+        jPanel14.add(tpTime);
 
         btnUpdate.setText("Lưu");
         btnUpdate.setBackground(new java.awt.Color(56, 122, 223));
@@ -439,11 +458,11 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setText("Đóng");
-        jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        txtClear.setText("Đóng");
+        txtClear.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
+        txtClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                txtClearActionPerformed(evt);
             }
         });
 
@@ -465,8 +484,8 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
                     .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))
+                    .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                    .addComponent(txtClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -477,10 +496,13 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
                     .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
@@ -537,29 +559,94 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_editCourseBtnActionPerformed
 
     private void onsiteCourseTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_onsiteCourseTableMouseClicked
+        clearText();
+        int row = onsiteCourseTable.getSelectedRow();
 
+        String courseID = onsiteCourseTable.getValueAt(row, 0).toString();
+        String title = onsiteCourseTable.getValueAt(row, 1).toString();
+        String credits = onsiteCourseTable.getValueAt(row, 2).toString();
+        String deparment = onsiteCourseTable.getValueAt(row, 3).toString();
+        String location = onsiteCourseTable.getValueAt(row, 4).toString();
+        String days = onsiteCourseTable.getValueAt(row, 5).toString();
+        String time = onsiteCourseTable.getValueAt(row, 6).toString();
+        LocalTime localtime = LocalTime.parse(time);
+
+        txtCourseID.setText(courseID);
+        txtTitle.setText(title);
+        txtCredit.setText(credits);
+        cbDepartment.setSelectedItem(deparment);
+        txtLocation.setText(location);
+        tpTime.setTime(localtime);
+        tpTime.requestFocus(false);
+        
+        while (!days.isEmpty())
+        {
+            char dayChar = days.charAt(days.length() - 1);
+            String day = String.valueOf(dayChar);
+            switch (day)
+            {
+                case "M":
+                    txtMonday.setSelected(true);
+                    break;
+                case "T":
+                    txtTuesday.setSelected(true);
+                    break;
+                case "W":
+                    txtWednesday.setSelected(true);
+                    break;
+                case "H":
+                    txtThursday.setSelected(true);
+                    break;
+                case "F":
+                    txtFriday.setSelected(true);
+                    break;
+                case "S":
+                    txtSaturday.setSelected(true);
+                    break;
+                default:
+                    throw new AssertionError();
+            }
+
+            days = days.substring(0, days.length() - 1);
+        }
     }//GEN-LAST:event_onsiteCourseTableMouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        editOnsiteCoursePanel.setVisible(false);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
+    public void clearText() {
+        txtCourseID.setText("");
+        txtTitle.setText("");
+        txtCredit.setText("");
+        cbDepartment.getEditor().setItem("");
+        txtLocation.setText("");
+        tpTime.setText("");
+        
+        txtMonday.setSelected(false);
+        txtTuesday.setSelected(false);
+        txtWednesday.setSelected(false);
+        txtThursday.setSelected(false);
+        txtFriday.setSelected(false);
+        txtSaturday.setSelected(false);
+    }
+    
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
 
     }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void txtClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClearActionPerformed
+        // TODO add your handling code here:
+        clearText();
+        editOnsiteCoursePanel.setVisible(false);
+    }//GEN-LAST:event_txtClearActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addCourseBtn;
     private javax.swing.JButton btnUpdate;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> cbDepartment;
     private javax.swing.JButton deleteCourseBtn;
     private javax.swing.JButton editCourseBtn;
     private javax.swing.JPanel editOnsiteCoursePanel;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -584,18 +671,19 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTable onsiteCourseTable;
     private javax.swing.JButton searchOnsiteCourseBtn;
     private javax.swing.JTextField searchOnsiteCourseValue;
-    private com.github.lgooddatepicker.components.TimePicker timePicker1;
+    private com.github.lgooddatepicker.components.TimePicker tpTime;
+    private javax.swing.JButton txtClear;
     private javax.swing.JTextField txtCourseID;
     private javax.swing.JTextField txtCredit;
     private javax.swing.JCheckBox txtFriday;
+    private javax.swing.JTextField txtLocation;
     private javax.swing.JCheckBox txtMonday;
     private javax.swing.JCheckBox txtSaturday;
     private javax.swing.JCheckBox txtThursday;
+    private javax.swing.JTextField txtTitle;
     private javax.swing.JCheckBox txtTuesday;
     private javax.swing.JCheckBox txtWednesday;
     // End of variables declaration//GEN-END:variables
