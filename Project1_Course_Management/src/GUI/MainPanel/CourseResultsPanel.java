@@ -30,6 +30,23 @@ public class CourseResultsPanel extends javax.swing.JPanel {
         LoadData();
         LoadDataCourse();
         jButtonClearSearch.setVisible(false);
+        jSearch.getDocument().addDocumentListener(new DocumentListener() {
+        @Override
+        public void insertUpdate(DocumentEvent e) {
+              SearchAll();
+        }
+
+        @Override
+        public void removeUpdate(DocumentEvent e) {
+              SearchAll();
+        }
+
+        @Override
+        public void changedUpdate(DocumentEvent e) {
+        // Xử lý khi có sự thay đổi trong thuộc tính của văn bản
+        // (chẳng hạn như một loại thuộc tính được thay đổi, nhưng không phải nội dung văn bản)
+        }
+        });
     }
 
     /**
@@ -160,14 +177,14 @@ public class CourseResultsPanel extends javax.swing.JPanel {
 
     private void jSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSearchKeyReleased
         // TODO add your handling code here:
-        if(jSearch.getText().toString().equals("") || jSearch.getText().toString().equals(" ")){
-            jButtonClearSearch.setVisible(false);
-            jTableCourse.setRowSorter(null);
-            LoadData();
-        }else{
-            Search(jSearch.getText().toString());
-            jButtonClearSearch.setVisible(true);
-        }
+//        if(jSearch.getText().isEmpty()){
+//            jButtonClearSearch.setVisible(false);
+//            jTableCourse.setRowSorter(null);
+//            LoadData();
+//        }else{
+//            Search(jSearch.getText().toString());
+//            jButtonClearSearch.setVisible(true);
+//        }
     }//GEN-LAST:event_jSearchKeyReleased
 
     private void jComboBoxCourseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxCourseMouseClicked
@@ -192,13 +209,24 @@ public class CourseResultsPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jComboBoxCourseActionPerformed
 
-    public void Search(String text){
+    public void SearchTable(String text){
         DefaultTableModel faut = (DefaultTableModel) jTableCourse.getModel();
         TableRowSorter<DefaultTableModel> search = new TableRowSorter<>(faut);
         jTableCourse.setRowSorter(search);
         search.setRowFilter(RowFilter.regexFilter("(?i)"+text));
     }
+    public void SearchAll(){
+        if(jSearch.getText().isEmpty()) {
+        jButtonClearSearch.setVisible(false);
+        jTableCourse.setRowSorter(null);
+        LoadData();
+        } else {
+        SearchTable(jSearch.getText().toString());
+        jButtonClearSearch.setVisible(true);
+        }
+    }
     public void LoadData(){
+        jComboBoxCourse.setSelectedIndex(0);
         DefaultTableModel model=new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column) {
