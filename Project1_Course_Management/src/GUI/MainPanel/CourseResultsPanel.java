@@ -162,6 +162,7 @@ public class CourseResultsPanel extends javax.swing.JPanel {
             onlineCourse.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             onlineCourse.setLocationRelativeTo(null);
             onlineCourse.setVisible(true);
+            jTableCourse.clearSelection();
         }
     }//GEN-LAST:event_jTableCourseMouseClicked
 

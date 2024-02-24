@@ -213,7 +213,6 @@ public class JFrameListStudent extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(studentGradeBll.getEnrollment(courseID, studentID) == 0) {
             JOptionPane.showMessageDialog(null, "Add success");
-            this.dispose();
             
             StudentGradeDTO studentGrade = new StudentGradeDTO();
             studentGrade.setCourseID(courseID);
@@ -224,6 +223,7 @@ public class JFrameListStudent extends javax.swing.JFrame {
         else {
             JOptionPane.showMessageDialog(null, "This student is already in the classroom");
         }
+        jTableStudent.clearSelection();
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
     public void LoadData(){

@@ -65,18 +65,16 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
         jSearch = new javax.swing.JTextField();
         jButtonClearSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableKhoaHocOnline = new javax.swing.JTable();
+        jTableStudentGrade = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jTextGrade = new javax.swing.JTextField();
         jButtonSave = new javax.swing.JButton();
         jTextName = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jButtonDelete = new javax.swing.JButton();
-        jButtonChange = new javax.swing.JButton();
         jTitle = new javax.swing.JLabel();
         jTextPersonID = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jButtonChange1 = new javax.swing.JButton();
         jButtonAdd = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -99,7 +97,7 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
             }
         });
 
-        jTableKhoaHocOnline.setModel(new javax.swing.table.DefaultTableModel(
+        jTableStudentGrade.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -110,12 +108,12 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
                 "STT", "PersonID", "FirstName", "LastName", "Grade"
             }
         ));
-        jTableKhoaHocOnline.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTableStudentGrade.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableKhoaHocOnlineMouseClicked(evt);
+                jTableStudentGradeMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTableKhoaHocOnline);
+        jScrollPane1.setViewportView(jTableStudentGrade);
 
         jLabel1.setText("Grade");
 
@@ -137,25 +135,11 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
             }
         });
 
-        jButtonChange.setText("Change");
-        jButtonChange.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonChangeActionPerformed(evt);
-            }
-        });
-
         jTitle.setText("Title");
 
         jTextPersonID.setEnabled(false);
 
         jLabel4.setText("ID");
-
-        jButtonChange1.setText("Details");
-        jButtonChange1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonChange1ActionPerformed(evt);
-            }
-        });
 
         jButtonAdd.setText("Add");
         jButtonAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -184,29 +168,27 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(176, 176, 176)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonSave)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonDelete)
-                        .addGap(12, 12, 12)
-                        .addComponent(jButtonChange)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonChange1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonAdd))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextName, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextPersonID, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jButtonSave)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextPersonID, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextName, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(176, 176, 176)
+                                .addComponent(jButtonAdd))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(53, 53, 53)
+                                .addComponent(jButtonDelete)))))
                 .addContainerGap(173, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -231,8 +213,6 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSave)
                     .addComponent(jButtonDelete)
-                    .addComponent(jButtonChange)
-                    .addComponent(jButtonChange1)
                     .addComponent(jButtonAdd))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -253,24 +233,25 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
             if(studentGradeBLL.updateGrade(studentGrade)){
                 JOptionPane.showMessageDialog(rootPane,"Update Success!");
                 Clear();
+                jTableStudentGrade.clearSelection();
                 LoadData(CourseID);
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Update Failed!");
-            }
-                    
+            }           
         }
+        
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
-    private void jTableKhoaHocOnlineMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableKhoaHocOnlineMouseClicked
+    private void jTableStudentGradeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableStudentGradeMouseClicked
         // TODO add your handling code here:
-        int n=jTableKhoaHocOnline.getSelectedRow();
+        int n=jTableStudentGrade.getSelectedRow();
         if(n!=-1){
-            jTextName.setText(jTableKhoaHocOnline.getValueAt(n, 2)+" "+jTableKhoaHocOnline.getValueAt(n, 3));
-        jTextGrade.setText(jTableKhoaHocOnline.getValueAt(n, 4)+"");
-        jTextPersonID.setText(jTableKhoaHocOnline.getValueAt(n, 1)+"");
+            jTextName.setText(jTableStudentGrade.getValueAt(n, 2)+" "+jTableStudentGrade.getValueAt(n, 3));
+        jTextGrade.setText(jTableStudentGrade.getValueAt(n, 4)+"");
+        jTextPersonID.setText(jTableStudentGrade.getValueAt(n, 1)+"");
         }
-        System.out.println(n);
-    }//GEN-LAST:event_jTableKhoaHocOnlineMouseClicked
+        
+    }//GEN-LAST:event_jTableStudentGradeMouseClicked
 
     private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
         // TODO add your handling code here:
@@ -297,24 +278,6 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
         }   
     }//GEN-LAST:event_jButtonDeleteActionPerformed
 
-    private void jButtonChange1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonChange1ActionPerformed
-        // TODO add your handling code here:
-        JFrameStudentInformationDetails details=new JFrameStudentInformationDetails(Integer.parseInt(jTextPersonID.getText().toString()));
-        details.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        details.setVisible(true);
-        Clear();
-    }//GEN-LAST:event_jButtonChange1ActionPerformed
-
-    private void jButtonChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonChangeActionPerformed
-        // TODO add your handling code here:
-        JFrameChangeCourse changeCourse=new JFrameChangeCourse(Integer.parseInt(jTextPersonID.getText().toString()),CourseID,jTextName.getText().toString(),jTitle.getText().toString(),Double.parseDouble(jTextGrade.getText().toString()));
-        changeCourse.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        changeCourse.setLocationRelativeTo(null);
-        changeCourse.setVisible(true);
-        Clear();
-        LoadData(CourseID);
-    }//GEN-LAST:event_jButtonChangeActionPerformed
-
     private void jSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jSearchActionPerformed
@@ -340,21 +303,27 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
         // TODO add your handling code here:
         JFrameListStudent students = new JFrameListStudent(CourseID, jTitle.getText());
+        students.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                LoadData(CourseID);
+            }
+        });
         students.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         students.setVisible(true);
         Clear();
     }//GEN-LAST:event_jButtonAddActionPerformed
 
     public void SearchTable(String txt) {
-        DefaultTableModel faut = (DefaultTableModel) jTableKhoaHocOnline.getModel();
+        DefaultTableModel faut = (DefaultTableModel) jTableStudentGrade.getModel();
         TableRowSorter<DefaultTableModel> search = new TableRowSorter<>(faut);
-        jTableKhoaHocOnline.setRowSorter(search);
+        jTableStudentGrade.setRowSorter(search);
         search.setRowFilter(RowFilter.regexFilter("(?i)"+txt));
     }
     public void SearchAll(){
         if(jSearch.getText().isEmpty()){
             jButtonClearSearch.setVisible(false);
-            jTableKhoaHocOnline.setRowSorter(null);
+            jTableStudentGrade.setRowSorter(null);
             LoadData(CourseID);
         }else{
             SearchTable(jSearch.getText().toString());
@@ -384,7 +353,7 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
             t.add(i.getGrade());
             model.addRow(t);
         }
-        jTableKhoaHocOnline.setModel(model);
+        jTableStudentGrade.setModel(model);
     }
     public void Clear(){
         jTextGrade.setText("");
@@ -393,8 +362,6 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAdd;
-    private javax.swing.JButton jButtonChange;
-    private javax.swing.JButton jButtonChange1;
     private javax.swing.JButton jButtonClearSearch;
     private javax.swing.JButton jButtonDelete;
     private javax.swing.JButton jButtonSave;
@@ -403,7 +370,7 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jSearch;
-    private javax.swing.JTable jTableKhoaHocOnline;
+    private javax.swing.JTable jTableStudentGrade;
     private javax.swing.JTextField jTextGrade;
     private javax.swing.JTextField jTextName;
     private javax.swing.JTextField jTextPersonID;
