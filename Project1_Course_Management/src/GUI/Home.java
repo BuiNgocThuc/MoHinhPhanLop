@@ -16,8 +16,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.Timer;
 import GUI.MainPanel.OnsiteCoursePanel;
-import javax.swing.BorderFactory;
-import javax.swing.border.EmptyBorder;
 /**
  *
  * @author ASUS

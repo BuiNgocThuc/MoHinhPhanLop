@@ -38,9 +38,9 @@ public class ConnectDB {
         }
     }
 
-    public static void main(String[] args) {
-        ConnectDB connDB = new ConnectDB();
-        connDB.getConnectDB();
-        connDB.closeConnection(conn);
-    }
+//    public static void main(String[] args) {
+//        ConnectDB connDB = new ConnectDB();
+//        connDB.getConnectDB();
+//        connDB.closeConnection(conn);
+//    }
 }
