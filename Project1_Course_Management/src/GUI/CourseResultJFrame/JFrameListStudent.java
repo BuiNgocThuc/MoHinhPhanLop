@@ -12,6 +12,8 @@ import java.util.Vector;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -33,6 +35,23 @@ public class JFrameListStudent extends javax.swing.JFrame {
         jButtonClearSearch.setVisible(false);
         jTitle.setText(courseID+" - "+Title);
         LoadData();
+        jSearch.getDocument().addDocumentListener(new DocumentListener() {
+        @Override
+        public void insertUpdate(DocumentEvent e) {
+              SearchAll();
+        }
+
+        @Override
+        public void removeUpdate(DocumentEvent e) {
+              SearchAll();
+        }
+
+        @Override
+        public void changedUpdate(DocumentEvent e) {
+        // Xử lý khi có sự thay đổi trong thuộc tính của văn bản
+        // (chẳng hạn như một loại thuộc tính được thay đổi, nhưng không phải nội dung văn bản)
+        }
+        });
     }
 
     /**
@@ -157,21 +176,31 @@ public class JFrameListStudent extends javax.swing.JFrame {
 
     private void jSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSearchKeyReleased
         // TODO add your handling code here:
-        if(jSearch.getText().toString().equals("") || jSearch.getText().toString().equals(" ")){
-            jButtonClearSearch.setVisible(false);
-            jTableStudent.setRowSorter(null);
-            LoadData();
-        }else{
-            Search(jSearch.getText().toString());
-            jButtonClearSearch.setVisible(true);
-        }
+//        if(jSearch.getText().isEmpty()){
+//            jButtonClearSearch.setVisible(false);
+//            jTableStudent.setRowSorter(null);
+//            LoadData();
+//        }else{
+//            Search(jSearch.getText().toString());
+//            jButtonClearSearch.setVisible(true);
+//        }
     }//GEN-LAST:event_jSearchKeyReleased
 
-    public void Search(String text){
+    public void SearchTable(String text){
         DefaultTableModel faut = (DefaultTableModel) jTableStudent.getModel();
         TableRowSorter<DefaultTableModel> search = new TableRowSorter<>(faut);
         jTableStudent.setRowSorter(search);
         search.setRowFilter(RowFilter.regexFilter("(?i)"+text));
+    }
+    public void SearchAll(){
+         if(jSearch.getText().isEmpty()){
+            jButtonClearSearch.setVisible(false);
+            jTableStudent.setRowSorter(null);
+            LoadData();
+        }else{
+            SearchTable(jSearch.getText().toString());
+            jButtonClearSearch.setVisible(true);
+        }
     }
     
     private void jButtonClearSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearSearchActionPerformed

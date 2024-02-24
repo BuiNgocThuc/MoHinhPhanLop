@@ -14,6 +14,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.RowFilter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 /**
@@ -33,6 +35,23 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
         this.CourseID=CourseID;
         jTitle.setText(CourseID+" - "+Title);
         LoadData(CourseID);
+        jSearch.getDocument().addDocumentListener(new DocumentListener() {
+        @Override
+        public void insertUpdate(DocumentEvent e) {
+              SearchAll();
+        }
+
+        @Override
+        public void removeUpdate(DocumentEvent e) {
+              SearchAll();
+        }
+
+        @Override
+        public void changedUpdate(DocumentEvent e) {
+        // Xử lý khi có sự thay đổi trong thuộc tính của văn bản
+        // (chẳng hạn như một loại thuộc tính được thay đổi, nhưng không phải nội dung văn bản)
+        }
+        });
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -302,14 +321,14 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
 
     private void jSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSearchKeyReleased
         // TODO add your handling code here:
-        if(jSearch.getText().toString().equals("") || jSearch.getText().toString().equals(" ")){
-            jButtonClearSearch.setVisible(false);
-            jTableKhoaHocOnline.setRowSorter(null);
-            LoadData(CourseID);
-        }else{
-            Search(jSearch.getText().toString());
-            jButtonClearSearch.setVisible(true);
-        }
+//        if(jSearch.getText().toString().equals("") || jSearch.getText().toString().equals(" ")){
+//            jButtonClearSearch.setVisible(false);
+//            jTableKhoaHocOnline.setRowSorter(null);
+//            LoadData(CourseID);
+//        }else{
+//            Search(jSearch.getText().toString());
+//            jButtonClearSearch.setVisible(true);
+//        }
     }//GEN-LAST:event_jSearchKeyReleased
 
     private void jButtonClearSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearSearchActionPerformed
@@ -326,11 +345,21 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
         Clear();
     }//GEN-LAST:event_jButtonAddActionPerformed
 
-    public void Search(String txt) {
+    public void SearchTable(String txt) {
         DefaultTableModel faut = (DefaultTableModel) jTableKhoaHocOnline.getModel();
         TableRowSorter<DefaultTableModel> search = new TableRowSorter<>(faut);
         jTableKhoaHocOnline.setRowSorter(search);
         search.setRowFilter(RowFilter.regexFilter("(?i)"+txt));
+    }
+    public void SearchAll(){
+        if(jSearch.getText().isEmpty()){
+            jButtonClearSearch.setVisible(false);
+            jTableKhoaHocOnline.setRowSorter(null);
+            LoadData(CourseID);
+        }else{
+            SearchTable(jSearch.getText().toString());
+            jButtonClearSearch.setVisible(true);
+        }
     }
     
     public void LoadData(int CourseID){
