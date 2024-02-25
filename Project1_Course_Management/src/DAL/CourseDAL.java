@@ -181,5 +181,71 @@ public class CourseDAL {
         }
         return false;
     }
+    
+    public ArrayList<CourseDTO> getAllList(){
+        ArrayList<CourseDTO> listCourse=new ArrayList<CourseDTO>();
+        try{
+            String query="select * from course";
+            PreparedStatement pre=conn.prepareStatement(query);
+            ResultSet rs=pre.executeQuery();
+            while(rs.next()){
+                CourseDTO course=new CourseDTO();
+                course.setCourseID(rs.getInt("CourseID"));
+                course.setTitle(rs.getString("Title"));
+                course.setCredits(rs.getInt("Credits"));
+                course.setDepartmentID(rs.getInt("DepartmentID"));
+                listCourse.add(course);
+            }
+            return listCourse;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public CourseDTO courseDetail(int id){
+        try{
+            String query="select * from course where CourseID=?";
+            PreparedStatement pre=conn.prepareStatement(query);
+            pre.setInt(1, id);
+            ResultSet rs=pre.executeQuery();
+            CourseDTO course=new CourseDTO();
+            if(rs.next()){
+                
+                course.setCourseID(id);
+                course.setCredits(rs.getInt("Credits"));
+                course.setDepartmentID(rs.getInt("DepartmentID"));
+                course.setTitle(rs.getString("Title"));
+            }
+            return course;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public ArrayList<CourseDTO> getAllList(String text){
+        ArrayList<CourseDTO> listCourse=new ArrayList<CourseDTO>();
+        try{
+            String query="";
+            if(text.equals("Online")){
+                query="select * from course where CourseID not in (select CourseID from onsitecourse)";
+            }else{
+                query="select * from course where CourseID not in (select CourseID from onlinecourse)";
+            }
+            PreparedStatement pre=conn.prepareStatement(query);
+            ResultSet rs=pre.executeQuery();
+            while(rs.next()){
+                CourseDTO course=new CourseDTO();
+                course.setCourseID(rs.getInt("CourseID"));
+                course.setTitle(rs.getString("Title"));
+                course.setCredits(rs.getInt("Credits"));
+                course.setDepartmentID(rs.getInt("DepartmentID"));
+                listCourse.add(course);
+            }
+            return listCourse;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    } 
    
 }

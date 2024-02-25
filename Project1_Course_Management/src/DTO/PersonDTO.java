@@ -6,6 +6,10 @@ public class PersonDTO {
     private int PersonID;
     private String LastName, FirstName;
     private Timestamp HireDate, EnrollmentDate;
+    
+    public PersonDTO() {
+        
+    }
 
     public PersonDTO(int personID, String firstName, String lastName, Timestamp hireDate, Timestamp enrollmentDate) {
         PersonID = personID;

@@ -6,6 +6,7 @@ package BLL;
 
 import DAL.CourseDAL;
 import DTO.CourseDTO;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,5 +34,17 @@ public class CourseBLL {
     
     public boolean deleteCourse(int CourseID) {
         return courseDAL.deleteCourse(CourseID);
+    }
+    
+    public ArrayList<CourseDTO> getAllist(){
+        return courseDAL.getAllList();
+    }
+    
+    public ArrayList<CourseDTO> getAllist(String text){
+        return courseDAL.getAllList(text);
+    }
+    
+    public CourseDTO courseDetail(int id){
+        return courseDAL.courseDetail(id);
     }
 }
