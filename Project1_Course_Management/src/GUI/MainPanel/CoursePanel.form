@@ -1,0 +1,2242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.8" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="sortCourseBtnGroup">
+    </Component>
+  </NonVisualComponents>
+  <Properties>
+    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+    </Property>
+    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+      <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+        <EmptyBorder bottom="10" left="10" right="10" top="10"/>
+      </Border>
+    </Property>
+  </Properties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="jPanel2" max="32767" attributes="0"/>
+          <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+          <Component id="detailCoursePanel" alignment="0" max="32767" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" pref="235" max="32767" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="detailCoursePanel" min="-2" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="jPanel2">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
+              <Component id="jPanel5" alignment="0" max="32767" attributes="0"/>
+              <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <Component id="jPanel5" pref="100" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Container class="javax.swing.JPanel" name="jPanel3">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+          </Properties>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLabel1" min="-2" pref="237" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="jLabel1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="QU&#x1ea2;N L&#xdd; KH&#xd3;A H&#x1ecc;C"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                    <EmptyBorder bottom="10" left="5" right="0" top="10"/>
+                  </Border>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="16" style="1"/>
+                </Property>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Component class="javax.swing.JSeparator" name="jSeparator1">
+        </Component>
+        <Container class="javax.swing.JPanel" name="jPanel5">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                <LineBorder>
+                  <Color PropertyName="color" blue="ce" green="ce" red="ce" type="rgb"/>
+                </LineBorder>
+              </Border>
+            </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[0, 62]"/>
+            </Property>
+          </Properties>
+          <SubComponents>
+            <Component class="javax.swing.JButton" name="addCourseBtn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="53" green="cf" red="9b" type="rgb"/>
+                </Property>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder>
+                      <Color PropertyName="color" blue="7c" green="ea" red="bf" type="rgb"/>
+                    </LineBorder>
+                  </Border>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[100, 40]"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addCourseBtnActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="editCourseBtn">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="e3" green="a2" red="40" type="rgb"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder>
+                      <Color PropertyName="color" blue="ec" green="e2" red="bb" type="rgb"/>
+                    </LineBorder>
+                  </Border>
+                </Property>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[100, 40]"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editCourseBtnActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="deleteCourseBtn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="68" green="68" red="ff" type="rgb"/>
+                </Property>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder>
+                      <Color PropertyName="color" blue="80" green="80" red="ff" type="rgb"/>
+                    </LineBorder>
+                  </Border>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[100, 40]"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteCourseBtnActionPerformed"/>
+              </Events>
+            </Component>
+            <Container class="javax.swing.JPanel" name="jPanel4">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[650, 40]"/>
+                </Property>
+              </Properties>
+              <SubComponents>
+                <Component class="javax.swing.JTextField" name="searchOnsiteCourseValue">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="16" style="0"/>
+                    </Property>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                        <LineBorder/>
+                      </Border>
+                    </Property>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[300, 40]"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="searchOnsiteCourseBtn">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/assets/icons8-search-24.png"/>
+                    </Property>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                        <LineBorder/>
+                      </Border>
+                    </Property>
+                    <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                      <Insets value="[2, 20, 3, 0]"/>
+                    </Property>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[40, 40]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchOnsiteCourseBtnActionPerformed"/>
+                  </Events>
+                </Component>
+              </SubComponents>
+              <LayoutCode>
+                <CodeStatement>
+                  <CodeExpression id="1_flowLayout1">
+                    <CodeVariable name="flowLayout1" type="4096" declaredType="java.awt.FlowLayout"/>
+                    <ExpressionOrigin>
+                      <ExpressionProvider type="CodeConstructor">
+                        <CodeConstructor class="java.awt.FlowLayout" parameterTypes="int, int, int"/>
+                      </ExpressionProvider>
+                      <Parameters>
+                        <CodeExpression id="2">
+                          <ExpressionOrigin>
+                            <Value type="int" value="2"/>
+                          </ExpressionOrigin>
+                        </CodeExpression>
+                        <CodeExpression id="3">
+                          <ExpressionOrigin>
+                            <Value type="int" value="0"/>
+                          </ExpressionOrigin>
+                        </CodeExpression>
+                        <CodeExpression id="4">
+                          <ExpressionOrigin>
+                            <Value type="int" value="0"/>
+                          </ExpressionOrigin>
+                        </CodeExpression>
+                      </Parameters>
+                    </ExpressionOrigin>
+                  </CodeExpression>
+                  <StatementProvider type="CodeExpression">
+                    <CodeExpression id="1_flowLayout1"/>
+                  </StatementProvider>
+                  <Parameters>
+                    <CodeExpression id="2"/>
+                    <CodeExpression id="3"/>
+                    <CodeExpression id="4"/>
+                  </Parameters>
+                </CodeStatement>
+                <CodeStatement>
+                  <CodeExpression id="1_flowLayout1"/>
+                  <StatementProvider type="CodeMethod">
+                    <CodeMethod name="setAlignOnBaseline" class="java.awt.FlowLayout" parameterTypes="boolean"/>
+                  </StatementProvider>
+                  <Parameters>
+                    <CodeExpression id="5">
+                      <ExpressionOrigin>
+                        <Value type="boolean" value="true"/>
+                      </ExpressionOrigin>
+                    </CodeExpression>
+                  </Parameters>
+                </CodeStatement>
+                <CodeStatement>
+                  <CodeExpression id="6_jPanel4">
+                    <CodeVariable name="jPanel4" type="8194" declaredType="javax.swing.JPanel"/>
+                    <ExpressionOrigin>
+                      <ExpressionProvider type="ComponentRef">
+                        <ComponentRef name="jPanel4"/>
+                      </ExpressionProvider>
+                    </ExpressionOrigin>
+                  </CodeExpression>
+                  <StatementProvider type="CodeMethod">
+                    <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
+                  </StatementProvider>
+                  <Parameters>
+                    <CodeExpression id="1_flowLayout1"/>
+                  </Parameters>
+                </CodeStatement>
+                <CodeStatement>
+                  <CodeExpression id="6_jPanel4"/>
+                  <StatementProvider type="CodeMethod">
+                    <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                  </StatementProvider>
+                  <Parameters>
+                    <CodeExpression id="7_searchOnsiteCourseValue">
+                      <CodeVariable name="searchOnsiteCourseValue" type="8194" declaredType="javax.swing.JTextField"/>
+                      <ExpressionOrigin>
+                        <ExpressionProvider type="ComponentRef">
+                          <ComponentRef name="searchOnsiteCourseValue"/>
+                        </ExpressionProvider>
+                      </ExpressionOrigin>
+                    </CodeExpression>
+                  </Parameters>
+                </CodeStatement>
+                <CodeStatement>
+                  <CodeExpression id="6_jPanel4"/>
+                  <StatementProvider type="CodeMethod">
+                    <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                  </StatementProvider>
+                  <Parameters>
+                    <CodeExpression id="8_searchOnsiteCourseBtn">
+                      <CodeVariable name="searchOnsiteCourseBtn" type="8194" declaredType="javax.swing.JButton"/>
+                      <ExpressionOrigin>
+                        <ExpressionProvider type="ComponentRef">
+                          <ComponentRef name="searchOnsiteCourseBtn"/>
+                        </ExpressionProvider>
+                      </ExpressionOrigin>
+                    </CodeExpression>
+                  </Parameters>
+                </CodeStatement>
+              </LayoutCode>
+            </Container>
+            <Container class="javax.swing.JPanel" name="sortCourseBtnGroupPnl">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder>
+                      <Color PropertyName="color" blue="ce" green="ce" red="ce" type="rgb"/>
+                    </LineBorder>
+                  </Border>
+                </Property>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[310, 40]"/>
+                </Property>
+              </Properties>
+              <SubComponents>
+                <Component class="javax.swing.JRadioButton" name="jRadioButton1">
+                  <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="sortCourseBtnGroup"/>
+                    </Property>
+                    <Property name="selected" type="boolean" value="true"/>
+                    <Property name="text" type="java.lang.String" value="T&#x1ea5;t c&#x1ea3;"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[54, 30]"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="jRadioButton2">
+                  <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="sortCourseBtnGroup"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Kh&#xf3;a h&#x1ecd;c onsite"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[108, 30]"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="jRadioButton3">
+                  <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="sortCourseBtnGroup"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Kh&#xf3;a h&#x1ecd;c online"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[109, 30]"/>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+              <LayoutCode>
+                <CodeStatement>
+                  <CodeExpression id="9_flowLayout6">
+                    <CodeVariable name="flowLayout6" type="4096" declaredType="java.awt.FlowLayout"/>
+                    <ExpressionOrigin>
+                      <ExpressionProvider type="CodeConstructor">
+                        <CodeConstructor class="java.awt.FlowLayout" parameterTypes="int"/>
+                      </ExpressionProvider>
+                      <Parameters>
+                        <CodeExpression id="10">
+                          <ExpressionOrigin>
+                            <Value type="int" value="0"/>
+                          </ExpressionOrigin>
+                        </CodeExpression>
+                      </Parameters>
+                    </ExpressionOrigin>
+                  </CodeExpression>
+                  <StatementProvider type="CodeExpression">
+                    <CodeExpression id="9_flowLayout6"/>
+                  </StatementProvider>
+                  <Parameters>
+                    <CodeExpression id="10"/>
+                  </Parameters>
+                </CodeStatement>
+                <CodeStatement>
+                  <CodeExpression id="9_flowLayout6"/>
+                  <StatementProvider type="CodeMethod">
+                    <CodeMethod name="setAlignOnBaseline" class="java.awt.FlowLayout" parameterTypes="boolean"/>
+                  </StatementProvider>
+                  <Parameters>
+                    <CodeExpression id="11">
+                      <ExpressionOrigin>
+                        <Value type="boolean" value="true"/>
+                      </ExpressionOrigin>
+                    </CodeExpression>
+                  </Parameters>
+                </CodeStatement>
+                <CodeStatement>
+                  <CodeExpression id="12_sortCourseBtnGroupPnl">
+                    <CodeVariable name="sortCourseBtnGroupPnl" type="8194" declaredType="javax.swing.JPanel"/>
+                    <ExpressionOrigin>
+                      <ExpressionProvider type="ComponentRef">
+                        <ComponentRef name="sortCourseBtnGroupPnl"/>
+                      </ExpressionProvider>
+                    </ExpressionOrigin>
+                  </CodeExpression>
+                  <StatementProvider type="CodeMethod">
+                    <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
+                  </StatementProvider>
+                  <Parameters>
+                    <CodeExpression id="9_flowLayout6"/>
+                  </Parameters>
+                </CodeStatement>
+                <CodeStatement>
+                  <CodeExpression id="12_sortCourseBtnGroupPnl"/>
+                  <StatementProvider type="CodeMethod">
+                    <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                  </StatementProvider>
+                  <Parameters>
+                    <CodeExpression id="13_jRadioButton1">
+                      <CodeVariable name="jRadioButton1" type="8194" declaredType="javax.swing.JRadioButton"/>
+                      <ExpressionOrigin>
+                        <ExpressionProvider type="ComponentRef">
+                          <ComponentRef name="jRadioButton1"/>
+                        </ExpressionProvider>
+                      </ExpressionOrigin>
+                    </CodeExpression>
+                  </Parameters>
+                </CodeStatement>
+                <CodeStatement>
+                  <CodeExpression id="12_sortCourseBtnGroupPnl"/>
+                  <StatementProvider type="CodeMethod">
+                    <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                  </StatementProvider>
+                  <Parameters>
+                    <CodeExpression id="14_jRadioButton2">
+                      <CodeVariable name="jRadioButton2" type="8194" declaredType="javax.swing.JRadioButton"/>
+                      <ExpressionOrigin>
+                        <ExpressionProvider type="ComponentRef">
+                          <ComponentRef name="jRadioButton2"/>
+                        </ExpressionProvider>
+                      </ExpressionOrigin>
+                    </CodeExpression>
+                  </Parameters>
+                </CodeStatement>
+                <CodeStatement>
+                  <CodeExpression id="12_sortCourseBtnGroupPnl"/>
+                  <StatementProvider type="CodeMethod">
+                    <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                  </StatementProvider>
+                  <Parameters>
+                    <CodeExpression id="15_jRadioButton3">
+                      <CodeVariable name="jRadioButton3" type="8194" declaredType="javax.swing.JRadioButton"/>
+                      <ExpressionOrigin>
+                        <ExpressionProvider type="ComponentRef">
+                          <ComponentRef name="jRadioButton3"/>
+                        </ExpressionProvider>
+                      </ExpressionOrigin>
+                    </CodeExpression>
+                  </Parameters>
+                </CodeStatement>
+              </LayoutCode>
+            </Container>
+          </SubComponents>
+          <LayoutCode>
+            <CodeStatement>
+              <CodeExpression id="16_flowLayout2">
+                <CodeVariable name="flowLayout2" type="4096" declaredType="java.awt.FlowLayout"/>
+                <ExpressionOrigin>
+                  <ExpressionProvider type="CodeConstructor">
+                    <CodeConstructor class="java.awt.FlowLayout" parameterTypes="int"/>
+                  </ExpressionProvider>
+                  <Parameters>
+                    <CodeExpression id="17">
+                      <ExpressionOrigin>
+                        <Value type="int" value="0"/>
+                      </ExpressionOrigin>
+                    </CodeExpression>
+                  </Parameters>
+                </ExpressionOrigin>
+              </CodeExpression>
+              <StatementProvider type="CodeExpression">
+                <CodeExpression id="16_flowLayout2"/>
+              </StatementProvider>
+              <Parameters>
+                <CodeExpression id="17"/>
+              </Parameters>
+            </CodeStatement>
+            <CodeStatement>
+              <CodeExpression id="16_flowLayout2"/>
+              <StatementProvider type="CodeMethod">
+                <CodeMethod name="setAlignOnBaseline" class="java.awt.FlowLayout" parameterTypes="boolean"/>
+              </StatementProvider>
+              <Parameters>
+                <CodeExpression id="18">
+                  <ExpressionOrigin>
+                    <Value type="boolean" value="true"/>
+                  </ExpressionOrigin>
+                </CodeExpression>
+              </Parameters>
+            </CodeStatement>
+            <CodeStatement>
+              <CodeExpression id="19_jPanel5">
+                <CodeVariable name="jPanel5" type="8194" declaredType="javax.swing.JPanel"/>
+                <ExpressionOrigin>
+                  <ExpressionProvider type="ComponentRef">
+                    <ComponentRef name="jPanel5"/>
+                  </ExpressionProvider>
+                </ExpressionOrigin>
+              </CodeExpression>
+              <StatementProvider type="CodeMethod">
+                <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
+              </StatementProvider>
+              <Parameters>
+                <CodeExpression id="16_flowLayout2"/>
+              </Parameters>
+            </CodeStatement>
+            <CodeStatement>
+              <CodeExpression id="19_jPanel5"/>
+              <StatementProvider type="CodeMethod">
+                <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+              </StatementProvider>
+              <Parameters>
+                <CodeExpression id="20_addCourseBtn">
+                  <CodeVariable name="addCourseBtn" type="8194" declaredType="javax.swing.JButton"/>
+                  <ExpressionOrigin>
+                    <ExpressionProvider type="ComponentRef">
+                      <ComponentRef name="addCourseBtn"/>
+                    </ExpressionProvider>
+                  </ExpressionOrigin>
+                </CodeExpression>
+              </Parameters>
+            </CodeStatement>
+            <CodeStatement>
+              <CodeExpression id="19_jPanel5"/>
+              <StatementProvider type="CodeMethod">
+                <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+              </StatementProvider>
+              <Parameters>
+                <CodeExpression id="21_editCourseBtn">
+                  <CodeVariable name="editCourseBtn" type="8194" declaredType="javax.swing.JButton"/>
+                  <ExpressionOrigin>
+                    <ExpressionProvider type="ComponentRef">
+                      <ComponentRef name="editCourseBtn"/>
+                    </ExpressionProvider>
+                  </ExpressionOrigin>
+                </CodeExpression>
+              </Parameters>
+            </CodeStatement>
+            <CodeStatement>
+              <CodeExpression id="19_jPanel5"/>
+              <StatementProvider type="CodeMethod">
+                <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+              </StatementProvider>
+              <Parameters>
+                <CodeExpression id="22_deleteCourseBtn">
+                  <CodeVariable name="deleteCourseBtn" type="8194" declaredType="javax.swing.JButton"/>
+                  <ExpressionOrigin>
+                    <ExpressionProvider type="ComponentRef">
+                      <ComponentRef name="deleteCourseBtn"/>
+                    </ExpressionProvider>
+                  </ExpressionOrigin>
+                </CodeExpression>
+              </Parameters>
+            </CodeStatement>
+            <CodeStatement>
+              <CodeExpression id="19_jPanel5"/>
+              <StatementProvider type="CodeMethod">
+                <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+              </StatementProvider>
+              <Parameters>
+                <CodeExpression id="6_jPanel4"/>
+              </Parameters>
+            </CodeStatement>
+            <CodeStatement>
+              <CodeExpression id="19_jPanel5"/>
+              <StatementProvider type="CodeMethod">
+                <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+              </StatementProvider>
+              <Parameters>
+                <CodeExpression id="12_sortCourseBtnGroupPnl"/>
+              </Parameters>
+            </CodeStatement>
+          </LayoutCode>
+        </Container>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTable" name="courseTable">
+          <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                <EmptyBorder bottom="10" left="10" right="10" top="10"/>
+              </Border>
+            </Property>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+              <Table columnCount="5" rowCount="5">
+                <Column editable="false" title="CourseID" type="java.lang.Object">
+                  <Data value="1045"/>
+                  <Data value="1046"/>
+                  <Data value="1061"/>
+                  <Data value="2042"/>
+                  <Data value="4022"/>
+                </Column>
+                <Column editable="false" title="CourseName" type="java.lang.Object">
+                  <Data value="Calculus"/>
+                  <Data value="Chemistry"/>
+                  <Data value="Physics"/>
+                  <Data value="Literature"/>
+                  <Data value="Microeconomics"/>
+                </Column>
+                <Column editable="false" title="Credit" type="java.lang.Object">
+                  <Data value="4"/>
+                  <Data value="4"/>
+                  <Data value="4"/>
+                  <Data value="4"/>
+                  <Data value="3"/>
+                </Column>
+                <Column editable="false" title="Department Name" type="java.lang.Object">
+                  <Data value="Mathematics"/>
+                  <Data value="Engineering"/>
+                  <Data value="Enginerring"/>
+                  <Data value="English"/>
+                  <Data value="Economics"/>
+                </Column>
+                <Column editable="false" title="Type" type="java.lang.Object"/>
+              </Table>
+            </Property>
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+              <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+              </TableColumnModel>
+            </Property>
+            <Property name="rowHeight" type="int" value="35"/>
+            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+              <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="courseTableMouseClicked"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="courseTable.getTableHeader().setFont(new Font(&quot;Segoe UI&quot;, 0, 14));&#xa;DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();&#xa;courseTable.setFont(new Font(&quot;Segoe UI&quot;, 0, 14));&#xa;leftRenderer.setHorizontalAlignment(JLabel.CENTER);&#xa;((DefaultTableCellRenderer)courseTable.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);&#xa;        // Iterate over each column and set cell renderer and font&#xa;for (int i = 0; i &lt; courseTable.getColumnCount(); i++) {&#xa;    courseTable.getColumnModel().getColumn(i).setCellRenderer(leftRenderer);&#xa;}"/>
+          </AuxValues>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="detailCoursePanel">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder>
+              <Color PropertyName="color" blue="ce" green="ce" red="ce" type="rgb"/>
+            </LineBorder>
+          </Border>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Component id="jPanel26" alignment="0" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Component id="jPanel26" alignment="1" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Container class="javax.swing.JPanel" name="jPanel26">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                <EmptyBorder bottom="5" left="5" right="5" top="5"/>
+              </Border>
+            </Property>
+          </Properties>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jPanel1" min="-2" pref="815" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="buttonPnl" pref="142" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="buttonPnl" alignment="0" pref="170" max="32767" attributes="0"/>
+                          <Component id="jPanel1" alignment="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JPanel" name="jPanel1">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+              </Properties>
+              <SubComponents>
+                <Container class="javax.swing.JPanel" name="txtCourseIDPnl">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[135, 50]"/>
+                    </Property>
+                  </Properties>
+                  <SubComponents>
+                    <Component class="javax.swing.JLabel" name="jLabel16">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="ID Kh&#xf3;a h&#x1ecd;c:"/>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                            <EmptyBorder bottom="0" left="5" right="0" top="0"/>
+                          </Border>
+                        </Property>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[75, 45]"/>
+                        </Property>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="txtCourseID">
+                      <Properties>
+                        <Property name="horizontalAlignment" type="int" value="0"/>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[50, 40]"/>
+                        </Property>
+                      </Properties>
+                    </Component>
+                  </SubComponents>
+                  <LayoutCode>
+                    <CodeStatement>
+                      <CodeExpression id="23_flowLayout3">
+                        <CodeVariable name="flowLayout3" type="4096" declaredType="java.awt.FlowLayout"/>
+                        <ExpressionOrigin>
+                          <ExpressionProvider type="CodeConstructor">
+                            <CodeConstructor class="java.awt.FlowLayout" parameterTypes="int"/>
+                          </ExpressionProvider>
+                          <Parameters>
+                            <CodeExpression id="24">
+                              <ExpressionOrigin>
+                                <Value type="int" value="0"/>
+                              </ExpressionOrigin>
+                            </CodeExpression>
+                          </Parameters>
+                        </ExpressionOrigin>
+                      </CodeExpression>
+                      <StatementProvider type="CodeExpression">
+                        <CodeExpression id="23_flowLayout3"/>
+                      </StatementProvider>
+                      <Parameters>
+                        <CodeExpression id="24"/>
+                      </Parameters>
+                    </CodeStatement>
+                    <CodeStatement>
+                      <CodeExpression id="23_flowLayout3"/>
+                      <StatementProvider type="CodeMethod">
+                        <CodeMethod name="setAlignOnBaseline" class="java.awt.FlowLayout" parameterTypes="boolean"/>
+                      </StatementProvider>
+                      <Parameters>
+                        <CodeExpression id="25">
+                          <ExpressionOrigin>
+                            <Value type="boolean" value="true"/>
+                          </ExpressionOrigin>
+                        </CodeExpression>
+                      </Parameters>
+                    </CodeStatement>
+                    <CodeStatement>
+                      <CodeExpression id="26_txtCourseIDPnl">
+                        <CodeVariable name="txtCourseIDPnl" type="8194" declaredType="javax.swing.JPanel"/>
+                        <ExpressionOrigin>
+                          <ExpressionProvider type="ComponentRef">
+                            <ComponentRef name="txtCourseIDPnl"/>
+                          </ExpressionProvider>
+                        </ExpressionOrigin>
+                      </CodeExpression>
+                      <StatementProvider type="CodeMethod">
+                        <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
+                      </StatementProvider>
+                      <Parameters>
+                        <CodeExpression id="23_flowLayout3"/>
+                      </Parameters>
+                    </CodeStatement>
+                    <CodeStatement>
+                      <CodeExpression id="26_txtCourseIDPnl"/>
+                      <StatementProvider type="CodeMethod">
+                        <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                      </StatementProvider>
+                      <Parameters>
+                        <CodeExpression id="27_jLabel16">
+                          <CodeVariable name="jLabel16" type="8194" declaredType="javax.swing.JLabel"/>
+                          <ExpressionOrigin>
+                            <ExpressionProvider type="ComponentRef">
+                              <ComponentRef name="jLabel16"/>
+                            </ExpressionProvider>
+                          </ExpressionOrigin>
+                        </CodeExpression>
+                      </Parameters>
+                    </CodeStatement>
+                    <CodeStatement>
+                      <CodeExpression id="26_txtCourseIDPnl"/>
+                      <StatementProvider type="CodeMethod">
+                        <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                      </StatementProvider>
+                      <Parameters>
+                        <CodeExpression id="28_txtCourseID">
+                          <CodeVariable name="txtCourseID" type="8194" declaredType="javax.swing.JTextField"/>
+                          <ExpressionOrigin>
+                            <ExpressionProvider type="ComponentRef">
+                              <ComponentRef name="txtCourseID"/>
+                            </ExpressionProvider>
+                          </ExpressionOrigin>
+                        </CodeExpression>
+                      </Parameters>
+                    </CodeStatement>
+                  </LayoutCode>
+                </Container>
+                <Container class="javax.swing.JPanel" name="txtCourseNamePnl">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                  </Properties>
+                  <SubComponents>
+                    <Component class="javax.swing.JLabel" name="jLabel17">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="T&#xea;n kh&#xf3;a h&#x1ecd;c:"/>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[75, 40]"/>
+                        </Property>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="jTextField5">
+                      <Properties>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[205, 40]"/>
+                        </Property>
+                      </Properties>
+                    </Component>
+                  </SubComponents>
+                  <LayoutCode>
+                    <CodeStatement>
+                      <CodeExpression id="29_flowLayout4">
+                        <CodeVariable name="flowLayout4" type="4096" declaredType="java.awt.FlowLayout"/>
+                        <ExpressionOrigin>
+                          <ExpressionProvider type="CodeConstructor">
+                            <CodeConstructor class="java.awt.FlowLayout" parameterTypes="int"/>
+                          </ExpressionProvider>
+                          <Parameters>
+                            <CodeExpression id="30">
+                              <ExpressionOrigin>
+                                <Value type="int" value="0"/>
+                              </ExpressionOrigin>
+                            </CodeExpression>
+                          </Parameters>
+                        </ExpressionOrigin>
+                      </CodeExpression>
+                      <StatementProvider type="CodeExpression">
+                        <CodeExpression id="29_flowLayout4"/>
+                      </StatementProvider>
+                      <Parameters>
+                        <CodeExpression id="30"/>
+                      </Parameters>
+                    </CodeStatement>
+                    <CodeStatement>
+                      <CodeExpression id="29_flowLayout4"/>
+                      <StatementProvider type="CodeMethod">
+                        <CodeMethod name="setAlignOnBaseline" class="java.awt.FlowLayout" parameterTypes="boolean"/>
+                      </StatementProvider>
+                      <Parameters>
+                        <CodeExpression id="31">
+                          <ExpressionOrigin>
+                            <Value type="boolean" value="true"/>
+                          </ExpressionOrigin>
+                        </CodeExpression>
+                      </Parameters>
+                    </CodeStatement>
+                    <CodeStatement>
+                      <CodeExpression id="32_txtCourseNamePnl">
+                        <CodeVariable name="txtCourseNamePnl" type="8194" declaredType="javax.swing.JPanel"/>
+                        <ExpressionOrigin>
+                          <ExpressionProvider type="ComponentRef">
+                            <ComponentRef name="txtCourseNamePnl"/>
+                          </ExpressionProvider>
+                        </ExpressionOrigin>
+                      </CodeExpression>
+                      <StatementProvider type="CodeMethod">
+                        <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
+                      </StatementProvider>
+                      <Parameters>
+                        <CodeExpression id="29_flowLayout4"/>
+                      </Parameters>
+                    </CodeStatement>
+                    <CodeStatement>
+                      <CodeExpression id="32_txtCourseNamePnl"/>
+                      <StatementProvider type="CodeMethod">
+                        <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                      </StatementProvider>
+                      <Parameters>
+                        <CodeExpression id="33_jLabel17">
+                          <CodeVariable name="jLabel17" type="8194" declaredType="javax.swing.JLabel"/>
+                          <ExpressionOrigin>
+                            <ExpressionProvider type="ComponentRef">
+                              <ComponentRef name="jLabel17"/>
+                            </ExpressionProvider>
+                          </ExpressionOrigin>
+                        </CodeExpression>
+                      </Parameters>
+                    </CodeStatement>
+                    <CodeStatement>
+                      <CodeExpression id="32_txtCourseNamePnl"/>
+                      <StatementProvider type="CodeMethod">
+                        <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                      </StatementProvider>
+                      <Parameters>
+                        <CodeExpression id="34_jTextField5">
+                          <CodeVariable name="jTextField5" type="8194" declaredType="javax.swing.JTextField"/>
+                          <ExpressionOrigin>
+                            <ExpressionProvider type="ComponentRef">
+                              <ComponentRef name="jTextField5"/>
+                            </ExpressionProvider>
+                          </ExpressionOrigin>
+                        </CodeExpression>
+                      </Parameters>
+                    </CodeStatement>
+                  </LayoutCode>
+                </Container>
+                <Container class="javax.swing.JPanel" name="txtDepartmentPnl">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                  </Properties>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+                  <SubComponents>
+                    <Component class="javax.swing.JLabel" name="jLabel19">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="T&#xea;n Khoa:"/>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[55, 45]"/>
+                        </Property>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JComboBox" name="jComboBox3">
+                      <Properties>
+                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                          <StringArray count="4">
+                            <StringItem index="0" value="Item 1"/>
+                            <StringItem index="1" value="Item 2"/>
+                            <StringItem index="2" value="Item 3"/>
+                            <StringItem index="3" value="Item 4"/>
+                          </StringArray>
+                        </Property>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="ce" green="ce" red="ce" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[150, 40]"/>
+                        </Property>
+                      </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                      </AuxValues>
+                    </Component>
+                  </SubComponents>
+                </Container>
+                <Container class="javax.swing.JPanel" name="txtCreditPnl">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[140, 55]"/>
+                    </Property>
+                  </Properties>
+                  <SubComponents>
+                    <Component class="javax.swing.JLabel" name="jLabel18">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="T&#xed;n ch&#x1ec9;:"/>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[40, 45]"/>
+                        </Property>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="txtCredit2">
+                      <Properties>
+                        <Property name="horizontalAlignment" type="int" value="0"/>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[90, 40]"/>
+                        </Property>
+                      </Properties>
+                    </Component>
+                  </SubComponents>
+                  <LayoutCode>
+                    <CodeStatement>
+                      <CodeExpression id="35_flowLayout5">
+                        <CodeVariable name="flowLayout5" type="4096" declaredType="java.awt.FlowLayout"/>
+                        <ExpressionOrigin>
+                          <ExpressionProvider type="CodeConstructor">
+                            <CodeConstructor class="java.awt.FlowLayout" parameterTypes="int"/>
+                          </ExpressionProvider>
+                          <Parameters>
+                            <CodeExpression id="36">
+                              <ExpressionOrigin>
+                                <Value type="int" value="0"/>
+                              </ExpressionOrigin>
+                            </CodeExpression>
+                          </Parameters>
+                        </ExpressionOrigin>
+                      </CodeExpression>
+                      <StatementProvider type="CodeExpression">
+                        <CodeExpression id="35_flowLayout5"/>
+                      </StatementProvider>
+                      <Parameters>
+                        <CodeExpression id="36"/>
+                      </Parameters>
+                    </CodeStatement>
+                    <CodeStatement>
+                      <CodeExpression id="35_flowLayout5"/>
+                      <StatementProvider type="CodeMethod">
+                        <CodeMethod name="setAlignOnBaseline" class="java.awt.FlowLayout" parameterTypes="boolean"/>
+                      </StatementProvider>
+                      <Parameters>
+                        <CodeExpression id="37">
+                          <ExpressionOrigin>
+                            <Value type="boolean" value="true"/>
+                          </ExpressionOrigin>
+                        </CodeExpression>
+                      </Parameters>
+                    </CodeStatement>
+                    <CodeStatement>
+                      <CodeExpression id="38_txtCreditPnl">
+                        <CodeVariable name="txtCreditPnl" type="8194" declaredType="javax.swing.JPanel"/>
+                        <ExpressionOrigin>
+                          <ExpressionProvider type="ComponentRef">
+                            <ComponentRef name="txtCreditPnl"/>
+                          </ExpressionProvider>
+                        </ExpressionOrigin>
+                      </CodeExpression>
+                      <StatementProvider type="CodeMethod">
+                        <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
+                      </StatementProvider>
+                      <Parameters>
+                        <CodeExpression id="35_flowLayout5"/>
+                      </Parameters>
+                    </CodeStatement>
+                    <CodeStatement>
+                      <CodeExpression id="38_txtCreditPnl"/>
+                      <StatementProvider type="CodeMethod">
+                        <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                      </StatementProvider>
+                      <Parameters>
+                        <CodeExpression id="39_jLabel18">
+                          <CodeVariable name="jLabel18" type="8194" declaredType="javax.swing.JLabel"/>
+                          <ExpressionOrigin>
+                            <ExpressionProvider type="ComponentRef">
+                              <ComponentRef name="jLabel18"/>
+                            </ExpressionProvider>
+                          </ExpressionOrigin>
+                        </CodeExpression>
+                      </Parameters>
+                    </CodeStatement>
+                    <CodeStatement>
+                      <CodeExpression id="38_txtCreditPnl"/>
+                      <StatementProvider type="CodeMethod">
+                        <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                      </StatementProvider>
+                      <Parameters>
+                        <CodeExpression id="40_txtCredit2">
+                          <CodeVariable name="txtCredit2" type="8194" declaredType="javax.swing.JTextField"/>
+                          <ExpressionOrigin>
+                            <ExpressionProvider type="ComponentRef">
+                              <ComponentRef name="txtCredit2"/>
+                            </ExpressionProvider>
+                          </ExpressionOrigin>
+                        </CodeExpression>
+                      </Parameters>
+                    </CodeStatement>
+                  </LayoutCode>
+                </Container>
+                <Container class="javax.swing.JPanel" name="txtDetailCourse">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[800, 220]"/>
+                    </Property>
+                  </Properties>
+                  <SubComponents>
+                    <Container class="javax.swing.JPanel" name="txtLocationPnl">
+                      <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                        </Property>
+                      </Properties>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="jLabel20">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="&#x110;&#x1ecb;a ch&#x1ec9;:"/>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[70, 40]"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="jTextField6">
+                          <Properties>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[200, 40]"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                      </SubComponents>
+                      <LayoutCode>
+                        <CodeStatement>
+                          <CodeExpression id="41_flowLayout7">
+                            <CodeVariable name="flowLayout7" type="4096" declaredType="java.awt.FlowLayout"/>
+                            <ExpressionOrigin>
+                              <ExpressionProvider type="CodeConstructor">
+                                <CodeConstructor class="java.awt.FlowLayout" parameterTypes="int"/>
+                              </ExpressionProvider>
+                              <Parameters>
+                                <CodeExpression id="42">
+                                  <ExpressionOrigin>
+                                    <Value type="int" value="0"/>
+                                  </ExpressionOrigin>
+                                </CodeExpression>
+                              </Parameters>
+                            </ExpressionOrigin>
+                          </CodeExpression>
+                          <StatementProvider type="CodeExpression">
+                            <CodeExpression id="41_flowLayout7"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="42"/>
+                          </Parameters>
+                        </CodeStatement>
+                        <CodeStatement>
+                          <CodeExpression id="41_flowLayout7"/>
+                          <StatementProvider type="CodeMethod">
+                            <CodeMethod name="setAlignOnBaseline" class="java.awt.FlowLayout" parameterTypes="boolean"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="43">
+                              <ExpressionOrigin>
+                                <Value type="boolean" value="true"/>
+                              </ExpressionOrigin>
+                            </CodeExpression>
+                          </Parameters>
+                        </CodeStatement>
+                        <CodeStatement>
+                          <CodeExpression id="44_txtLocationPnl">
+                            <CodeVariable name="txtLocationPnl" type="8194" declaredType="javax.swing.JPanel"/>
+                            <ExpressionOrigin>
+                              <ExpressionProvider type="ComponentRef">
+                                <ComponentRef name="txtLocationPnl"/>
+                              </ExpressionProvider>
+                            </ExpressionOrigin>
+                          </CodeExpression>
+                          <StatementProvider type="CodeMethod">
+                            <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="41_flowLayout7"/>
+                          </Parameters>
+                        </CodeStatement>
+                        <CodeStatement>
+                          <CodeExpression id="44_txtLocationPnl"/>
+                          <StatementProvider type="CodeMethod">
+                            <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="45_jLabel20">
+                              <CodeVariable name="jLabel20" type="8194" declaredType="javax.swing.JLabel"/>
+                              <ExpressionOrigin>
+                                <ExpressionProvider type="ComponentRef">
+                                  <ComponentRef name="jLabel20"/>
+                                </ExpressionProvider>
+                              </ExpressionOrigin>
+                            </CodeExpression>
+                          </Parameters>
+                        </CodeStatement>
+                        <CodeStatement>
+                          <CodeExpression id="44_txtLocationPnl"/>
+                          <StatementProvider type="CodeMethod">
+                            <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="46_jTextField6">
+                              <CodeVariable name="jTextField6" type="8194" declaredType="javax.swing.JTextField"/>
+                              <ExpressionOrigin>
+                                <ExpressionProvider type="ComponentRef">
+                                  <ComponentRef name="jTextField6"/>
+                                </ExpressionProvider>
+                              </ExpressionOrigin>
+                            </CodeExpression>
+                          </Parameters>
+                        </CodeStatement>
+                      </LayoutCode>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="txtUrlPnl">
+                      <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                        </Property>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[300, 50]"/>
+                        </Property>
+                      </Properties>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="jLabel23">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="URL:"/>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[25, 40]"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="jTextField7">
+                          <Properties>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[255, 40]"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                      </SubComponents>
+                      <LayoutCode>
+                        <CodeStatement>
+                          <CodeExpression id="47_flowLayout8">
+                            <CodeVariable name="flowLayout8" type="4096" declaredType="java.awt.FlowLayout"/>
+                            <ExpressionOrigin>
+                              <ExpressionProvider type="CodeConstructor">
+                                <CodeConstructor class="java.awt.FlowLayout" parameterTypes="int"/>
+                              </ExpressionProvider>
+                              <Parameters>
+                                <CodeExpression id="48">
+                                  <ExpressionOrigin>
+                                    <Value type="int" value="0"/>
+                                  </ExpressionOrigin>
+                                </CodeExpression>
+                              </Parameters>
+                            </ExpressionOrigin>
+                          </CodeExpression>
+                          <StatementProvider type="CodeExpression">
+                            <CodeExpression id="47_flowLayout8"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="48"/>
+                          </Parameters>
+                        </CodeStatement>
+                        <CodeStatement>
+                          <CodeExpression id="47_flowLayout8"/>
+                          <StatementProvider type="CodeMethod">
+                            <CodeMethod name="setAlignOnBaseline" class="java.awt.FlowLayout" parameterTypes="boolean"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="49">
+                              <ExpressionOrigin>
+                                <Value type="boolean" value="true"/>
+                              </ExpressionOrigin>
+                            </CodeExpression>
+                          </Parameters>
+                        </CodeStatement>
+                        <CodeStatement>
+                          <CodeExpression id="50_txtUrlPnl">
+                            <CodeVariable name="txtUrlPnl" type="8194" declaredType="javax.swing.JPanel"/>
+                            <ExpressionOrigin>
+                              <ExpressionProvider type="ComponentRef">
+                                <ComponentRef name="txtUrlPnl"/>
+                              </ExpressionProvider>
+                            </ExpressionOrigin>
+                          </CodeExpression>
+                          <StatementProvider type="CodeMethod">
+                            <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="47_flowLayout8"/>
+                          </Parameters>
+                        </CodeStatement>
+                        <CodeStatement>
+                          <CodeExpression id="50_txtUrlPnl"/>
+                          <StatementProvider type="CodeMethod">
+                            <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="51_jLabel23">
+                              <CodeVariable name="jLabel23" type="8194" declaredType="javax.swing.JLabel"/>
+                              <ExpressionOrigin>
+                                <ExpressionProvider type="ComponentRef">
+                                  <ComponentRef name="jLabel23"/>
+                                </ExpressionProvider>
+                              </ExpressionOrigin>
+                            </CodeExpression>
+                          </Parameters>
+                        </CodeStatement>
+                        <CodeStatement>
+                          <CodeExpression id="50_txtUrlPnl"/>
+                          <StatementProvider type="CodeMethod">
+                            <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="52_jTextField7">
+                              <CodeVariable name="jTextField7" type="8194" declaredType="javax.swing.JTextField"/>
+                              <ExpressionOrigin>
+                                <ExpressionProvider type="ComponentRef">
+                                  <ComponentRef name="jTextField7"/>
+                                </ExpressionProvider>
+                              </ExpressionOrigin>
+                            </CodeExpression>
+                          </Parameters>
+                        </CodeStatement>
+                      </LayoutCode>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="txtTimePnl">
+                      <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                        </Property>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[200, 50]"/>
+                        </Property>
+                      </Properties>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="jLabel22">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Th&#x1edd;i gian:"/>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[60, 40]"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="com.github.lgooddatepicker.components.TimePicker" name="timePicker3">
+                          <Properties>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[120, 40]"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                      </SubComponents>
+                      <LayoutCode>
+                        <CodeStatement>
+                          <CodeExpression id="53_flowLayout12">
+                            <CodeVariable name="flowLayout12" type="4096" declaredType="java.awt.FlowLayout"/>
+                            <ExpressionOrigin>
+                              <ExpressionProvider type="CodeConstructor">
+                                <CodeConstructor class="java.awt.FlowLayout" parameterTypes="int"/>
+                              </ExpressionProvider>
+                              <Parameters>
+                                <CodeExpression id="54">
+                                  <ExpressionOrigin>
+                                    <Value type="int" value="0"/>
+                                  </ExpressionOrigin>
+                                </CodeExpression>
+                              </Parameters>
+                            </ExpressionOrigin>
+                          </CodeExpression>
+                          <StatementProvider type="CodeExpression">
+                            <CodeExpression id="53_flowLayout12"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="54"/>
+                          </Parameters>
+                        </CodeStatement>
+                        <CodeStatement>
+                          <CodeExpression id="53_flowLayout12"/>
+                          <StatementProvider type="CodeMethod">
+                            <CodeMethod name="setAlignOnBaseline" class="java.awt.FlowLayout" parameterTypes="boolean"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="55">
+                              <ExpressionOrigin>
+                                <Value type="boolean" value="true"/>
+                              </ExpressionOrigin>
+                            </CodeExpression>
+                          </Parameters>
+                        </CodeStatement>
+                        <CodeStatement>
+                          <CodeExpression id="56_txtTimePnl">
+                            <CodeVariable name="txtTimePnl" type="8194" declaredType="javax.swing.JPanel"/>
+                            <ExpressionOrigin>
+                              <ExpressionProvider type="ComponentRef">
+                                <ComponentRef name="txtTimePnl"/>
+                              </ExpressionProvider>
+                            </ExpressionOrigin>
+                          </CodeExpression>
+                          <StatementProvider type="CodeMethod">
+                            <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="53_flowLayout12"/>
+                          </Parameters>
+                        </CodeStatement>
+                        <CodeStatement>
+                          <CodeExpression id="56_txtTimePnl"/>
+                          <StatementProvider type="CodeMethod">
+                            <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="57_jLabel22">
+                              <CodeVariable name="jLabel22" type="8194" declaredType="javax.swing.JLabel"/>
+                              <ExpressionOrigin>
+                                <ExpressionProvider type="ComponentRef">
+                                  <ComponentRef name="jLabel22"/>
+                                </ExpressionProvider>
+                              </ExpressionOrigin>
+                            </CodeExpression>
+                          </Parameters>
+                        </CodeStatement>
+                        <CodeStatement>
+                          <CodeExpression id="56_txtTimePnl"/>
+                          <StatementProvider type="CodeMethod">
+                            <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="58_timePicker3">
+                              <CodeVariable name="timePicker3" type="8194" declaredType="com.github.lgooddatepicker.components.TimePicker"/>
+                              <ExpressionOrigin>
+                                <ExpressionProvider type="ComponentRef">
+                                  <ComponentRef name="timePicker3"/>
+                                </ExpressionProvider>
+                              </ExpressionOrigin>
+                            </CodeExpression>
+                          </Parameters>
+                        </CodeStatement>
+                      </LayoutCode>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="txtDatePnl">
+                      <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                        </Property>
+                      </Properties>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="jLabel21">
+                          <Properties>
+                            <Property name="horizontalAlignment" type="int" value="2"/>
+                            <Property name="text" type="java.lang.String" value="Ng&#xe0;y:"/>
+                            <Property name="toolTipText" type="java.lang.String" value=""/>
+                            <Property name="horizontalTextPosition" type="int" value="10"/>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[70, 40]"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Container class="javax.swing.JPanel" name="jPanel33">
+                          <Properties>
+                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                            </Property>
+                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                                <LineBorder>
+                                  <Color PropertyName="color" blue="ce" green="ce" red="ce" type="rgb"/>
+                                </LineBorder>
+                              </Border>
+                            </Property>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[500, 40]"/>
+                            </Property>
+                          </Properties>
+                          <SubComponents>
+                            <Component class="javax.swing.JCheckBox" name="txtMonday2">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Th&#x1ee9; 2"/>
+                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                  <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                    <EmptyBorder bottom="5" left="5" right="15" top="5"/>
+                                  </Border>
+                                </Property>
+                                <Property name="horizontalAlignment" type="int" value="2"/>
+                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                  <Dimension value="[75, 30]"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JCheckBox" name="txtTuesday2">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Th&#x1ee9; 3"/>
+                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                  <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                    <EmptyBorder bottom="5" left="5" right="15" top="5"/>
+                                  </Border>
+                                </Property>
+                                <Property name="horizontalAlignment" type="int" value="2"/>
+                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                  <Dimension value="[75, 30]"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JCheckBox" name="txtWednesday2">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Th&#x1ee9; 4"/>
+                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                  <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                    <EmptyBorder bottom="5" left="5" right="15" top="5"/>
+                                  </Border>
+                                </Property>
+                                <Property name="horizontalAlignment" type="int" value="2"/>
+                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                  <Dimension value="[75, 30]"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JCheckBox" name="txtThursday2">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Th&#x1ee9; 5"/>
+                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                  <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                    <EmptyBorder bottom="5" left="5" right="15" top="5"/>
+                                  </Border>
+                                </Property>
+                                <Property name="horizontalAlignment" type="int" value="2"/>
+                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                  <Dimension value="[75, 30]"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JCheckBox" name="txtFriday2">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Th&#x1ee9; 6"/>
+                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                  <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                    <EmptyBorder bottom="5" left="5" right="15" top="5"/>
+                                  </Border>
+                                </Property>
+                                <Property name="horizontalAlignment" type="int" value="2"/>
+                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                  <Dimension value="[75, 30]"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JCheckBox" name="txtSaturday2">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Th&#x1ee9; 7"/>
+                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                  <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                    <EmptyBorder bottom="5" left="5" right="15" top="5"/>
+                                  </Border>
+                                </Property>
+                                <Property name="horizontalAlignment" type="int" value="2"/>
+                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                  <Dimension value="[75, 30]"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                          <LayoutCode>
+                            <CodeStatement>
+                              <CodeExpression id="59_flowLayout9">
+                                <CodeVariable name="flowLayout9" type="4096" declaredType="java.awt.FlowLayout"/>
+                                <ExpressionOrigin>
+                                  <ExpressionProvider type="CodeConstructor">
+                                    <CodeConstructor class="java.awt.FlowLayout" parameterTypes="int"/>
+                                  </ExpressionProvider>
+                                  <Parameters>
+                                    <CodeExpression id="60">
+                                      <ExpressionOrigin>
+                                        <Value type="int" value="0"/>
+                                      </ExpressionOrigin>
+                                    </CodeExpression>
+                                  </Parameters>
+                                </ExpressionOrigin>
+                              </CodeExpression>
+                              <StatementProvider type="CodeExpression">
+                                <CodeExpression id="59_flowLayout9"/>
+                              </StatementProvider>
+                              <Parameters>
+                                <CodeExpression id="60"/>
+                              </Parameters>
+                            </CodeStatement>
+                            <CodeStatement>
+                              <CodeExpression id="59_flowLayout9"/>
+                              <StatementProvider type="CodeMethod">
+                                <CodeMethod name="setAlignOnBaseline" class="java.awt.FlowLayout" parameterTypes="boolean"/>
+                              </StatementProvider>
+                              <Parameters>
+                                <CodeExpression id="61">
+                                  <ExpressionOrigin>
+                                    <Value type="boolean" value="true"/>
+                                  </ExpressionOrigin>
+                                </CodeExpression>
+                              </Parameters>
+                            </CodeStatement>
+                            <CodeStatement>
+                              <CodeExpression id="62_jPanel33">
+                                <CodeVariable name="jPanel33" type="8194" declaredType="javax.swing.JPanel"/>
+                                <ExpressionOrigin>
+                                  <ExpressionProvider type="ComponentRef">
+                                    <ComponentRef name="jPanel33"/>
+                                  </ExpressionProvider>
+                                </ExpressionOrigin>
+                              </CodeExpression>
+                              <StatementProvider type="CodeMethod">
+                                <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
+                              </StatementProvider>
+                              <Parameters>
+                                <CodeExpression id="59_flowLayout9"/>
+                              </Parameters>
+                            </CodeStatement>
+                            <CodeStatement>
+                              <CodeExpression id="62_jPanel33"/>
+                              <StatementProvider type="CodeMethod">
+                                <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                              </StatementProvider>
+                              <Parameters>
+                                <CodeExpression id="63_txtMonday2">
+                                  <CodeVariable name="txtMonday2" type="8194" declaredType="javax.swing.JCheckBox"/>
+                                  <ExpressionOrigin>
+                                    <ExpressionProvider type="ComponentRef">
+                                      <ComponentRef name="txtMonday2"/>
+                                    </ExpressionProvider>
+                                  </ExpressionOrigin>
+                                </CodeExpression>
+                              </Parameters>
+                            </CodeStatement>
+                            <CodeStatement>
+                              <CodeExpression id="62_jPanel33"/>
+                              <StatementProvider type="CodeMethod">
+                                <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                              </StatementProvider>
+                              <Parameters>
+                                <CodeExpression id="64_txtTuesday2">
+                                  <CodeVariable name="txtTuesday2" type="8194" declaredType="javax.swing.JCheckBox"/>
+                                  <ExpressionOrigin>
+                                    <ExpressionProvider type="ComponentRef">
+                                      <ComponentRef name="txtTuesday2"/>
+                                    </ExpressionProvider>
+                                  </ExpressionOrigin>
+                                </CodeExpression>
+                              </Parameters>
+                            </CodeStatement>
+                            <CodeStatement>
+                              <CodeExpression id="62_jPanel33"/>
+                              <StatementProvider type="CodeMethod">
+                                <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                              </StatementProvider>
+                              <Parameters>
+                                <CodeExpression id="65_txtWednesday2">
+                                  <CodeVariable name="txtWednesday2" type="8194" declaredType="javax.swing.JCheckBox"/>
+                                  <ExpressionOrigin>
+                                    <ExpressionProvider type="ComponentRef">
+                                      <ComponentRef name="txtWednesday2"/>
+                                    </ExpressionProvider>
+                                  </ExpressionOrigin>
+                                </CodeExpression>
+                              </Parameters>
+                            </CodeStatement>
+                            <CodeStatement>
+                              <CodeExpression id="62_jPanel33"/>
+                              <StatementProvider type="CodeMethod">
+                                <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                              </StatementProvider>
+                              <Parameters>
+                                <CodeExpression id="66_txtThursday2">
+                                  <CodeVariable name="txtThursday2" type="8194" declaredType="javax.swing.JCheckBox"/>
+                                  <ExpressionOrigin>
+                                    <ExpressionProvider type="ComponentRef">
+                                      <ComponentRef name="txtThursday2"/>
+                                    </ExpressionProvider>
+                                  </ExpressionOrigin>
+                                </CodeExpression>
+                              </Parameters>
+                            </CodeStatement>
+                            <CodeStatement>
+                              <CodeExpression id="62_jPanel33"/>
+                              <StatementProvider type="CodeMethod">
+                                <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                              </StatementProvider>
+                              <Parameters>
+                                <CodeExpression id="67_txtFriday2">
+                                  <CodeVariable name="txtFriday2" type="8194" declaredType="javax.swing.JCheckBox"/>
+                                  <ExpressionOrigin>
+                                    <ExpressionProvider type="ComponentRef">
+                                      <ComponentRef name="txtFriday2"/>
+                                    </ExpressionProvider>
+                                  </ExpressionOrigin>
+                                </CodeExpression>
+                              </Parameters>
+                            </CodeStatement>
+                            <CodeStatement>
+                              <CodeExpression id="62_jPanel33"/>
+                              <StatementProvider type="CodeMethod">
+                                <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                              </StatementProvider>
+                              <Parameters>
+                                <CodeExpression id="68_txtSaturday2">
+                                  <CodeVariable name="txtSaturday2" type="8194" declaredType="javax.swing.JCheckBox"/>
+                                  <ExpressionOrigin>
+                                    <ExpressionProvider type="ComponentRef">
+                                      <ComponentRef name="txtSaturday2"/>
+                                    </ExpressionProvider>
+                                  </ExpressionOrigin>
+                                </CodeExpression>
+                              </Parameters>
+                            </CodeStatement>
+                          </LayoutCode>
+                        </Container>
+                      </SubComponents>
+                      <LayoutCode>
+                        <CodeStatement>
+                          <CodeExpression id="69_flowLayout11">
+                            <CodeVariable name="flowLayout11" type="4096" declaredType="java.awt.FlowLayout"/>
+                            <ExpressionOrigin>
+                              <ExpressionProvider type="CodeConstructor">
+                                <CodeConstructor class="java.awt.FlowLayout" parameterTypes="int"/>
+                              </ExpressionProvider>
+                              <Parameters>
+                                <CodeExpression id="70">
+                                  <ExpressionOrigin>
+                                    <Value type="int" value="0"/>
+                                  </ExpressionOrigin>
+                                </CodeExpression>
+                              </Parameters>
+                            </ExpressionOrigin>
+                          </CodeExpression>
+                          <StatementProvider type="CodeExpression">
+                            <CodeExpression id="69_flowLayout11"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="70"/>
+                          </Parameters>
+                        </CodeStatement>
+                        <CodeStatement>
+                          <CodeExpression id="69_flowLayout11"/>
+                          <StatementProvider type="CodeMethod">
+                            <CodeMethod name="setAlignOnBaseline" class="java.awt.FlowLayout" parameterTypes="boolean"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="71">
+                              <ExpressionOrigin>
+                                <Value type="boolean" value="true"/>
+                              </ExpressionOrigin>
+                            </CodeExpression>
+                          </Parameters>
+                        </CodeStatement>
+                        <CodeStatement>
+                          <CodeExpression id="72_txtDatePnl">
+                            <CodeVariable name="txtDatePnl" type="8194" declaredType="javax.swing.JPanel"/>
+                            <ExpressionOrigin>
+                              <ExpressionProvider type="ComponentRef">
+                                <ComponentRef name="txtDatePnl"/>
+                              </ExpressionProvider>
+                            </ExpressionOrigin>
+                          </CodeExpression>
+                          <StatementProvider type="CodeMethod">
+                            <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="69_flowLayout11"/>
+                          </Parameters>
+                        </CodeStatement>
+                        <CodeStatement>
+                          <CodeExpression id="72_txtDatePnl"/>
+                          <StatementProvider type="CodeMethod">
+                            <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="73_jLabel21">
+                              <CodeVariable name="jLabel21" type="8194" declaredType="javax.swing.JLabel"/>
+                              <ExpressionOrigin>
+                                <ExpressionProvider type="ComponentRef">
+                                  <ComponentRef name="jLabel21"/>
+                                </ExpressionProvider>
+                              </ExpressionOrigin>
+                            </CodeExpression>
+                          </Parameters>
+                        </CodeStatement>
+                        <CodeStatement>
+                          <CodeExpression id="72_txtDatePnl"/>
+                          <StatementProvider type="CodeMethod">
+                            <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="62_jPanel33"/>
+                          </Parameters>
+                        </CodeStatement>
+                      </LayoutCode>
+                    </Container>
+                  </SubComponents>
+                  <LayoutCode>
+                    <CodeStatement>
+                      <CodeExpression id="74_flowLayout13">
+                        <CodeVariable name="flowLayout13" type="4096" declaredType="java.awt.FlowLayout"/>
+                        <ExpressionOrigin>
+                          <ExpressionProvider type="CodeConstructor">
+                            <CodeConstructor class="java.awt.FlowLayout" parameterTypes="int"/>
+                          </ExpressionProvider>
+                          <Parameters>
+                            <CodeExpression id="75">
+                              <ExpressionOrigin>
+                                <Value type="int" value="0"/>
+                              </ExpressionOrigin>
+                            </CodeExpression>
+                          </Parameters>
+                        </ExpressionOrigin>
+                      </CodeExpression>
+                      <StatementProvider type="CodeExpression">
+                        <CodeExpression id="74_flowLayout13"/>
+                      </StatementProvider>
+                      <Parameters>
+                        <CodeExpression id="75"/>
+                      </Parameters>
+                    </CodeStatement>
+                    <CodeStatement>
+                      <CodeExpression id="74_flowLayout13"/>
+                      <StatementProvider type="CodeMethod">
+                        <CodeMethod name="setAlignOnBaseline" class="java.awt.FlowLayout" parameterTypes="boolean"/>
+                      </StatementProvider>
+                      <Parameters>
+                        <CodeExpression id="76">
+                          <ExpressionOrigin>
+                            <Value type="boolean" value="true"/>
+                          </ExpressionOrigin>
+                        </CodeExpression>
+                      </Parameters>
+                    </CodeStatement>
+                    <CodeStatement>
+                      <CodeExpression id="77_txtDetailCourse">
+                        <CodeVariable name="txtDetailCourse" type="8194" declaredType="javax.swing.JPanel"/>
+                        <ExpressionOrigin>
+                          <ExpressionProvider type="ComponentRef">
+                            <ComponentRef name="txtDetailCourse"/>
+                          </ExpressionProvider>
+                        </ExpressionOrigin>
+                      </CodeExpression>
+                      <StatementProvider type="CodeMethod">
+                        <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
+                      </StatementProvider>
+                      <Parameters>
+                        <CodeExpression id="74_flowLayout13"/>
+                      </Parameters>
+                    </CodeStatement>
+                    <CodeStatement>
+                      <CodeExpression id="77_txtDetailCourse"/>
+                      <StatementProvider type="CodeMethod">
+                        <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                      </StatementProvider>
+                      <Parameters>
+                        <CodeExpression id="44_txtLocationPnl"/>
+                      </Parameters>
+                    </CodeStatement>
+                    <CodeStatement>
+                      <CodeExpression id="77_txtDetailCourse"/>
+                      <StatementProvider type="CodeMethod">
+                        <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                      </StatementProvider>
+                      <Parameters>
+                        <CodeExpression id="50_txtUrlPnl"/>
+                      </Parameters>
+                    </CodeStatement>
+                    <CodeStatement>
+                      <CodeExpression id="77_txtDetailCourse"/>
+                      <StatementProvider type="CodeMethod">
+                        <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                      </StatementProvider>
+                      <Parameters>
+                        <CodeExpression id="56_txtTimePnl"/>
+                      </Parameters>
+                    </CodeStatement>
+                    <CodeStatement>
+                      <CodeExpression id="77_txtDetailCourse"/>
+                      <StatementProvider type="CodeMethod">
+                        <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                      </StatementProvider>
+                      <Parameters>
+                        <CodeExpression id="72_txtDatePnl"/>
+                      </Parameters>
+                    </CodeStatement>
+                  </LayoutCode>
+                </Container>
+              </SubComponents>
+              <LayoutCode>
+                <CodeStatement>
+                  <CodeExpression id="78_flowLayout15">
+                    <CodeVariable name="flowLayout15" type="4096" declaredType="java.awt.FlowLayout"/>
+                    <ExpressionOrigin>
+                      <ExpressionProvider type="CodeConstructor">
+                        <CodeConstructor class="java.awt.FlowLayout" parameterTypes="int, int, int"/>
+                      </ExpressionProvider>
+                      <Parameters>
+                        <CodeExpression id="79">
+                          <ExpressionOrigin>
+                            <Value type="int" value="0"/>
+                          </ExpressionOrigin>
+                        </CodeExpression>
+                        <CodeExpression id="80">
+                          <ExpressionOrigin>
+                            <Value type="int" value="0"/>
+                          </ExpressionOrigin>
+                        </CodeExpression>
+                        <CodeExpression id="81">
+                          <ExpressionOrigin>
+                            <Value type="int" value="0"/>
+                          </ExpressionOrigin>
+                        </CodeExpression>
+                      </Parameters>
+                    </ExpressionOrigin>
+                  </CodeExpression>
+                  <StatementProvider type="CodeExpression">
+                    <CodeExpression id="78_flowLayout15"/>
+                  </StatementProvider>
+                  <Parameters>
+                    <CodeExpression id="79"/>
+                    <CodeExpression id="80"/>
+                    <CodeExpression id="81"/>
+                  </Parameters>
+                </CodeStatement>
+                <CodeStatement>
+                  <CodeExpression id="78_flowLayout15"/>
+                  <StatementProvider type="CodeMethod">
+                    <CodeMethod name="setAlignOnBaseline" class="java.awt.FlowLayout" parameterTypes="boolean"/>
+                  </StatementProvider>
+                  <Parameters>
+                    <CodeExpression id="82">
+                      <ExpressionOrigin>
+                        <Value type="boolean" value="true"/>
+                      </ExpressionOrigin>
+                    </CodeExpression>
+                  </Parameters>
+                </CodeStatement>
+                <CodeStatement>
+                  <CodeExpression id="83_jPanel1">
+                    <CodeVariable name="jPanel1" type="8194" declaredType="javax.swing.JPanel"/>
+                    <ExpressionOrigin>
+                      <ExpressionProvider type="ComponentRef">
+                        <ComponentRef name="jPanel1"/>
+                      </ExpressionProvider>
+                    </ExpressionOrigin>
+                  </CodeExpression>
+                  <StatementProvider type="CodeMethod">
+                    <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
+                  </StatementProvider>
+                  <Parameters>
+                    <CodeExpression id="78_flowLayout15"/>
+                  </Parameters>
+                </CodeStatement>
+                <CodeStatement>
+                  <CodeExpression id="83_jPanel1"/>
+                  <StatementProvider type="CodeMethod">
+                    <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                  </StatementProvider>
+                  <Parameters>
+                    <CodeExpression id="26_txtCourseIDPnl"/>
+                  </Parameters>
+                </CodeStatement>
+                <CodeStatement>
+                  <CodeExpression id="83_jPanel1"/>
+                  <StatementProvider type="CodeMethod">
+                    <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                  </StatementProvider>
+                  <Parameters>
+                    <CodeExpression id="32_txtCourseNamePnl"/>
+                  </Parameters>
+                </CodeStatement>
+                <CodeStatement>
+                  <CodeExpression id="83_jPanel1"/>
+                  <StatementProvider type="CodeMethod">
+                    <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                  </StatementProvider>
+                  <Parameters>
+                    <CodeExpression id="84_txtDepartmentPnl">
+                      <CodeVariable name="txtDepartmentPnl" type="8194" declaredType="javax.swing.JPanel"/>
+                      <ExpressionOrigin>
+                        <ExpressionProvider type="ComponentRef">
+                          <ComponentRef name="txtDepartmentPnl"/>
+                        </ExpressionProvider>
+                      </ExpressionOrigin>
+                    </CodeExpression>
+                  </Parameters>
+                </CodeStatement>
+                <CodeStatement>
+                  <CodeExpression id="83_jPanel1"/>
+                  <StatementProvider type="CodeMethod">
+                    <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                  </StatementProvider>
+                  <Parameters>
+                    <CodeExpression id="38_txtCreditPnl"/>
+                  </Parameters>
+                </CodeStatement>
+                <CodeStatement>
+                  <CodeExpression id="83_jPanel1"/>
+                  <StatementProvider type="CodeMethod">
+                    <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                  </StatementProvider>
+                  <Parameters>
+                    <CodeExpression id="77_txtDetailCourse"/>
+                  </Parameters>
+                </CodeStatement>
+              </LayoutCode>
+            </Container>
+            <Container class="javax.swing.JPanel" name="buttonPnl">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+              </Properties>
+              <SubComponents>
+                <Component class="javax.swing.JButton" name="jButton6">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="&#x110;&#xf3;ng"/>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                        <LineBorder>
+                          <Color PropertyName="color" blue="ce" green="ce" red="ce" type="rgb"/>
+                        </LineBorder>
+                      </Border>
+                    </Property>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[112, 40]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton6ActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="jButton5">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="L&#x1b0;u"/>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="df" green="7a" red="38" type="rgb"/>
+                    </Property>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                        <LineBorder>
+                          <Color PropertyName="color" blue="ed" green="c4" red="50" type="rgb"/>
+                        </LineBorder>
+                      </Border>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="12" style="1"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[112, 40]"/>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+              <LayoutCode>
+                <CodeStatement>
+                  <CodeExpression id="85_flowLayout14">
+                    <CodeVariable name="flowLayout14" type="4096" declaredType="java.awt.FlowLayout"/>
+                    <ExpressionOrigin>
+                      <ExpressionProvider type="CodeConstructor">
+                        <CodeConstructor class="java.awt.FlowLayout" parameterTypes="int"/>
+                      </ExpressionProvider>
+                      <Parameters>
+                        <CodeExpression id="86">
+                          <ExpressionOrigin>
+                            <Value type="int" value="2"/>
+                          </ExpressionOrigin>
+                        </CodeExpression>
+                      </Parameters>
+                    </ExpressionOrigin>
+                  </CodeExpression>
+                  <StatementProvider type="CodeExpression">
+                    <CodeExpression id="85_flowLayout14"/>
+                  </StatementProvider>
+                  <Parameters>
+                    <CodeExpression id="86"/>
+                  </Parameters>
+                </CodeStatement>
+                <CodeStatement>
+                  <CodeExpression id="85_flowLayout14"/>
+                  <StatementProvider type="CodeMethod">
+                    <CodeMethod name="setAlignOnBaseline" class="java.awt.FlowLayout" parameterTypes="boolean"/>
+                  </StatementProvider>
+                  <Parameters>
+                    <CodeExpression id="87">
+                      <ExpressionOrigin>
+                        <Value type="boolean" value="true"/>
+                      </ExpressionOrigin>
+                    </CodeExpression>
+                  </Parameters>
+                </CodeStatement>
+                <CodeStatement>
+                  <CodeExpression id="88_buttonPnl">
+                    <CodeVariable name="buttonPnl" type="8194" declaredType="javax.swing.JPanel"/>
+                    <ExpressionOrigin>
+                      <ExpressionProvider type="ComponentRef">
+                        <ComponentRef name="buttonPnl"/>
+                      </ExpressionProvider>
+                    </ExpressionOrigin>
+                  </CodeExpression>
+                  <StatementProvider type="CodeMethod">
+                    <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
+                  </StatementProvider>
+                  <Parameters>
+                    <CodeExpression id="85_flowLayout14"/>
+                  </Parameters>
+                </CodeStatement>
+                <CodeStatement>
+                  <CodeExpression id="88_buttonPnl"/>
+                  <StatementProvider type="CodeMethod">
+                    <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                  </StatementProvider>
+                  <Parameters>
+                    <CodeExpression id="89_jButton6">
+                      <CodeVariable name="jButton6" type="8194" declaredType="javax.swing.JButton"/>
+                      <ExpressionOrigin>
+                        <ExpressionProvider type="ComponentRef">
+                          <ComponentRef name="jButton6"/>
+                        </ExpressionProvider>
+                      </ExpressionOrigin>
+                    </CodeExpression>
+                  </Parameters>
+                </CodeStatement>
+                <CodeStatement>
+                  <CodeExpression id="88_buttonPnl"/>
+                  <StatementProvider type="CodeMethod">
+                    <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                  </StatementProvider>
+                  <Parameters>
+                    <CodeExpression id="90_jButton5">
+                      <CodeVariable name="jButton5" type="8194" declaredType="javax.swing.JButton"/>
+                      <ExpressionOrigin>
+                        <ExpressionProvider type="ComponentRef">
+                          <ComponentRef name="jButton5"/>
+                        </ExpressionProvider>
+                      </ExpressionOrigin>
+                    </CodeExpression>
+                  </Parameters>
+                </CodeStatement>
+              </LayoutCode>
+            </Container>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>
