@@ -140,7 +140,7 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
         jPanel14 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         tpTime = new com.github.lgooddatepicker.components.TimePicker();
-        btnUpdate = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         txtClear = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -446,12 +446,17 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
 
         tpTime.setPreferredSize(new java.awt.Dimension(200, 40));
         jPanel14.add(tpTime);
+
         jButton1.setText("Lưu");
         jButton1.setBackground(new java.awt.Color(56, 122, 223));
         jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(80, 196, 237)));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
-
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         txtClear.setText("Đóng");
         txtClear.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
@@ -479,7 +484,7 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
                     .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
                     .addComponent(txtClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -502,7 +507,7 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
                     .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())))
         );
@@ -622,10 +627,10 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
         txtSaturday.setSelected(false);
     }
     
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
-    }//GEN-LAST:event_btnUpdateActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClearActionPerformed
         // TODO add your handling code here:
@@ -636,12 +641,12 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addCourseBtn;
-    private javax.swing.JButton btnUpdate;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbDepartment;
     private javax.swing.JButton deleteCourseBtn;
     private javax.swing.JButton editCourseBtn;
     private javax.swing.JPanel editOnsiteCoursePanel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
