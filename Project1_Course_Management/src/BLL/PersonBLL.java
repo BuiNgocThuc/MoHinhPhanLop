@@ -22,4 +22,8 @@ public class PersonBLL {
     public ArrayList<PersonDTO> getListStudent(){
         return personDAL.getListStudent();
     }
+    
+    public boolean insertPerson(PersonDTO person) {
+        return personDAL.insertPerson(person);
+    }
 }

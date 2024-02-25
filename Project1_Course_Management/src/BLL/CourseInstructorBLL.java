@@ -11,6 +11,10 @@ import java.util.List;
 public class CourseInstructorBLL {
 
     private CourseInstructorDAL courseInstructorDAL = new CourseInstructorDAL();
+    
+    public CourseInstructorBLL() {
+        
+    }
 
     public List<CourseInstructorDTO> getAllCourseInstructors() throws SQLException {
         return courseInstructorDAL.selectAll();

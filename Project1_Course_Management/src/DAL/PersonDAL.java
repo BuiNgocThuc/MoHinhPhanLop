@@ -5,8 +5,7 @@
 package DAL;
 
 import DTO.PersonDTO;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 
 /**
@@ -83,5 +82,36 @@ public class PersonDAL {
             e.printStackTrace();
         }
         return null;
+    }
+    
+    public boolean insertPerson(PersonDTO personDTO) {
+        int result = -1;
+        
+        int personID = personDTO.getPersonID();
+        String lastName = personDTO.getLastName();
+        String firstName = personDTO.getFirstName();
+        Timestamp hireDate = personDTO.getHireDate();
+        Timestamp enrollmentDate = personDTO.getEnrollmentDate();
+        
+        String query = "INSERT INTO person(PersonID, LastName, FirstName, HireDate, EnrollmentDate) VALUES (?,?,?,?,?)";
+        try
+        {
+            PreparedStatement preStm = con.getConnectDB().prepareStatement(query);
+            preStm.setInt(1, personID);
+            preStm.setString(2, lastName);
+            preStm.setString(3, firstName);
+            preStm.setTimestamp(4, hireDate);
+            preStm.setTimestamp(5, enrollmentDate);
+            
+            result = preStm.executeUpdate();
+            if (result != 0)
+            {
+                return true;
+            }
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

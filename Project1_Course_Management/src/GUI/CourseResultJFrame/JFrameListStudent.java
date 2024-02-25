@@ -218,6 +218,7 @@ public class JFrameListStudent extends javax.swing.JFrame {
             studentGrade.setCourseID(courseID);
             studentGrade.setStudentID(studentID);
             studentGrade.setGrade(0);
+            
             studentGradeBll.insertStudent(studentGrade);
         }
         else {
