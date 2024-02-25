@@ -21,6 +21,8 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Time;
 import java.time.LocalTime;
+import javax.swing.JTable;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
@@ -38,6 +40,7 @@ public class CoursePanel extends javax.swing.JPanel {
     private final DepartmentBLL departmentBLL;
     private List<CourseDTO> listCourse;
     private List<DepartmentDTO> listDepartment;
+    private static DefaultTableModel modelCourse;
 
     public CoursePanel() {
         courseBLL = new CourseBLL();
@@ -47,27 +50,20 @@ public class CoursePanel extends javax.swing.JPanel {
         initComponents();
         loadDepartmentName();
         loadData();
-
     }
 
     private void loadData() {
         listCourse = courseBLL.selectAllCourse();
-        DefaultTableModel model = (DefaultTableModel) tblCourse.getModel();
-        model.setRowCount(0);
 
-        // set center cell of table
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-        for (int i = 0; i < model.getColumnCount(); i++)
-        {
-            tblCourse.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-        }
+         DefaultTableModel model = (DefaultTableModel) tblCourse.getModel();
+         model.setRowCount(0);
 
         int STT = 1;
         for (CourseDTO course : listCourse)
         {
             int courseID = course.getCourseID();
             String title = course.getTitle();
+            System.out.println(title);
             int credits = course.getCredits();
             int departmentID = course.getDepartmentID();
             String departmentName = departmentBLL.selectByID(departmentID).getName();
@@ -78,8 +74,8 @@ public class CoursePanel extends javax.swing.JPanel {
                 STT++, courseID, title, credits, departmentName, course_type
             };
             model.addRow(row);
-
         }
+        model.fireTableDataChanged();
     }
 
     private void loadDepartmentName() {
@@ -580,9 +576,7 @@ public class CoursePanel extends javax.swing.JPanel {
             .addGroup(jPanel26Layout.createSequentialGroup()
                 .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel26Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(buttonPnl, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(buttonPnl, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -632,11 +626,6 @@ public class CoursePanel extends javax.swing.JPanel {
     private void deleteCourseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCourseBtnActionPerformed
         int deleteChoice = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa dòng này không?");
     }//GEN-LAST:event_deleteCourseBtnActionPerformed
-
-    private void tblCourseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCourseMouseClicked
-        clearText();
-        selectCourse();
-    }//GEN-LAST:event_tblCourseMouseClicked
 
     private void selectCourse() {
         int row = tblCourse.getSelectedRow();
@@ -733,7 +722,7 @@ public class CoursePanel extends javax.swing.JPanel {
                 throw new AssertionError();
         }
     }
-    
+
     private void clearText() {
         txtCourseID.setText("");
         txtTitle.setText("");
@@ -749,11 +738,15 @@ public class CoursePanel extends javax.swing.JPanel {
         txtFriday.setSelected(false);
         txtSaturday.setSelected(false);
     }
-    
+
     private void displayErrorMessage(String message) {
-        JOptionPane.showMessageDialog(null, message, "Lỗi", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
     }
-    
+
+    private void displayMessage(String message) {
+        JOptionPane.showMessageDialog(null, message, "Information", JOptionPane.INFORMATION_MESSAGE);
+    }
+
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         detailCoursePanel.setVisible(false);
     }//GEN-LAST:event_btnCancelActionPerformed
@@ -764,28 +757,80 @@ public class CoursePanel extends javax.swing.JPanel {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-        String courseID = txtCourseID.getText();
-        if (courseID.isBlank())
+        String courseIDstr = txtCourseID.getText();
+        if (courseIDstr.isBlank())
         {
             displayErrorMessage("Chưa chọn khóa học cần sửa");
             return;
         }
+        boolean success = false;
         String title = txtTitle.getText();
-        String department = cbDepartment.getSelectedItem().toString();
+        int courseID = Integer.parseInt(courseIDstr);
+        int departmentIndex = cbDepartment.getSelectedIndex();
+        int departmentID = listDepartment.get(departmentIndex).getDepartmentID();
+        int credits = Integer.parseInt(txtCredit.getText());
+        CourseDTO course = new CourseDTO(courseID, departmentID, credits, title);
+        success = courseBLL.updateCourse(course);
         String course_type = txtType.getText();
         switch (course_type)
         {
             case "Online" ->
             {
-                
+                String url = txtUrl.getText();
+                OnlineCourseDTO onlineCourse = new OnlineCourseDTO(url, courseID, departmentID, credits, title);
+                success = onlineCourseBLL.updateOnlineCourse(onlineCourse);
             }
             case "Onsite" ->
             {
-                
+                String location = txtLocation.getText();
+                LocalTime localtime = tpTime.getTime();
+                Time time = Time.valueOf(localtime);
+                String Days = "";
+                if (txtMonday.isSelected())
+                {
+                    Days += "M";
+                }
+                if (txtTuesday.isSelected())
+                {
+                    Days += "T";
+                }
+                if (txtWednesday.isSelected())
+                {
+                    Days += "W";
+                }
+                if (txtThursday.isSelected())
+                {
+                    Days += "H";
+                }
+                if (txtFriday.isSelected())
+                {
+                    Days += "F";
+                }
+                if (txtSaturday.isSelected())
+                {
+                    Days += "S";
+                }
+
+//                System.out.println(location + " - " + Days + " - " + time);
+                OnsiteCourseDTO onsiteCourse = new OnsiteCourseDTO(location, Days, time, courseID, departmentID, credits, title);
+                success = onsiteCourseBLL.updateOnsiteCourse(onsiteCourse);
             }
-            default -> throw new AssertionError();
+            default ->
+                throw new AssertionError();
+        }
+        if (success)
+        {
+            loadData();
+            ((AbstractTableModel) tblCourse.getModel()).fireTableDataChanged();
+            clearText();
+            displayMessage("Update Course Successfully!");
         }
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void tblCourseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCourseMouseClicked
+        clearText();
+        selectCourse();
+    }//GEN-LAST:event_tblCourseMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

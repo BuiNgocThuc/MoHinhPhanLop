@@ -65,6 +65,10 @@ public class OnlineCourseDAL {
         }
         return null;
     }
+    
+    public void resetListData() {
+        listOnlCourses = selectAll();
+    }
 
     public boolean insertOnlineCourse(OnlineCourseDTO onlCourse) {
         int result = -1;

@@ -7,10 +7,10 @@ public class CourseDTO {
     private String course_type;
 
     public CourseDTO(int courseID, int departmentID, int credits, String title) {
-        CourseID = courseID;
-        DepartmentID = departmentID;
-        Credits = credits;
-        Title = title;
+        this.CourseID = courseID;
+        this.DepartmentID = departmentID;
+        this.Credits = credits;
+        this.Title = title;
     }
 
     public CourseDTO(int CourseID, String Title, int Credits, int DepartmentID, String course_type) {

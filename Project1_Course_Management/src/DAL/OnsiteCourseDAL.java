@@ -70,6 +70,10 @@ public class OnsiteCourseDAL {
         }
         return null;
     }
+    
+    public void resetListData() {
+        listOnsCourses = selectAll();
+    }
 
     public boolean insertOnsiteCourse(OnsiteCourseDTO onsCourse) {
         int result = -1;
@@ -108,7 +112,7 @@ public class OnsiteCourseDAL {
         String Days = onsCourse.getDays();
         Time Time = onsCourse.getTime();
 
-        String query = "UPDATE onlinecourse SET Location = ?, Days = ?, Time = ? WHERE CourseID = ?";
+        String query = "UPDATE onsitecourse SET Location = ?, Days = ?, Time = ? WHERE CourseID = ?";
         try
         {
             preStm = conn.prepareStatement(query);

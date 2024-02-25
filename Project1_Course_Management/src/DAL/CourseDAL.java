@@ -208,6 +208,12 @@ public class CourseDAL {
         }
         return listCourseFiltered;
     }
+    
+    public void resetListData() {
+        listCourses = selectAll();
+        onlCourseDAL.resetListData();
+        onsCourseDAL.resetListData();
+    }
 
     public ArrayList<CourseDTO> getAllList() {
         ArrayList<CourseDTO> listCourse = new ArrayList<CourseDTO>();
