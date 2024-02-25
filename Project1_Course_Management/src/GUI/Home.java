@@ -4,6 +4,7 @@
  */
 package GUi;
 
+import GUI.MainPanel.CoursePanel;
 import GUI.MainPanel.OnlineCoursePanel;
 import java.awt.Color;
 import java.awt.Component;
@@ -17,8 +18,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.Timer;
 import GUI.MainPanel.OnsiteCoursePanel;
-import javax.swing.BorderFactory;
-import javax.swing.border.EmptyBorder;
 /**
  *
  * @author ASUS
@@ -34,6 +33,7 @@ public class Home extends javax.swing.JFrame {
     private final Color lightGray = new Color(242,242,242);
     private final OnsiteCoursePanel onsiteCoursePanel = new OnsiteCoursePanel();
     private final OnlineCoursePanel onlineCoursePanel = new OnlineCoursePanel();
+    private final CoursePanel coursePanel = new CoursePanel();
     private boolean dropdownToggle = false;
     private JButton currentBtn = null;
     private final ArrayList<JButton> allBtnLeftBar = new ArrayList<>();
@@ -68,7 +68,6 @@ public class Home extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Course Management");
-        setPreferredSize(new java.awt.Dimension(1330, 700));
 
         sidebarMenu.setPreferredSize(new java.awt.Dimension(250, 653));
         sidebarMenu.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0));
@@ -169,7 +168,7 @@ public class Home extends javax.swing.JFrame {
         schedulePanel.setLayout(schedulePanelLayout);
         schedulePanelLayout.setHorizontalGroup(
             schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1080, Short.MAX_VALUE)
+            .addGap(0, 1000, Short.MAX_VALUE)
         );
         schedulePanelLayout.setVerticalGroup(
             schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,7 +183,7 @@ public class Home extends javax.swing.JFrame {
         resultPanel.setLayout(resultPanelLayout);
         resultPanelLayout.setHorizontalGroup(
             resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1080, Short.MAX_VALUE)
+            .addGap(0, 1000, Short.MAX_VALUE)
         );
         resultPanelLayout.setVerticalGroup(
             resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,6 +200,10 @@ public class Home extends javax.swing.JFrame {
 
     private void courseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_courseBtnActionPerformed
         toggleDropdown();
+        cardPanel.removeAll();
+        cardPanel.add(coursePanel);
+        cardPanel.repaint();
+        cardPanel.revalidate();
         setBackgroundDefaultAllButton();
         courseBtn.setBackground(lightBlue);
     }//GEN-LAST:event_courseBtnActionPerformed
@@ -231,6 +234,7 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         cardPanel.removeAll();
         cardPanel.add(onlineCoursePanel);
+        onlineCoursePanel.getEditOnsiteCoursePanel().setVisible(false);
         cardPanel.repaint();
         cardPanel.revalidate();
         setBackgroundDefaultAllButton();
