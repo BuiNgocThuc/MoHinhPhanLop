@@ -3,6 +3,10 @@ package DTO;
 public class StudentGradeDTO {
     private int EnrollmentID, StudentID, CourseID;
     private double Grade;
+    
+    public StudentGradeDTO() {
+        
+    }
 
     public StudentGradeDTO(int enrollmentID, int studentID, int courseID, double grade) {
         EnrollmentID = enrollmentID;

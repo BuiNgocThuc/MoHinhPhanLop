@@ -3,12 +3,12 @@ package DTO;
 import java.sql.Timestamp;
 
 public class DepartmentDTO {
-    private int DepartmentID;
+    private int DepartmentID, Administrator;
     private double Budget;
-    private String Name, Administrator;
+    private String Name;
     private Timestamp StartDate;
 
-    public DepartmentDTO(int departmentID, double budget, String name, String administrator, Timestamp startDate) {
+    public DepartmentDTO(int departmentID, double budget, String name, int administrator, Timestamp startDate) {
         DepartmentID = departmentID;
         Budget = budget;
         Name = name;
@@ -40,11 +40,11 @@ public class DepartmentDTO {
         Name = name;
     }
 
-    public String getAdministrator() {
+    public int getAdministrator() {
         return Administrator;
     }
 
-    public void setAdministrator(String administrator) {
+    public void setAdministrator(int administrator) {
         Administrator = administrator;
     }
 

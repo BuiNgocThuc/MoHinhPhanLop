@@ -21,7 +21,6 @@ public class ConnectDB {
         String dbPath = "jdbc:mysql://" + host + ":" + port + "/" + dbName;
         try {
             conn = DriverManager.getConnection(dbPath, dbUser, dbPassword);
-            System.out.println("connect successfully!!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -38,9 +37,9 @@ public class ConnectDB {
         }
     }
 
-    public static void main(String[] args) {
-        ConnectDB connDB = new ConnectDB();
-        connDB.getConnectDB();
-        connDB.closeConnection(conn);
-    }
+//    public static void main(String[] args) {
+//        ConnectDB connDB = new ConnectDB();
+//        connDB.getConnectDB();
+//        connDB.closeConnection(conn);
+//    }
 }

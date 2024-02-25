@@ -30,7 +30,7 @@ public class OnsiteCourseDAL {
 
     public List<OnsiteCourseDTO> selectAll() {
         
-        String query = "SELECT * FROM onlinecourse";
+        String query = "SELECT * FROM onsitecourse";
         try
         {
             preStm = conn.prepareStatement(query);

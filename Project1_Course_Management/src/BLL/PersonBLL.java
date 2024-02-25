@@ -3,28 +3,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package BLL;
-
-import DTO.CourseInstructorDTO;
+import DTO.PersonDTO;
+import DAL.PersonDAL;
+import java.util.ArrayList;
 /**
  *
  * @author buing
  */
 public class PersonBLL {
+    PersonDAL personDAL=new PersonDAL();
+    public ArrayList<PersonDTO> getAllList(){
+        return personDAL.getAllList();
+    }
+    public PersonDTO detailsPerson(int id){
+        return personDAL.detailsPerson(id);
+    }
     
-    public void addCourse(CourseInstructorDTO courseInstructorDTO) throws Exception{
-        try {
-            // Validation data
-            // throw if incorrect
-            
-            // Call to CourseInstructorBLL to check exist relationship
-            // if exist throw Exception;
-            
-            // insert relationship -> call to CourseInstrcutorDAL
-            // if error, throw SQLException;
-
-            // Done
-        } catch (Exception e) {
-            throw e;
-        }
+    public ArrayList<PersonDTO> getListStudent(){
+        return personDAL.getListStudent();
     }
 }

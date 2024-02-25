@@ -10,25 +10,14 @@ import java.util.List;
 
 public class CourseInstructorBLL {
 
-    private CourseInstructorDAL courseInstructorDAL;
+    private CourseInstructorDAL courseInstructorDAL = new CourseInstructorDAL();
 
-    public CourseInstructorBLL(Connection connection) {
-        this.courseInstructorDAL = new CourseInstructorDAL(connection);
-    }
-
-   public List<CourseInstructorDTO> getAllCourseInstructors() {
-    try {
+    public List<CourseInstructorDTO> getAllCourseInstructors() throws SQLException {
         return courseInstructorDAL.selectAll();
-    } catch (SQLException e) {
-        // Xử lý ngoại lệ, ví dụ: in ra thông báo hoặc ghi log
-        e.printStackTrace();
-        return null;
     }
-}
 
-
-    public CourseInstructorDTO getCourseInstructorByID(int courseID) throws SQLException {
-        return courseInstructorDAL.selectByID(courseID);
+    public CourseInstructorDTO getCourseInstructorByID(int courseID, int personID) throws SQLException {
+        return courseInstructorDAL.selectByID(courseID, personID);
     }
 
     public void insertCourseInstructor(CourseInstructorDTO courseInstructor) throws SQLException {
@@ -41,5 +30,17 @@ public class CourseInstructorBLL {
 
     public void deleteCourseInstructor(int courseID) throws SQLException {
         courseInstructorDAL.deleteCourseInstructor(courseID);
+    }
+
+    public static void main(String[] args) throws SQLException {
+        CourseInstructorBLL ciBLL = new CourseInstructorBLL();
+
+        for (CourseInstructorDTO ci : ciBLL.getAllCourseInstructors()) {
+            System.out.println(ci);
+        }
+
+        CourseInstructorDTO ci = ciBLL.getCourseInstructorByID(1045, 5);
+        System.out.println(ci);
+        
     }
 }
