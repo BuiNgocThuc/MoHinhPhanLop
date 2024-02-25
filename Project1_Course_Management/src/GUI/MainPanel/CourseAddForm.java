@@ -101,14 +101,13 @@ public class CourseAddForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Thêm khóa học");
         setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(1060, 900));
         setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel1.setText("THÊM KHÓA HỌC");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -293,9 +292,9 @@ public class CourseAddForm extends javax.swing.JFrame {
 
         onsiteInformationCourse.add(jPanel9);
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setText("Thêm sinh viên:");
         jLabel9.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 5, 0, 0));
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setPreferredSize(new java.awt.Dimension(100, 35));
 
         pnlAddStudent.setBackground(new java.awt.Color(255, 255, 255));
@@ -322,17 +321,17 @@ public class CourseAddForm extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(4).setMaxWidth(150);
         }
 
+        jButton1.setText("Thêm >>");
         jButton1.setBackground(new java.awt.Color(101, 183, 65));
+        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Thêm >>");
-        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
 
+        jButton2.setText("< < Xóa");
         jButton2.setBackground(new java.awt.Color(244, 80, 80));
+        jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("< < Xóa");
-        jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -384,8 +383,8 @@ public class CourseAddForm extends javax.swing.JFrame {
                 .addGap(113, 113, 113))
         );
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel11.setText("Thêm giảng viên:");
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel11.setPreferredSize(new java.awt.Dimension(91, 35));
 
         pnlAddTeacher.setBackground(new java.awt.Color(255, 255, 255));
@@ -432,15 +431,20 @@ public class CourseAddForm extends javax.swing.JFrame {
             jTable4.getColumnModel().getColumn(4).setMaxWidth(150);
         }
 
+        jButton3.setText("Thêm > >");
         jButton3.setBackground(new java.awt.Color(101, 183, 65));
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Thêm > >");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
+        jButton4.setText("< < Xóa");
         jButton4.setBackground(new java.awt.Color(244, 80, 80));
         jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("< < Xóa");
 
         javax.swing.GroupLayout pnlAddTeacherLayout = new javax.swing.GroupLayout(pnlAddTeacher);
         pnlAddTeacher.setLayout(pnlAddTeacherLayout);
@@ -569,6 +573,10 @@ public class CourseAddForm extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
          this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

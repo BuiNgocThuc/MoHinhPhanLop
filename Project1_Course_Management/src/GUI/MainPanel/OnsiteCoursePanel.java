@@ -446,12 +446,6 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
 
         tpTime.setPreferredSize(new java.awt.Dimension(200, 40));
         jPanel14.add(tpTime);
-        jButton1.setText("Lưu");
-        jButton1.setBackground(new java.awt.Color(56, 122, 223));
-        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(80, 196, 237)));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-
 
         txtClear.setText("Đóng");
         txtClear.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));

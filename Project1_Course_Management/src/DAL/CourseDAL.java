@@ -26,9 +26,17 @@ public class CourseDAL {
         ConnectDB connectDB = new ConnectDB();
         conn = (Connection) connectDB.getConnectDB();
     }
-    
+
     public List<CourseDTO> selectAll() {
-         String query = "SELECT * FROM course";
+        String query = "SELECT \n"
+                + "    course.*,\n"
+                + "    CASE \n"
+                + "        WHEN onlinecourse.CourseID IS NOT NULL THEN 'Online'\n"
+                + "        WHEN onsitecourse.CourseID IS NOT NULL THEN 'Onsite'\n"
+                + "    END AS course_type\n"
+                + "FROM course\n"
+                + "LEFT JOIN onlinecourse ON course.CourseID = onlinecourse.CourseID\n"
+                + "LEFT JOIN onsitecourse ON course.CourseID = onsitecourse.CourseID;";
         try
         {
             preStm = conn.prepareStatement(query);
@@ -39,9 +47,10 @@ public class CourseDAL {
                 String Title = rs.getString("Title");
                 int Credits = rs.getInt("Credits");
                 int DepartmentID = rs.getInt("DepartmentID");
+                String course_type = rs.getString("course_type");
 
-                CourseDTO course = new CourseDTO(CourseID, DepartmentID, Credits, Title);
-                
+                CourseDTO course = new CourseDTO(CourseID, Title, Credits, DepartmentID, course_type);
+
                 listCourses.add(course);
             }
         } catch (SQLException e)
@@ -53,8 +62,10 @@ public class CourseDAL {
     }
 
     public CourseDTO selectCourseByID(int CourseID) {
-        for(CourseDTO course : listCourses) {
-            if(course.getCourseID() == CourseID) {
+        for (CourseDTO course : listCourses)
+        {
+            if (course.getCourseID() == CourseID)
+            {
                 return course;
             }
         }
@@ -105,7 +116,7 @@ public class CourseDAL {
 
     public boolean insertCourse(CourseDTO course) {
         int result = -1;
-        
+
         int CourseID = course.getCourseID();
         String Title = course.getTitle();
         int Credits = course.getCredits();
@@ -119,7 +130,7 @@ public class CourseDAL {
             preStm.setString(2, Title);
             preStm.setInt(3, Credits);
             preStm.setInt(4, DepartmentID);
-            
+
             result = preStm.executeUpdate();
             if (result != 0)
             {
@@ -131,10 +142,10 @@ public class CourseDAL {
         }
         return false;
     }
-    
+
     public boolean updateCourse(CourseDTO course) {
-         int result = -1;
-        
+        int result = -1;
+
         int CourseID = course.getCourseID();
         String Title = course.getTitle();
         int Credits = course.getCredits();
@@ -148,7 +159,7 @@ public class CourseDAL {
             preStm.setString(1, Title);
             preStm.setInt(2, Credits);
             preStm.setInt(3, DepartmentID);
-            
+
             result = preStm.executeUpdate();
             if (result != 0)
             {
@@ -160,16 +171,16 @@ public class CourseDAL {
         }
         return false;
     }
-    
+
     public boolean deleteCourse(int CourseID) {
-         int result = -1;
+        int result = -1;
 
         String query = "DELETE FROM course WHERE CourseID = ?";
         try
         {
             preStm = conn.prepareStatement(query);
             preStm.setInt(1, CourseID);
-            
+
             result = preStm.executeUpdate();
             if (result != 0)
             {
@@ -181,15 +192,33 @@ public class CourseDAL {
         }
         return false;
     }
-    
-    public ArrayList<CourseDTO> getAllList(){
-        ArrayList<CourseDTO> listCourse=new ArrayList<CourseDTO>();
-        try{
-            String query="select * from course";
-            PreparedStatement pre=conn.prepareStatement(query);
-            ResultSet rs=pre.executeQuery();
-            while(rs.next()){
-                CourseDTO course=new CourseDTO();
+
+    public List<CourseDTO> searchCourse(String sequenceChar) {
+        List<CourseDTO> listCourseFiltered = new ArrayList<>();
+        if (sequenceChar == null || sequenceChar.isEmpty() || sequenceChar.isBlank())
+        {
+            return listCourses;
+        }
+        for (CourseDTO course : listCourses)
+        {
+            if (course.getTitle().toLowerCase().contains(sequenceChar.toLowerCase()) || String.valueOf(course.getCourseID()).contains(sequenceChar))
+            {
+                listCourseFiltered.add(course);
+            }
+        }
+        return listCourseFiltered;
+    }
+
+    public ArrayList<CourseDTO> getAllList() {
+        ArrayList<CourseDTO> listCourse = new ArrayList<CourseDTO>();
+        try
+        {
+            String query = "select * from course";
+            PreparedStatement pre = conn.prepareStatement(query);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next())
+            {
+                CourseDTO course = new CourseDTO();
                 course.setCourseID(rs.getInt("CourseID"));
                 course.setTitle(rs.getString("Title"));
                 course.setCredits(rs.getInt("Credits"));
@@ -197,44 +226,54 @@ public class CourseDAL {
                 listCourse.add(course);
             }
             return listCourse;
-        }catch(Exception e){
+        } catch (Exception e)
+        {
             e.printStackTrace();
         }
         return null;
     }
-    public CourseDTO courseDetail(int id){
-        try{
-            String query="select * from course where CourseID=?";
-            PreparedStatement pre=conn.prepareStatement(query);
+
+    public CourseDTO courseDetail(int id) {
+        try
+        {
+            String query = "select * from course where CourseID=?";
+            PreparedStatement pre = conn.prepareStatement(query);
             pre.setInt(1, id);
-            ResultSet rs=pre.executeQuery();
-            CourseDTO course=new CourseDTO();
-            if(rs.next()){
-                
+            ResultSet rs = pre.executeQuery();
+            CourseDTO course = new CourseDTO();
+            if (rs.next())
+            {
+
                 course.setCourseID(id);
                 course.setCredits(rs.getInt("Credits"));
                 course.setDepartmentID(rs.getInt("DepartmentID"));
                 course.setTitle(rs.getString("Title"));
             }
             return course;
-        }catch(Exception e){
+        } catch (Exception e)
+        {
             e.printStackTrace();
         }
         return null;
     }
-    public ArrayList<CourseDTO> getAllList(String text){
-        ArrayList<CourseDTO> listCourse=new ArrayList<CourseDTO>();
-        try{
-            String query="";
-            if(text.equals("Online")){
-                query="select * from course where CourseID not in (select CourseID from onsitecourse)";
-            }else{
-                query="select * from course where CourseID not in (select CourseID from onlinecourse)";
+
+    public ArrayList<CourseDTO> getAllList(String text) {
+        ArrayList<CourseDTO> listCourse = new ArrayList<CourseDTO>();
+        try
+        {
+            String query = "";
+            if (text.equals("Online"))
+            {
+                query = "select * from course where CourseID not in (select CourseID from onsitecourse)";
+            } else
+            {
+                query = "select * from course where CourseID not in (select CourseID from onlinecourse)";
             }
-            PreparedStatement pre=conn.prepareStatement(query);
-            ResultSet rs=pre.executeQuery();
-            while(rs.next()){
-                CourseDTO course=new CourseDTO();
+            PreparedStatement pre = conn.prepareStatement(query);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next())
+            {
+                CourseDTO course = new CourseDTO();
                 course.setCourseID(rs.getInt("CourseID"));
                 course.setTitle(rs.getString("Title"));
                 course.setCredits(rs.getInt("Credits"));
@@ -242,10 +281,11 @@ public class CourseDAL {
                 listCourse.add(course);
             }
             return listCourse;
-        }catch(Exception e){
+        } catch (Exception e)
+        {
             e.printStackTrace();
         }
         return null;
-    } 
-   
+    }
+
 }

@@ -26,6 +26,7 @@ public class OnsiteCourseDAL {
     public OnsiteCourseDAL() {
         ConnectDB connectDB = new ConnectDB();
         conn = (Connection) connectDB.getConnectDB();
+        listOnsCourses = selectAll();
     }
 
     public List<OnsiteCourseDTO> selectAll() {

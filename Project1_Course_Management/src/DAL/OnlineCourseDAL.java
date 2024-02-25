@@ -25,6 +25,7 @@ public class OnlineCourseDAL {
     public OnlineCourseDAL() {
         ConnectDB connectDB = new ConnectDB();
         conn = (Connection) connectDB.getConnectDB();
+        listOnlCourses = selectAll();
     }
 
     // xem danh sách

@@ -15,6 +15,7 @@ public class ValidateUtil {
 
         return matchFound;
     }
+    
 // Studycase of Try-Catch
 //
 //    public static void someMethodInBLL(String name) throws ValidationException, Throwable {
