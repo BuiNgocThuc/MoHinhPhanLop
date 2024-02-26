@@ -239,6 +239,10 @@
                       <Dimension value="[300, 40]"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchOnsiteCourseValueActionPerformed"/>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="searchOnsiteCourseValueKeyPressed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="searchOnsiteCourseBtn">
                   <Properties>
@@ -258,6 +262,7 @@
                     </Property>
                   </Properties>
                   <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="searchOnsiteCourseBtnMouseClicked"/>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchOnsiteCourseBtnActionPerformed"/>
                   </Events>
                 </Component>
@@ -655,36 +660,12 @@
               </Border>
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="6" rowCount="5">
+              <Table columnCount="6" rowCount="0">
                 <Column editable="false" title="No." type="java.lang.Object"/>
-                <Column editable="false" title="CourseID" type="java.lang.Object">
-                  <Data value="1045"/>
-                  <Data value="1046"/>
-                  <Data value="1061"/>
-                  <Data value="2042"/>
-                  <Data value="4022"/>
-                </Column>
-                <Column editable="false" title="Title" type="java.lang.Object">
-                  <Data value="Calculus"/>
-                  <Data value="Chemistry"/>
-                  <Data value="Physics"/>
-                  <Data value="Literature"/>
-                  <Data value="Microeconomics"/>
-                </Column>
-                <Column editable="false" title="Credits" type="java.lang.Object">
-                  <Data value="4"/>
-                  <Data value="4"/>
-                  <Data value="4"/>
-                  <Data value="4"/>
-                  <Data value="3"/>
-                </Column>
-                <Column editable="false" title="Department Name" type="java.lang.Object">
-                  <Data value="Mathematics"/>
-                  <Data value="Engineering"/>
-                  <Data value="Enginerring"/>
-                  <Data value="English"/>
-                  <Data value="Economics"/>
-                </Column>
+                <Column editable="false" title="CourseID" type="java.lang.Object"/>
+                <Column editable="false" title="Title" type="java.lang.Object"/>
+                <Column editable="false" title="Credits" type="java.lang.Object"/>
+                <Column editable="false" title="Department Name" type="java.lang.Object"/>
                 <Column editable="false" title="Type" type="java.lang.Object"/>
               </Table>
             </Property>

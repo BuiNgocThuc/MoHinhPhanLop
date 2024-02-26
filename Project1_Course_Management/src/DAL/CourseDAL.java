@@ -314,5 +314,71 @@ public class CourseDAL {
         }
         return null;
     }
-
+      
+    public ArrayList<CourseDTO> findCoursesByName(String s) {
+        ArrayList<CourseDTO> listCourse = new ArrayList<CourseDTO>();
+        try
+        {
+            String query = "SELECT \n"
+                + "    course.*,\n"
+                + "    CASE \n"
+                + "        WHEN onlinecourse.CourseID IS NOT NULL THEN 'Online'\n"
+                + "        WHEN onsitecourse.CourseID IS NOT NULL THEN 'Onsite'\n"
+                + "    END AS course_type\n"
+                + "FROM course\n"
+                + "LEFT JOIN onlinecourse ON course.CourseID = onlinecourse.CourseID\n"
+                + "LEFT JOIN onsitecourse ON course.CourseID = onsitecourse.CourseID\n"
+                + "where course.Title LIKE " + "'%" + s + "%'";
+            PreparedStatement pre = conn.prepareStatement(query);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next())
+            {
+                CourseDTO course = new CourseDTO();
+                course.setCourseID(rs.getInt("CourseID"));
+                course.setTitle(rs.getString("Title"));
+                course.setCredits(rs.getInt("Credits"));
+                course.setDepartmentID(rs.getInt("DepartmentID"));
+                course.setCourse_type(rs.getString("course_type"));
+                listCourse.add(course);
+            }
+            return listCourse;
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public ArrayList<CourseDTO> findCoursesById(int s) {
+        ArrayList<CourseDTO> listCourse = new ArrayList<CourseDTO>();
+        try
+        {
+            String query = "SELECT \n"
+                + "    course.*,\n"
+                + "    CASE \n"
+                + "        WHEN onlinecourse.CourseID IS NOT NULL THEN 'Online'\n"
+                + "        WHEN onsitecourse.CourseID IS NOT NULL THEN 'Onsite'\n"
+                + "    END AS course_type\n"
+                + "FROM course\n"
+                + "LEFT JOIN onlinecourse ON course.CourseID = onlinecourse.CourseID\n"
+                + "LEFT JOIN onsitecourse ON course.CourseID = onsitecourse.CourseID\n"
+                + "where course.CourseID = " + s + "";
+            PreparedStatement pre = conn.prepareStatement(query);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next())
+            {
+                CourseDTO course = new CourseDTO();
+                course.setCourseID(rs.getInt("CourseID"));
+                course.setTitle(rs.getString("Title"));
+                course.setCredits(rs.getInt("Credits"));
+                course.setDepartmentID(rs.getInt("DepartmentID"));
+                course.setCourse_type(rs.getString("course_type"));
+                listCourse.add(course);
+            }
+            return listCourse;
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
