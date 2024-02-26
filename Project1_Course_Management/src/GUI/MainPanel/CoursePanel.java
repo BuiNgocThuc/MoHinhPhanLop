@@ -233,6 +233,13 @@ public class CoursePanel extends javax.swing.JPanel {
         searchOnsiteCourseValue.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         searchOnsiteCourseValue.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         searchOnsiteCourseValue.setPreferredSize(new java.awt.Dimension(300, 40));
+        searchOnsiteCourseValue.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                searchOnsiteCourseValueInputMethodTextChanged(evt);
+            }
+        });
         searchOnsiteCourseValue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchOnsiteCourseValueActionPerformed(evt);
@@ -274,16 +281,46 @@ public class CoursePanel extends javax.swing.JPanel {
         jRadioButton1.setSelected(true);
         jRadioButton1.setText("Tất cả");
         jRadioButton1.setPreferredSize(new java.awt.Dimension(60, 30));
+        jRadioButton1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jRadioButton1StateChanged(evt);
+            }
+        });
+        jRadioButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton1MouseClicked(evt);
+            }
+        });
         sortCourseBtnGroupPnl.add(jRadioButton1);
 
         sortCourseBtnGroup.add(jRadioButton2);
         jRadioButton2.setText("Khóa học onsite");
         jRadioButton2.setPreferredSize(new java.awt.Dimension(108, 30));
+        jRadioButton2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jRadioButton2StateChanged(evt);
+            }
+        });
+        jRadioButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton2MouseClicked(evt);
+            }
+        });
         sortCourseBtnGroupPnl.add(jRadioButton2);
 
         sortCourseBtnGroup.add(jRadioButton3);
         jRadioButton3.setText("Khóa học online");
         jRadioButton3.setPreferredSize(new java.awt.Dimension(109, 30));
+        jRadioButton3.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jRadioButton3StateChanged(evt);
+            }
+        });
+        jRadioButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton3MouseClicked(evt);
+            }
+        });
         sortCourseBtnGroupPnl.add(jRadioButton3);
 
         jPanel5.add(sortCourseBtnGroupPnl);
@@ -839,41 +876,190 @@ public class CoursePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_searchOnsiteCourseValueKeyPressed
 
     private void searchOnsiteCourseValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchOnsiteCourseValueActionPerformed
-        xuLiTimKiem();
+        if (jRadioButton1.isSelected())
+           xuLiTimKiemAll();
+        else
+            if (jRadioButton2.isSelected())
+                xuLiTimKiemOnsite();
+            else
+                if (jRadioButton3.isSelected())
+                    xuLiTimKiemOnline();
     }//GEN-LAST:event_searchOnsiteCourseValueActionPerformed
 
     private void searchOnsiteCourseBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchOnsiteCourseBtnMouseClicked
-       xuLiTimKiem();
+       if (jRadioButton1.isSelected())
+           xuLiTimKiemAll();
+       else
+            if (jRadioButton2.isSelected())
+                xuLiTimKiemOnsite();
+            else
+                if (jRadioButton3.isSelected())
+                    xuLiTimKiemOnline();
     }//GEN-LAST:event_searchOnsiteCourseBtnMouseClicked
-    
-    public void xuLiTimKiem() {
-        String s = searchOnsiteCourseValue.getText()+"";
-        listCourse = courseBLL.findCourses(s);
-        
-        for (CourseDTO course : listCourse)
-        {
-        System.out.println();
-        }
+
+    private void jRadioButton2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRadioButton2StateChanged
+
+    }//GEN-LAST:event_jRadioButton2StateChanged
+
+    private void jRadioButton1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRadioButton1StateChanged
+   
+    }//GEN-LAST:event_jRadioButton1StateChanged
+
+    private void jRadioButton3StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRadioButton3StateChanged
+     
+    }//GEN-LAST:event_jRadioButton3StateChanged
+
+    private void jRadioButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton2MouseClicked
+        loadCoursesOnsite();
+    }//GEN-LAST:event_jRadioButton2MouseClicked
+
+    private void jRadioButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton1MouseClicked
+        loadData();
+    }//GEN-LAST:event_jRadioButton1MouseClicked
+
+    private void jRadioButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton3MouseClicked
+        loadCoursesOnline();
+    }//GEN-LAST:event_jRadioButton3MouseClicked
+
+    private void searchOnsiteCourseValueInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_searchOnsiteCourseValueInputMethodTextChanged
+
+    }//GEN-LAST:event_searchOnsiteCourseValueInputMethodTextChanged
+    public void loadCoursesOnsite() {
          DefaultTableModel model = (DefaultTableModel) tblCourse.getModel();
          model.setRowCount(0);
 
         int STT = 1;
         for (CourseDTO course : listCourse)
-        {
-            int courseID = course.getCourseID();
-            String title = course.getTitle();
-            int credits = course.getCredits();
-            int departmentID = course.getDepartmentID();
-            String departmentName = departmentBLL.selectByID(departmentID).getName();
-            String course_type = course.getCourse_type();
+        {   
+            if (course.getCourse_type().trim().equals("Onsite")) {
+                int courseID = course.getCourseID();
+                String title = course.getTitle();
+                int credits = course.getCredits();
+                int departmentID = course.getDepartmentID();
+                String departmentName = departmentBLL.selectByID(departmentID).getName();
+                String course_type = course.getCourse_type();
 
-            Object[] row =
-            {
-                STT++, courseID, title, credits, departmentName, course_type
-            };
-            model.addRow(row);
+                Object[] row =
+                {
+                    STT++, courseID, title, credits, departmentName, course_type
+                };
+                model.addRow(row);
+            }
         } 
         model.fireTableDataChanged();
+    }
+    public void loadCoursesOnline() {
+         DefaultTableModel model = (DefaultTableModel) tblCourse.getModel();
+         model.setRowCount(0);
+
+        int STT = 1;
+        for (CourseDTO course : listCourse)
+        {   
+            if (course.getCourse_type().trim().equals("Online")) {
+                int courseID = course.getCourseID();
+                String title = course.getTitle();
+                int credits = course.getCredits();
+                int departmentID = course.getDepartmentID();
+                String departmentName = departmentBLL.selectByID(departmentID).getName();
+                String course_type = course.getCourse_type();
+
+                Object[] row =
+                {
+                    STT++, courseID, title, credits, departmentName, course_type
+                };
+                model.addRow(row);
+            }
+        } 
+        model.fireTableDataChanged();
+    }
+    public void xuLiTimKiemAll() {
+        String s = searchOnsiteCourseValue.getText()+"";
+        if (!s.equals("")) {
+            listCourse = courseBLL.findCoursesAll(s);
+
+             DefaultTableModel model = (DefaultTableModel) tblCourse.getModel();
+             model.setRowCount(0);
+
+            int STT = 1;
+            for (CourseDTO course : listCourse)
+            {
+                int courseID = course.getCourseID();
+                String title = course.getTitle();
+                int credits = course.getCredits();
+                int departmentID = course.getDepartmentID();
+                String departmentName = departmentBLL.selectByID(departmentID).getName();
+                String course_type = course.getCourse_type();
+
+                Object[] row =
+                {
+                    STT++, courseID, title, credits, departmentName, course_type
+                };
+                model.addRow(row);
+            } 
+            model.fireTableDataChanged();
+        } else {
+            loadData();
+        }
+    }
+    public void xuLiTimKiemOnsite() {
+        String s = searchOnsiteCourseValue.getText()+"";
+        if (!s.equals("")) {
+            listCourse = courseBLL.findCoursesOnsite(s);
+
+             DefaultTableModel model = (DefaultTableModel) tblCourse.getModel();
+             model.setRowCount(0);
+
+            int STT = 1;
+            for (CourseDTO course : listCourse)
+            {
+                int courseID = course.getCourseID();
+                String title = course.getTitle();
+                int credits = course.getCredits();
+                int departmentID = course.getDepartmentID();
+                String departmentName = departmentBLL.selectByID(departmentID).getName();
+                String course_type = course.getCourse_type();
+
+                Object[] row =
+                {
+                    STT++, courseID, title, credits, departmentName, course_type
+                };
+                model.addRow(row);
+            } 
+            model.fireTableDataChanged();
+        } else {
+            loadData();
+            loadCoursesOnsite();
+        }
+    }
+    public void xuLiTimKiemOnline() {
+        String s = searchOnsiteCourseValue.getText()+"";
+        if (!s.equals("")) {
+            listCourse = courseBLL.findCoursesOnline(s);
+
+             DefaultTableModel model = (DefaultTableModel) tblCourse.getModel();
+             model.setRowCount(0);
+
+            int STT = 1;
+            for (CourseDTO course : listCourse)
+            {
+                int courseID = course.getCourseID();
+                String title = course.getTitle();
+                int credits = course.getCredits();
+                int departmentID = course.getDepartmentID();
+                String departmentName = departmentBLL.selectByID(departmentID).getName();
+                String course_type = course.getCourse_type();
+
+                Object[] row =
+                {
+                    STT++, courseID, title, credits, departmentName, course_type
+                };
+                model.addRow(row);
+            } 
+            model.fireTableDataChanged();
+        } else {
+            loadData();
+            loadCoursesOnline();
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

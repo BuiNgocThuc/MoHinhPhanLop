@@ -315,7 +315,7 @@ public class CourseDAL {
         return null;
     }
       
-    public ArrayList<CourseDTO> findCoursesByName(String s) {
+    public ArrayList<CourseDTO> findCoursesByNameAll(String s) {
         ArrayList<CourseDTO> listCourse = new ArrayList<CourseDTO>();
         try
         {
@@ -348,7 +348,63 @@ public class CourseDAL {
         }
         return null;
     }
-    public ArrayList<CourseDTO> findCoursesById(int s) {
+    public ArrayList<CourseDTO> findCoursesByNameOnsite(String s) {
+        ArrayList<CourseDTO> listCourse = new ArrayList<CourseDTO>();
+        try
+        {
+            String query = "SELECT \n"
+                + "    course.*, 'Onsite' as course_type\n"
+                + "FROM course\n"
+                + "LEFT JOIN onsitecourse ON course.CourseID = onsitecourse.CourseID\n"
+                + "where course.Title LIKE " + "'%" + s + "%'";
+            PreparedStatement pre = conn.prepareStatement(query);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next())
+            {
+                CourseDTO course = new CourseDTO();
+                course.setCourseID(rs.getInt("CourseID"));
+                course.setTitle(rs.getString("Title"));
+                course.setCredits(rs.getInt("Credits"));
+                course.setDepartmentID(rs.getInt("DepartmentID"));
+                course.setCourse_type(rs.getString("course_type"));
+                listCourse.add(course);
+            }
+            return listCourse;
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public ArrayList<CourseDTO> findCoursesByNameOnline(String s) {
+        ArrayList<CourseDTO> listCourse = new ArrayList<CourseDTO>();
+        try
+        {
+            String query = "SELECT \n"
+                + "    course.*, 'Online' as course_type\n"
+                + "FROM course\n"
+                + "LEFT JOIN onlinecourse ON course.CourseID = onlinecourse.CourseID\n"
+                + "where course.Title LIKE " + "'%" + s + "%'";
+            PreparedStatement pre = conn.prepareStatement(query);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next())
+            {
+                CourseDTO course = new CourseDTO();
+                course.setCourseID(rs.getInt("CourseID"));
+                course.setTitle(rs.getString("Title"));
+                course.setCredits(rs.getInt("Credits"));
+                course.setDepartmentID(rs.getInt("DepartmentID"));
+                course.setCourse_type(rs.getString("course_type"));
+                listCourse.add(course);
+            }
+            return listCourse;
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public ArrayList<CourseDTO> findCoursesByIdAll(int s) {
         ArrayList<CourseDTO> listCourse = new ArrayList<CourseDTO>();
         try
         {
@@ -361,6 +417,62 @@ public class CourseDAL {
                 + "FROM course\n"
                 + "LEFT JOIN onlinecourse ON course.CourseID = onlinecourse.CourseID\n"
                 + "LEFT JOIN onsitecourse ON course.CourseID = onsitecourse.CourseID\n"
+                + "where course.CourseID = " + s + "";
+            PreparedStatement pre = conn.prepareStatement(query);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next())
+            {
+                CourseDTO course = new CourseDTO();
+                course.setCourseID(rs.getInt("CourseID"));
+                course.setTitle(rs.getString("Title"));
+                course.setCredits(rs.getInt("Credits"));
+                course.setDepartmentID(rs.getInt("DepartmentID"));
+                course.setCourse_type(rs.getString("course_type"));
+                listCourse.add(course);
+            }
+            return listCourse;
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public ArrayList<CourseDTO> findCoursesByIdOnsite(int s) {
+        ArrayList<CourseDTO> listCourse = new ArrayList<CourseDTO>();
+        try
+        {
+            String query = "SELECT \n"
+                + "    course.*, 'Onsite' as course_type\n"
+                + "FROM course\n"
+                + "LEFT JOIN onsitecourse ON course.CourseID = onsitecourse.CourseID\n"
+                + "where course.CourseID = " + s + "";
+            PreparedStatement pre = conn.prepareStatement(query);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next())
+            {
+                CourseDTO course = new CourseDTO();
+                course.setCourseID(rs.getInt("CourseID"));
+                course.setTitle(rs.getString("Title"));
+                course.setCredits(rs.getInt("Credits"));
+                course.setDepartmentID(rs.getInt("DepartmentID"));
+                course.setCourse_type(rs.getString("course_type"));
+                listCourse.add(course);
+            }
+            return listCourse;
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public ArrayList<CourseDTO> findCoursesByIdOnline(int s) {
+        ArrayList<CourseDTO> listCourse = new ArrayList<CourseDTO>();
+        try
+        {
+            String query = "SELECT \n"
+                + "    course.*, 'Online' as course_type\n"
+                + "FROM course\n"
+                + "LEFT JOIN onlinecourse ON course.CourseID = onlinecourse.CourseID\n"
                 + "where course.CourseID = " + s + "";
             PreparedStatement pre = conn.prepareStatement(query);
             ResultSet rs = pre.executeQuery();
