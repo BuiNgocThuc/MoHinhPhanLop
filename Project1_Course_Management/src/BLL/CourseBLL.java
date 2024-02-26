@@ -53,10 +53,22 @@ public class CourseBLL {
         return courseDAL.courseDetail(id);
     }
     
-    public ArrayList<CourseDTO> findCourses(String text){
+    public ArrayList<CourseDTO> findCoursesAll(String text){
         if (ValidateUtil.isInteger(text))
-            return courseDAL.findCoursesById(Integer.parseInt(text));
+            return courseDAL.findCoursesByIdAll(Integer.parseInt(text));
         else 
-            return courseDAL.findCoursesByName(text);
+            return courseDAL.findCoursesByNameAll(text);
+    }
+    public ArrayList<CourseDTO> findCoursesOnsite(String text){
+        if (ValidateUtil.isInteger(text))
+            return courseDAL.findCoursesByIdOnsite(Integer.parseInt(text));
+        else 
+            return courseDAL.findCoursesByNameOnsite(text);
+    }
+    public ArrayList<CourseDTO> findCoursesOnline(String text){
+        if (ValidateUtil.isInteger(text))
+            return courseDAL.findCoursesByIdOnline(Integer.parseInt(text));
+        else 
+            return courseDAL.findCoursesByNameOnline(text);
     }
 }

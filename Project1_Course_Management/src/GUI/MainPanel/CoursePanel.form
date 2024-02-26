@@ -240,6 +240,7 @@
                     </Property>
                   </Properties>
                   <Events>
+                    <EventHandler event="inputMethodTextChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="searchOnsiteCourseValueInputMethodTextChanged"/>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchOnsiteCourseValueActionPerformed"/>
                     <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="searchOnsiteCourseValueKeyPressed"/>
                   </Events>
@@ -394,6 +395,10 @@
                       <Dimension value="[60, 30]"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jRadioButton1StateChanged"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jRadioButton1MouseClicked"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="jRadioButton2">
                   <Properties>
@@ -405,6 +410,10 @@
                       <Dimension value="[108, 30]"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jRadioButton2StateChanged"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jRadioButton2MouseClicked"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="jRadioButton3">
                   <Properties>
@@ -416,6 +425,10 @@
                       <Dimension value="[109, 30]"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jRadioButton3StateChanged"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jRadioButton3MouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
               <LayoutCode>
