@@ -233,12 +233,27 @@ public class CoursePanel extends javax.swing.JPanel {
         searchOnsiteCourseValue.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         searchOnsiteCourseValue.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         searchOnsiteCourseValue.setPreferredSize(new java.awt.Dimension(300, 40));
+        searchOnsiteCourseValue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchOnsiteCourseValueActionPerformed(evt);
+            }
+        });
+        searchOnsiteCourseValue.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                searchOnsiteCourseValueKeyPressed(evt);
+            }
+        });
         jPanel4.add(searchOnsiteCourseValue);
 
         searchOnsiteCourseBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8-search-24.png"))); // NOI18N
         searchOnsiteCourseBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         searchOnsiteCourseBtn.setMargin(new java.awt.Insets(2, 20, 3, 0));
         searchOnsiteCourseBtn.setPreferredSize(new java.awt.Dimension(40, 40));
+        searchOnsiteCourseBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                searchOnsiteCourseBtnMouseClicked(evt);
+            }
+        });
         searchOnsiteCourseBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchOnsiteCourseBtnActionPerformed(evt);
@@ -304,11 +319,7 @@ public class CoursePanel extends javax.swing.JPanel {
         tblCourse.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         tblCourse.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, "1045", "Calculus", "4", "Mathematics", null},
-                {null, "1046", "Chemistry", "4", "Engineering", null},
-                {null, "1061", "Physics", "4", "Enginerring", null},
-                {null, "2042", "Literature", "4", "English", null},
-                {null, "4022", "Microeconomics", "3", "Economics", null}
+
             },
             new String [] {
                 "No.", "CourseID", "Title", "Credits", "Department Name", "Type"
@@ -821,6 +832,49 @@ public class CoursePanel extends javax.swing.JPanel {
         selectCourse();
     }//GEN-LAST:event_tblCourseMouseClicked
 
+    private void searchOnsiteCourseValueKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchOnsiteCourseValueKeyPressed
+        // TODO add your handling code here:
+         
+
+    }//GEN-LAST:event_searchOnsiteCourseValueKeyPressed
+
+    private void searchOnsiteCourseValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchOnsiteCourseValueActionPerformed
+        xuLiTimKiem();
+    }//GEN-LAST:event_searchOnsiteCourseValueActionPerformed
+
+    private void searchOnsiteCourseBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchOnsiteCourseBtnMouseClicked
+       xuLiTimKiem();
+    }//GEN-LAST:event_searchOnsiteCourseBtnMouseClicked
+    
+    public void xuLiTimKiem() {
+        String s = searchOnsiteCourseValue.getText()+"";
+        listCourse = courseBLL.findCourses(s);
+        
+        for (CourseDTO course : listCourse)
+        {
+        System.out.println();
+        }
+         DefaultTableModel model = (DefaultTableModel) tblCourse.getModel();
+         model.setRowCount(0);
+
+        int STT = 1;
+        for (CourseDTO course : listCourse)
+        {
+            int courseID = course.getCourseID();
+            String title = course.getTitle();
+            int credits = course.getCredits();
+            int departmentID = course.getDepartmentID();
+            String departmentName = departmentBLL.selectByID(departmentID).getName();
+            String course_type = course.getCourse_type();
+
+            Object[] row =
+            {
+                STT++, courseID, title, credits, departmentName, course_type
+            };
+            model.addRow(row);
+        } 
+        model.fireTableDataChanged();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addCourseBtn;

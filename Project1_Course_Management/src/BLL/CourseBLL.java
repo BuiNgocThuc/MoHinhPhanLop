@@ -8,6 +8,7 @@ import DAL.CourseDAL;
 import DTO.CourseDTO;
 import java.util.ArrayList;
 import java.util.List;
+import util.ValidateUtil;
 
 /**
  *
@@ -50,5 +51,12 @@ public class CourseBLL {
     
     public CourseDTO courseDetail(int id){
         return courseDAL.courseDetail(id);
+    }
+    
+    public ArrayList<CourseDTO> findCourses(String text){
+        if (ValidateUtil.isInteger(text))
+            return courseDAL.findCoursesById(Integer.parseInt(text));
+        else 
+            return courseDAL.findCoursesByName(text);
     }
 }
