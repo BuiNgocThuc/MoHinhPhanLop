@@ -10,6 +10,7 @@ import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import DTO.PersonDTO;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
@@ -49,8 +50,7 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
 
         @Override
         public void changedUpdate(DocumentEvent e) {
-        // Xử lý khi có sự thay đổi trong thuộc tính của văn bản
-        // (chẳng hạn như một loại thuộc tính được thay đổi, nhưng không phải nội dung văn bản)
+       
         }
         });
     }
@@ -113,6 +113,11 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
         jTableStudentGrade.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableStudentGradeMouseClicked(evt);
+            }
+        });
+        jTableStudentGrade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTableStudentGradeKeyPressed(evt);
             }
         });
         jScrollPane1.setViewportView(jTableStudentGrade);
@@ -341,6 +346,31 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
         Clear();
     }//GEN-LAST:event_jButtonAddNewActionPerformed
 
+    private void jTableStudentGradeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTableStudentGradeKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            int row = jTableStudentGrade.getSelectedRow();
+            if (row != -1) {
+                String grade = jTableStudentGrade.getModel().getValueAt(row, 4).toString().trim();
+                if (!grade.equals("") && Double.parseDouble(grade) <= 10d) {
+                    int EnrollmentID = studentGradeBLL.getEnrollment(CourseID, Integer.parseInt(jTableStudentGrade.getModel().getValueAt(row, 1).toString()));
+                    StudentGradeDTO studentGrade = new StudentGradeDTO();
+                    studentGrade.setCourseID(CourseID);
+                    studentGrade.setEnrollmentID(EnrollmentID);
+                    studentGrade.setGrade(Double.parseDouble(grade));
+                    System.out.println(studentGrade.getEnrollmentID()+" "+studentGrade.getGrade());
+                    if (studentGradeBLL.updateGrade(studentGrade)) {
+                        //JOptionPane.showMessageDialog(rootPane,"Update Success!");
+                        Clear();
+                        //LoadData(CourseID);
+                    } else {
+                        JOptionPane.showMessageDialog(rootPane, "Update Failed!");
+                    }
+                }
+            }
+         }
+    }//GEN-LAST:event_jTableStudentGradeKeyPressed
+
     public void SearchTable(String txt) {
         DefaultTableModel faut = (DefaultTableModel) jTableStudentGrade.getModel();
         TableRowSorter<DefaultTableModel> search = new TableRowSorter<>(faut);
@@ -360,12 +390,13 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
     
     public void LoadData(int CourseID){
         String columns[]=new String[]{"STT","PersonID","FirstName","LastName","Grade"};
-        DefaultTableModel model=new DefaultTableModel(){
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
+        DefaultTableModel model=new DefaultTableModel();
+//        DefaultTableModel model=new DefaultTableModel(){
+//            @Override
+//            public boolean isCellEditable(int row, int column) {
+//                return false;
+//            }
+//        };
         for(String i:columns){
             model.addColumn(i);
         }
