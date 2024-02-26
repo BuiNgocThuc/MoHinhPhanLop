@@ -51,15 +51,4 @@ public class CourseBLL {
     public CourseDTO courseDetail(int id){
         return courseDAL.courseDetail(id);
     }
-    
-    public static void main(String[] args) {
-        CourseBLL courseBLL = new CourseBLL();
-        boolean success = false;
-        CourseDTO course = new CourseDTO(1045, 1, 10, "Calculusaaa");
-        success = courseBLL.updateCourse(course);
-        if (success)
-        {
-            System.out.println("Sua thanh cong");
-        }
-    }
 }

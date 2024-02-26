@@ -63,14 +63,30 @@ public class CourseDAL {
     }
 
     public CourseDTO selectCourseByID(int CourseID) {
-        for (CourseDTO course : listCourses)
+        CourseDTO course = null;
+        String query = "SELECT * FROM course WHERE CourseID = ?";
+         try
         {
-            if (course.getCourseID() == CourseID)
+            preStm = conn.prepareStatement(query);
+            preStm.setString(1, String.valueOf(CourseID));
+
+            ResultSet rs = preStm.executeQuery();
+            while (rs.next())
             {
-                return course;
+                String Title = rs.getString("Title");
+                int Credits = rs.getInt("Credits");
+                int DepartmentID = rs.getInt("DepartmentID");
+
+               course = new CourseDTO(CourseID, DepartmentID, Credits, Title);
+
+                listCourses.add(course);
             }
+            
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
         }
-        return null;
+        return course;
     }
 
     public List<OnlineCourseDTO> selectAllOnlineCourse() {
