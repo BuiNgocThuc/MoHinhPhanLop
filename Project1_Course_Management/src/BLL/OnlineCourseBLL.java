@@ -65,8 +65,4 @@ public class OnlineCourseBLL {
         }
         return false;
     }
-    
-    public List<OnlineCourseDTO> searchOnlineCourse(String sequenceChar) {
-        return onlCourseDAL.searchOnlineCourse(sequenceChar);
-    }
 }

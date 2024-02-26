@@ -79,7 +79,6 @@ public class CourseDAL {
 
                course = new CourseDTO(CourseID, DepartmentID, Credits, Title);
 
-                listCourses.add(course);
             }
             
         } catch (SQLException e)
@@ -221,21 +220,21 @@ public class CourseDAL {
         return false;
     }
 
-    public List<CourseDTO> searchCourse(String sequenceChar) {
-        List<CourseDTO> listCourseFiltered = new ArrayList<>();
-        if (sequenceChar == null || sequenceChar.isEmpty() || sequenceChar.isBlank())
-        {
-            return listCourses;
-        }
-        for (CourseDTO course : listCourses)
-        {
-            if (course.getTitle().toLowerCase().contains(sequenceChar.toLowerCase()) || String.valueOf(course.getCourseID()).contains(sequenceChar))
-            {
-                listCourseFiltered.add(course);
-            }
-        }
-        return listCourseFiltered;
-    }
+//    public List<CourseDTO> searchCourse(String sequenceChar) {
+//        List<CourseDTO> listCourseFiltered = new ArrayList<>();
+//        if (sequenceChar == null || sequenceChar.isEmpty() || sequenceChar.isBlank())
+//        {
+//            return listCourses;
+//        }
+//        for (CourseDTO course : listCourses)
+//        {
+//            if (course.getTitle().toLowerCase().contains(sequenceChar.toLowerCase()) || String.valueOf(course.getCourseID()).contains(sequenceChar))
+//            {
+//                listCourseFiltered.add(course);
+//            }
+//        }
+//        return listCourseFiltered;
+//    }
 
     public ArrayList<CourseDTO> getAllList() {
         ArrayList<CourseDTO> listCourse = new ArrayList<CourseDTO>();
