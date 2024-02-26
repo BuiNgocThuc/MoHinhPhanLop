@@ -26,6 +26,10 @@ public class OnsiteCourseBLL {
     public List<OnsiteCourseDTO> selectAllOnsiteCourse() {
         return courseDAL.selectAllOnsiteCourse();
     }
+    
+    public OnsiteCourseDTO selectByID(int CourseID) {
+        return onsCourseDAL.selectByID(CourseID);
+    }
 
     public boolean insertOnsiteCourse(OnsiteCourseDTO onsCourse) {
         return onsCourseDAL.insertOnsiteCourse(onsCourse);

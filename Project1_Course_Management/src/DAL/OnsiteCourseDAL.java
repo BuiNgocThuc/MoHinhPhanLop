@@ -26,10 +26,11 @@ public class OnsiteCourseDAL {
     public OnsiteCourseDAL() {
         ConnectDB connectDB = new ConnectDB();
         conn = (Connection) connectDB.getConnectDB();
+        listOnsCourses = selectAll();
     }
 
     public List<OnsiteCourseDTO> selectAll() {
-        
+        List<OnsiteCourseDTO> list = new ArrayList<>();
         String query = "SELECT * FROM onsitecourse";
         try
         {
@@ -48,14 +49,14 @@ public class OnsiteCourseDAL {
                 OnsCourse.setLocation(Location);
                 OnsCourse.setTime(time);
 
-                listOnsCourses.add(OnsCourse);
+                list.add(OnsCourse);
             }
         } catch (SQLException e)
         {
             e.printStackTrace();
         }
 
-        return listOnsCourses;
+        return list;
     }
     
     // xem chi tiết
@@ -90,6 +91,7 @@ public class OnsiteCourseDAL {
             result = preStm.executeUpdate();
             if (result != 0)
             {
+                listOnsCourses = selectAll();
                 return true;
             }
         } catch (SQLException e)
@@ -107,7 +109,7 @@ public class OnsiteCourseDAL {
         String Days = onsCourse.getDays();
         Time Time = onsCourse.getTime();
 
-        String query = "UPDATE onlinecourse SET Location = ?, Days = ?, Time = ? WHERE CourseID = ?";
+        String query = "UPDATE onsitecourse SET Location = ?, Days = ?, Time = ? WHERE CourseID = ?";
         try
         {
             preStm = conn.prepareStatement(query);
@@ -119,6 +121,7 @@ public class OnsiteCourseDAL {
             result = preStm.executeUpdate();
             if (result != 0)
             {
+                listOnsCourses = selectAll();
                 return true;
             }
         } catch (SQLException e)
@@ -140,6 +143,7 @@ public class OnsiteCourseDAL {
             result = preStm.executeUpdate();
             if (result != 0)
             {
+                listOnsCourses = selectAll();
                 return true;
             }
         } catch (SQLException e)

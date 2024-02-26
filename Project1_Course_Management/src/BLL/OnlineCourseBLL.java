@@ -39,6 +39,10 @@ public class OnlineCourseBLL {
         }
         return false;
     }
+    
+    public OnlineCourseDTO selectByID(int CourseID) {
+        return onlCourseDAL.selectByID(CourseID);
+    }
 
     public boolean updateOnlineCourse(OnlineCourseDTO onlCourse) {
         boolean success = courseBLL.updateCourse(onlCourse);

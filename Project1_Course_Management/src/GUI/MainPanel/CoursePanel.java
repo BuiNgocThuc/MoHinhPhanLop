@@ -4,11 +4,25 @@
  */
 package GUI.MainPanel;
 
+import BLL.CourseBLL;
+import BLL.DepartmentBLL;
+import BLL.OnlineCourseBLL;
+import BLL.OnsiteCourseBLL;
+import DTO.CourseDTO;
+import DTO.DepartmentDTO;
+import DTO.OnlineCourseDTO;
+import DTO.OnsiteCourseDTO;
 import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import java.sql.Time;
+import java.time.LocalTime;
+import javax.swing.JTable;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
@@ -19,11 +33,57 @@ public class CoursePanel extends javax.swing.JPanel {
     /**
      * Creates new form CoursePanel
      */
-    
     private final CourseAddForm courseAddForm = new CourseAddForm();
-    
+    private final CourseBLL courseBLL;
+    private final OnlineCourseBLL onlineCourseBLL;
+    private final OnsiteCourseBLL onsiteCourseBLL;
+    private final DepartmentBLL departmentBLL;
+    private List<CourseDTO> listCourse;
+    private List<DepartmentDTO> listDepartment;
+    private static DefaultTableModel modelCourse;
+
     public CoursePanel() {
+        courseBLL = new CourseBLL();
+        onlineCourseBLL = new OnlineCourseBLL();
+        onsiteCourseBLL = new OnsiteCourseBLL();
+        departmentBLL = new DepartmentBLL();
         initComponents();
+        loadDepartmentName();
+        loadData();
+    }
+
+    private void loadData() {
+        listCourse = courseBLL.selectAllCourse();
+
+         DefaultTableModel model = (DefaultTableModel) tblCourse.getModel();
+         model.setRowCount(0);
+
+        int STT = 1;
+        for (CourseDTO course : listCourse)
+        {
+            int courseID = course.getCourseID();
+            String title = course.getTitle();
+            int credits = course.getCredits();
+            int departmentID = course.getDepartmentID();
+            String departmentName = departmentBLL.selectByID(departmentID).getName();
+            String course_type = course.getCourse_type();
+
+            Object[] row =
+            {
+                STT++, courseID, title, credits, departmentName, course_type
+            };
+            model.addRow(row);
+        } 
+        model.fireTableDataChanged();
+    }
+
+    private void loadDepartmentName() {
+        listDepartment = departmentBLL.selectAll();
+        for (DepartmentDTO departmentDTO : listDepartment)
+        {
+            String name = departmentDTO.getName();
+            cbDepartment.addItem(name);
+        }
     }
 
     /**
@@ -52,7 +112,7 @@ public class CoursePanel extends javax.swing.JPanel {
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        courseTable = new javax.swing.JTable();
+        tblCourse = new javax.swing.JTable();
         detailCoursePanel = new javax.swing.JPanel();
         jPanel26 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -61,35 +121,37 @@ public class CoursePanel extends javax.swing.JPanel {
         txtCourseID = new javax.swing.JTextField();
         txtCourseNamePnl = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        txtTitle = new javax.swing.JTextField();
         txtDepartmentPnl = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        cbDepartment = new javax.swing.JComboBox<>();
         txtCreditPnl = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
-        txtCredit2 = new javax.swing.JTextField();
+        txtCredit = new javax.swing.JTextField();
         txtDetailCourse = new javax.swing.JPanel();
         txtLocationPnl = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        txtLocation = new javax.swing.JTextField();
         txtUrlPnl = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        txtUrl = new javax.swing.JTextField();
         txtTimePnl = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
-        timePicker3 = new com.github.lgooddatepicker.components.TimePicker();
+        tpTime = new com.github.lgooddatepicker.components.TimePicker();
         txtDatePnl = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jPanel33 = new javax.swing.JPanel();
-        txtMonday2 = new javax.swing.JCheckBox();
-        txtTuesday2 = new javax.swing.JCheckBox();
-        txtWednesday2 = new javax.swing.JCheckBox();
-        txtThursday2 = new javax.swing.JCheckBox();
-        txtFriday2 = new javax.swing.JCheckBox();
-        txtSaturday2 = new javax.swing.JCheckBox();
+        txtMonday = new javax.swing.JCheckBox();
+        txtTuesday = new javax.swing.JCheckBox();
+        txtWednesday = new javax.swing.JCheckBox();
+        txtThursday = new javax.swing.JCheckBox();
+        txtFriday = new javax.swing.JCheckBox();
+        txtSaturday = new javax.swing.JCheckBox();
+        jLabel2 = new javax.swing.JLabel();
+        txtType = new javax.swing.JTextField();
         buttonPnl = new javax.swing.JPanel();
-        jButton6 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -135,11 +197,11 @@ public class CoursePanel extends javax.swing.JPanel {
         });
         jPanel5.add(addCourseBtn);
 
+        editCourseBtn.setText("Sửa");
         editCourseBtn.setBackground(new java.awt.Color(64, 162, 227));
+        editCourseBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(187, 226, 236)));
         editCourseBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         editCourseBtn.setForeground(new java.awt.Color(255, 255, 255));
-        editCourseBtn.setText("Sửa");
-        editCourseBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(187, 226, 236)));
         editCourseBtn.setPreferredSize(new java.awt.Dimension(100, 40));
         editCourseBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,7 +257,7 @@ public class CoursePanel extends javax.swing.JPanel {
         sortCourseBtnGroup.add(jRadioButton1);
         jRadioButton1.setSelected(true);
         jRadioButton1.setText("Tất cả");
-        jRadioButton1.setPreferredSize(new java.awt.Dimension(54, 30));
+        jRadioButton1.setPreferredSize(new java.awt.Dimension(60, 30));
         sortCourseBtnGroupPnl.add(jRadioButton1);
 
         sortCourseBtnGroup.add(jRadioButton2);
@@ -229,44 +291,48 @@ public class CoursePanel extends javax.swing.JPanel {
                 .addGap(0, 0, 0))
         );
 
-        courseTable.getTableHeader().setFont(new Font("Segoe UI", 0, 14));
+        tblCourse.getTableHeader().setFont(new Font("Segoe UI", 0, 14));
         DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
-        courseTable.setFont(new Font("Segoe UI", 0, 14));
+        tblCourse.setFont(new Font("Segoe UI", 0, 14));
         leftRenderer.setHorizontalAlignment(JLabel.CENTER);
-        ((DefaultTableCellRenderer)courseTable.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);
+        ((DefaultTableCellRenderer)tblCourse.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);
         // Iterate over each column and set cell renderer and font
-        for (int i = 0; i < courseTable.getColumnCount(); i++) {
-            courseTable.getColumnModel().getColumn(i).setCellRenderer(leftRenderer);
+        for (int i = 0; i < tblCourse.getColumnCount(); i++) {
+            tblCourse.getColumnModel().getColumn(i).setCellRenderer(leftRenderer);
         }
-        courseTable.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        courseTable.setModel(new javax.swing.table.DefaultTableModel(
+        tblCourse.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        tblCourse.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"1045", "Calculus", "4", "Mathematics", null},
-                {"1046", "Chemistry", "4", "Engineering", null},
-                {"1061", "Physics", "4", "Enginerring", null},
-                {"2042", "Literature", "4", "English", null},
-                {"4022", "Microeconomics", "3", "Economics", null}
+                {null, "1045", "Calculus", "4", "Mathematics", null},
+                {null, "1046", "Chemistry", "4", "Engineering", null},
+                {null, "1061", "Physics", "4", "Enginerring", null},
+                {null, "2042", "Literature", "4", "English", null},
+                {null, "4022", "Microeconomics", "3", "Economics", null}
             },
             new String [] {
-                "CourseID", "CourseName", "Credit", "Department Name", "Type"
+                "No.", "CourseID", "Title", "Credits", "Department Name", "Type"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        courseTable.setRowHeight(35);
-        courseTable.getTableHeader().setReorderingAllowed(false);
-        courseTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblCourse.setRowHeight(35);
+        tblCourse.getTableHeader().setReorderingAllowed(false);
+        tblCourse.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                courseTableMouseClicked(evt);
+                tblCourseMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(courseTable);
+        jScrollPane1.setViewportView(tblCourse);
+        if (tblCourse.getColumnModel().getColumnCount() > 0) {
+            tblCourse.getColumnModel().getColumn(0).setMaxWidth(65);
+            tblCourse.getColumnModel().getColumn(3).setMaxWidth(80);
+        }
 
         detailCoursePanel.setBackground(new java.awt.Color(255, 255, 255));
         detailCoursePanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
@@ -275,7 +341,7 @@ public class CoursePanel extends javax.swing.JPanel {
         jPanel26.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        java.awt.FlowLayout flowLayout15 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 0);
+        java.awt.FlowLayout flowLayout15 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 0);
         flowLayout15.setAlignOnBaseline(true);
         jPanel1.setLayout(flowLayout15);
 
@@ -291,6 +357,7 @@ public class CoursePanel extends javax.swing.JPanel {
         txtCourseIDPnl.add(jLabel16);
 
         txtCourseID.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtCourseID.setFocusable(false);
         txtCourseID.setPreferredSize(new java.awt.Dimension(50, 40));
         txtCourseIDPnl.add(txtCourseID);
 
@@ -305,8 +372,8 @@ public class CoursePanel extends javax.swing.JPanel {
         jLabel17.setPreferredSize(new java.awt.Dimension(75, 40));
         txtCourseNamePnl.add(jLabel17);
 
-        jTextField5.setPreferredSize(new java.awt.Dimension(205, 40));
-        txtCourseNamePnl.add(jTextField5);
+        txtTitle.setPreferredSize(new java.awt.Dimension(205, 40));
+        txtCourseNamePnl.add(txtTitle);
 
         jPanel1.add(txtCourseNamePnl);
 
@@ -316,10 +383,9 @@ public class CoursePanel extends javax.swing.JPanel {
         jLabel19.setPreferredSize(new java.awt.Dimension(55, 45));
         txtDepartmentPnl.add(jLabel19);
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
-        jComboBox3.setPreferredSize(new java.awt.Dimension(150, 40));
-        txtDepartmentPnl.add(jComboBox3);
+        cbDepartment.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
+        cbDepartment.setPreferredSize(new java.awt.Dimension(150, 40));
+        txtDepartmentPnl.add(cbDepartment);
 
         jPanel1.add(txtDepartmentPnl);
 
@@ -333,15 +399,15 @@ public class CoursePanel extends javax.swing.JPanel {
         jLabel18.setPreferredSize(new java.awt.Dimension(40, 45));
         txtCreditPnl.add(jLabel18);
 
-        txtCredit2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtCredit2.setPreferredSize(new java.awt.Dimension(90, 40));
-        txtCreditPnl.add(txtCredit2);
+        txtCredit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtCredit.setPreferredSize(new java.awt.Dimension(90, 40));
+        txtCreditPnl.add(txtCredit);
 
         jPanel1.add(txtCreditPnl);
 
         txtDetailCourse.setBackground(new java.awt.Color(255, 255, 255));
-        txtDetailCourse.setPreferredSize(new java.awt.Dimension(800, 220));
-        java.awt.FlowLayout flowLayout13 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT);
+        txtDetailCourse.setPreferredSize(new java.awt.Dimension(850, 220));
+        java.awt.FlowLayout flowLayout13 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 15, 5);
         flowLayout13.setAlignOnBaseline(true);
         txtDetailCourse.setLayout(flowLayout13);
 
@@ -354,8 +420,8 @@ public class CoursePanel extends javax.swing.JPanel {
         jLabel20.setPreferredSize(new java.awt.Dimension(70, 40));
         txtLocationPnl.add(jLabel20);
 
-        jTextField6.setPreferredSize(new java.awt.Dimension(200, 40));
-        txtLocationPnl.add(jTextField6);
+        txtLocation.setPreferredSize(new java.awt.Dimension(200, 40));
+        txtLocationPnl.add(txtLocation);
 
         txtDetailCourse.add(txtLocationPnl);
 
@@ -369,8 +435,14 @@ public class CoursePanel extends javax.swing.JPanel {
         jLabel23.setPreferredSize(new java.awt.Dimension(25, 40));
         txtUrlPnl.add(jLabel23);
 
-        jTextField7.setPreferredSize(new java.awt.Dimension(255, 40));
-        txtUrlPnl.add(jTextField7);
+        txtUrl.setMargin(new java.awt.Insets(2, 15, 2, 6));
+        txtUrl.setPreferredSize(new java.awt.Dimension(255, 40));
+        txtUrl.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUrlActionPerformed(evt);
+            }
+        });
+        txtUrlPnl.add(txtUrl);
 
         txtDetailCourse.add(txtUrlPnl);
 
@@ -384,8 +456,8 @@ public class CoursePanel extends javax.swing.JPanel {
         jLabel22.setPreferredSize(new java.awt.Dimension(60, 40));
         txtTimePnl.add(jLabel22);
 
-        timePicker3.setPreferredSize(new java.awt.Dimension(120, 40));
-        txtTimePnl.add(timePicker3);
+        tpTime.setPreferredSize(new java.awt.Dimension(120, 40));
+        txtTimePnl.add(tpTime);
 
         txtDetailCourse.add(txtTimePnl);
 
@@ -408,87 +480,102 @@ public class CoursePanel extends javax.swing.JPanel {
         flowLayout9.setAlignOnBaseline(true);
         jPanel33.setLayout(flowLayout9);
 
-        txtMonday2.setText("Thứ 2");
-        txtMonday2.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 15));
-        txtMonday2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        txtMonday2.setPreferredSize(new java.awt.Dimension(75, 30));
-        jPanel33.add(txtMonday2);
+        txtMonday.setText("Thứ 2");
+        txtMonday.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 15));
+        txtMonday.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        txtMonday.setPreferredSize(new java.awt.Dimension(75, 30));
+        jPanel33.add(txtMonday);
 
-        txtTuesday2.setText("Thứ 3");
-        txtTuesday2.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 15));
-        txtTuesday2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        txtTuesday2.setPreferredSize(new java.awt.Dimension(75, 30));
-        jPanel33.add(txtTuesday2);
+        txtTuesday.setText("Thứ 3");
+        txtTuesday.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 15));
+        txtTuesday.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        txtTuesday.setPreferredSize(new java.awt.Dimension(75, 30));
+        jPanel33.add(txtTuesday);
 
-        txtWednesday2.setText("Thứ 4");
-        txtWednesday2.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 15));
-        txtWednesday2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        txtWednesday2.setPreferredSize(new java.awt.Dimension(75, 30));
-        jPanel33.add(txtWednesday2);
+        txtWednesday.setText("Thứ 4");
+        txtWednesday.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 15));
+        txtWednesday.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        txtWednesday.setPreferredSize(new java.awt.Dimension(75, 30));
+        jPanel33.add(txtWednesday);
 
-        txtThursday2.setText("Thứ 5");
-        txtThursday2.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 15));
-        txtThursday2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        txtThursday2.setPreferredSize(new java.awt.Dimension(75, 30));
-        jPanel33.add(txtThursday2);
+        txtThursday.setText("Thứ 5");
+        txtThursday.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 15));
+        txtThursday.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        txtThursday.setPreferredSize(new java.awt.Dimension(75, 30));
+        jPanel33.add(txtThursday);
 
-        txtFriday2.setText("Thứ 6");
-        txtFriday2.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 15));
-        txtFriday2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        txtFriday2.setPreferredSize(new java.awt.Dimension(75, 30));
-        jPanel33.add(txtFriday2);
+        txtFriday.setText("Thứ 6");
+        txtFriday.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 15));
+        txtFriday.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        txtFriday.setPreferredSize(new java.awt.Dimension(75, 30));
+        jPanel33.add(txtFriday);
 
-        txtSaturday2.setText("Thứ 7");
-        txtSaturday2.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 15));
-        txtSaturday2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        txtSaturday2.setPreferredSize(new java.awt.Dimension(75, 30));
-        jPanel33.add(txtSaturday2);
+        txtSaturday.setText("Thứ 7");
+        txtSaturday.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 15));
+        txtSaturday.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        txtSaturday.setPreferredSize(new java.awt.Dimension(75, 30));
+        jPanel33.add(txtSaturday);
 
         txtDatePnl.add(jPanel33);
 
         txtDetailCourse.add(txtDatePnl);
 
+        jLabel2.setText("Loại:");
+        jLabel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 14, 0, 0));
+        jLabel2.setPreferredSize(new java.awt.Dimension(50, 40));
+        txtDetailCourse.add(jLabel2);
+
+        txtType.setFocusable(false);
+        txtType.setPreferredSize(new java.awt.Dimension(140, 40));
+        txtDetailCourse.add(txtType);
+
         jPanel1.add(txtDetailCourse);
 
         buttonPnl.setBackground(new java.awt.Color(255, 255, 255));
-        java.awt.FlowLayout flowLayout14 = new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT);
-        flowLayout14.setAlignOnBaseline(true);
-        buttonPnl.setLayout(flowLayout14);
+        java.awt.FlowLayout flowLayout10 = new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT);
+        flowLayout10.setAlignOnBaseline(true);
+        buttonPnl.setLayout(flowLayout10);
 
-        jButton6.setText("Đóng");
-        jButton6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
-        jButton6.setPreferredSize(new java.awt.Dimension(112, 40));
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnCancel.setText("Đóng");
+        btnCancel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
+        btnCancel.setPreferredSize(new java.awt.Dimension(112, 40));
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnCancelActionPerformed(evt);
             }
         });
-        buttonPnl.add(jButton6);
+        buttonPnl.add(btnCancel);
 
-        jButton5.setText("Lưu");
-        jButton5.setBackground(new java.awt.Color(56, 122, 223));
-        jButton5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(80, 196, 237)));
-        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setPreferredSize(new java.awt.Dimension(112, 40));
-        buttonPnl.add(jButton5);
+        btnSave.setText("Lưu");
+        btnSave.setBackground(new java.awt.Color(56, 122, 223));
+        btnSave.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(80, 196, 237)));
+        btnSave.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSave.setForeground(new java.awt.Color(255, 255, 255));
+        btnSave.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnSave.setPreferredSize(new java.awt.Dimension(112, 40));
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+        buttonPnl.add(btnSave);
 
         javax.swing.GroupLayout jPanel26Layout = new javax.swing.GroupLayout(jPanel26);
         jPanel26.setLayout(jPanel26Layout);
         jPanel26Layout.setHorizontalGroup(
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel26Layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 815, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(buttonPnl, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 844, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonPnl, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel26Layout.setVerticalGroup(
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel26Layout.createSequentialGroup()
-                .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(buttonPnl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonPnl, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -532,36 +619,231 @@ public class CoursePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_addCourseBtnActionPerformed
 
     private void editCourseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editCourseBtnActionPerformed
+        detailCoursePanel.setVisible(true);
     }//GEN-LAST:event_editCourseBtnActionPerformed
 
     private void deleteCourseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCourseBtnActionPerformed
         int deleteChoice = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa dòng này không?");
     }//GEN-LAST:event_deleteCourseBtnActionPerformed
 
-    private void courseTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_courseTableMouseClicked
+    private void selectCourse() {
+        int row = tblCourse.getSelectedRow();
+        int colsCount = tblCourse.getColumnCount();
 
-    }//GEN-LAST:event_courseTableMouseClicked
+        // get value course from table
+        String courseID = tblCourse.getValueAt(row, 1).toString();
+        int ID = Integer.parseInt(courseID);
+        String title = tblCourse.getValueAt(row, 2).toString();
+        String credits = tblCourse.getValueAt(row, 3).toString();
+        String deparment = tblCourse.getValueAt(row, 4).toString();
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // set value to text field
+        txtCourseID.setText(courseID);
+        txtTitle.setText(title);
+        txtCredit.setText(credits);
+        cbDepartment.setSelectedItem(deparment);
+
+        String type = tblCourse.getValueAt(row, colsCount - 1).toString(); // get value course_type in last cell of row
+        txtType.setText(type);
+        switch (type)
+        {
+            case "Online" ->
+            {
+                // hide panel of onsite course
+                txtLocationPnl.setVisible(false);
+                txtDatePnl.setVisible(false);
+                txtTimePnl.setVisible(false);
+
+                // show panel of online course
+                txtUrlPnl.setVisible(true);
+
+                // get data of online course
+                OnlineCourseDTO onlCourse = onlineCourseBLL.selectByID(ID);
+                String url = onlCourse.getUrl();
+
+                // set data to text field
+                txtUrl.setText(url);
+            }
+            case "Onsite" ->
+            {
+                // show panel of onsite course
+                txtLocationPnl.setVisible(true);
+                txtDatePnl.setVisible(true);
+                txtTimePnl.setVisible(true);
+
+                // hide panel of online course
+                txtUrlPnl.setVisible(false);
+
+                // get data of online course
+                OnsiteCourseDTO onsCourse = onsiteCourseBLL.selectByID(ID);
+                String location = onsCourse.getLocation();
+                String days = onsCourse.getDays();
+                Time time = onsCourse.getTime();
+                LocalTime localtime = LocalTime.parse(String.valueOf(time));
+
+                // set data to text field
+                txtLocation.setText(location);
+                tpTime.setTime(localtime);
+                tpTime.requestFocus(false);
+                while (!days.isEmpty())
+                {
+                    char dayChar = days.charAt(days.length() - 1);
+                    String day = String.valueOf(dayChar);
+                    switch (day)
+                    {
+                        case "M":
+                            txtMonday.setSelected(true);
+                            break;
+                        case "T":
+                            txtTuesday.setSelected(true);
+                            break;
+                        case "W":
+                            txtWednesday.setSelected(true);
+                            break;
+                        case "H":
+                            txtThursday.setSelected(true);
+                            break;
+                        case "F":
+                            txtFriday.setSelected(true);
+                            break;
+                        case "S":
+                            txtSaturday.setSelected(true);
+                            break;
+                        default:
+                            throw new AssertionError();
+                    }
+
+                    days = days.substring(0, days.length() - 1);
+                }
+
+            }
+            default ->
+                throw new AssertionError();
+        }
+    }
+
+    private void clearText() {
+        txtCourseID.setText("");
+        txtTitle.setText("");
+        txtCredit.setText("");
+        cbDepartment.getEditor().setItem("");
+        txtLocation.setText("");
+        tpTime.setText("");
+
+        txtMonday.setSelected(false);
+        txtTuesday.setSelected(false);
+        txtWednesday.setSelected(false);
+        txtThursday.setSelected(false);
+        txtFriday.setSelected(false);
+        txtSaturday.setSelected(false);
+    }
+
+    private void displayErrorMessage(String message) {
+        JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    private void displayMessage(String message) {
+        JOptionPane.showMessageDialog(null, message, "Information", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         detailCoursePanel.setVisible(false);
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void txtUrlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUrlActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUrlActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+        String courseIDstr = txtCourseID.getText();
+        if (courseIDstr.isBlank())
+        {
+            displayErrorMessage("Chưa chọn khóa học cần sửa");
+            return;
+        }
+        boolean success = false;
+        String title = txtTitle.getText();
+        int courseID = Integer.parseInt(courseIDstr);
+        int departmentIndex = cbDepartment.getSelectedIndex();
+        int departmentID = listDepartment.get(departmentIndex).getDepartmentID();
+        int credits = Integer.parseInt(txtCredit.getText());
+        CourseDTO course = new CourseDTO(courseID, departmentID, credits, title);
+        success = courseBLL.updateCourse(course);
+        String course_type = txtType.getText();
+        switch (course_type)
+        {
+            case "Online" ->
+            {
+                String url = txtUrl.getText();
+                OnlineCourseDTO onlineCourse = new OnlineCourseDTO(url, courseID, departmentID, credits, title);
+                success = onlineCourseBLL.updateOnlineCourse(onlineCourse);
+            }
+            case "Onsite" ->
+            {
+                String location = txtLocation.getText();
+                LocalTime localtime = tpTime.getTime();
+                Time time = Time.valueOf(localtime);
+                String Days = "";
+                if (txtMonday.isSelected())
+                {
+                    Days += "M";
+                }
+                if (txtTuesday.isSelected())
+                {
+                    Days += "T";
+                }
+                if (txtWednesday.isSelected())
+                {
+                    Days += "W";
+                }
+                if (txtThursday.isSelected())
+                {
+                    Days += "H";
+                }
+                if (txtFriday.isSelected())
+                {
+                    Days += "F";
+                }
+                if (txtSaturday.isSelected())
+                {
+                    Days += "S";
+                }
+                OnsiteCourseDTO onsiteCourse = new OnsiteCourseDTO(location, Days, time, courseID, departmentID, credits, title);
+                success = onsiteCourseBLL.updateOnsiteCourse(onsiteCourse);
+            }
+            default ->
+                throw new AssertionError();
+        }
+        if (success)
+        {
+            loadData();
+            clearText();
+            displayMessage("Update Course Successfully!");
+        }
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void tblCourseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCourseMouseClicked
+        clearText();
+        selectCourse();
+    }//GEN-LAST:event_tblCourseMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addCourseBtn;
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnSave;
     private javax.swing.JPanel buttonPnl;
-    private javax.swing.JTable courseTable;
+    private javax.swing.JComboBox<String> cbDepartment;
     private javax.swing.JButton deleteCourseBtn;
     private javax.swing.JPanel detailCoursePanel;
     private javax.swing.JButton editCourseBtn;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -578,30 +860,32 @@ public class CoursePanel extends javax.swing.JPanel {
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JButton searchOnsiteCourseBtn;
     private javax.swing.JTextField searchOnsiteCourseValue;
     private javax.swing.ButtonGroup sortCourseBtnGroup;
     private javax.swing.JPanel sortCourseBtnGroupPnl;
-    private com.github.lgooddatepicker.components.TimePicker timePicker3;
+    private javax.swing.JTable tblCourse;
+    private com.github.lgooddatepicker.components.TimePicker tpTime;
     private javax.swing.JTextField txtCourseID;
     private javax.swing.JPanel txtCourseIDPnl;
     private javax.swing.JPanel txtCourseNamePnl;
-    private javax.swing.JTextField txtCredit2;
+    private javax.swing.JTextField txtCredit;
     private javax.swing.JPanel txtCreditPnl;
     private javax.swing.JPanel txtDatePnl;
     private javax.swing.JPanel txtDepartmentPnl;
     private javax.swing.JPanel txtDetailCourse;
-    private javax.swing.JCheckBox txtFriday2;
+    private javax.swing.JCheckBox txtFriday;
+    private javax.swing.JTextField txtLocation;
     private javax.swing.JPanel txtLocationPnl;
-    private javax.swing.JCheckBox txtMonday2;
-    private javax.swing.JCheckBox txtSaturday2;
-    private javax.swing.JCheckBox txtThursday2;
+    private javax.swing.JCheckBox txtMonday;
+    private javax.swing.JCheckBox txtSaturday;
+    private javax.swing.JCheckBox txtThursday;
     private javax.swing.JPanel txtTimePnl;
-    private javax.swing.JCheckBox txtTuesday2;
+    private javax.swing.JTextField txtTitle;
+    private javax.swing.JCheckBox txtTuesday;
+    private javax.swing.JTextField txtType;
+    private javax.swing.JTextField txtUrl;
     private javax.swing.JPanel txtUrlPnl;
-    private javax.swing.JCheckBox txtWednesday2;
+    private javax.swing.JCheckBox txtWednesday;
     // End of variables declaration//GEN-END:variables
 }
