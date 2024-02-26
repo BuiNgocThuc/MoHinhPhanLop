@@ -1,6 +1,7 @@
 package BLL;
 
 import DAL.CourseInstructorDAL;
+import DTO.CourseDTO;
 import DTO.CourseInstructorDTO;
 import java.util.List;
 import DTO.CourseInstructorDTO;
@@ -14,6 +15,15 @@ public class CourseInstructorBLL {
 
     public List<CourseInstructorDTO> getAllCourseInstructors() throws SQLException {
         return courseInstructorDAL.selectAll();
+    }
+
+    public List<CourseInstructorDTO> getListCourseInstructorsByPersonID(int personID) throws SQLException {
+        try {
+            return courseInstructorDAL.selectByPersonID(personID);
+        } catch (SQLException e) {
+            // Thông báo lỗi đến lớp gọi
+            throw new SQLException("Error retrieving course instructors by person ID", e);
+        }
     }
 
     public CourseInstructorDTO getCourseInstructorByID(int courseID, int personID) throws SQLException {
@@ -41,6 +51,6 @@ public class CourseInstructorBLL {
 
         CourseInstructorDTO ci = ciBLL.getCourseInstructorByID(1045, 5);
         System.out.println(ci);
-        
+
     }
 }
