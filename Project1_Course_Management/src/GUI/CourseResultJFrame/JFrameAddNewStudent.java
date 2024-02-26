@@ -9,8 +9,10 @@ import BLL.StudentGradeBLL;
 import DTO.PersonDTO;
 import DTO.StudentGradeDTO;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
-import util.ValidateUtil;
 
 /**
  *
@@ -25,8 +27,27 @@ public class JFrameAddNewStudent extends javax.swing.JFrame {
     public JFrameAddNewStudent(int courseID) {
         initComponents();
         this.courseID = courseID;
-        System.err.println("Current Date: " + ValidateUtil.getCurrentDate());
-//        enrollmentDateTxt.setText(ValidateUtil.getCurrentDate());
+        enrollmentDateTxt.setText(getCurrentDate());
+    }
+    
+    public static Timestamp convertStringToTimestamp(String dateString) {
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date parsedDate = dateFormat.parse(dateString);
+            return new Timestamp(parsedDate.getTime());
+        } 
+        catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    public static String getCurrentDate() {
+        Date currentDate = new Date();
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        return dateFormat.format(currentDate);
     }
 
     /**
@@ -174,13 +195,16 @@ public class JFrameAddNewStudent extends javax.swing.JFrame {
     private void addCourseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCourseBtnActionPerformed
         String lastName = this.lastNameTxt.getText();
         String firstName = this.firstNameTxt.getText();
-        Timestamp enrollmentDate = ValidateUtil.convertStringToTimestamp(enrollmentDateTxt.getText());
+        Timestamp enrollmentDate = convertStringToTimestamp(enrollmentDateTxt.getText());
         
         if(lastName.isEmpty() || firstName.isEmpty()) {
             JOptionPane.showMessageDialog(null, "There is empty data field");
         }
         else {
+            int id = personBll.getAutoIncrement();
+            
             PersonDTO person = new PersonDTO();
+            person.setPersonID(id);
             person.setLastName(lastName);
             person.setFirstName(firstName);
             person.setEnrollmentDate(enrollmentDate);
@@ -188,7 +212,7 @@ public class JFrameAddNewStudent extends javax.swing.JFrame {
             
             StudentGradeDTO studentGrade = new StudentGradeDTO();
             studentGrade.setCourseID(courseID);
-            studentGrade.setStudentID(person.getPersonID());
+            studentGrade.setStudentID(id);
             studentGrade.setGrade(0);
             studentGradeBll.insertStudent(studentGrade);
             

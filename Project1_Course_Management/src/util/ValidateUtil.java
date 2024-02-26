@@ -40,9 +40,6 @@ public class ValidateUtil {
         return dateFormat.format(currentDate);
     }
     
-    public static void main(String[] args) {
-        System.err.println("current date: " + getCurrentDate());
-    }
 // Studycase of Try-Catch
 //
 //    public static void someMethodInBLL(String name) throws ValidationException, Throwable {

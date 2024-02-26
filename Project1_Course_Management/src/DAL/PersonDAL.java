@@ -7,6 +7,8 @@ package DAL;
 import DTO.PersonDTO;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -113,5 +115,24 @@ public class PersonDAL {
             e.printStackTrace();
         }
         return false;
+    }
+    
+    public int getAutoIncrement() {
+        int result = -1;
+        try {
+            String sql = "SELECT `AUTO_INCREMENT` FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'school' AND   TABLE_NAME   = 'person'";
+            PreparedStatement pst = con.getConnectDB().prepareStatement(sql);
+            ResultSet rs2 = pst.executeQuery(sql);
+            if (!rs2.isBeforeFirst() ) {
+                System.out.println("No data");
+            } else {
+                while ( rs2.next() ) {
+                    result = rs2.getInt("AUTO_INCREMENT");
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonDAL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
     }
 }

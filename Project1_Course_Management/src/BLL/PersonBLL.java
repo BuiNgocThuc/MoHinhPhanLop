@@ -26,4 +26,8 @@ public class PersonBLL {
     public boolean insertPerson(PersonDTO person) {
         return personDAL.insertPerson(person);
     }
+    
+    public int getAutoIncrement() {
+        return personDAL.getAutoIncrement();
+    }
 }

@@ -391,12 +391,6 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
     public void LoadData(int CourseID){
         String columns[]=new String[]{"STT","PersonID","FirstName","LastName","Grade"};
         DefaultTableModel model=new DefaultTableModel();
-//        DefaultTableModel model=new DefaultTableModel(){
-//            @Override
-//            public boolean isCellEditable(int row, int column) {
-//                return false;
-//            }
-//        };
         for(String i:columns){
             model.addColumn(i);
         }
