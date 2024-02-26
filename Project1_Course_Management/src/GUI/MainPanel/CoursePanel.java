@@ -63,7 +63,6 @@ public class CoursePanel extends javax.swing.JPanel {
         {
             int courseID = course.getCourseID();
             String title = course.getTitle();
-            System.out.println(title);
             int credits = course.getCredits();
             int departmentID = course.getDepartmentID();
             String departmentName = departmentBLL.selectByID(departmentID).getName();
@@ -74,7 +73,7 @@ public class CoursePanel extends javax.swing.JPanel {
                 STT++, courseID, title, credits, departmentName, course_type
             };
             model.addRow(row);
-        }
+        } 
         model.fireTableDataChanged();
     }
 
@@ -810,8 +809,6 @@ public class CoursePanel extends javax.swing.JPanel {
                 {
                     Days += "S";
                 }
-
-//                System.out.println(location + " - " + Days + " - " + time);
                 OnsiteCourseDTO onsiteCourse = new OnsiteCourseDTO(location, Days, time, courseID, departmentID, credits, title);
                 success = onsiteCourseBLL.updateOnsiteCourse(onsiteCourse);
             }
@@ -821,7 +818,6 @@ public class CoursePanel extends javax.swing.JPanel {
         if (success)
         {
             loadData();
-            ((AbstractTableModel) tblCourse.getModel()).fireTableDataChanged();
             clearText();
             displayMessage("Update Course Successfully!");
         }

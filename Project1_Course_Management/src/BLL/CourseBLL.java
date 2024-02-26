@@ -36,10 +36,6 @@ public class CourseBLL {
         return courseDAL.deleteCourse(CourseID);
     }
     
-    public void resetDataCourse() {
-        courseDAL.resetListData();
-    }
-    
     public ArrayList<CourseDTO> getAllist(){
         return courseDAL.getAllList();
     }

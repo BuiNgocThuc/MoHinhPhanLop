@@ -20,7 +20,7 @@ public class CourseDAL {
     private PreparedStatement preStm;
     private OnlineCourseDAL onlCourseDAL = new OnlineCourseDAL();
     private OnsiteCourseDAL onsCourseDAL = new OnsiteCourseDAL();
-    private List<CourseDTO> listCourses = new ArrayList<>();
+    private List<CourseDTO> listCourses;
 
     public CourseDAL() {
         ConnectDB connectDB = new ConnectDB();
@@ -28,6 +28,7 @@ public class CourseDAL {
     }
 
     public List<CourseDTO> selectAll() {
+        listCourses = new ArrayList<>();
         String query = "SELECT \n"
                 + "    course.*,\n"
                 + "    CASE \n"
@@ -207,12 +208,6 @@ public class CourseDAL {
             }
         }
         return listCourseFiltered;
-    }
-    
-    public void resetListData() {
-        listCourses = selectAll();
-        onlCourseDAL.resetListData();
-        onsCourseDAL.resetListData();
     }
 
     public ArrayList<CourseDTO> getAllList() {

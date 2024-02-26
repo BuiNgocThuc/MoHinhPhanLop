@@ -30,6 +30,7 @@ public class OnlineCourseDAL {
 
     // xem danh sách
     public List<OnlineCourseDTO> selectAll() {
+        List<OnlineCourseDTO> list = new ArrayList<>();
         String query = "SELECT * FROM onlinecourse";
         try
         {
@@ -44,14 +45,14 @@ public class OnlineCourseDAL {
                 OnlCourse.setCourseID(CourseID);
                 OnlCourse.setUrl(url);
 
-                listOnlCourses.add(OnlCourse);
+                list.add(OnlCourse);
             }
         } catch (SQLException e)
         {
             e.printStackTrace();
         }
 
-        return listOnlCourses;
+        return list;
     }
 
     // xem chi tiết
@@ -64,10 +65,6 @@ public class OnlineCourseDAL {
             }
         }
         return null;
-    }
-    
-    public void resetListData() {
-        listOnlCourses = selectAll();
     }
 
     public boolean insertOnlineCourse(OnlineCourseDTO onlCourse) {
@@ -86,6 +83,7 @@ public class OnlineCourseDAL {
             result = preStm.executeUpdate();
             if (result != 0)
             {
+                 listOnlCourses = selectAll();
                 return true;
             }
         } catch (SQLException e)
@@ -111,6 +109,7 @@ public class OnlineCourseDAL {
             result = preStm.executeUpdate();
             if (result != 0)
             {
+                 listOnlCourses = selectAll();
                 return true;
             }
         } catch (SQLException e)
@@ -132,6 +131,7 @@ public class OnlineCourseDAL {
             result = preStm.executeUpdate();
             if (result != 0)
             {
+                 listOnlCourses = selectAll();
                 return true;
             }
         } catch (SQLException e)

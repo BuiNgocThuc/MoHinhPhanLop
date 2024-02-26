@@ -30,7 +30,7 @@ public class OnsiteCourseDAL {
     }
 
     public List<OnsiteCourseDTO> selectAll() {
-        
+        List<OnsiteCourseDTO> list = new ArrayList<>();
         String query = "SELECT * FROM onsitecourse";
         try
         {
@@ -49,14 +49,14 @@ public class OnsiteCourseDAL {
                 OnsCourse.setLocation(Location);
                 OnsCourse.setTime(time);
 
-                listOnsCourses.add(OnsCourse);
+                list.add(OnsCourse);
             }
         } catch (SQLException e)
         {
             e.printStackTrace();
         }
 
-        return listOnsCourses;
+        return list;
     }
     
     // xem chi tiết
@@ -69,10 +69,6 @@ public class OnsiteCourseDAL {
             }
         }
         return null;
-    }
-    
-    public void resetListData() {
-        listOnsCourses = selectAll();
     }
 
     public boolean insertOnsiteCourse(OnsiteCourseDTO onsCourse) {
@@ -95,6 +91,7 @@ public class OnsiteCourseDAL {
             result = preStm.executeUpdate();
             if (result != 0)
             {
+                listOnsCourses = selectAll();
                 return true;
             }
         } catch (SQLException e)
@@ -124,6 +121,7 @@ public class OnsiteCourseDAL {
             result = preStm.executeUpdate();
             if (result != 0)
             {
+                listOnsCourses = selectAll();
                 return true;
             }
         } catch (SQLException e)
@@ -145,6 +143,7 @@ public class OnsiteCourseDAL {
             result = preStm.executeUpdate();
             if (result != 0)
             {
+                listOnsCourses = selectAll();
                 return true;
             }
         } catch (SQLException e)
