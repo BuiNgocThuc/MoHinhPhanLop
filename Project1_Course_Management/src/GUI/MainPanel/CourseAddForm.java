@@ -51,34 +51,34 @@ public class CourseAddForm extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtTitle = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtCredits = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbDepartment = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        typeCourse = new javax.swing.JComboBox<>();
+        txtType = new javax.swing.JComboBox<>();
         onlineInformationCourse = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtUrl = new javax.swing.JTextField();
         onsiteInformationCourse = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtLocation = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        timePicker1 = new com.github.lgooddatepicker.components.TimePicker();
+        tpTime = new com.github.lgooddatepicker.components.TimePicker();
         jPanel9 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jCheckBox5 = new javax.swing.JCheckBox();
-        jCheckBox6 = new javax.swing.JCheckBox();
+        txtMonday = new javax.swing.JCheckBox();
+        txtTuesday = new javax.swing.JCheckBox();
+        txtWednesday = new javax.swing.JCheckBox();
+        txtThursday = new javax.swing.JCheckBox();
+        txtFriday = new javax.swing.JCheckBox();
+        txtSaturday = new javax.swing.JCheckBox();
         jPanel7 = new javax.swing.JPanel();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
@@ -87,21 +87,21 @@ public class CourseAddForm extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         pnlAddStudent = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblStudent = new javax.swing.JTable();
         jPanel14 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblStudentSelected = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         pnlAddTeacher = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
+        tblInstructor = new javax.swing.JTable();
         jPanel12 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tblInstructorSelected = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Thêm khóa học");
@@ -145,17 +145,15 @@ public class CourseAddForm extends javax.swing.JFrame {
         jLabel2.setPreferredSize(new java.awt.Dimension(85, 35));
         jPanel3.add(jLabel2);
 
-        jTextField1.setText("jTextField1");
-        jTextField1.setPreferredSize(new java.awt.Dimension(200, 35));
-        jPanel3.add(jTextField1);
+        txtTitle.setPreferredSize(new java.awt.Dimension(200, 35));
+        jPanel3.add(txtTitle);
 
         jLabel3.setText("Tín chỉ:");
         jLabel3.setPreferredSize(new java.awt.Dimension(38, 35));
         jPanel3.add(jLabel3);
 
-        jTextField2.setText("jTextField2");
-        jTextField2.setPreferredSize(new java.awt.Dimension(153, 35));
-        jPanel3.add(jTextField2);
+        txtCredits.setPreferredSize(new java.awt.Dimension(153, 35));
+        jPanel3.add(txtCredits);
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setPreferredSize(new java.awt.Dimension(342, 47));
@@ -167,10 +165,10 @@ public class CourseAddForm extends javax.swing.JFrame {
         jLabel4.setPreferredSize(new java.awt.Dimension(85, 35));
         jPanel5.add(jLabel4);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
-        jComboBox1.setPreferredSize(new java.awt.Dimension(400, 35));
-        jPanel5.add(jComboBox1);
+        cbDepartment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Chọn Khoa--" }));
+        cbDepartment.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
+        cbDepartment.setPreferredSize(new java.awt.Dimension(400, 35));
+        jPanel5.add(cbDepartment);
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setPreferredSize(new java.awt.Dimension(800, 47));
@@ -182,15 +180,15 @@ public class CourseAddForm extends javax.swing.JFrame {
         jLabel5.setPreferredSize(new java.awt.Dimension(85, 35));
         jPanel4.add(jLabel5);
 
-        typeCourse.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Online", "Onsite" }));
-        typeCourse.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
-        typeCourse.setPreferredSize(new java.awt.Dimension(400, 35));
-        typeCourse.addActionListener(new java.awt.event.ActionListener() {
+        txtType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Online", "Onsite" }));
+        txtType.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
+        txtType.setPreferredSize(new java.awt.Dimension(400, 35));
+        txtType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                typeCourseActionPerformed(evt);
+                txtTypeActionPerformed(evt);
             }
         });
-        jPanel4.add(typeCourse);
+        jPanel4.add(txtType);
 
         onlineInformationCourse.setBackground(new java.awt.Color(255, 255, 255));
         onlineInformationCourse.setPreferredSize(new java.awt.Dimension(753, 50));
@@ -204,9 +202,8 @@ public class CourseAddForm extends javax.swing.JFrame {
         jLabel6.setPreferredSize(new java.awt.Dimension(85, 35));
         jPanel6.add(jLabel6);
 
-        jTextField3.setText("jTextField3");
-        jTextField3.setPreferredSize(new java.awt.Dimension(910, 35));
-        jPanel6.add(jTextField3);
+        txtUrl.setPreferredSize(new java.awt.Dimension(910, 35));
+        jPanel6.add(txtUrl);
 
         javax.swing.GroupLayout onlineInformationCourseLayout = new javax.swing.GroupLayout(onlineInformationCourse);
         onlineInformationCourse.setLayout(onlineInformationCourseLayout);
@@ -235,21 +232,20 @@ public class CourseAddForm extends javax.swing.JFrame {
         jLabel7.setPreferredSize(new java.awt.Dimension(85, 35));
         jPanel8.add(jLabel7);
 
-        jTextField4.setText("jTextField4");
-        jTextField4.setPreferredSize(new java.awt.Dimension(200, 35));
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        txtLocation.setPreferredSize(new java.awt.Dimension(200, 35));
+        txtLocation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                txtLocationActionPerformed(evt);
             }
         });
-        jPanel8.add(jTextField4);
+        jPanel8.add(txtLocation);
 
         jLabel8.setText("Thời gian:");
         jLabel8.setPreferredSize(new java.awt.Dimension(52, 35));
         jPanel8.add(jLabel8);
 
-        timePicker1.setPreferredSize(new java.awt.Dimension(140, 35));
-        jPanel8.add(timePicker1);
+        tpTime.setPreferredSize(new java.awt.Dimension(140, 35));
+        jPanel8.add(tpTime);
 
         onsiteInformationCourse.add(jPanel8);
 
@@ -271,29 +267,29 @@ public class CourseAddForm extends javax.swing.JFrame {
         flowLayout8.setAlignOnBaseline(true);
         jPanel10.setLayout(flowLayout8);
 
-        jCheckBox1.setText("Thứ 2");
-        jCheckBox1.setPreferredSize(new java.awt.Dimension(65, 25));
-        jPanel10.add(jCheckBox1);
+        txtMonday.setText("Thứ 2");
+        txtMonday.setPreferredSize(new java.awt.Dimension(65, 25));
+        jPanel10.add(txtMonday);
 
-        jCheckBox2.setText("Thứ 3");
-        jCheckBox2.setPreferredSize(new java.awt.Dimension(65, 25));
-        jPanel10.add(jCheckBox2);
+        txtTuesday.setText("Thứ 3");
+        txtTuesday.setPreferredSize(new java.awt.Dimension(65, 25));
+        jPanel10.add(txtTuesday);
 
-        jCheckBox3.setText("Thứ 4");
-        jCheckBox3.setPreferredSize(new java.awt.Dimension(65, 25));
-        jPanel10.add(jCheckBox3);
+        txtWednesday.setText("Thứ 4");
+        txtWednesday.setPreferredSize(new java.awt.Dimension(65, 25));
+        jPanel10.add(txtWednesday);
 
-        jCheckBox4.setText("Thứ 5");
-        jCheckBox4.setPreferredSize(new java.awt.Dimension(65, 25));
-        jPanel10.add(jCheckBox4);
+        txtThursday.setText("Thứ 5");
+        txtThursday.setPreferredSize(new java.awt.Dimension(65, 25));
+        jPanel10.add(txtThursday);
 
-        jCheckBox5.setText("Thứ 6");
-        jCheckBox5.setPreferredSize(new java.awt.Dimension(65, 25));
-        jPanel10.add(jCheckBox5);
+        txtFriday.setText("Thứ 6");
+        txtFriday.setPreferredSize(new java.awt.Dimension(65, 25));
+        jPanel10.add(txtFriday);
 
-        jCheckBox6.setText("Thứ 7");
-        jCheckBox6.setPreferredSize(new java.awt.Dimension(65, 25));
-        jPanel10.add(jCheckBox6);
+        txtSaturday.setText("Thứ 7");
+        txtSaturday.setPreferredSize(new java.awt.Dimension(65, 25));
+        jPanel10.add(txtSaturday);
 
         jPanel9.add(jPanel10);
 
@@ -329,9 +325,9 @@ public class CourseAddForm extends javax.swing.JFrame {
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel11.setText("Thêm sinh viên:");
         jLabel11.setBackground(new java.awt.Color(255, 255, 255));
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel11.setText("Thêm sinh viên:");
         jLabel11.setOpaque(true);
 
         pnlAddStudent.setBackground(new java.awt.Color(255, 255, 255));
@@ -341,7 +337,7 @@ public class CourseAddForm extends javax.swing.JFrame {
 
         jScrollPane1.setPreferredSize(new java.awt.Dimension(455, 280));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblStudent.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -352,14 +348,14 @@ public class CourseAddForm extends javax.swing.JFrame {
                 "No", "ID", "First Name", "Last Name", "Enrollment Date"
             }
         ));
-        jTable1.setPreferredSize(new java.awt.Dimension(345, 80));
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setMinWidth(50);
-            jTable1.getColumnModel().getColumn(0).setMaxWidth(50);
-            jTable1.getColumnModel().getColumn(1).setMinWidth(70);
-            jTable1.getColumnModel().getColumn(1).setMaxWidth(70);
+        tblStudent.setPreferredSize(new java.awt.Dimension(345, 80));
+        tblStudent.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tblStudent);
+        if (tblStudent.getColumnModel().getColumnCount() > 0) {
+            tblStudent.getColumnModel().getColumn(0).setMinWidth(50);
+            tblStudent.getColumnModel().getColumn(0).setMaxWidth(50);
+            tblStudent.getColumnModel().getColumn(1).setMinWidth(70);
+            tblStudent.getColumnModel().getColumn(1).setMaxWidth(70);
         }
 
         pnlAddStudent.add(jScrollPane1);
@@ -397,7 +393,7 @@ public class CourseAddForm extends javax.swing.JFrame {
 
         jScrollPane4.setPreferredSize(new java.awt.Dimension(455, 280));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblStudentSelected.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -416,20 +412,20 @@ public class CourseAddForm extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable2.getTableHeader().setReorderingAllowed(false);
-        jScrollPane4.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setMinWidth(50);
-            jTable2.getColumnModel().getColumn(0).setMaxWidth(50);
-            jTable2.getColumnModel().getColumn(1).setMinWidth(70);
-            jTable2.getColumnModel().getColumn(1).setMaxWidth(70);
+        tblStudentSelected.getTableHeader().setReorderingAllowed(false);
+        jScrollPane4.setViewportView(tblStudentSelected);
+        if (tblStudentSelected.getColumnModel().getColumnCount() > 0) {
+            tblStudentSelected.getColumnModel().getColumn(0).setMinWidth(50);
+            tblStudentSelected.getColumnModel().getColumn(0).setMaxWidth(50);
+            tblStudentSelected.getColumnModel().getColumn(1).setMinWidth(70);
+            tblStudentSelected.getColumnModel().getColumn(1).setMaxWidth(70);
         }
 
         pnlAddStudent.add(jScrollPane4);
 
+        jLabel9.setText("Thêm giảng viên:");
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel9.setText("Thêm giảng viên:");
         jLabel9.setOpaque(true);
 
         pnlAddTeacher.setBackground(new java.awt.Color(255, 255, 255));
@@ -440,7 +436,7 @@ public class CourseAddForm extends javax.swing.JFrame {
         jScrollPane5.setPreferredSize(new java.awt.Dimension(455, 280));
         jScrollPane5.setRequestFocusEnabled(false);
 
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+        tblInstructor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -451,13 +447,13 @@ public class CourseAddForm extends javax.swing.JFrame {
                 "No", "ID", "First Name", "Last Name", "Hire Date"
             }
         ));
-        jTable5.getTableHeader().setReorderingAllowed(false);
-        jScrollPane5.setViewportView(jTable5);
-        if (jTable5.getColumnModel().getColumnCount() > 0) {
-            jTable5.getColumnModel().getColumn(0).setMinWidth(50);
-            jTable5.getColumnModel().getColumn(0).setMaxWidth(50);
-            jTable5.getColumnModel().getColumn(1).setMinWidth(70);
-            jTable5.getColumnModel().getColumn(1).setMaxWidth(70);
+        tblInstructor.getTableHeader().setReorderingAllowed(false);
+        jScrollPane5.setViewportView(tblInstructor);
+        if (tblInstructor.getColumnModel().getColumnCount() > 0) {
+            tblInstructor.getColumnModel().getColumn(0).setMinWidth(50);
+            tblInstructor.getColumnModel().getColumn(0).setMaxWidth(50);
+            tblInstructor.getColumnModel().getColumn(1).setMinWidth(70);
+            tblInstructor.getColumnModel().getColumn(1).setMaxWidth(70);
         }
 
         pnlAddTeacher.add(jScrollPane5);
@@ -497,7 +493,7 @@ public class CourseAddForm extends javax.swing.JFrame {
 
         jScrollPane3.setPreferredSize(new java.awt.Dimension(455, 280));
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tblInstructorSelected.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -508,12 +504,12 @@ public class CourseAddForm extends javax.swing.JFrame {
                 "No", "ID", "First Name", "Last Name", "Hire Date"
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
-        if (jTable3.getColumnModel().getColumnCount() > 0) {
-            jTable3.getColumnModel().getColumn(0).setMinWidth(50);
-            jTable3.getColumnModel().getColumn(0).setMaxWidth(50);
-            jTable3.getColumnModel().getColumn(1).setMinWidth(70);
-            jTable3.getColumnModel().getColumn(1).setMaxWidth(70);
+        jScrollPane3.setViewportView(tblInstructorSelected);
+        if (tblInstructorSelected.getColumnModel().getColumnCount() > 0) {
+            tblInstructorSelected.getColumnModel().getColumn(0).setMinWidth(50);
+            tblInstructorSelected.getColumnModel().getColumn(0).setMaxWidth(50);
+            tblInstructorSelected.getColumnModel().getColumn(1).setMinWidth(70);
+            tblInstructorSelected.getColumnModel().getColumn(1).setMaxWidth(70);
         }
 
         pnlAddTeacher.add(jScrollPane3);
@@ -599,19 +595,19 @@ public class CourseAddForm extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void typeCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_typeCourseActionPerformed
-        if (typeCourse.getSelectedItem() == "Online") {
+    private void txtTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTypeActionPerformed
+        if (txtType.getSelectedItem() == "Online") {
             onlineInformationCourse.setVisible(true);
             onsiteInformationCourse.setVisible(false);
         } else {
             onlineInformationCourse.setVisible(false);
             onsiteInformationCourse.setVisible(true);
         }
-    }//GEN-LAST:event_typeCourseActionPerformed
+    }//GEN-LAST:event_txtTypeActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void txtLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLocationActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_txtLocationActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
          this.dispose();
@@ -657,19 +653,13 @@ public class CourseAddForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbDepartment;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -700,19 +690,25 @@ public class CourseAddForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JPanel onlineInformationCourse;
     private javax.swing.JPanel onsiteInformationCourse;
     private javax.swing.JPanel pnlAddStudent;
     private javax.swing.JPanel pnlAddTeacher;
-    private com.github.lgooddatepicker.components.TimePicker timePicker1;
-    private javax.swing.JComboBox<String> typeCourse;
+    private javax.swing.JTable tblInstructor;
+    private javax.swing.JTable tblInstructorSelected;
+    private javax.swing.JTable tblStudent;
+    private javax.swing.JTable tblStudentSelected;
+    private com.github.lgooddatepicker.components.TimePicker tpTime;
+    private javax.swing.JTextField txtCredits;
+    private javax.swing.JCheckBox txtFriday;
+    private javax.swing.JTextField txtLocation;
+    private javax.swing.JCheckBox txtMonday;
+    private javax.swing.JCheckBox txtSaturday;
+    private javax.swing.JCheckBox txtThursday;
+    private javax.swing.JTextField txtTitle;
+    private javax.swing.JCheckBox txtTuesday;
+    private javax.swing.JComboBox<String> txtType;
+    private javax.swing.JTextField txtUrl;
+    private javax.swing.JCheckBox txtWednesday;
     // End of variables declaration//GEN-END:variables
 }
