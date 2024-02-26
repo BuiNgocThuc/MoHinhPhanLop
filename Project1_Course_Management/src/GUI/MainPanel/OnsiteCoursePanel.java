@@ -41,7 +41,7 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
     public OnsiteCoursePanel() {
         initComponents();
         createCbDepartment();
-        createOnsiteCourseTable();
+//        createOnsiteCourseTable();
         
 
     }

@@ -24,6 +24,10 @@ public class CourseBLL {
         return courseDAL.selectAll();
     }
     
+    public int selectLastID() {
+        return courseDAL.selectLastID();
+    }
+    
     public boolean insertCourse(CourseDTO course) {
         return courseDAL.insertCourse(course);
     }

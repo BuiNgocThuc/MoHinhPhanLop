@@ -31,8 +31,8 @@ public class Home extends javax.swing.JFrame {
     private final Color lightBlue = new Color(0, 158, 248);
     private final Color darkBlue = new Color(0, 158, 248);
     private final Color lightGray = new Color(242,242,242);
-    private final OnsiteCoursePanel onsiteCoursePanel = new OnsiteCoursePanel();
-    private final OnlineCoursePanel onlineCoursePanel = new OnlineCoursePanel();
+//    private final OnsiteCoursePanel onsiteCoursePanel = new OnsiteCoursePanel();
+//    private final OnlineCoursePanel onlineCoursePanel = new OnlineCoursePanel();
     private final CoursePanel coursePanel = new CoursePanel();
     private boolean dropdownToggle = false;
     private JButton currentBtn = null;
@@ -222,10 +222,10 @@ public class Home extends javax.swing.JFrame {
     private void onsiteCourseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onsiteCourseBtnActionPerformed
         // TODO add your handling code here:
         cardPanel.removeAll();
-        cardPanel.add(onsiteCoursePanel);
+//        cardPanel.add(onsiteCoursePanel);
         cardPanel.repaint();
         cardPanel.revalidate();
-        onsiteCoursePanel.getEditOnsiteCoursePanel().setVisible(false);
+//        onsiteCoursePanel.getEditOnsiteCoursePanel().setVisible(false);
         setBackgroundDefaultAllButton();
         onsiteCourseBtn.setBackground(lightBlue);
     }//GEN-LAST:event_onsiteCourseBtnActionPerformed
@@ -233,8 +233,8 @@ public class Home extends javax.swing.JFrame {
     private void onlineCourseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onlineCourseBtnActionPerformed
         // TODO add your handling code here:
         cardPanel.removeAll();
-        cardPanel.add(onlineCoursePanel);
-        onlineCoursePanel.getEditOnsiteCoursePanel().setVisible(false);
+//        cardPanel.add(onlineCoursePanel);
+//        onlineCoursePanel.getEditOnsiteCoursePanel().setVisible(false);
         cardPanel.repaint();
         cardPanel.revalidate();
         setBackgroundDefaultAllButton();

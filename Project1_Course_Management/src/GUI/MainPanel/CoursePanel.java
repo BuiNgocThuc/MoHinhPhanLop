@@ -23,6 +23,7 @@ import java.sql.Time;
 import java.time.LocalTime;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
+import util.SharedFunction;
 
 /**
  *
@@ -33,26 +34,26 @@ public class CoursePanel extends javax.swing.JPanel {
     /**
      * Creates new form CoursePanel
      */
-    private final CourseAddForm courseAddForm = new CourseAddForm();
+    private final CourseAddForm courseAddForm;
     private final CourseBLL courseBLL;
     private final OnlineCourseBLL onlineCourseBLL;
     private final OnsiteCourseBLL onsiteCourseBLL;
     private final DepartmentBLL departmentBLL;
     private List<CourseDTO> listCourse;
     private List<DepartmentDTO> listDepartment;
-    private static DefaultTableModel modelCourse;
 
     public CoursePanel() {
         courseBLL = new CourseBLL();
         onlineCourseBLL = new OnlineCourseBLL();
         onsiteCourseBLL = new OnsiteCourseBLL();
         departmentBLL = new DepartmentBLL();
+        courseAddForm = new CourseAddForm(this);
         initComponents();
         loadDepartmentName();
         loadData();
     }
 
-    private void loadData() {
+    public void loadData() {
         listCourse = courseBLL.selectAllCourse();
 
          DefaultTableModel model = (DefaultTableModel) tblCourse.getModel();
@@ -737,15 +738,7 @@ public class CoursePanel extends javax.swing.JPanel {
         txtFriday.setSelected(false);
         txtSaturday.setSelected(false);
     }
-
-    private void displayErrorMessage(String message) {
-        JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
-    }
-
-    private void displayMessage(String message) {
-        JOptionPane.showMessageDialog(null, message, "Information", JOptionPane.INFORMATION_MESSAGE);
-    }
-
+    
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         detailCoursePanel.setVisible(false);
     }//GEN-LAST:event_btnCancelActionPerformed
@@ -759,7 +752,7 @@ public class CoursePanel extends javax.swing.JPanel {
         String courseIDstr = txtCourseID.getText();
         if (courseIDstr.isBlank())
         {
-            displayErrorMessage("Chưa chọn khóa học cần sửa");
+            SharedFunction.displayErrorMessage("Chưa chọn khóa học cần sửa");
             return;
         }
         boolean success = false;
@@ -819,7 +812,7 @@ public class CoursePanel extends javax.swing.JPanel {
         {
             loadData();
             clearText();
-            displayMessage("Update Course Successfully!");
+            SharedFunction.displayErrorMessage("Update Course Successfully!");
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 

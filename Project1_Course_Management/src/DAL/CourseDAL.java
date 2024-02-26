@@ -114,6 +114,15 @@ public class CourseDAL {
 
         return listOnsCourses;
     }
+    
+    public int selectLastID() {
+        int MaxID = Integer.MIN_VALUE;
+        for (CourseDTO course : listCourses)
+        {
+            MaxID = course.getCourseID() > MaxID ? course.getCourseID() : MaxID;
+        }
+        return MaxID;
+    }
 
     public boolean insertCourse(CourseDTO course) {
         int result = -1;
@@ -123,18 +132,18 @@ public class CourseDAL {
         int Credits = course.getCredits();
         int DepartmentID = course.getDepartmentID();
 
-        String query = "INSERT INTO course(CourseID, Title, Credits, DepartmentID) VALUES (?,?,?,?)";
+        String query = "INSERT INTO course(Title, Credits, DepartmentID) VALUES (?,?,?)";
         try
         {
             preStm = conn.prepareStatement(query);
-            preStm.setInt(1, CourseID);
-            preStm.setString(2, Title);
-            preStm.setInt(3, Credits);
-            preStm.setInt(4, DepartmentID);
+            preStm.setString(1, Title);
+            preStm.setInt(2, Credits);
+            preStm.setInt(3, DepartmentID);
 
             result = preStm.executeUpdate();
             if (result != 0)
             {
+                listCourses = selectAll();
                 return true;
             }
         } catch (SQLException e)
@@ -164,6 +173,7 @@ public class CourseDAL {
             result = preStm.executeUpdate();
             if (result != 0)
             {
+                listCourses = selectAll();
                 return true;
             }
         } catch (SQLException e)
@@ -185,6 +195,7 @@ public class CourseDAL {
             result = preStm.executeUpdate();
             if (result != 0)
             {
+                listCourses = selectAll();
                 return true;
             }
         } catch (SQLException e)
