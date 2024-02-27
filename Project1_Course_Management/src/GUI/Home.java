@@ -6,6 +6,7 @@ package GUi;
 
 
 import GUI.MainPanel.CourseInstrutorPanel;
+import GUI.MainPanel.CoursePanel;
 
 import GUI.MainPanel.OnlineCoursePanel;
 import java.awt.Color;
@@ -33,11 +34,11 @@ public class Home extends javax.swing.JFrame {
     private final Color lightBlue = new Color(0, 158, 248);
     private final Color darkBlue = new Color(0, 158, 248);
     private final Color lightGray = new Color(242,242,242);
-
+    
 //    private final OnsiteCoursePanel onsiteCoursePanel = new OnsiteCoursePanel();
 //    private final OnlineCoursePanel onlineCoursePanel = new OnlineCoursePanel();
     private final CourseInstrutorPanel courseInstrutorPanel = new CourseInstrutorPanel();;
-
+    private final CoursePanel coursePanel = new CoursePanel();
     private boolean dropdownToggle = false;
     private JButton currentBtn = null;
     private final ArrayList<JButton> allBtnLeftBar = new ArrayList<>();
@@ -67,6 +68,7 @@ public class Home extends javax.swing.JFrame {
         scheduleBtn = new javax.swing.JButton();
         resultBtn = new javax.swing.JButton();
         cardPanel = new javax.swing.JPanel();
+        schedulePnl = new javax.swing.JPanel();
         resultPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -165,22 +167,20 @@ public class Home extends javax.swing.JFrame {
 
         cardPanel.setLayout(new java.awt.CardLayout());
 
+        schedulePnl.setBackground(new java.awt.Color(51, 204, 255));
 
-        schedulePanel.setBackground(new java.awt.Color(51, 204, 255));
-
-        javax.swing.GroupLayout schedulePanelLayout = new javax.swing.GroupLayout(schedulePanel);
-        schedulePanel.setLayout(schedulePanelLayout);
-        schedulePanelLayout.setHorizontalGroup(
-            schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout schedulePnlLayout = new javax.swing.GroupLayout(schedulePnl);
+        schedulePnl.setLayout(schedulePnlLayout);
+        schedulePnlLayout.setHorizontalGroup(
+            schedulePnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1000, Short.MAX_VALUE)
         );
-        schedulePanelLayout.setVerticalGroup(
-            schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        schedulePnlLayout.setVerticalGroup(
+            schedulePnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 700, Short.MAX_VALUE)
         );
 
-        cardPanel.add(schedulePanel, "card5");
-
+        cardPanel.add(schedulePnl, "card5");
 
         resultPanel.setBackground(new java.awt.Color(0, 255, 153));
 
@@ -340,6 +340,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton resultBtn;
     private javax.swing.JPanel resultPanel;
     private javax.swing.JButton scheduleBtn;
+    private javax.swing.JPanel schedulePnl;
     private javax.swing.JPanel sidebarMenu;
     // End of variables declaration//GEN-END:variables
 }
