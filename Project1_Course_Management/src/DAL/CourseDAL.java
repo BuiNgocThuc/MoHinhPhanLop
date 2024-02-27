@@ -183,17 +183,73 @@ public class CourseDAL {
         return false;
     }
 
-    public boolean deleteCourse(int CourseID) {
-        int result = -1;
+    public boolean isCourseInOnlineCourse(int courseID) {
+        String queryCheckOnline = "SELECT COUNT(*) FROM onlinecourse WHERE CourseID = ?";
+        try {
+            // Check if CourseID exists in onlinecourse
+            preStm = conn.prepareStatement(queryCheckOnline);
+            preStm.setInt(1, courseID);
+            ResultSet rsOnline = preStm.executeQuery();
+            rsOnline.next();
+            int onlineCount = rsOnline.getInt(1);
 
+            // If the CourseID exists in onlinecourse, return true
+            if (onlineCount > 0) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean deleteCourse(int courseID) {
+        boolean flag = isCourseInOnlineCourse(courseID);
+
+        if (flag) {
+            // If the course is in the onlinecourse table, delete it from there
+            deleteCourseFromOnlineCourse(courseID);
+        } else {
+            // If the course is not in the onlinecourse table, delete it from onsitecourse
+            deleteCourseFromOnsiteCourse(courseID);
+        }
+
+        // Delete the course from the course table
+        return deleteCourseFromCourseTable(courseID);
+    }
+
+    private void deleteCourseFromOnlineCourse(int courseID) {
+        String query = "DELETE FROM onlinecourse WHERE CourseID = ?";
+        try {
+            preStm = conn.prepareStatement(query);
+            preStm.setInt(1, courseID);
+            preStm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void deleteCourseFromOnsiteCourse(int courseID) {
+        String query = "DELETE FROM onsitecourse WHERE CourseID = ?";
+        try {
+            preStm = conn.prepareStatement(query);
+            preStm.setInt(1, courseID);
+            preStm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private boolean deleteCourseFromCourseTable(int courseID) {
+        int result = -1;
         String query = "DELETE FROM course WHERE CourseID = ?";
         try {
             preStm = conn.prepareStatement(query);
-            preStm.setInt(1, CourseID);
-
+            preStm.setInt(1, courseID);
             result = preStm.executeUpdate();
+
             if (result != 0) {
-                listCourses = selectAll();
+                listCourses = selectAll(); // Refresh list of courses
                 return true;
             }
         } catch (SQLException e) {
@@ -213,11 +269,7 @@ public class CourseDAL {
                 int numCourseInstructors = rs.getInt("NumCourseInstructors");
                 int numStudentsEnrolled = rs.getInt("NumStudentsEnrolled");
 
-                if (numCourseInstructors > 0 || numStudentsEnrolled > 0) {
-                    return false;
-                } else {
-                    return true;
-                }
+                return !(numCourseInstructors > 0 || numStudentsEnrolled > 0);
             }
         } catch (SQLException e) {
             e.printStackTrace();
