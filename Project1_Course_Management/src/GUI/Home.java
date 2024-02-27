@@ -4,7 +4,9 @@
  */
 package GUi;
 
-import GUI.MainPanel.CoursePanel;
+
+import GUI.MainPanel.CourseInstrutorPanel;
+
 import GUI.MainPanel.OnlineCoursePanel;
 import java.awt.Color;
 import java.awt.Component;
@@ -31,9 +33,11 @@ public class Home extends javax.swing.JFrame {
     private final Color lightBlue = new Color(0, 158, 248);
     private final Color darkBlue = new Color(0, 158, 248);
     private final Color lightGray = new Color(242,242,242);
+
 //    private final OnsiteCoursePanel onsiteCoursePanel = new OnsiteCoursePanel();
 //    private final OnlineCoursePanel onlineCoursePanel = new OnlineCoursePanel();
-    private final CoursePanel coursePanel = new CoursePanel();
+    private final CourseInstrutorPanel courseInstrutorPanel = new CourseInstrutorPanel();;
+
     private boolean dropdownToggle = false;
     private JButton currentBtn = null;
     private final ArrayList<JButton> allBtnLeftBar = new ArrayList<>();
@@ -63,7 +67,6 @@ public class Home extends javax.swing.JFrame {
         scheduleBtn = new javax.swing.JButton();
         resultBtn = new javax.swing.JButton();
         cardPanel = new javax.swing.JPanel();
-        schedulePanel = new javax.swing.JPanel();
         resultPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -162,6 +165,7 @@ public class Home extends javax.swing.JFrame {
 
         cardPanel.setLayout(new java.awt.CardLayout());
 
+
         schedulePanel.setBackground(new java.awt.Color(51, 204, 255));
 
         javax.swing.GroupLayout schedulePanelLayout = new javax.swing.GroupLayout(schedulePanel);
@@ -176,6 +180,7 @@ public class Home extends javax.swing.JFrame {
         );
 
         cardPanel.add(schedulePanel, "card5");
+
 
         resultPanel.setBackground(new java.awt.Color(0, 255, 153));
 
@@ -211,7 +216,13 @@ public class Home extends javax.swing.JFrame {
 
     private void scheduleBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scheduleBtnActionPerformed
 
-        switchPanel(schedulePanel,scheduleBtn);
+         cardPanel.removeAll();
+        cardPanel.add(courseInstrutorPanel);
+        cardPanel.repaint();
+        cardPanel.revalidate();
+        setBackgroundDefaultAllButton();
+        scheduleBtn.setBackground(lightBlue);
+//        switchPanel(schedulePanel,scheduleBtn);
 
     }//GEN-LAST:event_scheduleBtnActionPerformed
 
@@ -329,7 +340,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton resultBtn;
     private javax.swing.JPanel resultPanel;
     private javax.swing.JButton scheduleBtn;
-    private javax.swing.JPanel schedulePanel;
     private javax.swing.JPanel sidebarMenu;
     // End of variables declaration//GEN-END:variables
 }
