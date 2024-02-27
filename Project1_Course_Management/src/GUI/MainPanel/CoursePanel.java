@@ -700,6 +700,7 @@ public class CoursePanel extends javax.swing.JPanel {
                 if (flag) {
                     boolean deleteCourse = courseBLL.deleteCourse(Integer.parseInt(courseID));
                     if (deleteCourse) {
+                        loadData();
                         JOptionPane.showMessageDialog(this, "Xóa thành công");
                     } else {
                         JOptionPane.showMessageDialog(this, "Xóa thất bại");

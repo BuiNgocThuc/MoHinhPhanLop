@@ -213,10 +213,8 @@ public class CourseDAL {
                 int numCourseInstructors = rs.getInt("NumCourseInstructors");
                 int numStudentsEnrolled = rs.getInt("NumStudentsEnrolled");
 
-                if (numCourseInstructors > 0 && numStudentsEnrolled > 0) {
+                if (numCourseInstructors > 0 || numStudentsEnrolled > 0) {
                     return false;
-                } else if (numCourseInstructors > 0 && numStudentsEnrolled == 0) {
-                    return true;
                 } else {
                     return true;
                 }
