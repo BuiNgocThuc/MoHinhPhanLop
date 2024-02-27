@@ -4,10 +4,6 @@
  */
 package GUI.MainPanel;
 
-import com.formdev.flatlaf.FlatLightLaf;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-
 /**
  *
  * @author ASUS
@@ -19,6 +15,9 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
      */
     public CourseInstrutorPanel() {
         initComponents();
+        pnTable.add(new pnTableCourse());
+        pnTable.validate();
+        pnTable.repaint();
     }
 
     /**
@@ -38,23 +37,19 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
         cbPointOfView = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         pnTable = new javax.swing.JPanel();
-        spInstructor = new javax.swing.JScrollPane();
-        tblInstructor = new javax.swing.JTable();
-        spCourse = new javax.swing.JScrollPane();
-        tblCourse = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton2.setText("jButton2");
+        jButton2.setText("Tìm");
 
-        jTextField1.setText("jTextField1");
+        jTextField1.setToolTipText("ID hoặc tên");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2)
                 .addGap(20, 20, 20))
@@ -76,7 +71,7 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Thêm");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -117,46 +112,7 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tblInstructor.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "STT", "Title 2", "Tên giảng viên", "Title 4"
-            }
-        ));
-        spInstructor.setViewportView(tblInstructor);
-
-        tblCourse.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "STT", "Title 2", "Tên khóa học", "Title 4"
-            }
-        ));
-        spCourse.setViewportView(tblCourse);
-
-        javax.swing.GroupLayout pnTableLayout = new javax.swing.GroupLayout(pnTable);
-        pnTable.setLayout(pnTableLayout);
-        pnTableLayout.setHorizontalGroup(
-            pnTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(spInstructor)
-            .addGroup(pnTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(spCourse, javax.swing.GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE))
-        );
-        pnTableLayout.setVerticalGroup(
-            pnTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(spInstructor, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
-            .addGroup(pnTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(spCourse, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE))
-        );
+        pnTable.setLayout(new java.awt.CardLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -182,20 +138,23 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
 
     private void cbPointOfViewItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbPointOfViewItemStateChanged
         if (evt.getStateChange() == 1) {
-            switch (cbPointOfView.getSelectedItem().toString()) {
-                case "Giảng viên" -> {
-                    spInstructor.setVisible(true);
-                    spCourse.setVisible(false);
+            switch (cbPointOfView.getSelectedIndex()) {
+                case 0 -> {
+                    pnTable.removeAll();
+                    pnTable.add(new pnTableCourse());
+                    pnTable.validate();
+                    pnTable.repaint();
                 }
-                case "Khóa học" -> {
-                    spCourse.setVisible(true);
-                    spInstructor.setVisible(false);
+                case 1 -> {
+                    pnTable.removeAll();
+                    pnTable.add(new pnTableInstructor());
+                    pnTable.validate();
+                    pnTable.repaint();
                 }
                 default ->
                     throw new AssertionError();
             }
-            pnTable.validate();
-            pnTable.repaint();
+
         }
 
     }//GEN-LAST:event_cbPointOfViewItemStateChanged
@@ -209,9 +168,5 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel pnTable;
-    private javax.swing.JScrollPane spCourse;
-    private javax.swing.JScrollPane spInstructor;
-    private javax.swing.JTable tblCourse;
-    private javax.swing.JTable tblInstructor;
     // End of variables declaration//GEN-END:variables
 }
