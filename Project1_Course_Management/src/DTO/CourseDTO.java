@@ -4,12 +4,21 @@ public class CourseDTO {
     private int CourseID;
     private String Title;
     private int Credits, DepartmentID;
+    private String course_type;
 
     public CourseDTO(int courseID, int departmentID, int credits, String title) {
-        CourseID = courseID;
-        DepartmentID = departmentID;
-        Credits = credits;
-        Title = title;
+        this.CourseID = courseID;
+        this.DepartmentID = departmentID;
+        this.Credits = credits;
+        this.Title = title;
+    }
+
+    public CourseDTO(int CourseID, String Title, int Credits, int DepartmentID, String course_type) {
+        this.CourseID = CourseID;
+        this.Title = Title;
+        this.Credits = Credits;
+        this.DepartmentID = DepartmentID;
+        this.course_type = course_type;
     }
 
     public CourseDTO() {
@@ -47,6 +56,16 @@ public class CourseDTO {
     public void setTitle(String title) {
         Title = title;
     }
+
+    public String getCourse_type() {
+        return course_type;
+    }
+
+    public void setCourse_type(String course_type) {
+        this.course_type = course_type;
+    }
+    
+    
 
     @Override
     public String toString() {

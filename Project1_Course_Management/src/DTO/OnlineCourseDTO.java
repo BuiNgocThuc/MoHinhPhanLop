@@ -9,7 +9,11 @@ package DTO;
  * @author buing
  */
 public class OnlineCourseDTO extends CourseDTO {
+
     private String Url;
+
+    public OnlineCourseDTO() {
+    }
 
     public OnlineCourseDTO(String Url, int courseID, int departmentID, int credits, String title) {
         super(courseID, departmentID, credits, title);
@@ -26,6 +30,7 @@ public class OnlineCourseDTO extends CourseDTO {
 
     @Override
     public String toString() {
-        return "OnlineCourseDTO{" + "Url=" + Url + '}';
+        return "OnlineCourseDTO{" + "Url=" + Url + super.toString() + '}';
     }
+    
 }
