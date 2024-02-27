@@ -429,7 +429,7 @@ public class CourseDAL {
                     + "    course.*, 'Onsite' as course_type\n"
                     + "FROM course\n"
                     + "LEFT JOIN onsitecourse ON course.CourseID = onsitecourse.CourseID\n"
-                    + "where course.CourseID = " + s + "";
+                    + "where course.CourseID LIKE CONCAT('%'," + s + ",'%')";
             PreparedStatement pre = conn.prepareStatement(query);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
