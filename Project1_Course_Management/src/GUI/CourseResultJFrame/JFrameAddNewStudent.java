@@ -24,6 +24,7 @@ public class JFrameAddNewStudent extends javax.swing.JFrame {
     PersonBLL personBll = new PersonBLL();
     StudentGradeBLL studentGradeBll = new StudentGradeBLL();
     
+    
     public JFrameAddNewStudent(int courseID) {
         initComponents();
         this.courseID = courseID;
