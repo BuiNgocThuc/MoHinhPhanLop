@@ -8,12 +8,12 @@ package GUI.MainPanel;
  *
  * @author ASUS
  */
-public class pnTableCourse extends javax.swing.JPanel {
+public class PnTableCourse extends javax.swing.JPanel {
 
     /**
      * Creates new form pnTableCourse
      */
-    public pnTableCourse() {
+    public PnTableCourse() {
         initComponents();
     }
 

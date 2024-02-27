@@ -13,9 +13,14 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
     /**
      * Creates new form CourseInstrutorPanel
      */
+    private PnTableCourse pnTableCourse = null;
+    private PnTableInstructor pnTableInstructor = null;
+
     public CourseInstrutorPanel() {
         initComponents();
-        pnTable.add(new pnTableCourse());
+        pnTableCourse = new PnTableCourse();
+        pnTableInstructor = new PnTableInstructor();
+        pnTable.add(pnTableCourse);
         pnTable.validate();
         pnTable.repaint();
     }
@@ -55,7 +60,7 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField1)
+                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2))
         );
@@ -71,7 +76,7 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        cbPointOfView.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Theo giảng viên", "Theo khóa học" }));
+        cbPointOfView.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Theo khóa học", "Theo giảng viên" }));
         cbPointOfView.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbPointOfViewItemStateChanged(evt);
@@ -131,7 +136,7 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(550, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnDelete))
@@ -162,13 +167,13 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
             switch (cbPointOfView.getSelectedIndex()) {
                 case 0 -> {
                     pnTable.removeAll();
-                    pnTable.add(new pnTableCourse());
+                    pnTable.add(new PnTableCourse());
                     pnTable.validate();
                     pnTable.repaint();
                 }
                 case 1 -> {
                     pnTable.removeAll();
-                    pnTable.add(new pnTableInstructor());
+                    pnTable.add(new PnTableInstructor());
                     pnTable.validate();
                     pnTable.repaint();
                 }
