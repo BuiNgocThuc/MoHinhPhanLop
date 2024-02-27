@@ -52,7 +52,7 @@ public class CoursePanel extends javax.swing.JPanel {
     }
 
     public void loadData() {
-        listCourse = courseBLL.selectAllCourse();
+        List<CourseDTO> listCourse = courseBLL.selectAllCourse();
 
         DefaultTableModel model = (DefaultTableModel) tblCourse.getModel();
         model.setRowCount(0);

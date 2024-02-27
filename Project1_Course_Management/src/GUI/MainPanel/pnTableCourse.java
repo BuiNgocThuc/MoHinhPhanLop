@@ -4,6 +4,12 @@
  */
 package GUI.MainPanel;
 
+import BLL.CourseInstructorBLL;
+import DTO.CourseDTO;
+import java.sql.SQLException;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ASUS
@@ -13,8 +19,11 @@ public class PnTableCourse extends javax.swing.JPanel {
     /**
      * Creates new form pnTableCourse
      */
-    public PnTableCourse() {
+    private final CourseInstructorBLL courseInstructorBLL = new CourseInstructorBLL();
+
+    public PnTableCourse() throws SQLException {
         initComponents();
+        loadData();
     }
 
     /**
@@ -71,4 +80,21 @@ public class PnTableCourse extends javax.swing.JPanel {
     private javax.swing.JScrollPane spCourse;
     private javax.swing.JTable tblCourse;
     // End of variables declaration//GEN-END:variables
+
+    private void loadData() throws SQLException {
+        List<CourseDTO> listCourse = courseInstructorBLL.getListCourseAssignInstructor();
+        DefaultTableModel model = (DefaultTableModel) tblCourse.getModel();
+        model.setRowCount(0);
+
+        int no = 1;
+        for (CourseDTO course : listCourse) {
+            int courseID = course.getCourseID();
+            String title = course.getTitle();
+            Object[] row
+                    = {
+                        no++, courseID, title, ""
+                    };
+            model.addRow(row);
+        }
+    }
 }

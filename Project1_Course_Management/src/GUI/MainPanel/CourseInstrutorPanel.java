@@ -4,6 +4,8 @@
  */
 package GUI.MainPanel;
 
+import java.sql.SQLException;
+
 /**
  *
  * @author ASUS
@@ -16,7 +18,7 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
     private PnTableCourse pnTableCourse = null;
     private PnTableInstructor pnTableInstructor = null;
 
-    public CourseInstrutorPanel() {
+    public CourseInstrutorPanel() throws SQLException {
         initComponents();
         pnTableCourse = new PnTableCourse();
         pnTableInstructor = new PnTableInstructor();
@@ -167,13 +169,13 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
             switch (cbPointOfView.getSelectedIndex()) {
                 case 0 -> {
                     pnTable.removeAll();
-                    pnTable.add(new PnTableCourse());
+                    pnTable.add(pnTableCourse);
                     pnTable.validate();
                     pnTable.repaint();
                 }
                 case 1 -> {
                     pnTable.removeAll();
-                    pnTable.add(new PnTableInstructor());
+                    pnTable.add(pnTableInstructor);
                     pnTable.validate();
                     pnTable.repaint();
                 }
