@@ -15,60 +15,70 @@ import util.ValidateUtil;
  * @author buing
  */
 public class CourseBLL {
+
     private CourseDAL courseDAL;
-    
+
     public CourseBLL() {
         courseDAL = new CourseDAL();
     }
-    
+
     public List<CourseDTO> selectAllCourse() {
         return courseDAL.selectAll();
     }
-    
+
     public int selectLastID() {
         return courseDAL.selectLastID();
     }
-    
+
     public boolean insertCourse(CourseDTO course) {
         return courseDAL.insertCourse(course);
     }
-    
+
     public boolean updateCourse(CourseDTO course) {
         return courseDAL.updateCourse(course);
     }
-    
+
     public boolean deleteCourse(int CourseID) {
         return courseDAL.deleteCourse(CourseID);
     }
-    
-    public ArrayList<CourseDTO> getAllist(){
+
+    public ArrayList<CourseDTO> getAllist() {
         return courseDAL.getAllList();
     }
-    
-    public ArrayList<CourseDTO> getAllist(String text){
+
+    public ArrayList<CourseDTO> getAllist(String text) {
         return courseDAL.getAllList(text);
     }
-    
-    public CourseDTO courseDetail(int id){
+
+    public CourseDTO courseDetail(int id) {
         return courseDAL.courseDetail(id);
     }
-    
-    public ArrayList<CourseDTO> findCoursesAll(String text){
-        if (ValidateUtil.isInteger(text))
+
+    public boolean checkCourseEmpty(int CourseID) {
+        return courseDAL.checkCourseEmpty(CourseID);
+    }
+
+    public ArrayList<CourseDTO> findCoursesAll(String text) {
+        if (ValidateUtil.isInteger(text)) {
             return courseDAL.findCoursesByIdAll(Integer.parseInt(text));
-        else 
+        } else {
             return courseDAL.findCoursesByNameAll(text);
+        }
     }
-    public ArrayList<CourseDTO> findCoursesOnsite(String text){
-        if (ValidateUtil.isInteger(text))
+
+    public ArrayList<CourseDTO> findCoursesOnsite(String text) {
+        if (ValidateUtil.isInteger(text)) {
             return courseDAL.findCoursesByIdOnsite(Integer.parseInt(text));
-        else 
+        } else {
             return courseDAL.findCoursesByNameOnsite(text);
+        }
     }
-    public ArrayList<CourseDTO> findCoursesOnline(String text){
-        if (ValidateUtil.isInteger(text))
+
+    public ArrayList<CourseDTO> findCoursesOnline(String text) {
+        if (ValidateUtil.isInteger(text)) {
             return courseDAL.findCoursesByIdOnline(Integer.parseInt(text));
-        else 
+        } else {
             return courseDAL.findCoursesByNameOnline(text);
+        }
     }
 }

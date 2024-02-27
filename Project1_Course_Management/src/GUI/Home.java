@@ -204,6 +204,7 @@ public class Home extends javax.swing.JFrame {
         cardPanel.add(coursePanel);
         cardPanel.repaint();
         cardPanel.revalidate();
+        coursePanel.getDetailCoursePanel().setVisible(false);
         setBackgroundDefaultAllButton();
         courseBtn.setBackground(lightBlue);
     }//GEN-LAST:event_courseBtnActionPerformed
