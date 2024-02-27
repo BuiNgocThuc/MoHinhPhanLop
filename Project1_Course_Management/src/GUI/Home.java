@@ -4,7 +4,9 @@
  */
 package GUi;
 
+
 import GUI.MainPanel.CourseInstrutorPanel;
+
 import GUI.MainPanel.OnlineCoursePanel;
 import java.awt.Color;
 import java.awt.Component;
@@ -31,9 +33,11 @@ public class Home extends javax.swing.JFrame {
     private final Color lightBlue = new Color(0, 158, 248);
     private final Color darkBlue = new Color(0, 158, 248);
     private final Color lightGray = new Color(242,242,242);
-    private final OnsiteCoursePanel onsiteCoursePanel = new OnsiteCoursePanel();
-    private final OnlineCoursePanel onlineCoursePanel = new OnlineCoursePanel();
-    private final CourseInstrutorPanel courseInstrutorPanel = new CourseInstrutorPanel();
+
+//    private final OnsiteCoursePanel onsiteCoursePanel = new OnsiteCoursePanel();
+//    private final OnlineCoursePanel onlineCoursePanel = new OnlineCoursePanel();
+    private final CourseInstrutorPanel courseInstrutorPanel = new CourseInstrutorPanel();;
+
     private boolean dropdownToggle = false;
     private JButton currentBtn = null;
     private final ArrayList<JButton> allBtnLeftBar = new ArrayList<>();
@@ -161,13 +165,30 @@ public class Home extends javax.swing.JFrame {
 
         cardPanel.setLayout(new java.awt.CardLayout());
 
+
+        schedulePanel.setBackground(new java.awt.Color(51, 204, 255));
+
+        javax.swing.GroupLayout schedulePanelLayout = new javax.swing.GroupLayout(schedulePanel);
+        schedulePanel.setLayout(schedulePanelLayout);
+        schedulePanelLayout.setHorizontalGroup(
+            schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1000, Short.MAX_VALUE)
+        );
+        schedulePanelLayout.setVerticalGroup(
+            schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 700, Short.MAX_VALUE)
+        );
+
+        cardPanel.add(schedulePanel, "card5");
+
+
         resultPanel.setBackground(new java.awt.Color(0, 255, 153));
 
         javax.swing.GroupLayout resultPanelLayout = new javax.swing.GroupLayout(resultPanel);
         resultPanel.setLayout(resultPanelLayout);
         resultPanelLayout.setHorizontalGroup(
             resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1080, Short.MAX_VALUE)
+            .addGap(0, 1000, Short.MAX_VALUE)
         );
         resultPanelLayout.setVerticalGroup(
             resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,6 +205,11 @@ public class Home extends javax.swing.JFrame {
 
     private void courseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_courseBtnActionPerformed
         toggleDropdown();
+        cardPanel.removeAll();
+        cardPanel.add(coursePanel);
+        cardPanel.repaint();
+        cardPanel.revalidate();
+        coursePanel.getDetailCoursePanel().setVisible(false);
         setBackgroundDefaultAllButton();
         courseBtn.setBackground(lightBlue);
     }//GEN-LAST:event_courseBtnActionPerformed
@@ -208,10 +234,10 @@ public class Home extends javax.swing.JFrame {
     private void onsiteCourseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onsiteCourseBtnActionPerformed
         // TODO add your handling code here:
         cardPanel.removeAll();
-        cardPanel.add(onsiteCoursePanel);
+//        cardPanel.add(onsiteCoursePanel);
         cardPanel.repaint();
         cardPanel.revalidate();
-        onsiteCoursePanel.getEditOnsiteCoursePanel().setVisible(false);
+//        onsiteCoursePanel.getEditOnsiteCoursePanel().setVisible(false);
         setBackgroundDefaultAllButton();
         onsiteCourseBtn.setBackground(lightBlue);
     }//GEN-LAST:event_onsiteCourseBtnActionPerformed
@@ -219,7 +245,8 @@ public class Home extends javax.swing.JFrame {
     private void onlineCourseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onlineCourseBtnActionPerformed
         // TODO add your handling code here:
         cardPanel.removeAll();
-        cardPanel.add(onlineCoursePanel);
+//        cardPanel.add(onlineCoursePanel);
+//        onlineCoursePanel.getEditOnsiteCoursePanel().setVisible(false);
         cardPanel.repaint();
         cardPanel.revalidate();
         setBackgroundDefaultAllButton();

@@ -15,6 +15,27 @@ public class ValidateUtil {
 
         return matchFound;
     }
+    
+    public static boolean isEmpty(String s) {
+        return s.trim().equals("");
+    }
+    
+    public static boolean isValidUrl(String url) {
+        String regex = "^(https?|ftp)://([A-Za-z0-9.-]+)(:[0-9]+)?(/[A-Za-z0-9_.-]+)*(\\?[A-Za-z0-9_.-]+=[A-Za-z0-9%_.-]+)?(#\\w+)?$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(url);
+        
+        return matcher.matches();
+    }
+    
+    public static boolean isInteger(String str) {
+        try {
+            Integer.valueOf(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 // Studycase of Try-Catch
 //
 //    public static void someMethodInBLL(String name) throws ValidationException, Throwable {

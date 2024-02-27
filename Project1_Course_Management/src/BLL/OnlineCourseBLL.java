@@ -39,6 +39,10 @@ public class OnlineCourseBLL {
         }
         return false;
     }
+    
+    public OnlineCourseDTO selectByID(int CourseID) {
+        return onlCourseDAL.selectByID(CourseID);
+    }
 
     public boolean updateOnlineCourse(OnlineCourseDTO onlCourse) {
         boolean success = courseBLL.updateCourse(onlCourse);
@@ -60,9 +64,5 @@ public class OnlineCourseBLL {
             System.out.println("Xoa khoa hoc online that bai");
         }
         return false;
-    }
-    
-    public List<OnlineCourseDTO> searchOnlineCourse(String sequenceChar) {
-        return onlCourseDAL.searchOnlineCourse(sequenceChar);
     }
 }

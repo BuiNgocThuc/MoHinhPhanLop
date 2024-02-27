@@ -96,6 +96,35 @@ public class CourseInstructorDAL {
         }
         return null;
     }
+    
+    public List<CourseInstructorDTO> selectByPersonID(int personID) throws SQLException {
+    List<CourseInstructorDTO> courseInstructors = new ArrayList<>();
+    String query = "SELECT * FROM CourseInstructor ci "
+                + "JOIN person p on ci.PersonID = p.PersonID JOIN course c on ci.CourseID = c.CourseID "
+                + "WHERE ci.PersonID = ?";
+    try (PreparedStatement statement = conn.prepareStatement(query)) {
+        statement.setInt(1, personID);
+        try (ResultSet rs = statement.executeQuery()) {
+            while (rs.next()) {
+                int courseID = rs.getInt("CourseID");
+                String lastName = rs.getString("LastName");
+                String firstName = rs.getString("FirstName");
+                Timestamp hireDate = rs.getTimestamp("HireDate");
+                Timestamp enrollmentDate = rs.getTimestamp("EnrollmentDate");
+                PersonDTO person = new PersonDTO(personID, firstName, lastName, hireDate, enrollmentDate);
+                int departmentID = rs.getInt("DepartmentID");
+                int credits = rs.getInt("Credits");
+                String title = rs.getString("Title");
+                CourseDTO course = new CourseDTO(courseID, departmentID, courseID, title);
+                CourseInstructorDTO courseInstructor = new CourseInstructorDTO(courseID, personID, course, person);
+                courseInstructors.add(courseInstructor);
+            }
+        }
+    } catch (SQLException e) {
+        throw e;
+    }
+    return courseInstructors;
+}
 
     public static void main(String[] args) throws SQLException {
         CourseInstructorDAL ciDAL = new CourseInstructorDAL();

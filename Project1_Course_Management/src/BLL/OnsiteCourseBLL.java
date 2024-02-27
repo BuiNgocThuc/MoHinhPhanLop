@@ -26,6 +26,10 @@ public class OnsiteCourseBLL {
     public List<OnsiteCourseDTO> selectAllOnsiteCourse() {
         return courseDAL.selectAllOnsiteCourse();
     }
+    
+    public OnsiteCourseDTO selectByID(int CourseID) {
+        return onsCourseDAL.selectByID(CourseID);
+    }
 
     public boolean insertOnsiteCourse(OnsiteCourseDTO onsCourse) {
         return onsCourseDAL.insertOnsiteCourse(onsCourse);
@@ -37,9 +41,5 @@ public class OnsiteCourseBLL {
 
     public boolean deleteOnsiteCourse(int CourseID) {
         return onsCourseDAL.deleteOnsiteCourse(CourseID);
-    }
-    
-    public List<OnsiteCourseDTO> searchOnlineCourse(String sequenceChar) {
-        return onsCourseDAL.searchOnsiteCourse(sequenceChar);
     }
 }
