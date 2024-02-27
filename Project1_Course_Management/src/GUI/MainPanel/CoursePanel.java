@@ -135,11 +135,11 @@ public class CoursePanel extends javax.swing.JPanel {
         });
         jPanel5.add(addCourseBtn);
 
+        editCourseBtn.setText("Sửa");
         editCourseBtn.setBackground(new java.awt.Color(64, 162, 227));
+        editCourseBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(187, 226, 236)));
         editCourseBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         editCourseBtn.setForeground(new java.awt.Color(255, 255, 255));
-        editCourseBtn.setText("Sửa");
-        editCourseBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(187, 226, 236)));
         editCourseBtn.setPreferredSize(new java.awt.Dimension(100, 40));
         editCourseBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -193,7 +193,6 @@ public class CoursePanel extends javax.swing.JPanel {
         sortCourseBtnGroupPnl.setLayout(flowLayout6);
 
         sortCourseBtnGroup.add(jRadioButton1);
-        jRadioButton1.setSelected(true);
         jRadioButton1.setText("Tất cả");
         jRadioButton1.setPreferredSize(new java.awt.Dimension(54, 30));
         sortCourseBtnGroupPnl.add(jRadioButton1);

@@ -79,9 +79,9 @@ public class OnlineCoursePanel extends javax.swing.JPanel {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel1.setText("QUẢN LÝ KHÓA HỌC ONLINE");
         jLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 5, 0, 0));
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 5, 0);

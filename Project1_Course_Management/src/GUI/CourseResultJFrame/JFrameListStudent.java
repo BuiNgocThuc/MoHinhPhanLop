@@ -63,12 +63,17 @@ public class JFrameListStudent extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableStudent = new javax.swing.JTable();
         jTitle = new javax.swing.JLabel();
-        jSearch = new javax.swing.JTextField();
-        jButtonClearSearch = new javax.swing.JButton();
         jButtonSave = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jButtonClearSearch = new javax.swing.JButton();
+        jSearch = new javax.swing.JTextField();
+        searchOnsiteCourseBtn2 = new javax.swing.JButton();
+        jSeparator5 = new javax.swing.JSeparator();
+        closeFrameBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -99,17 +104,21 @@ public class JFrameListStudent extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTableStudent);
 
         jTitle.setText("Title");
+        jTitle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jSearch.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSave.setText("Thêm");
+        jButtonSave.setBackground(new java.awt.Color(155, 207, 83));
+        jButtonSave.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButtonSave.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jSearchActionPerformed(evt);
+                jButtonSaveActionPerformed(evt);
             }
         });
-        jSearch.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jSearchKeyReleased(evt);
-            }
-        });
+
+        jLabel7.setText("THÊM SINH VIÊN VÀO KHÓA HỌC");
+        jLabel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 5, 10, 0));
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
 
         jButtonClearSearch.setText("X");
         jButtonClearSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -118,10 +127,27 @@ public class JFrameListStudent extends javax.swing.JFrame {
             }
         });
 
-        jButtonSave.setText("Add");
-        jButtonSave.addActionListener(new java.awt.event.ActionListener() {
+        jSearch.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jSearch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jSearch.setPreferredSize(new java.awt.Dimension(300, 40));
+
+        searchOnsiteCourseBtn2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8-search-24.png"))); // NOI18N
+        searchOnsiteCourseBtn2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        searchOnsiteCourseBtn2.setMargin(new java.awt.Insets(2, 20, 3, 0));
+        searchOnsiteCourseBtn2.setPreferredSize(new java.awt.Dimension(40, 40));
+        searchOnsiteCourseBtn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSaveActionPerformed(evt);
+                searchOnsiteCourseBtn2ActionPerformed(evt);
+            }
+        });
+
+        closeFrameBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        closeFrameBtn.setText("Đóng");
+        closeFrameBtn.setBorder(null);
+        closeFrameBtn.setPreferredSize(new java.awt.Dimension(75, 38));
+        closeFrameBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeFrameBtnActionPerformed(evt);
             }
         });
 
@@ -130,35 +156,54 @@ public class JFrameListStudent extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonClearSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchOnsiteCourseBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonClearSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 785, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(259, 259, 259)
-                        .addComponent(jButtonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(6, 6, 6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(11, 11, 11))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(closeFrameBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(jButtonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(295, 295, 295))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonClearSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(searchOnsiteCourseBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jButtonClearSearch, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jSearch, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(closeFrameBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41))
         );
 
         pack();
@@ -169,22 +214,6 @@ public class JFrameListStudent extends javax.swing.JFrame {
         int n = jTableStudent.getSelectedRow();
         studentID = Integer.parseInt(jTableStudent.getValueAt(n,1).toString());
     }//GEN-LAST:event_jTableStudentMouseClicked
-
-    private void jSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jSearchActionPerformed
-
-    private void jSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSearchKeyReleased
-        // TODO add your handling code here:
-//        if(jSearch.getText().isEmpty()){
-//            jButtonClearSearch.setVisible(false);
-//            jTableStudent.setRowSorter(null);
-//            LoadData();
-//        }else{
-//            Search(jSearch.getText().toString());
-//            jButtonClearSearch.setVisible(true);
-//        }
-    }//GEN-LAST:event_jSearchKeyReleased
 
     public void SearchTable(String text){
         DefaultTableModel faut = (DefaultTableModel) jTableStudent.getModel();
@@ -203,12 +232,6 @@ public class JFrameListStudent extends javax.swing.JFrame {
         }
     }
     
-    private void jButtonClearSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearSearchActionPerformed
-        // TODO add your handling code here:
-        jSearch.setText("");
-        LoadData();
-    }//GEN-LAST:event_jButtonClearSearchActionPerformed
-
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
         // TODO add your handling code here:
         if(studentGradeBll.getEnrollment(courseID, studentID) == 0) {
@@ -226,6 +249,20 @@ public class JFrameListStudent extends javax.swing.JFrame {
         }
         jTableStudent.clearSelection();
     }//GEN-LAST:event_jButtonSaveActionPerformed
+
+    private void jButtonClearSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearSearchActionPerformed
+        // TODO add your handling code here:
+        jSearch.setText("");
+        LoadData();
+    }//GEN-LAST:event_jButtonClearSearchActionPerformed
+
+    private void searchOnsiteCourseBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchOnsiteCourseBtn2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchOnsiteCourseBtn2ActionPerformed
+
+    private void closeFrameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeFrameBtnActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_closeFrameBtnActionPerformed
 
     public void LoadData(){
         String columns[]=new String[]{"STT","PersonID","FirstName","LastName"};
@@ -251,11 +288,16 @@ public class JFrameListStudent extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton closeFrameBtn;
     private javax.swing.JButton jButtonClearSearch;
     private javax.swing.JButton jButtonSave;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jSearch;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JTable jTableStudent;
     private javax.swing.JLabel jTitle;
+    private javax.swing.JButton searchOnsiteCourseBtn2;
     // End of variables declaration//GEN-END:variables
 }
