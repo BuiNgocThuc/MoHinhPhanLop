@@ -1,17 +1,16 @@
 package BLL;
 
 import DAL.CourseInstructorDAL;
+import DAL.CourseDAL;
 import DTO.CourseDTO;
 import DTO.CourseInstructorDTO;
-import java.util.List;
-import DTO.CourseInstructorDTO;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
 public class CourseInstructorBLL {
 
     private CourseInstructorDAL courseInstructorDAL = new CourseInstructorDAL();
+    private CourseDAL courseDAL = new CourseDAL();
 
     public List<CourseInstructorDTO> getAllCourseInstructors() throws SQLException {
         return courseInstructorDAL.selectAll();
@@ -24,6 +23,19 @@ public class CourseInstructorBLL {
             // Thông báo lỗi đến lớp gọi
             throw new SQLException("Error retrieving course instructors by person ID", e);
         }
+    }
+
+    public static void main(String[] args) throws SQLException {
+        new CourseInstructorBLL().getListCourseAssignInstructor();
+    }
+
+    public List<CourseDTO> getListCourseAssignInstructor() throws SQLException {
+        List<CourseDTO> courses = courseDAL.getAllList();
+        System.out.println(courses.get(0).getInstructors());
+        courseDAL.populateInstructors(courses);
+        System.out.println(courses.get(0).getInstructors());
+        return courses;
+
     }
 
     public CourseInstructorDTO getCourseInstructorByID(int courseID, int personID) throws SQLException {
@@ -42,15 +54,15 @@ public class CourseInstructorBLL {
         courseInstructorDAL.deleteCourseInstructor(courseID);
     }
 
-    public static void main(String[] args) throws SQLException {
-        CourseInstructorBLL ciBLL = new CourseInstructorBLL();
-
-        for (CourseInstructorDTO ci : ciBLL.getAllCourseInstructors()) {
-            System.out.println(ci);
-        }
-
-        CourseInstructorDTO ci = ciBLL.getCourseInstructorByID(1045, 5);
-        System.out.println(ci);
-
-    }
+//    public static void main(String[] args) throws SQLException {
+//        CourseInstructorBLL ciBLL = new CourseInstructorBLL();
+//
+//        for (CourseInstructorDTO ci : ciBLL.getAllCourseInstructors()) {
+//            System.out.println(ci);
+//        }
+//
+//        CourseInstructorDTO ci = ciBLL.getCourseInstructorByID(1045, 5);
+//        System.out.println(ci);
+//
+//    }
 }

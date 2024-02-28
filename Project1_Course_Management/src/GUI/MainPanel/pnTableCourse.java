@@ -4,17 +4,27 @@
  */
 package GUI.MainPanel;
 
+import BLL.CourseInstructorBLL;
+import DTO.CourseDTO;
+import DTO.PersonDTO;
+import java.sql.SQLException;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ASUS
  */
-public class pnTableCourse extends javax.swing.JPanel {
+public class PnTableCourse extends javax.swing.JPanel {
 
     /**
      * Creates new form pnTableCourse
      */
-    public pnTableCourse() {
+    private final CourseInstructorBLL courseInstructorBLL = new CourseInstructorBLL();
+
+    public PnTableCourse() throws SQLException {
         initComponents();
+        loadData();
     }
 
     /**
@@ -71,4 +81,36 @@ public class pnTableCourse extends javax.swing.JPanel {
     private javax.swing.JScrollPane spCourse;
     private javax.swing.JTable tblCourse;
     // End of variables declaration//GEN-END:variables
+
+    private void loadData() throws SQLException {
+        List<CourseDTO> courses = courseInstructorBLL.getListCourseAssignInstructor();
+        DefaultTableModel model = (DefaultTableModel) tblCourse.getModel();
+        model.setRowCount(0);
+        int no = 1;
+        for (CourseDTO course : courses) {
+            int courseID = course.getCourseID();
+            String title = course.getTitle();
+            String instructorInfos = "";
+
+            List<PersonDTO> instructors = course.getInstructors();
+            if (instructors == null) {
+                continue;
+            }
+            for (int i = 0; i < instructors.size() - 1; i++) {
+                instructorInfos += String.format("%d-%s %s, ",
+                        instructors.get(i).getPersonID(),
+                        instructors.get(i).getLastName(),
+                        instructors.get(i).getFirstName());
+            }
+            instructorInfos += String.format("%d-%s %s",
+                    instructors.get(instructors.size() - 1).getPersonID(),
+                    instructors.get(instructors.size() - 1).getLastName(),
+                    instructors.get(instructors.size() - 1).getFirstName());
+            Object[] row
+                    = {
+                        no++, courseID, title, instructorInfos
+                    };
+            model.addRow(row);
+        }
+    }
 }
