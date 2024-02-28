@@ -33,7 +33,33 @@ public class StudentGradeDAL {
             e.printStackTrace();
         }
         return null;
+    }public  ArrayList<StudentGradeDTO> getAllListR(int CourseID,String text){
+        ArrayList<StudentGradeDTO> listStudentGrade=new ArrayList<StudentGradeDTO>();
+        try{
+            String query;
+            if(text.equals("Đậu")){
+                query="select * from studentgrade where CourseID=? and Grade>=5";
+            }else{
+                query="select * from studentgrade where CourseID=? and Grade<5";
+            }
+            PreparedStatement pre=con.getConnectDB().prepareStatement(query);
+            pre.setInt(1, CourseID);
+            ResultSet rs=pre.executeQuery();
+            while(rs.next()){
+                StudentGradeDTO studentGrade=new StudentGradeDTO();
+                studentGrade.setEnrollmentID(rs.getInt("EnrollmentID"));
+                studentGrade.setCourseID(rs.getInt("CourseID"));
+                studentGrade.setStudentID(rs.getInt("StudentID"));
+                studentGrade.setGrade(rs.getDouble("Grade"));
+                listStudentGrade.add(studentGrade);
+            }
+            return listStudentGrade;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
+    
     public boolean updateGrade(StudentGradeDTO student){
         try{
             StudentGradeDTO studentGradeDTO=new StudentGradeDTO();
@@ -106,6 +132,52 @@ public class StudentGradeDAL {
             e.printStackTrace();
         }
         return false;
+    }
+    public  ArrayList<StudentGradeDTO> serchAllStudentGrade(int CourseID,String text){
+        ArrayList<StudentGradeDTO> listStudentGrade=new ArrayList<StudentGradeDTO>();
+        try{
+            String query="select studentgrade.EnrollmentID,studentgrade.CourseID,studentgrade.StudentID,studentgrade.Grade from studentgrade join course on studentgrade.CourseID=course.CourseID join person on person.PersonID=studentgrade.StudentID where UPPER(CONCAT(person.PersonID,person.Firstname,person.Lastname,studentgrade.Grade)) like '%"+text+"%' and studentgrade.CourseID="+CourseID;
+            PreparedStatement pre=con.getConnectDB().prepareStatement(query);
+            ResultSet rs=pre.executeQuery();
+            while(rs.next()){
+                StudentGradeDTO studentGrade=new StudentGradeDTO();
+                studentGrade.setEnrollmentID(rs.getInt("studentgrade.EnrollmentID"));
+                studentGrade.setCourseID(rs.getInt("studentgrade.CourseID"));
+                studentGrade.setStudentID(rs.getInt("studentgrade.StudentID"));
+                studentGrade.setGrade(rs.getDouble("studentgrade.Grade"));
+                listStudentGrade.add(studentGrade);
+            }
+            return listStudentGrade;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public  ArrayList<StudentGradeDTO> Statistical(int CourseID,String text){
+        ArrayList<StudentGradeDTO> listStatistical=new ArrayList<>();
+        try{
+            String query;
+            if(text.equals("Đậu")){
+                query="select * from studentgrade where CourseID=? and Grade>=5";
+            }else{
+                query="select * from studentgrade where CourseID=? and Grade<5";
+            }
+            PreparedStatement pre=con.getConnectDB().prepareStatement(query);
+            pre.setInt(1, CourseID);
+            ResultSet rs=pre.executeQuery();
+            while(rs.next()){
+                StudentGradeDTO studentGrade=new StudentGradeDTO();
+                studentGrade.setEnrollmentID(rs.getInt("EnrollmentID"));
+                studentGrade.setCourseID(rs.getInt("CourseID"));
+                studentGrade.setStudentID(rs.getInt("StudentID"));
+                studentGrade.setGrade(rs.getDouble("Grade"));
+                listStatistical.add(studentGrade);
+            }
+            return listStatistical;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
     
 //    public int checkCourse(int CourseID,int StudentID){

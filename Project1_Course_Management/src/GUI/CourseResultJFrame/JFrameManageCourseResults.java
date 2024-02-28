@@ -706,10 +706,31 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonDetailActionPerformed
 
     public void SearchTable(String txt) {
-        DefaultTableModel faut = (DefaultTableModel) jTableStudentGrade.getModel();
-        TableRowSorter<DefaultTableModel> search = new TableRowSorter<>(faut);
-        jTableStudentGrade.setRowSorter(search);
-        search.setRowFilter(RowFilter.regexFilter("(?i)"+txt));
+        String columns[]=new String[]{"STT","PersonID","FirstName","LastName","Grade"};
+        DefaultTableModel model=new DefaultTableModel();
+        for(String i:columns){
+            model.addColumn(i);
+        }
+        int stt=0;
+        for(StudentGradeDTO i:studentGradeBLL.serchAllStudentGrade(CourseID, txt)){
+            Vector t=new Vector();
+            t.add(stt+=1);
+            t.add(i.getStudentID());
+            PersonDTO person=personBLL.detailsPerson(i.getStudentID());
+            t.add(person.getFirstName());
+            t.add(person.getLastName());
+            t.add(i.getGrade());
+            model.addRow(t);
+        }
+        
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        jTableStudentGrade.setDefaultRenderer(Object.class, centerRenderer);
+        
+        jTableStudentGrade.setModel(model);
+        
+        for (int i = 0; i < jTableStudentGrade.getColumnCount(); i++) {
+            jTableStudentGrade.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
     }
     public void SearchAll(){
         if(jSearch.getText().isEmpty()){

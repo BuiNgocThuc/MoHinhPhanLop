@@ -43,8 +43,7 @@ public class CourseResultsPanel extends javax.swing.JPanel {
 
         @Override
         public void changedUpdate(DocumentEvent e) {
-        // Xử lý khi có sự thay đổi trong thuộc tính của văn bản
-        // (chẳng hạn như một loại thuộc tính được thay đổi, nhưng không phải nội dung văn bản)
+       
         }
         });
     }
@@ -250,10 +249,23 @@ public class CourseResultsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonIconActionPerformed
 
     public void SearchTable(String text){
-        DefaultTableModel faut = (DefaultTableModel) jTableCourse.getModel();
-        TableRowSorter<DefaultTableModel> search = new TableRowSorter<>(faut);
-        jTableCourse.setRowSorter(search);
-        search.setRowFilter(RowFilter.regexFilter("(?i)"+text));
+         DefaultTableModel model=new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        String columns[]=new String[]{"CourseID","CourseName"};
+        for(String i:columns){
+            model.addColumn(i);
+        }
+        for(CourseDTO i:courseBLL.searchAllCourse(text)){
+            Vector t=new Vector<>();
+            t.add(i.getCourseID());
+            t.add(i.getTitle());
+            model.addRow(t);
+        }
+        jTableCourse.setModel(model);
     }
     public void SearchAll(){
         if(jSearch.getText().isEmpty()) {
@@ -286,7 +298,7 @@ public class CourseResultsPanel extends javax.swing.JPanel {
         }
         jTableCourse.setModel(model);
     }
-    
+    // choose course online or offline
     public void LoadData(String text){
         DefaultTableModel model=new DefaultTableModel(){
             @Override

@@ -47,4 +47,7 @@ public class CourseBLL {
     public CourseDTO courseDetail(int id){
         return courseDAL.courseDetail(id);
     }
+    public ArrayList<CourseDTO> searchAllCourse(String text){
+        return courseDAL.searchAllCourse(text);
+    }
 }

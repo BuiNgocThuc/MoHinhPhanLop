@@ -224,7 +224,7 @@ public class JFrameAddNewStudent extends javax.swing.JFrame {
             studentGradeBll.insertStudent(studentGrade);
             
             JOptionPane.showMessageDialog(null, "Add success");
-            this.dispose();
+            //this.dispose();
         }
     }//GEN-LAST:event_addCourseBtnActionPerformed
 

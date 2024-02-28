@@ -246,7 +246,7 @@ public class JFrameListStudent extends javax.swing.JFrame {
             studentGradeBll.insertStudent(studentGrade);
             
             JOptionPane.showMessageDialog(null, "Add success");
-            this.dispose();
+            //this.dispose();
         }
         else {
             JOptionPane.showMessageDialog(null, "This student is already in the classroom");
