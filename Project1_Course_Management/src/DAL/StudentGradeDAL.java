@@ -157,7 +157,7 @@ public class StudentGradeDAL {
         ArrayList<StudentGradeDTO> listStatistical=new ArrayList<>();
         try{
             String query;
-            if(text.equals("Đậu")){
+            if(text.equals("Passing")){
                 query="select * from studentgrade where CourseID=? and Grade>=5";
             }else{
                 query="select * from studentgrade where CourseID=? and Grade<5";

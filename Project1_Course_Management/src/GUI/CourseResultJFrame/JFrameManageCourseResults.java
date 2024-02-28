@@ -111,6 +111,7 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
         jButtonAddNew = new javax.swing.JButton();
         jButtonSave = new javax.swing.JButton();
         jButtonDetail = new javax.swing.JButton();
+        jButtonAddNew1 = new javax.swing.JButton();
 
         jLabel3.setText("QUẢN LÝ KHÓA HỌC");
         jLabel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 5, 10, 0));
@@ -445,6 +446,18 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
             }
         });
 
+        jButtonAddNew1.setBackground(new java.awt.Color(155, 207, 83));
+        jButtonAddNew1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonAddNew1.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonAddNew1.setText("Statistical");
+        jButtonAddNew1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(191, 234, 124)));
+        jButtonAddNew1.setPreferredSize(new java.awt.Dimension(100, 40));
+        jButtonAddNew1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddNew1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -463,15 +476,17 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButtonAddNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButtonAddNew, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButtonDetail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jButtonDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonAddNew1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -508,7 +523,8 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
                             .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonAddNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonDetail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jButtonDetail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonAddNew1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -705,6 +721,13 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonDetailActionPerformed
 
+    private void jButtonAddNew1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddNew1ActionPerformed
+        JFrameStatistical statistical=new JFrameStatistical(CourseID);
+            statistical.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            statistical.setLocationRelativeTo(null);
+            statistical.setVisible(true);
+    }//GEN-LAST:event_jButtonAddNew1ActionPerformed
+
     public void SearchTable(String txt) {
         String columns[]=new String[]{"STT","PersonID","FirstName","LastName","Grade"};
         DefaultTableModel model=new DefaultTableModel();
@@ -785,6 +808,7 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
     private javax.swing.JButton editCourseBtn2;
     private javax.swing.JButton jButtonAdd;
     private javax.swing.JButton jButtonAddNew;
+    private javax.swing.JButton jButtonAddNew1;
     private javax.swing.JButton jButtonClearSearch;
     private javax.swing.JButton jButtonDelete;
     private javax.swing.JButton jButtonDetail;
