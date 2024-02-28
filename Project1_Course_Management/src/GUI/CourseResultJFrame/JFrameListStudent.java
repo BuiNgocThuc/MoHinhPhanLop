@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -33,7 +34,7 @@ public class JFrameListStudent extends javax.swing.JFrame {
         initComponents();
         this.courseID = courseID;
         jButtonClearSearch.setVisible(false);
-        jTitle.setText(courseID+" - "+Title);
+        jTitle.setText("Tên khóa học: " + courseID + " - " + Title);
         LoadData();
         jSearch.getDocument().addDocumentListener(new DocumentListener() {
         @Override
@@ -103,22 +104,22 @@ public class JFrameListStudent extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableStudent);
 
+        jTitle.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jTitle.setText("Title");
-        jTitle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jButtonSave.setText("Thêm");
         jButtonSave.setBackground(new java.awt.Color(155, 207, 83));
-        jButtonSave.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButtonSave.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonSave.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonSave.setText("Thêm");
         jButtonSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSaveActionPerformed(evt);
             }
         });
 
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel7.setText("THÊM SINH VIÊN VÀO KHÓA HỌC");
         jLabel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 5, 10, 0));
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
 
         jButtonClearSearch.setText("X");
         jButtonClearSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -141,7 +142,9 @@ public class JFrameListStudent extends javax.swing.JFrame {
             }
         });
 
-        closeFrameBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        closeFrameBtn.setBackground(new java.awt.Color(128, 128, 128));
+        closeFrameBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        closeFrameBtn.setForeground(new java.awt.Color(255, 255, 255));
         closeFrameBtn.setText("Đóng");
         closeFrameBtn.setBorder(null);
         closeFrameBtn.setPreferredSize(new java.awt.Dimension(75, 38));
@@ -180,7 +183,7 @@ public class JFrameListStudent extends javax.swing.JFrame {
                 .addComponent(closeFrameBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(jButtonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(295, 295, 295))
+                .addGap(294, 294, 294))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,11 +202,11 @@ public class JFrameListStudent extends javax.swing.JFrame {
                 .addComponent(jTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(closeFrameBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41))
+                .addGap(56, 56, 56))
         );
 
         pack();
@@ -235,14 +238,15 @@ public class JFrameListStudent extends javax.swing.JFrame {
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
         // TODO add your handling code here:
         if(studentGradeBll.getEnrollment(courseID, studentID) == 0) {
-            JOptionPane.showMessageDialog(null, "Add success");
-            
             StudentGradeDTO studentGrade = new StudentGradeDTO();
             studentGrade.setCourseID(courseID);
             studentGrade.setStudentID(studentID);
             studentGrade.setGrade(0);
             
             studentGradeBll.insertStudent(studentGrade);
+            
+            JOptionPane.showMessageDialog(null, "Add success");
+            this.dispose();
         }
         else {
             JOptionPane.showMessageDialog(null, "This student is already in the classroom");
@@ -284,7 +288,15 @@ public class JFrameListStudent extends javax.swing.JFrame {
            t.add(i.getLastName());
            model.addRow(t);
         }
+        
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        jTableStudent.setDefaultRenderer(Object.class, centerRenderer);
+        
         jTableStudent.setModel(model);
+        
+        for (int i = 0; i < jTableStudent.getColumnCount(); i++) {
+            jTableStudent.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

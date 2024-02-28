@@ -26,8 +26,8 @@ public class ListCourseInstructor extends JPanel {
 
     private ConnectDB connectDB = new ConnectDB();
     Connection connection = connectDB.getConnectDB();
-    private CourseInstructorBLL courseInstructorBLL = new CourseInstructorBLL(connection);
-    private List<CourseInstructorDTO> listCourseInstructorDTO = courseInstructorBLL.getAllCourseInstructors();
+    private CourseInstructorBLL courseInstructorBLL = new CourseInstructorBLL();
+//    private List<CourseInstructorDTO> listCourseInstructorDTO = courseInstructorBLL.getAllCourseInstructors();
 
     public ListCourseInstructor() {
         initComponents();
@@ -162,15 +162,15 @@ public class ListCourseInstructor extends JPanel {
 
         table = new JTable(model);
         int stt = 1;
-        for (CourseInstructorDTO dto : listCourseInstructorDTO) {
-            String[] rowData = new String[5]; // 5 là số cột của bảng
-            rowData[0] = String.valueOf(stt++);
-            rowData[1] = String.valueOf(dto.getPersonID());
-            // rowData[2] = dto.getTeacherName();
-            // rowData[3] = dto.getClassName();
-            rowData[4] = String.valueOf(dto.getCourseID());
-            model.addRow(rowData);
-        }
+//        for (CourseInstructorDTO dto : listCourseInstructorDTO) {
+//            String[] rowData = new String[5]; // 5 là số cột của bảng
+//            rowData[0] = String.valueOf(stt++);
+//            rowData[1] = String.valueOf(dto.getPersonID());
+//            // rowData[2] = dto.getTeacherName();
+//            // rowData[3] = dto.getClassName();
+//            rowData[4] = String.valueOf(dto.getCourseID());
+//            model.addRow(rowData);
+//        }
 
         table.setModel(model);
         scrollPane = new JScrollPane(table);
