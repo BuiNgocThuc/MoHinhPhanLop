@@ -11,7 +11,7 @@ public class ConnectDB {
 
     public ConnectDB() {
         host = "localhost";
-        port = "3307";
+        port = "3306";
         dbName = "school";
         dbUser = "root";
         dbPassword = "";

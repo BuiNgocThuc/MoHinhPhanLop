@@ -7,12 +7,16 @@ package DAL;
 import DTO.CourseDTO;
 import DTO.OnlineCourseDTO;
 import DTO.OnsiteCourseDTO;
+import DTO.PersonDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CourseDAL {
 
@@ -501,7 +505,7 @@ public class CourseDAL {
     }
 
     public ArrayList<CourseDTO> findCoursesByIdOnline(int s) {
-        ArrayList<CourseDTO> listCourse = new ArrayList<CourseDTO>();
+        ArrayList<CourseDTO> listCourse = new ArrayList<>();
         try {
             String query = "SELECT \n"
                     + "    course.*, 'Online' as course_type\n"
@@ -524,5 +528,55 @@ public class CourseDAL {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void populateInstructors(List<CourseDTO> courses) throws SQLException {
+        // Collecting course IDs
+        List<Integer> courseIds = new ArrayList<>();
+        for (CourseDTO course : courses) {
+            courseIds.add(course.getCourseID());
+        }
+        // Mapping course IDs to instructors
+        Map<Integer, List<PersonDTO>> courseInstructorMap = new HashMap<>();
+        try {
+            List<PersonDTO> instructors = new ArrayList<>();
+            String query = "select * from Person p join courseinstructor ci "
+                    + "on p.PersonID = ci.PersonID "
+                    + "where p.HireDate is not null and "
+                    + "ci.CourseID IN (";
+            for (int i = 0; i < courseIds.size(); i++) {
+                query += (i == 0 ? "?" : ", ?");
+            }
+            query += ")";
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            // Set course IDs as parameters
+            for (int i = 0; i < courseIds.size(); i++) {
+                preparedStatement.setInt(i + 1, courseIds.get(i));
+            }
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int instructorId = rs.getInt("PersonID");
+                int courseId = rs.getInt("CourseID");
+                String firstName = rs.getString("Firstname");
+                String lastName = rs.getString("Lastname");
+                Timestamp hireDate = rs.getTimestamp("HireDate");
+                Timestamp enrollmentDate = rs.getTimestamp("EnrollmentDate");
+                // Create instructor DTO
+                PersonDTO instructor = new PersonDTO(instructorId, firstName, lastName, hireDate, enrollmentDate);
+                // Add instructor to the corresponding course ID in the map
+                if (!courseInstructorMap.containsKey(courseId)) {
+                    courseInstructorMap.put(courseId, new ArrayList<>());
+                }
+                courseInstructorMap.get(courseId).add(instructor);
+            }
+            for (CourseDTO course : courses) {
+                int courseId = course.getCourseID();
+                if (courseInstructorMap.containsKey(courseId)) {
+                    course.setInstructors(courseInstructorMap.get(courseId));
+                }
+            }
+        } catch (SQLException e) {
+            throw e;
+        }
     }
 }

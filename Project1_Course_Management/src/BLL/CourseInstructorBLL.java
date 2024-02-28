@@ -25,8 +25,16 @@ public class CourseInstructorBLL {
         }
     }
 
+    public static void main(String[] args) throws SQLException {
+        new CourseInstructorBLL().getListCourseAssignInstructor();
+    }
+
     public List<CourseDTO> getListCourseAssignInstructor() throws SQLException {
-        return courseDAL.getAllList();
+        List<CourseDTO> courses = courseDAL.getAllList();
+        System.out.println(courses.get(0).getInstructors());
+        courseDAL.populateInstructors(courses);
+        System.out.println(courses.get(0).getInstructors());
+        return courses;
 
     }
 
@@ -46,15 +54,15 @@ public class CourseInstructorBLL {
         courseInstructorDAL.deleteCourseInstructor(courseID);
     }
 
-    public static void main(String[] args) throws SQLException {
-        CourseInstructorBLL ciBLL = new CourseInstructorBLL();
-
-        for (CourseInstructorDTO ci : ciBLL.getAllCourseInstructors()) {
-            System.out.println(ci);
-        }
-
-        CourseInstructorDTO ci = ciBLL.getCourseInstructorByID(1045, 5);
-        System.out.println(ci);
-
-    }
+//    public static void main(String[] args) throws SQLException {
+//        CourseInstructorBLL ciBLL = new CourseInstructorBLL();
+//
+//        for (CourseInstructorDTO ci : ciBLL.getAllCourseInstructors()) {
+//            System.out.println(ci);
+//        }
+//
+//        CourseInstructorDTO ci = ciBLL.getCourseInstructorByID(1045, 5);
+//        System.out.println(ci);
+//
+//    }
 }

@@ -6,6 +6,7 @@ package GUI.MainPanel;
 
 import BLL.CourseInstructorBLL;
 import DTO.CourseDTO;
+import DTO.PersonDTO;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -82,17 +83,32 @@ public class PnTableCourse extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void loadData() throws SQLException {
-        List<CourseDTO> listCourse = courseInstructorBLL.getListCourseAssignInstructor();
+        List<CourseDTO> courses = courseInstructorBLL.getListCourseAssignInstructor();
         DefaultTableModel model = (DefaultTableModel) tblCourse.getModel();
         model.setRowCount(0);
-
         int no = 1;
-        for (CourseDTO course : listCourse) {
+        for (CourseDTO course : courses) {
             int courseID = course.getCourseID();
             String title = course.getTitle();
+            String instructorInfos = "";
+
+            List<PersonDTO> instructors = course.getInstructors();
+            if (instructors == null) {
+                continue;
+            }
+            for (int i = 0; i < instructors.size() - 1; i++) {
+                instructorInfos += String.format("%d-%s %s, ",
+                        instructors.get(i).getPersonID(),
+                        instructors.get(i).getLastName(),
+                        instructors.get(i).getFirstName());
+            }
+            instructorInfos += String.format("%d-%s %s",
+                    instructors.get(instructors.size() - 1).getPersonID(),
+                    instructors.get(instructors.size() - 1).getLastName(),
+                    instructors.get(instructors.size() - 1).getFirstName());
             Object[] row
                     = {
-                        no++, courseID, title, ""
+                        no++, courseID, title, instructorInfos
                     };
             model.addRow(row);
         }
