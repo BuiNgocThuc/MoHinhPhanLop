@@ -20,7 +20,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
-
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,7 +29,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-public class AssigmentDetailGV extends JPanel {
+public class AssigmentDetailGV extends JFrame {
 
     private int id_GV;
     private CourseBLL courseBLL = new CourseBLL();
@@ -41,8 +40,11 @@ public class AssigmentDetailGV extends JPanel {
     public AssigmentDetailGV(int id_GV) throws SQLException {
         listCourseInstructor = courseInstructorBLL.getListCourseInstructorsByPersonID(id_GV);
         initComponents(id_GV);
-        setPreferredSize(new Dimension(1200, 600));
+        setPreferredSize(new Dimension(1200, 800));
         setBackground(Color.WHITE);
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     private void initComponents(int id_GV) {
@@ -57,36 +59,12 @@ public class AssigmentDetailGV extends JPanel {
         panelBelow.setVisible(false);
     }
 
-    public static void main(String[] args) {
-        try {
-            UIManager.setLookAndFeel(new FlatLightLaf());
-        } catch (UnsupportedLookAndFeelException e) {
-            e.printStackTrace();
-        }
-
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("List Course Instructor");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-            AssigmentDetailGV panelAction = null;
-            try {
-                panelAction = new AssigmentDetailGV(4);
-            } catch (SQLException ex) {
-                Logger.getLogger(AssigmentDetailGV.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            frame.getContentPane().add(panelAction);
-
-            frame.pack();
-            frame.setVisible(true);
-        });
-    }
-
     private void initPanelTop(int id_GV) {
         panelTop = new JPanel();
         panelTop.setPreferredSize(new Dimension(1200, 80));
         panelTop.setLayout(new BorderLayout());
         panelTop.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createMatteBorder(1, 1, 1, 1, Color.GRAY), 
+                BorderFactory.createMatteBorder(1, 1, 1, 1, Color.GRAY),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)
         ));
 
@@ -95,7 +73,7 @@ public class AssigmentDetailGV extends JPanel {
 
         panelTop.add(titleLabel, BorderLayout.WEST);
 
-        JPanel panelInfor = new JPanel(new FlowLayout(FlowLayout.LEFT)); 
+        JPanel panelInfor = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel jLabelId = new JLabel("ID");
         JLabel jLabelFn = new JLabel("Firstname");
         jLabelFn.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 0));
@@ -103,7 +81,7 @@ public class AssigmentDetailGV extends JPanel {
         jLabelLn.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 0));
         JLabel jLabelHd = new JLabel("Hiredate");
         jLabelHd.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 0));
-        Font labelFont = new Font("Arial", Font.BOLD, 18); 
+        Font labelFont = new Font("Arial", Font.BOLD, 18);
         jLabelId.setFont(labelFont);
         jLabelFn.setFont(labelFont);
         jLabelLn.setFont(labelFont);
@@ -164,12 +142,18 @@ public class AssigmentDetailGV extends JPanel {
             Object[] rowData = new String[6]; // 5 là số cột của bảng
             rowData[0] = String.valueOf(stt++);
             rowData[1] = String.valueOf(dto.getCourseID());
-            rowData[2] = dto.courseDTO.getTitle();
-            rowData[3] = String.valueOf(dto.courseDTO.getCredits());
-            rowData[4] = "";
-            rowData[5] = "/assets/icons8-trash-35.png";
+            for (CourseDTO courseDTO : listCourseDTO) {
+                if (courseDTO.getCourseID() == dto.getCourseID()) {
+                    rowData[2] = courseDTO.getTitle();
+                    rowData[3] = String.valueOf(courseDTO.getCredits());
+                    rowData[4] = "";
+                    rowData[5] = "/assets/icons8-trash-35.png";
+                    break;
+                }
+            }
             modeltable.addRow(rowData);
         }
+
         table.setRowHeight(35);
         table.setModel(modeltable);
         JScrollPane scrollPane = new JScrollPane(table);
@@ -241,7 +225,6 @@ public class AssigmentDetailGV extends JPanel {
         }
         );
         btnAddMon = new JButton("thêm");
-
         btnAddMon.addActionListener(
                 new ActionListener() {
             @Override
@@ -254,15 +237,11 @@ public class AssigmentDetailGV extends JPanel {
         );
 
         panelRight.add(btnAddMon);
-
         panelRight.add(btnSave);
-
         panelCenter.add(panelRight, BorderLayout.NORTH);
-
         panel = new JPanel();
-
         panel.setPreferredSize(
-                new Dimension(1200, 150));
+                new Dimension(1200, 450));
         panelCenter.add(panel, BorderLayout.SOUTH);
     }
 
@@ -270,7 +249,7 @@ public class AssigmentDetailGV extends JPanel {
         panelBelow = new JPanel();
         panelBelow.setLayout(new BorderLayout());
         panelBelow.setBackground(Color.GRAY);
-        panelBelow.setPreferredSize(new Dimension(1200, 250));
+        panelBelow.setPreferredSize(new Dimension(1200, 450));
         panel_Table1 = new JPanel();
         panel_Table1.setLayout(new BorderLayout());
         panel_Table1.setBorder(BorderFactory.createCompoundBorder(
@@ -395,7 +374,6 @@ public class AssigmentDetailGV extends JPanel {
     public void removeRowFromTable(DefaultTableModel model, int rowIndex) {
         if (rowIndex >= 0 && rowIndex < model.getRowCount()) {
             model.removeRow(rowIndex);
-            // Cập nhật lại số thứ tự của các hàng sau khi xóa
             for (int i = rowIndex; i < model.getRowCount(); i++) {
                 model.setValueAt(String.valueOf(i + 1), i, 0);
             }

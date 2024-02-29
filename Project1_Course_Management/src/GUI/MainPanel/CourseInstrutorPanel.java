@@ -7,6 +7,7 @@ package GUI.MainPanel;
 import BLL.CourseInstructorBLL;
 import DTO.CourseDTO;
 import DTO.PersonDTO;
+import GUI.AssignmentManagement.AssignmentAdd;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -161,6 +162,12 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnTable, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+        btnAdd.setText("Thêm");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -250,6 +257,15 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbPointOfViewActionPerformed
 
+        AssignmentAdd assignmentAdd = null;
+        try {
+            assignmentAdd = new AssignmentAdd();
+        } catch (SQLException ex) {
+            Logger.getLogger(CourseInstrutorPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        assignmentAdd.setVisible(true);
+        assignmentAdd.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnAddActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
