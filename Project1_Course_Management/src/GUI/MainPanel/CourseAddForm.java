@@ -755,6 +755,7 @@ public class CourseAddForm extends javax.swing.JFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
+        // get data course
         String title = txtTitle.getText();
         int credits = Integer.parseInt(txtCredits.getText());
         int departmentIndex = cbDepartment.getSelectedIndex();
@@ -763,7 +764,7 @@ public class CourseAddForm extends javax.swing.JFrame {
         boolean success = false;
         CourseDTO course = new CourseDTO(0, departmentID, credits, title);
         success = courseBLL.insertCourse(course);
-        if (success)
+        if (success) // if insert course successfully
         {
             success = false;
             int courseID = courseBLL.selectLastID();
@@ -813,6 +814,8 @@ public class CourseAddForm extends javax.swing.JFrame {
                 default ->
                     throw new AssertionError();
             }
+             int studentTotal = tblStudentSelected.getRowCount();
+             int instructorTotal = tblInstructorSelected.getRowCount();
 
             if (success)
             {
