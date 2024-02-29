@@ -383,10 +383,16 @@ public class PnCourse extends javax.swing.JPanel {
         if (!idText.isEmpty()) {
             try {
                 int id = Integer.parseInt(idText);
+                ArrayList<PersonDTO> instructorList = personBLL.getListInstructor();
 
-                PersonDTO instructor = personBLL.detailsPerson(id);
+                PersonDTO instructor = new PersonDTO();
+                for (PersonDTO personDTO : instructorList) {
+                    if (id == personDTO.getPersonID()) {
+                        instructor = personDTO;
+                    }
+                }
 
-                if (instructor != null) {
+                if (instructor.getPersonID() != 0) {
                     DefaultTableModel tableModel = (DefaultTableModel) tableInstructorList.getModel();
                     tableModel.setRowCount(0);
 

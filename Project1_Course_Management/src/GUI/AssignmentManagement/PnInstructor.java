@@ -351,7 +351,7 @@ public class PnInstructor extends javax.swing.JPanel {
                     Object[] rowData = {courseDTO.getCourseID(), courseDTO.getTitle()};
                     tableModel.addRow(rowData);
                 } else {
-                    JOptionPane.showMessageDialog(null, "Không tìm thấy giảng viên với ID: " + id);
+                    JOptionPane.showMessageDialog(null, "Không tìm thấy khóa học với ID: " + id);
                 }
             } catch (NumberFormatException ex) {
                 DefaultTableModel tableModel = (DefaultTableModel) tableCourseList.getModel();
@@ -391,10 +391,16 @@ public class PnInstructor extends javax.swing.JPanel {
         if (!idText.isEmpty()) {
             try {
                 int id = Integer.parseInt(idText);
+                ArrayList<PersonDTO> instructorList = personBLL.getListInstructor();
 
-                PersonDTO instructor = personBLL.detailsPerson(id);
+                PersonDTO instructor = new PersonDTO();
+                for (PersonDTO personDTO : instructorList) {
+                    if (id == personDTO.getPersonID()) {
+                        instructor = personDTO;
+                    }
+                }
 
-                if (instructor != null) {
+                if (instructor.getPersonID() != 0) {
                     DefaultTableModel tableModel = (DefaultTableModel) tableInstructorList.getModel();
                     tableModel.setRowCount(0);
 
