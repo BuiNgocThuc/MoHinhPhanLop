@@ -85,7 +85,7 @@ public class PnTableCourse extends javax.swing.JPanel {
     private javax.swing.JTable tblCourse;
     // End of variables declaration//GEN-END:variables
 
-    private void loadData() throws SQLException {
+    public void loadData() throws SQLException {
         List<CourseDTO> courses = courseInstructorBLL.getListCourseAssignInstructor();
         DefaultTableModel model = (DefaultTableModel) tblCourse.getModel();
         model.setRowCount(0);

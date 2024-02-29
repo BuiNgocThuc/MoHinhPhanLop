@@ -160,11 +160,11 @@ public class CourseInstructorDAL {
         }
     }
 
-    public void deleteAllCourseInstructor(int courseID) throws SQLException {
-        String query = "DELETE FROM CourseInstructor WHERE CourseID = ?";
+    public void deleteAllCourseAssignInstructor(int instrutorID) throws SQLException {
+        String query = "DELETE FROM CourseInstructor WHERE PersonID = ?";
         try (PreparedStatement statement = conn.prepareStatement(query)) {
-            statement.setInt(1, courseID);
-            int rowsDeleted = statement.executeUpdate();
+            statement.setInt(1, instrutorID);
+            statement.executeUpdate();
         } catch (SQLException e) {
             throw e;
         }

@@ -1,10 +1,13 @@
-    /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package GUI.MainPanel;
 
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -186,7 +189,22 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_cbPointOfViewItemStateChanged
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
+        try {
+            int confirmed = JOptionPane.showConfirmDialog(null, "Xác nhận xóa",
+                    "Xác nhận", JOptionPane.YES_NO_OPTION);
+            if (confirmed == JOptionPane.YES_OPTION) {
+                switch (cbPointOfView.getSelectedIndex()) {
+                    case 1 -> {
+                        pnTableInstructor.deleteAllCourseAssignInstructor();
+                    }
+                }
+                pnTableCourse.loadData();
+                pnTableInstructor.loadData();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Lỗi hệ thống");
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

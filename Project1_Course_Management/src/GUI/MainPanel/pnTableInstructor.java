@@ -9,6 +9,7 @@ import DTO.CourseDTO;
 import DTO.PersonDTO;
 import java.sql.SQLException;
 import java.util.List;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -90,7 +91,7 @@ public class PnTableInstructor extends javax.swing.JPanel {
     private javax.swing.JScrollPane spInstructor;
     private javax.swing.JTable tblInstructor;
     // End of variables declaration//GEN-END:variables
-    private void loadData() throws SQLException {
+    public void loadData() throws SQLException {
         List<PersonDTO> instructors = courseInstructorBLL.getListInstructorAssignCourse();
         DefaultTableModel model = (DefaultTableModel) tblInstructor.getModel();
         model.setRowCount(0);
@@ -120,4 +121,18 @@ public class PnTableInstructor extends javax.swing.JPanel {
             model.addRow(row);
         }
     }
+
+    public void deleteAllCourseAssignInstructor() throws SQLException {
+        int seletedRow = tblInstructor.getSelectedRow();
+        if (seletedRow != -1) {
+            int instructorId = (int) tblInstructor.getValueAt(seletedRow, 1);
+            courseInstructorBLL.deleteAllCourseAssignInstructor(instructorId);
+        }
+    }
+
+    ;
+    public JTable getTblInstructor() {
+        return tblInstructor;
+    }
+
 }
