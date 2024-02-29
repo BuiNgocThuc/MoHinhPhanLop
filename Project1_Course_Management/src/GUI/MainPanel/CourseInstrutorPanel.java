@@ -8,6 +8,8 @@ import BLL.CourseInstructorBLL;
 import DTO.CourseDTO;
 import DTO.PersonDTO;
 import GUI.AssignmentManagement.CourseInstructorAddFrame;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -256,6 +258,20 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
         CourseInstructorAddFrame courseInstructorAddFrame = null;
         try {
             courseInstructorAddFrame = new CourseInstructorAddFrame();
+            courseInstructorAddFrame.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    try {
+                        List<CourseDTO> courses = courseInstructorBLL.getListCourseAssignInstructor();
+                        pnTableCourse.loadData(courses);
+                        List<PersonDTO> instructors = courseInstructorBLL.getListInstructorAssignCourse();
+                        pnTableInstructor.loadData(instructors);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(CourseInstrutorPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+
+            });
         } catch (SQLException ex) {
             Logger.getLogger(CourseInstrutorPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
