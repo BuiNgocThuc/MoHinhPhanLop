@@ -62,8 +62,10 @@ public class PnCourse extends javax.swing.JPanel {
         btInstructorSearch = new javax.swing.JButton();
         btSeeAllCourseList = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(900, 650));
 
+        pnSelectedInstructorList.setBackground(new java.awt.Color(255, 255, 255));
         pnSelectedInstructorList.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách giảng viên đã chọn", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
 
         tableSelectedInstructorList.setModel(new javax.swing.table.DefaultTableModel(
@@ -86,6 +88,8 @@ public class PnCourse extends javax.swing.JPanel {
         spSelectedCourseList.setViewportView(tableSelectedInstructorList);
 
         btDeleteInstructor.setText("Xóa");
+        btDeleteInstructor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
+        btDeleteInstructor.setPreferredSize(new java.awt.Dimension(72, 40));
         btDeleteInstructor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btDeleteInstructorActionPerformed(evt);
@@ -98,21 +102,22 @@ public class PnCourse extends javax.swing.JPanel {
             pnSelectedInstructorListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnSelectedInstructorListLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(spSelectedCourseList, javax.swing.GroupLayout.DEFAULT_SIZE, 785, Short.MAX_VALUE)
+                .addComponent(spSelectedCourseList, javax.swing.GroupLayout.PREFERRED_SIZE, 785, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btDeleteInstructor)
-                .addGap(9, 9, 9))
+                .addComponent(btDeleteInstructor, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnSelectedInstructorListLayout.setVerticalGroup(
             pnSelectedInstructorListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnSelectedInstructorListLayout.createSequentialGroup()
-                .addComponent(spSelectedCourseList, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
+                .addComponent(spSelectedCourseList, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
                 .addGap(7, 7, 7))
             .addGroup(pnSelectedInstructorListLayout.createSequentialGroup()
-                .addComponent(btDeleteInstructor)
+                .addComponent(btDeleteInstructor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        pnInstructorList.setBackground(new java.awt.Color(255, 255, 255));
         pnInstructorList.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách giảng viên", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
         pnInstructorList.setPreferredSize(new java.awt.Dimension(22, 310));
 
@@ -138,6 +143,8 @@ public class PnCourse extends javax.swing.JPanel {
         spCourseList.setViewportView(tableInstructorList);
 
         btSelectedInstructor.setText("Thêm");
+        btSelectedInstructor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
+        btSelectedInstructor.setPreferredSize(new java.awt.Dimension(72, 40));
         btSelectedInstructor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btSelectedInstructorActionPerformed(evt);
@@ -145,6 +152,8 @@ public class PnCourse extends javax.swing.JPanel {
         });
 
         btSeeAllInstructorList.setText("Xem tất cả");
+        btSeeAllInstructorList.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
+        btSeeAllInstructorList.setPreferredSize(new java.awt.Dimension(86, 40));
         btSeeAllInstructorList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btSeeAllInstructorListActionPerformed(evt);
@@ -158,25 +167,26 @@ public class PnCourse extends javax.swing.JPanel {
             .addGroup(pnInstructorListLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(spCourseList, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnInstructorListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btSelectedInstructor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btSeeAllInstructorList, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(7, 7, 7)
+                .addGroup(pnInstructorListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btSeeAllInstructorList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btSelectedInstructor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnInstructorListLayout.setVerticalGroup(
             pnInstructorListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnInstructorListLayout.createSequentialGroup()
                 .addGroup(pnInstructorListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(spCourseList, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+                    .addComponent(spCourseList, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
                     .addGroup(pnInstructorListLayout.createSequentialGroup()
-                        .addComponent(btSeeAllInstructorList)
+                        .addComponent(btSeeAllInstructorList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btSelectedInstructor)
+                        .addComponent(btSelectedInstructor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
+        pnCourseList.setBackground(new java.awt.Color(255, 255, 255));
         pnCourseList.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách khóa học", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
         pnCourseList.setPreferredSize(new java.awt.Dimension(22, 100));
 
@@ -213,18 +223,26 @@ public class PnCourse extends javax.swing.JPanel {
         pnCourseListLayout.setVerticalGroup(
             pnCourseListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnCourseListLayout.createSequentialGroup()
-                .addComponent(spInstructorList, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+                .addComponent(spInstructorList, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
+        tfCourseSearch.setPreferredSize(new java.awt.Dimension(64, 40));
+
         btCourseSearch.setText("Tìm");
+        btCourseSearch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
+        btCourseSearch.setPreferredSize(new java.awt.Dimension(72, 40));
         btCourseSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btCourseSearchActionPerformed(evt);
             }
         });
 
+        tfInstructorSearch.setPreferredSize(new java.awt.Dimension(64, 40));
+
         btInstructorSearch.setText("Tìm");
+        btInstructorSearch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
+        btInstructorSearch.setPreferredSize(new java.awt.Dimension(72, 40));
         btInstructorSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btInstructorSearchActionPerformed(evt);
@@ -232,6 +250,8 @@ public class PnCourse extends javax.swing.JPanel {
         });
 
         btSeeAllCourseList.setText("Xem tất cả");
+        btSeeAllCourseList.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
+        btSeeAllCourseList.setPreferredSize(new java.awt.Dimension(86, 40));
         btSeeAllCourseList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btSeeAllCourseListActionPerformed(evt);
@@ -243,26 +263,26 @@ public class PnCourse extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(tfCourseSearch)
+                                .addComponent(tfCourseSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btCourseSearch)
+                                .addComponent(btCourseSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btSeeAllCourseList))
-                            .addComponent(pnCourseList, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE))
+                                .addComponent(btSeeAllCourseList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(pnCourseList, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE))
                         .addGap(70, 70, 70)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(tfInstructorSearch)
+                                .addComponent(tfInstructorSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btInstructorSearch))
-                            .addComponent(pnInstructorList, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)))
+                                .addComponent(btInstructorSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(pnInstructorList, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)))
                     .addComponent(pnSelectedInstructorList, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,18 +291,18 @@ public class PnCourse extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(tfCourseSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btCourseSearch)
-                        .addComponent(btSeeAllCourseList))
+                        .addComponent(btCourseSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btSeeAllCourseList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(tfInstructorSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btInstructorSearch)))
+                        .addComponent(btInstructorSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnCourseList, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
-                    .addComponent(pnInstructorList, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE))
+                    .addComponent(pnCourseList, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+                    .addComponent(pnInstructorList, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnSelectedInstructorList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(0, 0, 0))
         );
     }// </editor-fold>//GEN-END:initComponents
 
