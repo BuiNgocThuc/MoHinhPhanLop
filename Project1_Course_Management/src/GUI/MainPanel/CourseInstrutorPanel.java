@@ -202,22 +202,31 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         try {
-            int confirmed = JOptionPane.showConfirmDialog(null, "Xác nhận xóa",
+            String deleteType = "";
+            switch (cbPointOfView.getSelectedIndex()) {
+                case 0 ->
+                    deleteType = "các giảng viên đã được phân công của khóa học";
+                case 1 ->
+                    deleteType = "các môn học đã được phân công của giáo viên";
+            }
+
+            int confirmed = JOptionPane.showConfirmDialog(null, "Xác nhận hủy phân công " + deleteType,
                     "Xác nhận", JOptionPane.YES_NO_OPTION);
+
             if (confirmed == JOptionPane.YES_OPTION) {
                 switch (cbPointOfView.getSelectedIndex()) {
-                    case 0 -> {
+                    case 0 ->
                         pnTableCourse.deleteAllInstructorAssignCourse();
-                    }
-                    case 1 -> {
+                    case 1 ->
                         pnTableInstructor.deleteAllCourseAssignInstructor();
-                    }
-
                 }
+
                 List<CourseDTO> courses = courseInstructorBLL.getListCourseAssignInstructor();
                 pnTableCourse.loadData(courses);
                 List<PersonDTO> instructors = courseInstructorBLL.getListInstructorAssignCourse();
                 pnTableInstructor.loadData(instructors);
+
+                JOptionPane.showMessageDialog(null, "Đã hủy phân công " + deleteType + " thành công.", "Thành công", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (SQLException e) {
             e.printStackTrace();
