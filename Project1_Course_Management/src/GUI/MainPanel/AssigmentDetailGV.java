@@ -44,6 +44,7 @@ public class AssigmentDetailGV extends JFrame {
         setBackground(Color.WHITE);
         pack();
         setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     private void initComponents(int id_GV) {

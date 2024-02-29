@@ -26,6 +26,8 @@ public class InstructorAdd extends javax.swing.JFrame {
      */
     public InstructorAdd() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
     }
 
     /**

@@ -7,6 +7,7 @@ package GUI.MainPanel;
 import BLL.CourseInstructorBLL;
 import DTO.CourseDTO;
 import DTO.PersonDTO;
+import GUI.AssignmentManagement.AssignmentAdd;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -144,6 +145,11 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
         });
 
         btnAdd.setText("Thêm");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -241,6 +247,17 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Lỗi hệ thống");
         }
     }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        AssignmentAdd assignmentAdd = null;
+        try {
+            assignmentAdd = new AssignmentAdd();
+        } catch (SQLException ex) {
+            Logger.getLogger(CourseInstrutorPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        assignmentAdd.setVisible(true);
+        assignmentAdd.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnAddActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;

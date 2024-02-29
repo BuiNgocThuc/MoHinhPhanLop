@@ -40,6 +40,9 @@ public class AssignmentAdd extends javax.swing.JFrame {
         pnContainerChange.add(pnInstructor);
         pnContainerChange.validate();
         pnContainerChange.repaint();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
     }
 
     /**
