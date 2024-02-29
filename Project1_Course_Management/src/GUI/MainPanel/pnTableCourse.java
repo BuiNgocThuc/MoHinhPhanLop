@@ -41,10 +41,7 @@ public class PnTableCourse extends javax.swing.JPanel {
 
         tblCourse.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "STT", "ID", "Tên khóa học", "Giảng viên dạy"
@@ -60,15 +57,21 @@ public class PnTableCourse extends javax.swing.JPanel {
         });
         spCourse.setViewportView(tblCourse);
         if (tblCourse.getColumnModel().getColumnCount() > 0) {
+            tblCourse.getColumnModel().getColumn(0).setMinWidth(50);
             tblCourse.getColumnModel().getColumn(0).setMaxWidth(50);
+            tblCourse.getColumnModel().getColumn(1).setMinWidth(50);
             tblCourse.getColumnModel().getColumn(1).setMaxWidth(50);
+            tblCourse.getColumnModel().getColumn(2).setMinWidth(200);
+            tblCourse.getColumnModel().getColumn(2).setMaxWidth(200);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(spCourse, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(spCourse, javax.swing.GroupLayout.DEFAULT_SIZE, 641, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

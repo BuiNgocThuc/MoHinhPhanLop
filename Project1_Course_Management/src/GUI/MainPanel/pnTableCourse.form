@@ -16,7 +16,10 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="spCourse" alignment="0" pref="400" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="spCourse" pref="641" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -33,7 +36,7 @@
         <Component class="javax.swing.JTable" name="tblCourse">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="4" rowCount="4">
+              <Table columnCount="4" rowCount="0">
                 <Column editable="false" title="STT" type="java.lang.Object"/>
                 <Column editable="false" title="ID" type="java.lang.Object"/>
                 <Column editable="false" title="T&#xea;n kh&#xf3;a h&#x1ecd;c" type="java.lang.Object"/>
@@ -42,17 +45,17 @@
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
-                <Column maxWidth="50" minWidth="-1" prefWidth="-1" resizable="true">
+                <Column maxWidth="50" minWidth="50" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="50" minWidth="-1" prefWidth="-1" resizable="true">
+                <Column maxWidth="50" minWidth="50" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                <Column maxWidth="200" minWidth="200" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
