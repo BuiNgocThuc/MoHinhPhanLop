@@ -4,6 +4,13 @@
  */
 package GUI.MainPanel;
 
+import BLL.CourseInstructorBLL;
+import DTO.CourseDTO;
+import DTO.PersonDTO;
+import java.sql.SQLException;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ASUS
@@ -13,8 +20,11 @@ public class PnTableInstructor extends javax.swing.JPanel {
     /**
      * Creates new form pnTableInstructor
      */
-    public PnTableInstructor() {
+    private final CourseInstructorBLL courseInstructorBLL = new CourseInstructorBLL();
+
+    public PnTableInstructor() throws SQLException {
         initComponents();
+        loadData();
     }
 
     /**
@@ -31,17 +41,14 @@ public class PnTableInstructor extends javax.swing.JPanel {
 
         tblInstructor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "STT", "ID", "Tên giảng viên", "Môn dạy"
+                "STT", "ID", "Họ", "Tên", "Môn dạy"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -50,17 +57,25 @@ public class PnTableInstructor extends javax.swing.JPanel {
         });
         spInstructor.setViewportView(tblInstructor);
         if (tblInstructor.getColumnModel().getColumnCount() > 0) {
+            tblInstructor.getColumnModel().getColumn(0).setMinWidth(50);
             tblInstructor.getColumnModel().getColumn(0).setMaxWidth(50);
+            tblInstructor.getColumnModel().getColumn(1).setMinWidth(50);
             tblInstructor.getColumnModel().getColumn(1).setMaxWidth(50);
+            tblInstructor.getColumnModel().getColumn(2).setMinWidth(150);
+            tblInstructor.getColumnModel().getColumn(2).setMaxWidth(150);
+            tblInstructor.getColumnModel().getColumn(3).setMinWidth(150);
+            tblInstructor.getColumnModel().getColumn(3).setMaxWidth(150);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 687, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(spInstructor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE))
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(spInstructor, javax.swing.GroupLayout.DEFAULT_SIZE, 687, Short.MAX_VALUE)
+                    .addGap(0, 0, 0)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -75,4 +90,34 @@ public class PnTableInstructor extends javax.swing.JPanel {
     private javax.swing.JScrollPane spInstructor;
     private javax.swing.JTable tblInstructor;
     // End of variables declaration//GEN-END:variables
+    private void loadData() throws SQLException {
+        List<PersonDTO> instructors = courseInstructorBLL.getListInstructorAssignCourse();
+        DefaultTableModel model = (DefaultTableModel) tblInstructor.getModel();
+        model.setRowCount(0);
+        int no = 1;
+        for (PersonDTO instructor : instructors) {
+            int instructorID = instructor.getPersonID();
+            String firstName = instructor.getFirstName();
+            String lastName = instructor.getLastName();
+
+            String courseInfos = "";
+            List<CourseDTO> courses = instructor.getCourses();
+            if (courses == null) {
+                continue;
+            }
+            for (int i = 0; i < courses.size() - 1; i++) {
+                courseInfos += String.format("%d-%s, ",
+                        courses.get(i).getCourseID(),
+                        courses.get(i).getTitle());
+            }
+            courseInfos += String.format("%d-%s",
+                    courses.get(courses.size() - 1).getCourseID(),
+                    courses.get(courses.size() - 1).getTitle());
+            Object[] row
+                    = {
+                        no++, instructorID, lastName, firstName, courseInfos
+                    };
+            model.addRow(row);
+        }
+    }
 }

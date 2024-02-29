@@ -2,8 +2,10 @@ package BLL;
 
 import DAL.CourseInstructorDAL;
 import DAL.CourseDAL;
+import DAL.PersonDAL;
 import DTO.CourseDTO;
 import DTO.CourseInstructorDTO;
+import DTO.PersonDTO;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -11,6 +13,7 @@ public class CourseInstructorBLL {
 
     private CourseInstructorDAL courseInstructorDAL = new CourseInstructorDAL();
     private CourseDAL courseDAL = new CourseDAL();
+    private PersonDAL personDAL = new PersonDAL();
 
     public List<CourseInstructorDTO> getAllCourseInstructors() throws SQLException {
         return courseInstructorDAL.selectAll();
@@ -31,10 +34,15 @@ public class CourseInstructorBLL {
 
     public List<CourseDTO> getListCourseAssignInstructor() throws SQLException {
         List<CourseDTO> courses = courseDAL.getAllList();
-        System.out.println(courses.get(0).getInstructors());
         courseDAL.populateInstructors(courses);
-        System.out.println(courses.get(0).getInstructors());
         return courses;
+
+    }
+
+    public List<PersonDTO> getListInstructorAssignCourse() throws SQLException {
+        List<PersonDTO> instructors = personDAL.getAllList();
+        personDAL.populateCourses(instructors);
+        return instructors;
 
     }
 
