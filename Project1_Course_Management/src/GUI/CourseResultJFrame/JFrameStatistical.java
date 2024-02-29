@@ -54,7 +54,7 @@ public class JFrameStatistical extends javax.swing.JFrame {
 
         jLabelDau.setText("jLabel3");
 
-        jComboBoxOption.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Failing", "Passing" }));
+        jComboBoxOption.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Passing", "Failing" }));
         jComboBoxOption.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxOptionActionPerformed(evt);
