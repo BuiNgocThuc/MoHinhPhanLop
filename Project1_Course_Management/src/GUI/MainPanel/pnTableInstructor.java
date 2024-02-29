@@ -101,19 +101,20 @@ public class PnTableInstructor extends javax.swing.JPanel {
             String firstName = instructor.getFirstName();
             String lastName = instructor.getLastName();
 
-            String courseInfos = "";
+            String courseInfos = "-------";
             List<CourseDTO> courses = instructor.getCourses();
-            if (courses == null) {
-                continue;
+            if (courses != null) {
+                courseInfos = "";
+                for (int i = 0; i < courses.size() - 1; i++) {
+                    courseInfos += String.format("%d-%s, ",
+                            courses.get(i).getCourseID(),
+                            courses.get(i).getTitle());
+                }
+                courseInfos += String.format("%d-%s",
+                        courses.get(courses.size() - 1).getCourseID(),
+                        courses.get(courses.size() - 1).getTitle());
             }
-            for (int i = 0; i < courses.size() - 1; i++) {
-                courseInfos += String.format("%d-%s, ",
-                        courses.get(i).getCourseID(),
-                        courses.get(i).getTitle());
-            }
-            courseInfos += String.format("%d-%s",
-                    courses.get(courses.size() - 1).getCourseID(),
-                    courses.get(courses.size() - 1).getTitle());
+
             Object[] row
                     = {
                         no++, instructorID, lastName, firstName, courseInfos

@@ -4,7 +4,10 @@
  */
 package GUI.MainPanel;
 
+import BLL.CourseInstructorBLL;
+import DTO.CourseDTO;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -18,6 +21,8 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
     /**
      * Creates new form CourseInstrutorPanel
      */
+    private final CourseInstructorBLL courseInstructorBLL = new CourseInstructorBLL();
+
     private PnTableCourse pnTableCourse = null;
     private PnTableInstructor pnTableInstructor = null;
 
@@ -41,8 +46,8 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
+        tfSearch = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         cbPointOfView = new javax.swing.JComboBox<>();
         pnTable = new javax.swing.JPanel();
@@ -55,9 +60,14 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton2.setText("Tìm");
+        btnSearch.setText("Tìm");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
-        jTextField1.setToolTipText("ID hoặc tên");
+        tfSearch.setToolTipText("ID hoặc tên");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -65,17 +75,17 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                .addComponent(tfSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2))
+                .addComponent(btnSearch))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -202,7 +212,8 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
                     }
 
                 }
-                pnTableCourse.loadData();
+                List<CourseDTO> courses = courseInstructorBLL.getListCourseAssignInstructor();
+                pnTableCourse.loadData(courses);
                 pnTableInstructor.loadData();
             }
         } catch (SQLException e) {
@@ -211,15 +222,30 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        try {
+            String text = tfSearch.getText();
+
+            switch (cbPointOfView.getSelectedIndex()) {
+                case 0 -> {
+                    pnTableCourse.findCourses(text);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Lỗi hệ thống");
+        }
+    }//GEN-LAST:event_btnSearchActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JComboBox<String> cbPointOfView;
-    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel pnTable;
+    private javax.swing.JTextField tfSearch;
     // End of variables declaration//GEN-END:variables
 }

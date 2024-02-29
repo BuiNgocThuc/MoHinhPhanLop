@@ -9,6 +9,8 @@ import DTO.PersonDTO;
 import java.sql.SQLException;
 import java.util.List;
 
+import util.ValidateUtil;
+
 public class CourseInstructorBLL {
 
     private CourseInstructorDAL courseInstructorDAL = new CourseInstructorDAL();
@@ -36,7 +38,7 @@ public class CourseInstructorBLL {
     }
 
     public List<PersonDTO> getListInstructorAssignCourse() throws SQLException {
-        List<PersonDTO> instructors = personDAL.getAllList();
+        List<PersonDTO> instructors = personDAL.getListInstructor();
         personDAL.populateCourses(instructors);
         return instructors;
 
@@ -44,6 +46,17 @@ public class CourseInstructorBLL {
 
     public CourseInstructorDTO getCourseInstructorByID(int courseID, int personID) throws SQLException {
         return courseInstructorDAL.selectByID(courseID, personID);
+    }
+
+    public List<CourseDTO> findCourses(String text) throws SQLException {
+        List<CourseDTO> courses = null;
+        if (ValidateUtil.isInteger(text)) {
+            courses = courseDAL.findCoursesByIdAll(Integer.parseInt(text));
+        } else {
+            courses = courseDAL.findCoursesByNameAll(text);
+        }
+        courseDAL.populateInstructors(courses);
+        return courses;
     }
 
     public void insertCourseInstructor(CourseInstructorDTO courseInstructor) throws SQLException {
@@ -66,15 +79,4 @@ public class CourseInstructorBLL {
         courseInstructorDAL.deleteAllInstructorAssignCourse(courseID);
     }
 
-//    public static void main(String[] args) throws SQLException {
-//        CourseInstructorBLL ciBLL = new CourseInstructorBLL();
-//
-//        for (CourseInstructorDTO ci : ciBLL.getAllCourseInstructors()) {
-//            System.out.println(ci);
-//        }
-//
-//        CourseInstructorDTO ci = ciBLL.getCourseInstructorByID(1045, 5);
-//        System.out.println(ci);
-//
-//    }
 }
