@@ -20,7 +20,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
-
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,10 +40,9 @@ public class AssigmentDetailGV extends JFrame {
     public AssigmentDetailGV(int id_GV) throws SQLException {
         listCourseInstructor = courseInstructorBLL.getListCourseInstructorsByPersonID(id_GV);
         initComponents(id_GV);
-        setPreferredSize(new Dimension(1200, 600));
+        setPreferredSize(new Dimension(1200, 800));
         setBackground(Color.WHITE);
-        setVisible(true);
-//        setDefaultCloseOperation(null);
+        pack();
         setLocationRelativeTo(null);
     }
 
@@ -60,29 +58,6 @@ public class AssigmentDetailGV extends JFrame {
         panelBelow.setVisible(false);
     }
 
-//    public static void main(String[] args) {
-//        try {
-//            UIManager.setLookAndFeel(new FlatLightLaf());
-//        } catch (UnsupportedLookAndFeelException e) {
-//            e.printStackTrace();
-//        }
-//
-//        SwingUtilities.invokeLater(() -> {
-//            JFrame frame = new JFrame("List Course Instructor");
-//            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//
-//            AssigmentDetailGV panelAction = null;
-//            try {
-//                panelAction = new AssigmentDetailGV(4);
-//            } catch (SQLException ex) {
-//                Logger.getLogger(AssigmentDetailGV.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//            frame.getContentPane().add(panelAction);
-//
-//            frame.pack();
-//            frame.setVisible(true);
-//        });
-//    }
     private void initPanelTop(int id_GV) {
         panelTop = new JPanel();
         panelTop.setPreferredSize(new Dimension(1200, 80));
@@ -166,12 +141,18 @@ public class AssigmentDetailGV extends JFrame {
             Object[] rowData = new String[6]; // 5 là số cột của bảng
             rowData[0] = String.valueOf(stt++);
             rowData[1] = String.valueOf(dto.getCourseID());
-            rowData[2] = dto.courseDTO.getTitle();
-            rowData[3] = String.valueOf(dto.courseDTO.getCredits());
-            rowData[4] = "";
-            rowData[5] = "/assets/icons8-trash-35.png";
+            for (CourseDTO courseDTO : listCourseDTO) {
+                if (courseDTO.getCourseID() == dto.getCourseID()) {
+                    rowData[2] = courseDTO.getTitle();
+                    rowData[3] = String.valueOf(courseDTO.getCredits());
+                    rowData[4] = "";
+                    rowData[5] = "/assets/icons8-trash-35.png";
+                    break;
+                }
+            }
             modeltable.addRow(rowData);
         }
+
         table.setRowHeight(35);
         table.setModel(modeltable);
         JScrollPane scrollPane = new JScrollPane(table);
@@ -243,7 +224,6 @@ public class AssigmentDetailGV extends JFrame {
         }
         );
         btnAddMon = new JButton("thêm");
-
         btnAddMon.addActionListener(
                 new ActionListener() {
             @Override
@@ -256,13 +236,9 @@ public class AssigmentDetailGV extends JFrame {
         );
 
         panelRight.add(btnAddMon);
-
         panelRight.add(btnSave);
-
         panelCenter.add(panelRight, BorderLayout.NORTH);
-
         panel = new JPanel();
-
         panel.setPreferredSize(
                 new Dimension(1200, 450));
         panelCenter.add(panel, BorderLayout.SOUTH);
@@ -397,7 +373,6 @@ public class AssigmentDetailGV extends JFrame {
     public void removeRowFromTable(DefaultTableModel model, int rowIndex) {
         if (rowIndex >= 0 && rowIndex < model.getRowCount()) {
             model.removeRow(rowIndex);
-            // Cập nhật lại số thứ tự của các hàng sau khi xóa
             for (int i = rowIndex; i < model.getRowCount(); i++) {
                 model.setValueAt(String.valueOf(i + 1), i, 0);
             }
