@@ -24,7 +24,7 @@ public class JFrameStudentInformationDetails extends javax.swing.JFrame {
         jTextFieldFirstName.setText(personDTO.getFirstName());
         jTextFieldLastName.setText(personDTO.getLastName());
         jTextFieldHireDate.setText(personDTO.getHireDate()==null?"":personDTO.getHireDate().toString());
-        jTextFieldEnrollmentDate.setText(personDTO.getEnrollmentDate().toString());
+        jTextFieldEnrollmentDate.setText(personDTO.getEnrollmentDate()==null?"":personDTO.getEnrollmentDate().toString());
         
     }
 

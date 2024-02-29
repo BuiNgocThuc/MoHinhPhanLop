@@ -40,7 +40,8 @@ public class StudentGradeDAL {
             e.printStackTrace();
         }
         return null;
-    }public  ArrayList<StudentGradeDTO> getAllListR(int CourseID,String text){
+    }
+    public  ArrayList<StudentGradeDTO> getAllListR(int CourseID,String text){
         ArrayList<StudentGradeDTO> listStudentGrade=new ArrayList<StudentGradeDTO>();
         try{
             String query;
@@ -147,7 +148,13 @@ public class StudentGradeDAL {
     public  ArrayList<StudentGradeDTO> serchAllStudentGrade(int CourseID,String text){
         ArrayList<StudentGradeDTO> listStudentGrade=new ArrayList<StudentGradeDTO>();
         try{
-            String query="select studentgrade.EnrollmentID,studentgrade.CourseID,studentgrade.StudentID,studentgrade.Grade from studentgrade join course on studentgrade.CourseID=course.CourseID join person on person.PersonID=studentgrade.StudentID where UPPER(CONCAT(person.PersonID,person.Firstname,person.Lastname,studentgrade.Grade)) like '%"+text+"%' and studentgrade.CourseID="+CourseID;
+            String query="select studentgrade.EnrollmentID,studentgrade.CourseID,"
+                    + "studentgrade.StudentID,studentgrade.Grade "
+                    + "from studentgrade "
+                    + "join course on studentgrade.CourseID=course.CourseID "
+                    + "join person on person.PersonID=studentgrade.StudentID "
+                    + "where UPPER(CONCAT(person.PersonID,person.Firstname,person.Lastname,studentgrade.Grade)) "
+                    + "like '%"+text+"%' and studentgrade.CourseID="+CourseID;
             PreparedStatement pre=con.getConnectDB().prepareStatement(query);
             ResultSet rs=pre.executeQuery();
             while(rs.next()){
