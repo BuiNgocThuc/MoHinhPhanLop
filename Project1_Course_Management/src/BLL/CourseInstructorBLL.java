@@ -90,4 +90,13 @@ public class CourseInstructorBLL {
         courseInstructorDAL.deleteAllInstructorAssignCourse(courseID);
     }
 
+    public List<CourseInstructorDTO> getListCourseInstructorsByCourseID(int id_Course) throws SQLException {
+        try {
+            return courseInstructorDAL.selectByCourseID(id_Course);
+        } catch (SQLException e) {
+            // Thông báo lỗi đến lớp gọi
+            throw new SQLException("Error retrieving course instructors by person ID", e);
+        }
+    }
+
 }

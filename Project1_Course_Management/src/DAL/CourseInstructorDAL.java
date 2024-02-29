@@ -60,7 +60,7 @@ public class CourseInstructorDAL {
                 int departmentID = rs.getInt("DepartmentID");
                 int credits = rs.getInt("Credits");
                 String title = rs.getString("Title");
-                CourseDTO course = new CourseDTO(courseID, departmentID, courseID, title);
+                CourseDTO course = new CourseDTO(courseID, departmentID, credits, title);
                 CourseInstructorDTO courseInstructor = new CourseInstructorDTO(courseID, personID, course, person);
                 courseInstructors.add(courseInstructor);
             }
@@ -87,7 +87,7 @@ public class CourseInstructorDAL {
                     int departmentID = rs.getInt("DepartmentID");
                     int credits = rs.getInt("Credits");
                     String title = rs.getString("Title");
-                    CourseDTO course = new CourseDTO(courseID, departmentID, courseID, title);
+                    CourseDTO course = new CourseDTO(courseID, departmentID, credits, title);
                     return new CourseInstructorDTO(courseID, personID, course, person);
                 }
             }
@@ -115,7 +115,7 @@ public class CourseInstructorDAL {
                     int departmentID = rs.getInt("DepartmentID");
                     int credits = rs.getInt("Credits");
                     String title = rs.getString("Title");
-                    CourseDTO course = new CourseDTO(courseID, departmentID, courseID, title);
+                    CourseDTO course = new CourseDTO(courseID, departmentID, credits, title);
                     CourseInstructorDTO courseInstructor = new CourseInstructorDTO(courseID, personID, course, person);
                     courseInstructors.add(courseInstructor);
                 }
@@ -169,6 +169,7 @@ public class CourseInstructorDAL {
             throw e;
         }
     }
+
     public void deleteAllInstructorAssignCourse(int courseID) throws SQLException {
         String query = "DELETE FROM CourseInstructor WHERE CourseID = ?";
         try (PreparedStatement statement = conn.prepareStatement(query)) {
@@ -204,4 +205,34 @@ public class CourseInstructorDAL {
             throw e;
         }
     }
+
+    public List<CourseInstructorDTO> selectByCourseID(int id_Course) throws SQLException {
+        List<CourseInstructorDTO> courseInstructors = new ArrayList<>();
+        String query = "SELECT * FROM CourseInstructor ci "
+                + "JOIN person p ON ci.PersonID = p.PersonID "
+                + "JOIN course c ON ci.CourseID = c.CourseID "
+                + "WHERE ci.CourseID = ?";
+        try (PreparedStatement statement = conn.prepareStatement(query)) {
+            statement.setInt(1, id_Course);
+            try (ResultSet rs = statement.executeQuery()) {
+                while (rs.next()) {
+                    int courseID = rs.getInt("CourseID");
+                    int personID = rs.getInt("PersonID");
+                    String lastName = rs.getString("LastName");
+                    String firstName = rs.getString("FirstName");
+                    Timestamp hireDate = rs.getTimestamp("HireDate");
+                    Timestamp enrollmentDate = rs.getTimestamp("EnrollmentDate");
+                    PersonDTO person = new PersonDTO(personID, firstName, lastName, hireDate, enrollmentDate);
+                    int departmentID = rs.getInt("DepartmentID");
+                    int credits = rs.getInt("Credits");
+                    String title = rs.getString("Title");
+                    CourseDTO course = new CourseDTO(courseID, departmentID, credits, title);
+                    CourseInstructorDTO courseInstructor = new CourseInstructorDTO(courseID, personID, course, person);
+                    courseInstructors.add(courseInstructor);
+                }
+            }
+        }
+        return courseInstructors;
+    }
+
 }

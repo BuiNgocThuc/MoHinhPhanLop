@@ -30,18 +30,18 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-public class AssigmentDetailGV extends JFrame {
+public class AssigmentCourseDetail extends JFrame {
 
-    private int id_GV;
-    private CourseBLL courseBLL = new CourseBLL();
+    private int id_Course;
+    private PersonBLL personBLL = new PersonBLL();
     private CourseInstructorBLL courseInstructorBLL = new CourseInstructorBLL();
-    private List<CourseDTO> listCourseDTO = courseBLL.getAllist();
+    private List<PersonDTO> listPersonDTO = personBLL.getListInstructor();
     private List<CourseInstructorDTO> listCourseInstructor;
-    DepartmentBLL departmentBLL = new DepartmentBLL();
 
-    public AssigmentDetailGV(int id_GV) throws SQLException {
-        listCourseInstructor = courseInstructorBLL.getListCourseInstructorsByPersonID(id_GV);
-        initComponents(id_GV);
+    public AssigmentCourseDetail(int id_Course) throws SQLException {
+        this.id_Course = id_Course;
+        listCourseInstructor = courseInstructorBLL.getListCourseInstructorsByCourseID(id_Course);
+        initComponents();
         setPreferredSize(new Dimension(1200, 800));
         setBackground(Color.WHITE);
         pack();
@@ -49,10 +49,9 @@ public class AssigmentDetailGV extends JFrame {
         setVisible(true);
     }
 
-    private void initComponents(int id_GV) {
+    private void initComponents() {
         setLayout(new BorderLayout());
-        this.id_GV = id_GV;
-        initPanelTop(id_GV);
+        initPanelTop();
         add(panelTop, BorderLayout.NORTH);
         initPanelCenter();
         add(panelCenter, BorderLayout.CENTER);
@@ -61,7 +60,7 @@ public class AssigmentDetailGV extends JFrame {
         panelBelow.setVisible(false);
     }
 
-    private void initPanelTop(int id_GV) {
+    private void initPanelTop() {
         panelTop = new JPanel();
         panelTop.setPreferredSize(new Dimension(1200, 80));
         panelTop.setLayout(new BorderLayout());
@@ -70,18 +69,18 @@ public class AssigmentDetailGV extends JFrame {
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)
         ));
 
-        JLabel titleLabel = new JLabel("Chi tiết phân công của giảng viên");
+        JLabel titleLabel = new JLabel("Chi tiết môn học");
         titleLabel.setFont(new Font("Arial", Font.PLAIN, 20));
 
         panelTop.add(titleLabel, BorderLayout.WEST);
 
         JPanel panelInfor = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel jLabelId = new JLabel("ID");
-        JLabel jLabelFn = new JLabel("Firstname");
+        JLabel jLabelFn = new JLabel("Tilte");
         jLabelFn.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 0));
-        JLabel jLabelLn = new JLabel("Lastname");
+        JLabel jLabelLn = new JLabel("Credits");
         jLabelLn.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 0));
-        JLabel jLabelHd = new JLabel("Hiredate");
+        JLabel jLabelHd = new JLabel("Department");
         jLabelHd.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 0));
         Font labelFont = new Font("Arial", Font.BOLD, 18);
         jLabelId.setFont(labelFont);
@@ -89,31 +88,33 @@ public class AssigmentDetailGV extends JFrame {
         jLabelLn.setFont(labelFont);
         jLabelHd.setFont(labelFont);
 
-        JLabel valueId = new JLabel(String.valueOf(id_GV));
-        JLabel valueFn = new JLabel();
-        JLabel valueLn = new JLabel();
-        JLabel valueHd = new JLabel();
+        JLabel valueId = new JLabel(String.valueOf(id_Course));
+        JLabel valueTilte = new JLabel();
+        JLabel valueCredits = new JLabel();
+        JLabel valueDepart = new JLabel();
 
-        PersonBLL personBLL = new PersonBLL();
-        PersonDTO personDTO = personBLL.detailsPerson(id_GV);
-        valueFn.setText(personDTO.getFirstName());
-        valueLn.setText(personDTO.getLastName());
-        valueHd.setText(String.valueOf(personDTO.getHireDate()));
+        CourseBLL courseBLL = new CourseBLL();
+        CourseDTO courseDTO = courseBLL.courseDetail(id_Course);
+        valueTilte.setText(courseDTO.getTitle());
+        valueCredits.setText(String.valueOf(courseDTO.getCredits()));
+        DepartmentBLL departmentBLL = new DepartmentBLL();
+        DepartmentDTO departmentDTO = departmentBLL.selectByID(courseDTO.getDepartmentID());
+        valueDepart.setText(departmentDTO.getName());
 
         Font valueFont = new Font("Arial", Font.PLAIN, 18);
         valueId.setFont(valueFont);
-        valueFn.setFont(valueFont);
-        valueLn.setFont(valueFont);
-        valueHd.setFont(valueFont);
+        valueTilte.setFont(valueFont);
+        valueCredits.setFont(valueFont);
+        valueDepart.setFont(valueFont);
 
         panelInfor.add(jLabelId);
         panelInfor.add(valueId);
         panelInfor.add(jLabelFn);
-        panelInfor.add(valueFn);
+        panelInfor.add(valueTilte);
         panelInfor.add(jLabelLn);
-        panelInfor.add(valueLn);
+        panelInfor.add(valueCredits);
         panelInfor.add(jLabelHd);
-        panelInfor.add(valueHd);
+        panelInfor.add(valueDepart);
 
         panelTop.add(panelInfor, BorderLayout.SOUTH);
 
@@ -128,10 +129,10 @@ public class AssigmentDetailGV extends JFrame {
                 BorderFactory.createEmptyBorder(0, 10, 10, 10),
                 BorderFactory.createTitledBorder(
                         BorderFactory.createEtchedBorder(EtchedBorder.LOWERED, Color.WHITE, Color.GRAY),
-                        "Danh sách các môn được phân công", TitledBorder.LEADING, TitledBorder.TOP)));
+                        "Danh sách các giảng viên được phân công", TitledBorder.LEADING, TitledBorder.TOP)));
         modeltable = new DefaultTableModel(
                 new Object[][]{},
-                new String[]{"STT", "ID", "Tên Môn", "Số Tín Chỉ", "Phòng", ""}) {
+                new String[]{"STT", "ID", "First Name", "Last Name", "HireDate", ""}) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false; // Ngăn chặn việc chỉnh sửa ô
@@ -143,12 +144,16 @@ public class AssigmentDetailGV extends JFrame {
         for (CourseInstructorDTO dto : listCourseInstructor) {
             Object[] rowData = new String[6]; // 5 là số cột của bảng
             rowData[0] = String.valueOf(stt++);
-            rowData[1] = String.valueOf(dto.getCourseID());
-            rowData[2] = dto.courseDTO.getTitle();
-            rowData[3] = String.valueOf(dto.courseDTO.getCredits());
-            DepartmentDTO departmentDTO = departmentBLL.selectByID(dto.courseDTO.getDepartmentID());
-            rowData[4] = departmentDTO.getName();
-            rowData[5] = "/assets/icons8-trash-35.png";
+            rowData[1] = String.valueOf(dto.getPersonID());
+            for (PersonDTO personDTO : listPersonDTO) {
+                if (personDTO.getPersonID() == dto.getPersonID()) {
+                    rowData[2] = personDTO.getFirstName();
+                    rowData[3] = personDTO.getLastName();
+                    rowData[4] = String.valueOf(personDTO.getHireDate());
+                    rowData[5] = "/assets/icons8-trash-35.png";
+                    break;
+                }
+            }
             modeltable.addRow(rowData);
         }
 
@@ -206,17 +211,17 @@ public class AssigmentDetailGV extends JFrame {
                     try {
                         courseInstructorBLL.deleteCourseInstructor(dto);
                     } catch (SQLException ex) {
-                        Logger.getLogger(AssigmentDetailGV.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(AssigmentCourseDetail.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
 
                 for (int i = 0; i < table.getRowCount(); i++) {
-                    String courseID = table.getValueAt(i, 1).toString();
-                    CourseInstructorDTO courseInstructor = new CourseInstructorDTO(Integer.parseInt(courseID), id_GV);
+                    String personID = table.getValueAt(i, 1).toString();
+                    CourseInstructorDTO courseInstructor = new CourseInstructorDTO(id_Course, Integer.parseInt(personID));
                     try {
                         courseInstructorBLL.insertCourseInstructor(courseInstructor);
                     } catch (SQLException ex) {
-                        Logger.getLogger(AssigmentDetailGV.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(AssigmentCourseDetail.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
@@ -254,11 +259,11 @@ public class AssigmentDetailGV extends JFrame {
                 BorderFactory.createEmptyBorder(0, 10, 10, 10),
                 BorderFactory.createTitledBorder(
                         BorderFactory.createEtchedBorder(EtchedBorder.LOWERED, Color.WHITE, Color.GRAY),
-                        "Danh sách các môn", TitledBorder.LEADING, TitledBorder.TOP)));
+                        "Danh sách các giảng viên", TitledBorder.LEADING, TitledBorder.TOP)));
 
         modeltable1 = new DefaultTableModel(
                 new Object[][]{},
-                new String[]{"STT", "ID", "Tên Môn", "Số Tín Chỉ", "Phòng", ""}) {
+                new String[]{"STT", "ID", "First Name", "Last Name", "HireDate", ""}) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false; // Ngăn chặn việc chỉnh sửa ô
@@ -268,14 +273,13 @@ public class AssigmentDetailGV extends JFrame {
         JTable table1 = new JTable();
         table1 = new JTable(modeltable1);
         int stt = 1;
-        for (CourseDTO dto : listCourseDTO) {
+        for (PersonDTO dto : listPersonDTO) {
             Object[] rowData = new String[6]; // 5 là số cột của bảng
             rowData[0] = String.valueOf(stt++);
-            rowData[1] = String.valueOf(dto.getCourseID());
-            rowData[2] = dto.getTitle();
-            rowData[3] = String.valueOf(dto.getCredits());
-            DepartmentDTO departmentDTO = departmentBLL.selectByID(dto.getDepartmentID());
-            rowData[4] = departmentDTO.getName();
+            rowData[1] = String.valueOf(dto.getPersonID());
+            rowData[2] = dto.getFirstName();
+            rowData[3] = dto.getLastName();
+            rowData[4] = String.valueOf(dto.getHireDate());;
             rowData[5] = "/assets/icons8-add-48.png";
             modeltable1.addRow(rowData);
         }
@@ -318,7 +322,7 @@ public class AssigmentDetailGV extends JFrame {
                 if (column == 5) {
                     int row = target.rowAtPoint(e.getPoint());
                     Object value = target.getValueAt(row, 1);
-                    addRowToTable(modeltable, Integer.parseInt(value.toString()), listCourseDTO);
+                    addRowToTable(modeltable, Integer.parseInt(value.toString()), listPersonDTO);
                 }
             }
         });
@@ -345,25 +349,24 @@ public class AssigmentDetailGV extends JFrame {
         panelBelow.add(panelRight1, BorderLayout.SOUTH);
     }
 
-    public void addRowToTable(DefaultTableModel model, int courseID, List<CourseDTO> listCourseDTO) {
+    public void addRowToTable(DefaultTableModel model, int personID, List<PersonDTO> listPersonDTO) {
         // Kiểm tra xem courseID đã tồn tại trong cột row1 chưa
         for (int i = 0; i < model.getRowCount(); i++) {
             int existingCourseID = Integer.parseInt((String) model.getValueAt(i, 1));
-            if (existingCourseID == courseID) {
-                JOptionPane.showMessageDialog(null, "Môn học đã được thêm!", "", JOptionPane.WARNING_MESSAGE);
+            if (existingCourseID == personID) {
+                JOptionPane.showMessageDialog(null, "Giảng viên đã được thêm!", "", JOptionPane.WARNING_MESSAGE);
                 return;
             }
         }
 
         Object[] rowData = new Object[6];
         rowData[0] = String.valueOf(model.getRowCount() + 1);
-        rowData[1] = String.valueOf(courseID);
-        for (CourseDTO courseDTO : listCourseDTO) {
-            if (courseDTO.getCourseID() == courseID) {
-                rowData[2] = courseDTO.getTitle();
-                rowData[3] = String.valueOf(courseDTO.getCredits());
-                DepartmentDTO departmentDTO = departmentBLL.selectByID(courseDTO.getDepartmentID());
-                rowData[4] = departmentDTO.getName();
+        rowData[1] = String.valueOf(personID);
+        for (PersonDTO personDTO : listPersonDTO) {
+            if (personDTO.getPersonID() == personID) {
+                rowData[2] = personDTO.getFirstName();
+                rowData[3] = personDTO.getLastName();
+                rowData[4] = personDTO.getHireDate();
                 rowData[5] = "/assets/icons8-trash-35.png";
                 break;
             }
