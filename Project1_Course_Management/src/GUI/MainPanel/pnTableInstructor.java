@@ -9,6 +9,7 @@ import DTO.CourseDTO;
 import DTO.PersonDTO;
 import java.sql.SQLException;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,7 +26,9 @@ public class PnTableInstructor extends javax.swing.JPanel {
 
     public PnTableInstructor() throws SQLException {
         initComponents();
-        loadData();
+        List<PersonDTO> instructors = courseInstructorBLL.getListInstructorAssignCourse();
+
+        loadData(instructors);
     }
 
     /**
@@ -91,8 +94,7 @@ public class PnTableInstructor extends javax.swing.JPanel {
     private javax.swing.JScrollPane spInstructor;
     private javax.swing.JTable tblInstructor;
     // End of variables declaration//GEN-END:variables
-    public void loadData() throws SQLException {
-        List<PersonDTO> instructors = courseInstructorBLL.getListInstructorAssignCourse();
+    public void loadData(List<PersonDTO> instructors) throws SQLException {
         DefaultTableModel model = (DefaultTableModel) tblInstructor.getModel();
         model.setRowCount(0);
         int no = 1;
@@ -128,6 +130,15 @@ public class PnTableInstructor extends javax.swing.JPanel {
         if (seletedRow != -1) {
             int instructorId = (int) tblInstructor.getValueAt(seletedRow, 1);
             courseInstructorBLL.deleteAllCourseAssignInstructor(instructorId);
+        }
+    }
+
+    public void findInstructors(String text) throws SQLException {
+        List<PersonDTO> instructors = courseInstructorBLL.findInstructors(text);
+        if (instructors.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Không tìm thấy");
+        } else {
+            loadData(instructors);
         }
     }
 

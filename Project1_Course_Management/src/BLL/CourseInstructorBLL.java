@@ -59,6 +59,17 @@ public class CourseInstructorBLL {
         return courses;
     }
 
+    public List<PersonDTO> findInstructors(String text) throws SQLException {
+        List<PersonDTO> instructors = null;
+        if (ValidateUtil.isInteger(text)) {
+            instructors = personDAL.findInstructorsById(Integer.parseInt(text));
+        } else {
+            instructors = personDAL.findInstrutorsByName(text);
+        }
+        personDAL.populateCourses(instructors);
+        return instructors;
+    }
+
     public void insertCourseInstructor(CourseInstructorDTO courseInstructor) throws SQLException {
         courseInstructorDAL.insertCourseInstructor(courseInstructor);
     }
