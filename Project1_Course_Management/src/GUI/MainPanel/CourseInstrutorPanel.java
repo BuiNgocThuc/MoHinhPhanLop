@@ -7,7 +7,7 @@ package GUI.MainPanel;
 import BLL.CourseInstructorBLL;
 import DTO.CourseDTO;
 import DTO.PersonDTO;
-import GUI.AssignmentManagement.AssignmentAdd;
+import GUI.AssignmentManagement.CourseInstructorAddFrame;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -253,14 +253,14 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        AssignmentAdd assignmentAdd = null;
+        CourseInstructorAddFrame courseInstructorAddFrame = null;
         try {
-            assignmentAdd = new AssignmentAdd();
+            courseInstructorAddFrame = new CourseInstructorAddFrame();
         } catch (SQLException ex) {
             Logger.getLogger(CourseInstrutorPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        assignmentAdd.setVisible(true);
-        assignmentAdd.setLocationRelativeTo(null);
+        courseInstructorAddFrame.setVisible(true);
+        courseInstructorAddFrame.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void cbPointOfViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPointOfViewActionPerformed
