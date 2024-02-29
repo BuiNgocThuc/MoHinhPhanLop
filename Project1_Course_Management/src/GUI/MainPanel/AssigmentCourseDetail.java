@@ -228,19 +228,19 @@ public class AssigmentCourseDetail extends JFrame {
         }
         );
         btnAddMon = new JButton("thêm");
-        btnAddMon.addActionListener(
-                new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e
-            ) {
-                panel.setVisible(false);
-                panelBelow.setVisible(true);
-            }
-        }
-        );
+        btnAddMon.addActionListener((ActionEvent e) -> {
+            panel.setVisible(false);
+            panelBelow.setVisible(true);
+        });
+        
+        btnCloseFrame = new JButton("Đóng");
+        btnCloseFrame.addActionListener((e) -> {
+            this.dispose();
+        });
 
         panelRight.add(btnAddMon);
         panelRight.add(btnSave);
+        panelRight.add(btnCloseFrame);
         panelCenter.add(panelRight, BorderLayout.NORTH);
         panel = new JPanel();
         panel.setPreferredSize(
@@ -415,6 +415,7 @@ public class AssigmentCourseDetail extends JFrame {
     private JPanel panel_Table1;
     private JButton btnAddMon;
     private JButton btnSave;
+    private JButton btnCloseFrame;
     private JTextField searchValue;
     private JButton btnSearch;
     private JPanel panel;

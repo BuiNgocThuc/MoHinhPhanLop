@@ -231,9 +231,15 @@ public class AssigmentDetailGV extends JFrame {
             panel.setVisible(false);
             panelBelow.setVisible(true);
         });
+        
+        btnCloseFrame = new JButton("Đóng");
+        btnCloseFrame.addActionListener((e) -> {
+            this.dispose();
+        });
 
         panelRight.add(btnAddMon);
         panelRight.add(btnSave);
+        panelRight.add(btnCloseFrame);
         panelCenter.add(panelRight, BorderLayout.NORTH);
         panel = new JPanel();
         panel.setPreferredSize(
@@ -410,6 +416,7 @@ public class AssigmentDetailGV extends JFrame {
     private JPanel panel_Table1;
     private JButton btnAddMon;
     private JButton btnSave;
+    private JButton btnCloseFrame;
     private JTextField searchValue;
     private JButton btnSearch;
     private JPanel panel;
