@@ -74,11 +74,11 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
         flowLayout1.setAlignOnBaseline(true);
         jPanel5.setLayout(flowLayout1);
 
-        btnAdd.setText("Thêm");
         btnAdd.setBackground(new java.awt.Color(155, 207, 83));
-        btnAdd.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(191, 234, 124)));
         btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAdd.setForeground(new java.awt.Color(255, 255, 255));
+        btnAdd.setText("Thêm");
+        btnAdd.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(191, 234, 124)));
         btnAdd.setPreferredSize(new java.awt.Dimension(100, 40));
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -162,12 +162,6 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnTable, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        btnAdd.setText("Thêm");
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -250,13 +244,6 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAddActionPerformed
-
-    private void cbPointOfViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPointOfViewActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbPointOfViewActionPerformed
-
         AssignmentAdd assignmentAdd = null;
         try {
             assignmentAdd = new AssignmentAdd();
@@ -266,6 +253,12 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
         assignmentAdd.setVisible(true);
         assignmentAdd.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void cbPointOfViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPointOfViewActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbPointOfViewActionPerformed
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
