@@ -26,6 +26,13 @@ public class StudentGradeDAL {
                 studentGrade.setCourseID(rs.getInt("CourseID"));
                 studentGrade.setStudentID(rs.getInt("StudentID"));
                 studentGrade.setGrade(rs.getDouble("Grade"));
+                Double grade=rs.getDouble("Grade");
+                if(rs.wasNull()){
+                    studentGrade.setGrade(null);
+                }else{
+                    studentGrade.setGrade(grade);
+                }
+                
                 listStudentGrade.add(studentGrade);
             }
             return listStudentGrade;
@@ -111,7 +118,7 @@ public class StudentGradeDAL {
         int EnrollmentID = studentGradeDTO.getEnrollmentID();
         int CourseID = studentGradeDTO.getCourseID();
         int StudentID = studentGradeDTO.getStudentID();
-        double Grade = studentGradeDTO.getGrade();
+        Double Grade = studentGradeDTO.getGrade();
 
         String query = "INSERT INTO studentgrade(EnrollmentID, CourseID, StudentID, Grade) VALUES (?,?,?,?)";
         try
@@ -120,7 +127,11 @@ public class StudentGradeDAL {
             preStm.setInt(1, EnrollmentID);
             preStm.setInt(2, CourseID);
             preStm.setInt(3, StudentID);
-            preStm.setDouble(4, Grade);
+            if(Grade!=null){
+                preStm.setDouble(4,Grade);
+            }else{
+                preStm.setNull(4,java.sql.Types.DOUBLE);
+            }
             
             result = preStm.executeUpdate();
             if (result != 0)

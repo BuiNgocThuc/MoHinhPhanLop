@@ -19,6 +19,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableRowSorter;
 import util.ValidateUtil;
 /**
@@ -552,7 +553,7 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
         int n=jTableStudentGrade.getSelectedRow();
         if(n!=-1){
             jTextName.setText(jTableStudentGrade.getValueAt(n, 2)+" "+jTableStudentGrade.getValueAt(n, 3));
-            jTextGrade.setText(jTableStudentGrade.getValueAt(n, 4)+"");
+            jTextGrade.setText(jTableStudentGrade.getValueAt(n, 4)==null?"":jTableStudentGrade.getValueAt(n, 4)+"");
             jTextPersonID.setText(jTableStudentGrade.getValueAt(n, 1)+"");
         }
         
@@ -563,14 +564,17 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             int row = jTableStudentGrade.getSelectedRow();
             if (row != -1) {
-                String grade = jTableStudentGrade.getModel().getValueAt(row, 4).toString().trim();
-                if (!grade.equals("") && Double.parseDouble(grade) <= 10d) {
                     int EnrollmentID = studentGradeBLL.getEnrollment(CourseID, Integer.parseInt(jTableStudentGrade.getModel().getValueAt(row, 1).toString()));
                     StudentGradeDTO studentGrade = new StudentGradeDTO();
                     studentGrade.setCourseID(CourseID);
                     studentGrade.setEnrollmentID(EnrollmentID);
-                    studentGrade.setGrade(Double.parseDouble(grade));
-                    System.out.println(studentGrade.getEnrollmentID()+" "+studentGrade.getGrade());
+                    TableCellEditor edit=jTableStudentGrade.getCellEditor();
+                    if(edit!=null){
+                       edit.stopCellEditing();
+                    }
+                    System.out.println(jTableStudentGrade.getModel().getValueAt(row, 4).toString().trim());
+                    String grade = jTableStudentGrade.getModel().getValueAt(row, 4).toString().trim();
+                    studentGrade.setGrade(Double.parseDouble(jTableStudentGrade.getModel().getValueAt(row, 4).toString().trim()));
                     if (studentGradeBLL.updateGrade(studentGrade)) {
                         //JOptionPane.showMessageDialog(rootPane,"Update Success!");
                         Clear();
@@ -578,7 +582,7 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
                     } else {
                         JOptionPane.showMessageDialog(rootPane, "Update Failed!");
                     }
-                }
+                
             }
          }
     }//GEN-LAST:event_jTableStudentGradeKeyPressed
@@ -676,7 +680,8 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
 
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
         // TODO add your handling code here:
-        String grade=jTextGrade.getText().toString();
+        if(jTableStudentGrade.getSelectedRow()!=-1){
+            String grade=jTextGrade.getText().toString();
         if(!grade.equals("") && (Double.parseDouble(grade)<=10d )){
             int EnrollmentID=studentGradeBLL.getEnrollment(CourseID,Integer.parseInt(jTextPersonID.getText().toString()));
             StudentGradeDTO studentGrade=new StudentGradeDTO();
@@ -692,6 +697,10 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane,"Update Failed!");
             }           
         }
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Please choose");
+        }
+        
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
     private void jTextPersonIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextPersonIDActionPerformed
