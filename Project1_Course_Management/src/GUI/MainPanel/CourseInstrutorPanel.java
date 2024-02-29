@@ -194,9 +194,13 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
                     "Xác nhận", JOptionPane.YES_NO_OPTION);
             if (confirmed == JOptionPane.YES_OPTION) {
                 switch (cbPointOfView.getSelectedIndex()) {
+                    case 0 -> {
+                        pnTableCourse.deleteAllInstructorAssignCourse();
+                    }
                     case 1 -> {
                         pnTableInstructor.deleteAllCourseAssignInstructor();
                     }
+
                 }
                 pnTableCourse.loadData();
                 pnTableInstructor.loadData();
