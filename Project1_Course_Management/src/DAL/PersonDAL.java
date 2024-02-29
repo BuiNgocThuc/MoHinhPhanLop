@@ -211,4 +211,20 @@ public class PersonDAL {
             throw e;
         }
     }
+
+    public boolean addPerson(PersonDTO person) throws SQLException {
+        try {
+            String query = "INSERT INTO person (Lastname, Firstname, HireDate, EnrollmentDate) VALUES (?, ?, ?, ?)";
+            PreparedStatement preparedStatement = con.getConnectDB().prepareStatement(query);
+            preparedStatement.setString(1, person.getLastName());
+            preparedStatement.setString(2, person.getFirstName());
+            preparedStatement.setTimestamp(3, person.getHireDate());
+            preparedStatement.setTimestamp(4, person.getEnrollmentDate());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+
 }

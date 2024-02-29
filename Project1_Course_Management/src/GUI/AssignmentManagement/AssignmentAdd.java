@@ -76,6 +76,11 @@ public class AssignmentAdd extends javax.swing.JFrame {
         });
 
         btInstructorAdd.setText("Thêm");
+        btInstructorAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btInstructorAddActionPerformed(evt);
+            }
+        });
 
         btClose.setText("Đóng");
         btClose.addActionListener(new java.awt.event.ActionListener() {
@@ -251,6 +256,12 @@ public class AssignmentAdd extends javax.swing.JFrame {
     private void btCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCloseActionPerformed
         dispose();
     }//GEN-LAST:event_btCloseActionPerformed
+
+    private void btInstructorAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInstructorAddActionPerformed
+        InstructorAdd instructorAdd = new InstructorAdd();
+        instructorAdd.setVisible(true);
+        instructorAdd.setLocationRelativeTo(this);
+    }//GEN-LAST:event_btInstructorAddActionPerformed
 
     /**
      * @param args the command line arguments
