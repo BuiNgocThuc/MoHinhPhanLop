@@ -25,13 +25,13 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
      */
     private final CourseInstructorBLL courseInstructorBLL = new CourseInstructorBLL();
 
-    private PnTableCourse pnTableCourse = null;
-    private PnTableInstructor pnTableInstructor = null;
+    private TableCoursePanel pnTableCourse = null;
+    private TableInstructorPanel pnTableInstructor = null;
 
     public CourseInstrutorPanel() throws SQLException {
         initComponents();
-        pnTableCourse = new PnTableCourse();
-        pnTableInstructor = new PnTableInstructor();
+        pnTableCourse = new TableCoursePanel();
+        pnTableInstructor = new TableInstructorPanel();
         pnTable.add(pnTableCourse);
         pnTable.validate();
         pnTable.repaint();
@@ -87,11 +87,11 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
         });
         jPanel5.add(btnAdd);
 
-        btnDelete.setText("Xóa");
         btnDelete.setBackground(new java.awt.Color(255, 104, 104));
-        btnDelete.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 128, 128)));
         btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnDelete.setForeground(new java.awt.Color(255, 255, 255));
+        btnDelete.setText("Xóa");
+        btnDelete.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 128, 128)));
         btnDelete.setPreferredSize(new java.awt.Dimension(100, 40));
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

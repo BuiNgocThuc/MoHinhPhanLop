@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author ASUS
  */
-public class PnTableInstructor extends javax.swing.JPanel {
+public class TableInstructorPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form pnTableInstructor
@@ -26,7 +26,7 @@ public class PnTableInstructor extends javax.swing.JPanel {
     JPanel cardPanel = null;
     private final CourseInstructorBLL courseInstructorBLL = new CourseInstructorBLL();
 
-    public PnTableInstructor() throws SQLException {
+    public TableInstructorPanel() throws SQLException {
         initComponents();
         List<PersonDTO> instructors = courseInstructorBLL.getListInstructorAssignCourse();
 
