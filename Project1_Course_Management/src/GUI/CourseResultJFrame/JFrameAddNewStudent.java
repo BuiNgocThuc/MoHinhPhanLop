@@ -220,7 +220,7 @@ public class JFrameAddNewStudent extends javax.swing.JFrame {
             StudentGradeDTO studentGrade = new StudentGradeDTO();
             studentGrade.setCourseID(courseID);
             studentGrade.setStudentID(id);
-            studentGrade.setGrade(0);
+            studentGrade.setGrade(null);
             studentGradeBll.insertStudent(studentGrade);
             
             JOptionPane.showMessageDialog(null, "Add success");

@@ -241,7 +241,7 @@ public class JFrameListStudent extends javax.swing.JFrame {
             StudentGradeDTO studentGrade = new StudentGradeDTO();
             studentGrade.setCourseID(courseID);
             studentGrade.setStudentID(studentID);
-            studentGrade.setGrade(0);
+            studentGrade.setGrade(null);
             
             studentGradeBll.insertStudent(studentGrade);
             
