@@ -6,6 +6,7 @@ package GUI.MainPanel;
 
 import BLL.CourseInstructorBLL;
 import DTO.CourseDTO;
+import DTO.PersonDTO;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -214,7 +215,8 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
                 }
                 List<CourseDTO> courses = courseInstructorBLL.getListCourseAssignInstructor();
                 pnTableCourse.loadData(courses);
-                pnTableInstructor.loadData();
+                List<PersonDTO> instructors = courseInstructorBLL.getListInstructorAssignCourse();
+                pnTableInstructor.loadData(instructors);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -229,6 +231,9 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
             switch (cbPointOfView.getSelectedIndex()) {
                 case 0 -> {
                     pnTableCourse.findCourses(text);
+                }
+                case 1 -> {
+                    pnTableInstructor.findInstructors(text);
                 }
             }
         } catch (SQLException e) {

@@ -127,9 +127,8 @@ public class PnTableCourse extends javax.swing.JPanel {
     }
 
     public void findCourses(String text) throws SQLException {
-        System.out.println(text + "]");
         List<CourseDTO> courses = courseInstructorBLL.findCourses(text);
-        if (courses.size() == 0) {
+        if (courses.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Không tìm thấy");
         } else {
             loadData(courses);
