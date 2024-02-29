@@ -38,8 +38,12 @@ public class CourseInstructorBLL {
         return courseInstructorDAL.updateCourseInstructor(courseInstructor);
     }
 
-    public void deleteCourseInstructor(int courseID) throws SQLException {
-        courseInstructorDAL.deleteCourseInstructor(courseID);
+    public void deleteCourseInstructor(CourseInstructorDTO courseInstructor) throws SQLException {
+        courseInstructorDAL.deleteCourseInstructor(courseInstructor);
+    }
+    
+    public void deleteALLCourseInstructor(int courseID) throws SQLException {
+        courseInstructorDAL.deleteAllCourseInstructor(courseID);
     }
 
     public static void main(String[] args) throws SQLException {

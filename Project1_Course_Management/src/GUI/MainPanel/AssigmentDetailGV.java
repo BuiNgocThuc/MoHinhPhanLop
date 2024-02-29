@@ -12,13 +12,15 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.PopupMenu;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,17 +29,17 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 
 public class AssigmentDetailGV extends JPanel {
 
+    private int id_GV;
     private CourseBLL courseBLL = new CourseBLL();
     private CourseInstructorBLL courseInstructorBLL = new CourseInstructorBLL();
     private List<CourseDTO> listCourseDTO = courseBLL.getAllist();
-    private List<CourseInstructorDTO> listCourseDTOOfPersonId;
+    private List<CourseInstructorDTO> listCourseInstructor;
 
     public AssigmentDetailGV(int id_GV) throws SQLException {
-        listCourseDTOOfPersonId = courseInstructorBLL.getListCourseInstructorsByPersonID(id_GV);
+        listCourseInstructor = courseInstructorBLL.getListCourseInstructorsByPersonID(id_GV);
         initComponents(id_GV);
         setPreferredSize(new Dimension(1200, 600));
         setBackground(Color.WHITE);
@@ -45,6 +47,7 @@ public class AssigmentDetailGV extends JPanel {
 
     private void initComponents(int id_GV) {
         setLayout(new BorderLayout());
+        this.id_GV = id_GV;
         initPanelTop(id_GV);
         add(panelTop, BorderLayout.NORTH);
         initPanelCenter();
@@ -67,7 +70,7 @@ public class AssigmentDetailGV extends JPanel {
 
             AssigmentDetailGV panelAction = null;
             try {
-                panelAction = new AssigmentDetailGV(1);
+                panelAction = new AssigmentDetailGV(4);
             } catch (SQLException ex) {
                 Logger.getLogger(AssigmentDetailGV.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -83,8 +86,8 @@ public class AssigmentDetailGV extends JPanel {
         panelTop.setPreferredSize(new Dimension(1200, 80));
         panelTop.setLayout(new BorderLayout());
         panelTop.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createMatteBorder(1, 1, 1, 1, Color.GRAY), // MatteBorder
-                BorderFactory.createEmptyBorder(10, 10, 10, 10) // EmptyBorder
+                BorderFactory.createMatteBorder(1, 1, 1, 1, Color.GRAY), 
+                BorderFactory.createEmptyBorder(10, 10, 10, 10)
         ));
 
         JLabel titleLabel = new JLabel("Chi tiết phân công của giảng viên");
@@ -92,7 +95,7 @@ public class AssigmentDetailGV extends JPanel {
 
         panelTop.add(titleLabel, BorderLayout.WEST);
 
-        JPanel panelInfor = new JPanel(new FlowLayout(FlowLayout.LEFT)); // thông tin của giảng viên 
+        JPanel panelInfor = new JPanel(new FlowLayout(FlowLayout.LEFT)); 
         JLabel jLabelId = new JLabel("ID");
         JLabel jLabelFn = new JLabel("Firstname");
         jLabelFn.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 0));
@@ -100,7 +103,7 @@ public class AssigmentDetailGV extends JPanel {
         jLabelLn.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 0));
         JLabel jLabelHd = new JLabel("Hiredate");
         jLabelHd.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 0));
-        Font labelFont = new Font("Arial", Font.BOLD, 18); // Thiết lập font với kích thước 14 và kiểu Plain
+        Font labelFont = new Font("Arial", Font.BOLD, 18); 
         jLabelId.setFont(labelFont);
         jLabelFn.setFont(labelFont);
         jLabelLn.setFont(labelFont);
@@ -117,7 +120,7 @@ public class AssigmentDetailGV extends JPanel {
         valueLn.setText(personDTO.getLastName());
         valueHd.setText(String.valueOf(personDTO.getHireDate()));
 
-        Font valueFont = new Font("Arial", Font.PLAIN, 18); // Thiết lập font với kích thước 14 và kiểu Bold
+        Font valueFont = new Font("Arial", Font.PLAIN, 18);
         valueId.setFont(valueFont);
         valueFn.setFont(valueFont);
         valueLn.setFont(valueFont);
@@ -146,8 +149,7 @@ public class AssigmentDetailGV extends JPanel {
                 BorderFactory.createTitledBorder(
                         BorderFactory.createEtchedBorder(EtchedBorder.LOWERED, Color.WHITE, Color.GRAY),
                         "Danh sách các môn được phân công", TitledBorder.LEADING, TitledBorder.TOP)));
-
-        DefaultTableModel model = new DefaultTableModel(
+        modeltable = new DefaultTableModel(
                 new Object[][]{},
                 new String[]{"STT", "ID", "Tên Môn", "Số Tín Chỉ", "Khoa", ""}) {
             @Override
@@ -155,24 +157,21 @@ public class AssigmentDetailGV extends JPanel {
                 return false; // Ngăn chặn việc chỉnh sửa ô
             }
         };
-        JTable table = new JTable();
-        table = new JTable(model);
+        table = new JTable();
+        table = new JTable(modeltable);
         int stt = 1;
-        for (CourseInstructorDTO dto : listCourseDTOOfPersonId) {
+        for (CourseInstructorDTO dto : listCourseInstructor) {
             Object[] rowData = new String[6]; // 5 là số cột của bảng
             rowData[0] = String.valueOf(stt++);
             rowData[1] = String.valueOf(dto.getCourseID());
-            for (CourseDTO courseDTO : listCourseDTO) {
-                if (courseDTO.getCourseID() == dto.getCourseID()) {
-                    rowData[2] = courseDTO.getTitle();
-                    rowData[3] = String.valueOf(courseDTO.getCredits());
-                }
-            }
+            rowData[2] = dto.courseDTO.getTitle();
+            rowData[3] = String.valueOf(dto.courseDTO.getCredits());
             rowData[4] = "";
-//            rowData[5] = "/assets/icons8-search-24.png";
-            model.addRow(rowData);
+            rowData[5] = "/assets/icons8-trash-35.png";
+            modeltable.addRow(rowData);
         }
-        table.setModel(model);
+        table.setRowHeight(35);
+        table.setModel(modeltable);
         JScrollPane scrollPane = new JScrollPane(table);
         panel_Table.add(scrollPane, BorderLayout.CENTER);
         panelCenter.add(panel_Table, BorderLayout.CENTER);
@@ -183,6 +182,36 @@ public class AssigmentDetailGV extends JPanel {
                 table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
             }
         }
+        table.getColumnModel().getColumn(5).setCellRenderer(new ImageRender());
+        table.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                JTable target = (JTable) e.getSource();
+                int row = target.rowAtPoint(e.getPoint());
+                int column = target.columnAtPoint(e.getPoint());
+
+                if (row >= 0 && row < target.getRowCount() && column == 5) {
+                    target.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                }
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                JTable target = (JTable) e.getSource();
+                target.setCursor(Cursor.getDefaultCursor());
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JTable target = (JTable) e.getSource();
+                int column = target.columnAtPoint(e.getPoint());
+                if (column == 5) {
+                    int row = target.rowAtPoint(e.getPoint());
+                    removeRowFromTable(modeltable, row);
+
+                }
+            }
+        });
 
         JPanel panelRight = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         panelRight.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
@@ -191,23 +220,49 @@ public class AssigmentDetailGV extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Nút Lưu được nhấn");
+                for (CourseInstructorDTO dto : listCourseInstructor) {
+                    try {
+                        courseInstructorBLL.deleteCourseInstructor(dto);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(AssigmentDetailGV.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+
+                for (int i = 0; i < table.getRowCount(); i++) {
+                    String courseID = table.getValueAt(i, 1).toString();
+                    CourseInstructorDTO courseInstructor = new CourseInstructorDTO(Integer.parseInt(courseID), id_GV);
+                    try {
+                        courseInstructorBLL.insertCourseInstructor(courseInstructor);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(AssigmentDetailGV.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
             }
-        });
+        }
+        );
         btnAddMon = new JButton("thêm");
-        btnAddMon.addActionListener(new ActionListener() {
+
+        btnAddMon.addActionListener(
+                new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e
+            ) {
                 panel.setVisible(false);
                 panelBelow.setVisible(true);
             }
-        });
+        }
+        );
 
         panelRight.add(btnAddMon);
+
         panelRight.add(btnSave);
+
         panelCenter.add(panelRight, BorderLayout.NORTH);
 
         panel = new JPanel();
-        panel.setPreferredSize(new Dimension(1200, 150));
+
+        panel.setPreferredSize(
+                new Dimension(1200, 150));
         panelCenter.add(panel, BorderLayout.SOUTH);
     }
 
@@ -224,7 +279,7 @@ public class AssigmentDetailGV extends JPanel {
                         BorderFactory.createEtchedBorder(EtchedBorder.LOWERED, Color.WHITE, Color.GRAY),
                         "Danh sách các môn", TitledBorder.LEADING, TitledBorder.TOP)));
 
-        DefaultTableModel model = new DefaultTableModel(
+        modeltable1 = new DefaultTableModel(
                 new Object[][]{},
                 new String[]{"STT", "ID", "Tên Môn", "Số Tín Chỉ", "Khoa", ""}) {
             @Override
@@ -234,7 +289,7 @@ public class AssigmentDetailGV extends JPanel {
         };
 
         JTable table1 = new JTable();
-        table1 = new JTable(model);
+        table1 = new JTable(modeltable1);
         int stt = 1;
         for (CourseDTO dto : listCourseDTO) {
             Object[] rowData = new String[6]; // 5 là số cột của bảng
@@ -244,9 +299,10 @@ public class AssigmentDetailGV extends JPanel {
             rowData[3] = String.valueOf(dto.getCredits());
             rowData[4] = "";
             rowData[5] = "/assets/icons8-add-48.png";
-            model.addRow(rowData);
+            modeltable1.addRow(rowData);
         }
-        table1.setModel(model);
+        table1.setRowHeight(35);
+        table1.setModel(modeltable1);
         JScrollPane scrollPane = new JScrollPane(table1);
         panel_Table1.add(scrollPane, BorderLayout.CENTER);
         panelBelow.add(panel_Table1, BorderLayout.CENTER);
@@ -259,7 +315,36 @@ public class AssigmentDetailGV extends JPanel {
         }
         table1.getColumnModel().getColumn(5).setCellRenderer(new ImageRender());
 
-        JPanel panelRight = new JPanel(new FlowLayout(FlowLayout.RIGHT)); // code thanh searh va button vao day
+        table1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                JTable target = (JTable) e.getSource();
+                int row = target.rowAtPoint(e.getPoint());
+                int column = target.columnAtPoint(e.getPoint());
+
+                if (row >= 0 && row < target.getRowCount() && column == 5) {
+                    target.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                }
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                JTable target = (JTable) e.getSource();
+                target.setCursor(Cursor.getDefaultCursor());
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JTable target = (JTable) e.getSource();
+                int column = target.columnAtPoint(e.getPoint());
+                if (column == 5) {
+                    int row = target.rowAtPoint(e.getPoint());
+                    Object value = target.getValueAt(row, 1);
+                    addRowToTable(modeltable, Integer.parseInt(value.toString()), listCourseDTO);
+                }
+            }
+        });
+        JPanel panelRight = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         panelRight.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
         searchValue = new JTextField();
         searchValue.setPreferredSize(new Dimension(200, 30));
@@ -282,37 +367,62 @@ public class AssigmentDetailGV extends JPanel {
         panelBelow.add(panelRight1, BorderLayout.SOUTH);
     }
 
+    public void addRowToTable(DefaultTableModel model, int courseID, List<CourseDTO> listCourseDTO) {
+        // Kiểm tra xem courseID đã tồn tại trong cột row1 chưa
+        for (int i = 0; i < model.getRowCount(); i++) {
+            int existingCourseID = Integer.parseInt((String) model.getValueAt(i, 1));
+            if (existingCourseID == courseID) {
+                JOptionPane.showMessageDialog(null, "Môn học đã được thêm!", "", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+
+        Object[] rowData = new Object[6];
+        rowData[0] = String.valueOf(model.getRowCount() + 1);
+        rowData[1] = String.valueOf(courseID);
+        for (CourseDTO courseDTO : listCourseDTO) {
+            if (courseDTO.getCourseID() == courseID) {
+                rowData[2] = courseDTO.getTitle();
+                rowData[3] = String.valueOf(courseDTO.getCredits());
+                rowData[4] = "";
+                rowData[5] = "/assets/icons8-trash-35.png";
+                break;
+            }
+        }
+        model.addRow(rowData);
+    }
+
+    public void removeRowFromTable(DefaultTableModel model, int rowIndex) {
+        if (rowIndex >= 0 && rowIndex < model.getRowCount()) {
+            model.removeRow(rowIndex);
+            // Cập nhật lại số thứ tự của các hàng sau khi xóa
+            for (int i = rowIndex; i < model.getRowCount(); i++) {
+                model.setValueAt(String.valueOf(i + 1), i, 0);
+            }
+        } else {
+            System.out.println("Invalid row index: " + rowIndex);
+        }
+    }
+
     public class ImageRender extends DefaultTableCellRenderer {
 
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
                 int row, int column) {
             JLabel label = new JLabel();
-
             if (value instanceof String && (((String) value).endsWith(".png") || ((String) value).endsWith(".jpg"))) {
-                System.out.println("hi");
-                // Tạo hình ảnh từ chuỗi string
-                ImageIcon originalIcon = new ImageIcon((String) value);
-
-                // Thay đổi kích thước của Image thành 50x50 pixels
+                ImageIcon originalIcon = new ImageIcon(getClass().getResource((String) value));
                 Image originalImage = originalIcon.getImage();
-                Image resizedImage = originalImage.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-
-                // Tạo ImageIcon mới với kích thước 50x50
+                Image resizedImage = originalImage.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
                 ImageIcon resizedIcon = new ImageIcon(resizedImage);
-
-                // Đặt alignment để căn giữa biểu tượng trong Jlabel
                 label.setIcon(resizedIcon);
                 label.setHorizontalAlignment(SwingConstants.CENTER);
                 label.setVerticalAlignment(SwingConstants.CENTER);
-
-                // Loại bỏ văn bản
             } else {
+                label.setText("thêm");
                 System.out.println("không có");
-                // Nếu không phải biểu tượng thì sử dụng giá trị mặc định
                 return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
             }
-
             return label;
         }
     }
@@ -322,9 +432,12 @@ public class AssigmentDetailGV extends JPanel {
     private JPanel panelBelow;
     private JPanel panel_Table;
     private JPanel panel_Table1;
-    private JButton btnAddMon; // button để chọn thêm môn cho giảng viên đó
+    private JButton btnAddMon;
     private JButton btnSave;
     private JTextField searchValue;
     private JButton btnSearch;
     private JPanel panel;
+    private JTable table;
+    private DefaultTableModel modeltable;
+    private DefaultTableModel modeltable1;
 }
