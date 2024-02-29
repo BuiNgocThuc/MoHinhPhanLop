@@ -28,10 +28,6 @@ public class CourseInstructorBLL {
         }
     }
 
-    public static void main(String[] args) throws SQLException {
-        new CourseInstructorBLL().getListCourseAssignInstructor();
-    }
-
     public List<CourseDTO> getListCourseAssignInstructor() throws SQLException {
         List<CourseDTO> courses = courseDAL.getAllList();
         courseDAL.populateInstructors(courses);
@@ -61,9 +57,9 @@ public class CourseInstructorBLL {
     public void deleteCourseInstructor(CourseInstructorDTO courseInstructor) throws SQLException {
         courseInstructorDAL.deleteCourseInstructor(courseInstructor);
     }
-    
-    public void deleteALLCourseInstructor(int courseID) throws SQLException {
-        courseInstructorDAL.deleteAllCourseInstructor(courseID);
+
+    public void deleteAllCourseAssignInstructor(int instrutorID) throws SQLException {
+        courseInstructorDAL.deleteAllCourseAssignInstructor(instrutorID);
     }
 
 //    public static void main(String[] args) throws SQLException {
