@@ -61,7 +61,6 @@ public class PnTableInstructor extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        tblInstructor.setRowHeight(35);
         tblInstructor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblInstructorMouseClicked(evt);
