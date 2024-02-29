@@ -9,6 +9,8 @@ import DTO.CourseDTO;
 import DTO.PersonDTO;
 import java.sql.SQLException;
 import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,11 +23,14 @@ public class PnTableInstructor extends javax.swing.JPanel {
     /**
      * Creates new form pnTableInstructor
      */
+    JPanel cardPanel = null;
     private final CourseInstructorBLL courseInstructorBLL = new CourseInstructorBLL();
 
     public PnTableInstructor() throws SQLException {
         initComponents();
-        loadData();
+        List<PersonDTO> instructors = courseInstructorBLL.getListInstructorAssignCourse();
+
+        loadData(instructors);
     }
 
     /**
@@ -54,6 +59,11 @@ public class PnTableInstructor extends javax.swing.JPanel {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblInstructor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblInstructorMouseClicked(evt);
             }
         });
         spInstructor.setViewportView(tblInstructor);
@@ -86,13 +96,26 @@ public class PnTableInstructor extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tblInstructorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblInstructorMouseClicked
+        if (evt.getClickCount() == 2) {
+            int row = tblInstructor.getSelectedRow();
+            int instructorID = (int) tblInstructor.getValueAt(row, 1);
+            System.out.println(instructorID);
+            try {
+                new AssigmentDetailGV(instructorID);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Lỗi hệ thống");
+            }
+        }
+    }//GEN-LAST:event_tblInstructorMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane spInstructor;
     private javax.swing.JTable tblInstructor;
     // End of variables declaration//GEN-END:variables
-    public void loadData() throws SQLException {
-        List<PersonDTO> instructors = courseInstructorBLL.getListInstructorAssignCourse();
+    public void loadData(List<PersonDTO> instructors) throws SQLException {
         DefaultTableModel model = (DefaultTableModel) tblInstructor.getModel();
         model.setRowCount(0);
         int no = 1;
@@ -101,19 +124,20 @@ public class PnTableInstructor extends javax.swing.JPanel {
             String firstName = instructor.getFirstName();
             String lastName = instructor.getLastName();
 
-            String courseInfos = "";
+            String courseInfos = "-------";
             List<CourseDTO> courses = instructor.getCourses();
-            if (courses == null) {
-                continue;
+            if (courses != null) {
+                courseInfos = "";
+                for (int i = 0; i < courses.size() - 1; i++) {
+                    courseInfos += String.format("%d-%s, ",
+                            courses.get(i).getCourseID(),
+                            courses.get(i).getTitle());
+                }
+                courseInfos += String.format("%d-%s",
+                        courses.get(courses.size() - 1).getCourseID(),
+                        courses.get(courses.size() - 1).getTitle());
             }
-            for (int i = 0; i < courses.size() - 1; i++) {
-                courseInfos += String.format("%d-%s, ",
-                        courses.get(i).getCourseID(),
-                        courses.get(i).getTitle());
-            }
-            courseInfos += String.format("%d-%s",
-                    courses.get(courses.size() - 1).getCourseID(),
-                    courses.get(courses.size() - 1).getTitle());
+
             Object[] row
                     = {
                         no++, instructorID, lastName, firstName, courseInfos
@@ -127,6 +151,15 @@ public class PnTableInstructor extends javax.swing.JPanel {
         if (seletedRow != -1) {
             int instructorId = (int) tblInstructor.getValueAt(seletedRow, 1);
             courseInstructorBLL.deleteAllCourseAssignInstructor(instructorId);
+        }
+    }
+
+    public void findInstructors(String text) throws SQLException {
+        List<PersonDTO> instructors = courseInstructorBLL.findInstructors(text);
+        if (instructors.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Không tìm thấy");
+        } else {
+            loadData(instructors);
         }
     }
 

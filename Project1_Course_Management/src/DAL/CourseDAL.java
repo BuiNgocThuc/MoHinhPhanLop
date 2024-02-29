@@ -531,6 +531,9 @@ public class CourseDAL {
     }
 
     public void populateInstructors(List<CourseDTO> courses) throws SQLException {
+        if (courses.isEmpty()) {
+            return;
+        }
         // Collecting course IDs
         List<Integer> courseIds = new ArrayList<>();
         for (CourseDTO course : courses) {

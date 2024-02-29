@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 /**
  *
@@ -109,7 +110,61 @@ public class PersonDAL {
         return null;
     }
 
+    public List<PersonDTO> findInstructorsById(int s) {
+        ArrayList<PersonDTO> instructors = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM person p "
+                    + "WHERE HireDate IS NOT NULL "
+                    + "AND p.PersonID LIKE CONCAT('%'," + s + ",'%')";
+            PreparedStatement pre = con.getConnectDB().prepareStatement(query);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                int instructorId = rs.getInt("PersonID");
+                String firstName = rs.getString("Firstname");
+                String lastName = rs.getString("Lastname");
+                Timestamp hireDate = rs.getTimestamp("HireDate");
+                Timestamp enrollmentDate = rs.getTimestamp("EnrollmentDate");
+                // Create instructor DTO
+                PersonDTO instructor = new PersonDTO(instructorId, firstName, lastName, hireDate, enrollmentDate);
+                instructors.add(instructor);
+            }
+            return instructors;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<PersonDTO> findInstrutorsByName(String name) {
+        ArrayList<PersonDTO> instructors = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM person p "
+                    + "WHERE HireDate IS NOT NULL "
+                    + "AND CONCAT(p.LastName,' ',p.FirstName) LIKE CONCAT('%',?,'%')";
+            PreparedStatement pre = con.getConnectDB().prepareStatement(query);
+            pre.setString(1, name);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                int instructorId = rs.getInt("PersonID");
+                String firstName = rs.getString("Firstname");
+                String lastName = rs.getString("Lastname");
+                Timestamp hireDate = rs.getTimestamp("HireDate");
+                Timestamp enrollmentDate = rs.getTimestamp("EnrollmentDate");
+                // Create instructor DTO
+                PersonDTO instructor = new PersonDTO(instructorId, firstName, lastName, hireDate, enrollmentDate);
+                instructors.add(instructor);
+            }
+            return instructors;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public void populateCourses(List<PersonDTO> instructors) throws SQLException {
+        if (instructors.isEmpty()) {
+            return;
+        }
         // Collecting instructor IDs
         List<Integer> instructorIds = new ArrayList<>();
         for (PersonDTO instructor : instructors) {
