@@ -169,6 +169,15 @@ public class CourseInstructorDAL {
             throw e;
         }
     }
+    public void deleteAllInstructorAssignCourse(int courseID) throws SQLException {
+        String query = "DELETE FROM CourseInstructor WHERE CourseID = ?";
+        try (PreparedStatement statement = conn.prepareStatement(query)) {
+            statement.setInt(1, courseID);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
 
     public void populate(CourseInstructorDTO courseInstructorDTO, String[] fields) {
 

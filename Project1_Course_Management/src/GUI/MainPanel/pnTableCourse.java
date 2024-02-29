@@ -116,4 +116,12 @@ public class PnTableCourse extends javax.swing.JPanel {
             model.addRow(row);
         }
     }
+
+    public void deleteAllInstructorAssignCourse() throws SQLException {
+        int seletedRow = tblCourse.getSelectedRow();
+        if (seletedRow != -1) {
+            int courseID = (int) tblCourse.getValueAt(seletedRow, 1);
+            courseInstructorBLL.deleteAllInstructorAssignCourse(courseID);
+        }
+    }
 }

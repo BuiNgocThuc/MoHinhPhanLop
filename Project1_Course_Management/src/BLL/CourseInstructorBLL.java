@@ -62,6 +62,10 @@ public class CourseInstructorBLL {
         courseInstructorDAL.deleteAllCourseAssignInstructor(instrutorID);
     }
 
+    public void deleteAllInstructorAssignCourse(int courseID) throws SQLException {
+        courseInstructorDAL.deleteAllInstructorAssignCourse(courseID);
+    }
+
 //    public static void main(String[] args) throws SQLException {
 //        CourseInstructorBLL ciBLL = new CourseInstructorBLL();
 //
