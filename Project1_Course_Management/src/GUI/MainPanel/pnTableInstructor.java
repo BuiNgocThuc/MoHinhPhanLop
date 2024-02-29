@@ -10,6 +10,7 @@ import DTO.PersonDTO;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,6 +23,7 @@ public class PnTableInstructor extends javax.swing.JPanel {
     /**
      * Creates new form pnTableInstructor
      */
+    JPanel cardPanel = null;
     private final CourseInstructorBLL courseInstructorBLL = new CourseInstructorBLL();
 
     public PnTableInstructor() throws SQLException {
@@ -59,6 +61,11 @@ public class PnTableInstructor extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tblInstructor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblInstructorMouseClicked(evt);
+            }
+        });
         spInstructor.setViewportView(tblInstructor);
         if (tblInstructor.getColumnModel().getColumnCount() > 0) {
             tblInstructor.getColumnModel().getColumn(0).setMinWidth(50);
@@ -88,6 +95,20 @@ public class PnTableInstructor extends javax.swing.JPanel {
                 .addComponent(spInstructor, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tblInstructorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblInstructorMouseClicked
+        if (evt.getClickCount() == 2) {
+            int row = tblInstructor.getSelectedRow();
+            int instructorID = (int) tblInstructor.getValueAt(row, 1);
+            System.out.println(instructorID);
+            try {
+                new AssigmentDetailGV(instructorID);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Lỗi hệ thống");
+            }
+        }
+    }//GEN-LAST:event_tblInstructorMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
