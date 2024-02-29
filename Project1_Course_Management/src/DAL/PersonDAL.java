@@ -110,7 +110,10 @@ public class PersonDAL {
     }
 
     public void populateCourses(List<PersonDTO> instructors) throws SQLException {
-        // Collecting instructor IDs
+        if (instructors.isEmpty()) {
+            return;
+        }
+// Collecting instructor IDs
         List<Integer> instructorIds = new ArrayList<>();
         for (PersonDTO instructor : instructors) {
             instructorIds.add(instructor.getPersonID());
