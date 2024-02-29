@@ -59,6 +59,7 @@ public class PnTableInstructor extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tblInstructor.setRowHeight(35);
         spInstructor.setViewportView(tblInstructor);
         if (tblInstructor.getColumnModel().getColumnCount() > 0) {
             tblInstructor.getColumnModel().getColumn(0).setMinWidth(50);
