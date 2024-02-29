@@ -16,14 +16,14 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author ASUS
  */
-public class PnTableCourse extends javax.swing.JPanel {
+public class TableCoursePanel extends javax.swing.JPanel {
 
     /**
      * Creates new form pnTableCourse
      */
     private final CourseInstructorBLL courseInstructorBLL = new CourseInstructorBLL();
 
-    public PnTableCourse() throws SQLException {
+    public TableCoursePanel() throws SQLException {
         initComponents();
         List<CourseDTO> courses = courseInstructorBLL.getListCourseAssignInstructor();
         loadData(courses);

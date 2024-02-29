@@ -22,7 +22,7 @@ import javax.swing.UnsupportedLookAndFeelException;
  *
  * @author Bao
  */
-public class AssignmentAdd extends javax.swing.JFrame {
+public class CourseInstructorAddFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form AssignmentList
@@ -32,7 +32,7 @@ public class AssignmentAdd extends javax.swing.JFrame {
     private CourseInstructorBLL courseInstructorBLL = new CourseInstructorBLL();
     private final List<CourseInstructorDTO> courseInstructorList;
 
-    public AssignmentAdd() throws SQLException {
+    public CourseInstructorAddFrame() throws SQLException {
         initComponents();
         this.courseInstructorList = courseInstructorBLL.getAllCourseInstructors();
         pnInstructor = new PnInstructor();
@@ -228,7 +228,7 @@ public class AssignmentAdd extends javax.swing.JFrame {
                                 try {
                                     courseInstructorBLL.insertCourseInstructor(courseInstructorDTO);
                                 } catch (SQLException ex) {
-                                    Logger.getLogger(AssignmentAdd.class.getName()).log(Level.SEVERE, null, ex);
+                                    Logger.getLogger(CourseInstructorAddFrame.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                             }
                             JOptionPane.showMessageDialog(null, "Thêm thành công");
@@ -264,7 +264,7 @@ public class AssignmentAdd extends javax.swing.JFrame {
                                 try {
                                     courseInstructorBLL.insertCourseInstructor(courseInstructorDTO);
                                 } catch (SQLException ex) {
-                                    Logger.getLogger(AssignmentAdd.class.getName()).log(Level.SEVERE, null, ex);
+                                    Logger.getLogger(CourseInstructorAddFrame.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                             }
                             JOptionPane.showMessageDialog(null, "Thêm thành công");
@@ -301,11 +301,11 @@ public class AssignmentAdd extends javax.swing.JFrame {
                 System.err.println("Failed to initialize LaF");
             }
             try {
-                AssignmentAdd assignmentAdd = new AssignmentAdd();
+                CourseInstructorAddFrame assignmentAdd = new CourseInstructorAddFrame();
                 assignmentAdd.setVisible(true);
                 assignmentAdd.setLocationRelativeTo(null);
             } catch (SQLException ex) {
-                Logger.getLogger(AssignmentAdd.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CourseInstructorAddFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
     }

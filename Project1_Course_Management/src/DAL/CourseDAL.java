@@ -543,7 +543,7 @@ public class CourseDAL {
         Map<Integer, List<PersonDTO>> courseInstructorMap = new HashMap<>();
         try {
             List<PersonDTO> instructors = new ArrayList<>();
-            String query = "select * from Person p join courseinstructor ci "
+            String query = "select * from person p join courseinstructor ci "
                     + "on p.PersonID = ci.PersonID "
                     + "where p.HireDate is not null and "
                     + "ci.CourseID IN (";

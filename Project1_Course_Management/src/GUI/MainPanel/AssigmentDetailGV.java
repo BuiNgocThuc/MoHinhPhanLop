@@ -76,14 +76,14 @@ public class AssigmentDetailGV extends JFrame {
         panelTop.add(titleLabel, BorderLayout.WEST);
 
         JPanel panelInfor = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JLabel jLabelId = new JLabel("ID");
-        JLabel jLabelFn = new JLabel("Firstname");
+        JLabel jLabelId = new JLabel("ID: ");
+        JLabel jLabelFn = new JLabel("Firstname: ");
         jLabelFn.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 0));
-        JLabel jLabelLn = new JLabel("Lastname");
+        JLabel jLabelLn = new JLabel("Lastname: ");
         jLabelLn.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 0));
-        JLabel jLabelHd = new JLabel("Hiredate");
+        JLabel jLabelHd = new JLabel("Hiredate: ");
         jLabelHd.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 0));
-        Font labelFont = new Font("Arial", Font.BOLD, 18);
+        Font labelFont = new Font("Arial", Font.PLAIN, 18);
         jLabelId.setFont(labelFont);
         jLabelFn.setFont(labelFont);
         jLabelLn.setFont(labelFont);
@@ -198,9 +198,11 @@ public class AssigmentDetailGV extends JFrame {
         JPanel panelRight = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         panelRight.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
         btnSave = new JButton("Lưu");
-        btnSave.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        btnSave.addActionListener((ActionEvent e) -> {
+            int confirmed = JOptionPane.showConfirmDialog(null,
+                    "Bạn có chắc chắn muốn lưu thay đổi không?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+
+            if (confirmed == JOptionPane.YES_OPTION) {
                 System.out.println("Nút Lưu được nhấn");
                 for (CourseInstructorDTO dto : listCourseInstructor) {
                     try {
@@ -219,20 +221,16 @@ public class AssigmentDetailGV extends JFrame {
                         Logger.getLogger(AssigmentDetailGV.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
+
+                JOptionPane.showMessageDialog(null, "Thay đổi đã được lưu thành công.", "Thành công", JOptionPane.INFORMATION_MESSAGE);
             }
-        }
-        );
+        });
+
         btnAddMon = new JButton("thêm");
-        btnAddMon.addActionListener(
-                new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e
-            ) {
-                panel.setVisible(false);
-                panelBelow.setVisible(true);
-            }
-        }
-        );
+        btnAddMon.addActionListener((ActionEvent e) -> {
+            panel.setVisible(false);
+            panelBelow.setVisible(true);
+        });
 
         panelRight.add(btnAddMon);
         panelRight.add(btnSave);
