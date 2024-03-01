@@ -7,7 +7,9 @@ package GUI.MainPanel;
 import BLL.CourseInstructorBLL;
 import DTO.CourseDTO;
 import DTO.PersonDTO;
-import GUI.AssignmentManagement.AssignmentAdd;
+import GUI.AssignmentManagement.CourseInstructorAddFrame;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -25,13 +27,13 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
      */
     private final CourseInstructorBLL courseInstructorBLL = new CourseInstructorBLL();
 
-    private PnTableCourse pnTableCourse = null;
-    private PnTableInstructor pnTableInstructor = null;
+    private TableCoursePanel pnTableCourse = null;
+    private TableInstructorPanel pnTableInstructor = null;
 
     public CourseInstrutorPanel() throws SQLException {
         initComponents();
-        pnTableCourse = new PnTableCourse();
-        pnTableInstructor = new PnTableInstructor();
+        pnTableCourse = new TableCoursePanel();
+        pnTableInstructor = new TableInstructorPanel();
         pnTable.add(pnTableCourse);
         pnTable.validate();
         pnTable.repaint();
@@ -87,11 +89,11 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
         });
         jPanel5.add(btnAdd);
 
-        btnDelete.setText("Xóa");
         btnDelete.setBackground(new java.awt.Color(255, 104, 104));
-        btnDelete.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 128, 128)));
         btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnDelete.setForeground(new java.awt.Color(255, 255, 255));
+        btnDelete.setText("Xóa");
+        btnDelete.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 128, 128)));
         btnDelete.setPreferredSize(new java.awt.Dimension(100, 40));
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -202,22 +204,31 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         try {
-            int confirmed = JOptionPane.showConfirmDialog(null, "Xác nhận xóa",
+            String deleteType = "";
+            switch (cbPointOfView.getSelectedIndex()) {
+                case 0 ->
+                    deleteType = "các giảng viên đã được phân công của khóa học";
+                case 1 ->
+                    deleteType = "các môn học đã được phân công của giáo viên";
+            }
+
+            int confirmed = JOptionPane.showConfirmDialog(null, "Xác nhận hủy phân công " + deleteType,
                     "Xác nhận", JOptionPane.YES_NO_OPTION);
+
             if (confirmed == JOptionPane.YES_OPTION) {
                 switch (cbPointOfView.getSelectedIndex()) {
-                    case 0 -> {
+                    case 0 ->
                         pnTableCourse.deleteAllInstructorAssignCourse();
-                    }
-                    case 1 -> {
+                    case 1 ->
                         pnTableInstructor.deleteAllCourseAssignInstructor();
-                    }
-
                 }
+
                 List<CourseDTO> courses = courseInstructorBLL.getListCourseAssignInstructor();
                 pnTableCourse.loadData(courses);
                 List<PersonDTO> instructors = courseInstructorBLL.getListInstructorAssignCourse();
                 pnTableInstructor.loadData(instructors);
+
+                JOptionPane.showMessageDialog(null, "Đã hủy phân công " + deleteType + " thành công.", "Thành công", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -244,14 +255,28 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        AssignmentAdd assignmentAdd = null;
+        CourseInstructorAddFrame courseInstructorAddFrame = null;
         try {
-            assignmentAdd = new AssignmentAdd();
+            courseInstructorAddFrame = new CourseInstructorAddFrame();
+            courseInstructorAddFrame.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    try {
+                        List<CourseDTO> courses = courseInstructorBLL.getListCourseAssignInstructor();
+                        pnTableCourse.loadData(courses);
+                        List<PersonDTO> instructors = courseInstructorBLL.getListInstructorAssignCourse();
+                        pnTableInstructor.loadData(instructors);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(CourseInstrutorPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+
+            });
         } catch (SQLException ex) {
             Logger.getLogger(CourseInstrutorPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        assignmentAdd.setVisible(true);
-        assignmentAdd.setLocationRelativeTo(null);
+        courseInstructorAddFrame.setVisible(true);
+        courseInstructorAddFrame.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void cbPointOfViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPointOfViewActionPerformed

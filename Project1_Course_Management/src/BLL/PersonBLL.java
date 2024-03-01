@@ -35,4 +35,12 @@ public class PersonBLL {
     public ArrayList<PersonDTO> getListInstructor() {
         return personDAL.getListInstructor();
     }
+    
+    public boolean insertPerson(PersonDTO person) {
+        return personDAL.insertPerson(person);
+    }
+    
+    public int getAutoIncrement() {
+        return personDAL.getAutoIncrement();
+    }
 }

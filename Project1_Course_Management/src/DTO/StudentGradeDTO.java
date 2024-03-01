@@ -2,13 +2,13 @@ package DTO;
 
 public class StudentGradeDTO {
     private int EnrollmentID, StudentID, CourseID;
-    private double Grade;
+    private Double Grade;
     
     public StudentGradeDTO() {
         
     }
 
-    public StudentGradeDTO(int enrollmentID, int studentID, int courseID, double grade) {
+    public StudentGradeDTO(int enrollmentID, int studentID, int courseID, Double grade) {
         EnrollmentID = enrollmentID;
         StudentID = studentID;
         CourseID = courseID;
@@ -39,11 +39,11 @@ public class StudentGradeDTO {
         CourseID = courseID;
     }
 
-    public double getGrade() {
+    public Double getGrade() {
         return Grade;
     }
 
-    public void setGrade(double grade) {
+    public void setGrade(Double grade) {
         Grade = grade;
     }
 }

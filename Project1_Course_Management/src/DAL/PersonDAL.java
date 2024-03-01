@@ -6,14 +6,15 @@ package DAL;
 
 import DTO.CourseDTO;
 import DTO.PersonDTO;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -227,4 +228,54 @@ public class PersonDAL {
         }
     }
 
+    
+    public boolean insertPerson(PersonDTO personDTO) {
+        int result = -1;
+        
+        int personID = personDTO.getPersonID();
+        String lastName = personDTO.getLastName();
+        String firstName = personDTO.getFirstName();
+        Timestamp hireDate = personDTO.getHireDate();
+        Timestamp enrollmentDate = personDTO.getEnrollmentDate();
+        
+        String query = "INSERT INTO person(PersonID, LastName, FirstName, HireDate, EnrollmentDate) VALUES (?,?,?,?,?)";
+        try
+        {
+            PreparedStatement preStm = con.getConnectDB().prepareStatement(query);
+            preStm.setInt(1, personID);
+            preStm.setString(2, lastName);
+            preStm.setString(3, firstName);
+            preStm.setTimestamp(4, hireDate);
+            preStm.setTimestamp(5, enrollmentDate);
+            
+            result = preStm.executeUpdate();
+            if (result != 0)
+            {
+                return true;
+            }
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    public int getAutoIncrement() {
+        int result = -1;
+        try {
+            String sql = "SELECT `AUTO_INCREMENT` FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'school' AND   TABLE_NAME   = 'person'";
+            PreparedStatement pst = con.getConnectDB().prepareStatement(sql);
+            ResultSet rs2 = pst.executeQuery(sql);
+            if (!rs2.isBeforeFirst() ) {
+                System.out.println("No data");
+            } else {
+                while ( rs2.next() ) {
+                    result = rs2.getInt("AUTO_INCREMENT");
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonDAL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
 }

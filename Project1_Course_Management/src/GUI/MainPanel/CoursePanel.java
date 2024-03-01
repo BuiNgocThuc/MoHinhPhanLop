@@ -48,11 +48,16 @@ public class CoursePanel extends javax.swing.JPanel {
         courseAddForm = new CourseAddForm(this);
         initComponents();
         loadDepartmentName();
+        readCourse();
+    }
+    
+    private void readCourse() {
         loadData();
     }
-
+    
+    
     public void loadData() {
-        List<CourseDTO> listCourse = courseBLL.selectAllCourse();
+        listCourse = courseBLL.selectAllCourse();
 
         DefaultTableModel model = (DefaultTableModel) tblCourse.getModel();
         model.setRowCount(0);
@@ -283,7 +288,6 @@ public class CoursePanel extends javax.swing.JPanel {
         sortCourseBtnGroupPnl.setLayout(flowLayout6);
 
         sortCourseBtnGroup.add(jRadioButton1);
-        jRadioButton1.setSelected(true);
         jRadioButton1.setText("Tất cả");
         jRadioButton1.setPreferredSize(new java.awt.Dimension(60, 30));
         jRadioButton1.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -945,7 +949,7 @@ public class CoursePanel extends javax.swing.JPanel {
     public void loadCoursesOnsite() {
         DefaultTableModel model = (DefaultTableModel) tblCourse.getModel();
         model.setRowCount(0);
-        listCourse = courseBLL.selectAllCourse();
+        listCourse = courseBLL.selectOnsiteAllCourse();
         int STT = 1;
         for (CourseDTO course : listCourse) {
             if (course.getCourse_type().trim().equals("Onsite")) {
@@ -969,7 +973,7 @@ public class CoursePanel extends javax.swing.JPanel {
     public void loadCoursesOnline() {
         DefaultTableModel model = (DefaultTableModel) tblCourse.getModel();
         model.setRowCount(0);
-
+        listCourse = courseBLL.selectOnlineAllCourse();
         int STT = 1;
         for (CourseDTO course : listCourse) {
             if (course.getCourse_type().trim().equals("Online")) {

@@ -264,7 +264,8 @@ public class CourseDAL {
 
     public boolean checkCourseEmpty(int CourseID) {
         String query = "SELECT\n"
-                + "    (SELECT COUNT(*) FROM courseinstructor WHERE CourseID =" + CourseID + ") AS NumCourseInstructors,\n"
+                + "    (SELECT COUNT(*) FROM courseinstructor WHERE CourseID =" + CourseID
+                + ") AS NumCourseInstructors,\n"
                 + "    (SELECT COUNT(*) FROM studentgrade WHERE CourseID = " + CourseID + ") AS NumStudentsEnrolled;";
         try {
             preStm = conn.prepareStatement(query);
@@ -280,21 +281,22 @@ public class CourseDAL {
         }
         return true;
     }
-    //    public List<CourseDTO> searchCourse(String sequenceChar) {
-    //        List<CourseDTO> listCourseFiltered = new ArrayList<>();
-    //        if (sequenceChar == null || sequenceChar.isEmpty() || sequenceChar.isBlank())
-    //        {
-    //            return listCourses;
-    //        }
-    //        for (CourseDTO course : listCourses)
-    //        {
-    //            if (course.getTitle().toLowerCase().contains(sequenceChar.toLowerCase()) || String.valueOf(course.getCourseID()).contains(sequenceChar))
-    //            {
-    //                listCourseFiltered.add(course);
-    //            }
-    //        }
-    //        return listCourseFiltered;
-    //    }
+    // public List<CourseDTO> searchCourse(String sequenceChar) {
+    // List<CourseDTO> listCourseFiltered = new ArrayList<>();
+    // if (sequenceChar == null || sequenceChar.isEmpty() || sequenceChar.isBlank())
+    // {
+    // return listCourses;
+    // }
+    // for (CourseDTO course : listCourses)
+    // {
+    // if (course.getTitle().toLowerCase().contains(sequenceChar.toLowerCase()) ||
+    // String.valueOf(course.getCourseID()).contains(sequenceChar))
+    // {
+    // listCourseFiltered.add(course);
+    // }
+    // }
+    // return listCourseFiltered;
+    // }
 
     public ArrayList<CourseDTO> getAllList() {
         ArrayList<CourseDTO> listCourse = new ArrayList<CourseDTO>();
@@ -394,6 +396,79 @@ public class CourseDAL {
         }
         return null;
     }
+     public ArrayList<CourseDTO> searchAllCourse(String text){
+         ArrayList<CourseDTO> searchAllCourse=new ArrayList<CourseDTO>();
+        try{
+            String query="select * from course where UPPER(CONCAT(course.CourseID,course.Title)) like '%"+text+"%'";
+            PreparedStatement pre = conn.prepareStatement(query);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next())
+            {
+                CourseDTO course = new CourseDTO();
+                course.setCourseID(rs.getInt("CourseID"));
+                course.setTitle(rs.getString("Title"));
+                course.setCredits(rs.getInt("Credits"));
+                course.setDepartmentID(rs.getInt("DepartmentID"));
+                searchAllCourse.add(course);
+            }
+            return searchAllCourse;
+        }catch(Exception ex){
+        }
+        return null;
+    }
+    public List<CourseDTO> selectOnsiteAll() {
+        listCourses = new ArrayList<>();
+        String query = "SELECT \n"
+                    + "    course.*, 'Onsite' as course_type\n"
+                    + "FROM onsitecourse\n"
+                    + "LEFT JOIN course ON course.CourseID = onsitecourse.CourseID;";
+        try {
+            preStm = conn.prepareStatement(query);
+            ResultSet rs = preStm.executeQuery();
+            while (rs.next()) {
+                int CourseID = rs.getInt("CourseID");
+                String Title = rs.getString("Title");
+                int Credits = rs.getInt("Credits");
+                int DepartmentID = rs.getInt("DepartmentID");
+                String course_type = rs.getString("course_type");
+
+                CourseDTO course = new CourseDTO(CourseID, Title, Credits, DepartmentID, course_type);
+
+                listCourses.add(course);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return listCourses;
+    }
+    
+    public List<CourseDTO> selectOnlineAll() {
+        listCourses = new ArrayList<>();
+        String query = "SELECT \n"
+                    + "    course.*, 'Online' as course_type\n"
+                    + "FROM onlinecourse\n"
+                    + "LEFT JOIN course ON course.CourseID = onlinecourse.CourseID;";
+        try {
+            preStm = conn.prepareStatement(query);
+            ResultSet rs = preStm.executeQuery();
+            while (rs.next()) {
+                int CourseID = rs.getInt("CourseID");
+                String Title = rs.getString("Title");
+                int Credits = rs.getInt("Credits");
+                int DepartmentID = rs.getInt("DepartmentID");
+                String course_type = rs.getString("course_type");
+
+                CourseDTO course = new CourseDTO(CourseID, Title, Credits, DepartmentID, course_type);
+
+                listCourses.add(course);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return listCourses;
+    }
 
     public ArrayList<CourseDTO> findCoursesByNameOnsite(String s) {
         ArrayList<CourseDTO> listCourse = new ArrayList<CourseDTO>();
@@ -481,11 +556,13 @@ public class CourseDAL {
     public ArrayList<CourseDTO> findCoursesByIdOnsite(int s) {
         ArrayList<CourseDTO> listCourse = new ArrayList<CourseDTO>();
         try {
-            String query = "SELECT \n"
-                    + "    course.*, 'Onsite' as course_type\n"
-                    + "FROM course\n"
-                    + "LEFT JOIN onsitecourse ON course.CourseID = onsitecourse.CourseID\n"
-                    + "where course.CourseID LIKE CONCAT('%'," + s + ",'%')";
+            String query = "SELECT *\n" +
+                    "FROM (\n" +
+                    "    SELECT course.*, 'Onsite' as course_type \n" +
+                    "    FROM course \n" +
+                    "    JOIN onsitecourse ON course.CourseID = onsitecourse.CourseID\n" +
+                    ") AS subquery\n" +
+                    "WHERE CourseID LIKE CONCAT('%'," + s + ",'%')";
             PreparedStatement pre = conn.prepareStatement(query);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
@@ -507,11 +584,13 @@ public class CourseDAL {
     public ArrayList<CourseDTO> findCoursesByIdOnline(int s) {
         ArrayList<CourseDTO> listCourse = new ArrayList<>();
         try {
-            String query = "SELECT \n"
-                    + "    course.*, 'Online' as course_type\n"
-                    + "FROM course\n"
-                    + "LEFT JOIN onlinecourse ON course.CourseID = onlinecourse.CourseID\n"
-                    + "where course.CourseID LIKE CONCAT('%'," + s + ",'%')";
+            String query = "SELECT *\n" +
+                    "FROM (\n" +
+                    "    SELECT course.*, 'Online' as course_type \n" +
+                    "    FROM course \n" +
+                    "    JOIN onlinecourse ON course.CourseID = onlinecourse.CourseID\n" +
+                    ") AS subquery\n" +
+                    "WHERE CourseID LIKE CONCAT('%'," + s + ",'%')";
             PreparedStatement pre = conn.prepareStatement(query);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
@@ -543,7 +622,7 @@ public class CourseDAL {
         Map<Integer, List<PersonDTO>> courseInstructorMap = new HashMap<>();
         try {
             List<PersonDTO> instructors = new ArrayList<>();
-            String query = "select * from Person p join courseinstructor ci "
+            String query = "select * from person p join courseinstructor ci "
                     + "on p.PersonID = ci.PersonID "
                     + "where p.HireDate is not null and "
                     + "ci.CourseID IN (";

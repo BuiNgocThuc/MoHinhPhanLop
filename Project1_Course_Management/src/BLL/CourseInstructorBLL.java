@@ -17,6 +17,10 @@ public class CourseInstructorBLL {
     private CourseDAL courseDAL = new CourseDAL();
     private PersonDAL personDAL = new PersonDAL();
 
+    public CourseInstructorBLL() {
+
+    }
+
     public List<CourseInstructorDTO> getAllCourseInstructors() throws SQLException {
         return courseInstructorDAL.selectAll();
     }
@@ -90,4 +94,28 @@ public class CourseInstructorBLL {
         courseInstructorDAL.deleteAllInstructorAssignCourse(courseID);
     }
 
+    public List<CourseInstructorDTO> getListCourseInstructorsByCourseID(int id_Course) throws SQLException {
+        try {
+            return courseInstructorDAL.selectByCourseID(id_Course);
+        } catch (SQLException e) {
+            // Thông báo lỗi đến lớp gọi
+            throw new SQLException("Error retrieving course instructors by person ID", e);
+        }
+    }
+
+    public void updateCourseInstructors(PersonDTO instructor) throws SQLException {
+        deleteAllCourseAssignInstructor(instructor.getPersonID());
+        for (CourseDTO course : instructor.getCourses()) {
+            CourseInstructorDTO courseInstructor = new CourseInstructorDTO(course.getCourseID(), instructor.getPersonID());
+            insertCourseInstructor(courseInstructor);
+        }
+    }
+
+    public void updateCourseInstructors(CourseDTO course) throws SQLException {
+        deleteAllInstructorAssignCourse(course.getCourseID());
+        for (PersonDTO person : course.getInstructors()) {
+            CourseInstructorDTO courseInstructor = new CourseInstructorDTO(course.getCourseID(), person.getPersonID());
+            insertCourseInstructor(courseInstructor);
+        }
+    }
 }

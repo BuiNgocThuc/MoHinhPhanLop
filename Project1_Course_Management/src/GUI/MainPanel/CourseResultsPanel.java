@@ -43,8 +43,7 @@ public class CourseResultsPanel extends javax.swing.JPanel {
 
         @Override
         public void changedUpdate(DocumentEvent e) {
-        // Xử lý khi có sự thay đổi trong thuộc tính của văn bản
-        // (chẳng hạn như một loại thuộc tính được thay đổi, nhưng không phải nội dung văn bản)
+       
         }
         });
     }
@@ -58,12 +57,23 @@ public class CourseResultsPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButtonClearSearch1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableCourse = new javax.swing.JTable();
-        jSearch = new javax.swing.JTextField();
-        jButtonClearSearch = new javax.swing.JButton();
         jComboBoxCourse = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSearch = new javax.swing.JTextField();
+        jButtonIcon = new javax.swing.JButton();
+        jButtonClearSearch = new javax.swing.JButton();
+
+        jButtonClearSearch1.setText("X");
+        jButtonClearSearch1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonClearSearch1ActionPerformed(evt);
+            }
+        });
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(838, 629));
@@ -86,24 +96,6 @@ public class CourseResultsPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTableCourse);
 
-        jSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jSearchActionPerformed(evt);
-            }
-        });
-        jSearch.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jSearchKeyReleased(evt);
-            }
-        });
-
-        jButtonClearSearch.setText("X");
-        jButtonClearSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonClearSearchActionPerformed(evt);
-            }
-        });
-
         jComboBoxCourse.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBoxCourse.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -116,41 +108,89 @@ public class CourseResultsPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel1.setText("Course");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel2.setText("QUẢN LÝ KẾT QUẢ SINH VIÊN");
+        jLabel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 5, 10, 0));
+
+        jSearch.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jSearch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jSearch.setPreferredSize(new java.awt.Dimension(300, 40));
+        jSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSearchActionPerformed(evt);
+            }
+        });
+
+        jButtonIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8-search-24.png"))); // NOI18N
+        jButtonIcon.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButtonIcon.setMargin(new java.awt.Insets(2, 20, 3, 0));
+        jButtonIcon.setPreferredSize(new java.awt.Dimension(40, 40));
+        jButtonIcon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonIconActionPerformed(evt);
+            }
+        });
+
+        jButtonClearSearch.setText("X");
+        jButtonClearSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonClearSearchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(665, 665, 665))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(254, 254, 254)
-                        .addComponent(jSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonClearSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBoxCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jComboBoxCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButtonClearSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButtonIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(21, 21, 21))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonClearSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                .addGap(16, 16, 16)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonClearSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jComboBoxCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -165,28 +205,6 @@ public class CourseResultsPanel extends javax.swing.JPanel {
             jTableCourse.clearSelection();
         }
     }//GEN-LAST:event_jTableCourseMouseClicked
-
-    private void jSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jSearchActionPerformed
-
-    private void jButtonClearSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearSearchActionPerformed
-        // TODO add your handling code here:
-        jSearch.setText("");
-        LoadData();
-    }//GEN-LAST:event_jButtonClearSearchActionPerformed
-
-    private void jSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSearchKeyReleased
-        // TODO add your handling code here:
-//        if(jSearch.getText().isEmpty()){
-//            jButtonClearSearch.setVisible(false);
-//            jTableCourse.setRowSorter(null);
-//            LoadData();
-//        }else{
-//            Search(jSearch.getText().toString());
-//            jButtonClearSearch.setVisible(true);
-//        }
-    }//GEN-LAST:event_jSearchKeyReleased
 
     private void jComboBoxCourseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxCourseMouseClicked
         // TODO add your handling code here:
@@ -210,20 +228,54 @@ public class CourseResultsPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jComboBoxCourseActionPerformed
 
+    private void jSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jSearchActionPerformed
+
+    private void jButtonClearSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearSearch1ActionPerformed
+        // TODO add your handling code here:
+        jSearch.setText("");
+        LoadData();
+    }//GEN-LAST:event_jButtonClearSearch1ActionPerformed
+
+    private void jButtonClearSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearSearchActionPerformed
+        // TODO add your handling code here:
+        jSearch.setText("");
+        LoadData();
+    }//GEN-LAST:event_jButtonClearSearchActionPerformed
+
+    private void jButtonIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIconActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonIconActionPerformed
+
     public void SearchTable(String text){
-        DefaultTableModel faut = (DefaultTableModel) jTableCourse.getModel();
-        TableRowSorter<DefaultTableModel> search = new TableRowSorter<>(faut);
-        jTableCourse.setRowSorter(search);
-        search.setRowFilter(RowFilter.regexFilter("(?i)"+text));
+         DefaultTableModel model=new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        String columns[]=new String[]{"CourseID","CourseName"};
+        for(String i:columns){
+            model.addColumn(i);
+        }
+        for(CourseDTO i:courseBLL.searchAllCourse(text)){
+            Vector t=new Vector<>();
+            t.add(i.getCourseID());
+            t.add(i.getTitle());
+            model.addRow(t);
+        }
+        jTableCourse.setModel(model);
     }
     public void SearchAll(){
         if(jSearch.getText().isEmpty()) {
-        jButtonClearSearch.setVisible(false);
-        jTableCourse.setRowSorter(null);
-        LoadData();
-        } else {
-        SearchTable(jSearch.getText().toString());
-        jButtonClearSearch.setVisible(true);
+            jButtonClearSearch.setVisible(false);
+            jTableCourse.setRowSorter(null);
+            LoadData();
+        }
+        else {
+            SearchTable(jSearch.getText().toString());
+            jButtonClearSearch.setVisible(true);
         }
     }
     public void LoadData(){
@@ -246,7 +298,7 @@ public class CourseResultsPanel extends javax.swing.JPanel {
         }
         jTableCourse.setModel(model);
     }
-    
+    // choose course online or offline
     public void LoadData(String text){
         DefaultTableModel model=new DefaultTableModel(){
             @Override
@@ -275,10 +327,14 @@ public class CourseResultsPanel extends javax.swing.JPanel {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonClearSearch;
+    private javax.swing.JButton jButtonClearSearch1;
+    private javax.swing.JButton jButtonIcon;
     private javax.swing.JComboBox<String> jComboBoxCourse;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jSearch;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTableCourse;
     // End of variables declaration//GEN-END:variables
 }

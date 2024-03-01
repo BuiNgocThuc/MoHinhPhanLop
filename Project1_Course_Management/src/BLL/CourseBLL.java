@@ -50,14 +50,26 @@ public class CourseBLL {
         return courseDAL.getAllList(text);
     }
 
-    public CourseDTO courseDetail(int id) {
+    public ArrayList<CourseDTO> searchAllCourse(String text){
+        return courseDAL.searchAllCourse(text);
+    }
+    
+    public CourseDTO courseDetail(int id){
         return courseDAL.courseDetail(id);
     }
 
     public boolean checkCourseEmpty(int CourseID) {
         return courseDAL.checkCourseEmpty(CourseID);
     }
-
+    
+    public List<CourseDTO> selectOnsiteAllCourse() {
+        return courseDAL.selectOnsiteAll();
+    }
+    
+    public List<CourseDTO> selectOnlineAllCourse() {
+        return courseDAL.selectOnlineAll();
+    }
+    
     public ArrayList<CourseDTO> findCoursesAll(String text) {
         if (ValidateUtil.isInteger(text)) {
             return courseDAL.findCoursesByIdAll(Integer.parseInt(text));
