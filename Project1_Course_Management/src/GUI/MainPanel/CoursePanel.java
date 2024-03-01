@@ -48,9 +48,14 @@ public class CoursePanel extends javax.swing.JPanel {
         courseAddForm = new CourseAddForm(this);
         initComponents();
         loadDepartmentName();
+        readCourse();
+    }
+    
+    private void readCourse() {
         loadData();
     }
-
+    
+    
     public void loadData() {
         List<CourseDTO> listCourse = courseBLL.selectAllCourse();
 
