@@ -5,8 +5,8 @@
 package GUI.MainPanel;
 
 import BLL.CourseInstructorBLL;
-import DTO.CourseDTO;
-import DTO.PersonDTO;
+import BLL.Entity.CourseEntity;
+import BLL.Entity.PersonEntity;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -25,7 +25,7 @@ public class TableCoursePanel extends javax.swing.JPanel {
 
     public TableCoursePanel() throws SQLException {
         initComponents();
-        List<CourseDTO> courses = courseInstructorBLL.getListCourseAssignInstructor();
+        List<CourseEntity> courses = courseInstructorBLL.getListCourseAssignInstructor();
         loadData(courses);
     }
 
@@ -88,16 +88,16 @@ public class TableCoursePanel extends javax.swing.JPanel {
     private javax.swing.JTable tblCourse;
     // End of variables declaration//GEN-END:variables
 
-    public void loadData(List<CourseDTO> courses) throws SQLException {
+    public void loadData(List<CourseEntity> courses) throws SQLException {
         DefaultTableModel model = (DefaultTableModel) tblCourse.getModel();
         model.setRowCount(0);
         int no = 1;
-        for (CourseDTO course : courses) {
+        for (CourseEntity course : courses) {
             int courseID = course.getCourseID();
             String title = course.getTitle();
             String instructorInfos = "-------";
 
-            List<PersonDTO> instructors = course.getInstructors();
+            List<PersonEntity> instructors = course.getInstructors();
             if (instructors != null) {
                 instructorInfos = "";
                 for (int i = 0; i < instructors.size() - 1; i++) {
@@ -128,7 +128,7 @@ public class TableCoursePanel extends javax.swing.JPanel {
     }
 
     public void findCourses(String text) throws SQLException {
-        List<CourseDTO> courses = courseInstructorBLL.findCourses(text);
+        List<CourseEntity> courses = courseInstructorBLL.findCourses(text);
         if (courses.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Không tìm thấy");
         } else {

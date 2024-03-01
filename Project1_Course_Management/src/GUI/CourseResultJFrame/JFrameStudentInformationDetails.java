@@ -5,7 +5,7 @@
 package GUI.CourseResultJFrame;
 
 import BLL.PersonBLL;
-import DTO.PersonDTO;
+import BLL.Entity.PersonEntity;
 
 /**
  *
@@ -18,7 +18,7 @@ public class JFrameStudentInformationDetails extends javax.swing.JFrame {
      */
     public JFrameStudentInformationDetails(int id) {
         initComponents();
-        PersonDTO personDTO=personBLL.detailsPerson(id);
+        PersonEntity personDTO=personBLL.detailsPerson(id);
         jTextFieldPersonID.setText(id+"");
         jTextFieldFirstName.setText(personDTO.getFirstName());
         jTextFieldLastName.setText(personDTO.getLastName());

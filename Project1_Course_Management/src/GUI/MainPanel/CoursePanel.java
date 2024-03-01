@@ -8,10 +8,10 @@ import BLL.CourseBLL;
 import BLL.DepartmentBLL;
 import BLL.OnlineCourseBLL;
 import BLL.OnsiteCourseBLL;
-import DTO.CourseDTO;
-import DTO.DepartmentDTO;
-import DTO.OnlineCourseDTO;
-import DTO.OnsiteCourseDTO;
+import BLL.Entity.CourseEntity;
+import BLL.Entity.DepartmentEntity;
+import BLL.Entity.OnlineCourseEntity;
+import BLL.Entity.OnsiteCourseEntity;
 import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -37,8 +37,8 @@ public class CoursePanel extends javax.swing.JPanel {
     private final OnlineCourseBLL onlineCourseBLL;
     private final OnsiteCourseBLL onsiteCourseBLL;
     private final DepartmentBLL departmentBLL;
-    private List<CourseDTO> listCourse;
-    private List<DepartmentDTO> listDepartment;
+    private List<CourseEntity> listCourse;
+    private List<DepartmentEntity> listDepartment;
 
     public CoursePanel() {
         courseBLL = new CourseBLL();
@@ -57,13 +57,13 @@ public class CoursePanel extends javax.swing.JPanel {
     
     
     public void loadData() {
-        List<CourseDTO> listCourse = courseBLL.selectAllCourse();
+        listCourse = courseBLL.selectAllCourse();
 
         DefaultTableModel model = (DefaultTableModel) tblCourse.getModel();
         model.setRowCount(0);
 
         int STT = 1;
-        for (CourseDTO course : listCourse) {
+        for (CourseEntity course : listCourse) {
             int courseID = course.getCourseID();
             String title = course.getTitle();
             int credits = course.getCredits();
@@ -82,7 +82,7 @@ public class CoursePanel extends javax.swing.JPanel {
 
     private void loadDepartmentName() {
         listDepartment = departmentBLL.selectAll();
-        for (DepartmentDTO departmentDTO : listDepartment) {
+        for (DepartmentEntity departmentDTO : listDepartment) {
             String name = departmentDTO.getName();
             cbDepartment.addItem(name);
         }
@@ -748,7 +748,7 @@ public class CoursePanel extends javax.swing.JPanel {
                 txtUrlPnl.setVisible(true);
 
                 // get data of online course
-                OnlineCourseDTO onlCourse = onlineCourseBLL.selectByID(ID);
+                OnlineCourseEntity onlCourse = onlineCourseBLL.selectByID(ID);
                 String url = onlCourse.getUrl();
 
                 // set data to text field
@@ -764,7 +764,7 @@ public class CoursePanel extends javax.swing.JPanel {
                 txtUrlPnl.setVisible(false);
 
                 // get data of online course
-                OnsiteCourseDTO onsCourse = onsiteCourseBLL.selectByID(ID);
+                OnsiteCourseEntity onsCourse = onsiteCourseBLL.selectByID(ID);
                 String location = onsCourse.getLocation();
                 String days = onsCourse.getDays();
                 Time time = onsCourse.getTime();
@@ -846,13 +846,13 @@ public class CoursePanel extends javax.swing.JPanel {
         int departmentIndex = cbDepartment.getSelectedIndex();
         int departmentID = listDepartment.get(departmentIndex).getDepartmentID();
         int credits = Integer.parseInt(txtCredit.getText());
-        CourseDTO course = new CourseDTO(courseID, departmentID, credits, title);
+        CourseEntity course = new CourseEntity(courseID, departmentID, credits, title);
         success = courseBLL.updateCourse(course);
         String course_type = txtType.getText();
         switch (course_type) {
             case "Online" -> {
                 String url = txtUrl.getText();
-                OnlineCourseDTO onlineCourse = new OnlineCourseDTO(url, courseID, departmentID, credits, title);
+                OnlineCourseEntity onlineCourse = new OnlineCourseEntity(url, courseID, departmentID, credits, title);
                 success = onlineCourseBLL.updateOnlineCourse(onlineCourse);
             }
             case "Onsite" -> {
@@ -878,7 +878,7 @@ public class CoursePanel extends javax.swing.JPanel {
                 if (txtSaturday.isSelected()) {
                     Days += "S";
                 }
-                OnsiteCourseDTO onsiteCourse = new OnsiteCourseDTO(location, Days, time, courseID, departmentID, credits, title);
+                OnsiteCourseEntity onsiteCourse = new OnsiteCourseEntity(location, Days, time, courseID, departmentID, credits, title);
                 success = onsiteCourseBLL.updateOnsiteCourse(onsiteCourse);
             }
             default ->
@@ -950,9 +950,9 @@ public class CoursePanel extends javax.swing.JPanel {
     public void loadCoursesOnsite() {
         DefaultTableModel model = (DefaultTableModel) tblCourse.getModel();
         model.setRowCount(0);
-        listCourse = courseBLL.selectAllCourse();
+        listCourse = courseBLL.selectOnsiteAllCourse();
         int STT = 1;
-        for (CourseDTO course : listCourse) {
+        for (CourseEntity course : listCourse) {
             if (course.getCourse_type().trim().equals("Onsite")) {
                 int courseID = course.getCourseID();
                 String title = course.getTitle();
@@ -974,9 +974,9 @@ public class CoursePanel extends javax.swing.JPanel {
     public void loadCoursesOnline() {
         DefaultTableModel model = (DefaultTableModel) tblCourse.getModel();
         model.setRowCount(0);
-
+        listCourse = courseBLL.selectOnlineAllCourse();
         int STT = 1;
-        for (CourseDTO course : listCourse) {
+        for (CourseEntity course : listCourse) {
             if (course.getCourse_type().trim().equals("Online")) {
                 int courseID = course.getCourseID();
                 String title = course.getTitle();
@@ -1004,7 +1004,7 @@ public class CoursePanel extends javax.swing.JPanel {
             model.setRowCount(0);
 
             int STT = 1;
-            for (CourseDTO course : listCourse) {
+            for (CourseEntity course : listCourse) {
                 int courseID = course.getCourseID();
                 String title = course.getTitle();
                 int credits = course.getCredits();
@@ -1033,7 +1033,7 @@ public class CoursePanel extends javax.swing.JPanel {
             model.setRowCount(0);
 
             int STT = 1;
-            for (CourseDTO course : listCourse) {
+            for (CourseEntity course : listCourse) {
                 int courseID = course.getCourseID();
                 String title = course.getTitle();
                 int credits = course.getCredits();
@@ -1063,7 +1063,7 @@ public class CoursePanel extends javax.swing.JPanel {
             model.setRowCount(0);
 
             int STT = 1;
-            for (CourseDTO course : listCourse) {
+            for (CourseEntity course : listCourse) {
                 int courseID = course.getCourseID();
                 String title = course.getTitle();
                 int credits = course.getCredits();

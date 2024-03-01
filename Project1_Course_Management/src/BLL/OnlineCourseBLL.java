@@ -6,7 +6,7 @@ package BLL;
 
 import DAL.CourseDAL;
 import DAL.OnlineCourseDAL;
-import DTO.OnlineCourseDTO;
+import BLL.Entity.OnlineCourseEntity;
 import java.util.List;
 
 /**
@@ -24,11 +24,11 @@ public class OnlineCourseBLL {
         onlCourseDAL = new OnlineCourseDAL();
     }
 
-    public List<OnlineCourseDTO> selectAllOnlineCourse() {
+    public List<OnlineCourseEntity> selectAllOnlineCourse() {
         return courseDAL.selectAllOnlineCourse();
     }
 
-    public boolean insertOnlineCourse(OnlineCourseDTO onlCourse) {
+    public boolean insertOnlineCourse(OnlineCourseEntity onlCourse) {
         boolean success = courseBLL.insertCourse(onlCourse);
         if (success)
         {
@@ -40,11 +40,11 @@ public class OnlineCourseBLL {
         return false;
     }
     
-    public OnlineCourseDTO selectByID(int CourseID) {
+    public OnlineCourseEntity selectByID(int CourseID) {
         return onlCourseDAL.selectByID(CourseID);
     }
 
-    public boolean updateOnlineCourse(OnlineCourseDTO onlCourse) {
+    public boolean updateOnlineCourse(OnlineCourseEntity onlCourse) {
         boolean success = courseBLL.updateCourse(onlCourse);
         if (success)
         {

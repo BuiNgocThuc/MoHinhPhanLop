@@ -5,7 +5,7 @@
 package BLL;
 
 import DAL.DepartmentDAL;
-import DTO.DepartmentDTO;
+import BLL.Entity.DepartmentEntity;
 import java.util.List;
 
 /**
@@ -19,11 +19,11 @@ public class DepartmentBLL {
         departmentDAL = new DepartmentDAL();
     }
     
-    public List<DepartmentDTO> selectAll() {
+    public List<DepartmentEntity> selectAll() {
         return departmentDAL.selectAll();
     }
     
-    public DepartmentDTO selectByID(int departmentID) {
+    public DepartmentEntity selectByID(int departmentID) {
         return departmentDAL.selectByID(departmentID);
     }
 }
