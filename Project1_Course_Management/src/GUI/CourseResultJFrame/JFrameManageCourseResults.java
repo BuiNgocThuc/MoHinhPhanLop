@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package GUI.CourseResultJFrame;
+
 import BLL.PersonBLL;
 import BLL.StudentGradeBLL;
 import DTO.StudentGradeDTO;
@@ -22,40 +23,44 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableRowSorter;
 import util.ValidateUtil;
+
 /**
  *
  * @author MSI
  */
 public class JFrameManageCourseResults extends javax.swing.JFrame {
-    StudentGradeBLL studentGradeBLL=new StudentGradeBLL();
-    PersonBLL personBLL=new PersonBLL();
+
+    StudentGradeBLL studentGradeBLL = new StudentGradeBLL();
+    PersonBLL personBLL = new PersonBLL();
     int CourseID;
+
     /**
      * Creates new form JFrameKhoaHocOnline
      */
-    public JFrameManageCourseResults(int CourseID,String Title) {
+    public JFrameManageCourseResults(int CourseID, String Title) {
         initComponents();
         jButtonClearSearch.setVisible(false);
-        this.CourseID=CourseID;
-        jTitle.setText("Tên khóa học: " + CourseID+" - "+Title);
+        this.CourseID = CourseID;
+        jTitle.setText("Tên khóa học: " + CourseID + " - " + Title);
         LoadData(CourseID);
         jSearch.getDocument().addDocumentListener(new DocumentListener() {
-        @Override
-        public void insertUpdate(DocumentEvent e) {
-              SearchAll();
-        }
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                SearchAll();
+            }
 
-        @Override
-        public void removeUpdate(DocumentEvent e) {
-              SearchAll();
-        }
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                SearchAll();
+            }
 
-        @Override
-        public void changedUpdate(DocumentEvent e) {
-       
-        }
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+
+            }
         });
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -550,66 +555,63 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
 
     private void jTableStudentGradeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableStudentGradeMouseClicked
         // TODO add your handling code here:
-        int n=jTableStudentGrade.getSelectedRow();
-        if(n!=-1){
-            jTextName.setText(jTableStudentGrade.getValueAt(n, 2)+" "+jTableStudentGrade.getValueAt(n, 3));
-            jTextGrade.setText(jTableStudentGrade.getValueAt(n, 4)==null?"":jTableStudentGrade.getValueAt(n, 4)+"");
-            jTextPersonID.setText(jTableStudentGrade.getValueAt(n, 1)+"");
+        int n = jTableStudentGrade.getSelectedRow();
+        if (n != -1) {
+            jTextName.setText(jTableStudentGrade.getValueAt(n, 2) + " " + jTableStudentGrade.getValueAt(n, 3));
+            jTextGrade.setText(jTableStudentGrade.getValueAt(n, 4) == null ? "" : jTableStudentGrade.getValueAt(n, 4) + "");
+            jTextPersonID.setText(jTableStudentGrade.getValueAt(n, 1) + "");
         }
-        
+
     }//GEN-LAST:event_jTableStudentGradeMouseClicked
 
     private void jTableStudentGradeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTableStudentGradeKeyPressed
         // TODO add your handling code here:
-        
+
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             int row = jTableStudentGrade.getSelectedRow();
-            String tmp="";
             Double gradeValue;
-            try{
-                tmp=jTableStudentGrade.getModel().getValueAt(row, 4).toString().trim();
-            }catch(Exception ex){
-                tmp="";
-            }
-            
             if (row != -1) {
-                    int EnrollmentID = studentGradeBLL.getEnrollment(CourseID, Integer.parseInt(jTableStudentGrade.getModel().getValueAt(row, 1).toString()));
-                    StudentGradeDTO studentGrade = new StudentGradeDTO();
-                    studentGrade.setCourseID(CourseID);
-                    studentGrade.setEnrollmentID(EnrollmentID);
-                    TableCellEditor edit=jTableStudentGrade.getCellEditor();
-                    if(edit!=null){
-                       edit.stopCellEditing();
-                    }
-                    
-                    System.out.println(tmp);
-                    //System.out.println(jTableStugidentGrade.getModel().getValueAt(row, 4).toString().trim());
+                int EnrollmentID = studentGradeBLL.getEnrollment(CourseID, Integer.parseInt(jTableStudentGrade.getModel().getValueAt(row, 1).toString()));
+                StudentGradeDTO studentGrade = new StudentGradeDTO();
+                studentGrade.setCourseID(CourseID);
+                studentGrade.setEnrollmentID(EnrollmentID);
+                TableCellEditor edit = jTableStudentGrade.getCellEditor();
+                if (edit != null) {
+                    edit.stopCellEditing();
+                }
+                try {
                     try {
-                            gradeValue = Double.parseDouble(jTableStudentGrade.getModel().getValueAt(row, 4).toString().trim());
-                            if (gradeValue < 0d || gradeValue > 10d){
-                            JOptionPane.showMessageDialog(rootPane, "Please enter a score from 0 to 10.");
-                            jTableStudentGrade.getModel().setValueAt(tmp, row, 4);
-                            evt.consume();
-                            return;
-                            }
-                             studentGrade.setGrade(Double.parseDouble(jTableStudentGrade.getModel().getValueAt(row, 4).toString().trim()));
-                            if (studentGradeBLL.updateGrade(studentGrade)) {
-                                 Clear();
-                            } else {
-                             JOptionPane.showMessageDialog(rootPane, "Update Failed!");
-                            }
-                    }catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(rootPane, "Please enter a valid score");
-                            jTableStudentGrade.getModel().setValueAt(tmp, row, 4);
-                            evt.consume();
-                            return;
+                        gradeValue = Double.parseDouble(jTableStudentGrade.getModel().getValueAt(row, 4).toString().trim());
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(rootPane, "Please enter a valid score");
+                        jTableStudentGrade.getModel().setValueAt("", row, 4);
+                        evt.consume();
+                        return;
                     }
+                    if (gradeValue < 0 || gradeValue > 10) {
+                        JOptionPane.showMessageDialog(rootPane, "Please enter a score from 0 to 10.");
+                        jTableStudentGrade.getModel().setValueAt("", row, 4);
+                        evt.consume();
+                        return;
+                    }
+                    studentGrade.setGrade(Double.parseDouble(jTableStudentGrade.getModel().getValueAt(row, 4).toString().trim()));
+                    if (studentGradeBLL.updateGrade(studentGrade)) {
+                        Clear();
+                    } else {
+                        JOptionPane.showMessageDialog(rootPane, "Update Failed!");
+                    }
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(rootPane, "Please enter a valid score");
+                    jTableStudentGrade.getModel().setValueAt("", row, 4);
+                    evt.consume();
+                    return;
+                }
             }
-         }
+        }
     }//GEN-LAST:event_jTableStudentGradeKeyPressed
 
     private void addCourseBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCourseBtn1ActionPerformed
-        
+
     }//GEN-LAST:event_addCourseBtn1ActionPerformed
 
     private void editCourseBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editCourseBtn1ActionPerformed
@@ -625,7 +627,7 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
     }//GEN-LAST:event_searchOnsiteCourseBtnActionPerformed
 
     private void addCourseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCourseBtnActionPerformed
-        
+
     }//GEN-LAST:event_addCourseBtnActionPerformed
 
     private void editCourseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editCourseBtnActionPerformed
@@ -657,20 +659,20 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
 
     private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
         // TODO add your handling code here:
-        int EnrollmentID=studentGradeBLL.getEnrollment(CourseID,Integer.parseInt(jTextPersonID.getText().toString()));
-        if(jTextGrade.getText().toString().equals("")){
+        int EnrollmentID = studentGradeBLL.getEnrollment(CourseID, Integer.parseInt(jTextPersonID.getText().toString()));
+        if (jTextGrade.getText().toString().equals("")) {
             int choice = JOptionPane.showConfirmDialog(rootPane, "Do You Want To Delete?", "Confirm", JOptionPane.YES_NO_OPTION);
-            if(choice==JOptionPane.YES_OPTION){
-                if(studentGradeBLL.deleteGrade(EnrollmentID)){
-                   JOptionPane.showMessageDialog(rootPane,"Delete Success!");
-                   Clear();
-                   LoadData(CourseID);
-                }else{
-                   JOptionPane.showMessageDialog(rootPane,"Delete Failed!");
+            if (choice == JOptionPane.YES_OPTION) {
+                if (studentGradeBLL.deleteGrade(EnrollmentID)) {
+                    JOptionPane.showMessageDialog(rootPane, "Delete Success!");
+                    Clear();
+                    LoadData(CourseID);
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Delete Failed!");
                 }
             }
-        }else{
-            JOptionPane.showMessageDialog(rootPane,"Không Thể Xóa");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Không Thể Xóa");
         }
     }//GEN-LAST:event_jButtonDeleteActionPerformed
 
@@ -695,31 +697,31 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
 
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
         // TODO add your handling code here:
-        if(jTableStudentGrade.getSelectedRow()!=-1){
+        if (jTableStudentGrade.getSelectedRow() != -1) {
             try {
-                    double gradeValue = Double.parseDouble(jTextGrade.getText().toString().trim());
-                    if (gradeValue < 0 || gradeValue > 10){
+                double gradeValue = Double.parseDouble(jTextGrade.getText().toString().trim());
+                if (gradeValue < 0 || gradeValue > 10) {
                     JOptionPane.showMessageDialog(rootPane, "Please enter a score from 0 to 10.");
-                        return;
-                    }
-                   int EnrollmentID=studentGradeBLL.getEnrollment(CourseID,Integer.parseInt(jTextPersonID.getText().toString()));
-                   StudentGradeDTO studentGrade=new StudentGradeDTO();
-                   studentGrade.setCourseID(CourseID);
-                   studentGrade.setEnrollmentID(EnrollmentID);
-                   studentGrade.setGrade(Double.parseDouble(jTextGrade.getText().toString()));
-                   if(studentGradeBLL.updateGrade(studentGrade)){
-                      JOptionPane.showMessageDialog(rootPane,"Update Success!");
-                       Clear();
-                       jTableStudentGrade.clearSelection();
-                       LoadData(CourseID);
-                    }else{
-                      JOptionPane.showMessageDialog(rootPane,"Update Failed!");
-                    }         
-            }catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(rootPane, "Please enter a valid score");
-                            return;
+                    return;
+                }
+                int EnrollmentID = studentGradeBLL.getEnrollment(CourseID, Integer.parseInt(jTextPersonID.getText().toString()));
+                StudentGradeDTO studentGrade = new StudentGradeDTO();
+                studentGrade.setCourseID(CourseID);
+                studentGrade.setEnrollmentID(EnrollmentID);
+                studentGrade.setGrade(Double.parseDouble(jTextGrade.getText().toString()));
+                if (studentGradeBLL.updateGrade(studentGrade)) {
+                    JOptionPane.showMessageDialog(rootPane, "Update Success!");
+                    Clear();
+                    jTableStudentGrade.clearSelection();
+                    LoadData(CourseID);
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Update Failed!");
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(rootPane, "Please enter a valid score");
+                return;
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(rootPane, "Please enter a valid score");
         }
     }//GEN-LAST:event_jButtonSaveActionPerformed
@@ -737,94 +739,95 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
     private void jButtonDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDetailActionPerformed
         // TODO add your handling code here:
         int n = jTableStudentGrade.getSelectedRow();
-        if(n != -1) {
-            int studentID = Integer.parseInt(jTableStudentGrade.getValueAt(n,1).toString());
+        if (n != -1) {
+            int studentID = Integer.parseInt(jTableStudentGrade.getValueAt(n, 1).toString());
             JFrameStudentInformationDetails detail = new JFrameStudentInformationDetails(studentID);
             detail.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             detail.setLocationRelativeTo(null);
             detail.setVisible(true);
             Clear();
-        }
-        else {
+        } else {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn một học sinh để xem chi tiết!!!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         }
-        
+
     }//GEN-LAST:event_jButtonDetailActionPerformed
 
     private void jButtonAddNew1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddNew1ActionPerformed
 
-        JFrameStatistical statistical=new JFrameStatistical(CourseID);
+        JFrameStatistical statistical = new JFrameStatistical(CourseID);
         statistical.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         statistical.setLocationRelativeTo(null);
         statistical.setVisible(true);
     }//GEN-LAST:event_jButtonAddNew1ActionPerformed
 
     public void SearchTable(String txt) {
-        String columns[]=new String[]{"STT","PersonID","FirstName","LastName","Grade"};
-        DefaultTableModel model=new DefaultTableModel();
-        for(String i:columns){
+        String columns[] = new String[]{"STT", "PersonID", "FirstName", "LastName", "Grade"};
+        DefaultTableModel model = new DefaultTableModel();
+        for (String i : columns) {
             model.addColumn(i);
         }
-        int stt=0;
-        for(StudentGradeDTO i:studentGradeBLL.serchAllStudentGrade(CourseID, txt)){
-            Vector t=new Vector();
-            t.add(stt+=1);
+        int stt = 0;
+        for (StudentGradeDTO i : studentGradeBLL.serchAllStudentGrade(CourseID, txt)) {
+            Vector t = new Vector();
+            t.add(stt += 1);
             t.add(i.getStudentID());
-            PersonDTO person=personBLL.detailsPerson(i.getStudentID());
+            PersonDTO person = personBLL.detailsPerson(i.getStudentID());
             t.add(person.getFirstName());
             t.add(person.getLastName());
             t.add(i.getGrade());
             model.addRow(t);
         }
-        
+
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         jTableStudentGrade.setDefaultRenderer(Object.class, centerRenderer);
-        
+
         jTableStudentGrade.setModel(model);
-        
+
         for (int i = 0; i < jTableStudentGrade.getColumnCount(); i++) {
             jTableStudentGrade.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
         }
     }
-    public void SearchAll(){
-        if(jSearch.getText().isEmpty()){
+
+    public void SearchAll() {
+        if (jSearch.getText().isEmpty()) {
             jButtonClearSearch.setVisible(false);
             jTableStudentGrade.setRowSorter(null);
             LoadData(CourseID);
-        }else{
+        } else {
             SearchTable(jSearch.getText().toString());
             jButtonClearSearch.setVisible(true);
         }
     }
-    
-    public void LoadData(int CourseID){
-        String columns[]=new String[]{"STT","PersonID","FirstName","LastName","Grade"};
-        DefaultTableModel model=new DefaultTableModel();
-        for(String i:columns){
+
+    public void LoadData(int CourseID) {
+        String columns[] = new String[]{"STT", "PersonID", "FirstName", "LastName", "Grade"};
+        DefaultTableModel model = new DefaultTableModel();
+        for (String i : columns) {
             model.addColumn(i);
         }
-        int stt=0;
-        for(StudentGradeDTO i:studentGradeBLL.getAllList(CourseID)){
-            Vector t=new Vector();
-            t.add(stt+=1);
+        int stt = 0;
+        for (StudentGradeDTO i : studentGradeBLL.getAllList(CourseID)) {
+            Vector t = new Vector();
+            t.add(stt += 1);
             t.add(i.getStudentID());
-            PersonDTO person=personBLL.detailsPerson(i.getStudentID());
+            PersonDTO person = personBLL.detailsPerson(i.getStudentID());
             t.add(person.getFirstName());
             t.add(person.getLastName());
             t.add(i.getGrade());
             model.addRow(t);
         }
-        
+
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         jTableStudentGrade.setDefaultRenderer(Object.class, centerRenderer);
-        
+
         jTableStudentGrade.setModel(model);
-        
+
         for (int i = 0; i < jTableStudentGrade.getColumnCount(); i++) {
             jTableStudentGrade.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
         }
     }
-    public void Clear(){
+
+    public void Clear() {
         jTextGrade.setText("");
         jTextName.setText("");
         jTextPersonID.setText("");
@@ -880,4 +883,3 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
     private javax.swing.JPanel sortCourseBtnGroupPnl1;
     // End of variables declaration//GEN-END:variables
 }
-
