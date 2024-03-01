@@ -1,21 +1,21 @@
-package DTO;
+package BLL.Entity;
 
 import java.sql.Timestamp;
 import java.util.List;
 
-public class PersonDTO {
+public class PersonEntity {
 
     private int PersonID;
     private String LastName, FirstName;
     private Timestamp HireDate, EnrollmentDate;
 
-    private List<CourseDTO> courses;
+    private List<CourseEntity> courses;
 
-    public PersonDTO() {
+    public PersonEntity() {
 
     }
 
-    public PersonDTO(int personID, String firstName, String lastName, Timestamp hireDate, Timestamp enrollmentDate) {
+    public PersonEntity(int personID, String firstName, String lastName, Timestamp hireDate, Timestamp enrollmentDate) {
         PersonID = personID;
         FirstName = firstName;
         LastName = lastName;
@@ -63,11 +63,11 @@ public class PersonDTO {
         EnrollmentDate = enrollmentDate;
     }
 
-    public List<CourseDTO> getCourses() {
+    public List<CourseEntity> getCourses() {
         return courses;
     }
 
-    public void setCourses(List<CourseDTO> courses) {
+    public void setCourses(List<CourseEntity> courses) {
         this.courses = courses;
     }
 

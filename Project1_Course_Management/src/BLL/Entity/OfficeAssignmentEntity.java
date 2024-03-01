@@ -1,14 +1,14 @@
-package DTO;
+package BLL.Entity;
 
 import java.sql.Time;
 import java.sql.Timestamp;
 
-public class OfficeAssignmentDTO {
+public class OfficeAssignmentEntity {
     private int InstructorID;
     private String Location;
     private Timestamp Timestamp;
 
-    public OfficeAssignmentDTO(int instructorID, String location, Timestamp timestamp) {
+    public OfficeAssignmentEntity(int instructorID, String location, Timestamp timestamp) {
         InstructorID = instructorID;
         Location = location;
         Timestamp = timestamp;

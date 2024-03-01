@@ -7,8 +7,8 @@ package GUI.CourseResultJFrame;
 import javax.swing.DefaultComboBoxModel;
 import BLL.CourseBLL;
 import BLL.StudentGradeBLL;
-import DTO.CourseDTO;
-import DTO.StudentGradeDTO;
+import BLL.Entity.CourseEntity;
+import BLL.Entity.StudentGradeEntity;
 import javax.swing.JOptionPane;
 /**
  *
@@ -33,7 +33,7 @@ public class JFrameChangeCourse extends javax.swing.JFrame {
    }
     public void LoadData(){
         DefaultComboBoxModel model=new DefaultComboBoxModel<>();
-        for(CourseDTO i:courseBLL.selectAllCourse()){
+        for(CourseEntity i:courseBLL.selectAllCourse()){
             model.addElement(i.getCourseID()+"-"+i.getTitle());
         }
         jComboBoxCourse.setModel(model);
@@ -143,7 +143,7 @@ public class JFrameChangeCourse extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-StudentGradeDTO studentGradeDTO=new StudentGradeDTO();
+StudentGradeEntity studentGradeDTO=new StudentGradeEntity();
         String tmp[]=jComboBoxCourse.getSelectedItem().toString().split("-");
         studentGradeDTO.setCourseID(Integer.parseInt(tmp[0]));
         studentGradeDTO.setGrade(0d);
