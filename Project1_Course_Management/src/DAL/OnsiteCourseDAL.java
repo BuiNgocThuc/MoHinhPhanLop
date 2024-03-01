@@ -4,6 +4,7 @@
  */
 package DAL;
 
+import DTO.OnlineCourseDTO;
 import DTO.OnsiteCourseDTO;
 import java.sql.Time;
 import java.sql.Connection;
@@ -26,10 +27,11 @@ public class OnsiteCourseDAL {
     public OnsiteCourseDAL() {
         ConnectDB connectDB = new ConnectDB();
         conn = (Connection) connectDB.getConnectDB();
+        listOnsCourses = selectAll();
     }
 
     public List<OnsiteCourseDTO> selectAll() {
-        
+        List<OnsiteCourseDTO> list = new ArrayList<>();
         String query = "SELECT * FROM onsitecourse";
         try
         {
@@ -48,26 +50,44 @@ public class OnsiteCourseDAL {
                 OnsCourse.setLocation(Location);
                 OnsCourse.setTime(time);
 
-                listOnsCourses.add(OnsCourse);
+                list.add(OnsCourse);
             }
         } catch (SQLException e)
         {
             e.printStackTrace();
         }
 
-        return listOnsCourses;
+        return list;
     }
     
     // xem chi tiết
-    public OnsiteCourseDTO selectByID(int CourseID) {
-        for (OnsiteCourseDTO onsCourse : listOnsCourses)
+     public OnsiteCourseDTO selectByID(int CourseID) {
+        OnsiteCourseDTO course = null;
+        String query = "SELECT * FROM onsitecourse WHERE CourseID = ?";
+         try
         {
-            if (onsCourse.getCourseID() == CourseID)
+            preStm = conn.prepareStatement(query);
+            preStm.setString(1, String.valueOf(CourseID));
+
+            ResultSet rs = preStm.executeQuery();
+            while (rs.next())
             {
-                return onsCourse;
+                String location = rs.getString("Location");
+                String days = rs.getString("Days");
+                Time time = rs.getTime("Time");
+
+               course = new OnsiteCourseDTO();
+               course.setLocation(location);
+               course.setDays(days);
+               course.setTime(time);
+
             }
+            
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
         }
-        return null;
+        return course;
     }
 
     public boolean insertOnsiteCourse(OnsiteCourseDTO onsCourse) {
@@ -90,6 +110,7 @@ public class OnsiteCourseDAL {
             result = preStm.executeUpdate();
             if (result != 0)
             {
+                listOnsCourses = selectAll();
                 return true;
             }
         } catch (SQLException e)
@@ -107,7 +128,7 @@ public class OnsiteCourseDAL {
         String Days = onsCourse.getDays();
         Time Time = onsCourse.getTime();
 
-        String query = "UPDATE onlinecourse SET Location = ?, Days = ?, Time = ? WHERE CourseID = ?";
+        String query = "UPDATE onsitecourse SET Location = ?, Days = ?, Time = ? WHERE CourseID = ?";
         try
         {
             preStm = conn.prepareStatement(query);
@@ -119,6 +140,7 @@ public class OnsiteCourseDAL {
             result = preStm.executeUpdate();
             if (result != 0)
             {
+                listOnsCourses = selectAll();
                 return true;
             }
         } catch (SQLException e)
@@ -140,6 +162,7 @@ public class OnsiteCourseDAL {
             result = preStm.executeUpdate();
             if (result != 0)
             {
+                listOnsCourses = selectAll();
                 return true;
             }
         } catch (SQLException e)
@@ -149,19 +172,19 @@ public class OnsiteCourseDAL {
         return false;
     }
     
-        public List<OnsiteCourseDTO> searchOnsiteCourse(String sequenceChar) {
-        List<OnsiteCourseDTO> listOnlCoursesFiltered = new ArrayList<>();
-        if (sequenceChar == null || sequenceChar.isEmpty())
-        {
-            return listOnsCourses;
-        }
-        for (OnsiteCourseDTO onsCourse : listOnsCourses)
-        {
-            if (onsCourse.getTitle().toLowerCase().contains(sequenceChar.toLowerCase()))
-            {
-                listOnlCoursesFiltered.add(onsCourse);
-            }
-        }
-        return listOnlCoursesFiltered;
-    }
+//        public List<OnsiteCourseDTO> searchOnsiteCourse(String sequenceChar) {
+//        List<OnsiteCourseDTO> listOnlCoursesFiltered = new ArrayList<>();
+//        if (sequenceChar == null || sequenceChar.isEmpty())
+//        {
+//            return listOnsCourses;
+//        }
+//        for (OnsiteCourseDTO onsCourse : listOnsCourses)
+//        {
+//            if (onsCourse.getTitle().toLowerCase().contains(sequenceChar.toLowerCase()))
+//            {
+//                listOnlCoursesFiltered.add(onsCourse);
+//            }
+//        }
+//        return listOnlCoursesFiltered;
+//    }
 }

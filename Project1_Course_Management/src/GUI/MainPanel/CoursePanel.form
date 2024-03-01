@@ -239,6 +239,11 @@
                       <Dimension value="[300, 40]"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="inputMethodTextChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="searchOnsiteCourseValueInputMethodTextChanged"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchOnsiteCourseValueActionPerformed"/>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="searchOnsiteCourseValueKeyPressed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="searchOnsiteCourseBtn">
                   <Properties>
@@ -258,6 +263,7 @@
                     </Property>
                   </Properties>
                   <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="searchOnsiteCourseBtnMouseClicked"/>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchOnsiteCourseBtnActionPerformed"/>
                   </Events>
                 </Component>
@@ -385,9 +391,13 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="T&#x1ea5;t c&#x1ea3;"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[54, 30]"/>
+                      <Dimension value="[60, 30]"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jRadioButton1StateChanged"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jRadioButton1MouseClicked"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="jRadioButton2">
                   <Properties>
@@ -399,6 +409,10 @@
                       <Dimension value="[108, 30]"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jRadioButton2StateChanged"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jRadioButton2MouseClicked"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="jRadioButton3">
                   <Properties>
@@ -410,6 +424,10 @@
                       <Dimension value="[109, 30]"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jRadioButton3StateChanged"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jRadioButton3MouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
               <LayoutCode>
@@ -646,7 +664,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="courseTable">
+        <Component class="javax.swing.JTable" name="tblCourse">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
@@ -654,41 +672,18 @@
               </Border>
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="5" rowCount="5">
-                <Column editable="false" title="CourseID" type="java.lang.Object">
-                  <Data value="1045"/>
-                  <Data value="1046"/>
-                  <Data value="1061"/>
-                  <Data value="2042"/>
-                  <Data value="4022"/>
-                </Column>
-                <Column editable="false" title="CourseName" type="java.lang.Object">
-                  <Data value="Calculus"/>
-                  <Data value="Chemistry"/>
-                  <Data value="Physics"/>
-                  <Data value="Literature"/>
-                  <Data value="Microeconomics"/>
-                </Column>
-                <Column editable="false" title="Credit" type="java.lang.Object">
-                  <Data value="4"/>
-                  <Data value="4"/>
-                  <Data value="4"/>
-                  <Data value="4"/>
-                  <Data value="3"/>
-                </Column>
-                <Column editable="false" title="Department Name" type="java.lang.Object">
-                  <Data value="Mathematics"/>
-                  <Data value="Engineering"/>
-                  <Data value="Enginerring"/>
-                  <Data value="English"/>
-                  <Data value="Economics"/>
-                </Column>
+              <Table columnCount="6" rowCount="0">
+                <Column editable="false" title="No." type="java.lang.Object"/>
+                <Column editable="false" title="CourseID" type="java.lang.Object"/>
+                <Column editable="false" title="Title" type="java.lang.Object"/>
+                <Column editable="false" title="Credits" type="java.lang.Object"/>
+                <Column editable="false" title="Department Name" type="java.lang.Object"/>
                 <Column editable="false" title="Type" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                <Column maxWidth="65" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
@@ -699,6 +694,11 @@
                   <Renderer/>
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="80" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
@@ -721,10 +721,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="courseTableMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblCourseMouseClicked"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="courseTable.getTableHeader().setFont(new Font(&quot;Segoe UI&quot;, 0, 14));&#xa;DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();&#xa;courseTable.setFont(new Font(&quot;Segoe UI&quot;, 0, 14));&#xa;leftRenderer.setHorizontalAlignment(JLabel.CENTER);&#xa;((DefaultTableCellRenderer)courseTable.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);&#xa;        // Iterate over each column and set cell renderer and font&#xa;for (int i = 0; i &lt; courseTable.getColumnCount(); i++) {&#xa;    courseTable.getColumnModel().getColumn(i).setCellRenderer(leftRenderer);&#xa;}"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tblCourse.getTableHeader().setFont(new Font(&quot;Segoe UI&quot;, 0, 14));&#xa;DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();&#xa;tblCourse.setFont(new Font(&quot;Segoe UI&quot;, 0, 14));&#xa;leftRenderer.setHorizontalAlignment(JLabel.CENTER);&#xa;((DefaultTableCellRenderer)tblCourse.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);&#xa;        // Iterate over each column and set cell renderer and font&#xa;for (int i = 0; i &lt; tblCourse.getColumnCount(); i++) {&#xa;    tblCourse.getColumnModel().getColumn(i).setCellRenderer(leftRenderer);&#xa;}"/>
           </AuxValues>
         </Component>
       </SubComponents>
@@ -772,19 +772,19 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jPanel1" min="-2" pref="815" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="buttonPnl" pref="142" max="32767" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <Component id="jPanel1" min="-2" pref="844" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="buttonPnl" min="-2" pref="125" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="buttonPnl" alignment="0" pref="170" max="32767" attributes="0"/>
-                          <Component id="jPanel1" alignment="0" pref="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jPanel1" min="-2" pref="170" max="-2" attributes="0"/>
+                          <Component id="buttonPnl" min="-2" pref="103" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -825,6 +825,8 @@
                     <Component class="javax.swing.JTextField" name="txtCourseID">
                       <Properties>
                         <Property name="horizontalAlignment" type="int" value="0"/>
+                        <Property name="enabled" type="boolean" value="false"/>
+                        <Property name="focusable" type="boolean" value="false"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[50, 40]"/>
                         </Property>
@@ -933,7 +935,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField5">
+                    <Component class="javax.swing.JTextField" name="txtTitle">
                       <Properties>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[205, 40]"/>
@@ -1016,11 +1018,11 @@
                         <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                       </StatementProvider>
                       <Parameters>
-                        <CodeExpression id="34_jTextField5">
-                          <CodeVariable name="jTextField5" type="8194" declaredType="javax.swing.JTextField"/>
+                        <CodeExpression id="34_txtTitle">
+                          <CodeVariable name="txtTitle" type="8194" declaredType="javax.swing.JTextField"/>
                           <ExpressionOrigin>
                             <ExpressionProvider type="ComponentRef">
-                              <ComponentRef name="jTextField5"/>
+                              <ComponentRef name="txtTitle"/>
                             </ExpressionProvider>
                           </ExpressionOrigin>
                         </CodeExpression>
@@ -1045,15 +1047,10 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JComboBox" name="jComboBox3">
+                    <Component class="javax.swing.JComboBox" name="cbDepartment">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="4">
-                            <StringItem index="0" value="Item 1"/>
-                            <StringItem index="1" value="Item 2"/>
-                            <StringItem index="2" value="Item 3"/>
-                            <StringItem index="3" value="Item 4"/>
-                          </StringArray>
+                          <StringArray count="0"/>
                         </Property>
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -1090,7 +1087,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="txtCredit2">
+                    <Component class="javax.swing.JTextField" name="txtCredit">
                       <Properties>
                         <Property name="horizontalAlignment" type="int" value="0"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -1174,11 +1171,11 @@
                         <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                       </StatementProvider>
                       <Parameters>
-                        <CodeExpression id="40_txtCredit2">
-                          <CodeVariable name="txtCredit2" type="8194" declaredType="javax.swing.JTextField"/>
+                        <CodeExpression id="40_txtCredit">
+                          <CodeVariable name="txtCredit" type="8194" declaredType="javax.swing.JTextField"/>
                           <ExpressionOrigin>
                             <ExpressionProvider type="ComponentRef">
-                              <ComponentRef name="txtCredit2"/>
+                              <ComponentRef name="txtCredit"/>
                             </ExpressionProvider>
                           </ExpressionOrigin>
                         </CodeExpression>
@@ -1192,7 +1189,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[800, 220]"/>
+                      <Dimension value="[850, 220]"/>
                     </Property>
                   </Properties>
                   <SubComponents>
@@ -1211,7 +1208,7 @@
                             </Property>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="jTextField6">
+                        <Component class="javax.swing.JTextField" name="txtLocation">
                           <Properties>
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                               <Dimension value="[200, 40]"/>
@@ -1294,11 +1291,11 @@
                             <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                           </StatementProvider>
                           <Parameters>
-                            <CodeExpression id="46_jTextField6">
-                              <CodeVariable name="jTextField6" type="8194" declaredType="javax.swing.JTextField"/>
+                            <CodeExpression id="46_txtLocation">
+                              <CodeVariable name="txtLocation" type="8194" declaredType="javax.swing.JTextField"/>
                               <ExpressionOrigin>
                                 <ExpressionProvider type="ComponentRef">
-                                  <ComponentRef name="jTextField6"/>
+                                  <ComponentRef name="txtLocation"/>
                                 </ExpressionProvider>
                               </ExpressionOrigin>
                             </CodeExpression>
@@ -1312,7 +1309,7 @@
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[300, 50]"/>
+                          <Dimension value="[330, 50]"/>
                         </Property>
                       </Properties>
                       <SubComponents>
@@ -1324,12 +1321,18 @@
                             </Property>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="jTextField7">
+                        <Component class="javax.swing.JTextField" name="txtUrl">
                           <Properties>
+                            <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                              <Insets value="[2, 15, 2, 6]"/>
+                            </Property>
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                              <Dimension value="[255, 40]"/>
+                              <Dimension value="[290, 40]"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtUrlActionPerformed"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                       <LayoutCode>
@@ -1407,11 +1410,11 @@
                             <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                           </StatementProvider>
                           <Parameters>
-                            <CodeExpression id="52_jTextField7">
-                              <CodeVariable name="jTextField7" type="8194" declaredType="javax.swing.JTextField"/>
+                            <CodeExpression id="52_txtUrl">
+                              <CodeVariable name="txtUrl" type="8194" declaredType="javax.swing.JTextField"/>
                               <ExpressionOrigin>
                                 <ExpressionProvider type="ComponentRef">
-                                  <ComponentRef name="jTextField7"/>
+                                  <ComponentRef name="txtUrl"/>
                                 </ExpressionProvider>
                               </ExpressionOrigin>
                             </CodeExpression>
@@ -1437,7 +1440,7 @@
                             </Property>
                           </Properties>
                         </Component>
-                        <Component class="com.github.lgooddatepicker.components.TimePicker" name="timePicker3">
+                        <Component class="com.github.lgooddatepicker.components.TimePicker" name="tpTime">
                           <Properties>
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                               <Dimension value="[120, 40]"/>
@@ -1520,11 +1523,11 @@
                             <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                           </StatementProvider>
                           <Parameters>
-                            <CodeExpression id="58_timePicker3">
-                              <CodeVariable name="timePicker3" type="8194" declaredType="com.github.lgooddatepicker.components.TimePicker"/>
+                            <CodeExpression id="58_tpTime">
+                              <CodeVariable name="tpTime" type="8194" declaredType="com.github.lgooddatepicker.components.TimePicker"/>
                               <ExpressionOrigin>
                                 <ExpressionProvider type="ComponentRef">
-                                  <ComponentRef name="timePicker3"/>
+                                  <ComponentRef name="tpTime"/>
                                 </ExpressionProvider>
                               </ExpressionOrigin>
                             </CodeExpression>
@@ -1536,6 +1539,9 @@
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                        </Property>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[620, 50]"/>
                         </Property>
                       </Properties>
                       <SubComponents>
@@ -1563,11 +1569,11 @@
                               </Border>
                             </Property>
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                              <Dimension value="[500, 40]"/>
+                              <Dimension value="[535, 40]"/>
                             </Property>
                           </Properties>
                           <SubComponents>
-                            <Component class="javax.swing.JCheckBox" name="txtMonday2">
+                            <Component class="javax.swing.JCheckBox" name="txtMonday">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Th&#x1ee9; 2"/>
                                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -1581,7 +1587,7 @@
                                 </Property>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JCheckBox" name="txtTuesday2">
+                            <Component class="javax.swing.JCheckBox" name="txtTuesday">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Th&#x1ee9; 3"/>
                                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -1595,7 +1601,7 @@
                                 </Property>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JCheckBox" name="txtWednesday2">
+                            <Component class="javax.swing.JCheckBox" name="txtWednesday">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Th&#x1ee9; 4"/>
                                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -1609,7 +1615,7 @@
                                 </Property>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JCheckBox" name="txtThursday2">
+                            <Component class="javax.swing.JCheckBox" name="txtThursday">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Th&#x1ee9; 5"/>
                                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -1623,7 +1629,7 @@
                                 </Property>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JCheckBox" name="txtFriday2">
+                            <Component class="javax.swing.JCheckBox" name="txtFriday">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Th&#x1ee9; 6"/>
                                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -1637,7 +1643,7 @@
                                 </Property>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JCheckBox" name="txtSaturday2">
+                            <Component class="javax.swing.JCheckBox" name="txtSaturday">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Th&#x1ee9; 7"/>
                                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -1658,12 +1664,22 @@
                                 <CodeVariable name="flowLayout9" type="4096" declaredType="java.awt.FlowLayout"/>
                                 <ExpressionOrigin>
                                   <ExpressionProvider type="CodeConstructor">
-                                    <CodeConstructor class="java.awt.FlowLayout" parameterTypes="int"/>
+                                    <CodeConstructor class="java.awt.FlowLayout" parameterTypes="int, int, int"/>
                                   </ExpressionProvider>
                                   <Parameters>
                                     <CodeExpression id="60">
                                       <ExpressionOrigin>
                                         <Value type="int" value="0"/>
+                                      </ExpressionOrigin>
+                                    </CodeExpression>
+                                    <CodeExpression id="61">
+                                      <ExpressionOrigin>
+                                        <Value type="int" value="10"/>
+                                      </ExpressionOrigin>
+                                    </CodeExpression>
+                                    <CodeExpression id="62">
+                                      <ExpressionOrigin>
+                                        <Value type="int" value="5"/>
                                       </ExpressionOrigin>
                                     </CodeExpression>
                                   </Parameters>
@@ -1674,6 +1690,8 @@
                               </StatementProvider>
                               <Parameters>
                                 <CodeExpression id="60"/>
+                                <CodeExpression id="61"/>
+                                <CodeExpression id="62"/>
                               </Parameters>
                             </CodeStatement>
                             <CodeStatement>
@@ -1682,7 +1700,7 @@
                                 <CodeMethod name="setAlignOnBaseline" class="java.awt.FlowLayout" parameterTypes="boolean"/>
                               </StatementProvider>
                               <Parameters>
-                                <CodeExpression id="61">
+                                <CodeExpression id="63">
                                   <ExpressionOrigin>
                                     <Value type="boolean" value="true"/>
                                   </ExpressionOrigin>
@@ -1690,7 +1708,7 @@
                               </Parameters>
                             </CodeStatement>
                             <CodeStatement>
-                              <CodeExpression id="62_jPanel33">
+                              <CodeExpression id="64_jPanel33">
                                 <CodeVariable name="jPanel33" type="8194" declaredType="javax.swing.JPanel"/>
                                 <ExpressionOrigin>
                                   <ExpressionProvider type="ComponentRef">
@@ -1706,96 +1724,96 @@
                               </Parameters>
                             </CodeStatement>
                             <CodeStatement>
-                              <CodeExpression id="62_jPanel33"/>
+                              <CodeExpression id="64_jPanel33"/>
                               <StatementProvider type="CodeMethod">
                                 <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                               </StatementProvider>
                               <Parameters>
-                                <CodeExpression id="63_txtMonday2">
-                                  <CodeVariable name="txtMonday2" type="8194" declaredType="javax.swing.JCheckBox"/>
+                                <CodeExpression id="65_txtMonday">
+                                  <CodeVariable name="txtMonday" type="8194" declaredType="javax.swing.JCheckBox"/>
                                   <ExpressionOrigin>
                                     <ExpressionProvider type="ComponentRef">
-                                      <ComponentRef name="txtMonday2"/>
+                                      <ComponentRef name="txtMonday"/>
                                     </ExpressionProvider>
                                   </ExpressionOrigin>
                                 </CodeExpression>
                               </Parameters>
                             </CodeStatement>
                             <CodeStatement>
-                              <CodeExpression id="62_jPanel33"/>
+                              <CodeExpression id="64_jPanel33"/>
                               <StatementProvider type="CodeMethod">
                                 <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                               </StatementProvider>
                               <Parameters>
-                                <CodeExpression id="64_txtTuesday2">
-                                  <CodeVariable name="txtTuesday2" type="8194" declaredType="javax.swing.JCheckBox"/>
+                                <CodeExpression id="66_txtTuesday">
+                                  <CodeVariable name="txtTuesday" type="8194" declaredType="javax.swing.JCheckBox"/>
                                   <ExpressionOrigin>
                                     <ExpressionProvider type="ComponentRef">
-                                      <ComponentRef name="txtTuesday2"/>
+                                      <ComponentRef name="txtTuesday"/>
                                     </ExpressionProvider>
                                   </ExpressionOrigin>
                                 </CodeExpression>
                               </Parameters>
                             </CodeStatement>
                             <CodeStatement>
-                              <CodeExpression id="62_jPanel33"/>
+                              <CodeExpression id="64_jPanel33"/>
                               <StatementProvider type="CodeMethod">
                                 <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                               </StatementProvider>
                               <Parameters>
-                                <CodeExpression id="65_txtWednesday2">
-                                  <CodeVariable name="txtWednesday2" type="8194" declaredType="javax.swing.JCheckBox"/>
+                                <CodeExpression id="67_txtWednesday">
+                                  <CodeVariable name="txtWednesday" type="8194" declaredType="javax.swing.JCheckBox"/>
                                   <ExpressionOrigin>
                                     <ExpressionProvider type="ComponentRef">
-                                      <ComponentRef name="txtWednesday2"/>
+                                      <ComponentRef name="txtWednesday"/>
                                     </ExpressionProvider>
                                   </ExpressionOrigin>
                                 </CodeExpression>
                               </Parameters>
                             </CodeStatement>
                             <CodeStatement>
-                              <CodeExpression id="62_jPanel33"/>
+                              <CodeExpression id="64_jPanel33"/>
                               <StatementProvider type="CodeMethod">
                                 <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                               </StatementProvider>
                               <Parameters>
-                                <CodeExpression id="66_txtThursday2">
-                                  <CodeVariable name="txtThursday2" type="8194" declaredType="javax.swing.JCheckBox"/>
+                                <CodeExpression id="68_txtThursday">
+                                  <CodeVariable name="txtThursday" type="8194" declaredType="javax.swing.JCheckBox"/>
                                   <ExpressionOrigin>
                                     <ExpressionProvider type="ComponentRef">
-                                      <ComponentRef name="txtThursday2"/>
+                                      <ComponentRef name="txtThursday"/>
                                     </ExpressionProvider>
                                   </ExpressionOrigin>
                                 </CodeExpression>
                               </Parameters>
                             </CodeStatement>
                             <CodeStatement>
-                              <CodeExpression id="62_jPanel33"/>
+                              <CodeExpression id="64_jPanel33"/>
                               <StatementProvider type="CodeMethod">
                                 <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                               </StatementProvider>
                               <Parameters>
-                                <CodeExpression id="67_txtFriday2">
-                                  <CodeVariable name="txtFriday2" type="8194" declaredType="javax.swing.JCheckBox"/>
+                                <CodeExpression id="69_txtFriday">
+                                  <CodeVariable name="txtFriday" type="8194" declaredType="javax.swing.JCheckBox"/>
                                   <ExpressionOrigin>
                                     <ExpressionProvider type="ComponentRef">
-                                      <ComponentRef name="txtFriday2"/>
+                                      <ComponentRef name="txtFriday"/>
                                     </ExpressionProvider>
                                   </ExpressionOrigin>
                                 </CodeExpression>
                               </Parameters>
                             </CodeStatement>
                             <CodeStatement>
-                              <CodeExpression id="62_jPanel33"/>
+                              <CodeExpression id="64_jPanel33"/>
                               <StatementProvider type="CodeMethod">
                                 <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                               </StatementProvider>
                               <Parameters>
-                                <CodeExpression id="68_txtSaturday2">
-                                  <CodeVariable name="txtSaturday2" type="8194" declaredType="javax.swing.JCheckBox"/>
+                                <CodeExpression id="70_txtSaturday">
+                                  <CodeVariable name="txtSaturday" type="8194" declaredType="javax.swing.JCheckBox"/>
                                   <ExpressionOrigin>
                                     <ExpressionProvider type="ComponentRef">
-                                      <ComponentRef name="txtSaturday2"/>
+                                      <ComponentRef name="txtSaturday"/>
                                     </ExpressionProvider>
                                   </ExpressionOrigin>
                                 </CodeExpression>
@@ -1806,14 +1824,14 @@
                       </SubComponents>
                       <LayoutCode>
                         <CodeStatement>
-                          <CodeExpression id="69_flowLayout11">
+                          <CodeExpression id="71_flowLayout11">
                             <CodeVariable name="flowLayout11" type="4096" declaredType="java.awt.FlowLayout"/>
                             <ExpressionOrigin>
                               <ExpressionProvider type="CodeConstructor">
                                 <CodeConstructor class="java.awt.FlowLayout" parameterTypes="int"/>
                               </ExpressionProvider>
                               <Parameters>
-                                <CodeExpression id="70">
+                                <CodeExpression id="72">
                                   <ExpressionOrigin>
                                     <Value type="int" value="0"/>
                                   </ExpressionOrigin>
@@ -1822,19 +1840,19 @@
                             </ExpressionOrigin>
                           </CodeExpression>
                           <StatementProvider type="CodeExpression">
-                            <CodeExpression id="69_flowLayout11"/>
+                            <CodeExpression id="71_flowLayout11"/>
                           </StatementProvider>
                           <Parameters>
-                            <CodeExpression id="70"/>
+                            <CodeExpression id="72"/>
                           </Parameters>
                         </CodeStatement>
                         <CodeStatement>
-                          <CodeExpression id="69_flowLayout11"/>
+                          <CodeExpression id="71_flowLayout11"/>
                           <StatementProvider type="CodeMethod">
                             <CodeMethod name="setAlignOnBaseline" class="java.awt.FlowLayout" parameterTypes="boolean"/>
                           </StatementProvider>
                           <Parameters>
-                            <CodeExpression id="71">
+                            <CodeExpression id="73">
                               <ExpressionOrigin>
                                 <Value type="boolean" value="true"/>
                               </ExpressionOrigin>
@@ -1842,7 +1860,7 @@
                           </Parameters>
                         </CodeStatement>
                         <CodeStatement>
-                          <CodeExpression id="72_txtDatePnl">
+                          <CodeExpression id="74_txtDatePnl">
                             <CodeVariable name="txtDatePnl" type="8194" declaredType="javax.swing.JPanel"/>
                             <ExpressionOrigin>
                               <ExpressionProvider type="ComponentRef">
@@ -1854,16 +1872,16 @@
                             <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
                           </StatementProvider>
                           <Parameters>
-                            <CodeExpression id="69_flowLayout11"/>
+                            <CodeExpression id="71_flowLayout11"/>
                           </Parameters>
                         </CodeStatement>
                         <CodeStatement>
-                          <CodeExpression id="72_txtDatePnl"/>
+                          <CodeExpression id="74_txtDatePnl"/>
                           <StatementProvider type="CodeMethod">
                             <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                           </StatementProvider>
                           <Parameters>
-                            <CodeExpression id="73_jLabel21">
+                            <CodeExpression id="75_jLabel21">
                               <CodeVariable name="jLabel21" type="8194" declaredType="javax.swing.JLabel"/>
                               <ExpressionOrigin>
                                 <ExpressionProvider type="ComponentRef">
@@ -1874,12 +1892,125 @@
                           </Parameters>
                         </CodeStatement>
                         <CodeStatement>
-                          <CodeExpression id="72_txtDatePnl"/>
+                          <CodeExpression id="74_txtDatePnl"/>
                           <StatementProvider type="CodeMethod">
                             <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                           </StatementProvider>
                           <Parameters>
-                            <CodeExpression id="62_jPanel33"/>
+                            <CodeExpression id="64_jPanel33"/>
+                          </Parameters>
+                        </CodeStatement>
+                      </LayoutCode>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="txtTypePnl">
+                      <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                        </Property>
+                      </Properties>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="jLabel2">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Lo&#x1ea1;i:"/>
+                            <Property name="horizontalTextPosition" type="int" value="2"/>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[60, 40]"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="txtType">
+                          <Properties>
+                            <Property name="enabled" type="boolean" value="false"/>
+                            <Property name="focusable" type="boolean" value="false"/>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[120, 40]"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                      </SubComponents>
+                      <LayoutCode>
+                        <CodeStatement>
+                          <CodeExpression id="76_flowLayout14">
+                            <CodeVariable name="flowLayout14" type="4096" declaredType="java.awt.FlowLayout"/>
+                            <ExpressionOrigin>
+                              <ExpressionProvider type="CodeConstructor">
+                                <CodeConstructor class="java.awt.FlowLayout" parameterTypes="int"/>
+                              </ExpressionProvider>
+                              <Parameters>
+                                <CodeExpression id="77">
+                                  <ExpressionOrigin>
+                                    <Value type="int" value="0"/>
+                                  </ExpressionOrigin>
+                                </CodeExpression>
+                              </Parameters>
+                            </ExpressionOrigin>
+                          </CodeExpression>
+                          <StatementProvider type="CodeExpression">
+                            <CodeExpression id="76_flowLayout14"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="77"/>
+                          </Parameters>
+                        </CodeStatement>
+                        <CodeStatement>
+                          <CodeExpression id="76_flowLayout14"/>
+                          <StatementProvider type="CodeMethod">
+                            <CodeMethod name="setAlignOnBaseline" class="java.awt.FlowLayout" parameterTypes="boolean"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="78">
+                              <ExpressionOrigin>
+                                <Value type="boolean" value="true"/>
+                              </ExpressionOrigin>
+                            </CodeExpression>
+                          </Parameters>
+                        </CodeStatement>
+                        <CodeStatement>
+                          <CodeExpression id="79_txtTypePnl">
+                            <CodeVariable name="txtTypePnl" type="8194" declaredType="javax.swing.JPanel"/>
+                            <ExpressionOrigin>
+                              <ExpressionProvider type="ComponentRef">
+                                <ComponentRef name="txtTypePnl"/>
+                              </ExpressionProvider>
+                            </ExpressionOrigin>
+                          </CodeExpression>
+                          <StatementProvider type="CodeMethod">
+                            <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="76_flowLayout14"/>
+                          </Parameters>
+                        </CodeStatement>
+                        <CodeStatement>
+                          <CodeExpression id="79_txtTypePnl"/>
+                          <StatementProvider type="CodeMethod">
+                            <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="80_jLabel2">
+                              <CodeVariable name="jLabel2" type="8194" declaredType="javax.swing.JLabel"/>
+                              <ExpressionOrigin>
+                                <ExpressionProvider type="ComponentRef">
+                                  <ComponentRef name="jLabel2"/>
+                                </ExpressionProvider>
+                              </ExpressionOrigin>
+                            </CodeExpression>
+                          </Parameters>
+                        </CodeStatement>
+                        <CodeStatement>
+                          <CodeExpression id="79_txtTypePnl"/>
+                          <StatementProvider type="CodeMethod">
+                            <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="81_txtType">
+                              <CodeVariable name="txtType" type="8194" declaredType="javax.swing.JTextField"/>
+                              <ExpressionOrigin>
+                                <ExpressionProvider type="ComponentRef">
+                                  <ComponentRef name="txtType"/>
+                                </ExpressionProvider>
+                              </ExpressionOrigin>
+                            </CodeExpression>
                           </Parameters>
                         </CodeStatement>
                       </LayoutCode>
@@ -1887,14 +2018,14 @@
                   </SubComponents>
                   <LayoutCode>
                     <CodeStatement>
-                      <CodeExpression id="74_flowLayout13">
+                      <CodeExpression id="82_flowLayout13">
                         <CodeVariable name="flowLayout13" type="4096" declaredType="java.awt.FlowLayout"/>
                         <ExpressionOrigin>
                           <ExpressionProvider type="CodeConstructor">
                             <CodeConstructor class="java.awt.FlowLayout" parameterTypes="int"/>
                           </ExpressionProvider>
                           <Parameters>
-                            <CodeExpression id="75">
+                            <CodeExpression id="83">
                               <ExpressionOrigin>
                                 <Value type="int" value="0"/>
                               </ExpressionOrigin>
@@ -1903,19 +2034,19 @@
                         </ExpressionOrigin>
                       </CodeExpression>
                       <StatementProvider type="CodeExpression">
-                        <CodeExpression id="74_flowLayout13"/>
+                        <CodeExpression id="82_flowLayout13"/>
                       </StatementProvider>
                       <Parameters>
-                        <CodeExpression id="75"/>
+                        <CodeExpression id="83"/>
                       </Parameters>
                     </CodeStatement>
                     <CodeStatement>
-                      <CodeExpression id="74_flowLayout13"/>
+                      <CodeExpression id="82_flowLayout13"/>
                       <StatementProvider type="CodeMethod">
                         <CodeMethod name="setAlignOnBaseline" class="java.awt.FlowLayout" parameterTypes="boolean"/>
                       </StatementProvider>
                       <Parameters>
-                        <CodeExpression id="76">
+                        <CodeExpression id="84">
                           <ExpressionOrigin>
                             <Value type="boolean" value="true"/>
                           </ExpressionOrigin>
@@ -1923,7 +2054,7 @@
                       </Parameters>
                     </CodeStatement>
                     <CodeStatement>
-                      <CodeExpression id="77_txtDetailCourse">
+                      <CodeExpression id="85_txtDetailCourse">
                         <CodeVariable name="txtDetailCourse" type="8194" declaredType="javax.swing.JPanel"/>
                         <ExpressionOrigin>
                           <ExpressionProvider type="ComponentRef">
@@ -1935,11 +2066,11 @@
                         <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
                       </StatementProvider>
                       <Parameters>
-                        <CodeExpression id="74_flowLayout13"/>
+                        <CodeExpression id="82_flowLayout13"/>
                       </Parameters>
                     </CodeStatement>
                     <CodeStatement>
-                      <CodeExpression id="77_txtDetailCourse"/>
+                      <CodeExpression id="85_txtDetailCourse"/>
                       <StatementProvider type="CodeMethod">
                         <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                       </StatementProvider>
@@ -1948,7 +2079,7 @@
                       </Parameters>
                     </CodeStatement>
                     <CodeStatement>
-                      <CodeExpression id="77_txtDetailCourse"/>
+                      <CodeExpression id="85_txtDetailCourse"/>
                       <StatementProvider type="CodeMethod">
                         <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                       </StatementProvider>
@@ -1957,7 +2088,7 @@
                       </Parameters>
                     </CodeStatement>
                     <CodeStatement>
-                      <CodeExpression id="77_txtDetailCourse"/>
+                      <CodeExpression id="85_txtDetailCourse"/>
                       <StatementProvider type="CodeMethod">
                         <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                       </StatementProvider>
@@ -1966,12 +2097,21 @@
                       </Parameters>
                     </CodeStatement>
                     <CodeStatement>
-                      <CodeExpression id="77_txtDetailCourse"/>
+                      <CodeExpression id="85_txtDetailCourse"/>
                       <StatementProvider type="CodeMethod">
                         <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                       </StatementProvider>
                       <Parameters>
-                        <CodeExpression id="72_txtDatePnl"/>
+                        <CodeExpression id="74_txtDatePnl"/>
+                      </Parameters>
+                    </CodeStatement>
+                    <CodeStatement>
+                      <CodeExpression id="85_txtDetailCourse"/>
+                      <StatementProvider type="CodeMethod">
+                        <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                      </StatementProvider>
+                      <Parameters>
+                        <CodeExpression id="79_txtTypePnl"/>
                       </Parameters>
                     </CodeStatement>
                   </LayoutCode>
@@ -1979,24 +2119,24 @@
               </SubComponents>
               <LayoutCode>
                 <CodeStatement>
-                  <CodeExpression id="78_flowLayout15">
+                  <CodeExpression id="86_flowLayout15">
                     <CodeVariable name="flowLayout15" type="4096" declaredType="java.awt.FlowLayout"/>
                     <ExpressionOrigin>
                       <ExpressionProvider type="CodeConstructor">
                         <CodeConstructor class="java.awt.FlowLayout" parameterTypes="int, int, int"/>
                       </ExpressionProvider>
                       <Parameters>
-                        <CodeExpression id="79">
+                        <CodeExpression id="87">
                           <ExpressionOrigin>
                             <Value type="int" value="0"/>
                           </ExpressionOrigin>
                         </CodeExpression>
-                        <CodeExpression id="80">
+                        <CodeExpression id="88">
                           <ExpressionOrigin>
-                            <Value type="int" value="0"/>
+                            <Value type="int" value="10"/>
                           </ExpressionOrigin>
                         </CodeExpression>
-                        <CodeExpression id="81">
+                        <CodeExpression id="89">
                           <ExpressionOrigin>
                             <Value type="int" value="0"/>
                           </ExpressionOrigin>
@@ -2005,21 +2145,21 @@
                     </ExpressionOrigin>
                   </CodeExpression>
                   <StatementProvider type="CodeExpression">
-                    <CodeExpression id="78_flowLayout15"/>
+                    <CodeExpression id="86_flowLayout15"/>
                   </StatementProvider>
                   <Parameters>
-                    <CodeExpression id="79"/>
-                    <CodeExpression id="80"/>
-                    <CodeExpression id="81"/>
+                    <CodeExpression id="87"/>
+                    <CodeExpression id="88"/>
+                    <CodeExpression id="89"/>
                   </Parameters>
                 </CodeStatement>
                 <CodeStatement>
-                  <CodeExpression id="78_flowLayout15"/>
+                  <CodeExpression id="86_flowLayout15"/>
                   <StatementProvider type="CodeMethod">
                     <CodeMethod name="setAlignOnBaseline" class="java.awt.FlowLayout" parameterTypes="boolean"/>
                   </StatementProvider>
                   <Parameters>
-                    <CodeExpression id="82">
+                    <CodeExpression id="90">
                       <ExpressionOrigin>
                         <Value type="boolean" value="true"/>
                       </ExpressionOrigin>
@@ -2027,7 +2167,7 @@
                   </Parameters>
                 </CodeStatement>
                 <CodeStatement>
-                  <CodeExpression id="83_jPanel1">
+                  <CodeExpression id="91_jPanel1">
                     <CodeVariable name="jPanel1" type="8194" declaredType="javax.swing.JPanel"/>
                     <ExpressionOrigin>
                       <ExpressionProvider type="ComponentRef">
@@ -2039,11 +2179,11 @@
                     <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
                   </StatementProvider>
                   <Parameters>
-                    <CodeExpression id="78_flowLayout15"/>
+                    <CodeExpression id="86_flowLayout15"/>
                   </Parameters>
                 </CodeStatement>
                 <CodeStatement>
-                  <CodeExpression id="83_jPanel1"/>
+                  <CodeExpression id="91_jPanel1"/>
                   <StatementProvider type="CodeMethod">
                     <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                   </StatementProvider>
@@ -2052,7 +2192,7 @@
                   </Parameters>
                 </CodeStatement>
                 <CodeStatement>
-                  <CodeExpression id="83_jPanel1"/>
+                  <CodeExpression id="91_jPanel1"/>
                   <StatementProvider type="CodeMethod">
                     <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                   </StatementProvider>
@@ -2061,12 +2201,12 @@
                   </Parameters>
                 </CodeStatement>
                 <CodeStatement>
-                  <CodeExpression id="83_jPanel1"/>
+                  <CodeExpression id="91_jPanel1"/>
                   <StatementProvider type="CodeMethod">
                     <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                   </StatementProvider>
                   <Parameters>
-                    <CodeExpression id="84_txtDepartmentPnl">
+                    <CodeExpression id="92_txtDepartmentPnl">
                       <CodeVariable name="txtDepartmentPnl" type="8194" declaredType="javax.swing.JPanel"/>
                       <ExpressionOrigin>
                         <ExpressionProvider type="ComponentRef">
@@ -2077,7 +2217,7 @@
                   </Parameters>
                 </CodeStatement>
                 <CodeStatement>
-                  <CodeExpression id="83_jPanel1"/>
+                  <CodeExpression id="91_jPanel1"/>
                   <StatementProvider type="CodeMethod">
                     <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                   </StatementProvider>
@@ -2086,12 +2226,12 @@
                   </Parameters>
                 </CodeStatement>
                 <CodeStatement>
-                  <CodeExpression id="83_jPanel1"/>
+                  <CodeExpression id="91_jPanel1"/>
                   <StatementProvider type="CodeMethod">
                     <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                   </StatementProvider>
                   <Parameters>
-                    <CodeExpression id="77_txtDetailCourse"/>
+                    <CodeExpression id="85_txtDetailCourse"/>
                   </Parameters>
                 </CodeStatement>
               </LayoutCode>
@@ -2103,7 +2243,7 @@
                 </Property>
               </Properties>
               <SubComponents>
-                <Component class="javax.swing.JButton" name="jButton6">
+                <Component class="javax.swing.JButton" name="btnCancel">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="&#x110;&#xf3;ng"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -2118,10 +2258,10 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton6ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton5">
+                <Component class="javax.swing.JButton" name="btnSave">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="L&#x1b0;u"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -2140,22 +2280,26 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
+                    <Property name="horizontalTextPosition" type="int" value="0"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[112, 40]"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaveActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
               <LayoutCode>
                 <CodeStatement>
-                  <CodeExpression id="85_flowLayout14">
-                    <CodeVariable name="flowLayout14" type="4096" declaredType="java.awt.FlowLayout"/>
+                  <CodeExpression id="93_flowLayout10">
+                    <CodeVariable name="flowLayout10" type="4096" declaredType="java.awt.FlowLayout"/>
                     <ExpressionOrigin>
                       <ExpressionProvider type="CodeConstructor">
                         <CodeConstructor class="java.awt.FlowLayout" parameterTypes="int"/>
                       </ExpressionProvider>
                       <Parameters>
-                        <CodeExpression id="86">
+                        <CodeExpression id="94">
                           <ExpressionOrigin>
                             <Value type="int" value="2"/>
                           </ExpressionOrigin>
@@ -2164,19 +2308,19 @@
                     </ExpressionOrigin>
                   </CodeExpression>
                   <StatementProvider type="CodeExpression">
-                    <CodeExpression id="85_flowLayout14"/>
+                    <CodeExpression id="93_flowLayout10"/>
                   </StatementProvider>
                   <Parameters>
-                    <CodeExpression id="86"/>
+                    <CodeExpression id="94"/>
                   </Parameters>
                 </CodeStatement>
                 <CodeStatement>
-                  <CodeExpression id="85_flowLayout14"/>
+                  <CodeExpression id="93_flowLayout10"/>
                   <StatementProvider type="CodeMethod">
                     <CodeMethod name="setAlignOnBaseline" class="java.awt.FlowLayout" parameterTypes="boolean"/>
                   </StatementProvider>
                   <Parameters>
-                    <CodeExpression id="87">
+                    <CodeExpression id="95">
                       <ExpressionOrigin>
                         <Value type="boolean" value="true"/>
                       </ExpressionOrigin>
@@ -2184,7 +2328,7 @@
                   </Parameters>
                 </CodeStatement>
                 <CodeStatement>
-                  <CodeExpression id="88_buttonPnl">
+                  <CodeExpression id="96_buttonPnl">
                     <CodeVariable name="buttonPnl" type="8194" declaredType="javax.swing.JPanel"/>
                     <ExpressionOrigin>
                       <ExpressionProvider type="ComponentRef">
@@ -2196,36 +2340,36 @@
                     <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
                   </StatementProvider>
                   <Parameters>
-                    <CodeExpression id="85_flowLayout14"/>
+                    <CodeExpression id="93_flowLayout10"/>
                   </Parameters>
                 </CodeStatement>
                 <CodeStatement>
-                  <CodeExpression id="88_buttonPnl"/>
+                  <CodeExpression id="96_buttonPnl"/>
                   <StatementProvider type="CodeMethod">
                     <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                   </StatementProvider>
                   <Parameters>
-                    <CodeExpression id="89_jButton6">
-                      <CodeVariable name="jButton6" type="8194" declaredType="javax.swing.JButton"/>
+                    <CodeExpression id="97_btnCancel">
+                      <CodeVariable name="btnCancel" type="8194" declaredType="javax.swing.JButton"/>
                       <ExpressionOrigin>
                         <ExpressionProvider type="ComponentRef">
-                          <ComponentRef name="jButton6"/>
+                          <ComponentRef name="btnCancel"/>
                         </ExpressionProvider>
                       </ExpressionOrigin>
                     </CodeExpression>
                   </Parameters>
                 </CodeStatement>
                 <CodeStatement>
-                  <CodeExpression id="88_buttonPnl"/>
+                  <CodeExpression id="96_buttonPnl"/>
                   <StatementProvider type="CodeMethod">
                     <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                   </StatementProvider>
                   <Parameters>
-                    <CodeExpression id="90_jButton5">
-                      <CodeVariable name="jButton5" type="8194" declaredType="javax.swing.JButton"/>
+                    <CodeExpression id="98_btnSave">
+                      <CodeVariable name="btnSave" type="8194" declaredType="javax.swing.JButton"/>
                       <ExpressionOrigin>
                         <ExpressionProvider type="ComponentRef">
-                          <ComponentRef name="jButton5"/>
+                          <ComponentRef name="btnSave"/>
                         </ExpressionProvider>
                       </ExpressionOrigin>
                     </CodeExpression>
