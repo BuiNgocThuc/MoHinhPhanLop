@@ -206,7 +206,7 @@ public class AssigmentDetailGV extends JFrame {
                 PersonDTO instructor = new PersonDTO();
                 List<CourseDTO> courses = new ArrayList<>();
                 for (int i = 0; i < table.getRowCount(); i++) {
-                    int courseID = (int) table.getValueAt(i, 1);
+                    int courseID = Integer.parseInt(table.getValueAt(i, 1).toString());
                     CourseDTO course = new CourseDTO();
                     course.setCourseID(courseID);
                     courses.add(course);

@@ -9,7 +9,11 @@ import DTO.CourseDTO;
 import DTO.PersonDTO;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -58,6 +62,11 @@ public class TableCoursePanel extends javax.swing.JPanel {
             }
         });
         tblCourse.setRowHeight(35);
+        tblCourse.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblCourseMouseClicked(evt);
+            }
+        });
         spCourse.setViewportView(tblCourse);
         if (tblCourse.getColumnModel().getColumnCount() > 0) {
             tblCourse.getColumnModel().getColumn(0).setMinWidth(50);
@@ -81,6 +90,30 @@ public class TableCoursePanel extends javax.swing.JPanel {
             .addComponent(spCourse, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tblCourseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCourseMouseClicked
+        if (evt.getClickCount() == 2) {
+            int row = tblCourse.getSelectedRow();
+            int courseID = (int) tblCourse.getValueAt(row, 1);
+            try {
+                JFrame assigmentCourseDetail = new AssigmentCourseDetail(courseID);
+                assigmentCourseDetail.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        try {
+                            List<CourseDTO> courses = courseInstructorBLL.getListCourseAssignInstructor();
+                            loadData(courses);
+                        } catch (SQLException ex) {
+                            ex.printStackTrace();
+                            JOptionPane.showMessageDialog(null, "Lỗi hệ thống");
+                        }
+                    }
+                });
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Lỗi hệ thống");
+            }
+        }    }//GEN-LAST:event_tblCourseMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

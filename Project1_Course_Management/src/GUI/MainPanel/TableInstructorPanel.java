@@ -9,6 +9,7 @@ import DTO.CourseDTO;
 import DTO.PersonDTO;
 import java.sql.SQLException;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -103,7 +104,19 @@ public class TableInstructorPanel extends javax.swing.JPanel {
             int instructorID = (int) tblInstructor.getValueAt(row, 1);
             System.out.println(instructorID);
             try {
-                new AssigmentDetailGV(instructorID);
+                JFrame assigmentDetailGV = new AssigmentDetailGV(instructorID);
+                assigmentDetailGV.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        try {
+                            List<PersonDTO> instructors = courseInstructorBLL.getListInstructorAssignCourse();
+                            loadData(instructors);
+                        } catch (SQLException ex) {
+                            ex.printStackTrace();
+                            JOptionPane.showMessageDialog(null, "Lỗi hệ thống");
+                        }
+                    }
+                });
             } catch (SQLException ex) {
                 ex.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Lỗi hệ thống");

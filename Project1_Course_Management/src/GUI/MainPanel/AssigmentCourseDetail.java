@@ -211,7 +211,7 @@ public class AssigmentCourseDetail extends JFrame {
                 CourseDTO course = new CourseDTO();
                 List<PersonDTO> instructors = new ArrayList<>();
                 for (int i = 0; i < table.getRowCount(); i++) {
-                    int personID = (int) table.getValueAt(i, 1);
+                    int personID = Integer.parseInt(table.getValueAt(i, 1).toString());
                     PersonDTO personDTO = new PersonDTO();
                     personDTO.setPersonID(personID);
                     instructors.add(personDTO);
