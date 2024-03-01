@@ -33,4 +33,10 @@ public class StudentGradeBLL {
     public  boolean deleteGrade(int id){
         return studentGradeDAL.deleteGrade(id);
     }
+    public  ArrayList<StudentGradeDTO> serchAllStudentGrade(int CourseID,String text){
+        return studentGradeDAL.serchAllStudentGrade(CourseID, text);
+    }
+    public  ArrayList<StudentGradeDTO> Statistical(int CourseID,String text){
+        return studentGradeDAL.Statistical(CourseID, text);
+    }
 }

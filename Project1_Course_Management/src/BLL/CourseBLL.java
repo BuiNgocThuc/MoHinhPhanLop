@@ -50,7 +50,11 @@ public class CourseBLL {
         return courseDAL.getAllList(text);
     }
 
-    public CourseDTO courseDetail(int id) {
+    public ArrayList<CourseDTO> searchAllCourse(String text){
+        return courseDAL.searchAllCourse(text);
+    }
+    
+    public CourseDTO courseDetail(int id){
         return courseDAL.courseDetail(id);
     }
 

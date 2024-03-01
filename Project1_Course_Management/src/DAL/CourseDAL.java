@@ -396,7 +396,26 @@ public class CourseDAL {
         }
         return null;
     }
-    
+     public ArrayList<CourseDTO> searchAllCourse(String text){
+         ArrayList<CourseDTO> searchAllCourse=new ArrayList<CourseDTO>();
+        try{
+            String query="select * from course where UPPER(CONCAT(course.CourseID,course.Title)) like '%"+text+"%'";
+            PreparedStatement pre = conn.prepareStatement(query);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next())
+            {
+                CourseDTO course = new CourseDTO();
+                course.setCourseID(rs.getInt("CourseID"));
+                course.setTitle(rs.getString("Title"));
+                course.setCredits(rs.getInt("Credits"));
+                course.setDepartmentID(rs.getInt("DepartmentID"));
+                searchAllCourse.add(course);
+            }
+            return searchAllCourse;
+        }catch(Exception ex){
+        }
+        return null;
+    }
     public List<CourseDTO> selectOnsiteAll() {
         listCourses = new ArrayList<>();
         String query = "SELECT \n"

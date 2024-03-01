@@ -288,7 +288,6 @@ public class CoursePanel extends javax.swing.JPanel {
         sortCourseBtnGroupPnl.setLayout(flowLayout6);
 
         sortCourseBtnGroup.add(jRadioButton1);
-        jRadioButton1.setSelected(true);
         jRadioButton1.setText("Tất cả");
         jRadioButton1.setPreferredSize(new java.awt.Dimension(60, 30));
         jRadioButton1.addChangeListener(new javax.swing.event.ChangeListener() {

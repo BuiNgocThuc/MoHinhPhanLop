@@ -5,6 +5,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ValidateUtil {
 
@@ -15,6 +19,27 @@ public class ValidateUtil {
 
         return matchFound;
     }
+    
+    public static Timestamp convertStringToTimestamp(String dateString) {
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date parsedDate = dateFormat.parse(dateString);
+            return new Timestamp(parsedDate.getTime());
+        } 
+        catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    public static String getCurrentDate() {
+        Date currentDate = new Date();
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        return dateFormat.format(currentDate);
+    }
+    
     
     public static boolean isEmpty(String s) {
         return s.trim().equals("");

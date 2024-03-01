@@ -6,7 +6,7 @@ package GUi;
 
 import GUI.MainPanel.CourseInstrutorPanel;
 import GUI.MainPanel.CoursePanel;
-
+import GUI.MainPanel.CourseResultsPanel;
 import GUI.MainPanel.OnlineCoursePanel;
 import java.awt.Color;
 import java.awt.Component;
@@ -40,6 +40,7 @@ public class Home extends javax.swing.JFrame {
     private CourseInstrutorPanel courseInstrutorPanel = null;
     ;
     private final CoursePanel coursePanel = new CoursePanel();
+    private final CourseResultsPanel courseResultPanel = new CourseResultsPanel();
     private boolean dropdownToggle = false;
     private JButton currentBtn = null;
     private final ArrayList<JButton> allBtnLeftBar = new ArrayList<>();
@@ -235,8 +236,12 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_scheduleBtnActionPerformed
 
     private void resultBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resultBtnActionPerformed
-
-        switchPanel(resultPanel, resultBtn);
+        cardPanel.removeAll();
+        cardPanel.add(courseResultPanel);
+        cardPanel.repaint();
+        cardPanel.revalidate();
+        setBackgroundDefaultAllButton();
+        resultBtn.setBackground(lightBlue);
     }//GEN-LAST:event_resultBtnActionPerformed
 
     private void onsiteCourseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onsiteCourseBtnActionPerformed
