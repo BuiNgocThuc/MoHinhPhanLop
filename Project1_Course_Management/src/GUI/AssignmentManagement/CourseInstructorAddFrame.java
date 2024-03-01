@@ -231,7 +231,7 @@ public class CourseInstructorAddFrame extends javax.swing.JFrame {
                                     Logger.getLogger(CourseInstructorAddFrame.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                             }
-                            JOptionPane.showMessageDialog(null, "Thêm thành công");
+                            JOptionPane.showMessageDialog(null, "Phân công các khóa học cho giảng viên thành công");
                             pnInstructor.resetSelectedCourseListTable();
                         }
                     }
@@ -267,7 +267,7 @@ public class CourseInstructorAddFrame extends javax.swing.JFrame {
                                     Logger.getLogger(CourseInstructorAddFrame.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                             }
-                            JOptionPane.showMessageDialog(null, "Thêm thành công");
+                            JOptionPane.showMessageDialog(null, "Phân công các giảng viên cho khóa học thành công");
                             pnCourse.resetSelectedCourseListTable();
                         }
                     }

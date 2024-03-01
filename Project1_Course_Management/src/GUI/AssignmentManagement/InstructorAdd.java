@@ -204,7 +204,7 @@ public class InstructorAdd extends javax.swing.JFrame {
         }
 
         if (firstName.matches("\\d+") || lastName.matches("\\d+")) {
-            JOptionPane.showMessageDialog(this, "Tên không được chứa chữ số.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Tên không được chứa số.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
