@@ -21,6 +21,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -203,27 +204,29 @@ public class AssigmentCourseDetail extends JFrame {
         JPanel panelRight = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         panelRight.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
         btnSave = new JButton("Lưu");
-        btnSave.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        btnSave.addActionListener((ActionEvent e) -> {
+            int confirmed = JOptionPane.showConfirmDialog(null,
+                    "Bạn có chắc chắn muốn lưu thay đổi không?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+            if (confirmed == JOptionPane.YES_OPTION) {
+                CourseDTO course = new CourseDTO();
+                List<PersonDTO> instructors = new ArrayList<>();
+                for (int i = 0; i < table.getRowCount(); i++) {
+                    int personID = (int) table.getValueAt(i, 1);
+                    PersonDTO personDTO = new PersonDTO();
+                    personDTO.setPersonID(personID);
+                    instructors.add(personDTO);
+                }
+                course.setCourseID(id_Course);
+                course.setInstructors(instructors);
                 try {
-                    courseInstructorBLL.deleteAllInstructorAssignCourse(id_Course);
+                    courseInstructorBLL.updateCourseInstructors(course);
                 } catch (SQLException ex) {
-                    Logger.getLogger(AssigmentCourseDetail.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(AssigmentDetailGV.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-                for (int i = 0; i < table.getRowCount(); i++) {
-                    String personID = table.getValueAt(i, 1).toString();
-                    CourseInstructorDTO courseInstructor = new CourseInstructorDTO(id_Course, Integer.parseInt(personID));
-                    try {
-                        courseInstructorBLL.insertCourseInstructor(courseInstructor);
-                    } catch (SQLException ex) {
-                        Logger.getLogger(AssigmentCourseDetail.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
+                JOptionPane.showMessageDialog(null, "Thay đổi đã được lưu thành công.", "Thành công", JOptionPane.INFORMATION_MESSAGE);
             }
-        }
-        );
+        });
         btnAddMon = new JButton("thêm");
         btnAddMon.addActionListener((ActionEvent e) -> {
             panel.setVisible(false);

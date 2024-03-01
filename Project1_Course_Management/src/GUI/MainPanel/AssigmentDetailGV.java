@@ -21,6 +21,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -201,24 +202,21 @@ public class AssigmentDetailGV extends JFrame {
         btnSave.addActionListener((ActionEvent e) -> {
             int confirmed = JOptionPane.showConfirmDialog(null,
                     "Bạn có chắc chắn muốn lưu thay đổi không?", "Xác nhận", JOptionPane.YES_NO_OPTION);
-
             if (confirmed == JOptionPane.YES_OPTION) {
-                System.out.println("Nút Lưu được nhấn");
-
+                PersonDTO instructor = new PersonDTO();
+                List<CourseDTO> courses = new ArrayList<>();
+                for (int i = 0; i < table.getRowCount(); i++) {
+                    int courseID = (int) table.getValueAt(i, 1);
+                    CourseDTO course = new CourseDTO();
+                    course.setCourseID(courseID);
+                    courses.add(course);
+                }
+                instructor.setPersonID(id_GV);
+                instructor.setCourses(courses);
                 try {
-                    courseInstructorBLL.deleteAllCourseAssignInstructor(id_GV);
+                    courseInstructorBLL.updateCourseInstructors(instructor);
                 } catch (SQLException ex) {
                     Logger.getLogger(AssigmentDetailGV.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-                for (int i = 0; i < table.getRowCount(); i++) {
-                    String courseID = table.getValueAt(i, 1).toString();
-                    CourseInstructorDTO courseInstructor = new CourseInstructorDTO(Integer.parseInt(courseID), id_GV);
-                    try {
-                        courseInstructorBLL.insertCourseInstructor(courseInstructor);
-                    } catch (SQLException ex) {
-                        Logger.getLogger(AssigmentDetailGV.class.getName()).log(Level.SEVERE, null, ex);
-                    }
                 }
 
                 JOptionPane.showMessageDialog(null, "Thay đổi đã được lưu thành công.", "Thành công", JOptionPane.INFORMATION_MESSAGE);

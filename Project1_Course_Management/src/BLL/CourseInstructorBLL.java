@@ -103,4 +103,19 @@ public class CourseInstructorBLL {
         }
     }
 
+    public void updateCourseInstructors(PersonDTO instructor) throws SQLException {
+        deleteAllCourseAssignInstructor(instructor.getPersonID());
+        for (CourseDTO course : instructor.getCourses()) {
+            CourseInstructorDTO courseInstructor = new CourseInstructorDTO(course.getCourseID(), instructor.getPersonID());
+            insertCourseInstructor(courseInstructor);
+        }
+    }
+
+    public void updateCourseInstructors(CourseDTO course) throws SQLException {
+        deleteAllInstructorAssignCourse(course.getCourseID());
+        for (PersonDTO person : course.getInstructors()) {
+            CourseInstructorDTO courseInstructor = new CourseInstructorDTO(course.getCourseID(), person.getPersonID());
+            insertCourseInstructor(courseInstructor);
+        }
+    }
 }
