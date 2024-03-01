@@ -583,10 +583,10 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
                     }
                     
                     System.out.println(tmp);
-                    //System.out.println(jTableStudentGrade.getModel().getValueAt(row, 4).toString().trim());
+                    //System.out.println(jTableStugidentGrade.getModel().getValueAt(row, 4).toString().trim());
                     try {
                             gradeValue = Double.parseDouble(jTableStudentGrade.getModel().getValueAt(row, 4).toString().trim());
-                            if (gradeValue < 0 || gradeValue > 10){
+                            if (gradeValue < 0d || gradeValue > 10d){
                             JOptionPane.showMessageDialog(rootPane, "Please enter a score from 0 to 10.");
                             jTableStudentGrade.getModel().setValueAt(tmp, row, 4);
                             evt.consume();
@@ -696,7 +696,6 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
         // TODO add your handling code here:
         if(jTableStudentGrade.getSelectedRow()!=-1){
-            String grade=jTextGrade.getText().toString();
             try {
                     double gradeValue = Double.parseDouble(jTextGrade.getText().toString().trim());
                     if (gradeValue < 0 || gradeValue > 10){
@@ -720,6 +719,8 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(rootPane, "Please enter a valid score");
                             return;
             }
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Please enter a valid score");
         }
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
