@@ -204,12 +204,11 @@ public class AssigmentDetailGV extends JFrame {
 
             if (confirmed == JOptionPane.YES_OPTION) {
                 System.out.println("Nút Lưu được nhấn");
-                for (CourseInstructorDTO dto : listCourseInstructor) {
-                    try {
-                        courseInstructorBLL.deleteCourseInstructor(dto);
-                    } catch (SQLException ex) {
-                        Logger.getLogger(AssigmentDetailGV.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+
+                try {
+                    courseInstructorBLL.deleteAllCourseAssignInstructor(id_GV);
+                } catch (SQLException ex) {
+                    Logger.getLogger(AssigmentDetailGV.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
                 for (int i = 0; i < table.getRowCount(); i++) {
@@ -231,7 +230,7 @@ public class AssigmentDetailGV extends JFrame {
             panel.setVisible(false);
             panelBelow.setVisible(true);
         });
-        
+
         btnCloseFrame = new JButton("Đóng");
         btnCloseFrame.addActionListener((e) -> {
             this.dispose();

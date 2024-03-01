@@ -16,9 +16,9 @@ public class CourseInstructorBLL {
     private CourseInstructorDAL courseInstructorDAL = new CourseInstructorDAL();
     private CourseDAL courseDAL = new CourseDAL();
     private PersonDAL personDAL = new PersonDAL();
-    
+
     public CourseInstructorBLL() {
-        
+
     }
 
     public List<CourseInstructorDTO> getAllCourseInstructors() throws SQLException {
