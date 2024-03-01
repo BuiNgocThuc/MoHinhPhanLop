@@ -396,6 +396,60 @@ public class CourseDAL {
         }
         return null;
     }
+    
+    public List<CourseDTO> selectOnsiteAll() {
+        listCourses = new ArrayList<>();
+        String query = "SELECT \n"
+                    + "    course.*, 'Onsite' as course_type\n"
+                    + "FROM onsitecourse\n"
+                    + "LEFT JOIN course ON course.CourseID = onsitecourse.CourseID;";
+        try {
+            preStm = conn.prepareStatement(query);
+            ResultSet rs = preStm.executeQuery();
+            while (rs.next()) {
+                int CourseID = rs.getInt("CourseID");
+                String Title = rs.getString("Title");
+                int Credits = rs.getInt("Credits");
+                int DepartmentID = rs.getInt("DepartmentID");
+                String course_type = rs.getString("course_type");
+
+                CourseDTO course = new CourseDTO(CourseID, Title, Credits, DepartmentID, course_type);
+
+                listCourses.add(course);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return listCourses;
+    }
+    
+    public List<CourseDTO> selectOnlineAll() {
+        listCourses = new ArrayList<>();
+        String query = "SELECT \n"
+                    + "    course.*, 'Online' as course_type\n"
+                    + "FROM onlinecourse\n"
+                    + "LEFT JOIN course ON course.CourseID = onlinecourse.CourseID;";
+        try {
+            preStm = conn.prepareStatement(query);
+            ResultSet rs = preStm.executeQuery();
+            while (rs.next()) {
+                int CourseID = rs.getInt("CourseID");
+                String Title = rs.getString("Title");
+                int Credits = rs.getInt("Credits");
+                int DepartmentID = rs.getInt("DepartmentID");
+                String course_type = rs.getString("course_type");
+
+                CourseDTO course = new CourseDTO(CourseID, Title, Credits, DepartmentID, course_type);
+
+                listCourses.add(course);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return listCourses;
+    }
 
     public ArrayList<CourseDTO> findCoursesByNameOnsite(String s) {
         ArrayList<CourseDTO> listCourse = new ArrayList<CourseDTO>();

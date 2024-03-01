@@ -57,7 +57,7 @@ public class CoursePanel extends javax.swing.JPanel {
     
     
     public void loadData() {
-        List<CourseDTO> listCourse = courseBLL.selectAllCourse();
+        listCourse = courseBLL.selectAllCourse();
 
         DefaultTableModel model = (DefaultTableModel) tblCourse.getModel();
         model.setRowCount(0);
@@ -950,7 +950,7 @@ public class CoursePanel extends javax.swing.JPanel {
     public void loadCoursesOnsite() {
         DefaultTableModel model = (DefaultTableModel) tblCourse.getModel();
         model.setRowCount(0);
-        listCourse = courseBLL.selectAllCourse();
+        listCourse = courseBLL.selectOnsiteAllCourse();
         int STT = 1;
         for (CourseDTO course : listCourse) {
             if (course.getCourse_type().trim().equals("Onsite")) {
@@ -974,7 +974,7 @@ public class CoursePanel extends javax.swing.JPanel {
     public void loadCoursesOnline() {
         DefaultTableModel model = (DefaultTableModel) tblCourse.getModel();
         model.setRowCount(0);
-
+        listCourse = courseBLL.selectOnlineAllCourse();
         int STT = 1;
         for (CourseDTO course : listCourse) {
             if (course.getCourse_type().trim().equals("Online")) {
