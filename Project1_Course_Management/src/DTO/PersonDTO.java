@@ -1,14 +1,18 @@
 package DTO;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class PersonDTO {
+
     private int PersonID;
     private String LastName, FirstName;
     private Timestamp HireDate, EnrollmentDate;
-    
+
+    private List<CourseDTO> courses;
+
     public PersonDTO() {
-        
+
     }
 
     public PersonDTO(int personID, String firstName, String lastName, Timestamp hireDate, Timestamp enrollmentDate) {
@@ -59,14 +63,22 @@ public class PersonDTO {
         EnrollmentDate = enrollmentDate;
     }
 
+    public List<CourseDTO> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<CourseDTO> courses) {
+        this.courses = courses;
+    }
+
     @Override
     public String toString() {
-        return "Person{" +
-                "PersonID=" + PersonID +
-                ", FirstName='" + FirstName + '\'' +
-                ", LastName='" + LastName + '\'' +
-                ", HireDate=" + HireDate +
-                ", EnrollmentDate=" + EnrollmentDate +
-                '}';
+        return "Person{"
+                + "PersonID=" + PersonID
+                + ", FirstName='" + FirstName + '\''
+                + ", LastName='" + LastName + '\''
+                + ", HireDate=" + HireDate
+                + ", EnrollmentDate=" + EnrollmentDate
+                + '}';
     }
 }

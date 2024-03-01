@@ -4,7 +4,9 @@
  */
 package GUi;
 
+import GUI.MainPanel.CourseInstrutorPanel;
 import GUI.MainPanel.CoursePanel;
+
 import GUI.MainPanel.OnlineCoursePanel;
 import java.awt.Color;
 import java.awt.Component;
@@ -17,7 +19,9 @@ import java.util.Arrays;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.Timer;
-import GUI.MainPanel.OnsiteCoursePanel;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ASUS
@@ -30,9 +34,11 @@ public class Home extends javax.swing.JFrame {
     private final Color yellow = new Color(255, 188, 0);
     private final Color lightBlue = new Color(0, 158, 248);
     private final Color darkBlue = new Color(0, 158, 248);
-    private final Color lightGray = new Color(242,242,242);
+    private final Color lightGray = new Color(242, 242, 242);
 //    private final OnsiteCoursePanel onsiteCoursePanel = new OnsiteCoursePanel();
 //    private final OnlineCoursePanel onlineCoursePanel = new OnlineCoursePanel();
+    private CourseInstrutorPanel courseInstrutorPanel = null;
+    ;
     private final CoursePanel coursePanel = new CoursePanel();
     private boolean dropdownToggle = false;
     private JButton currentBtn = null;
@@ -40,6 +46,13 @@ public class Home extends javax.swing.JFrame {
     private final ArrayList<JButton> allBtnLeftSubBar = new ArrayList<>();
 
     public Home() {
+        try {
+            this.courseInstrutorPanel = new CourseInstrutorPanel();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Lỗi hệ thống");
+        }
+
         initComponents();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/assets/icons8-graduate-60.png")));
         allBtnLeftBar.addAll(Arrays.asList(courseBtn, scheduleBtn, resultBtn));
@@ -63,7 +76,7 @@ public class Home extends javax.swing.JFrame {
         scheduleBtn = new javax.swing.JButton();
         resultBtn = new javax.swing.JButton();
         cardPanel = new javax.swing.JPanel();
-        schedulePanel = new javax.swing.JPanel();
+        schedulePnl = new javax.swing.JPanel();
         resultPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -162,20 +175,20 @@ public class Home extends javax.swing.JFrame {
 
         cardPanel.setLayout(new java.awt.CardLayout());
 
-        schedulePanel.setBackground(new java.awt.Color(51, 204, 255));
+        schedulePnl.setBackground(new java.awt.Color(51, 204, 255));
 
-        javax.swing.GroupLayout schedulePanelLayout = new javax.swing.GroupLayout(schedulePanel);
-        schedulePanel.setLayout(schedulePanelLayout);
-        schedulePanelLayout.setHorizontalGroup(
-            schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout schedulePnlLayout = new javax.swing.GroupLayout(schedulePnl);
+        schedulePnl.setLayout(schedulePnlLayout);
+        schedulePnlLayout.setHorizontalGroup(
+            schedulePnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1000, Short.MAX_VALUE)
         );
-        schedulePanelLayout.setVerticalGroup(
-            schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        schedulePnlLayout.setVerticalGroup(
+            schedulePnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 700, Short.MAX_VALUE)
         );
 
-        cardPanel.add(schedulePanel, "card5");
+        cardPanel.add(schedulePnl, "card5");
 
         resultPanel.setBackground(new java.awt.Color(0, 255, 153));
 
@@ -211,13 +224,19 @@ public class Home extends javax.swing.JFrame {
 
     private void scheduleBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scheduleBtnActionPerformed
 
-        switchPanel(schedulePanel,scheduleBtn);
+        cardPanel.removeAll();
+        cardPanel.add(courseInstrutorPanel);
+        cardPanel.repaint();
+        cardPanel.revalidate();
+        setBackgroundDefaultAllButton();
+        scheduleBtn.setBackground(lightBlue);
+//        switchPanel(schedulePanel,scheduleBtn);
 
     }//GEN-LAST:event_scheduleBtnActionPerformed
 
     private void resultBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resultBtnActionPerformed
 
-        switchPanel(resultPanel,resultBtn);
+        switchPanel(resultPanel, resultBtn);
     }//GEN-LAST:event_resultBtnActionPerformed
 
     private void onsiteCourseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onsiteCourseBtnActionPerformed
@@ -298,17 +317,17 @@ public class Home extends javax.swing.JFrame {
     }
 
     private void toggleDropdown() {
-    dropdownToggle = !dropdownToggle;
-    if (dropdownToggle) {
-        courseBtn.setIcon(new ImageIcon(getClass().getResource("/assets/icons8-arrow-up-20.png")));
-        openMenu();
-    } else {
-        courseBtn.setIcon(new ImageIcon(getClass().getResource("/assets/icons8-arrow-down-20.png")));
-        closeMenu();
+        dropdownToggle = !dropdownToggle;
+        if (dropdownToggle) {
+            courseBtn.setIcon(new ImageIcon(getClass().getResource("/assets/icons8-arrow-up-20.png")));
+            openMenu();
+        } else {
+            courseBtn.setIcon(new ImageIcon(getClass().getResource("/assets/icons8-arrow-down-20.png")));
+            closeMenu();
+        }
     }
-}
-    
-    private void switchPanel(Component panel,JButton btn) {
+
+    private void switchPanel(Component panel, JButton btn) {
         cardPanel.removeAll();
         cardPanel.add(panel);
         cardPanel.repaint();
@@ -329,7 +348,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton resultBtn;
     private javax.swing.JPanel resultPanel;
     private javax.swing.JButton scheduleBtn;
-    private javax.swing.JPanel schedulePanel;
+    private javax.swing.JPanel schedulePnl;
     private javax.swing.JPanel sidebarMenu;
     // End of variables declaration//GEN-END:variables
 }

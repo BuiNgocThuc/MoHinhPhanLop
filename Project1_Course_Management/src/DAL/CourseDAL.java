@@ -7,12 +7,16 @@ package DAL;
 import DTO.CourseDTO;
 import DTO.OnlineCourseDTO;
 import DTO.OnsiteCourseDTO;
+import DTO.PersonDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CourseDAL {
 
@@ -183,17 +187,73 @@ public class CourseDAL {
         return false;
     }
 
-    public boolean deleteCourse(int CourseID) {
-        int result = -1;
+    public boolean isCourseInOnlineCourse(int courseID) {
+        String queryCheckOnline = "SELECT COUNT(*) FROM onlinecourse WHERE CourseID = ?";
+        try {
+            // Check if CourseID exists in onlinecourse
+            preStm = conn.prepareStatement(queryCheckOnline);
+            preStm.setInt(1, courseID);
+            ResultSet rsOnline = preStm.executeQuery();
+            rsOnline.next();
+            int onlineCount = rsOnline.getInt(1);
 
+            // If the CourseID exists in onlinecourse, return true
+            if (onlineCount > 0) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean deleteCourse(int courseID) {
+        boolean flag = isCourseInOnlineCourse(courseID);
+
+        if (flag) {
+            // If the course is in the onlinecourse table, delete it from there
+            deleteCourseFromOnlineCourse(courseID);
+        } else {
+            // If the course is not in the onlinecourse table, delete it from onsitecourse
+            deleteCourseFromOnsiteCourse(courseID);
+        }
+
+        // Delete the course from the course table
+        return deleteCourseFromCourseTable(courseID);
+    }
+
+    private void deleteCourseFromOnlineCourse(int courseID) {
+        String query = "DELETE FROM onlinecourse WHERE CourseID = ?";
+        try {
+            preStm = conn.prepareStatement(query);
+            preStm.setInt(1, courseID);
+            preStm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void deleteCourseFromOnsiteCourse(int courseID) {
+        String query = "DELETE FROM onsitecourse WHERE CourseID = ?";
+        try {
+            preStm = conn.prepareStatement(query);
+            preStm.setInt(1, courseID);
+            preStm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private boolean deleteCourseFromCourseTable(int courseID) {
+        int result = -1;
         String query = "DELETE FROM course WHERE CourseID = ?";
         try {
             preStm = conn.prepareStatement(query);
-            preStm.setInt(1, CourseID);
-
+            preStm.setInt(1, courseID);
             result = preStm.executeUpdate();
+
             if (result != 0) {
-                listCourses = selectAll();
+                listCourses = selectAll(); // Refresh list of courses
                 return true;
             }
         } catch (SQLException e) {
@@ -213,11 +273,7 @@ public class CourseDAL {
                 int numCourseInstructors = rs.getInt("NumCourseInstructors");
                 int numStudentsEnrolled = rs.getInt("NumStudentsEnrolled");
 
-                if (numCourseInstructors > 0 || numStudentsEnrolled > 0) {
-                    return false;
-                } else {
-                    return true;
-                }
+                return !(numCourseInstructors > 0 || numStudentsEnrolled > 0);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -449,7 +505,7 @@ public class CourseDAL {
     }
 
     public ArrayList<CourseDTO> findCoursesByIdOnline(int s) {
-        ArrayList<CourseDTO> listCourse = new ArrayList<CourseDTO>();
+        ArrayList<CourseDTO> listCourse = new ArrayList<>();
         try {
             String query = "SELECT \n"
                     + "    course.*, 'Online' as course_type\n"
@@ -472,5 +528,58 @@ public class CourseDAL {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void populateInstructors(List<CourseDTO> courses) throws SQLException {
+        if (courses.isEmpty()) {
+            return;
+        }
+        // Collecting course IDs
+        List<Integer> courseIds = new ArrayList<>();
+        for (CourseDTO course : courses) {
+            courseIds.add(course.getCourseID());
+        }
+        // Mapping course IDs to instructors
+        Map<Integer, List<PersonDTO>> courseInstructorMap = new HashMap<>();
+        try {
+            List<PersonDTO> instructors = new ArrayList<>();
+            String query = "select * from person p join courseinstructor ci "
+                    + "on p.PersonID = ci.PersonID "
+                    + "where p.HireDate is not null and "
+                    + "ci.CourseID IN (";
+            for (int i = 0; i < courseIds.size(); i++) {
+                query += (i == 0 ? "?" : ", ?");
+            }
+            query += ")";
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            // Set course IDs as parameters
+            for (int i = 0; i < courseIds.size(); i++) {
+                preparedStatement.setInt(i + 1, courseIds.get(i));
+            }
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int instructorId = rs.getInt("PersonID");
+                int courseId = rs.getInt("CourseID");
+                String firstName = rs.getString("Firstname");
+                String lastName = rs.getString("Lastname");
+                Timestamp hireDate = rs.getTimestamp("HireDate");
+                Timestamp enrollmentDate = rs.getTimestamp("EnrollmentDate");
+                // Create instructor DTO
+                PersonDTO instructor = new PersonDTO(instructorId, firstName, lastName, hireDate, enrollmentDate);
+                // Add instructor to the corresponding course ID in the map
+                if (!courseInstructorMap.containsKey(courseId)) {
+                    courseInstructorMap.put(courseId, new ArrayList<>());
+                }
+                courseInstructorMap.get(courseId).add(instructor);
+            }
+            for (CourseDTO course : courses) {
+                int courseId = course.getCourseID();
+                if (courseInstructorMap.containsKey(courseId)) {
+                    course.setInstructors(courseInstructorMap.get(courseId));
+                }
+            }
+        } catch (SQLException e) {
+            throw e;
+        }
     }
 }
