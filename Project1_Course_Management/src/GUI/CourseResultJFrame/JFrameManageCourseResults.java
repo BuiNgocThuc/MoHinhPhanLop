@@ -752,10 +752,11 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonDetailActionPerformed
 
     private void jButtonAddNew1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddNew1ActionPerformed
-            JFrameStatistical statistical=new JFrameStatistical(CourseID);
-            statistical.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            statistical.setLocationRelativeTo(null);
-            statistical.setVisible(true);
+
+        JFrameStatistical statistical=new JFrameStatistical(CourseID);
+        statistical.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        statistical.setLocationRelativeTo(null);
+        statistical.setVisible(true);
     }//GEN-LAST:event_jButtonAddNew1ActionPerformed
 
     public void SearchTable(String txt) {

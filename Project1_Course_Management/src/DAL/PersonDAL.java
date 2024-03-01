@@ -62,12 +62,10 @@ public class PersonDAL {
     public ArrayList<PersonDTO> getListStudent(){
         ArrayList<PersonDTO> listPerson=new ArrayList<PersonDTO>();
         try{
-            String query="SELECT *\n" +
-                        "FROM person\n" +
-                        "WHERE PersonID NOT IN (\n" +
-                        "    SELECT PersonID\n" +
-                        "    FROM courseinstructor\n" +
-                        ");";
+            String query="SELECT *\n"
+                        + "FROM person\n"
+                        + "WHERE EnrollmentDate IS NOT NULL "
+                        + "AND HireDate IS NULL";
             PreparedStatement pre=con.getConnectDB().prepareStatement(query);
             ResultSet rs=pre.executeQuery();
             while(rs.next()){

@@ -224,10 +224,15 @@ public class JFrameAddNewStudent extends javax.swing.JFrame {
             studentGradeBll.insertStudent(studentGrade);
             
             JOptionPane.showMessageDialog(null, "Add success");
-            //this.dispose();
+            clearInput();
         }
     }//GEN-LAST:event_addCourseBtnActionPerformed
 
+    public void clearInput() {
+        this.lastNameTxt.setText("");
+        this.firstNameTxt.setText("");
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addCourseBtn;
     private javax.swing.JButton closeFrameBtn;

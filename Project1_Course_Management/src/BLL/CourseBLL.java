@@ -43,11 +43,13 @@ public class CourseBLL {
     public ArrayList<CourseDTO> getAllist(String text){
         return courseDAL.getAllList(text);
     }
+
+    public ArrayList<CourseDTO> searchAllCourse(String text){
+        return courseDAL.searchAllCourse(text);
+    }
     
     public CourseDTO courseDetail(int id){
         return courseDAL.courseDetail(id);
     }
-    public ArrayList<CourseDTO> searchAllCourse(String text){
-        return courseDAL.searchAllCourse(text);
-    }
+    
 }
