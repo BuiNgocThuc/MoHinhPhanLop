@@ -6,8 +6,8 @@ package GUI.CourseResultJFrame;
 
 import BLL.PersonBLL;
 import BLL.StudentGradeBLL;
-import BLL.Entity.PersonEntity;
-import BLL.Entity.StudentGradeEntity;
+import DTO.PersonDTO;
+import DTO.StudentGradeDTO;
 import java.util.Vector;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -214,7 +214,7 @@ public class JFrameListStudent extends javax.swing.JFrame {
         if(studentGradeBll.getEnrollment(courseID, studentID) == 0) {
             JOptionPane.showMessageDialog(null, "Add success");
             
-            StudentGradeEntity studentGrade = new StudentGradeEntity();
+            StudentGradeDTO studentGrade = new StudentGradeDTO();
             studentGrade.setCourseID(courseID);
             studentGrade.setStudentID(studentID);
             studentGrade.setGrade(0);
@@ -238,7 +238,7 @@ public class JFrameListStudent extends javax.swing.JFrame {
             model.addColumn(i);
         }
         int stt=0;
-        for(PersonEntity i : personBLL.getListStudent()){
+        for(PersonDTO i : personBLL.getListStudent()){
            Vector t=new Vector();
            t.add(stt+=1);
            t.add(i.getPersonID());

@@ -5,8 +5,8 @@
 package GUI.MainPanel;
 
 import BLL.CourseInstructorBLL;
-import BLL.Entity.CourseEntity;
-import BLL.Entity.PersonEntity;
+import DTO.CourseDTO;
+import DTO.PersonDTO;
 import GUI.AssignmentManagement.CourseInstructorAddFrame;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -223,9 +223,9 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
                         pnTableInstructor.deleteAllCourseAssignInstructor();
                 }
 
-                List<CourseEntity> courses = courseInstructorBLL.getListCourseAssignInstructor();
+                List<CourseDTO> courses = courseInstructorBLL.getListCourseAssignInstructor();
                 pnTableCourse.loadData(courses);
-                List<PersonEntity> instructors = courseInstructorBLL.getListInstructorAssignCourse();
+                List<PersonDTO> instructors = courseInstructorBLL.getListInstructorAssignCourse();
                 pnTableInstructor.loadData(instructors);
 
                 JOptionPane.showMessageDialog(null, "Đã hủy phân công " + deleteType + " thành công.", "Thành công", JOptionPane.INFORMATION_MESSAGE);
@@ -262,9 +262,9 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
                 @Override
                 public void windowClosed(WindowEvent e) {
                     try {
-                        List<CourseEntity> courses = courseInstructorBLL.getListCourseAssignInstructor();
+                        List<CourseDTO> courses = courseInstructorBLL.getListCourseAssignInstructor();
                         pnTableCourse.loadData(courses);
-                        List<PersonEntity> instructors = courseInstructorBLL.getListInstructorAssignCourse();
+                        List<PersonDTO> instructors = courseInstructorBLL.getListInstructorAssignCourse();
                         pnTableInstructor.loadData(instructors);
                     } catch (SQLException ex) {
                         Logger.getLogger(CourseInstrutorPanel.class.getName()).log(Level.SEVERE, null, ex);

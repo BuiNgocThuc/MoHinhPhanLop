@@ -2,20 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package BLL.Entity;
+package DTO;
 
 /**
  *
  * @author buing
  */
-public class OnlineCourseEntity extends CourseEntity {
+public class OnlineCourseDTO extends CourseDTO {
 
     private String Url;
 
-    public OnlineCourseEntity() {
+    public OnlineCourseDTO() {
     }
 
-    public OnlineCourseEntity(String Url, int courseID, int departmentID, int credits, String title) {
+    public OnlineCourseDTO(String Url, int courseID, int departmentID, int credits, String title) {
         super(courseID, departmentID, credits, title);
         this.Url = Url;
     }

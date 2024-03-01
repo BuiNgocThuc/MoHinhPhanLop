@@ -5,7 +5,7 @@
 package GUI.MainPanel;
 
 import BLL.CourseBLL;
-import BLL.Entity.CourseEntity;
+import DTO.CourseDTO;
 import GUI.CourseResultJFrame.JFrameManageCourseResults;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
@@ -238,7 +238,7 @@ public class CourseResultsPanel extends javax.swing.JPanel {
         for(String i:columns){
             model.addColumn(i);
         }
-        for(CourseEntity i:courseBLL.getAllist()){
+        for(CourseDTO i:courseBLL.getAllist()){
             Vector t=new Vector<>();
             t.add(i.getCourseID());
             t.add(i.getTitle());
@@ -258,7 +258,7 @@ public class CourseResultsPanel extends javax.swing.JPanel {
         for(String i:columns){
             model.addColumn(i);
         }
-        for(CourseEntity i:courseBLL.getAllist(text)){
+        for(CourseDTO i:courseBLL.getAllist(text)){
             Vector t=new Vector<>();
             t.add(i.getCourseID());
             t.add(i.getTitle());

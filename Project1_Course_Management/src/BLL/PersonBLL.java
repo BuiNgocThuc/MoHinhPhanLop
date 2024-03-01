@@ -4,7 +4,7 @@
  */
 package BLL;
 
-import BLL.Entity.PersonEntity;
+import DTO.PersonDTO;
 import DAL.PersonDAL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,23 +16,23 @@ import java.util.ArrayList;
 public class PersonBLL {
     PersonDAL personDAL = new PersonDAL();
 
-    public ArrayList<PersonEntity> getAllList() {
+    public ArrayList<PersonDTO> getAllList() {
         return personDAL.getAllList();
     }
 
-    public PersonEntity detailsPerson(int id) {
+    public PersonDTO detailsPerson(int id) {
         return personDAL.detailsPerson(id);
     }
 
-    public boolean addPerson(PersonEntity person) throws SQLException {
+    public boolean addPerson(PersonDTO person) throws SQLException {
         return personDAL.addPerson(person);
     }
 
-    public ArrayList<PersonEntity> getListStudent() {
+    public ArrayList<PersonDTO> getListStudent() {
         return personDAL.getListStudent();
     }
 
-    public ArrayList<PersonEntity> getListInstructor() {
+    public ArrayList<PersonDTO> getListInstructor() {
         return personDAL.getListInstructor();
     }
 }

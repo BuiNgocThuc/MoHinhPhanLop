@@ -7,9 +7,9 @@ package GUI.MainPanel;
 import BLL.CourseBLL;
 import BLL.DepartmentBLL;
 import BLL.OnsiteCourseBLL;
-import BLL.Entity.CourseEntity;
-import BLL.Entity.DepartmentEntity;
-import BLL.Entity.OnsiteCourseEntity;
+import DTO.CourseDTO;
+import DTO.DepartmentDTO;
+import DTO.OnsiteCourseDTO;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -47,10 +47,10 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
     }
 
     public void createOnsiteCourseTable() {
-        List<OnsiteCourseEntity> listOnsiteCourseDTO = onsiteCourseBLL.selectAllOnsiteCourse();
+        List<OnsiteCourseDTO> listOnsiteCourseDTO = onsiteCourseBLL.selectAllOnsiteCourse();
         DefaultTableModel model = (DefaultTableModel) onsiteCourseTable.getModel();
         model.setRowCount(0);
-        for (OnsiteCourseEntity onsiteCourseDTO : listOnsiteCourseDTO)
+        for (OnsiteCourseDTO onsiteCourseDTO : listOnsiteCourseDTO)
         {
             int courseID = onsiteCourseDTO.getCourseID();
             String title = onsiteCourseDTO.getTitle();
@@ -70,9 +70,9 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
     }
     
     public void createCbDepartment() {
-        List<DepartmentEntity> listDepartment = departmentBLL.selectAll();
+        List<DepartmentDTO> listDepartment = departmentBLL.selectAll();
         
-        for (DepartmentEntity departmentDTO : listDepartment)
+        for (DepartmentDTO departmentDTO : listDepartment)
         {
             String name = departmentDTO.getName();
             cbDepartment.addItem(name);

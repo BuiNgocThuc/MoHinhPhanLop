@@ -1,14 +1,14 @@
-package BLL.Entity;
+package DTO;
 
-public class StudentGradeEntity {
+public class StudentGradeDTO {
     private int EnrollmentID, StudentID, CourseID;
     private double Grade;
     
-    public StudentGradeEntity() {
+    public StudentGradeDTO() {
         
     }
 
-    public StudentGradeEntity(int enrollmentID, int studentID, int courseID, double grade) {
+    public StudentGradeDTO(int enrollmentID, int studentID, int courseID, double grade) {
         EnrollmentID = enrollmentID;
         StudentID = studentID;
         CourseID = courseID;

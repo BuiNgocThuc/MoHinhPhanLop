@@ -4,8 +4,8 @@
  */
 package DAL;
 
-import BLL.Entity.CourseEntity;
-import BLL.Entity.DepartmentEntity;
+import DTO.CourseDTO;
+import DTO.DepartmentDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,14 +22,14 @@ public class DepartmentDAL {
 
     private Connection conn;
     private PreparedStatement preStm;
-    private List<DepartmentEntity> listDepartment = new ArrayList<>();
+    private List<DepartmentDTO> listDepartment = new ArrayList<>();
 
     public DepartmentDAL() {
         ConnectDB connectDB = new ConnectDB();
         conn = (Connection) connectDB.getConnectDB();
     }
 
-    public List<DepartmentEntity> selectAll() {
+    public List<DepartmentDTO> selectAll() {
         String query = "SELECT * FROM department";
         try
         {
@@ -43,7 +43,7 @@ public class DepartmentDAL {
                 Timestamp startDate = rs.getTimestamp(4);
                 int admin = rs.getInt(5);
 
-                DepartmentEntity department = new DepartmentEntity(departmentID, budget, name, admin, startDate);
+                DepartmentDTO department = new DepartmentDTO(departmentID, budget, name, admin, startDate);
                 
                 listDepartment.add(department);
             }
@@ -55,9 +55,9 @@ public class DepartmentDAL {
         return listDepartment;
     }
     
-    public DepartmentEntity selectByID(int departmentID) {
+    public DepartmentDTO selectByID(int departmentID) {
         listDepartment = selectAll();
-        for(DepartmentEntity department : listDepartment) {
+        for(DepartmentDTO department : listDepartment) {
             if(department.getDepartmentID() == departmentID) {
                 return department;
             }

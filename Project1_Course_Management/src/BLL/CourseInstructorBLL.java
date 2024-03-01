@@ -3,9 +3,9 @@ package BLL;
 import DAL.CourseInstructorDAL;
 import DAL.CourseDAL;
 import DAL.PersonDAL;
-import BLL.Entity.CourseEntity;
-import BLL.Entity.CourseInstructorEntity;
-import BLL.Entity.PersonEntity;
+import DTO.CourseDTO;
+import DTO.CourseInstructorDTO;
+import DTO.PersonDTO;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -17,11 +17,11 @@ public class CourseInstructorBLL {
     private CourseDAL courseDAL = new CourseDAL();
     private PersonDAL personDAL = new PersonDAL();
 
-    public List<CourseInstructorEntity> getAllCourseInstructors() throws SQLException {
+    public List<CourseInstructorDTO> getAllCourseInstructors() throws SQLException {
         return courseInstructorDAL.selectAll();
     }
 
-    public List<CourseInstructorEntity> getListCourseInstructorsByPersonID(int personID) throws SQLException {
+    public List<CourseInstructorDTO> getListCourseInstructorsByPersonID(int personID) throws SQLException {
         try {
             return courseInstructorDAL.selectByPersonID(personID);
         } catch (SQLException e) {
@@ -30,26 +30,26 @@ public class CourseInstructorBLL {
         }
     }
 
-    public List<CourseEntity> getListCourseAssignInstructor() throws SQLException {
-        List<CourseEntity> courses = courseDAL.getAllList();
+    public List<CourseDTO> getListCourseAssignInstructor() throws SQLException {
+        List<CourseDTO> courses = courseDAL.getAllList();
         courseDAL.populateInstructors(courses);
         return courses;
 
     }
 
-    public List<PersonEntity> getListInstructorAssignCourse() throws SQLException {
-        List<PersonEntity> instructors = personDAL.getListInstructor();
+    public List<PersonDTO> getListInstructorAssignCourse() throws SQLException {
+        List<PersonDTO> instructors = personDAL.getListInstructor();
         personDAL.populateCourses(instructors);
         return instructors;
 
     }
 
-    public CourseInstructorEntity getCourseInstructorByID(int courseID, int personID) throws SQLException {
+    public CourseInstructorDTO getCourseInstructorByID(int courseID, int personID) throws SQLException {
         return courseInstructorDAL.selectByID(courseID, personID);
     }
 
-    public List<CourseEntity> findCourses(String text) throws SQLException {
-        List<CourseEntity> courses = null;
+    public List<CourseDTO> findCourses(String text) throws SQLException {
+        List<CourseDTO> courses = null;
         if (ValidateUtil.isInteger(text)) {
             courses = courseDAL.findCoursesByIdAll(Integer.parseInt(text));
         } else {
@@ -59,8 +59,8 @@ public class CourseInstructorBLL {
         return courses;
     }
 
-    public List<PersonEntity> findInstructors(String text) throws SQLException {
-        List<PersonEntity> instructors = null;
+    public List<PersonDTO> findInstructors(String text) throws SQLException {
+        List<PersonDTO> instructors = null;
         if (ValidateUtil.isInteger(text)) {
             instructors = personDAL.findInstructorsById(Integer.parseInt(text));
         } else {
@@ -70,15 +70,15 @@ public class CourseInstructorBLL {
         return instructors;
     }
 
-    public void insertCourseInstructor(CourseInstructorEntity courseInstructor) throws SQLException {
+    public void insertCourseInstructor(CourseInstructorDTO courseInstructor) throws SQLException {
         courseInstructorDAL.insertCourseInstructor(courseInstructor);
     }
 
-    public boolean updateCourseInstructor(CourseInstructorEntity courseInstructor) throws SQLException {
+    public boolean updateCourseInstructor(CourseInstructorDTO courseInstructor) throws SQLException {
         return courseInstructorDAL.updateCourseInstructor(courseInstructor);
     }
 
-    public void deleteCourseInstructor(CourseInstructorEntity courseInstructor) throws SQLException {
+    public void deleteCourseInstructor(CourseInstructorDTO courseInstructor) throws SQLException {
         courseInstructorDAL.deleteCourseInstructor(courseInstructor);
     }
 
@@ -90,7 +90,7 @@ public class CourseInstructorBLL {
         courseInstructorDAL.deleteAllInstructorAssignCourse(courseID);
     }
 
-    public List<CourseInstructorEntity> getListCourseInstructorsByCourseID(int id_Course) throws SQLException {
+    public List<CourseInstructorDTO> getListCourseInstructorsByCourseID(int id_Course) throws SQLException {
         try {
             return courseInstructorDAL.selectByCourseID(id_Course);
         } catch (SQLException e) {

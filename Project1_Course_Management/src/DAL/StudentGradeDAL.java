@@ -4,7 +4,7 @@
  */
 package DAL;
 import DAL.ConnectDB;
-import BLL.Entity.StudentGradeEntity;
+import DTO.StudentGradeDTO;
 import java.util.ArrayList;
 import java.sql.*;
 /**
@@ -13,15 +13,15 @@ import java.sql.*;
  */
 public class StudentGradeDAL {
     ConnectDB con=new ConnectDB();
-    public  ArrayList<StudentGradeEntity> getAllList(int CourseID){
-        ArrayList<StudentGradeEntity> listStudentGrade=new ArrayList<StudentGradeEntity>();
+    public  ArrayList<StudentGradeDTO> getAllList(int CourseID){
+        ArrayList<StudentGradeDTO> listStudentGrade=new ArrayList<StudentGradeDTO>();
         try{
             String query="select * from studentgrade where CourseID=?";
             PreparedStatement pre=con.getConnectDB().prepareStatement(query);
             pre.setInt(1, CourseID);
             ResultSet rs=pre.executeQuery();
             while(rs.next()){
-                StudentGradeEntity studentGrade=new StudentGradeEntity();
+                StudentGradeDTO studentGrade=new StudentGradeDTO();
                 studentGrade.setEnrollmentID(rs.getInt("EnrollmentID"));
                 studentGrade.setCourseID(rs.getInt("CourseID"));
                 studentGrade.setStudentID(rs.getInt("StudentID"));
@@ -34,9 +34,9 @@ public class StudentGradeDAL {
         }
         return null;
     }
-    public boolean updateGrade(StudentGradeEntity student){
+    public boolean updateGrade(StudentGradeDTO student){
         try{
-            StudentGradeEntity studentGradeDTO=new StudentGradeEntity();
+            StudentGradeDTO studentGradeDTO=new StudentGradeDTO();
             String query="update studentgrade set CourseID=?,Grade=? where EnrollmentID=?";
             PreparedStatement pre=con.getConnectDB().prepareStatement(query);
             pre.setInt(1, student.getCourseID());
@@ -79,7 +79,7 @@ public class StudentGradeDAL {
         return 0;
     }
     
-    public boolean insertStudentGrade(StudentGradeEntity studentGradeDTO) {
+    public boolean insertStudentGrade(StudentGradeDTO studentGradeDTO) {
         int result = -1;
         
         int EnrollmentID = studentGradeDTO.getEnrollmentID();
