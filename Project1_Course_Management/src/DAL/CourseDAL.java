@@ -425,11 +425,13 @@ public class CourseDAL {
     public ArrayList<CourseDTO> findCoursesByIdOnsite(int s) {
         ArrayList<CourseDTO> listCourse = new ArrayList<CourseDTO>();
         try {
-            String query = "SELECT \n"
-                    + "    course.*, 'Onsite' as course_type\n"
-                    + "FROM course\n"
-                    + "LEFT JOIN onsitecourse ON course.CourseID = onsitecourse.CourseID\n"
-                    + "where course.CourseID LIKE CONCAT('%'," + s + ",'%')";
+            String query = "SELECT *\n" +
+                            "FROM (\n" +
+                            "    SELECT course.*, 'Onsite' as course_type \n" +
+                            "    FROM course \n" +
+                            "    JOIN onsitecourse ON course.CourseID = onsitecourse.CourseID\n" +
+                            ") AS subquery\n" +
+                            "WHERE CourseID LIKE CONCAT('%'," + s + ",'%');";
             PreparedStatement pre = conn.prepareStatement(query);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
@@ -451,11 +453,13 @@ public class CourseDAL {
     public ArrayList<CourseDTO> findCoursesByIdOnline(int s) {
         ArrayList<CourseDTO> listCourse = new ArrayList<CourseDTO>();
         try {
-            String query = "SELECT \n"
-                    + "    course.*, 'Online' as course_type\n"
-                    + "FROM course\n"
-                    + "LEFT JOIN onlinecourse ON course.CourseID = onlinecourse.CourseID\n"
-                    + "where course.CourseID LIKE CONCAT('%'," + s + ",'%')";
+            String query = "SELECT *\n" +
+                            "FROM (\n" +
+                            "    SELECT course.*, 'Online' as course_type \n" +
+                            "    FROM course \n" +
+                            "    JOIN onlinecourse ON course.CourseID = onlinecourse.CourseID\n" +
+                            ") AS subquery\n" +
+                            "WHERE CourseID LIKE CONCAT('%'," + s + ",'%');";
             PreparedStatement pre = conn.prepareStatement(query);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
