@@ -225,8 +225,9 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
 
                 List<CourseDTO> courses = courseInstructorBLL.getListCourseAssignInstructor();
                 pnTableCourse.loadData(courses);
+                
                 List<PersonDTO> instructors = courseInstructorBLL.getListInstructorAssignCourse();
-                pnTableInstructor.loadData(instructors);
+                pnTableInstructor.populateUI();
 
                 JOptionPane.showMessageDialog(null, "Đã hủy phân công " + deleteType + " thành công.", "Thành công", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -265,7 +266,7 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
                         List<CourseDTO> courses = courseInstructorBLL.getListCourseAssignInstructor();
                         pnTableCourse.loadData(courses);
                         List<PersonDTO> instructors = courseInstructorBLL.getListInstructorAssignCourse();
-                        pnTableInstructor.loadData(instructors);
+                        pnTableInstructor.populateUI();
                     } catch (SQLException ex) {
                         Logger.getLogger(CourseInstrutorPanel.class.getName()).log(Level.SEVERE, null, ex);
                     }
