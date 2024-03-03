@@ -8,6 +8,7 @@ import DTO.CourseInstructorDTO;
 import DTO.PersonDTO;
 import java.sql.SQLException;
 import java.util.List;
+import util.Paginate;
 
 import util.ValidateUtil;
 
@@ -45,6 +46,14 @@ public class CourseInstructorBLL {
         List<PersonDTO> instructors = personDAL.getListInstructor();
         personDAL.populateCourses(instructors);
         return instructors;
+    }
+
+    public Paginate<PersonDTO> getListInstructorAssignedCourse(int offset, int limit, String querySearch) throws SQLException {
+        Paginate<PersonDTO> paginate = personDAL.getListInstructorAssignedCourse(offset, limit, querySearch);
+
+        personDAL.populateCourses(paginate.getItems());
+
+        return paginate;
 
     }
 
