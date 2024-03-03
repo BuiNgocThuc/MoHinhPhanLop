@@ -60,13 +60,16 @@ public class CourseResultsPanel extends javax.swing.JPanel {
         jButtonClearSearch1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableCourse = new javax.swing.JTable();
-        jComboBoxCourse = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jComboBoxCourse = new javax.swing.JComboBox<>();
+        jPanel2 = new javax.swing.JPanel();
+        jButtonClearSearch = new javax.swing.JButton();
         jSearch = new javax.swing.JTextField();
         jButtonIcon = new javax.swing.JButton();
-        jButtonClearSearch = new javax.swing.JButton();
 
         jButtonClearSearch1.setText("X");
         jButtonClearSearch1.addActionListener(new java.awt.event.ActionListener() {
@@ -76,7 +79,8 @@ public class CourseResultsPanel extends javax.swing.JPanel {
         });
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(838, 629));
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        setPreferredSize(new java.awt.Dimension(1007, 607));
 
         jTableCourse.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -96,7 +100,28 @@ public class CourseResultsPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTableCourse);
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel2.setText("QUẢN LÝ KẾT QUẢ SINH VIÊN");
+        jLabel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 5, 10, 0));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
+        java.awt.FlowLayout flowLayout2 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT);
+        flowLayout2.setAlignOnBaseline(true);
+        jPanel1.setLayout(flowLayout2);
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT);
+        flowLayout1.setAlignOnBaseline(true);
+        jPanel3.setLayout(flowLayout1);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setText("Course");
+        jPanel3.add(jLabel1);
+
         jComboBoxCourse.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxCourse.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
+        jComboBoxCourse.setPreferredSize(new java.awt.Dimension(200, 40));
         jComboBoxCourse.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jComboBoxCourseMouseClicked(evt);
@@ -107,13 +132,23 @@ public class CourseResultsPanel extends javax.swing.JPanel {
                 jComboBoxCourseActionPerformed(evt);
             }
         });
+        jPanel3.add(jComboBoxCourse);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel1.setText("Course");
+        jPanel1.add(jPanel3);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel2.setText("QUẢN LÝ KẾT QUẢ SINH VIÊN");
-        jLabel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 5, 10, 0));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setPreferredSize(new java.awt.Dimension(705, 50));
+        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+
+        jButtonClearSearch.setText("X");
+        jButtonClearSearch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButtonClearSearch.setPreferredSize(new java.awt.Dimension(40, 40));
+        jButtonClearSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonClearSearchActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonClearSearch);
 
         jSearch.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jSearch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -123,6 +158,7 @@ public class CourseResultsPanel extends javax.swing.JPanel {
                 jSearchActionPerformed(evt);
             }
         });
+        jPanel2.add(jSearch);
 
         jButtonIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8-search-24.png"))); // NOI18N
         jButtonIcon.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -133,64 +169,31 @@ public class CourseResultsPanel extends javax.swing.JPanel {
                 jButtonIconActionPerformed(evt);
             }
         });
+        jPanel2.add(jButtonIcon);
 
-        jButtonClearSearch.setText("X");
-        jButtonClearSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonClearSearchActionPerformed(evt);
-            }
-        });
+        jPanel1.add(jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(665, 665, 665))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jComboBoxCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButtonClearSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jButtonIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(21, 21, 21))
+            .addComponent(jScrollPane1)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(712, Short.MAX_VALUE))
+            .addComponent(jSeparator1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(16, 16, 16)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonClearSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jComboBoxCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel1)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
+                .addGap(0, 0, 0)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -332,6 +335,9 @@ public class CourseResultsPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jComboBoxCourse;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jSearch;
     private javax.swing.JSeparator jSeparator1;
