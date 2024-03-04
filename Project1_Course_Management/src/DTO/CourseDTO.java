@@ -1,31 +1,31 @@
-package BLL.Entity;
+package DTO;
 
 import java.util.List;
 
-public class CourseEntity {
+public class CourseDTO {
 
     private int CourseID;
     private String Title;
     private int Credits, DepartmentID;
     private String course_type;
-    private List<PersonEntity> instructors;
+    private List<PersonDTO> instructors;
 
-    public List<PersonEntity> getInstructors() {
+    public List<PersonDTO> getInstructors() {
         return instructors;
     }
 
-    public void setInstructors(List<PersonEntity> instructors) {
+    public void setInstructors(List<PersonDTO> instructors) {
         this.instructors = instructors;
     }
 
-    public CourseEntity(int courseID, int departmentID, int credits, String title) {
+    public CourseDTO(int courseID, int departmentID, int credits, String title) {
         this.CourseID = courseID;
         this.DepartmentID = departmentID;
         this.Credits = credits;
         this.Title = title;
     }
 
-    public CourseEntity(int CourseID, String Title, int Credits, int DepartmentID, String course_type) {
+    public CourseDTO(int CourseID, String Title, int Credits, int DepartmentID, String course_type) {
         this.CourseID = CourseID;
         this.Title = Title;
         this.Credits = Credits;
@@ -33,7 +33,7 @@ public class CourseEntity {
         this.course_type = course_type;
     }
 
-    public CourseEntity() {
+    public CourseDTO() {
 
     }
 

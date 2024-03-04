@@ -4,16 +4,17 @@
  */
 package DAL;
 
-import BLL.Entity.CourseEntity;
-import BLL.Entity.PersonEntity;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import DTO.CourseDTO;
+import DTO.PersonDTO;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -23,14 +24,14 @@ public class PersonDAL {
 
     private ConnectDB con = new ConnectDB();
 
-    public ArrayList<PersonEntity> getAllList() {
-        ArrayList<PersonEntity> listPerson = new ArrayList<PersonEntity>();
+    public ArrayList<PersonDTO> getAllList() {
+        ArrayList<PersonDTO> listPerson = new ArrayList<PersonDTO>();
         try {
             String query = "select * from person";
             PreparedStatement pre = con.getConnectDB().prepareStatement(query);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
-                PersonEntity person = new PersonEntity();
+                PersonDTO person = new PersonDTO();
                 person.setPersonID(rs.getInt("PersonID"));
                 person.setLastName(rs.getString("Lastname"));
                 person.setFirstName(rs.getString("Firstname"));
@@ -45,9 +46,9 @@ public class PersonDAL {
         return null;
     }
 
-    public PersonEntity detailsPerson(int id) {
+    public PersonDTO detailsPerson(int id) {
         try {
-            PersonEntity person = new PersonEntity();
+            PersonDTO person = new PersonDTO();
             String query = "select * from person where PersonID=?";
             PreparedStatement pre = con.getConnectDB().prepareStatement(query);
             pre.setInt(1, id);
@@ -66,14 +67,14 @@ public class PersonDAL {
         return null;
     }
 
-    public ArrayList<PersonEntity> getListStudent() {
-        ArrayList<PersonEntity> listPerson = new ArrayList<PersonEntity>();
+    public ArrayList<PersonDTO> getListStudent() {
+        ArrayList<PersonDTO> listPerson = new ArrayList<PersonDTO>();
         try {
             String query = "SELECT * FROM person WHERE EnrollmentDate IS NOT NULL;";
             PreparedStatement pre = con.getConnectDB().prepareStatement(query);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
-                PersonEntity person = new PersonEntity();
+                PersonDTO person = new PersonDTO();
                 person.setPersonID(rs.getInt("PersonID"));
                 person.setLastName(rs.getString("Lastname"));
                 person.setFirstName(rs.getString("Firstname"));
@@ -88,14 +89,14 @@ public class PersonDAL {
         return null;
     }
 
-    public ArrayList<PersonEntity> getListInstructor() {
-        ArrayList<PersonEntity> listPerson = new ArrayList<PersonEntity>();
+    public ArrayList<PersonDTO> getListInstructor() {
+        ArrayList<PersonDTO> listPerson = new ArrayList<PersonDTO>();
         try {
             String query = "SELECT * FROM person WHERE HireDate IS NOT NULL";
             PreparedStatement pre = con.getConnectDB().prepareStatement(query);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
-                PersonEntity person = new PersonEntity();
+                PersonDTO person = new PersonDTO();
                 person.setPersonID(rs.getInt("PersonID"));
                 person.setLastName(rs.getString("Lastname"));
                 person.setFirstName(rs.getString("Firstname"));
@@ -110,8 +111,8 @@ public class PersonDAL {
         return null;
     }
 
-    public List<PersonEntity> findInstructorsById(int s) {
-        ArrayList<PersonEntity> instructors = new ArrayList<>();
+    public List<PersonDTO> findInstructorsById(int s) {
+        ArrayList<PersonDTO> instructors = new ArrayList<>();
         try {
             String query = "SELECT * FROM person p "
                     + "WHERE HireDate IS NOT NULL "
@@ -125,7 +126,7 @@ public class PersonDAL {
                 Timestamp hireDate = rs.getTimestamp("HireDate");
                 Timestamp enrollmentDate = rs.getTimestamp("EnrollmentDate");
                 // Create instructor DTO
-                PersonEntity instructor = new PersonEntity(instructorId, firstName, lastName, hireDate, enrollmentDate);
+                PersonDTO instructor = new PersonDTO(instructorId, firstName, lastName, hireDate, enrollmentDate);
                 instructors.add(instructor);
             }
             return instructors;
@@ -135,8 +136,8 @@ public class PersonDAL {
         return null;
     }
 
-    public List<PersonEntity> findInstrutorsByName(String name) {
-        ArrayList<PersonEntity> instructors = new ArrayList<>();
+    public List<PersonDTO> findInstrutorsByName(String name) {
+        ArrayList<PersonDTO> instructors = new ArrayList<>();
         try {
             String query = "SELECT * FROM person p "
                     + "WHERE HireDate IS NOT NULL "
@@ -151,7 +152,7 @@ public class PersonDAL {
                 Timestamp hireDate = rs.getTimestamp("HireDate");
                 Timestamp enrollmentDate = rs.getTimestamp("EnrollmentDate");
                 // Create instructor DTO
-                PersonEntity instructor = new PersonEntity(instructorId, firstName, lastName, hireDate, enrollmentDate);
+                PersonDTO instructor = new PersonDTO(instructorId, firstName, lastName, hireDate, enrollmentDate);
                 instructors.add(instructor);
             }
             return instructors;
@@ -161,19 +162,19 @@ public class PersonDAL {
         return null;
     }
 
-    public void populateCourses(List<PersonEntity> instructors) throws SQLException {
+    public void populateCourses(List<PersonDTO> instructors) throws SQLException {
         if (instructors.isEmpty()) {
             return;
         }
         // Collecting instructor IDs
         List<Integer> instructorIds = new ArrayList<>();
-        for (PersonEntity instructor : instructors) {
+        for (PersonDTO instructor : instructors) {
             instructorIds.add(instructor.getPersonID());
         }
         // Mapping instructor IDs to courses
-        Map<Integer, List<CourseEntity>> courseInstructorMap = new HashMap<>();
+        Map<Integer, List<CourseDTO>> courseInstructorMap = new HashMap<>();
         try {
-            List<CourseEntity> courses = new ArrayList<>();
+            List<CourseDTO> courses = new ArrayList<>();
             String query = "select * from course c join courseinstructor ci "
                     + "on c.CourseID = ci.CourseID "
                     + "where ci.PersonID IN (";
@@ -194,14 +195,14 @@ public class PersonDAL {
                 int credits = rs.getInt("Credits");
                 int departmentID = rs.getInt("DepartmentID");
                 // Create course DTO
-                CourseEntity course = new CourseEntity(courseId, departmentID, credits, title);
+                CourseDTO course = new CourseDTO(courseId, departmentID, credits, title);
                 // Add course to the corresponding instructor ID in the map
                 if (!courseInstructorMap.containsKey(instructorId)) {
                     courseInstructorMap.put(instructorId, new ArrayList<>());
                 }
                 courseInstructorMap.get(instructorId).add(course);
             }
-            for (PersonEntity instructor : instructors) {
+            for (PersonDTO instructor : instructors) {
                 int instructorId = instructor.getPersonID();
                 if (courseInstructorMap.containsKey(instructorId)) {
                     instructor.setCourses(courseInstructorMap.get(instructorId));
@@ -212,7 +213,7 @@ public class PersonDAL {
         }
     }
 
-    public boolean addPerson(PersonEntity person) throws SQLException {
+    public boolean addPerson(PersonDTO person) throws SQLException {
         try {
             String query = "INSERT INTO person (Lastname, Firstname, HireDate, EnrollmentDate) VALUES (?, ?, ?, ?)";
             PreparedStatement preparedStatement = con.getConnectDB().prepareStatement(query);
@@ -227,4 +228,54 @@ public class PersonDAL {
         }
     }
 
+    
+    public boolean insertPerson(PersonDTO personDTO) {
+        int result = -1;
+        
+        int personID = personDTO.getPersonID();
+        String lastName = personDTO.getLastName();
+        String firstName = personDTO.getFirstName();
+        Timestamp hireDate = personDTO.getHireDate();
+        Timestamp enrollmentDate = personDTO.getEnrollmentDate();
+        
+        String query = "INSERT INTO person(PersonID, LastName, FirstName, HireDate, EnrollmentDate) VALUES (?,?,?,?,?)";
+        try
+        {
+            PreparedStatement preStm = con.getConnectDB().prepareStatement(query);
+            preStm.setInt(1, personID);
+            preStm.setString(2, lastName);
+            preStm.setString(3, firstName);
+            preStm.setTimestamp(4, hireDate);
+            preStm.setTimestamp(5, enrollmentDate);
+            
+            result = preStm.executeUpdate();
+            if (result != 0)
+            {
+                return true;
+            }
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    public int getAutoIncrement() {
+        int result = -1;
+        try {
+            String sql = "SELECT `AUTO_INCREMENT` FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'school' AND   TABLE_NAME   = 'person'";
+            PreparedStatement pst = con.getConnectDB().prepareStatement(sql);
+            ResultSet rs2 = pst.executeQuery(sql);
+            if (!rs2.isBeforeFirst() ) {
+                System.out.println("No data");
+            } else {
+                while ( rs2.next() ) {
+                    result = rs2.getInt("AUTO_INCREMENT");
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonDAL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
 }

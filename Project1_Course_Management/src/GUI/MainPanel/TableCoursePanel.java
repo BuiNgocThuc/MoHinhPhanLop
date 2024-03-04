@@ -5,11 +5,15 @@
 package GUI.MainPanel;
 
 import BLL.CourseInstructorBLL;
-import BLL.Entity.CourseEntity;
-import BLL.Entity.PersonEntity;
+import DTO.CourseDTO;
+import DTO.PersonDTO;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,7 +29,7 @@ public class TableCoursePanel extends javax.swing.JPanel {
 
     public TableCoursePanel() throws SQLException {
         initComponents();
-        List<CourseEntity> courses = courseInstructorBLL.getListCourseAssignInstructor();
+        List<CourseDTO> courses = courseInstructorBLL.getListCourseAssignInstructor();
         loadData(courses);
     }
 
@@ -58,6 +62,11 @@ public class TableCoursePanel extends javax.swing.JPanel {
             }
         });
         tblCourse.setRowHeight(35);
+        tblCourse.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblCourseMouseClicked(evt);
+            }
+        });
         spCourse.setViewportView(tblCourse);
         if (tblCourse.getColumnModel().getColumnCount() > 0) {
             tblCourse.getColumnModel().getColumn(0).setMinWidth(50);
@@ -82,22 +91,46 @@ public class TableCoursePanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tblCourseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCourseMouseClicked
+        if (evt.getClickCount() == 2) {
+            int row = tblCourse.getSelectedRow();
+            int courseID = (int) tblCourse.getValueAt(row, 1);
+            try {
+                JFrame assigmentCourseDetail = new AssigmentCourseDetail(courseID);
+                assigmentCourseDetail.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        try {
+                            List<CourseDTO> courses = courseInstructorBLL.getListCourseAssignInstructor();
+                            loadData(courses);
+                        } catch (SQLException ex) {
+                            ex.printStackTrace();
+                            JOptionPane.showMessageDialog(null, "Lỗi hệ thống");
+                        }
+                    }
+                });
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Lỗi hệ thống");
+            }
+        }    }//GEN-LAST:event_tblCourseMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane spCourse;
     private javax.swing.JTable tblCourse;
     // End of variables declaration//GEN-END:variables
 
-    public void loadData(List<CourseEntity> courses) throws SQLException {
+    public void loadData(List<CourseDTO> courses) throws SQLException {
         DefaultTableModel model = (DefaultTableModel) tblCourse.getModel();
         model.setRowCount(0);
         int no = 1;
-        for (CourseEntity course : courses) {
+        for (CourseDTO course : courses) {
             int courseID = course.getCourseID();
             String title = course.getTitle();
             String instructorInfos = "-------";
 
-            List<PersonEntity> instructors = course.getInstructors();
+            List<PersonDTO> instructors = course.getInstructors();
             if (instructors != null) {
                 instructorInfos = "";
                 for (int i = 0; i < instructors.size() - 1; i++) {
@@ -128,7 +161,7 @@ public class TableCoursePanel extends javax.swing.JPanel {
     }
 
     public void findCourses(String text) throws SQLException {
-        List<CourseEntity> courses = courseInstructorBLL.findCourses(text);
+        List<CourseDTO> courses = courseInstructorBLL.findCourses(text);
         if (courses.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Không tìm thấy");
         } else {

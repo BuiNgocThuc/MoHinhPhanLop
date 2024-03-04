@@ -5,7 +5,7 @@
 package GUI.AssignmentManagement;
 
 import BLL.PersonBLL;
-import BLL.Entity.PersonEntity;
+import DTO.PersonDTO;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.sql.SQLException;
 import java.util.Date;
@@ -204,11 +204,11 @@ public class InstructorAdd extends javax.swing.JFrame {
         }
 
         if (firstName.matches("\\d+") || lastName.matches("\\d+")) {
-            JOptionPane.showMessageDialog(this, "Tên không được chứa chữ số.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Tên không được chứa số.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        PersonEntity newPerson = new PersonEntity();
+        PersonDTO newPerson = new PersonDTO();
         newPerson.setFirstName(firstName);
         newPerson.setLastName(lastName);
         newPerson.setHireDate(new java.sql.Timestamp(hireDate.getTime()));

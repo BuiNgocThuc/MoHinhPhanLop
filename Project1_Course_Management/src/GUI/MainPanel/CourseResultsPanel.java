@@ -5,7 +5,7 @@
 package GUI.MainPanel;
 
 import BLL.CourseBLL;
-import BLL.Entity.CourseEntity;
+import DTO.CourseDTO;
 import GUI.CourseResultJFrame.JFrameManageCourseResults;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
@@ -43,8 +43,7 @@ public class CourseResultsPanel extends javax.swing.JPanel {
 
         @Override
         public void changedUpdate(DocumentEvent e) {
-        // Xử lý khi có sự thay đổi trong thuộc tính của văn bản
-        // (chẳng hạn như một loại thuộc tính được thay đổi, nhưng không phải nội dung văn bản)
+       
         }
         });
     }
@@ -58,15 +57,30 @@ public class CourseResultsPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButtonClearSearch1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableCourse = new javax.swing.JTable();
-        jSearch = new javax.swing.JTextField();
-        jButtonClearSearch = new javax.swing.JButton();
-        jComboBoxCourse = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jComboBoxCourse = new javax.swing.JComboBox<>();
+        jPanel2 = new javax.swing.JPanel();
+        jButtonClearSearch = new javax.swing.JButton();
+        jSearch = new javax.swing.JTextField();
+        jButtonIcon = new javax.swing.JButton();
+
+        jButtonClearSearch1.setText("X");
+        jButtonClearSearch1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonClearSearch1ActionPerformed(evt);
+            }
+        });
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(838, 629));
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        setPreferredSize(new java.awt.Dimension(1007, 607));
 
         jTableCourse.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -86,25 +100,28 @@ public class CourseResultsPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTableCourse);
 
-        jSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jSearchActionPerformed(evt);
-            }
-        });
-        jSearch.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jSearchKeyReleased(evt);
-            }
-        });
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel2.setText("QUẢN LÝ KẾT QUẢ SINH VIÊN");
+        jLabel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 5, 10, 0));
 
-        jButtonClearSearch.setText("X");
-        jButtonClearSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonClearSearchActionPerformed(evt);
-            }
-        });
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
+        java.awt.FlowLayout flowLayout2 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT);
+        flowLayout2.setAlignOnBaseline(true);
+        jPanel1.setLayout(flowLayout2);
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT);
+        flowLayout1.setAlignOnBaseline(true);
+        jPanel3.setLayout(flowLayout1);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setText("Course");
+        jPanel3.add(jLabel1);
 
         jComboBoxCourse.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxCourse.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
+        jComboBoxCourse.setPreferredSize(new java.awt.Dimension(200, 40));
         jComboBoxCourse.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jComboBoxCourseMouseClicked(evt);
@@ -115,42 +132,68 @@ public class CourseResultsPanel extends javax.swing.JPanel {
                 jComboBoxCourseActionPerformed(evt);
             }
         });
+        jPanel3.add(jComboBoxCourse);
 
-        jLabel1.setText("Course");
+        jPanel1.add(jPanel3);
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setPreferredSize(new java.awt.Dimension(705, 50));
+        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+
+        jButtonClearSearch.setText("X");
+        jButtonClearSearch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButtonClearSearch.setPreferredSize(new java.awt.Dimension(40, 40));
+        jButtonClearSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonClearSearchActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonClearSearch);
+
+        jSearch.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jSearch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jSearch.setPreferredSize(new java.awt.Dimension(300, 40));
+        jSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSearchActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jSearch);
+
+        jButtonIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8-search-24.png"))); // NOI18N
+        jButtonIcon.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButtonIcon.setMargin(new java.awt.Insets(2, 20, 3, 0));
+        jButtonIcon.setPreferredSize(new java.awt.Dimension(40, 40));
+        jButtonIcon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonIconActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonIcon);
+
+        jPanel1.add(jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(254, 254, 254)
-                        .addComponent(jSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonClearSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBoxCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(712, Short.MAX_VALUE))
+            .addComponent(jSeparator1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonClearSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -165,28 +208,6 @@ public class CourseResultsPanel extends javax.swing.JPanel {
             jTableCourse.clearSelection();
         }
     }//GEN-LAST:event_jTableCourseMouseClicked
-
-    private void jSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jSearchActionPerformed
-
-    private void jButtonClearSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearSearchActionPerformed
-        // TODO add your handling code here:
-        jSearch.setText("");
-        LoadData();
-    }//GEN-LAST:event_jButtonClearSearchActionPerformed
-
-    private void jSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSearchKeyReleased
-        // TODO add your handling code here:
-//        if(jSearch.getText().isEmpty()){
-//            jButtonClearSearch.setVisible(false);
-//            jTableCourse.setRowSorter(null);
-//            LoadData();
-//        }else{
-//            Search(jSearch.getText().toString());
-//            jButtonClearSearch.setVisible(true);
-//        }
-    }//GEN-LAST:event_jSearchKeyReleased
 
     private void jComboBoxCourseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxCourseMouseClicked
         // TODO add your handling code here:
@@ -210,20 +231,54 @@ public class CourseResultsPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jComboBoxCourseActionPerformed
 
+    private void jSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jSearchActionPerformed
+
+    private void jButtonClearSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearSearch1ActionPerformed
+        // TODO add your handling code here:
+        jSearch.setText("");
+        LoadData();
+    }//GEN-LAST:event_jButtonClearSearch1ActionPerformed
+
+    private void jButtonClearSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearSearchActionPerformed
+        // TODO add your handling code here:
+        jSearch.setText("");
+        LoadData();
+    }//GEN-LAST:event_jButtonClearSearchActionPerformed
+
+    private void jButtonIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIconActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonIconActionPerformed
+
     public void SearchTable(String text){
-        DefaultTableModel faut = (DefaultTableModel) jTableCourse.getModel();
-        TableRowSorter<DefaultTableModel> search = new TableRowSorter<>(faut);
-        jTableCourse.setRowSorter(search);
-        search.setRowFilter(RowFilter.regexFilter("(?i)"+text));
+         DefaultTableModel model=new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        String columns[]=new String[]{"CourseID","CourseName"};
+        for(String i:columns){
+            model.addColumn(i);
+        }
+        for(CourseDTO i:courseBLL.searchAllCourse(text)){
+            Vector t=new Vector<>();
+            t.add(i.getCourseID());
+            t.add(i.getTitle());
+            model.addRow(t);
+        }
+        jTableCourse.setModel(model);
     }
     public void SearchAll(){
         if(jSearch.getText().isEmpty()) {
-        jButtonClearSearch.setVisible(false);
-        jTableCourse.setRowSorter(null);
-        LoadData();
-        } else {
-        SearchTable(jSearch.getText().toString());
-        jButtonClearSearch.setVisible(true);
+            jButtonClearSearch.setVisible(false);
+            jTableCourse.setRowSorter(null);
+            LoadData();
+        }
+        else {
+            SearchTable(jSearch.getText().toString());
+            jButtonClearSearch.setVisible(true);
         }
     }
     public void LoadData(){
@@ -238,7 +293,7 @@ public class CourseResultsPanel extends javax.swing.JPanel {
         for(String i:columns){
             model.addColumn(i);
         }
-        for(CourseEntity i:courseBLL.getAllist()){
+        for(CourseDTO i:courseBLL.getAllist()){
             Vector t=new Vector<>();
             t.add(i.getCourseID());
             t.add(i.getTitle());
@@ -246,7 +301,7 @@ public class CourseResultsPanel extends javax.swing.JPanel {
         }
         jTableCourse.setModel(model);
     }
-    
+    // choose course online or offline
     public void LoadData(String text){
         DefaultTableModel model=new DefaultTableModel(){
             @Override
@@ -258,7 +313,7 @@ public class CourseResultsPanel extends javax.swing.JPanel {
         for(String i:columns){
             model.addColumn(i);
         }
-        for(CourseEntity i:courseBLL.getAllist(text)){
+        for(CourseDTO i:courseBLL.getAllist(text)){
             Vector t=new Vector<>();
             t.add(i.getCourseID());
             t.add(i.getTitle());
@@ -275,10 +330,17 @@ public class CourseResultsPanel extends javax.swing.JPanel {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonClearSearch;
+    private javax.swing.JButton jButtonClearSearch1;
+    private javax.swing.JButton jButtonIcon;
     private javax.swing.JComboBox<String> jComboBoxCourse;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jSearch;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTableCourse;
     // End of variables declaration//GEN-END:variables
 }

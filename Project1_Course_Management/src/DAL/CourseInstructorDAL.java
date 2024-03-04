@@ -4,9 +4,9 @@
  */
 package DAL;
 
-import BLL.Entity.CourseInstructorEntity;
-import BLL.Entity.PersonEntity;
-import BLL.Entity.CourseEntity;
+import DTO.CourseInstructorDTO;
+import DTO.PersonDTO;
+import DTO.CourseDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,7 +35,7 @@ public class CourseInstructorDAL {
 //            while (rs.next()) {
 //                int courseID = rs.getInt("CourseID");
 //                int personID = rs.getInt("PersonID");
-//                CourseInstructorEntity courseInstructor = new CourseInstructorEntity(courseID, personID);
+//                CourseInstructorDTO courseInstructor = new CourseInstructorDTO(courseID, personID);
 //                courseInstructors.add(courseInstructor);
 //            }
 //        } catch (SQLException e) {
@@ -44,8 +44,8 @@ public class CourseInstructorDAL {
 //        return courseInstructors;
 //    }
     // use this before complete populate function 
-    public List<CourseInstructorEntity> selectAll() throws SQLException {
-        List<CourseInstructorEntity> courseInstructors = new ArrayList<>();
+    public List<CourseInstructorDTO> selectAll() throws SQLException {
+        List<CourseInstructorDTO> courseInstructors = new ArrayList<>();
         String query = "SELECT * FROM courseinstructor ci "
                 + "JOIN person p on ci.PersonID = p.PersonID JOIN course c on ci.CourseID = c.CourseID";
         try (PreparedStatement statement = conn.prepareStatement(query); ResultSet rs = statement.executeQuery()) {
@@ -55,13 +55,13 @@ public class CourseInstructorDAL {
                 String firstName = rs.getString("FirstName");
                 Timestamp hireDate = rs.getTimestamp("HireDate");
                 Timestamp enrollmentDate = rs.getTimestamp("EnrollmentDate");
-                PersonEntity person = new PersonEntity(personID, firstName, lastName, hireDate, enrollmentDate);
+                PersonDTO person = new PersonDTO(personID, firstName, lastName, hireDate, enrollmentDate);
                 int courseID = rs.getInt("CourseID");
                 int departmentID = rs.getInt("DepartmentID");
                 int credits = rs.getInt("Credits");
                 String title = rs.getString("Title");
-                CourseEntity course = new CourseEntity(courseID, departmentID, credits, title);
-                CourseInstructorEntity courseInstructor = new CourseInstructorEntity(courseID, personID, course, person);
+                CourseDTO course = new CourseDTO(courseID, departmentID, credits, title);
+                CourseInstructorDTO courseInstructor = new CourseInstructorDTO(courseID, personID, course, person);
                 courseInstructors.add(courseInstructor);
             }
         } catch (SQLException e) {
@@ -70,7 +70,7 @@ public class CourseInstructorDAL {
         return courseInstructors;
     }
 
-    public CourseInstructorEntity selectByID(int courseID, int personID) throws SQLException {
+    public CourseInstructorDTO selectByID(int courseID, int personID) throws SQLException {
         String query = "SELECT * FROM courseinstructor ci "
                 + "JOIN person p on ci.PersonID = p.PersonID JOIN course c on ci.CourseID = c.CourseID "
                 + "WHERE ci.CourseID = ? AND ci.PersonID = ?";
@@ -83,12 +83,12 @@ public class CourseInstructorDAL {
                     String firstName = rs.getString("FirstName");
                     Timestamp hireDate = rs.getTimestamp("HireDate");
                     Timestamp enrollmentDate = rs.getTimestamp("EnrollmentDate");
-                    PersonEntity person = new PersonEntity(personID, firstName, lastName, hireDate, enrollmentDate);
+                    PersonDTO person = new PersonDTO(personID, firstName, lastName, hireDate, enrollmentDate);
                     int departmentID = rs.getInt("DepartmentID");
                     int credits = rs.getInt("Credits");
                     String title = rs.getString("Title");
-                    CourseEntity course = new CourseEntity(courseID, departmentID, credits, title);
-                    return new CourseInstructorEntity(courseID, personID, course, person);
+                    CourseDTO course = new CourseDTO(courseID, departmentID, credits, title);
+                    return new CourseInstructorDTO(courseID, personID, course, person);
                 }
             }
         } catch (SQLException e) {
@@ -97,8 +97,8 @@ public class CourseInstructorDAL {
         return null;
     }
 
-    public List<CourseInstructorEntity> selectByPersonID(int personID) throws SQLException {
-        List<CourseInstructorEntity> courseInstructors = new ArrayList<>();
+    public List<CourseInstructorDTO> selectByPersonID(int personID) throws SQLException {
+        List<CourseInstructorDTO> courseInstructors = new ArrayList<>();
         String query = "SELECT * FROM courseinstructor ci "
                 + "JOIN person p on ci.PersonID = p.PersonID JOIN course c on ci.CourseID = c.CourseID "
                 + "WHERE ci.PersonID = ?";
@@ -111,12 +111,12 @@ public class CourseInstructorDAL {
                     String firstName = rs.getString("FirstName");
                     Timestamp hireDate = rs.getTimestamp("HireDate");
                     Timestamp enrollmentDate = rs.getTimestamp("EnrollmentDate");
-                    PersonEntity person = new PersonEntity(personID, firstName, lastName, hireDate, enrollmentDate);
+                    PersonDTO person = new PersonDTO(personID, firstName, lastName, hireDate, enrollmentDate);
                     int departmentID = rs.getInt("DepartmentID");
                     int credits = rs.getInt("Credits");
                     String title = rs.getString("Title");
-                    CourseEntity course = new CourseEntity(courseID, departmentID, credits, title);
-                    CourseInstructorEntity courseInstructor = new CourseInstructorEntity(courseID, personID, course, person);
+                    CourseDTO course = new CourseDTO(courseID, departmentID, credits, title);
+                    CourseInstructorDTO courseInstructor = new CourseInstructorDTO(courseID, personID, course, person);
                     courseInstructors.add(courseInstructor);
                 }
             }
@@ -128,15 +128,15 @@ public class CourseInstructorDAL {
 
     public static void main(String[] args) throws SQLException {
         CourseInstructorDAL ciDAL = new CourseInstructorDAL();
-        List<CourseInstructorEntity> courseInstructors = ciDAL.selectAll();
-        for (CourseInstructorEntity ci : courseInstructors) {
+        List<CourseInstructorDTO> courseInstructors = ciDAL.selectAll();
+        for (CourseInstructorDTO ci : courseInstructors) {
             System.out.println(ci);
         }
 
     }
 
     // Method to insert a new course instructor into the database
-    public void insertCourseInstructor(CourseInstructorEntity courseInstructor) throws SQLException {
+    public void insertCourseInstructor(CourseInstructorDTO courseInstructor) throws SQLException {
         String query = "INSERT INTO courseinstructor (CourseID, PersonID) VALUES (?, ?)";
         try (PreparedStatement statement = conn.prepareStatement(query)) {
             statement.setInt(1, courseInstructor.getCourseID());
@@ -148,7 +148,7 @@ public class CourseInstructorDAL {
     }
 
     // Method to update a course instructor in the database
-    public boolean updateCourseInstructor(CourseInstructorEntity courseInstructor) throws SQLException {
+    public boolean updateCourseInstructor(CourseInstructorDTO courseInstructor) throws SQLException {
         String query = "UPDATE courseinstructor SET PersonID = ? WHERE CourseID = ?";
         try (PreparedStatement statement = conn.prepareStatement(query)) {
             statement.setInt(1, courseInstructor.getPersonID());
@@ -180,7 +180,7 @@ public class CourseInstructorDAL {
         }
     }
 
-    public void populate(CourseInstructorEntity courseInstructorDTO, String[] fields) {
+    public void populate(CourseInstructorDTO courseInstructorDTO, String[] fields) {
 
         // create SQL query and map result to object
         for (String field : fields) {
@@ -188,14 +188,14 @@ public class CourseInstructorDAL {
         }
     }
 
-    public void populate(List<CourseInstructorEntity> courseInstructorDTOs, String[] fields) {
+    public void populate(List<CourseInstructorDTO> courseInstructorDTOs, String[] fields) {
         // get list ids
 
         // create query with ids
         // mapping all elements
     }
 
-    public void deleteCourseInstructor(CourseInstructorEntity courseInstructor) throws SQLException {
+    public void deleteCourseInstructor(CourseInstructorDTO courseInstructor) throws SQLException {
         String query = "DELETE FROM courseinstructor WHERE CourseID = ? AND PersonID = ?";
         try (PreparedStatement statement = conn.prepareStatement(query)) {
             statement.setInt(1, courseInstructor.getCourseID());
@@ -206,8 +206,8 @@ public class CourseInstructorDAL {
         }
     }
 
-    public List<CourseInstructorEntity> selectByCourseID(int id_Course) throws SQLException {
-        List<CourseInstructorEntity> courseInstructors = new ArrayList<>();
+    public List<CourseInstructorDTO> selectByCourseID(int id_Course) throws SQLException {
+        List<CourseInstructorDTO> courseInstructors = new ArrayList<>();
         String query = "SELECT * FROM CourseInstructor ci "
                 + "JOIN person p ON ci.PersonID = p.PersonID "
                 + "JOIN course c ON ci.CourseID = c.CourseID "
@@ -222,12 +222,12 @@ public class CourseInstructorDAL {
                     String firstName = rs.getString("FirstName");
                     Timestamp hireDate = rs.getTimestamp("HireDate");
                     Timestamp enrollmentDate = rs.getTimestamp("EnrollmentDate");
-                    PersonEntity person = new PersonEntity(personID, firstName, lastName, hireDate, enrollmentDate);
+                    PersonDTO person = new PersonDTO(personID, firstName, lastName, hireDate, enrollmentDate);
                     int departmentID = rs.getInt("DepartmentID");
                     int credits = rs.getInt("Credits");
                     String title = rs.getString("Title");
-                    CourseEntity course = new CourseEntity(courseID, departmentID, credits, title);
-                    CourseInstructorEntity courseInstructor = new CourseInstructorEntity(courseID, personID, course, person);
+                    CourseDTO course = new CourseDTO(courseID, departmentID, credits, title);
+                    CourseInstructorDTO courseInstructor = new CourseInstructorDTO(courseID, personID, course, person);
                     courseInstructors.add(courseInstructor);
                 }
             }

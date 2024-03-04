@@ -3,56 +3,64 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package GUI.CourseResultJFrame;
+
 import BLL.PersonBLL;
 import BLL.StudentGradeBLL;
-import BLL.Entity.StudentGradeEntity;
+import DTO.StudentGradeDTO;
 import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import BLL.Entity.PersonEntity;
+import DTO.PersonDTO;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.RowFilter;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableRowSorter;
+import util.ValidateUtil;
+
 /**
  *
  * @author MSI
  */
 public class JFrameManageCourseResults extends javax.swing.JFrame {
-    StudentGradeBLL studentGradeBLL=new StudentGradeBLL();
-    PersonBLL personBLL=new PersonBLL();
+
+    StudentGradeBLL studentGradeBLL = new StudentGradeBLL();
+    PersonBLL personBLL = new PersonBLL();
     int CourseID;
+
     /**
      * Creates new form JFrameKhoaHocOnline
      */
-    public JFrameManageCourseResults(int CourseID,String Title) {
+    public JFrameManageCourseResults(int CourseID, String Title) {
         initComponents();
         jButtonClearSearch.setVisible(false);
-        this.CourseID=CourseID;
-        jTitle.setText(CourseID+" - "+Title);
+        this.CourseID = CourseID;
+        jTitle.setText("Tên khóa học: " + CourseID + " - " + Title);
         LoadData(CourseID);
         jSearch.getDocument().addDocumentListener(new DocumentListener() {
-        @Override
-        public void insertUpdate(DocumentEvent e) {
-              SearchAll();
-        }
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                SearchAll();
+            }
 
-        @Override
-        public void removeUpdate(DocumentEvent e) {
-              SearchAll();
-        }
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                SearchAll();
+            }
 
-        @Override
-        public void changedUpdate(DocumentEvent e) {
-        // Xử lý khi có sự thay đổi trong thuộc tính của văn bản
-        // (chẳng hạn như một loại thuộc tính được thay đổi, nhưng không phải nội dung văn bản)
-        }
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+
+            }
         });
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,33 +70,264 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jSearch = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jPanel5 = new javax.swing.JPanel();
+        addCourseBtn1 = new javax.swing.JButton();
+        editCourseBtn1 = new javax.swing.JButton();
+        deleteCourseBtn1 = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        searchOnsiteCourseValue = new javax.swing.JTextField();
+        searchOnsiteCourseBtn = new javax.swing.JButton();
+        sortCourseBtnGroupPnl = new javax.swing.JPanel();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton3 = new javax.swing.JRadioButton();
+        jLabel5 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jPanel6 = new javax.swing.JPanel();
+        addCourseBtn = new javax.swing.JButton();
+        editCourseBtn = new javax.swing.JButton();
+        deleteCourseBtn = new javax.swing.JButton();
+        jPanel7 = new javax.swing.JPanel();
+        searchOnsiteCourseValue1 = new javax.swing.JTextField();
+        searchOnsiteCourseBtn1 = new javax.swing.JButton();
+        sortCourseBtnGroupPnl1 = new javax.swing.JPanel();
+        jRadioButton4 = new javax.swing.JRadioButton();
+        jRadioButton5 = new javax.swing.JRadioButton();
+        jRadioButton6 = new javax.swing.JRadioButton();
+        jLabel6 = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
+        editCourseBtn2 = new javax.swing.JButton();
         jButtonClearSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableStudentGrade = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jTextGrade = new javax.swing.JTextField();
-        jButtonSave = new javax.swing.JButton();
         jTextName = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jButtonDelete = new javax.swing.JButton();
         jTitle = new javax.swing.JLabel();
         jTextPersonID = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jSeparator5 = new javax.swing.JSeparator();
         jButtonAdd = new javax.swing.JButton();
+        jSearch = new javax.swing.JTextField();
+        jButtonDelete = new javax.swing.JButton();
+        jButtonAddNew = new javax.swing.JButton();
+        jButtonSave = new javax.swing.JButton();
+        jButtonDetail = new javax.swing.JButton();
+        jButtonAddNew1 = new javax.swing.JButton();
+
+        jLabel3.setText("QUẢN LÝ KHÓA HỌC");
+        jLabel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 5, 10, 0));
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
+        jPanel5.setPreferredSize(new java.awt.Dimension(0, 62));
+        java.awt.FlowLayout flowLayout3 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT);
+        flowLayout3.setAlignOnBaseline(true);
+        jPanel5.setLayout(flowLayout3);
+
+        addCourseBtn1.setText("Thêm");
+        addCourseBtn1.setBackground(new java.awt.Color(155, 207, 83));
+        addCourseBtn1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(191, 234, 124)));
+        addCourseBtn1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        addCourseBtn1.setForeground(new java.awt.Color(255, 255, 255));
+        addCourseBtn1.setPreferredSize(new java.awt.Dimension(100, 40));
+        addCourseBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addCourseBtn1ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(addCourseBtn1);
+
+        editCourseBtn1.setText("Sửa");
+        editCourseBtn1.setBackground(new java.awt.Color(64, 162, 227));
+        editCourseBtn1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(187, 226, 236)));
+        editCourseBtn1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        editCourseBtn1.setForeground(new java.awt.Color(255, 255, 255));
+        editCourseBtn1.setPreferredSize(new java.awt.Dimension(100, 40));
+        editCourseBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editCourseBtn1ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(editCourseBtn1);
+
+        deleteCourseBtn1.setText("Xóa");
+        deleteCourseBtn1.setBackground(new java.awt.Color(255, 104, 104));
+        deleteCourseBtn1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 128, 128)));
+        deleteCourseBtn1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        deleteCourseBtn1.setForeground(new java.awt.Color(255, 255, 255));
+        deleteCourseBtn1.setPreferredSize(new java.awt.Dimension(100, 40));
+        deleteCourseBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteCourseBtn1ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(deleteCourseBtn1);
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setPreferredSize(new java.awt.Dimension(650, 40));
+        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 0, 0);
+        flowLayout1.setAlignOnBaseline(true);
+        jPanel4.setLayout(flowLayout1);
+
+        searchOnsiteCourseValue.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        searchOnsiteCourseValue.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        searchOnsiteCourseValue.setPreferredSize(new java.awt.Dimension(300, 40));
+        jPanel4.add(searchOnsiteCourseValue);
+
+        searchOnsiteCourseBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8-search-24.png"))); // NOI18N
+        searchOnsiteCourseBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        searchOnsiteCourseBtn.setMargin(new java.awt.Insets(2, 20, 3, 0));
+        searchOnsiteCourseBtn.setPreferredSize(new java.awt.Dimension(40, 40));
+        searchOnsiteCourseBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchOnsiteCourseBtnActionPerformed(evt);
+            }
+        });
+        jPanel4.add(searchOnsiteCourseBtn);
+
+        jPanel5.add(jPanel4);
+
+        sortCourseBtnGroupPnl.setBackground(new java.awt.Color(255, 255, 255));
+        sortCourseBtnGroupPnl.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
+        sortCourseBtnGroupPnl.setPreferredSize(new java.awt.Dimension(310, 40));
+        java.awt.FlowLayout flowLayout2 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT);
+        flowLayout2.setAlignOnBaseline(true);
+        sortCourseBtnGroupPnl.setLayout(flowLayout2);
+
+        jRadioButton1.setSelected(true);
+        jRadioButton1.setText("Tất cả");
+        jRadioButton1.setPreferredSize(new java.awt.Dimension(54, 30));
+        sortCourseBtnGroupPnl.add(jRadioButton1);
+
+        jRadioButton2.setText("Khóa học onsite");
+        jRadioButton2.setPreferredSize(new java.awt.Dimension(108, 30));
+        sortCourseBtnGroupPnl.add(jRadioButton2);
+
+        jRadioButton3.setText("Khóa học online");
+        jRadioButton3.setPreferredSize(new java.awt.Dimension(109, 30));
+        sortCourseBtnGroupPnl.add(jRadioButton3);
+
+        jPanel5.add(sortCourseBtnGroupPnl);
+
+        jLabel5.setText("QUẢN LÝ KHÓA HỌC");
+        jLabel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 5, 10, 0));
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
+        jPanel6.setPreferredSize(new java.awt.Dimension(0, 62));
+        java.awt.FlowLayout flowLayout9 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT);
+        flowLayout9.setAlignOnBaseline(true);
+        jPanel6.setLayout(flowLayout9);
+
+        addCourseBtn.setText("Thêm");
+        addCourseBtn.setBackground(new java.awt.Color(155, 207, 83));
+        addCourseBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(191, 234, 124)));
+        addCourseBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        addCourseBtn.setForeground(new java.awt.Color(255, 255, 255));
+        addCourseBtn.setPreferredSize(new java.awt.Dimension(100, 40));
+        addCourseBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addCourseBtnActionPerformed(evt);
+            }
+        });
+        jPanel6.add(addCourseBtn);
+
+        editCourseBtn.setText("Sửa");
+        editCourseBtn.setBackground(new java.awt.Color(64, 162, 227));
+        editCourseBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(187, 226, 236)));
+        editCourseBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        editCourseBtn.setForeground(new java.awt.Color(255, 255, 255));
+        editCourseBtn.setPreferredSize(new java.awt.Dimension(100, 40));
+        editCourseBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editCourseBtnActionPerformed(evt);
+            }
+        });
+        jPanel6.add(editCourseBtn);
+
+        deleteCourseBtn.setText("Xóa");
+        deleteCourseBtn.setBackground(new java.awt.Color(255, 104, 104));
+        deleteCourseBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 128, 128)));
+        deleteCourseBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        deleteCourseBtn.setForeground(new java.awt.Color(255, 255, 255));
+        deleteCourseBtn.setPreferredSize(new java.awt.Dimension(100, 40));
+        deleteCourseBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteCourseBtnActionPerformed(evt);
+            }
+        });
+        jPanel6.add(deleteCourseBtn);
+
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel7.setPreferredSize(new java.awt.Dimension(650, 40));
+        java.awt.FlowLayout flowLayout7 = new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 0, 0);
+        flowLayout7.setAlignOnBaseline(true);
+        jPanel7.setLayout(flowLayout7);
+
+        searchOnsiteCourseValue1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        searchOnsiteCourseValue1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        searchOnsiteCourseValue1.setPreferredSize(new java.awt.Dimension(300, 40));
+        jPanel7.add(searchOnsiteCourseValue1);
+
+        searchOnsiteCourseBtn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8-search-24.png"))); // NOI18N
+        searchOnsiteCourseBtn1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        searchOnsiteCourseBtn1.setMargin(new java.awt.Insets(2, 20, 3, 0));
+        searchOnsiteCourseBtn1.setPreferredSize(new java.awt.Dimension(40, 40));
+        searchOnsiteCourseBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchOnsiteCourseBtn1ActionPerformed(evt);
+            }
+        });
+        jPanel7.add(searchOnsiteCourseBtn1);
+
+        jPanel6.add(jPanel7);
+
+        sortCourseBtnGroupPnl1.setBackground(new java.awt.Color(255, 255, 255));
+        sortCourseBtnGroupPnl1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
+        sortCourseBtnGroupPnl1.setPreferredSize(new java.awt.Dimension(310, 40));
+        java.awt.FlowLayout flowLayout8 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT);
+        flowLayout8.setAlignOnBaseline(true);
+        sortCourseBtnGroupPnl1.setLayout(flowLayout8);
+
+        jRadioButton4.setSelected(true);
+        jRadioButton4.setText("Tất cả");
+        jRadioButton4.setPreferredSize(new java.awt.Dimension(54, 30));
+        sortCourseBtnGroupPnl1.add(jRadioButton4);
+
+        jRadioButton5.setText("Khóa học onsite");
+        jRadioButton5.setPreferredSize(new java.awt.Dimension(108, 30));
+        sortCourseBtnGroupPnl1.add(jRadioButton5);
+
+        jRadioButton6.setText("Khóa học online");
+        jRadioButton6.setPreferredSize(new java.awt.Dimension(109, 30));
+        sortCourseBtnGroupPnl1.add(jRadioButton6);
+
+        jPanel6.add(sortCourseBtnGroupPnl1);
+
+        jLabel6.setText("QUẢN LÝ KHÓA HỌC");
+        jLabel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 5, 10, 0));
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+
+        editCourseBtn2.setText("Sửa");
+        editCourseBtn2.setBackground(new java.awt.Color(64, 162, 227));
+        editCourseBtn2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(187, 226, 236)));
+        editCourseBtn2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        editCourseBtn2.setForeground(new java.awt.Color(255, 255, 255));
+        editCourseBtn2.setPreferredSize(new java.awt.Dimension(100, 40));
+        editCourseBtn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editCourseBtn2ActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jSearchActionPerformed(evt);
-            }
-        });
-        jSearch.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jSearchKeyReleased(evt);
-            }
-        });
 
         jButtonClearSearch.setText("X");
         jButtonClearSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -97,6 +336,7 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
             }
         });
 
+        jTableStudentGrade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTableStudentGrade.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -113,38 +353,114 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
                 jTableStudentGradeMouseClicked(evt);
             }
         });
+        jTableStudentGrade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTableStudentGradeKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableStudentGrade);
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("Grade");
 
-        jButtonSave.setText("Save");
-        jButtonSave.addActionListener(new java.awt.event.ActionListener() {
+        jTextGrade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jTextName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextName.setEnabled(false);
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setText("Name");
+
+        jTitle.setText("Title");
+
+        jTextPersonID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextPersonID.setEnabled(false);
+        jTextPersonID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSaveActionPerformed(evt);
+                jTextPersonIDActionPerformed(evt);
             }
         });
 
-        jTextName.setEnabled(false);
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setText("ID");
 
-        jLabel2.setText("Name");
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel7.setText("QUẢN LÝ KẾT QUẢ KHÓA HỌC");
+        jLabel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 5, 10, 0));
 
-        jButtonDelete.setText("Delete");
+        jButtonAdd.setBackground(new java.awt.Color(155, 207, 83));
+        jButtonAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonAdd.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonAdd.setText("Thêm");
+        jButtonAdd.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(191, 234, 124)));
+        jButtonAdd.setPreferredSize(new java.awt.Dimension(100, 40));
+        jButtonAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddActionPerformed(evt);
+            }
+        });
+
+        jSearch.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jSearch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jSearch.setPreferredSize(new java.awt.Dimension(300, 40));
+
+        jButtonDelete.setBackground(new java.awt.Color(255, 104, 104));
+        jButtonDelete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonDelete.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonDelete.setText("Xóa");
+        jButtonDelete.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 128, 128)));
+        jButtonDelete.setPreferredSize(new java.awt.Dimension(100, 40));
         jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonDeleteActionPerformed(evt);
             }
         });
 
-        jTitle.setText("Title");
-
-        jTextPersonID.setEnabled(false);
-
-        jLabel4.setText("ID");
-
-        jButtonAdd.setText("Add");
-        jButtonAdd.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAddNew.setBackground(new java.awt.Color(155, 207, 83));
+        jButtonAddNew.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonAddNew.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonAddNew.setText("Thêm mới");
+        jButtonAddNew.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(191, 234, 124)));
+        jButtonAddNew.setPreferredSize(new java.awt.Dimension(100, 40));
+        jButtonAddNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAddActionPerformed(evt);
+                jButtonAddNewActionPerformed(evt);
+            }
+        });
+
+        jButtonSave.setBackground(new java.awt.Color(64, 162, 227));
+        jButtonSave.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonSave.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonSave.setText("Lưu");
+        jButtonSave.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(187, 226, 236)));
+        jButtonSave.setPreferredSize(new java.awt.Dimension(100, 40));
+        jButtonSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSaveActionPerformed(evt);
+            }
+        });
+
+        jButtonDetail.setBackground(new java.awt.Color(128, 128, 128));
+        jButtonDetail.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonDetail.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonDetail.setText("Chi tiết");
+        jButtonDetail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(191, 234, 124)));
+        jButtonDetail.setPreferredSize(new java.awt.Dimension(100, 40));
+        jButtonDetail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDetailActionPerformed(evt);
+            }
+        });
+
+        jButtonAddNew1.setBackground(new java.awt.Color(155, 207, 83));
+        jButtonAddNew1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonAddNew1.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonAddNew1.setText("Statistical");
+        jButtonAddNew1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(191, 234, 124)));
+        jButtonAddNew1.setPreferredSize(new java.awt.Dimension(100, 40));
+        jButtonAddNew1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddNew1ActionPerformed(evt);
             }
         });
 
@@ -153,152 +469,178 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 843, Short.MAX_VALUE)
-                        .addContainerGap())
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonClearSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 963, Short.MAX_VALUE)
+                    .addComponent(jSeparator5, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonClearSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 333, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(176, 176, 176)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextName, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextPersonID, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jButtonSave)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(176, 176, 176)
-                                .addComponent(jButtonAdd))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(53, 53, 53)
-                                .addComponent(jButtonDelete)))))
-                .addContainerGap(173, Short.MAX_VALUE))
+                                .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonAddNew, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonAddNew1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextPersonID)
+                            .addComponent(jTextName, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButtonSave, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonClearSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTitle))
-                .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextGrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jSearch, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonClearSearch, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextPersonID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonSave)
-                    .addComponent(jButtonDelete)
-                    .addComponent(jButtonAdd))
+                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonAddNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonDetail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonAddNew1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextGrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jTextName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextPersonID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(33, 33, 33)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
-        // TODO add your handling code here:
-        String grade=jTextGrade.getText().toString();
-        if(!grade.equals("") && (Double.parseDouble(grade)<=10d )){
-            int EnrollmentID=studentGradeBLL.getEnrollment(CourseID,Integer.parseInt(jTextPersonID.getText().toString()));
-            StudentGradeEntity studentGrade=new StudentGradeEntity();
-            studentGrade.setCourseID(CourseID);
-            studentGrade.setEnrollmentID(EnrollmentID);
-            studentGrade.setGrade(Double.parseDouble(jTextGrade.getText().toString()));
-            if(studentGradeBLL.updateGrade(studentGrade)){
-                JOptionPane.showMessageDialog(rootPane,"Update Success!");
-                Clear();
-                jTableStudentGrade.clearSelection();
-                LoadData(CourseID);
-            }else{
-                JOptionPane.showMessageDialog(rootPane,"Update Failed!");
-            }           
-        }
-        
-    }//GEN-LAST:event_jButtonSaveActionPerformed
-
     private void jTableStudentGradeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableStudentGradeMouseClicked
         // TODO add your handling code here:
-        int n=jTableStudentGrade.getSelectedRow();
-        if(n!=-1){
-            jTextName.setText(jTableStudentGrade.getValueAt(n, 2)+" "+jTableStudentGrade.getValueAt(n, 3));
-        jTextGrade.setText(jTableStudentGrade.getValueAt(n, 4)+"");
-        jTextPersonID.setText(jTableStudentGrade.getValueAt(n, 1)+"");
+        int n = jTableStudentGrade.getSelectedRow();
+        if (n != -1) {
+            jTextName.setText(jTableStudentGrade.getValueAt(n, 2) + " " + jTableStudentGrade.getValueAt(n, 3));
+            jTextGrade.setText(jTableStudentGrade.getValueAt(n, 4) == null ? "" : jTableStudentGrade.getValueAt(n, 4) + "");
+            jTextPersonID.setText(jTableStudentGrade.getValueAt(n, 1) + "");
         }
-        
+
     }//GEN-LAST:event_jTableStudentGradeMouseClicked
 
-    private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
+    private void jTableStudentGradeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTableStudentGradeKeyPressed
         // TODO add your handling code here:
-        int EnrollmentID=studentGradeBLL.getEnrollment(CourseID,Integer.parseInt(jTextPersonID.getText().toString()));
-        if(Double.parseDouble(jTextGrade.getText().toString())!=0){
-            int choice = JOptionPane.showConfirmDialog(rootPane, "Do You Want To Delete?", "Confirm", JOptionPane.YES_NO_OPTION);
-            if(choice==JOptionPane.YES_OPTION){
-            if(studentGradeBLL.deleteGrade(EnrollmentID)){
-            JOptionPane.showMessageDialog(rootPane,"Delete Success!");
-                Clear();
-                LoadData(CourseID);
-            }else{
-                JOptionPane.showMessageDialog(rootPane,"Delete Failed!");
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            int row = jTableStudentGrade.getSelectedRow();
+            Double gradeValue;
+            if (row != -1) {
+                int EnrollmentID = studentGradeBLL.getEnrollment(CourseID, Integer.parseInt(jTableStudentGrade.getModel().getValueAt(row, 1).toString()));
+                StudentGradeDTO studentGrade = new StudentGradeDTO();
+                studentGrade.setCourseID(CourseID);
+                studentGrade.setEnrollmentID(EnrollmentID);
+                TableCellEditor edit = jTableStudentGrade.getCellEditor();
+                if (edit != null) {
+                    edit.stopCellEditing();
+                }
+                try {
+                    try {
+                        gradeValue = Double.parseDouble(jTableStudentGrade.getModel().getValueAt(row, 4).toString().trim());
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(rootPane, "Please enter a valid score");
+                        jTableStudentGrade.getModel().setValueAt("", row, 4);
+                        evt.consume();
+                        return;
+                    }
+                    if (gradeValue < 0 || gradeValue > 10) {
+                        JOptionPane.showMessageDialog(rootPane, "Please enter a score from 0 to 10.");
+                        jTableStudentGrade.getModel().setValueAt("", row, 4);
+                        evt.consume();
+                        return;
+                    }
+                    studentGrade.setGrade(Double.parseDouble(jTableStudentGrade.getModel().getValueAt(row, 4).toString().trim()));
+                    if (studentGradeBLL.updateGrade(studentGrade)) {
+                        Clear();
+                    } else {
+                        JOptionPane.showMessageDialog(rootPane, "Update Failed!");
+                    }
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(rootPane, "Please enter a valid score");
+                    jTableStudentGrade.getModel().setValueAt("", row, 4);
+                    evt.consume();
+                    return;
+                }
             }
         }
-        }else{
-            if(studentGradeBLL.deleteGrade(EnrollmentID)){
-            JOptionPane.showMessageDialog(rootPane,"Delete Success!");
-                Clear();
-                LoadData(CourseID);
-            }else{
-                JOptionPane.showMessageDialog(rootPane,"Delete Failed!");
-            }
-        }   
-    }//GEN-LAST:event_jButtonDeleteActionPerformed
+    }//GEN-LAST:event_jTableStudentGradeKeyPressed
 
-    private void jSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jSearchActionPerformed
+    private void addCourseBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCourseBtn1ActionPerformed
 
-    private void jSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSearchKeyReleased
-        // TODO add your handling code here:
-//        if(jSearch.getText().toString().equals("") || jSearch.getText().toString().equals(" ")){
-//            jButtonClearSearch.setVisible(false);
-//            jTableKhoaHocOnline.setRowSorter(null);
-//            LoadData(CourseID);
-//        }else{
-//            Search(jSearch.getText().toString());
-//            jButtonClearSearch.setVisible(true);
-//        }
-    }//GEN-LAST:event_jSearchKeyReleased
+    }//GEN-LAST:event_addCourseBtn1ActionPerformed
 
-    private void jButtonClearSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearSearchActionPerformed
+    private void editCourseBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editCourseBtn1ActionPerformed
+
+    }//GEN-LAST:event_editCourseBtn1ActionPerformed
+
+    private void deleteCourseBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCourseBtn1ActionPerformed
+        int deleteChoice = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa dòng này không?");
+    }//GEN-LAST:event_deleteCourseBtn1ActionPerformed
+
+    private void searchOnsiteCourseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchOnsiteCourseBtnActionPerformed
         // TODO add your handling code here:
-        jSearch.setText("");
-        LoadData(CourseID);
-    }//GEN-LAST:event_jButtonClearSearchActionPerformed
+    }//GEN-LAST:event_searchOnsiteCourseBtnActionPerformed
+
+    private void addCourseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCourseBtnActionPerformed
+
+    }//GEN-LAST:event_addCourseBtnActionPerformed
+
+    private void editCourseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editCourseBtnActionPerformed
+
+    }//GEN-LAST:event_editCourseBtnActionPerformed
+
+    private void deleteCourseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCourseBtnActionPerformed
+        int deleteChoice = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa dòng này không?");
+    }//GEN-LAST:event_deleteCourseBtnActionPerformed
+
+    private void searchOnsiteCourseBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchOnsiteCourseBtn1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchOnsiteCourseBtn1ActionPerformed
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
         // TODO add your handling code here:
@@ -310,71 +652,234 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
             }
         });
         students.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        students.setLocationRelativeTo(null);
         students.setVisible(true);
         Clear();
     }//GEN-LAST:event_jButtonAddActionPerformed
 
-    public void SearchTable(String txt) {
-        DefaultTableModel faut = (DefaultTableModel) jTableStudentGrade.getModel();
-        TableRowSorter<DefaultTableModel> search = new TableRowSorter<>(faut);
-        jTableStudentGrade.setRowSorter(search);
-        search.setRowFilter(RowFilter.regexFilter("(?i)"+txt));
-    }
-    public void SearchAll(){
-        if(jSearch.getText().isEmpty()){
-            jButtonClearSearch.setVisible(false);
-            jTableStudentGrade.setRowSorter(null);
-            LoadData(CourseID);
-        }else{
-            SearchTable(jSearch.getText().toString());
-            jButtonClearSearch.setVisible(true);
-        }
-    }
-    
-    public void LoadData(int CourseID){
-        String columns[]=new String[]{"STT","PersonID","FirstName","LastName","Grade"};
-        DefaultTableModel model=new DefaultTableModel(){
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
+    private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
+        // TODO add your handling code here:
+        int EnrollmentID = studentGradeBLL.getEnrollment(CourseID, Integer.parseInt(jTextPersonID.getText().toString()));
+        if (jTextGrade.getText().toString().equals("")) {
+            int choice = JOptionPane.showConfirmDialog(rootPane, "Do You Want To Delete?", "Confirm", JOptionPane.YES_NO_OPTION);
+            if (choice == JOptionPane.YES_OPTION) {
+                if (studentGradeBLL.deleteGrade(EnrollmentID)) {
+                    JOptionPane.showMessageDialog(rootPane, "Delete Success!");
+                    Clear();
+                    LoadData(CourseID);
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Delete Failed!");
+                }
             }
-        };
-        for(String i:columns){
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Không Thể Xóa");
+        }
+    }//GEN-LAST:event_jButtonDeleteActionPerformed
+
+    private void jButtonAddNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddNewActionPerformed
+        // TODO add your handling code here:
+        JFrameAddNewStudent newStudent = new JFrameAddNewStudent(CourseID);
+        newStudent.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                LoadData(CourseID);
+            }
+        });
+        newStudent.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        newStudent.setLocationRelativeTo(null);
+        newStudent.setVisible(true);
+        Clear();
+    }//GEN-LAST:event_jButtonAddNewActionPerformed
+
+    private void editCourseBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editCourseBtn2ActionPerformed
+
+    }//GEN-LAST:event_editCourseBtn2ActionPerformed
+
+    private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
+        // TODO add your handling code here:
+        if (jTableStudentGrade.getSelectedRow() != -1) {
+            try {
+                double gradeValue = Double.parseDouble(jTextGrade.getText().toString().trim());
+                if (gradeValue < 0 || gradeValue > 10) {
+                    JOptionPane.showMessageDialog(rootPane, "Please enter a score from 0 to 10.");
+                    return;
+                }
+                int EnrollmentID = studentGradeBLL.getEnrollment(CourseID, Integer.parseInt(jTextPersonID.getText().toString()));
+                StudentGradeDTO studentGrade = new StudentGradeDTO();
+                studentGrade.setCourseID(CourseID);
+                studentGrade.setEnrollmentID(EnrollmentID);
+                studentGrade.setGrade(Double.parseDouble(jTextGrade.getText().toString()));
+                if (studentGradeBLL.updateGrade(studentGrade)) {
+                    JOptionPane.showMessageDialog(rootPane, "Update Success!");
+                    Clear();
+                    jTableStudentGrade.clearSelection();
+                    LoadData(CourseID);
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Update Failed!");
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(rootPane, "Please enter a valid score");
+                return;
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Please enter a valid score");
+        }
+    }//GEN-LAST:event_jButtonSaveActionPerformed
+
+    private void jTextPersonIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextPersonIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextPersonIDActionPerformed
+
+    private void jButtonClearSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearSearchActionPerformed
+        // TODO add your handling code here:
+        jSearch.setText("");
+        LoadData(CourseID);
+    }//GEN-LAST:event_jButtonClearSearchActionPerformed
+
+    private void jButtonDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDetailActionPerformed
+        // TODO add your handling code here:
+        int n = jTableStudentGrade.getSelectedRow();
+        if (n != -1) {
+            int studentID = Integer.parseInt(jTableStudentGrade.getValueAt(n, 1).toString());
+            JFrameStudentInformationDetails detail = new JFrameStudentInformationDetails(studentID);
+            detail.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            detail.setLocationRelativeTo(null);
+            detail.setVisible(true);
+            Clear();
+        } else {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn một học sinh để xem chi tiết!!!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+        }
+
+    }//GEN-LAST:event_jButtonDetailActionPerformed
+
+    private void jButtonAddNew1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddNew1ActionPerformed
+
+        JFrameStatistical statistical = new JFrameStatistical(CourseID);
+        statistical.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        statistical.setLocationRelativeTo(null);
+        statistical.setVisible(true);
+    }//GEN-LAST:event_jButtonAddNew1ActionPerformed
+
+    public void SearchTable(String txt) {
+        String columns[] = new String[]{"STT", "PersonID", "FirstName", "LastName", "Grade"};
+        DefaultTableModel model = new DefaultTableModel();
+        for (String i : columns) {
             model.addColumn(i);
         }
-        int stt=0;
-        for(StudentGradeEntity i:studentGradeBLL.getAllList(CourseID)){
-            Vector t=new Vector();
-            t.add(stt+=1);
+        int stt = 0;
+        for (StudentGradeDTO i : studentGradeBLL.serchAllStudentGrade(CourseID, txt)) {
+            Vector t = new Vector();
+            t.add(stt += 1);
             t.add(i.getStudentID());
-            PersonEntity person=personBLL.detailsPerson(i.getStudentID());
+            PersonDTO person = personBLL.detailsPerson(i.getStudentID());
             t.add(person.getFirstName());
             t.add(person.getLastName());
             t.add(i.getGrade());
             model.addRow(t);
         }
+
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        jTableStudentGrade.setDefaultRenderer(Object.class, centerRenderer);
+
         jTableStudentGrade.setModel(model);
+
+        for (int i = 0; i < jTableStudentGrade.getColumnCount(); i++) {
+            jTableStudentGrade.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
     }
-    public void Clear(){
+
+    public void SearchAll() {
+        if (jSearch.getText().isEmpty()) {
+            jButtonClearSearch.setVisible(false);
+            jTableStudentGrade.setRowSorter(null);
+            LoadData(CourseID);
+        } else {
+            SearchTable(jSearch.getText().toString());
+            jButtonClearSearch.setVisible(true);
+        }
+    }
+
+    public void LoadData(int CourseID) {
+        String columns[] = new String[]{"STT", "PersonID", "FirstName", "LastName", "Grade"};
+        DefaultTableModel model = new DefaultTableModel();
+        for (String i : columns) {
+            model.addColumn(i);
+        }
+        int stt = 0;
+        for (StudentGradeDTO i : studentGradeBLL.getAllList(CourseID)) {
+            Vector t = new Vector();
+            t.add(stt += 1);
+            t.add(i.getStudentID());
+            PersonDTO person = personBLL.detailsPerson(i.getStudentID());
+            t.add(person.getFirstName());
+            t.add(person.getLastName());
+            t.add(i.getGrade());
+            model.addRow(t);
+        }
+
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        jTableStudentGrade.setDefaultRenderer(Object.class, centerRenderer);
+
+        jTableStudentGrade.setModel(model);
+
+        for (int i = 0; i < jTableStudentGrade.getColumnCount(); i++) {
+            jTableStudentGrade.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+    }
+
+    public void Clear() {
         jTextGrade.setText("");
         jTextName.setText("");
         jTextPersonID.setText("");
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addCourseBtn;
+    private javax.swing.JButton addCourseBtn1;
+    private javax.swing.JButton deleteCourseBtn;
+    private javax.swing.JButton deleteCourseBtn1;
+    private javax.swing.JButton editCourseBtn;
+    private javax.swing.JButton editCourseBtn1;
+    private javax.swing.JButton editCourseBtn2;
     private javax.swing.JButton jButtonAdd;
+    private javax.swing.JButton jButtonAddNew;
+    private javax.swing.JButton jButtonAddNew1;
     private javax.swing.JButton jButtonClearSearch;
     private javax.swing.JButton jButtonDelete;
+    private javax.swing.JButton jButtonDetail;
     private javax.swing.JButton jButtonSave;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JRadioButton jRadioButton5;
+    private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jSearch;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JTable jTableStudentGrade;
     private javax.swing.JTextField jTextGrade;
     private javax.swing.JTextField jTextName;
     private javax.swing.JTextField jTextPersonID;
     private javax.swing.JLabel jTitle;
+    private javax.swing.JButton searchOnsiteCourseBtn;
+    private javax.swing.JButton searchOnsiteCourseBtn1;
+    private javax.swing.JTextField searchOnsiteCourseValue;
+    private javax.swing.JTextField searchOnsiteCourseValue1;
+    private javax.swing.JPanel sortCourseBtnGroupPnl;
+    private javax.swing.JPanel sortCourseBtnGroupPnl1;
     // End of variables declaration//GEN-END:variables
 }
-

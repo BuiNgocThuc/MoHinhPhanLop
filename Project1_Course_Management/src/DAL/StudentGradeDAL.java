@@ -4,7 +4,7 @@
  */
 package DAL;
 import DAL.ConnectDB;
-import BLL.Entity.StudentGradeEntity;
+import DTO.StudentGradeDTO;
 import java.util.ArrayList;
 import java.sql.*;
 /**
@@ -13,15 +13,48 @@ import java.sql.*;
  */
 public class StudentGradeDAL {
     ConnectDB con=new ConnectDB();
-    public  ArrayList<StudentGradeEntity> getAllList(int CourseID){
-        ArrayList<StudentGradeEntity> listStudentGrade=new ArrayList<StudentGradeEntity>();
+    public  ArrayList<StudentGradeDTO> getAllList(int CourseID){
+        ArrayList<StudentGradeDTO> listStudentGrade=new ArrayList<StudentGradeDTO>();
         try{
             String query="select * from studentgrade where CourseID=?";
             PreparedStatement pre=con.getConnectDB().prepareStatement(query);
             pre.setInt(1, CourseID);
             ResultSet rs=pre.executeQuery();
             while(rs.next()){
-                StudentGradeEntity studentGrade=new StudentGradeEntity();
+                StudentGradeDTO studentGrade=new StudentGradeDTO();
+                studentGrade.setEnrollmentID(rs.getInt("EnrollmentID"));
+                studentGrade.setCourseID(rs.getInt("CourseID"));
+                studentGrade.setStudentID(rs.getInt("StudentID"));
+                studentGrade.setGrade(rs.getDouble("Grade"));
+                Double grade=rs.getDouble("Grade");
+                if(rs.wasNull()){
+                    studentGrade.setGrade(null);
+                }else{
+                    studentGrade.setGrade(grade);
+                }
+                
+                listStudentGrade.add(studentGrade);
+            }
+            return listStudentGrade;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public  ArrayList<StudentGradeDTO> getAllListR(int CourseID,String text){
+        ArrayList<StudentGradeDTO> listStudentGrade=new ArrayList<StudentGradeDTO>();
+        try{
+            String query;
+            if(text.equals("Đậu")){
+                query="select * from studentgrade where CourseID=? and Grade>=5";
+            }else{
+                query="select * from studentgrade where CourseID=? and Grade<5";
+            }
+            PreparedStatement pre=con.getConnectDB().prepareStatement(query);
+            pre.setInt(1, CourseID);
+            ResultSet rs=pre.executeQuery();
+            while(rs.next()){
+                StudentGradeDTO studentGrade=new StudentGradeDTO();
                 studentGrade.setEnrollmentID(rs.getInt("EnrollmentID"));
                 studentGrade.setCourseID(rs.getInt("CourseID"));
                 studentGrade.setStudentID(rs.getInt("StudentID"));
@@ -34,9 +67,10 @@ public class StudentGradeDAL {
         }
         return null;
     }
-    public boolean updateGrade(StudentGradeEntity student){
+    
+    public boolean updateGrade(StudentGradeDTO student){
         try{
-            StudentGradeEntity studentGradeDTO=new StudentGradeEntity();
+            StudentGradeDTO studentGradeDTO=new StudentGradeDTO();
             String query="update studentgrade set CourseID=?,Grade=? where EnrollmentID=?";
             PreparedStatement pre=con.getConnectDB().prepareStatement(query);
             pre.setInt(1, student.getCourseID());
@@ -79,13 +113,13 @@ public class StudentGradeDAL {
         return 0;
     }
     
-    public boolean insertStudentGrade(StudentGradeEntity studentGradeDTO) {
+    public boolean insertStudentGrade(StudentGradeDTO studentGradeDTO) {
         int result = -1;
         
         int EnrollmentID = studentGradeDTO.getEnrollmentID();
         int CourseID = studentGradeDTO.getCourseID();
         int StudentID = studentGradeDTO.getStudentID();
-        double Grade = studentGradeDTO.getGrade();
+        Double Grade = studentGradeDTO.getGrade();
 
         String query = "INSERT INTO studentgrade(EnrollmentID, CourseID, StudentID, Grade) VALUES (?,?,?,?)";
         try
@@ -94,7 +128,11 @@ public class StudentGradeDAL {
             preStm.setInt(1, EnrollmentID);
             preStm.setInt(2, CourseID);
             preStm.setInt(3, StudentID);
-            preStm.setDouble(4, Grade);
+            if(Grade!=null){
+                preStm.setDouble(4,Grade);
+            }else{
+                preStm.setNull(4,java.sql.Types.DOUBLE);
+            }
             
             result = preStm.executeUpdate();
             if (result != 0)
@@ -106,6 +144,58 @@ public class StudentGradeDAL {
             e.printStackTrace();
         }
         return false;
+    }
+    public  ArrayList<StudentGradeDTO> serchAllStudentGrade(int CourseID,String text){
+        ArrayList<StudentGradeDTO> listStudentGrade=new ArrayList<StudentGradeDTO>();
+        try{
+            String query="select studentgrade.EnrollmentID,studentgrade.CourseID,"
+                    + "studentgrade.StudentID,studentgrade.Grade "
+                    + "from studentgrade "
+                    + "join course on studentgrade.CourseID=course.CourseID "
+                    + "join person on person.PersonID=studentgrade.StudentID "
+                    + "where UPPER(CONCAT(person.PersonID,person.Firstname,person.Lastname,studentgrade.Grade)) "
+                    + "like '%"+text+"%' and studentgrade.CourseID="+CourseID;
+            PreparedStatement pre=con.getConnectDB().prepareStatement(query);
+            ResultSet rs=pre.executeQuery();
+            while(rs.next()){
+                StudentGradeDTO studentGrade=new StudentGradeDTO();
+                studentGrade.setEnrollmentID(rs.getInt("studentgrade.EnrollmentID"));
+                studentGrade.setCourseID(rs.getInt("studentgrade.CourseID"));
+                studentGrade.setStudentID(rs.getInt("studentgrade.StudentID"));
+                studentGrade.setGrade(rs.getDouble("studentgrade.Grade"));
+                listStudentGrade.add(studentGrade);
+            }
+            return listStudentGrade;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public  ArrayList<StudentGradeDTO> Statistical(int CourseID,String text){
+        ArrayList<StudentGradeDTO> listStatistical=new ArrayList<>();
+        try{
+            String query;
+            if(text.equals("Passing")){
+                query="select * from studentgrade where CourseID=? and Grade>=5";
+            }else{
+                query="select * from studentgrade where CourseID=? and Grade<5";
+            }
+            PreparedStatement pre=con.getConnectDB().prepareStatement(query);
+            pre.setInt(1, CourseID);
+            ResultSet rs=pre.executeQuery();
+            while(rs.next()){
+                StudentGradeDTO studentGrade=new StudentGradeDTO();
+                studentGrade.setEnrollmentID(rs.getInt("EnrollmentID"));
+                studentGrade.setCourseID(rs.getInt("CourseID"));
+                studentGrade.setStudentID(rs.getInt("StudentID"));
+                studentGrade.setGrade(rs.getDouble("Grade"));
+                listStatistical.add(studentGrade);
+            }
+            return listStatistical;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
     
 //    public int checkCourse(int CourseID,int StudentID){

@@ -6,7 +6,7 @@ package BLL;
 
 import DAL.CourseDAL;
 import DAL.OnsiteCourseDAL;
-import BLL.Entity.OnsiteCourseEntity;
+import DTO.OnsiteCourseDTO;
 import java.util.List;
 
 /**
@@ -23,19 +23,19 @@ public class OnsiteCourseBLL {
         onsCourseDAL = new OnsiteCourseDAL();
     }
 
-    public List<OnsiteCourseEntity> selectAllOnsiteCourse() {
+    public List<OnsiteCourseDTO> selectAllOnsiteCourse() {
         return courseDAL.selectAllOnsiteCourse();
     }
     
-    public OnsiteCourseEntity selectByID(int CourseID) {
+    public OnsiteCourseDTO selectByID(int CourseID) {
         return onsCourseDAL.selectByID(CourseID);
     }
 
-    public boolean insertOnsiteCourse(OnsiteCourseEntity onsCourse) {
+    public boolean insertOnsiteCourse(OnsiteCourseDTO onsCourse) {
         return onsCourseDAL.insertOnsiteCourse(onsCourse);
     }
 
-    public boolean updateOnsiteCourse(OnsiteCourseEntity onsCourse) {
+    public boolean updateOnsiteCourse(OnsiteCourseDTO onsCourse) {
         return onsCourseDAL.updateOnsiteCourse(onsCourse);
     }
 

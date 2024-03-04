@@ -4,8 +4,8 @@
  */
 package DAL;
 
-import BLL.Entity.OnlineCourseEntity;
-import BLL.Entity.OnsiteCourseEntity;
+import DTO.OnlineCourseDTO;
+import DTO.OnsiteCourseDTO;
 import java.sql.Time;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,7 +22,7 @@ public class OnsiteCourseDAL {
 
     private Connection conn;
     private PreparedStatement preStm;
-    private List<OnsiteCourseEntity> listOnsCourses = new ArrayList<>();
+    private List<OnsiteCourseDTO> listOnsCourses = new ArrayList<>();
 
     public OnsiteCourseDAL() {
         ConnectDB connectDB = new ConnectDB();
@@ -30,8 +30,8 @@ public class OnsiteCourseDAL {
         listOnsCourses = selectAll();
     }
 
-    public List<OnsiteCourseEntity> selectAll() {
-        List<OnsiteCourseEntity> list = new ArrayList<>();
+    public List<OnsiteCourseDTO> selectAll() {
+        List<OnsiteCourseDTO> list = new ArrayList<>();
         String query = "SELECT * FROM onsitecourse";
         try
         {
@@ -44,7 +44,7 @@ public class OnsiteCourseDAL {
                 String Days = rs.getString("Days");
                 Time time = rs.getTime("Time");
 
-                OnsiteCourseEntity OnsCourse = new OnsiteCourseEntity();
+                OnsiteCourseDTO OnsCourse = new OnsiteCourseDTO();
                 OnsCourse.setCourseID(CourseID);
                 OnsCourse.setDays(Days);
                 OnsCourse.setLocation(Location);
@@ -61,8 +61,8 @@ public class OnsiteCourseDAL {
     }
     
     // xem chi tiết
-     public OnsiteCourseEntity selectByID(int CourseID) {
-        OnsiteCourseEntity course = null;
+     public OnsiteCourseDTO selectByID(int CourseID) {
+        OnsiteCourseDTO course = null;
         String query = "SELECT * FROM onsitecourse WHERE CourseID = ?";
          try
         {
@@ -76,7 +76,7 @@ public class OnsiteCourseDAL {
                 String days = rs.getString("Days");
                 Time time = rs.getTime("Time");
 
-               course = new OnsiteCourseEntity();
+               course = new OnsiteCourseDTO();
                course.setLocation(location);
                course.setDays(days);
                course.setTime(time);
@@ -90,7 +90,7 @@ public class OnsiteCourseDAL {
         return course;
     }
 
-    public boolean insertOnsiteCourse(OnsiteCourseEntity onsCourse) {
+    public boolean insertOnsiteCourse(OnsiteCourseDTO onsCourse) {
         int result = -1;
 
         int CourseID = onsCourse.getCourseID();
@@ -120,7 +120,7 @@ public class OnsiteCourseDAL {
         return false;
     }
 
-    public boolean updateOnsiteCourse(OnsiteCourseEntity onsCourse) {
+    public boolean updateOnsiteCourse(OnsiteCourseDTO onsCourse) {
         int result = -1;
 
         int CourseID = onsCourse.getCourseID();
@@ -178,7 +178,7 @@ public class OnsiteCourseDAL {
 //        {
 //            return listOnsCourses;
 //        }
-//        for (OnsiteCourseEntity onsCourse : listOnsCourses)
+//        for (OnsiteCourseDTO onsCourse : listOnsCourses)
 //        {
 //            if (onsCourse.getTitle().toLowerCase().contains(sequenceChar.toLowerCase()))
 //            {

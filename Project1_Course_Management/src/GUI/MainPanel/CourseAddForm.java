@@ -9,11 +9,11 @@ import BLL.DepartmentBLL;
 import BLL.OnlineCourseBLL;
 import BLL.OnsiteCourseBLL;
 import BLL.PersonBLL;
-import BLL.Entity.CourseEntity;
-import BLL.Entity.DepartmentEntity;
-import BLL.Entity.OnlineCourseEntity;
-import BLL.Entity.OnsiteCourseEntity;
-import BLL.Entity.PersonEntity;
+import DTO.CourseDTO;
+import DTO.DepartmentDTO;
+import DTO.OnlineCourseDTO;
+import DTO.OnsiteCourseDTO;
+import DTO.PersonDTO;
 import java.awt.Color;
 import java.awt.Component;
 import java.sql.Time;
@@ -39,9 +39,9 @@ public class CourseAddForm extends javax.swing.JFrame {
     private final CourseBLL courseBLL = new CourseBLL();
     private final OnlineCourseBLL onlineCourseBLL = new OnlineCourseBLL();
     private final OnsiteCourseBLL onsiteCourseBLL = new OnsiteCourseBLL();
-    private List<DepartmentEntity> listDepartment = new ArrayList<>();
-    private List<PersonEntity> listStudent = new ArrayList<>();
-    private List<PersonEntity> listInstructor = new ArrayList<>();
+    private List<DepartmentDTO> listDepartment = new ArrayList<>();
+    private List<PersonDTO> listStudent = new ArrayList<>();
+    private List<PersonDTO> listInstructor = new ArrayList<>();
     private CoursePanel coursePanel;
 
     /**
@@ -57,7 +57,7 @@ public class CourseAddForm extends javax.swing.JFrame {
 
     private void loadDepartmentName() {
         listDepartment = departmentBLL.selectAll();
-        for (DepartmentEntity departmentDTO : listDepartment)
+        for (DepartmentDTO departmentDTO : listDepartment)
         {
             String name = departmentDTO.getName();
             cbDepartment.addItem(name);
@@ -71,7 +71,7 @@ public class CourseAddForm extends javax.swing.JFrame {
         model.setRowCount(0);
 
         int STT = 1;
-        for (PersonEntity student : listStudent)
+        for (PersonDTO student : listStudent)
         {
             int personID = student.getPersonID();
             String firstname = student.getFirstName();
@@ -95,7 +95,7 @@ public class CourseAddForm extends javax.swing.JFrame {
         model.setRowCount(0);
 
         int STT = 1;
-        for (PersonEntity instructor : listInstructor)
+        for (PersonDTO instructor : listInstructor)
         {
             int personID = instructor.getPersonID();
             String firstname = instructor.getFirstName();
@@ -762,7 +762,7 @@ public class CourseAddForm extends javax.swing.JFrame {
         int departmentID = listDepartment.get(departmentIndex - 1).getDepartmentID();
 
         boolean success = false;
-        CourseEntity course = new CourseEntity(0, departmentID, credits, title);
+        CourseDTO course = new CourseDTO(0, departmentID, credits, title);
         success = courseBLL.insertCourse(course);
         if (success) // if insert course successfully
         {
@@ -775,7 +775,7 @@ public class CourseAddForm extends javax.swing.JFrame {
                 case "Online" ->
                 {
                     String url = txtUrl.getText();
-                    OnlineCourseEntity onlineCourse = new OnlineCourseEntity(url, courseID, departmentID, credits, title);
+                    OnlineCourseDTO onlineCourse = new OnlineCourseDTO(url, courseID, departmentID, credits, title);
                     success = onlineCourseBLL.insertOnlineCourse(onlineCourse);
                 }
                 case "Onsite" ->
@@ -808,7 +808,7 @@ public class CourseAddForm extends javax.swing.JFrame {
                     {
                         Days += "S";
                     }
-                    OnsiteCourseEntity onsiteCourse = new OnsiteCourseEntity(location, Days, time, courseID, departmentID, credits, title);
+                    OnsiteCourseDTO onsiteCourse = new OnsiteCourseDTO(location, Days, time, courseID, departmentID, credits, title);
                     success = onsiteCourseBLL.insertOnsiteCourse(onsiteCourse);
                 }
                 default ->

@@ -5,10 +5,11 @@
 package GUI.MainPanel;
 
 import BLL.CourseInstructorBLL;
-import BLL.Entity.CourseEntity;
-import BLL.Entity.PersonEntity;
+import DTO.CourseDTO;
+import DTO.PersonDTO;
 import java.sql.SQLException;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -28,7 +29,7 @@ public class TableInstructorPanel extends javax.swing.JPanel {
 
     public TableInstructorPanel() throws SQLException {
         initComponents();
-        List<PersonEntity> instructors = courseInstructorBLL.getListInstructorAssignCourse();
+        List<PersonDTO> instructors = courseInstructorBLL.getListInstructorAssignCourse();
 
         loadData(instructors);
     }
@@ -103,7 +104,19 @@ public class TableInstructorPanel extends javax.swing.JPanel {
             int instructorID = (int) tblInstructor.getValueAt(row, 1);
             System.out.println(instructorID);
             try {
-                new AssigmentDetailGV(instructorID);
+                JFrame assigmentDetailGV = new AssigmentDetailGV(instructorID);
+                assigmentDetailGV.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        try {
+                            List<PersonDTO> instructors = courseInstructorBLL.getListInstructorAssignCourse();
+                            loadData(instructors);
+                        } catch (SQLException ex) {
+                            ex.printStackTrace();
+                            JOptionPane.showMessageDialog(null, "Lỗi hệ thống");
+                        }
+                    }
+                });
             } catch (SQLException ex) {
                 ex.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Lỗi hệ thống");
@@ -116,17 +129,17 @@ public class TableInstructorPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane spInstructor;
     private javax.swing.JTable tblInstructor;
     // End of variables declaration//GEN-END:variables
-    public void loadData(List<PersonEntity> instructors) throws SQLException {
+    public void loadData(List<PersonDTO> instructors) throws SQLException {
         DefaultTableModel model = (DefaultTableModel) tblInstructor.getModel();
         model.setRowCount(0);
         int no = 1;
-        for (PersonEntity instructor : instructors) {
+        for (PersonDTO instructor : instructors) {
             int instructorID = instructor.getPersonID();
             String firstName = instructor.getFirstName();
             String lastName = instructor.getLastName();
 
             String courseInfos = "-------";
-            List<CourseEntity> courses = instructor.getCourses();
+            List<CourseDTO> courses = instructor.getCourses();
             if (courses != null) {
                 courseInfos = "";
                 for (int i = 0; i < courses.size() - 1; i++) {
@@ -156,7 +169,7 @@ public class TableInstructorPanel extends javax.swing.JPanel {
     }
 
     public void findInstructors(String text) throws SQLException {
-        List<PersonEntity> instructors = courseInstructorBLL.findInstructors(text);
+        List<PersonDTO> instructors = courseInstructorBLL.findInstructors(text);
         if (instructors.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Không tìm thấy");
         } else {

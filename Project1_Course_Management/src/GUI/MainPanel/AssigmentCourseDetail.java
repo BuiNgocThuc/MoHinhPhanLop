@@ -4,10 +4,10 @@ import BLL.CourseBLL;
 import BLL.CourseInstructorBLL;
 import BLL.DepartmentBLL;
 import BLL.PersonBLL;
-import BLL.Entity.CourseEntity;
-import BLL.Entity.CourseInstructorEntity;
-import BLL.Entity.DepartmentEntity;
-import BLL.Entity.PersonEntity;
+import DTO.CourseDTO;
+import DTO.CourseInstructorDTO;
+import DTO.DepartmentDTO;
+import DTO.PersonDTO;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -21,6 +21,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,8 +36,8 @@ public class AssigmentCourseDetail extends JFrame {
     private int id_Course;
     private PersonBLL personBLL = new PersonBLL();
     private CourseInstructorBLL courseInstructorBLL = new CourseInstructorBLL();
-    private List<PersonEntity> listPersonDTO = personBLL.getListInstructor();
-    private List<CourseInstructorEntity> listCourseInstructor;
+    private List<PersonDTO> listPersonDTO = personBLL.getListInstructor();
+    private List<CourseInstructorDTO> listCourseInstructor;
 
     public AssigmentCourseDetail(int id_Course) throws SQLException {
         this.id_Course = id_Course;
@@ -94,11 +95,11 @@ public class AssigmentCourseDetail extends JFrame {
         JLabel valueDepart = new JLabel();
 
         CourseBLL courseBLL = new CourseBLL();
-        CourseEntity courseDTO = courseBLL.courseDetail(id_Course);
+        CourseDTO courseDTO = courseBLL.courseDetail(id_Course);
         valueTilte.setText(courseDTO.getTitle());
         valueCredits.setText(String.valueOf(courseDTO.getCredits()));
         DepartmentBLL departmentBLL = new DepartmentBLL();
-        DepartmentEntity departmentDTO = departmentBLL.selectByID(courseDTO.getDepartmentID());
+        DepartmentDTO departmentDTO = departmentBLL.selectByID(courseDTO.getDepartmentID());
         valueDepart.setText(departmentDTO.getName());
 
         Font valueFont = new Font("Arial", Font.PLAIN, 18);
@@ -141,11 +142,11 @@ public class AssigmentCourseDetail extends JFrame {
         table = new JTable();
         table = new JTable(modeltable);
         int stt = 1;
-        for (CourseInstructorEntity dto : listCourseInstructor) {
+        for (CourseInstructorDTO dto : listCourseInstructor) {
             Object[] rowData = new String[6]; // 5 là số cột của bảng
             rowData[0] = String.valueOf(stt++);
             rowData[1] = String.valueOf(dto.getPersonID());
-            for (PersonEntity personDTO : listPersonDTO) {
+            for (PersonDTO personDTO : listPersonDTO) {
                 if (personDTO.getPersonID() == dto.getPersonID()) {
                     rowData[2] = personDTO.getFirstName();
                     rowData[3] = personDTO.getLastName();
@@ -203,36 +204,35 @@ public class AssigmentCourseDetail extends JFrame {
         JPanel panelRight = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         panelRight.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
         btnSave = new JButton("Lưu");
-        btnSave.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Nút Lưu được nhấn");
-                for (CourseInstructorEntity dto : listCourseInstructor) {
-                    try {
-                        courseInstructorBLL.deleteCourseInstructor(dto);
-                    } catch (SQLException ex) {
-                        Logger.getLogger(AssigmentCourseDetail.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+        btnSave.addActionListener((ActionEvent e) -> {
+            int confirmed = JOptionPane.showConfirmDialog(null,
+                    "Bạn có chắc chắn muốn lưu thay đổi không?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+            if (confirmed == JOptionPane.YES_OPTION) {
+                CourseDTO course = new CourseDTO();
+                List<PersonDTO> instructors = new ArrayList<>();
+                for (int i = 0; i < table.getRowCount(); i++) {
+                    int personID = Integer.parseInt(table.getValueAt(i, 1).toString());
+                    PersonDTO personDTO = new PersonDTO();
+                    personDTO.setPersonID(personID);
+                    instructors.add(personDTO);
+                }
+                course.setCourseID(id_Course);
+                course.setInstructors(instructors);
+                try {
+                    courseInstructorBLL.updateCourseInstructors(course);
+                } catch (SQLException ex) {
+                    Logger.getLogger(AssigmentDetailGV.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-                for (int i = 0; i < table.getRowCount(); i++) {
-                    String personID = table.getValueAt(i, 1).toString();
-                    CourseInstructorEntity courseInstructor = new CourseInstructorEntity(id_Course, Integer.parseInt(personID));
-                    try {
-                        courseInstructorBLL.insertCourseInstructor(courseInstructor);
-                    } catch (SQLException ex) {
-                        Logger.getLogger(AssigmentCourseDetail.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
+                JOptionPane.showMessageDialog(null, "Thay đổi đã được lưu thành công.", "Thành công", JOptionPane.INFORMATION_MESSAGE);
             }
-        }
-        );
+        });
         btnAddMon = new JButton("thêm");
         btnAddMon.addActionListener((ActionEvent e) -> {
             panel.setVisible(false);
             panelBelow.setVisible(true);
         });
-        
+
         btnCloseFrame = new JButton("Đóng");
         btnCloseFrame.addActionListener((e) -> {
             this.dispose();
@@ -273,7 +273,7 @@ public class AssigmentCourseDetail extends JFrame {
         JTable table1 = new JTable();
         table1 = new JTable(modeltable1);
         int stt = 1;
-        for (PersonEntity dto : listPersonDTO) {
+        for (PersonDTO dto : listPersonDTO) {
             Object[] rowData = new String[6]; // 5 là số cột của bảng
             rowData[0] = String.valueOf(stt++);
             rowData[1] = String.valueOf(dto.getPersonID());
@@ -349,7 +349,7 @@ public class AssigmentCourseDetail extends JFrame {
         panelBelow.add(panelRight1, BorderLayout.SOUTH);
     }
 
-    public void addRowToTable(DefaultTableModel model, int personID, List<PersonEntity> listPersonDTO) {
+    public void addRowToTable(DefaultTableModel model, int personID, List<PersonDTO> listPersonDTO) {
         // Kiểm tra xem courseID đã tồn tại trong cột row1 chưa
         for (int i = 0; i < model.getRowCount(); i++) {
             int existingCourseID = Integer.parseInt((String) model.getValueAt(i, 1));
@@ -362,7 +362,7 @@ public class AssigmentCourseDetail extends JFrame {
         Object[] rowData = new Object[6];
         rowData[0] = String.valueOf(model.getRowCount() + 1);
         rowData[1] = String.valueOf(personID);
-        for (PersonEntity personDTO : listPersonDTO) {
+        for (PersonDTO personDTO : listPersonDTO) {
             if (personDTO.getPersonID() == personID) {
                 rowData[2] = personDTO.getFirstName();
                 rowData[3] = personDTO.getLastName();

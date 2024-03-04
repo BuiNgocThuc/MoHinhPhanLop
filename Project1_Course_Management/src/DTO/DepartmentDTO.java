@@ -1,14 +1,14 @@
-package BLL.Entity;
+package DTO;
 
 import java.sql.Timestamp;
 
-public class DepartmentEntity {
+public class DepartmentDTO {
     private int DepartmentID, Administrator;
     private double Budget;
     private String Name;
     private Timestamp StartDate;
 
-    public DepartmentEntity(int departmentID, double budget, String name, int administrator, Timestamp startDate) {
+    public DepartmentDTO(int departmentID, double budget, String name, int administrator, Timestamp startDate) {
         DepartmentID = departmentID;
         Budget = budget;
         Name = name;
