@@ -121,17 +121,16 @@ public class StudentGradeDAL {
         int StudentID = studentGradeDTO.getStudentID();
         Double Grade = studentGradeDTO.getGrade();
 
-        String query = "INSERT INTO studentgrade(EnrollmentID, CourseID, StudentID, Grade) VALUES (?,?,?,?)";
+        String query = "INSERT INTO studentgrade(CourseID, StudentID, Grade) VALUES (?,?,?)";
         try
         {
             PreparedStatement preStm = con.getConnectDB().prepareStatement(query);
-            preStm.setInt(1, EnrollmentID);
-            preStm.setInt(2, CourseID);
-            preStm.setInt(3, StudentID);
+            preStm.setInt(1, CourseID);
+            preStm.setInt(2, StudentID);
             if(Grade!=null){
-                preStm.setDouble(4,Grade);
+                preStm.setDouble(3,Grade);
             }else{
-                preStm.setNull(4,java.sql.Types.DOUBLE);
+                preStm.setNull(3,java.sql.Types.DOUBLE);
             }
             
             result = preStm.executeUpdate();

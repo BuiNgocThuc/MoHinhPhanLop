@@ -9,13 +9,18 @@ import BLL.DepartmentBLL;
 import BLL.OnlineCourseBLL;
 import BLL.OnsiteCourseBLL;
 import BLL.PersonBLL;
+import BLL.StudentGradeBLL;
+import BLL.CourseInstructorBLL;
 import DTO.CourseDTO;
+import DTO.CourseInstructorDTO;
 import DTO.DepartmentDTO;
 import DTO.OnlineCourseDTO;
 import DTO.OnsiteCourseDTO;
 import DTO.PersonDTO;
+import DTO.StudentGradeDTO;
 import java.awt.Color;
 import java.awt.Component;
+import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalTime;
@@ -39,6 +44,8 @@ public class CourseAddForm extends javax.swing.JFrame {
     private final CourseBLL courseBLL = new CourseBLL();
     private final OnlineCourseBLL onlineCourseBLL = new OnlineCourseBLL();
     private final OnsiteCourseBLL onsiteCourseBLL = new OnsiteCourseBLL();
+    private final StudentGradeBLL studentGradeBLL = new StudentGradeBLL();
+    private final CourseInstructorBLL courseInstrutorBLL = new CourseInstructorBLL();
     private List<DepartmentDTO> listDepartment = new ArrayList<>();
     private List<PersonDTO> listStudent = new ArrayList<>();
     private List<PersonDTO> listInstructor = new ArrayList<>();
@@ -814,13 +821,34 @@ public class CourseAddForm extends javax.swing.JFrame {
                 default ->
                     throw new AssertionError();
             }
+            
+            // insert student to new course
              int studentTotal = tblStudentSelected.getRowCount();
+             for(int i = 0; i < studentTotal; ++i) {
+                 int currentStudentID = Integer.parseInt(tblStudentSelected.getValueAt(i, 1).toString());
+                 StudentGradeDTO student = new StudentGradeDTO(1, currentStudentID, courseID, null);
+                 studentGradeBLL.insertStudent(student);
+             }
+             
+             // insert instructor to new course
              int instructorTotal = tblInstructorSelected.getRowCount();
-
+             for(int i = 0; i < instructorTotal; ++i) {
+                 int currentInstructorID = Integer.parseInt(tblStudentSelected.getValueAt(i, 1).toString());
+                 CourseInstructorDTO instructor = new CourseInstructorDTO(courseID, currentInstructorID);
+                 try
+                 {
+                      courseInstrutorBLL.insertCourseInstructor(instructor);
+                 } catch (SQLException e)
+                 {
+                     e.printStackTrace();
+                 }
+                 
+             }
             if (success)
             {
                 coursePanel.loadData();
                 SharedFunction.displayConfirmMessage("Insert course successfully!!");
+                this.dispose();
             }
         }
 
