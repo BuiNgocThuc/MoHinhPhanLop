@@ -8,6 +8,10 @@ import DTO.CourseInstructorDTO;
 import DTO.PersonDTO;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.swing.JOptionPane;
 
 import util.ValidateUtil;
 
@@ -106,7 +110,8 @@ public class CourseInstructorBLL {
     public void updateCourseInstructors(PersonDTO instructor) throws SQLException {
         deleteAllCourseAssignInstructor(instructor.getPersonID());
         for (CourseDTO course : instructor.getCourses()) {
-            CourseInstructorDTO courseInstructor = new CourseInstructorDTO(course.getCourseID(), instructor.getPersonID());
+            CourseInstructorDTO courseInstructor = new CourseInstructorDTO(course.getCourseID(),
+                    instructor.getPersonID());
             insertCourseInstructor(courseInstructor);
         }
     }
@@ -118,4 +123,39 @@ public class CourseInstructorBLL {
             insertCourseInstructor(courseInstructor);
         }
     }
+
+    public int checkCourseExist(int instructorId,
+            List<CourseDTO> selectedCourses) {
+        try {
+            for (CourseInstructorDTO courseInstructorDTO : getAllCourseInstructors()) {
+                for (CourseDTO courseDTO : selectedCourses) {
+                    if (courseInstructorDTO.getCourseID() == courseDTO.getCourseID()
+                            && instructorId == courseInstructorDTO.getPersonID()) {
+                        return courseDTO.getCourseID();
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CourseInstructorBLL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    public int checkInstructorExist(int courseId,
+            List<PersonDTO> selectedPerson) {
+        try {
+            for (CourseInstructorDTO courseInstructorDTO : getAllCourseInstructors()) {
+                for (PersonDTO personDTO : selectedPerson) {
+                    if (courseInstructorDTO.getPersonID() == personDTO.getPersonID()
+                            && courseId == courseInstructorDTO.getCourseID()) {
+                        return personDTO.getPersonID();
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CourseInstructorBLL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
 }
