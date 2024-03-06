@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import util.Paginate;
 
 /**
  *
@@ -106,6 +107,64 @@ public class PersonDAL {
             }
             return listPerson;
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Paginate<PersonDTO> getListInstructorAssignedCourse(int offset, int limit, String querySearch) {
+        List<PersonDTO> listPerson = new ArrayList<>();
+        try {
+            String baseQuery = "SELECT * FROM person WHERE HireDate IS NOT NULL ";
+
+            if (querySearch != null && !querySearch.isEmpty()) {
+                baseQuery += "AND (FirstName LIKE ? OR LastName LIKE ?)";
+            }
+
+            String countQuery = "SELECT COUNT(*) AS total FROM (" + baseQuery + ") AS subquery";
+
+            baseQuery += " LIMIT ? OFFSET ?";
+
+            PreparedStatement countPre = con.getConnectDB().prepareStatement(countQuery);
+            PreparedStatement pre = con.getConnectDB().prepareStatement(baseQuery);
+
+            // Set search parameters if provided for both queries
+            int paramIndex = 1;
+            if (querySearch != null && !querySearch.isEmpty()) {
+                countPre.setString(paramIndex, "%" + querySearch + "%");
+                pre.setString(paramIndex++, "%" + querySearch + "%");
+                countPre.setString(paramIndex, "%" + querySearch + "%");
+                pre.setString(paramIndex++, "%" + querySearch + "%");
+            }
+
+            ResultSet countRs = countPre.executeQuery();
+            int totalItems = 0;
+            if (countRs.next()) {
+                totalItems = countRs.getInt("total");
+            }
+
+            pre.setInt(paramIndex++, limit);
+            pre.setInt(paramIndex, offset);
+
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                PersonDTO person = new PersonDTO();
+                person.setPersonID(rs.getInt("PersonID"));
+                person.setLastName(rs.getString("Lastname"));
+                person.setFirstName(rs.getString("Firstname"));
+                person.setHireDate(rs.getTimestamp("HireDate"));
+                person.setEnrollmentDate(rs.getTimestamp("EnrollmentDate"));
+                listPerson.add(person);
+            }
+
+            // Calculate total pages
+            int totalPages = (int) Math.ceil((double) totalItems / limit);
+
+            // Create Paginate object
+            Paginate<PersonDTO> paginate = new Paginate<>(offset, totalItems, 1, totalPages, listPerson);
+
+            return paginate;
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
@@ -228,48 +287,44 @@ public class PersonDAL {
         }
     }
 
-    
     public boolean insertPerson(PersonDTO personDTO) {
         int result = -1;
-        
+
         int personID = personDTO.getPersonID();
         String lastName = personDTO.getLastName();
         String firstName = personDTO.getFirstName();
         Timestamp hireDate = personDTO.getHireDate();
         Timestamp enrollmentDate = personDTO.getEnrollmentDate();
-        
+
         String query = "INSERT INTO person(PersonID, LastName, FirstName, HireDate, EnrollmentDate) VALUES (?,?,?,?,?)";
-        try
-        {
+        try {
             PreparedStatement preStm = con.getConnectDB().prepareStatement(query);
             preStm.setInt(1, personID);
             preStm.setString(2, lastName);
             preStm.setString(3, firstName);
             preStm.setTimestamp(4, hireDate);
             preStm.setTimestamp(5, enrollmentDate);
-            
+
             result = preStm.executeUpdate();
-            if (result != 0)
-            {
+            if (result != 0) {
                 return true;
             }
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
     }
-    
+
     public int getAutoIncrement() {
         int result = -1;
         try {
             String sql = "SELECT `AUTO_INCREMENT` FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'school' AND   TABLE_NAME   = 'person'";
             PreparedStatement pst = con.getConnectDB().prepareStatement(sql);
             ResultSet rs2 = pst.executeQuery(sql);
-            if (!rs2.isBeforeFirst() ) {
+            if (!rs2.isBeforeFirst()) {
                 System.out.println("No data");
             } else {
-                while ( rs2.next() ) {
+                while (rs2.next()) {
                     result = rs2.getInt("AUTO_INCREMENT");
                 }
             }
