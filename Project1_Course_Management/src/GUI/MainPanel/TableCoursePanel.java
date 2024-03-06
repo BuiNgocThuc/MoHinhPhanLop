@@ -44,6 +44,15 @@ public class TableCoursePanel extends javax.swing.JPanel {
 
         spCourse = new javax.swing.JScrollPane();
         tblCourse = new javax.swing.JTable();
+        itemPerPageSpinner = new javax.swing.JSpinner();
+        currentPageSpinner = new javax.swing.JSpinner();
+        nextPageButton = new javax.swing.JButton();
+        detailPageLabel = new javax.swing.JLabel();
+        previousPageButton = new javax.swing.JButton();
+        titlePaginationLabel = new javax.swing.JLabel();
+        detailItemPerPageLabel = new javax.swing.JLabel();
+        searchTextField = new javax.swing.JTextField();
+        searchButton = new javax.swing.JButton();
 
         tblCourse.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -77,17 +86,95 @@ public class TableCoursePanel extends javax.swing.JPanel {
             tblCourse.getColumnModel().getColumn(2).setMaxWidth(200);
         }
 
+        itemPerPageSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                itemPerPageSpinnerStateChanged(evt);
+            }
+        });
+
+        currentPageSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                currentPageSpinnerStateChanged(evt);
+            }
+        });
+
+        nextPageButton.setText(">>");
+        nextPageButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextPageButtonActionPerformed(evt);
+            }
+        });
+
+        detailPageLabel.setText("of 30");
+
+        previousPageButton.setText("<<");
+        previousPageButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                previousPageButtonActionPerformed(evt);
+            }
+        });
+
+        titlePaginationLabel.setText("Items per page");
+
+        detailItemPerPageLabel.setText("1-25 of 300 items");
+
+        searchTextField.setToolTipText("Search query...");
+
+        searchButton.setText("Search");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(spCourse)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(spCourse, javax.swing.GroupLayout.DEFAULT_SIZE, 641, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(titlePaginationLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(itemPerPageSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(detailItemPerPageLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                        .addComponent(previousPageButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(currentPageSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(detailPageLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nextPageButton))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchButton)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(spCourse, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(spCourse, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nextPageButton)
+                    .addComponent(detailPageLabel)
+                    .addComponent(previousPageButton)
+                    .addComponent(detailItemPerPageLabel)
+                    .addComponent(titlePaginationLabel)
+                    .addComponent(itemPerPageSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(currentPageSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -115,10 +202,50 @@ public class TableCoursePanel extends javax.swing.JPanel {
             }
         }    }//GEN-LAST:event_tblCourseMouseClicked
 
+    private void itemPerPageSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_itemPerPageSpinnerStateChanged
+//        itemPerPage = Integer.valueOf(itemPerPageSpinner.getValue().toString());
+
+//        updateData();
+    }//GEN-LAST:event_itemPerPageSpinnerStateChanged
+
+    private void currentPageSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_currentPageSpinnerStateChanged
+//        currentPage = Integer.valueOf(currentPageSpinner.getValue().toString());
+
+//        updateData();
+    }//GEN-LAST:event_currentPageSpinnerStateChanged
+
+    private void nextPageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextPageButtonActionPerformed
+//        currentPage = instructorsPaginate.getTotalPages();
+//        currentPageSpinner.setValue(currentPage);
+//        updateData();
+    }//GEN-LAST:event_nextPageButtonActionPerformed
+
+    private void previousPageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousPageButtonActionPerformed
+//        currentPage = 0;
+
+//        currentPageSpinner.setValue(currentPage);
+//        updateData();
+    }//GEN-LAST:event_previousPageButtonActionPerformed
+
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+//        query = searchTextField.getText();
+//        updateData();
+    }//GEN-LAST:event_searchButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JSpinner currentPageSpinner;
+    private javax.swing.JLabel detailItemPerPageLabel;
+    private javax.swing.JLabel detailPageLabel;
+    private javax.swing.JSpinner itemPerPageSpinner;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton nextPageButton;
+    private javax.swing.JButton previousPageButton;
+    private javax.swing.JButton searchButton;
+    private javax.swing.JTextField searchTextField;
     private javax.swing.JScrollPane spCourse;
     private javax.swing.JTable tblCourse;
+    private javax.swing.JLabel titlePaginationLabel;
     // End of variables declaration//GEN-END:variables
 
     public void loadData(List<CourseDTO> courses) throws SQLException {
