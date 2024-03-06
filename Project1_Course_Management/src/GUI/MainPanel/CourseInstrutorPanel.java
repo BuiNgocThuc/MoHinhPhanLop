@@ -214,7 +214,7 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
                 }
 
                 List<CourseDTO> courses = courseInstructorBLL.getListCourseAssignInstructor();
-                pnTableCourse.loadData(courses);
+                pnTableCourse.populateUI();
                 
                 List<PersonDTO> instructors = courseInstructorBLL.getListInstructorAssignCourse();
                 pnTableInstructor.populateUI();
@@ -254,7 +254,7 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
                 public void windowClosed(WindowEvent e) {
                     try {
                         List<CourseDTO> courses = courseInstructorBLL.getListCourseAssignInstructor();
-                        pnTableCourse.loadData(courses);
+                        pnTableCourse.populateUI();
                         List<PersonDTO> instructors = courseInstructorBLL.getListInstructorAssignCourse();
                         pnTableInstructor.populateUI();
                     } catch (SQLException ex) {

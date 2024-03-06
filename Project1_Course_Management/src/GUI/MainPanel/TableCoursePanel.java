@@ -14,7 +14,9 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
+import util.Paginate;
 
 /**
  *
@@ -27,10 +29,15 @@ public class TableCoursePanel extends javax.swing.JPanel {
      */
     private final CourseInstructorBLL courseInstructorBLL = new CourseInstructorBLL();
 
+    private int itemPerPage = 25;
+    private String query = "";
+    private int currentPage = 1;
+    private Paginate<CourseDTO> coursesPaginate;
+
     public TableCoursePanel() throws SQLException {
         initComponents();
-        List<CourseDTO> courses = courseInstructorBLL.getListCourseAssignInstructor();
-        loadData(courses);
+        
+        updateData();
     }
 
     /**
@@ -189,7 +196,7 @@ public class TableCoursePanel extends javax.swing.JPanel {
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         try {
                             List<CourseDTO> courses = courseInstructorBLL.getListCourseAssignInstructor();
-                            loadData(courses);
+                            populateUI();
                         } catch (SQLException ex) {
                             ex.printStackTrace();
                             JOptionPane.showMessageDialog(null, "Lỗi hệ thống");
@@ -203,33 +210,33 @@ public class TableCoursePanel extends javax.swing.JPanel {
         }    }//GEN-LAST:event_tblCourseMouseClicked
 
     private void itemPerPageSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_itemPerPageSpinnerStateChanged
-//        itemPerPage = Integer.valueOf(itemPerPageSpinner.getValue().toString());
+        itemPerPage = Integer.valueOf(itemPerPageSpinner.getValue().toString());
 
-//        updateData();
+        updateData();
     }//GEN-LAST:event_itemPerPageSpinnerStateChanged
 
     private void currentPageSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_currentPageSpinnerStateChanged
-//        currentPage = Integer.valueOf(currentPageSpinner.getValue().toString());
+        currentPage = Integer.valueOf(currentPageSpinner.getValue().toString());
 
-//        updateData();
+        updateData();
     }//GEN-LAST:event_currentPageSpinnerStateChanged
 
     private void nextPageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextPageButtonActionPerformed
-//        currentPage = instructorsPaginate.getTotalPages();
-//        currentPageSpinner.setValue(currentPage);
-//        updateData();
+        currentPage = coursesPaginate.getTotalPages();
+        currentPageSpinner.setValue(currentPage);
+        updateData();
     }//GEN-LAST:event_nextPageButtonActionPerformed
 
     private void previousPageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousPageButtonActionPerformed
-//        currentPage = 0;
+        currentPage = 0;
 
-//        currentPageSpinner.setValue(currentPage);
-//        updateData();
+        currentPageSpinner.setValue(currentPage);
+        updateData();
     }//GEN-LAST:event_previousPageButtonActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-//        query = searchTextField.getText();
-//        updateData();
+        query = searchTextField.getText();
+        updateData();
     }//GEN-LAST:event_searchButtonActionPerformed
 
 
@@ -248,11 +255,47 @@ public class TableCoursePanel extends javax.swing.JPanel {
     private javax.swing.JLabel titlePaginationLabel;
     // End of variables declaration//GEN-END:variables
 
-    public void loadData(List<CourseDTO> courses) throws SQLException {
+    
+
+    public void deleteAllInstructorAssignCourse() throws SQLException {
+        int seletedRow = tblCourse.getSelectedRow();
+        if (seletedRow != -1) {
+            int courseID = (int) tblCourse.getValueAt(seletedRow, 1);
+            courseInstructorBLL.deleteAllInstructorAssignCourse(courseID);
+        }
+    }
+
+    public void findCourses(String text) throws SQLException {
+        List<CourseDTO> courses = courseInstructorBLL.findCourses(text);
+        if (courses.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Không tìm thấy");
+        } else {
+            populateUI();
+        }
+    }
+
+    public void updateData() {
+        try {
+            if (coursesPaginate == null) {
+                coursesPaginate = new Paginate<>(20, 0, 1, 0, null);
+            }
+
+            int limit = itemPerPage;
+            int offset = itemPerPage * (currentPage - 1);
+
+            coursesPaginate = courseInstructorBLL.getListCourseAssignedInstructor(offset, limit, query);
+            System.out.println(coursesPaginate);
+            populateUI();
+        } catch (SQLException ex) {
+            Logger.getLogger(TableCoursePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void populateUI() throws SQLException {
         DefaultTableModel model = (DefaultTableModel) tblCourse.getModel();
         model.setRowCount(0);
         int no = 1;
-        for (CourseDTO course : courses) {
+        for (CourseDTO course : coursesPaginate.getItems()) {
             int courseID = course.getCourseID();
             String title = course.getTitle();
             String instructorInfos = "-------";
@@ -277,22 +320,18 @@ public class TableCoursePanel extends javax.swing.JPanel {
                     };
             model.addRow(row);
         }
-    }
-
-    public void deleteAllInstructorAssignCourse() throws SQLException {
-        int seletedRow = tblCourse.getSelectedRow();
-        if (seletedRow != -1) {
-            int courseID = (int) tblCourse.getValueAt(seletedRow, 1);
-            courseInstructorBLL.deleteAllInstructorAssignCourse(courseID);
+        
+          int totalItems = coursesPaginate.getTotalItems();
+        int totalPages = 1;
+        
+        if (coursesPaginate.getTotalPages() > 0) {
+            totalPages = coursesPaginate.getTotalPages();
         }
-    }
-
-    public void findCourses(String text) throws SQLException {
-        List<CourseDTO> courses = courseInstructorBLL.findCourses(text);
-        if (courses.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Không tìm thấy");
-        } else {
-            loadData(courses);
-        }
+        SpinnerNumberModel itemPerPageModel = new SpinnerNumberModel(itemPerPage, 1, 25, 1);
+        itemPerPageSpinner.setModel(itemPerPageModel);
+        detailItemPerPageLabel.setText("1-25 of " + totalItems + " items");
+        detailPageLabel.setText("of " + totalPages);
+        SpinnerNumberModel currentPageModel = new SpinnerNumberModel(currentPage, 1, totalPages, 1);
+        currentPageSpinner.setModel(currentPageModel);
     }
 }
