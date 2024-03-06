@@ -58,7 +58,14 @@ public class CourseInstructorBLL {
         personDAL.populateCourses(paginate.getItems());
 
         return paginate;
+    }
+    
+    public Paginate<CourseDTO> getListCourseAssignedInstructor(int offset, int limit, String querySearch) throws SQLException {
+        Paginate<CourseDTO> paginate = courseDAL.getListCourseAssignedInstructor(offset, limit, querySearch);
 
+        courseDAL.populateInstructors(paginate.getItems());
+
+        return paginate;
     }
 
     public CourseInstructorDTO getCourseInstructorByID(int courseID, int personID) throws SQLException {
