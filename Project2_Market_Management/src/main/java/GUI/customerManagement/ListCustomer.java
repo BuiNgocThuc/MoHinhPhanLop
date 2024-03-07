@@ -74,8 +74,8 @@ public class ListCustomer extends JPanel {
             rowData[2] = customer.getFullname();
             rowData[3] = customer.getAddress();
             rowData[4] = customer.getCity();
-            rowData[5] = "src/main/java/assets/icons8-trash-35.png";
-            rowData[6] = "/src/main/java/assets/icons8-trash-35.png";
+            rowData[5] = "/assets/icons8-trash-35.png";
+            rowData[6] = "/assets/icons8-trash-35.png";
             modeltable.addRow(rowData);
         }
 
