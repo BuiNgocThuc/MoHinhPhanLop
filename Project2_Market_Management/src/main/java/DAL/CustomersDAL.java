@@ -10,6 +10,7 @@ public class CustomersDAL {
         session = HibernateUtils.getSessionFactory().openSession();
     }
 
+    @SuppressWarnings("rawtypes")
     public List loadCustomers() {
         List<Customers> customers;
         session.beginTransaction();
