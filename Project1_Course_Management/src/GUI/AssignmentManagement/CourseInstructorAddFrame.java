@@ -188,8 +188,7 @@ public class CourseInstructorAddFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cbViewItemStateChanged(java.awt.event.ItemEvent evt) {// GEN-FIRST:event_cbViewItemStateChanged
-        // TODO add your handling code here:
+    private void cbViewItemStateChanged(java.awt.event.ItemEvent evt) {
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             switch (cbView.getSelectedItem().toString()) {
                 case "Theo khóa học" -> {
@@ -208,13 +207,13 @@ public class CourseInstructorAddFrame extends javax.swing.JFrame {
                     throw new AssertionError();
             }
         }
-    }// GEN-LAST:event_cbViewItemStateChanged
+    }
 
     private void cbViewActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cbViewActionPerformed
         // TODO add your handling code here:
     }// GEN-LAST:event_cbViewActionPerformed
 
-    private void btSaveActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btSaveActionPerformed
+    private void btSaveActionPerformed(java.awt.event.ActionEvent evt) {
 
         if (cbView.getSelectedItem().toString().equals("Theo giảng viên")) {
             List<CourseDTO> selectedCourses = (List<CourseDTO>) pnInstructor.getSelectedCourses();

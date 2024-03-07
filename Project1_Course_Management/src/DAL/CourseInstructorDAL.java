@@ -141,7 +141,7 @@ public class CourseInstructorDAL {
         try (PreparedStatement statement = conn.prepareStatement(query)) {
             statement.setInt(1, courseInstructor.getCourseID());
             statement.setInt(2, courseInstructor.getPersonID());
-            int rowsInserted = statement.executeUpdate();
+            statement.executeUpdate();
         } catch (SQLException e) {
             throw e;
         }

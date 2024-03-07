@@ -187,7 +187,7 @@ public class InstructorAdd extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSaveActionPerformed
+    private void btSaveActionPerformed(java.awt.event.ActionEvent evt) {
         String firstName = tfFirstName.getText().trim();
         String lastName = tfLastName.getText().trim();
         Date hireDate = dcHireDate.getDate();
@@ -227,7 +227,7 @@ public class InstructorAdd extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Thêm giảng viên mới thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_btSaveActionPerformed
+    }
 
     private void resetInput() {
         tfFirstName.setText("");
