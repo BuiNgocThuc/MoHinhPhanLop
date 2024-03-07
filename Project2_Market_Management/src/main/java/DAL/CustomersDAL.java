@@ -25,7 +25,9 @@ public class CustomersDAL {
     }
 
     public void addCustomers(Customers customer) {
+        session.beginTransaction();
         session.save(customer);
+        session.getTransaction().commit();
     }
 
     public void updateCustomers(Customers customer) {
