@@ -10,6 +10,7 @@ public class OrderDAL {
         session = HibernateUtils.getSessionFactory().openSession();
     }
 
+    @SuppressWarnings("rawtypes")
     public List loadOrders() {
         List<Order> orders;
         session.beginTransaction();
