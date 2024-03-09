@@ -4,10 +4,10 @@ import BLL.CourseBLL;
 import BLL.CourseInstructorBLL;
 import BLL.DepartmentBLL;
 import BLL.PersonBLL;
-import DTO.CourseDTO;
-import DTO.CourseInstructorDTO;
-import DTO.DepartmentDTO;
-import DTO.PersonDTO;
+import BLL.Entity.CourseEntity;
+import BLL.Entity.CourseInstructorEntity;
+import BLL.Entity.DepartmentEntity;
+import BLL.Entity.PersonEntity;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -36,8 +36,8 @@ public class AssigmentDetailGV extends JFrame {
     private int id_GV;
     private CourseBLL courseBLL = new CourseBLL();
     private CourseInstructorBLL courseInstructorBLL = new CourseInstructorBLL();
-    private List<CourseDTO> listCourseDTO = courseBLL.getAllist();
-    private List<CourseInstructorDTO> listCourseInstructor;
+    private List<CourseEntity> listCourseDTO = courseBLL.getAllist();
+    private List<CourseInstructorEntity> listCourseInstructor;
     DepartmentBLL departmentBLL = new DepartmentBLL();
 
     public AssigmentDetailGV(int id_GV) throws SQLException {
@@ -96,7 +96,7 @@ public class AssigmentDetailGV extends JFrame {
         JLabel valueHd = new JLabel();
 
         PersonBLL personBLL = new PersonBLL();
-        PersonDTO personDTO = personBLL.detailsPerson(id_GV);
+        PersonEntity personDTO = personBLL.detailsPerson(id_GV);
         valueFn.setText(personDTO.getFirstName());
         valueLn.setText(personDTO.getLastName());
         valueHd.setText(String.valueOf(personDTO.getHireDate()));
@@ -141,13 +141,13 @@ public class AssigmentDetailGV extends JFrame {
         table = new JTable();
         table = new JTable(modeltable);
         int stt = 1;
-        for (CourseInstructorDTO dto : listCourseInstructor) {
+        for (CourseInstructorEntity dto : listCourseInstructor) {
             Object[] rowData = new String[6]; // 5 là số cột của bảng
             rowData[0] = String.valueOf(stt++);
             rowData[1] = String.valueOf(dto.getCourseID());
             rowData[2] = dto.courseDTO.getTitle();
             rowData[3] = String.valueOf(dto.courseDTO.getCredits());
-            DepartmentDTO departmentDTO = departmentBLL.selectByID(dto.courseDTO.getDepartmentID());
+            DepartmentEntity departmentDTO = departmentBLL.selectByID(dto.courseDTO.getDepartmentID());
             rowData[4] = departmentDTO.getName();
             rowData[5] = "/assets/icons8-trash-35.png";
             modeltable.addRow(rowData);
@@ -203,11 +203,11 @@ public class AssigmentDetailGV extends JFrame {
             int confirmed = JOptionPane.showConfirmDialog(null,
                     "Bạn có chắc chắn muốn lưu thay đổi không?", "Xác nhận", JOptionPane.YES_NO_OPTION);
             if (confirmed == JOptionPane.YES_OPTION) {
-                PersonDTO instructor = new PersonDTO();
-                List<CourseDTO> courses = new ArrayList<>();
+                PersonEntity instructor = new PersonEntity();
+                List<CourseEntity> courses = new ArrayList<>();
                 for (int i = 0; i < table.getRowCount(); i++) {
                     int courseID = Integer.parseInt(table.getValueAt(i, 1).toString());
-                    CourseDTO course = new CourseDTO();
+                    CourseEntity course = new CourseEntity();
                     course.setCourseID(courseID);
                     courses.add(course);
                 }
@@ -269,13 +269,13 @@ public class AssigmentDetailGV extends JFrame {
         JTable table1 = new JTable();
         table1 = new JTable(modeltable1);
         int stt = 1;
-        for (CourseDTO dto : listCourseDTO) {
+        for (CourseEntity dto : listCourseDTO) {
             Object[] rowData = new String[6]; // 5 là số cột của bảng
             rowData[0] = String.valueOf(stt++);
             rowData[1] = String.valueOf(dto.getCourseID());
             rowData[2] = dto.getTitle();
             rowData[3] = String.valueOf(dto.getCredits());
-            DepartmentDTO departmentDTO = departmentBLL.selectByID(dto.getDepartmentID());
+            DepartmentEntity departmentDTO = departmentBLL.selectByID(dto.getDepartmentID());
             rowData[4] = departmentDTO.getName();
             rowData[5] = "/assets/icons8-add-48.png";
             modeltable1.addRow(rowData);
@@ -346,7 +346,7 @@ public class AssigmentDetailGV extends JFrame {
         panelBelow.add(panelRight1, BorderLayout.SOUTH);
     }
 
-    public void addRowToTable(DefaultTableModel model, int courseID, List<CourseDTO> listCourseDTO) {
+    public void addRowToTable(DefaultTableModel model, int courseID, List<CourseEntity> listCourseDTO) {
         // Kiểm tra xem courseID đã tồn tại trong cột row1 chưa
         for (int i = 0; i < model.getRowCount(); i++) {
             int existingCourseID = Integer.parseInt((String) model.getValueAt(i, 1));
@@ -359,11 +359,11 @@ public class AssigmentDetailGV extends JFrame {
         Object[] rowData = new Object[6];
         rowData[0] = String.valueOf(model.getRowCount() + 1);
         rowData[1] = String.valueOf(courseID);
-        for (CourseDTO courseDTO : listCourseDTO) {
+        for (CourseEntity courseDTO : listCourseDTO) {
             if (courseDTO.getCourseID() == courseID) {
                 rowData[2] = courseDTO.getTitle();
                 rowData[3] = String.valueOf(courseDTO.getCredits());
-                DepartmentDTO departmentDTO = departmentBLL.selectByID(courseDTO.getDepartmentID());
+                DepartmentEntity departmentDTO = departmentBLL.selectByID(courseDTO.getDepartmentID());
                 rowData[4] = departmentDTO.getName();
                 rowData[5] = "/assets/icons8-trash-35.png";
                 break;

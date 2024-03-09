@@ -6,8 +6,8 @@ package GUI.AssignmentManagement;
 
 import GUI.AssignmentManagement.AssigmentCourseDetail;
 import BLL.CourseInstructorBLL;
-import DTO.CourseDTO;
-import DTO.PersonDTO;
+import BLL.Entity.CourseEntity;
+import BLL.Entity.PersonEntity;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -33,7 +33,7 @@ public class TableCoursePanel extends javax.swing.JPanel {
     private int itemPerPage = 25;
     private String query = "";
     private int currentPage = 1;
-    private Paginate<CourseDTO> coursesPaginate;
+    private Paginate<CourseEntity> coursesPaginate;
 
     public TableCoursePanel() throws SQLException {
         initComponents();
@@ -196,7 +196,7 @@ public class TableCoursePanel extends javax.swing.JPanel {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         try {
-                            List<CourseDTO> courses = courseInstructorBLL.getListCourseAssignInstructor();
+                            List<CourseEntity> courses = courseInstructorBLL.getListCourseAssignInstructor();
                             populateUI();
                         } catch (SQLException ex) {
                             ex.printStackTrace();
@@ -266,7 +266,7 @@ public class TableCoursePanel extends javax.swing.JPanel {
     }
 
     public void findCourses(String text) throws SQLException {
-        List<CourseDTO> courses = courseInstructorBLL.findCourses(text);
+        List<CourseEntity> courses = courseInstructorBLL.findCourses(text);
         if (courses.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Không tìm thấy");
         } else {
@@ -295,12 +295,12 @@ public class TableCoursePanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblCourse.getModel();
         model.setRowCount(0);
         int no = 1;
-        for (CourseDTO course : coursesPaginate.getItems()) {
+        for (CourseEntity course : coursesPaginate.getItems()) {
             int courseID = course.getCourseID();
             String title = course.getTitle();
             String instructorInfos = "-------";
 
-            List<PersonDTO> instructors = course.getInstructors();
+            List<PersonEntity> instructors = course.getInstructors();
             if (instructors != null) {
                 instructorInfos = "";
                 for (int i = 0; i < instructors.size() - 1; i++) {

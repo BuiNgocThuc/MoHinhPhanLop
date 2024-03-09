@@ -6,8 +6,8 @@ package GUI.CourseResultJFrame;
 
 import BLL.PersonBLL;
 import BLL.StudentGradeBLL;
-import DTO.PersonDTO;
-import DTO.StudentGradeDTO;
+import BLL.Entity.PersonEntity;
+import BLL.Entity.StudentGradeEntity;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -210,14 +210,14 @@ public class JFrameAddNewStudent extends javax.swing.JFrame {
         else {
             int id = personBll.getAutoIncrement();
             
-            PersonDTO person = new PersonDTO();
+            PersonEntity person = new PersonEntity();
             person.setPersonID(id);
             person.setLastName(lastName);
             person.setFirstName(firstName);
             person.setEnrollmentDate(enrollmentDate);
             personBll.insertPerson(person);
             
-            StudentGradeDTO studentGrade = new StudentGradeDTO();
+            StudentGradeEntity studentGrade = new StudentGradeEntity();
             studentGrade.setCourseID(courseID);
             studentGrade.setStudentID(id);
             studentGrade.setGrade(null);

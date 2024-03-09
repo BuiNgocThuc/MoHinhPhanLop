@@ -6,11 +6,11 @@ package GUI.CourseResultJFrame;
 
 import BLL.PersonBLL;
 import BLL.StudentGradeBLL;
-import DTO.StudentGradeDTO;
+import BLL.Entity.StudentGradeEntity;
 import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import DTO.PersonDTO;
+import BLL.Entity.PersonEntity;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -572,7 +572,7 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
             Double gradeValue;
             if (row != -1) {
                 int EnrollmentID = studentGradeBLL.getEnrollment(CourseID, Integer.parseInt(jTableStudentGrade.getModel().getValueAt(row, 1).toString()));
-                StudentGradeDTO studentGrade = new StudentGradeDTO();
+                StudentGradeEntity studentGrade = new StudentGradeEntity();
                 studentGrade.setCourseID(CourseID);
                 studentGrade.setEnrollmentID(EnrollmentID);
                 TableCellEditor edit = jTableStudentGrade.getCellEditor();
@@ -705,7 +705,7 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
                     return;
                 }
                 int EnrollmentID = studentGradeBLL.getEnrollment(CourseID, Integer.parseInt(jTextPersonID.getText().toString()));
-                StudentGradeDTO studentGrade = new StudentGradeDTO();
+                StudentGradeEntity studentGrade = new StudentGradeEntity();
                 studentGrade.setCourseID(CourseID);
                 studentGrade.setEnrollmentID(EnrollmentID);
                 studentGrade.setGrade(Double.parseDouble(jTextGrade.getText().toString()));
@@ -767,11 +767,11 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
             model.addColumn(i);
         }
         int stt = 0;
-        for (StudentGradeDTO i : studentGradeBLL.serchAllStudentGrade(CourseID, txt)) {
+        for (StudentGradeEntity i : studentGradeBLL.serchAllStudentGrade(CourseID, txt)) {
             Vector t = new Vector();
             t.add(stt += 1);
             t.add(i.getStudentID());
-            PersonDTO person = personBLL.detailsPerson(i.getStudentID());
+            PersonEntity person = personBLL.detailsPerson(i.getStudentID());
             t.add(person.getFirstName());
             t.add(person.getLastName());
             t.add(i.getGrade());
@@ -806,11 +806,11 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
             model.addColumn(i);
         }
         int stt = 0;
-        for (StudentGradeDTO i : studentGradeBLL.getAllList(CourseID)) {
+        for (StudentGradeEntity i : studentGradeBLL.getAllList(CourseID)) {
             Vector t = new Vector();
             t.add(stt += 1);
             t.add(i.getStudentID());
-            PersonDTO person = personBLL.detailsPerson(i.getStudentID());
+            PersonEntity person = personBLL.detailsPerson(i.getStudentID());
             t.add(person.getFirstName());
             t.add(person.getLastName());
             t.add(i.getGrade());

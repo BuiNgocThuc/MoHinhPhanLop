@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DTO;
+package BLL.Entity;
 
 import java.sql.Time;
 
@@ -10,15 +10,15 @@ import java.sql.Time;
  *
  * @author buing
  */
-public class OnsiteCourseDTO extends CourseDTO {
+public class OnsiteCourseEntity extends CourseEntity {
 
     private String Location, Days;
     private Time Time;
 
-    public OnsiteCourseDTO() {
+    public OnsiteCourseEntity() {
     }
 
-    public OnsiteCourseDTO(String Location, String Days, Time Time, int courseID, int departmentID, int credits, String title) {
+    public OnsiteCourseEntity(String Location, String Days, Time Time, int courseID, int departmentID, int credits, String title) {
         super(courseID, departmentID, credits, title);
         this.Location = Location;
         this.Days = Days;

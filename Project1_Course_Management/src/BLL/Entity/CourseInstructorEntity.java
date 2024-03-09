@@ -1,17 +1,17 @@
-package DTO;
+package BLL.Entity;
 
-public class CourseInstructorDTO {
+public class CourseInstructorEntity {
 
     private int CourseID, PersonID;
-    public CourseDTO courseDTO;
-    public PersonDTO personDTO;
+    public CourseEntity courseDTO;
+    public PersonEntity personDTO;
 
-    public CourseInstructorDTO(int courseID, int personID) {
+    public CourseInstructorEntity(int courseID, int personID) {
         CourseID = courseID;
         PersonID = personID;
     }
 
-    public CourseInstructorDTO(int CourseID, int PersonID, CourseDTO courseDTO, PersonDTO personDTO) {
+    public CourseInstructorEntity(int CourseID, int PersonID, CourseEntity courseDTO, PersonEntity personDTO) {
         this.CourseID = CourseID;
         this.PersonID = PersonID;
         this.courseDTO = courseDTO;

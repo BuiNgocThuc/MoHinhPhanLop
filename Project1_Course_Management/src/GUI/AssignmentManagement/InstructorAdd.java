@@ -5,7 +5,7 @@
 package GUI.AssignmentManagement;
 
 import BLL.PersonBLL;
-import DTO.PersonDTO;
+import BLL.Entity.PersonEntity;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.sql.SQLException;
 import java.util.Date;
@@ -218,7 +218,7 @@ public class InstructorAdd extends javax.swing.JFrame {
             return;
         }
 
-        PersonDTO newPerson = new PersonDTO();
+        PersonEntity newPerson = new PersonEntity();
         newPerson.setFirstName(firstName);
         newPerson.setLastName(lastName);
         newPerson.setHireDate(new java.sql.Timestamp(hireDate.getTime()));

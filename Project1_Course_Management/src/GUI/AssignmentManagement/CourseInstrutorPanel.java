@@ -7,8 +7,8 @@ package GUI.AssignmentManagement;
 import GUI.AssignmentManagement.TableInstructorPanel;
 import GUI.AssignmentManagement.TableCoursePanel;
 import BLL.CourseInstructorBLL;
-import DTO.CourseDTO;
-import DTO.PersonDTO;
+import BLL.Entity.CourseEntity;
+import BLL.Entity.PersonEntity;
 import GUI.AssignmentManagement.CourseInstructorAddFrame;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -215,10 +215,10 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
                         pnTableInstructor.deleteAllCourseAssignInstructor();
                 }
 
-                List<CourseDTO> courses = courseInstructorBLL.getListCourseAssignInstructor();
+                List<CourseEntity> courses = courseInstructorBLL.getListCourseAssignInstructor();
                 pnTableCourse.populateUI();
                 
-                List<PersonDTO> instructors = courseInstructorBLL.getListInstructorAssignCourse();
+                List<PersonEntity> instructors = courseInstructorBLL.getListInstructorAssignCourse();
                 pnTableInstructor.populateUI();
 
                 JOptionPane.showMessageDialog(null, "Đã hủy phân công " + deleteType + " thành công.", "Thành công", JOptionPane.INFORMATION_MESSAGE);
@@ -255,9 +255,9 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
                 @Override
                 public void windowClosed(WindowEvent e) {
                     try {
-                        List<CourseDTO> courses = courseInstructorBLL.getListCourseAssignInstructor();
+                        List<CourseEntity> courses = courseInstructorBLL.getListCourseAssignInstructor();
                         pnTableCourse.populateUI();
-                        List<PersonDTO> instructors = courseInstructorBLL.getListInstructorAssignCourse();
+                        List<PersonEntity> instructors = courseInstructorBLL.getListInstructorAssignCourse();
                         pnTableInstructor.populateUI();
                     } catch (SQLException ex) {
                         Logger.getLogger(CourseInstrutorPanel.class.getName()).log(Level.SEVERE, null, ex);

@@ -4,10 +4,10 @@
  */
 package DAL;
 
-import DTO.CourseDTO;
-import DTO.OnlineCourseDTO;
-import DTO.OnsiteCourseDTO;
-import DTO.PersonDTO;
+import BLL.Entity.CourseEntity;
+import BLL.Entity.OnlineCourseEntity;
+import BLL.Entity.OnsiteCourseEntity;
+import BLL.Entity.PersonEntity;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -25,14 +25,14 @@ public class CourseDAL {
     private PreparedStatement preStm;
     private OnlineCourseDAL onlCourseDAL = new OnlineCourseDAL();
     private OnsiteCourseDAL onsCourseDAL = new OnsiteCourseDAL();
-    private List<CourseDTO> listCourses;
+    private List<CourseEntity> listCourses;
 
     public CourseDAL() {
         ConnectDB connectDB = new ConnectDB();
         conn = (Connection) connectDB.getConnectDB();
     }
 
-    public List<CourseDTO> selectAll() {
+    public List<CourseEntity> selectAll() {
         listCourses = new ArrayList<>();
         String query = "SELECT \n"
                 + "    course.*,\n"
@@ -53,7 +53,7 @@ public class CourseDAL {
                 int DepartmentID = rs.getInt("DepartmentID");
                 String course_type = rs.getString("course_type");
 
-                CourseDTO course = new CourseDTO(CourseID, Title, Credits, DepartmentID, course_type);
+                CourseEntity course = new CourseEntity(CourseID, Title, Credits, DepartmentID, course_type);
 
                 listCourses.add(course);
             }
@@ -64,8 +64,8 @@ public class CourseDAL {
         return listCourses;
     }
 
-    public CourseDTO selectCourseByID(int CourseID) {
-        CourseDTO course = null;
+    public CourseEntity selectCourseByID(int CourseID) {
+        CourseEntity course = null;
         String query = "SELECT * FROM course WHERE CourseID = ?";
         try {
             preStm = conn.prepareStatement(query);
@@ -77,7 +77,7 @@ public class CourseDAL {
                 int Credits = rs.getInt("Credits");
                 int DepartmentID = rs.getInt("DepartmentID");
 
-                course = new CourseDTO(CourseID, DepartmentID, Credits, Title);
+                course = new CourseEntity(CourseID, DepartmentID, Credits, Title);
 
             }
 
@@ -87,13 +87,13 @@ public class CourseDAL {
         return course;
     }
 
-    public List<OnlineCourseDTO> selectAllOnlineCourse() {
-        List<OnlineCourseDTO> listOnlCourses = onlCourseDAL.selectAll();
+    public List<OnlineCourseEntity> selectAllOnlineCourse() {
+        List<OnlineCourseEntity> listOnlCourses = onlCourseDAL.selectAll();
 
         listCourses = selectAll();
-        for (OnlineCourseDTO onlCourse : listOnlCourses) {
+        for (OnlineCourseEntity onlCourse : listOnlCourses) {
             int CourseID = onlCourse.getCourseID();
-            CourseDTO course = selectCourseByID(CourseID);
+            CourseEntity course = selectCourseByID(CourseID);
 
             String Title = course.getTitle();
             int DepartmentID = course.getDepartmentID();
@@ -107,13 +107,13 @@ public class CourseDAL {
         return listOnlCourses;
     }
 
-    public List<OnsiteCourseDTO> selectAllOnsiteCourse() {
-        List<OnsiteCourseDTO> listOnsCourses = onsCourseDAL.selectAll();
+    public List<OnsiteCourseEntity> selectAllOnsiteCourse() {
+        List<OnsiteCourseEntity> listOnsCourses = onsCourseDAL.selectAll();
 
         listCourses = selectAll();
-        for (OnsiteCourseDTO onsCourse : listOnsCourses) {
+        for (OnsiteCourseEntity onsCourse : listOnsCourses) {
             int CourseID = onsCourse.getCourseID();
-            CourseDTO course = selectCourseByID(CourseID);
+            CourseEntity course = selectCourseByID(CourseID);
 
             String Title = course.getTitle();
             int DepartmentID = course.getDepartmentID();
@@ -129,13 +129,13 @@ public class CourseDAL {
 
     public int selectLastID() {
         int MaxID = Integer.MIN_VALUE;
-        for (CourseDTO course : listCourses) {
+        for (CourseEntity course : listCourses) {
             MaxID = course.getCourseID() > MaxID ? course.getCourseID() : MaxID;
         }
         return MaxID;
     }
 
-    public boolean insertCourse(CourseDTO course) {
+    public boolean insertCourse(CourseEntity course) {
         int result = -1;
 
         int CourseID = course.getCourseID();
@@ -161,7 +161,7 @@ public class CourseDAL {
         return false;
     }
 
-    public boolean updateCourse(CourseDTO course) {
+    public boolean updateCourse(CourseEntity course) {
         int result = -1;
 
         int CourseID = course.getCourseID();
@@ -288,7 +288,7 @@ public class CourseDAL {
     // {
     // return listCourses;
     // }
-    // for (CourseDTO course : listCourses)
+    // for (CourseEntity course : listCourses)
     // {
     // if (course.getTitle().toLowerCase().contains(sequenceChar.toLowerCase()) ||
     // String.valueOf(course.getCourseID()).contains(sequenceChar))
@@ -299,14 +299,14 @@ public class CourseDAL {
     // return listCourseFiltered;
     // }
 
-    public ArrayList<CourseDTO> getAllList() {
-        ArrayList<CourseDTO> listCourse = new ArrayList<CourseDTO>();
+    public ArrayList<CourseEntity> getAllList() {
+        ArrayList<CourseEntity> listCourse = new ArrayList<CourseEntity>();
         try {
             String query = "select * from course";
             PreparedStatement pre = conn.prepareStatement(query);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
-                CourseDTO course = new CourseDTO();
+                CourseEntity course = new CourseEntity();
                 course.setCourseID(rs.getInt("CourseID"));
                 course.setTitle(rs.getString("Title"));
                 course.setCredits(rs.getInt("Credits"));
@@ -320,13 +320,13 @@ public class CourseDAL {
         return null;
     }
 
-    public CourseDTO courseDetail(int id) {
+    public CourseEntity courseDetail(int id) {
         try {
             String query = "select * from course where CourseID=?";
             PreparedStatement pre = conn.prepareStatement(query);
             pre.setInt(1, id);
             ResultSet rs = pre.executeQuery();
-            CourseDTO course = new CourseDTO();
+            CourseEntity course = new CourseEntity();
             if (rs.next()) {
 
                 course.setCourseID(id);
@@ -341,8 +341,8 @@ public class CourseDAL {
         return null;
     }
 
-    public ArrayList<CourseDTO> getAllList(String text) {
-        ArrayList<CourseDTO> listCourse = new ArrayList<CourseDTO>();
+    public ArrayList<CourseEntity> getAllList(String text) {
+        ArrayList<CourseEntity> listCourse = new ArrayList<CourseEntity>();
         try {
             String query = "";
             if (text.equals("Online")) {
@@ -353,7 +353,7 @@ public class CourseDAL {
             PreparedStatement pre = conn.prepareStatement(query);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
-                CourseDTO course = new CourseDTO();
+                CourseEntity course = new CourseEntity();
                 course.setCourseID(rs.getInt("CourseID"));
                 course.setTitle(rs.getString("Title"));
                 course.setCredits(rs.getInt("Credits"));
@@ -367,8 +367,8 @@ public class CourseDAL {
         return null;
     }
 
-    public ArrayList<CourseDTO> findCoursesByNameAll(String s) {
-        ArrayList<CourseDTO> listCourse = new ArrayList<CourseDTO>();
+    public ArrayList<CourseEntity> findCoursesByNameAll(String s) {
+        ArrayList<CourseEntity> listCourse = new ArrayList<CourseEntity>();
         try {
             String query = "SELECT \n"
                     + "    course.*,\n"
@@ -383,7 +383,7 @@ public class CourseDAL {
             PreparedStatement pre = conn.prepareStatement(query);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
-                CourseDTO course = new CourseDTO();
+                CourseEntity course = new CourseEntity();
                 course.setCourseID(rs.getInt("CourseID"));
                 course.setTitle(rs.getString("Title"));
                 course.setCredits(rs.getInt("Credits"));
@@ -398,14 +398,14 @@ public class CourseDAL {
         return null;
     }
 
-    public ArrayList<CourseDTO> searchAllCourse(String text) {
-        ArrayList<CourseDTO> searchAllCourse = new ArrayList<CourseDTO>();
+    public ArrayList<CourseEntity> searchAllCourse(String text) {
+        ArrayList<CourseEntity> searchAllCourse = new ArrayList<CourseEntity>();
         try {
             String query = "select * from course where UPPER(CONCAT(course.CourseID,course.Title)) like '%" + text + "%'";
             PreparedStatement pre = conn.prepareStatement(query);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
-                CourseDTO course = new CourseDTO();
+                CourseEntity course = new CourseEntity();
                 course.setCourseID(rs.getInt("CourseID"));
                 course.setTitle(rs.getString("Title"));
                 course.setCredits(rs.getInt("Credits"));
@@ -418,7 +418,7 @@ public class CourseDAL {
         return null;
     }
 
-    public List<CourseDTO> selectOnsiteAll() {
+    public List<CourseEntity> selectOnsiteAll() {
         listCourses = new ArrayList<>();
         String query = "SELECT \n"
                 + "    course.*, 'Onsite' as course_type\n"
@@ -434,7 +434,7 @@ public class CourseDAL {
                 int DepartmentID = rs.getInt("DepartmentID");
                 String course_type = rs.getString("course_type");
 
-                CourseDTO course = new CourseDTO(CourseID, Title, Credits, DepartmentID, course_type);
+                CourseEntity course = new CourseEntity(CourseID, Title, Credits, DepartmentID, course_type);
 
                 listCourses.add(course);
             }
@@ -445,7 +445,7 @@ public class CourseDAL {
         return listCourses;
     }
 
-    public List<CourseDTO> selectOnlineAll() {
+    public List<CourseEntity> selectOnlineAll() {
         listCourses = new ArrayList<>();
         String query = "SELECT \n"
                 + "    course.*, 'Online' as course_type\n"
@@ -461,7 +461,7 @@ public class CourseDAL {
                 int DepartmentID = rs.getInt("DepartmentID");
                 String course_type = rs.getString("course_type");
 
-                CourseDTO course = new CourseDTO(CourseID, Title, Credits, DepartmentID, course_type);
+                CourseEntity course = new CourseEntity(CourseID, Title, Credits, DepartmentID, course_type);
 
                 listCourses.add(course);
             }
@@ -472,8 +472,8 @@ public class CourseDAL {
         return listCourses;
     }
 
-    public ArrayList<CourseDTO> findCoursesByNameOnsite(String s) {
-        ArrayList<CourseDTO> listCourse = new ArrayList<CourseDTO>();
+    public ArrayList<CourseEntity> findCoursesByNameOnsite(String s) {
+        ArrayList<CourseEntity> listCourse = new ArrayList<CourseEntity>();
         try {
             String query = "SELECT \n"
                     + "    course.*, 'Onsite' as course_type\n"
@@ -483,7 +483,7 @@ public class CourseDAL {
             PreparedStatement pre = conn.prepareStatement(query);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
-                CourseDTO course = new CourseDTO();
+                CourseEntity course = new CourseEntity();
                 course.setCourseID(rs.getInt("CourseID"));
                 course.setTitle(rs.getString("Title"));
                 course.setCredits(rs.getInt("Credits"));
@@ -498,8 +498,8 @@ public class CourseDAL {
         return null;
     }
 
-    public ArrayList<CourseDTO> findCoursesByNameOnline(String s) {
-        ArrayList<CourseDTO> listCourse = new ArrayList<CourseDTO>();
+    public ArrayList<CourseEntity> findCoursesByNameOnline(String s) {
+        ArrayList<CourseEntity> listCourse = new ArrayList<CourseEntity>();
         try {
             String query = "SELECT \n"
                     + "    course.*, 'Online' as course_type\n"
@@ -509,7 +509,7 @@ public class CourseDAL {
             PreparedStatement pre = conn.prepareStatement(query);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
-                CourseDTO course = new CourseDTO();
+                CourseEntity course = new CourseEntity();
                 course.setCourseID(rs.getInt("CourseID"));
                 course.setTitle(rs.getString("Title"));
                 course.setCredits(rs.getInt("Credits"));
@@ -524,8 +524,8 @@ public class CourseDAL {
         return null;
     }
 
-    public ArrayList<CourseDTO> findCoursesByIdAll(int s) {
-        ArrayList<CourseDTO> listCourse = new ArrayList<CourseDTO>();
+    public ArrayList<CourseEntity> findCoursesByIdAll(int s) {
+        ArrayList<CourseEntity> listCourse = new ArrayList<CourseEntity>();
         try {
             String query = "SELECT \n"
                     + "    course.*,\n"
@@ -540,7 +540,7 @@ public class CourseDAL {
             PreparedStatement pre = conn.prepareStatement(query);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
-                CourseDTO course = new CourseDTO();
+                CourseEntity course = new CourseEntity();
                 course.setCourseID(rs.getInt("CourseID"));
                 course.setTitle(rs.getString("Title"));
                 course.setCredits(rs.getInt("Credits"));
@@ -555,8 +555,8 @@ public class CourseDAL {
         return null;
     }
 
-    public ArrayList<CourseDTO> findCoursesByIdOnsite(int s) {
-        ArrayList<CourseDTO> listCourse = new ArrayList<CourseDTO>();
+    public ArrayList<CourseEntity> findCoursesByIdOnsite(int s) {
+        ArrayList<CourseEntity> listCourse = new ArrayList<CourseEntity>();
         try {
             String query = "SELECT *\n"
                     + "FROM (\n"
@@ -568,7 +568,7 @@ public class CourseDAL {
             PreparedStatement pre = conn.prepareStatement(query);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
-                CourseDTO course = new CourseDTO();
+                CourseEntity course = new CourseEntity();
                 course.setCourseID(rs.getInt("CourseID"));
                 course.setTitle(rs.getString("Title"));
                 course.setCredits(rs.getInt("Credits"));
@@ -583,8 +583,8 @@ public class CourseDAL {
         return null;
     }
 
-    public ArrayList<CourseDTO> findCoursesByIdOnline(int s) {
-        ArrayList<CourseDTO> listCourse = new ArrayList<>();
+    public ArrayList<CourseEntity> findCoursesByIdOnline(int s) {
+        ArrayList<CourseEntity> listCourse = new ArrayList<>();
         try {
             String query = "SELECT *\n"
                     + "FROM (\n"
@@ -596,7 +596,7 @@ public class CourseDAL {
             PreparedStatement pre = conn.prepareStatement(query);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
-                CourseDTO course = new CourseDTO();
+                CourseEntity course = new CourseEntity();
                 course.setCourseID(rs.getInt("CourseID"));
                 course.setTitle(rs.getString("Title"));
                 course.setCredits(rs.getInt("Credits"));
@@ -611,19 +611,19 @@ public class CourseDAL {
         return null;
     }
 
-    public void populateInstructors(List<CourseDTO> courses) throws SQLException {
+    public void populateInstructors(List<CourseEntity> courses) throws SQLException {
         if (courses.isEmpty()) {
             return;
         }
         // Collecting course IDs
         List<Integer> courseIds = new ArrayList<>();
-        for (CourseDTO course : courses) {
+        for (CourseEntity course : courses) {
             courseIds.add(course.getCourseID());
         }
         // Mapping course IDs to instructors
-        Map<Integer, List<PersonDTO>> courseInstructorMap = new HashMap<>();
+        Map<Integer, List<PersonEntity>> courseInstructorMap = new HashMap<>();
         try {
-            List<PersonDTO> instructors = new ArrayList<>();
+            List<PersonEntity> instructors = new ArrayList<>();
             String query = "select * from person p join courseinstructor ci "
                     + "on p.PersonID = ci.PersonID "
                     + "where p.HireDate is not null and "
@@ -646,14 +646,14 @@ public class CourseDAL {
                 Timestamp hireDate = rs.getTimestamp("HireDate");
                 Timestamp enrollmentDate = rs.getTimestamp("EnrollmentDate");
                 // Create instructor DTO
-                PersonDTO instructor = new PersonDTO(instructorId, firstName, lastName, hireDate, enrollmentDate);
+                PersonEntity instructor = new PersonEntity(instructorId, firstName, lastName, hireDate, enrollmentDate);
                 // Add instructor to the corresponding course ID in the map
                 if (!courseInstructorMap.containsKey(courseId)) {
                     courseInstructorMap.put(courseId, new ArrayList<>());
                 }
                 courseInstructorMap.get(courseId).add(instructor);
             }
-            for (CourseDTO course : courses) {
+            for (CourseEntity course : courses) {
                 int courseId = course.getCourseID();
                 if (courseInstructorMap.containsKey(courseId)) {
                     course.setInstructors(courseInstructorMap.get(courseId));
@@ -664,8 +664,8 @@ public class CourseDAL {
         }
     }
 
-    public Paginate<CourseDTO> getListCourseAssignedInstructor(int offset, int limit, String querySearch) {
-        ArrayList<CourseDTO> listCourse = new ArrayList<>();
+    public Paginate<CourseEntity> getListCourseAssignedInstructor(int offset, int limit, String querySearch) {
+        ArrayList<CourseEntity> listCourse = new ArrayList<>();
         try {
             String baseQuery = "SELECT * FROM course";
 
@@ -697,7 +697,7 @@ public class CourseDAL {
 
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
-                CourseDTO course = new CourseDTO();
+                CourseEntity course = new CourseEntity();
                 course.setCourseID(rs.getInt("CourseID"));
                 course.setTitle(rs.getString("Title"));
                 course.setCredits(rs.getInt("Credits"));
@@ -707,7 +707,7 @@ public class CourseDAL {
 
             int totalPages = (int) Math.ceil((double) totalItems / limit);
 
-            Paginate<CourseDTO> paginate = new Paginate<>(offset, totalItems, 1, totalPages, listCourse);
+            Paginate<CourseEntity> paginate = new Paginate<>(offset, totalItems, 1, totalPages, listCourse);
 
             return paginate;
         } catch (Exception e) {

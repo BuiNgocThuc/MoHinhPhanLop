@@ -5,7 +5,7 @@
 package BLL;
 
 import DAL.StudentGradeDAL;
-import DTO.StudentGradeDTO;
+import BLL.Entity.StudentGradeEntity;
 import java.util.ArrayList;
 
 /**
@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class StudentGradeBLL {
     StudentGradeDAL studentGradeDAL=new StudentGradeDAL();
-    public ArrayList<StudentGradeDTO> getAllList(int CourseID){
+    public ArrayList<StudentGradeEntity> getAllList(int CourseID){
         return studentGradeDAL.getAllList(CourseID);
     }
     
@@ -22,21 +22,21 @@ public class StudentGradeBLL {
         return studentGradeDAL.getEnrollment(CourseID, StudentID);
     }
     
-    public boolean insertStudent(StudentGradeDTO student) {
+    public boolean insertStudent(StudentGradeEntity student) {
         return studentGradeDAL.insertStudentGrade(student);
     }
     
-    public boolean updateGrade(StudentGradeDTO student){
+    public boolean updateGrade(StudentGradeEntity student){
         return studentGradeDAL.updateGrade(student);
     }
     
     public  boolean deleteGrade(int id){
         return studentGradeDAL.deleteGrade(id);
     }
-    public  ArrayList<StudentGradeDTO> serchAllStudentGrade(int CourseID,String text){
+    public  ArrayList<StudentGradeEntity> serchAllStudentGrade(int CourseID,String text){
         return studentGradeDAL.serchAllStudentGrade(CourseID, text);
     }
-    public  ArrayList<StudentGradeDTO> Statistical(int CourseID,String text){
+    public  ArrayList<StudentGradeEntity> Statistical(int CourseID,String text){
         return studentGradeDAL.Statistical(CourseID, text);
     }
 }

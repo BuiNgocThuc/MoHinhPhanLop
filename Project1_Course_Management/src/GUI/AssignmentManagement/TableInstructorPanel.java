@@ -6,8 +6,8 @@ package GUI.AssignmentManagement;
 
 import GUI.AssignmentManagement.AssigmentDetailGV;
 import BLL.CourseInstructorBLL;
-import DTO.CourseDTO;
-import DTO.PersonDTO;
+import BLL.Entity.CourseEntity;
+import BLL.Entity.PersonEntity;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -28,7 +28,7 @@ public class TableInstructorPanel extends javax.swing.JPanel {
     JPanel cardPanel = null;
     private final CourseInstructorBLL courseInstructorBLL = new CourseInstructorBLL();
 
-    private Paginate<PersonDTO> instructorsPaginate;
+    private Paginate<PersonEntity> instructorsPaginate;
 
     private int itemPerPage = 25;
     private String query = "";
@@ -261,7 +261,7 @@ public class TableInstructorPanel extends javax.swing.JPanel {
     }
 
     public void findInstructors(String text) throws SQLException {
-        List<PersonDTO> instructors = courseInstructorBLL.findInstructors(text);
+        List<PersonEntity> instructors = courseInstructorBLL.findInstructors(text);
         if (instructors.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Không tìm thấy");
         } else {
@@ -298,13 +298,13 @@ public class TableInstructorPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         int no = 1;
 
-        for (PersonDTO instructor : instructorsPaginate.getItems()) {
+        for (PersonEntity instructor : instructorsPaginate.getItems()) {
             int instructorID = instructor.getPersonID();
             String firstName = instructor.getFirstName();
             String lastName = instructor.getLastName();
 
             String courseInfos = "-------";
-            List<CourseDTO> courses = instructor.getCourses();
+            List<CourseEntity> courses = instructor.getCourses();
             if (courses != null) {
                 courseInfos = "";
                 for (int i = 0; i < courses.size() - 1; i++) {

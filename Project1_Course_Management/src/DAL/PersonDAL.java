@@ -4,8 +4,8 @@
  */
 package DAL;
 
-import DTO.CourseDTO;
-import DTO.PersonDTO;
+import BLL.Entity.CourseEntity;
+import BLL.Entity.PersonEntity;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,14 +25,14 @@ public class PersonDAL {
 
     private ConnectDB con = new ConnectDB();
 
-    public ArrayList<PersonDTO> getAllList() {
-        ArrayList<PersonDTO> listPerson = new ArrayList<PersonDTO>();
+    public ArrayList<PersonEntity> getAllList() {
+        ArrayList<PersonEntity> listPerson = new ArrayList<PersonEntity>();
         try {
             String query = "select * from person";
             PreparedStatement pre = con.getConnectDB().prepareStatement(query);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
-                PersonDTO person = new PersonDTO();
+                PersonEntity person = new PersonEntity();
                 person.setPersonID(rs.getInt("PersonID"));
                 person.setLastName(rs.getString("Lastname"));
                 person.setFirstName(rs.getString("Firstname"));
@@ -47,9 +47,9 @@ public class PersonDAL {
         return null;
     }
 
-    public PersonDTO detailsPerson(int id) {
+    public PersonEntity detailsPerson(int id) {
         try {
-            PersonDTO person = new PersonDTO();
+            PersonEntity person = new PersonEntity();
             String query = "select * from person where PersonID=?";
             PreparedStatement pre = con.getConnectDB().prepareStatement(query);
             pre.setInt(1, id);
@@ -68,14 +68,14 @@ public class PersonDAL {
         return null;
     }
 
-    public ArrayList<PersonDTO> getListStudent() {
-        ArrayList<PersonDTO> listPerson = new ArrayList<PersonDTO>();
+    public ArrayList<PersonEntity> getListStudent() {
+        ArrayList<PersonEntity> listPerson = new ArrayList<PersonEntity>();
         try {
             String query = "SELECT * FROM person WHERE EnrollmentDate IS NOT NULL;";
             PreparedStatement pre = con.getConnectDB().prepareStatement(query);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
-                PersonDTO person = new PersonDTO();
+                PersonEntity person = new PersonEntity();
                 person.setPersonID(rs.getInt("PersonID"));
                 person.setLastName(rs.getString("Lastname"));
                 person.setFirstName(rs.getString("Firstname"));
@@ -90,14 +90,14 @@ public class PersonDAL {
         return null;
     }
 
-    public ArrayList<PersonDTO> getListInstructor() {
-        ArrayList<PersonDTO> listPerson = new ArrayList<PersonDTO>();
+    public ArrayList<PersonEntity> getListInstructor() {
+        ArrayList<PersonEntity> listPerson = new ArrayList<PersonEntity>();
         try {
             String query = "SELECT * FROM person WHERE HireDate IS NOT NULL";
             PreparedStatement pre = con.getConnectDB().prepareStatement(query);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
-                PersonDTO person = new PersonDTO();
+                PersonEntity person = new PersonEntity();
                 person.setPersonID(rs.getInt("PersonID"));
                 person.setLastName(rs.getString("Lastname"));
                 person.setFirstName(rs.getString("Firstname"));
@@ -112,8 +112,8 @@ public class PersonDAL {
         return null;
     }
 
-    public Paginate<PersonDTO> getListInstructorAssignedCourse(int offset, int limit, String querySearch) {
-        List<PersonDTO> listPerson = new ArrayList<>();
+    public Paginate<PersonEntity> getListInstructorAssignedCourse(int offset, int limit, String querySearch) {
+        List<PersonEntity> listPerson = new ArrayList<>();
         try {
             String baseQuery = "SELECT * FROM person WHERE HireDate IS NOT NULL ";
 
@@ -148,7 +148,7 @@ public class PersonDAL {
 
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
-                PersonDTO person = new PersonDTO();
+                PersonEntity person = new PersonEntity();
                 person.setPersonID(rs.getInt("PersonID"));
                 person.setLastName(rs.getString("Lastname"));
                 person.setFirstName(rs.getString("Firstname"));
@@ -161,7 +161,7 @@ public class PersonDAL {
             int totalPages = (int) Math.ceil((double) totalItems / limit);
 
             // Create Paginate object
-            Paginate<PersonDTO> paginate = new Paginate<>(offset, totalItems, 1, totalPages, listPerson);
+            Paginate<PersonEntity> paginate = new Paginate<>(offset, totalItems, 1, totalPages, listPerson);
 
             return paginate;
         } catch (SQLException e) {
@@ -170,8 +170,8 @@ public class PersonDAL {
         return null;
     }
 
-    public List<PersonDTO> findInstructorsById(int s) {
-        ArrayList<PersonDTO> instructors = new ArrayList<>();
+    public List<PersonEntity> findInstructorsById(int s) {
+        ArrayList<PersonEntity> instructors = new ArrayList<>();
         try {
             String query = "SELECT * FROM person p "
                     + "WHERE HireDate IS NOT NULL "
@@ -185,7 +185,7 @@ public class PersonDAL {
                 Timestamp hireDate = rs.getTimestamp("HireDate");
                 Timestamp enrollmentDate = rs.getTimestamp("EnrollmentDate");
                 // Create instructor DTO
-                PersonDTO instructor = new PersonDTO(instructorId, firstName, lastName, hireDate, enrollmentDate);
+                PersonEntity instructor = new PersonEntity(instructorId, firstName, lastName, hireDate, enrollmentDate);
                 instructors.add(instructor);
             }
             return instructors;
@@ -195,8 +195,8 @@ public class PersonDAL {
         return null;
     }
 
-    public List<PersonDTO> findInstrutorsByName(String name) {
-        ArrayList<PersonDTO> instructors = new ArrayList<>();
+    public List<PersonEntity> findInstrutorsByName(String name) {
+        ArrayList<PersonEntity> instructors = new ArrayList<>();
         try {
             String query = "SELECT * FROM person p "
                     + "WHERE HireDate IS NOT NULL "
@@ -211,7 +211,7 @@ public class PersonDAL {
                 Timestamp hireDate = rs.getTimestamp("HireDate");
                 Timestamp enrollmentDate = rs.getTimestamp("EnrollmentDate");
                 // Create instructor DTO
-                PersonDTO instructor = new PersonDTO(instructorId, firstName, lastName, hireDate, enrollmentDate);
+                PersonEntity instructor = new PersonEntity(instructorId, firstName, lastName, hireDate, enrollmentDate);
                 instructors.add(instructor);
             }
             return instructors;
@@ -221,19 +221,19 @@ public class PersonDAL {
         return null;
     }
 
-    public void populateCourses(List<PersonDTO> instructors) throws SQLException {
+    public void populateCourses(List<PersonEntity> instructors) throws SQLException {
         if (instructors.isEmpty()) {
             return;
         }
         // Collecting instructor IDs
         List<Integer> instructorIds = new ArrayList<>();
-        for (PersonDTO instructor : instructors) {
+        for (PersonEntity instructor : instructors) {
             instructorIds.add(instructor.getPersonID());
         }
         // Mapping instructor IDs to courses
-        Map<Integer, List<CourseDTO>> courseInstructorMap = new HashMap<>();
+        Map<Integer, List<CourseEntity>> courseInstructorMap = new HashMap<>();
         try {
-            List<CourseDTO> courses = new ArrayList<>();
+            List<CourseEntity> courses = new ArrayList<>();
             String query = "select * from course c join courseinstructor ci "
                     + "on c.CourseID = ci.CourseID "
                     + "where ci.PersonID IN (";
@@ -254,14 +254,14 @@ public class PersonDAL {
                 int credits = rs.getInt("Credits");
                 int departmentID = rs.getInt("DepartmentID");
                 // Create course DTO
-                CourseDTO course = new CourseDTO(courseId, departmentID, credits, title);
+                CourseEntity course = new CourseEntity(courseId, departmentID, credits, title);
                 // Add course to the corresponding instructor ID in the map
                 if (!courseInstructorMap.containsKey(instructorId)) {
                     courseInstructorMap.put(instructorId, new ArrayList<>());
                 }
                 courseInstructorMap.get(instructorId).add(course);
             }
-            for (PersonDTO instructor : instructors) {
+            for (PersonEntity instructor : instructors) {
                 int instructorId = instructor.getPersonID();
                 if (courseInstructorMap.containsKey(instructorId)) {
                     instructor.setCourses(courseInstructorMap.get(instructorId));
@@ -272,7 +272,7 @@ public class PersonDAL {
         }
     }
 
-    public boolean addPerson(PersonDTO person) throws SQLException {
+    public boolean addPerson(PersonEntity person) throws SQLException {
         try {
             String query = "INSERT INTO person (Lastname, Firstname, HireDate, EnrollmentDate) VALUES (?, ?, ?, ?)";
             PreparedStatement preparedStatement = con.getConnectDB().prepareStatement(query);
@@ -287,7 +287,7 @@ public class PersonDAL {
         }
     }
 
-    public boolean insertPerson(PersonDTO personDTO) {
+    public boolean insertPerson(PersonEntity personDTO) {
         int result = -1;
 
         int personID = personDTO.getPersonID();

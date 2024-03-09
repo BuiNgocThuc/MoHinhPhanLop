@@ -7,9 +7,9 @@ package GUI.AssignmentManagement;
 import BLL.CourseBLL;
 import BLL.CourseInstructorBLL;
 import BLL.PersonBLL;
-import DTO.CourseDTO;
-import DTO.CourseInstructorDTO;
-import DTO.PersonDTO;
+import BLL.Entity.CourseEntity;
+import BLL.Entity.CourseInstructorEntity;
+import BLL.Entity.PersonEntity;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.event.ItemEvent;
 import java.sql.SQLException;
@@ -34,7 +34,7 @@ public class CourseInstructorAddFrame extends javax.swing.JFrame {
     private CourseInstructorBLL courseInstructorBLL = new CourseInstructorBLL();
     private CourseBLL courseBLL = new CourseBLL();
     private PersonBLL personBLL = new PersonBLL();
-    private final List<CourseInstructorDTO> courseInstructorList;
+    private final List<CourseInstructorEntity> courseInstructorList;
 
     public CourseInstructorAddFrame() throws SQLException {
         initComponents();
@@ -216,21 +216,21 @@ public class CourseInstructorAddFrame extends javax.swing.JFrame {
     private void btSaveActionPerformed(java.awt.event.ActionEvent evt) {
 
         if (cbView.getSelectedItem().toString().equals("Theo giảng viên")) {
-            List<CourseDTO> selectedCourses = (List<CourseDTO>) pnInstructor.getSelectedCourses();
+            List<CourseEntity> selectedCourses = (List<CourseEntity>) pnInstructor.getSelectedCourses();
             Integer idInstructor = pnInstructor.getFirstColumnDataOfSelectedRow();
             if (idInstructor != null) {
                 if (!selectedCourses.isEmpty()) {
                     int idCourse = courseInstructorBLL.checkCourseExist(idInstructor, selectedCourses);
                     if (idCourse != 0) {
-                        CourseDTO courseDTO = courseBLL.courseDetail(idCourse);
+                        CourseEntity courseDTO = courseBLL.courseDetail(idCourse);
                         JOptionPane.showMessageDialog(null, "Khóa học " + courseDTO.getTitle() + " đã được phân công!");
                     } else {
                         int confirmationResult = JOptionPane.showConfirmDialog(null,
                                 "Bạn có muốn thêm giảng viên được phân công với các khóa học này không?", "Xác nhận",
                                 JOptionPane.YES_NO_OPTION);
                         if (confirmationResult == JOptionPane.YES_OPTION) {
-                            for (CourseDTO courseDTO : selectedCourses) {
-                                CourseInstructorDTO courseInstructorDTO = new CourseInstructorDTO(
+                            for (CourseEntity courseDTO : selectedCourses) {
+                                CourseInstructorEntity courseInstructorDTO = new CourseInstructorEntity(
                                         courseDTO.getCourseID(), idInstructor);
                                 try {
                                     courseInstructorBLL.insertCourseInstructor(courseInstructorDTO);
@@ -250,13 +250,13 @@ public class CourseInstructorAddFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Chưa chọn giảng viên nào!");
             }
         } else {
-            List<PersonDTO> selectedInstructors = (List<PersonDTO>) pnCourse.getSelectedCourses();
+            List<PersonEntity> selectedInstructors = (List<PersonEntity>) pnCourse.getSelectedCourses();
             Integer idCourse = pnCourse.getFirstColumnDataOfSelectedRow();
             if (idCourse != null) {
                 if (!selectedInstructors.isEmpty()) {
                     int idInstructor = courseInstructorBLL.checkInstructorExist(idCourse, selectedInstructors);
                     if (idInstructor != 0) {
-                        PersonDTO personDTO = personBLL.detailsPerson(idInstructor);
+                        PersonEntity personDTO = personBLL.detailsPerson(idInstructor);
                         JOptionPane.showMessageDialog(null,
                                 "Giảng viên " + personDTO.getFirstName() + " đã được phân công!");
                     } else {
@@ -264,8 +264,8 @@ public class CourseInstructorAddFrame extends javax.swing.JFrame {
                                 "Bạn có muốn thêm giảng viên được phân công với các khóa học này không?", "Xác nhận",
                                 JOptionPane.YES_NO_OPTION);
                         if (confirmationResult == JOptionPane.YES_OPTION) {
-                            for (PersonDTO personDTO : selectedInstructors) {
-                                CourseInstructorDTO courseInstructorDTO = new CourseInstructorDTO(idCourse,
+                            for (PersonEntity personDTO : selectedInstructors) {
+                                CourseInstructorEntity courseInstructorDTO = new CourseInstructorEntity(idCourse,
                                         personDTO.getPersonID());
                                 try {
                                     courseInstructorBLL.insertCourseInstructor(courseInstructorDTO);
