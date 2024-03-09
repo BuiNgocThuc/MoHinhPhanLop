@@ -232,9 +232,9 @@ public class CustomerAdd extends javax.swing.JPanel {
                 }
 
                 CustomersBLL customersBLL = new CustomersBLL();
-                int id = customersBLL.loadCustomers().size() + 1;
+                // int id = customersBLL.loadCustomers().size() + 1;
                 Customers newCustomer = new Customers();
-                newCustomer.setId(id);
+                // newCustomer.setId(id);
                 newCustomer.setFullname(fullName);
                 newCustomer.setPassword("Abcd1234");
                 newCustomer.setAddress(address);
