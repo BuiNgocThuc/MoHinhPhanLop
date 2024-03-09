@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package GUI.MainPanel;
+package GUI.CourseInfo;
 
 import BLL.CourseBLL;
 import BLL.DepartmentBLL;
@@ -446,6 +446,17 @@ public class OnsiteCoursePanel extends javax.swing.JPanel {
 
         tpTime.setPreferredSize(new java.awt.Dimension(200, 40));
         jPanel14.add(tpTime);
+
+        jButton1.setText("Lưu");
+        jButton1.setBackground(new java.awt.Color(56, 122, 223));
+        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(80, 196, 237)));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         txtClear.setText("Đóng");
         txtClear.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));

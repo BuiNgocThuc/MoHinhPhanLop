@@ -1,4 +1,4 @@
-package GUI.MainPanel;
+package GUI.AssignmentManagement;
 
 import BLL.CourseBLL;
 import BLL.CourseInstructorBLL;

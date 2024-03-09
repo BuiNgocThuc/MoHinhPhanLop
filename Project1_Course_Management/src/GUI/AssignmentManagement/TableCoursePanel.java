@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package GUI.MainPanel;
+package GUI.AssignmentManagement;
 
+import GUI.AssignmentManagement.AssigmentCourseDetail;
 import BLL.CourseInstructorBLL;
 import DTO.CourseDTO;
 import DTO.PersonDTO;
@@ -245,7 +246,6 @@ public class TableCoursePanel extends javax.swing.JPanel {
     private javax.swing.JLabel detailItemPerPageLabel;
     private javax.swing.JLabel detailPageLabel;
     private javax.swing.JSpinner itemPerPageSpinner;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JButton nextPageButton;
     private javax.swing.JButton previousPageButton;
     private javax.swing.JButton searchButton;

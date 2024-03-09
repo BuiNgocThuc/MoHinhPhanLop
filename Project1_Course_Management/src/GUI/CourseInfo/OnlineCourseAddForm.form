@@ -94,10 +94,10 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
+                <Property name="text" type="java.lang.String" value="TH&#xca;M KH&#xd3;A H&#x1ecc;C ONLINE"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="16" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="TH&#xca;M KH&#xd3;A H&#x1ecc;C ONLINE"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JSeparator" name="jSeparator1">

@@ -4,10 +4,10 @@
  */
 package GUi;
 
-import GUI.MainPanel.CourseInstrutorPanel;
-import GUI.MainPanel.CoursePanel;
-import GUI.MainPanel.CourseResultsPanel;
-import GUI.MainPanel.OnlineCoursePanel;
+import GUI.AssignmentManagement.CourseInstrutorPanel;
+import GUI.CourseInfo.CoursePanel;
+import GUI.CourseInfo.CourseResultsPanel;
+import GUI.CourseInfo.OnlineCoursePanel;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;

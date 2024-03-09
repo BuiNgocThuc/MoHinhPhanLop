@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package GUI.MainPanel;
+package GUI.CourseInfo;
 
 import BLL.CourseBLL;
 import BLL.DepartmentBLL;
@@ -206,7 +206,6 @@ public class CourseAddForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Thêm khóa học");
         setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(1150, 700));
         setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package GUI.MainPanel;
+package GUI.CourseInfo;
 
 /**
  *
@@ -138,9 +138,9 @@ public class OnlineCourseAddForm extends javax.swing.JFrame {
         flowLayout6.setAlignOnBaseline(true);
         btnContainer.setLayout(flowLayout6);
 
+        closeFrameBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         closeFrameBtn.setText("Đóng");
         closeFrameBtn.setBorder(null);
-        closeFrameBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         closeFrameBtn.setPreferredSize(new java.awt.Dimension(75, 38));
         closeFrameBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,11 +149,11 @@ public class OnlineCourseAddForm extends javax.swing.JFrame {
         });
         btnContainer.add(closeFrameBtn);
 
-        addCourseBtn.setText("Thêm");
         addCourseBtn.setBackground(new java.awt.Color(101, 183, 65));
-        addCourseBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(193, 242, 176)));
         addCourseBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         addCourseBtn.setForeground(new java.awt.Color(255, 255, 255));
+        addCourseBtn.setText("Thêm");
+        addCourseBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(193, 242, 176)));
         addCourseBtn.setPreferredSize(new java.awt.Dimension(75, 38));
         addCourseBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
