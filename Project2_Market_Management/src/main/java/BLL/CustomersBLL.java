@@ -49,4 +49,10 @@ public class CustomersBLL {
     public void deleteCustomer(int id) {
         customerDAL.deleteCustomers(id);
     }
+
+    public void resetPassword(int customerId) {
+        Customers customer = getCustomer(customerId);
+        customer.setPassword("Abcd1234");
+        updateCustomer(customer);
+    }
 }

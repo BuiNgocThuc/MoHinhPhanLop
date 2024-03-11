@@ -43,7 +43,7 @@ public class ListCustomer extends JPanel {
         JLabel titleLabel = new JLabel("Danh Sách Khách Hàng");
         titleLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         panelTop.add(titleLabel);
-//        add(panelTop, BorderLayout.WEST);
+        // add(panelTop, BorderLayout.WEST);
     }
 
     private void initCenter() {
@@ -57,8 +57,8 @@ public class ListCustomer extends JPanel {
                         BorderFactory.createEtchedBorder(EtchedBorder.LOWERED, Color.WHITE, Color.GRAY),
                         "Danh sách khách hàng", TitledBorder.LEADING, TitledBorder.TOP)));
         modeltable = new DefaultTableModel(
-                new Object[][]{},
-                new String[]{"STT", "ID", "Họ Tên", "Địa Chỉ", "Thành Phố", "Khôi Phục Mật Khẩu", "Xóa"}) {
+                new Object[][] {},
+                new String[] { "STT", "ID", "Họ Tên", "Địa Chỉ", "Thành Phố", "Khôi Phục Mật Khẩu", "Xóa" }) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false; // Ngăn chặn việc chỉnh sửa ô
@@ -74,7 +74,7 @@ public class ListCustomer extends JPanel {
             rowData[2] = customer.getFullname();
             rowData[3] = customer.getAddress();
             rowData[4] = customer.getCity();
-            rowData[5] = "/assets/icons8-trash-35.png";
+            rowData[5] = "/assets/icons8-reset-30.png";
             rowData[6] = "/assets/icons8-trash-35.png";
             modeltable.addRow(rowData);
         }
@@ -93,7 +93,7 @@ public class ListCustomer extends JPanel {
             }
         }
         table.getColumnModel().getColumn(5).setCellRenderer(new ImageRender());
-//        table.getColumnModel().getColumn(6).setCellRenderer(new ImageRender());
+        table.getColumnModel().getColumn(6).setCellRenderer(new ImageRender());
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -118,13 +118,42 @@ public class ListCustomer extends JPanel {
                 int column = target.columnAtPoint(e.getPoint());
                 if (column == 5) {
                     int row = target.rowAtPoint(e.getPoint());
-//                    removeRowFromTable(modeltable, row);
+                    // removeRowFromTable(modeltable, row);
+                    int choice = JOptionPane.showConfirmDialog(null,
+                            "Bạn có chắc chắn muốn đặt lại mật khẩu?", "Xác nhận", JOptionPane.YES_NO_OPTION);
 
+                    // Xử lý dựa trên sự lựa chọn của người dùng
+                    if (choice == JOptionPane.YES_OPTION) {
+                        JOptionPane.showMessageDialog(null, "Hành động đã được thực hiện!");
+                    }
+                }
+
+                if (column == 6) {
+                    int choice = JOptionPane.showConfirmDialog(null,
+                            "Bạn có chắc chắn muốn xóa khách hàng này?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+                    if (choice == JOptionPane.YES_OPTION) {
+                        int row = target.rowAtPoint(e.getPoint());
+                        int value = Integer.parseInt((String) target.getValueAt(row, 1));
+                        System.out.println(value);
+                        // removeRowFromTable(modeltable, row);
+                        customerBLL.deleteCustomer(value);
+                    }
                 }
             }
         });
 
         add(panelCenter);
+    }
+
+    public void removeRowFromTable(DefaultTableModel model, int rowIndex) {
+        if (rowIndex >= 0 && rowIndex < model.getRowCount()) {
+            model.removeRow(rowIndex);
+            for (int i = rowIndex; i < model.getRowCount(); i++) {
+                model.setValueAt(String.valueOf(i + 1), i, 0);
+            }
+        } else {
+            System.out.println("Invalid row index: " + rowIndex);
+        }
     }
 
     public class ImageRender extends DefaultTableCellRenderer {
@@ -135,7 +164,6 @@ public class ListCustomer extends JPanel {
             System.out.println((String) value);
             JLabel label = new JLabel();
             if (value instanceof String && (((String) value).endsWith(".png") || ((String) value).endsWith(".jpg"))) {
-                System.out.println("vô");
                 ImageIcon originalIcon = new ImageIcon(getClass().getResource((String) value));
                 Image originalImage = originalIcon.getImage();
                 Image resizedImage = originalImage.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
@@ -143,6 +171,20 @@ public class ListCustomer extends JPanel {
                 label.setIcon(resizedIcon);
                 label.setHorizontalAlignment(SwingConstants.CENTER);
                 label.setVerticalAlignment(SwingConstants.CENTER);
+                label.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        int choice = JOptionPane.showConfirmDialog(null,
+                                "Bạn có chắc chắn muốn lưu thay đổi không?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+
+                        // Xử lý dựa trên sự lựa chọn của người dùng
+                        if (choice == JOptionPane.YES_OPTION) {
+                            JOptionPane.showMessageDialog(null, "Hành động đã được thực hiện!");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Hành động đã bị hủy bỏ!");
+                        }
+                    }
+                });
             } else {
                 System.out.println("không có");
                 return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
