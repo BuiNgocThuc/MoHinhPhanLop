@@ -62,9 +62,7 @@ public class CourseInstructorBLL {
     
     public Paginate<CourseEntity> getListCourseAssignedInstructor(int offset, int limit, String querySearch) throws SQLException {
         Paginate<CourseEntity> paginate = courseDAL.getListCourseAssignedInstructor(offset, limit, querySearch);
-
         courseDAL.populateInstructors(paginate.getItems());
-
         return paginate;
     }
 

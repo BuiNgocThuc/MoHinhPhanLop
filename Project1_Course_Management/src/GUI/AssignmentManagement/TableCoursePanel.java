@@ -37,7 +37,7 @@ public class TableCoursePanel extends javax.swing.JPanel {
 
     public TableCoursePanel() throws SQLException {
         initComponents();
-        
+
         updateData();
     }
 
@@ -49,7 +49,6 @@ public class TableCoursePanel extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
         spCourse = new javax.swing.JScrollPane();
         tblCourse = new javax.swing.JTable();
         itemPerPageSpinner = new javax.swing.JSpinner();
@@ -255,13 +254,12 @@ public class TableCoursePanel extends javax.swing.JPanel {
     private javax.swing.JLabel titlePaginationLabel;
     // End of variables declaration//GEN-END:variables
 
-    
-
     public void deleteAllInstructorAssignCourse() throws SQLException {
         int seletedRow = tblCourse.getSelectedRow();
         if (seletedRow != -1) {
             int courseID = (int) tblCourse.getValueAt(seletedRow, 1);
             courseInstructorBLL.deleteAllInstructorAssignCourse(courseID);
+            updateData();
         }
     }
 
@@ -270,6 +268,7 @@ public class TableCoursePanel extends javax.swing.JPanel {
         if (courses.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Không tìm thấy");
         } else {
+            coursesPaginate = new Paginate<>(20, courses.size(), 1, 0, courses);
             populateUI();
         }
     }
@@ -279,10 +278,8 @@ public class TableCoursePanel extends javax.swing.JPanel {
             if (coursesPaginate == null) {
                 coursesPaginate = new Paginate<>(20, 0, 1, 0, null);
             }
-
             int limit = itemPerPage;
             int offset = itemPerPage * (currentPage - 1);
-
             coursesPaginate = courseInstructorBLL.getListCourseAssignedInstructor(offset, limit, query);
             System.out.println(coursesPaginate);
             populateUI();
@@ -290,7 +287,7 @@ public class TableCoursePanel extends javax.swing.JPanel {
             Logger.getLogger(TableCoursePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void populateUI() throws SQLException {
         DefaultTableModel model = (DefaultTableModel) tblCourse.getModel();
         model.setRowCount(0);
@@ -299,7 +296,6 @@ public class TableCoursePanel extends javax.swing.JPanel {
             int courseID = course.getCourseID();
             String title = course.getTitle();
             String instructorInfos = "-------";
-
             List<PersonEntity> instructors = course.getInstructors();
             if (instructors != null) {
                 instructorInfos = "";
@@ -320,10 +316,8 @@ public class TableCoursePanel extends javax.swing.JPanel {
                     };
             model.addRow(row);
         }
-        
-          int totalItems = coursesPaginate.getTotalItems();
+        int totalItems = coursesPaginate.getTotalItems();
         int totalPages = 1;
-        
         if (coursesPaginate.getTotalPages() > 0) {
             totalPages = coursesPaginate.getTotalPages();
         }

@@ -668,33 +668,25 @@ public class CourseDAL {
         ArrayList<CourseEntity> listCourse = new ArrayList<>();
         try {
             String baseQuery = "SELECT * FROM course";
-
             if (querySearch != null && !querySearch.isEmpty()) {
                 baseQuery += " WHERE Title LIKE ?";
             }
-
             String countQuery = "SELECT COUNT(*) AS total FROM (" + baseQuery + ") AS subquery";
-
             baseQuery += " LIMIT ? OFFSET ?";
-
             PreparedStatement countPre = conn.prepareStatement(countQuery);
             PreparedStatement pre = conn.prepareStatement(baseQuery);
-
             int paramIndex = 1;
             if (querySearch != null && !querySearch.isEmpty()) {
                 countPre.setString(paramIndex, "%" + querySearch + "%");
                 pre.setString(paramIndex++, "%" + querySearch + "%");
             }
-
             ResultSet countRs = countPre.executeQuery();
             int totalItems = 0;
             if (countRs.next()) {
                 totalItems = countRs.getInt("total");
             }
-
             pre.setInt(paramIndex++, limit);
             pre.setInt(paramIndex, offset);
-
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 CourseEntity course = new CourseEntity();
@@ -704,11 +696,8 @@ public class CourseDAL {
                 course.setDepartmentID(rs.getInt("DepartmentID"));
                 listCourse.add(course);
             }
-
             int totalPages = (int) Math.ceil((double) totalItems / limit);
-
             Paginate<CourseEntity> paginate = new Paginate<>(offset, totalItems, 1, totalPages, listCourse);
-
             return paginate;
         } catch (Exception e) {
             e.printStackTrace();

@@ -221,56 +221,56 @@ public class PersonDAL {
         return null;
     }
 
-    public void populateCourses(List<PersonEntity> instructors) throws SQLException {
-        if (instructors.isEmpty()) {
-            return;
-        }
-        // Collecting instructor IDs
-        List<Integer> instructorIds = new ArrayList<>();
-        for (PersonEntity instructor : instructors) {
-            instructorIds.add(instructor.getPersonID());
-        }
-        // Mapping instructor IDs to courses
-        Map<Integer, List<CourseEntity>> courseInstructorMap = new HashMap<>();
-        try {
-            List<CourseEntity> courses = new ArrayList<>();
-            String query = "select * from course c join courseinstructor ci "
-                    + "on c.CourseID = ci.CourseID "
-                    + "where ci.PersonID IN (";
-            for (int i = 0; i < instructorIds.size(); i++) {
-                query += (i == 0 ? "?" : ", ?");
+        public void populateCourses(List<PersonEntity> instructors) throws SQLException {
+            if (instructors.isEmpty()) {
+                return;
             }
-            query += ")";
-            PreparedStatement preparedStatement = con.getConnectDB().prepareStatement(query);
-            // Set instructor IDs as parameters
-            for (int i = 0; i < instructorIds.size(); i++) {
-                preparedStatement.setInt(i + 1, instructorIds.get(i));
-            }
-            ResultSet rs = preparedStatement.executeQuery();
-            while (rs.next()) {
-                int instructorId = rs.getInt("PersonID");
-                int courseId = rs.getInt("CourseID");
-                String title = rs.getString("Title");
-                int credits = rs.getInt("Credits");
-                int departmentID = rs.getInt("DepartmentID");
-                // Create course DTO
-                CourseEntity course = new CourseEntity(courseId, departmentID, credits, title);
-                // Add course to the corresponding instructor ID in the map
-                if (!courseInstructorMap.containsKey(instructorId)) {
-                    courseInstructorMap.put(instructorId, new ArrayList<>());
-                }
-                courseInstructorMap.get(instructorId).add(course);
-            }
+            // Collecting instructor IDs
+            List<Integer> instructorIds = new ArrayList<>();
             for (PersonEntity instructor : instructors) {
-                int instructorId = instructor.getPersonID();
-                if (courseInstructorMap.containsKey(instructorId)) {
-                    instructor.setCourses(courseInstructorMap.get(instructorId));
-                }
+                instructorIds.add(instructor.getPersonID());
             }
-        } catch (SQLException e) {
-            throw e;
+            // Mapping instructor IDs to courses
+            Map<Integer, List<CourseEntity>> courseInstructorMap = new HashMap<>();
+            try {
+                List<CourseEntity> courses = new ArrayList<>();
+                String query = "select * from course c join courseinstructor ci "
+                        + "on c.CourseID = ci.CourseID "
+                        + "where ci.PersonID IN (";
+                for (int i = 0; i < instructorIds.size(); i++) {
+                    query += (i == 0 ? "?" : ", ?");
+                }
+                query += ")";
+                PreparedStatement preparedStatement = con.getConnectDB().prepareStatement(query);
+                // Set instructor IDs as parameters
+                for (int i = 0; i < instructorIds.size(); i++) {
+                    preparedStatement.setInt(i + 1, instructorIds.get(i));
+                }
+                ResultSet rs = preparedStatement.executeQuery();
+                while (rs.next()) {
+                    int instructorId = rs.getInt("PersonID");
+                    int courseId = rs.getInt("CourseID");
+                    String title = rs.getString("Title");
+                    int credits = rs.getInt("Credits");
+                    int departmentID = rs.getInt("DepartmentID");
+                    // Create course DTO
+                    CourseEntity course = new CourseEntity(courseId, departmentID, credits, title);
+                    // Add course to the corresponding instructor ID in the map
+                    if (!courseInstructorMap.containsKey(instructorId)) {
+                        courseInstructorMap.put(instructorId, new ArrayList<>());
+                    }
+                    courseInstructorMap.get(instructorId).add(course);
+                }
+                for (PersonEntity instructor : instructors) {
+                    int instructorId = instructor.getPersonID();
+                    if (courseInstructorMap.containsKey(instructorId)) {
+                        instructor.setCourses(courseInstructorMap.get(instructorId));
+                    }
+                }
+            } catch (SQLException e) {
+                throw e;
+            }
         }
-    }
 
     public boolean addPerson(PersonEntity person) throws SQLException {
         try {

@@ -265,6 +265,7 @@ public class TableInstructorPanel extends javax.swing.JPanel {
         if (instructors.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Không tìm thấy");
         } else {
+            instructorsPaginate = new Paginate<>(20, instructors.size(), 1, 0, instructors);
             populateUI();
         }
     }
@@ -278,13 +279,10 @@ public class TableInstructorPanel extends javax.swing.JPanel {
             if (instructorsPaginate == null) {
                 instructorsPaginate = new Paginate<>(20, 0, 1, 0, null);
             }
-
             int limit = itemPerPage;
             int offset = itemPerPage * (currentPage - 1);
-
             System.out.println(limit);
             System.out.println(offset);
-
             instructorsPaginate = courseInstructorBLL.getListInstructorAssignedCourse(offset, limit, query);
             System.out.println(instructorsPaginate);
             populateUI();
@@ -297,12 +295,10 @@ public class TableInstructorPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblInstructor.getModel();
         model.setRowCount(0);
         int no = 1;
-
         for (PersonEntity instructor : instructorsPaginate.getItems()) {
             int instructorID = instructor.getPersonID();
             String firstName = instructor.getFirstName();
             String lastName = instructor.getLastName();
-
             String courseInfos = "-------";
             List<CourseEntity> courses = instructor.getCourses();
             if (courses != null) {
@@ -316,17 +312,14 @@ public class TableInstructorPanel extends javax.swing.JPanel {
                         courses.get(courses.size() - 1).getCourseID(),
                         courses.get(courses.size() - 1).getTitle());
             }
-
             Object[] row
                     = {
                         no++, instructorID, lastName, firstName, courseInfos
                     };
             model.addRow(row);
         }
-
         int totalItems = instructorsPaginate.getTotalItems();
         int totalPages = 1;
-        
         if (instructorsPaginate.getTotalPages() > 0) {
             totalPages = instructorsPaginate.getTotalPages();
         }
