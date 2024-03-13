@@ -73,7 +73,7 @@ public class JFrameStatistical extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "STT", "PersonID", "LastName", "FirstName", "Grade"
+                "No.", "PersonID", "LastName", "FirstName", "Grade"
             }
         ));
         jScrollPane1.setViewportView(jTableChart);

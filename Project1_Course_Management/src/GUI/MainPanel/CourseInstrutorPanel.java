@@ -65,9 +65,9 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel1.setText("QUẢN LÝ PHÂN CÔNG");
+        jLabel1.setText("ASSIGNMENT MANAGEMENT");
         jLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 5, 10, 0));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel1.setPreferredSize(new java.awt.Dimension(170, 42));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
@@ -76,11 +76,11 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
         flowLayout1.setAlignOnBaseline(true);
         jPanel5.setLayout(flowLayout1);
 
+        btnAdd.setText("Add");
         btnAdd.setBackground(new java.awt.Color(155, 207, 83));
+        btnAdd.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(191, 234, 124)));
         btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAdd.setForeground(new java.awt.Color(255, 255, 255));
-        btnAdd.setText("Thêm");
-        btnAdd.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(191, 234, 124)));
         btnAdd.setPreferredSize(new java.awt.Dimension(100, 40));
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,11 +89,11 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
         });
         jPanel5.add(btnAdd);
 
+        btnDelete.setText("Delete");
         btnDelete.setBackground(new java.awt.Color(255, 104, 104));
+        btnDelete.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 128, 128)));
         btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnDelete.setForeground(new java.awt.Color(255, 255, 255));
-        btnDelete.setText("Xóa");
-        btnDelete.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 128, 128)));
         btnDelete.setPreferredSize(new java.awt.Dimension(100, 40));
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,7 +126,7 @@ public class CourseInstrutorPanel extends javax.swing.JPanel {
 
         jPanel5.add(jPanel6);
 
-        cbPointOfView.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Theo khóa học", "Theo giảng viên" }));
+        cbPointOfView.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "By course", "By Teacher" }));
         cbPointOfView.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
         cbPointOfView.setPreferredSize(new java.awt.Dimension(205, 40));
         cbPointOfView.addItemListener(new java.awt.event.ItemListener() {

@@ -52,11 +52,11 @@ public class InstructorAdd extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lbInstructorAdd.setText("THÊM GIẢNG VIÊN MỚI");
+        lbInstructorAdd.setText("ADD NEW INSTRUCTOR");
 
-        pnContainer.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin giảng viên", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
+        pnContainer.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Instructor Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
 
-        pnFirstName.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Họ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
+        pnFirstName.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "First Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
         pnFirstName.setPreferredSize(new java.awt.Dimension(64, 22));
 
         javax.swing.GroupLayout pnFirstNameLayout = new javax.swing.GroupLayout(pnFirstName);
@@ -75,7 +75,7 @@ public class InstructorAdd extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pnLastName.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tên", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
+        pnLastName.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Last Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
         pnLastName.setPreferredSize(new java.awt.Dimension(64, 22));
 
         javax.swing.GroupLayout pnLastNameLayout = new javax.swing.GroupLayout(pnLastName);
@@ -94,7 +94,7 @@ public class InstructorAdd extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pnHireDate.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ngày thuê", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
+        pnHireDate.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hire date", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
         pnHireDate.setPreferredSize(new java.awt.Dimension(64, 22));
 
         javax.swing.GroupLayout pnHireDateLayout = new javax.swing.GroupLayout(pnHireDate);
@@ -139,14 +139,14 @@ public class InstructorAdd extends javax.swing.JFrame {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        btClose.setText("Đóng");
+        btClose.setText("Close");
         btClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btCloseActionPerformed(evt);
             }
         });
 
-        btSave.setText("Lưu");
+        btSave.setText("Save");
         btSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btSaveActionPerformed(evt);

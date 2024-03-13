@@ -197,15 +197,14 @@ public class CourseAddForm extends javax.swing.JFrame {
         tblInstructorSelected = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Thêm khóa học");
+        setTitle("Add Course");
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1150, 700));
-        setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        jLabel1.setText("THÊM KHÓA HỌC");
+        jLabel1.setText("ADD COURSE");
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -234,14 +233,14 @@ public class CourseAddForm extends javax.swing.JFrame {
         flowLayout1.setAlignOnBaseline(true);
         jPanel3.setLayout(flowLayout1);
 
-        jLabel2.setText("Tên khóa học:");
+        jLabel2.setText("Course Name:");
         jLabel2.setPreferredSize(new java.awt.Dimension(85, 35));
         jPanel3.add(jLabel2);
 
         txtTitle.setPreferredSize(new java.awt.Dimension(200, 35));
         jPanel3.add(txtTitle);
 
-        jLabel3.setText("Tín chỉ:");
+        jLabel3.setText("Credit:");
         jLabel3.setPreferredSize(new java.awt.Dimension(38, 35));
         jPanel3.add(jLabel3);
 
@@ -254,11 +253,11 @@ public class CourseAddForm extends javax.swing.JFrame {
         flowLayout2.setAlignOnBaseline(true);
         jPanel5.setLayout(flowLayout2);
 
-        jLabel4.setText("Phòng nhân sự:");
+        jLabel4.setText("Department");
         jLabel4.setPreferredSize(new java.awt.Dimension(85, 35));
         jPanel5.add(jLabel4);
 
-        cbDepartment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Chọn Khoa--" }));
+        cbDepartment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Choose department--" }));
         cbDepartment.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
         cbDepartment.setPreferredSize(new java.awt.Dimension(400, 35));
         jPanel5.add(cbDepartment);
@@ -269,7 +268,7 @@ public class CourseAddForm extends javax.swing.JFrame {
         flowLayout3.setAlignOnBaseline(true);
         jPanel4.setLayout(flowLayout3);
 
-        jLabel5.setText("Loại khóa học:");
+        jLabel5.setText("Course Type:");
         jLabel5.setPreferredSize(new java.awt.Dimension(85, 35));
         jPanel4.add(jLabel5);
 
@@ -321,7 +320,7 @@ public class CourseAddForm extends javax.swing.JFrame {
         flowLayout5.setAlignOnBaseline(true);
         jPanel8.setLayout(flowLayout5);
 
-        jLabel7.setText("Địa chỉ:");
+        jLabel7.setText("Address:");
         jLabel7.setPreferredSize(new java.awt.Dimension(85, 35));
         jPanel8.add(jLabel7);
 
@@ -333,7 +332,7 @@ public class CourseAddForm extends javax.swing.JFrame {
         });
         jPanel8.add(txtLocation);
 
-        jLabel8.setText("Thời gian:");
+        jLabel8.setText("Time:");
         jLabel8.setPreferredSize(new java.awt.Dimension(52, 35));
         jPanel8.add(jLabel8);
 
@@ -349,7 +348,7 @@ public class CourseAddForm extends javax.swing.JFrame {
         flowLayout7.setAlignOnBaseline(true);
         jPanel9.setLayout(flowLayout7);
 
-        jLabel10.setText("Ngày:");
+        jLabel10.setText("Day:");
         jLabel10.setPreferredSize(new java.awt.Dimension(40, 35));
         jPanel9.add(jLabel10);
 
@@ -360,27 +359,27 @@ public class CourseAddForm extends javax.swing.JFrame {
         flowLayout8.setAlignOnBaseline(true);
         jPanel10.setLayout(flowLayout8);
 
-        txtMonday.setText("Thứ 2");
+        txtMonday.setText("Mon.");
         txtMonday.setPreferredSize(new java.awt.Dimension(65, 25));
         jPanel10.add(txtMonday);
 
-        txtTuesday.setText("Thứ 3");
+        txtTuesday.setText("Tue.");
         txtTuesday.setPreferredSize(new java.awt.Dimension(65, 25));
         jPanel10.add(txtTuesday);
 
-        txtWednesday.setText("Thứ 4");
+        txtWednesday.setText("Wed");
         txtWednesday.setPreferredSize(new java.awt.Dimension(65, 25));
         jPanel10.add(txtWednesday);
 
-        txtThursday.setText("Thứ 5");
+        txtThursday.setText("Thu");
         txtThursday.setPreferredSize(new java.awt.Dimension(65, 25));
         jPanel10.add(txtThursday);
 
-        txtFriday.setText("Thứ 6");
+        txtFriday.setText("Fri");
         txtFriday.setPreferredSize(new java.awt.Dimension(65, 25));
         jPanel10.add(txtFriday);
 
-        txtSaturday.setText("Thứ 7");
+        txtSaturday.setText("Sat");
         txtSaturday.setPreferredSize(new java.awt.Dimension(65, 25));
         jPanel10.add(txtSaturday);
 
@@ -394,7 +393,7 @@ public class CourseAddForm extends javax.swing.JFrame {
         flowLayout9.setAlignOnBaseline(true);
         jPanel7.setLayout(flowLayout9);
 
-        btnCancel.setText("Đóng");
+        btnCancel.setText("Close");
         btnCancel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnCancel.setPreferredSize(new java.awt.Dimension(100, 35));
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -404,7 +403,7 @@ public class CourseAddForm extends javax.swing.JFrame {
         });
         jPanel7.add(btnCancel);
 
-        btnSave.setText("Lưu");
+        btnSave.setText("Save");
         btnSave.setBackground(new java.awt.Color(95, 208, 104));
         btnSave.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75, 134, 115)));
         btnSave.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -423,7 +422,7 @@ public class CourseAddForm extends javax.swing.JFrame {
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel11.setText("Thêm sinh viên:");
+        jLabel11.setText("Add student:");
         jLabel11.setBackground(new java.awt.Color(255, 255, 255));
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel11.setOpaque(true);
@@ -470,7 +469,7 @@ public class CourseAddForm extends javax.swing.JFrame {
         jPanel14Layout.rowHeights = new int[] {0, 10, 0};
         jPanel14.setLayout(jPanel14Layout);
 
-        btnSelectStudent.setText("Thêm > >");
+        btnSelectStudent.setText("Add > >");
         btnSelectStudent.setBackground(new java.awt.Color(101, 183, 65));
         btnSelectStudent.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
         btnSelectStudent.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -486,7 +485,7 @@ public class CourseAddForm extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         jPanel14.add(btnSelectStudent, gridBagConstraints);
 
-        btnUnselectStudent.setText("< < Xóa ");
+        btnUnselectStudent.setText("< < Remove ");
         btnUnselectStudent.setBackground(new java.awt.Color(244, 80, 80));
         btnUnselectStudent.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
         btnUnselectStudent.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -533,7 +532,7 @@ public class CourseAddForm extends javax.swing.JFrame {
 
         pnlAddStudent.add(jScrollPane4);
 
-        jLabel9.setText("Thêm giảng viên:");
+        jLabel9.setText("Add teacher:");
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setOpaque(true);
@@ -576,7 +575,7 @@ public class CourseAddForm extends javax.swing.JFrame {
         jPanel12Layout.rowHeights = new int[] {0, 10, 0};
         jPanel12.setLayout(jPanel12Layout);
 
-        btnSelectInstructor.setText("Thêm > >");
+        btnSelectInstructor.setText("Add > >");
         btnSelectInstructor.setBackground(new java.awt.Color(101, 183, 65));
         btnSelectInstructor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
         btnSelectInstructor.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -593,7 +592,7 @@ public class CourseAddForm extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         jPanel12.add(btnSelectInstructor, gridBagConstraints);
 
-        btnUnselectInstructor.setText("< < Xóa");
+        btnUnselectInstructor.setText("< < Remove");
         btnUnselectInstructor.setBackground(new java.awt.Color(244, 80, 80));
         btnUnselectInstructor.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnUnselectInstructor.setForeground(new java.awt.Color(255, 255, 255));

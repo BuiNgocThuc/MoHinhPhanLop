@@ -89,7 +89,7 @@
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder justification="1" position="2" title="Danh s&#xe1;ch gi&#x1ea3;ng vi&#xea;n &#x111;&#xe3; ch&#x1ecd;n"/>
+            <TitledBorder justification="1" position="2" title="Instructor Choosen List"/>
           </Border>
         </Property>
       </Properties>
@@ -131,9 +131,9 @@
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="3" rowCount="0">
-                    <Column editable="false" title="STT" type="java.lang.Object"/>
-                    <Column editable="true" title="M&#xe3; gi&#x1ea3;ng vi&#xea;n" type="java.lang.Object"/>
-                    <Column editable="true" title="T&#xea;n gi&#x1ea3;ng vi&#xea;n" type="java.lang.Object"/>
+                    <Column editable="false" title="No." type="java.lang.Object"/>
+                    <Column editable="true" title="Instructor ID" type="java.lang.Object"/>
+                    <Column editable="true" title="Instructor Name" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -165,7 +165,7 @@
         </Container>
         <Component class="javax.swing.JButton" name="btDeleteInstructor">
           <Properties>
-            <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
+            <Property name="text" type="java.lang.String" value="Delete"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder>
@@ -190,7 +190,7 @@
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder justification="1" position="2" title="Danh s&#xe1;ch gi&#x1ea3;ng vi&#xea;n"/>
+            <TitledBorder justification="1" position="2" title="Instructor List"/>
           </Border>
         </Property>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -242,8 +242,8 @@
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="2" rowCount="4">
-                    <Column editable="false" title="M&#xe3; gi&#x1ea3;ng vi&#xea;n" type="java.lang.Object"/>
-                    <Column editable="true" title="T&#xea;n gi&#x1ea3;ng vi&#xea;n" type="java.lang.Object"/>
+                    <Column editable="false" title="Instructor ID" type="java.lang.Object"/>
+                    <Column editable="true" title="Instructor Name" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -269,7 +269,7 @@
         </Container>
         <Component class="javax.swing.JButton" name="btSelectedInstructor">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
+            <Property name="text" type="java.lang.String" value="Add"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder>
@@ -287,7 +287,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btSeeAllInstructorList">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Xem t&#x1ea5;t c&#x1ea3;"/>
+            <Property name="text" type="java.lang.String" value="All List"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder>
@@ -312,7 +312,7 @@
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder justification="1" position="2" title="Danh s&#xe1;ch kh&#xf3;a h&#x1ecd;c"/>
+            <TitledBorder justification="1" position="2" title="Course List"/>
           </Border>
         </Property>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -351,8 +351,8 @@
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="2" rowCount="4">
-                    <Column editable="false" title="M&#xe3; kh&#xf3;a h&#x1ecd;c" type="java.lang.Object"/>
-                    <Column editable="true" title="T&#xea;n kh&#xf3;a h&#x1ecd;c" type="java.lang.Object"/>
+                    <Column editable="false" title="CourseID" type="java.lang.Object"/>
+                    <Column editable="true" title="Course Name" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -387,7 +387,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btCourseSearch">
       <Properties>
-        <Property name="text" type="java.lang.String" value="T&#xec;m"/>
+        <Property name="text" type="java.lang.String" value="Search"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
             <LineBorder>
@@ -412,7 +412,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btInstructorSearch">
       <Properties>
-        <Property name="text" type="java.lang.String" value="T&#xec;m"/>
+        <Property name="text" type="java.lang.String" value="Search"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
             <LineBorder>
@@ -430,7 +430,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btSeeAllCourseList">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Xem t&#x1ea5;t c&#x1ea3;"/>
+        <Property name="text" type="java.lang.String" value="List"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
             <LineBorder>

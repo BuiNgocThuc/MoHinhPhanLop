@@ -112,7 +112,6 @@ public class CoursePanel extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jPanel5 = new javax.swing.JPanel();
         addCourseBtn = new javax.swing.JButton();
-        editCourseBtn = new javax.swing.JButton();
         deleteCourseBtn = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         searchOnsiteCourseValue = new javax.swing.JTextField();
@@ -171,7 +170,7 @@ public class CoursePanel extends javax.swing.JPanel {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setText("QUẢN LÝ KHÓA HỌC");
+        jLabel1.setText("COURSE MANAGEMENT");
         jLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 5, 10, 0));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
 
@@ -195,7 +194,7 @@ public class CoursePanel extends javax.swing.JPanel {
         flowLayout2.setAlignOnBaseline(true);
         jPanel5.setLayout(flowLayout2);
 
-        addCourseBtn.setText("Thêm");
+        addCourseBtn.setText("Add");
         addCourseBtn.setBackground(new java.awt.Color(155, 207, 83));
         addCourseBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(191, 234, 124)));
         addCourseBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -208,20 +207,7 @@ public class CoursePanel extends javax.swing.JPanel {
         });
         jPanel5.add(addCourseBtn);
 
-        editCourseBtn.setText("Sửa");
-        editCourseBtn.setBackground(new java.awt.Color(64, 162, 227));
-        editCourseBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(187, 226, 236)));
-        editCourseBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        editCourseBtn.setForeground(new java.awt.Color(255, 255, 255));
-        editCourseBtn.setPreferredSize(new java.awt.Dimension(100, 40));
-        editCourseBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editCourseBtnActionPerformed(evt);
-            }
-        });
-        jPanel5.add(editCourseBtn);
-
-        deleteCourseBtn.setText("Xóa");
+        deleteCourseBtn.setText("Delete");
         deleteCourseBtn.setBackground(new java.awt.Color(255, 104, 104));
         deleteCourseBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 128, 128)));
         deleteCourseBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -235,7 +221,7 @@ public class CoursePanel extends javax.swing.JPanel {
         jPanel5.add(deleteCourseBtn);
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setPreferredSize(new java.awt.Dimension(650, 40));
+        jPanel4.setPreferredSize(new java.awt.Dimension(760, 40));
         java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 0, 0);
         flowLayout1.setAlignOnBaseline(true);
         jPanel4.setLayout(flowLayout1);
@@ -288,7 +274,8 @@ public class CoursePanel extends javax.swing.JPanel {
         sortCourseBtnGroupPnl.setLayout(flowLayout6);
 
         sortCourseBtnGroup.add(jRadioButton1);
-        jRadioButton1.setText("Tất cả");
+        jRadioButton1.setSelected(true);
+        jRadioButton1.setText("All");
         jRadioButton1.setPreferredSize(new java.awt.Dimension(60, 30));
         jRadioButton1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -303,7 +290,7 @@ public class CoursePanel extends javax.swing.JPanel {
         sortCourseBtnGroupPnl.add(jRadioButton1);
 
         sortCourseBtnGroup.add(jRadioButton2);
-        jRadioButton2.setText("Khóa học onsite");
+        jRadioButton2.setText("Onsite Course");
         jRadioButton2.setPreferredSize(new java.awt.Dimension(108, 30));
         jRadioButton2.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -318,7 +305,7 @@ public class CoursePanel extends javax.swing.JPanel {
         sortCourseBtnGroupPnl.add(jRadioButton2);
 
         sortCourseBtnGroup.add(jRadioButton3);
-        jRadioButton3.setText("Khóa học online");
+        jRadioButton3.setText("Online course");
         jRadioButton3.setPreferredSize(new java.awt.Dimension(109, 30));
         jRadioButton3.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -409,7 +396,7 @@ public class CoursePanel extends javax.swing.JPanel {
         flowLayout3.setAlignOnBaseline(true);
         txtCourseIDPnl.setLayout(flowLayout3);
 
-        jLabel16.setText("ID Khóa học:");
+        jLabel16.setText("Course ID:");
         jLabel16.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 5, 0, 0));
         jLabel16.setPreferredSize(new java.awt.Dimension(75, 45));
         txtCourseIDPnl.add(jLabel16);
@@ -427,7 +414,7 @@ public class CoursePanel extends javax.swing.JPanel {
         flowLayout4.setAlignOnBaseline(true);
         txtCourseNamePnl.setLayout(flowLayout4);
 
-        jLabel17.setText("Tên khóa học:");
+        jLabel17.setText("Course name:");
         jLabel17.setPreferredSize(new java.awt.Dimension(75, 40));
         txtCourseNamePnl.add(jLabel17);
 
@@ -438,7 +425,7 @@ public class CoursePanel extends javax.swing.JPanel {
 
         txtDepartmentPnl.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel19.setText("Tên Khoa:");
+        jLabel19.setText("Department:");
         jLabel19.setPreferredSize(new java.awt.Dimension(55, 45));
         txtDepartmentPnl.add(jLabel19);
 
@@ -454,7 +441,7 @@ public class CoursePanel extends javax.swing.JPanel {
         flowLayout5.setAlignOnBaseline(true);
         txtCreditPnl.setLayout(flowLayout5);
 
-        jLabel18.setText("Tín chỉ:");
+        jLabel18.setText("Credit:");
         jLabel18.setPreferredSize(new java.awt.Dimension(40, 45));
         txtCreditPnl.add(jLabel18);
 
@@ -475,7 +462,7 @@ public class CoursePanel extends javax.swing.JPanel {
         flowLayout7.setAlignOnBaseline(true);
         txtLocationPnl.setLayout(flowLayout7);
 
-        jLabel20.setText("Địa chỉ:");
+        jLabel20.setText("Address:");
         jLabel20.setPreferredSize(new java.awt.Dimension(70, 40));
         txtLocationPnl.add(jLabel20);
 
@@ -511,7 +498,7 @@ public class CoursePanel extends javax.swing.JPanel {
         flowLayout12.setAlignOnBaseline(true);
         txtTimePnl.setLayout(flowLayout12);
 
-        jLabel22.setText("Thời gian:");
+        jLabel22.setText("Time:");
         jLabel22.setPreferredSize(new java.awt.Dimension(60, 40));
         txtTimePnl.add(jLabel22);
 
@@ -527,10 +514,10 @@ public class CoursePanel extends javax.swing.JPanel {
         txtDatePnl.setLayout(flowLayout11);
 
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel21.setText("Ngày:");
-        jLabel21.setToolTipText("");
+        jLabel21.setText("Day:");
         jLabel21.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         jLabel21.setPreferredSize(new java.awt.Dimension(70, 40));
+        jLabel21.setToolTipText("");
         txtDatePnl.add(jLabel21);
 
         jPanel33.setBackground(new java.awt.Color(255, 255, 255));
@@ -540,37 +527,37 @@ public class CoursePanel extends javax.swing.JPanel {
         flowLayout9.setAlignOnBaseline(true);
         jPanel33.setLayout(flowLayout9);
 
-        txtMonday.setText("Thứ 2");
+        txtMonday.setText("Mon.");
         txtMonday.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 15));
         txtMonday.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         txtMonday.setPreferredSize(new java.awt.Dimension(75, 30));
         jPanel33.add(txtMonday);
 
-        txtTuesday.setText("Thứ 3");
+        txtTuesday.setText("Tue.");
         txtTuesday.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 15));
         txtTuesday.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         txtTuesday.setPreferredSize(new java.awt.Dimension(75, 30));
         jPanel33.add(txtTuesday);
 
-        txtWednesday.setText("Thứ 4");
+        txtWednesday.setText("Wed.");
         txtWednesday.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 15));
         txtWednesday.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         txtWednesday.setPreferredSize(new java.awt.Dimension(75, 30));
         jPanel33.add(txtWednesday);
 
-        txtThursday.setText("Thứ 5");
+        txtThursday.setText("Thu.");
         txtThursday.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 15));
         txtThursday.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         txtThursday.setPreferredSize(new java.awt.Dimension(75, 30));
         jPanel33.add(txtThursday);
 
-        txtFriday.setText("Thứ 6");
+        txtFriday.setText("Fri.");
         txtFriday.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 15));
         txtFriday.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         txtFriday.setPreferredSize(new java.awt.Dimension(75, 30));
         jPanel33.add(txtFriday);
 
-        txtSaturday.setText("Thứ 7");
+        txtSaturday.setText("Sat.");
         txtSaturday.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 15));
         txtSaturday.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         txtSaturday.setPreferredSize(new java.awt.Dimension(75, 30));
@@ -585,7 +572,7 @@ public class CoursePanel extends javax.swing.JPanel {
         flowLayout14.setAlignOnBaseline(true);
         txtTypePnl.setLayout(flowLayout14);
 
-        jLabel2.setText("Loại:");
+        jLabel2.setText("Type:");
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel2.setPreferredSize(new java.awt.Dimension(60, 40));
         txtTypePnl.add(jLabel2);
@@ -604,7 +591,7 @@ public class CoursePanel extends javax.swing.JPanel {
         flowLayout10.setAlignOnBaseline(true);
         buttonPnl.setLayout(flowLayout10);
 
-        btnCancel.setText("Đóng");
+        btnCancel.setText("Close");
         btnCancel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
         btnCancel.setPreferredSize(new java.awt.Dimension(112, 40));
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -614,7 +601,7 @@ public class CoursePanel extends javax.swing.JPanel {
         });
         buttonPnl.add(btnCancel);
 
-        btnSave.setText("Lưu");
+        btnSave.setText("Save");
         btnSave.setBackground(new java.awt.Color(56, 122, 223));
         btnSave.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(80, 196, 237)));
         btnSave.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -685,10 +672,6 @@ public class CoursePanel extends javax.swing.JPanel {
         courseAddForm.setVisible(true);
         courseAddForm.getOnsiteInformationCourse().setVisible(false);
     }//GEN-LAST:event_addCourseBtnActionPerformed
-
-    private void editCourseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editCourseBtnActionPerformed
-        detailCoursePanel.setVisible(true);
-    }//GEN-LAST:event_editCourseBtnActionPerformed
 
     private void deleteCourseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCourseBtnActionPerformed
         int row = tblCourse.getSelectedRow();
@@ -1091,7 +1074,6 @@ public class CoursePanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbDepartment;
     private javax.swing.JButton deleteCourseBtn;
     private javax.swing.JPanel detailCoursePanel;
-    private javax.swing.JButton editCourseBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;

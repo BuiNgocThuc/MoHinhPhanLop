@@ -77,7 +77,8 @@ public class CourseInstructorAddFrame extends javax.swing.JFrame {
         pnContainerCloseSave.setLayout(flowLayout1);
 
         btClose.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btClose.setText("Đóng");
+        btClose.setText("Close");
+        btClose.setToolTipText("");
         btClose.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btClose.setPreferredSize(new java.awt.Dimension(100, 40));
         btClose.addActionListener(new java.awt.event.ActionListener() {
@@ -90,7 +91,7 @@ public class CourseInstructorAddFrame extends javax.swing.JFrame {
         btSave.setBackground(new java.awt.Color(56, 122, 223));
         btSave.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btSave.setForeground(new java.awt.Color(255, 255, 255));
-        btSave.setText("Lưu");
+        btSave.setText("Save");
         btSave.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(80, 196, 237)));
         btSave.setPreferredSize(new java.awt.Dimension(100, 40));
         btSave.addActionListener(new java.awt.event.ActionListener() {
@@ -106,7 +107,7 @@ public class CourseInstructorAddFrame extends javax.swing.JFrame {
         flowLayout2.setAlignOnBaseline(true);
         jPanel1.setLayout(flowLayout2);
 
-        cbView.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Theo giảng viên", "Theo khóa học" }));
+        cbView.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "By instructor", "By student" }));
         cbView.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
         cbView.setPreferredSize(new java.awt.Dimension(200, 40));
         cbView.addItemListener(new java.awt.event.ItemListener() {
@@ -124,7 +125,7 @@ public class CourseInstructorAddFrame extends javax.swing.JFrame {
         btInstructorAdd.setBackground(new java.awt.Color(155, 207, 83));
         btInstructorAdd.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btInstructorAdd.setForeground(new java.awt.Color(255, 255, 255));
-        btInstructorAdd.setText("Thêm");
+        btInstructorAdd.setText("Add");
         btInstructorAdd.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(191, 234, 124)));
         btInstructorAdd.setPreferredSize(new java.awt.Dimension(100, 40));
         btInstructorAdd.addActionListener(new java.awt.event.ActionListener() {

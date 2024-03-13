@@ -51,7 +51,7 @@ public class TableInstructorPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "STT", "ID", "Họ", "Tên", "Môn dạy"
+                "No", "ID", "First Name", "Last Name", "Course"
             }
         ) {
             boolean[] canEdit = new boolean [] {
