@@ -100,9 +100,9 @@ public class CourseResultsPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTableCourse);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel2.setText("QUẢN LÝ KẾT QUẢ SINH VIÊN");
+        jLabel2.setText("COURSE RESULT MANAGMENT");
         jLabel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 5, 10, 0));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));

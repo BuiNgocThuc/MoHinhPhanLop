@@ -66,14 +66,14 @@ public class PnCourse extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(900, 650));
 
         pnSelectedInstructorList.setBackground(new java.awt.Color(255, 255, 255));
-        pnSelectedInstructorList.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách giảng viên đã chọn", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
+        pnSelectedInstructorList.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Instructor Choosen List", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
 
         tableSelectedInstructorList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "STT", "Mã giảng viên", "Tên giảng viên"
+                "No", "InstructorID", "Instructor Name"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -87,7 +87,7 @@ public class PnCourse extends javax.swing.JPanel {
         tableSelectedInstructorList.setToolTipText("");
         spSelectedCourseList.setViewportView(tableSelectedInstructorList);
 
-        btDeleteInstructor.setText("Xóa");
+        btDeleteInstructor.setText("Delete");
         btDeleteInstructor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
         btDeleteInstructor.setPreferredSize(new java.awt.Dimension(72, 40));
         btDeleteInstructor.addActionListener(new java.awt.event.ActionListener() {
@@ -118,7 +118,7 @@ public class PnCourse extends javax.swing.JPanel {
         );
 
         pnInstructorList.setBackground(new java.awt.Color(255, 255, 255));
-        pnInstructorList.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách giảng viên", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
+        pnInstructorList.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Instructors List", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
         pnInstructorList.setPreferredSize(new java.awt.Dimension(22, 310));
 
         tableInstructorList.setModel(new javax.swing.table.DefaultTableModel(
@@ -129,7 +129,7 @@ public class PnCourse extends javax.swing.JPanel {
                 {null, null}
             },
             new String [] {
-                "Mã giảng viên", "Tên giảng viên"
+                "InstructorID", "Instructor Name"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -142,7 +142,7 @@ public class PnCourse extends javax.swing.JPanel {
         });
         spCourseList.setViewportView(tableInstructorList);
 
-        btSelectedInstructor.setText("Thêm");
+        btSelectedInstructor.setText("Add");
         btSelectedInstructor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
         btSelectedInstructor.setPreferredSize(new java.awt.Dimension(72, 40));
         btSelectedInstructor.addActionListener(new java.awt.event.ActionListener() {
@@ -151,7 +151,7 @@ public class PnCourse extends javax.swing.JPanel {
             }
         });
 
-        btSeeAllInstructorList.setText("Xem tất cả");
+        btSeeAllInstructorList.setText("All List");
         btSeeAllInstructorList.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
         btSeeAllInstructorList.setPreferredSize(new java.awt.Dimension(86, 40));
         btSeeAllInstructorList.addActionListener(new java.awt.event.ActionListener() {
@@ -187,7 +187,7 @@ public class PnCourse extends javax.swing.JPanel {
         );
 
         pnCourseList.setBackground(new java.awt.Color(255, 255, 255));
-        pnCourseList.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách khóa học", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
+        pnCourseList.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Course List", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
         pnCourseList.setPreferredSize(new java.awt.Dimension(22, 100));
 
         tableCourseList.setModel(new javax.swing.table.DefaultTableModel(
@@ -198,7 +198,7 @@ public class PnCourse extends javax.swing.JPanel {
                 {null, null}
             },
             new String [] {
-                "Mã khóa học", "Tên khóa học"
+                "Course ID", "Course Name"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -229,7 +229,7 @@ public class PnCourse extends javax.swing.JPanel {
 
         tfCourseSearch.setPreferredSize(new java.awt.Dimension(64, 40));
 
-        btCourseSearch.setText("Tìm");
+        btCourseSearch.setText("Search");
         btCourseSearch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
         btCourseSearch.setPreferredSize(new java.awt.Dimension(72, 40));
         btCourseSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -240,7 +240,7 @@ public class PnCourse extends javax.swing.JPanel {
 
         tfInstructorSearch.setPreferredSize(new java.awt.Dimension(64, 40));
 
-        btInstructorSearch.setText("Tìm");
+        btInstructorSearch.setText("Search");
         btInstructorSearch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
         btInstructorSearch.setPreferredSize(new java.awt.Dimension(72, 40));
         btInstructorSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -249,7 +249,7 @@ public class PnCourse extends javax.swing.JPanel {
             }
         });
 
-        btSeeAllCourseList.setText("Xem tất cả");
+        btSeeAllCourseList.setText("All List");
         btSeeAllCourseList.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
         btSeeAllCourseList.setPreferredSize(new java.awt.Dimension(86, 40));
         btSeeAllCourseList.addActionListener(new java.awt.event.ActionListener() {

@@ -71,7 +71,7 @@ public class AssigmentDetailGV extends JFrame {
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)
         ));
 
-        JLabel titleLabel = new JLabel("Chi tiết phân công của giảng viên");
+        JLabel titleLabel = new JLabel("Instructor Assignment Detail");
         titleLabel.setFont(new Font("Arial", Font.PLAIN, 20));
 
         panelTop.add(titleLabel, BorderLayout.WEST);
@@ -129,10 +129,10 @@ public class AssigmentDetailGV extends JFrame {
                 BorderFactory.createEmptyBorder(0, 10, 10, 10),
                 BorderFactory.createTitledBorder(
                         BorderFactory.createEtchedBorder(EtchedBorder.LOWERED, Color.WHITE, Color.GRAY),
-                        "Danh sách các môn được phân công", TitledBorder.LEADING, TitledBorder.TOP)));
+                        "Course Assignment List", TitledBorder.LEADING, TitledBorder.TOP)));
         modeltable = new DefaultTableModel(
                 new Object[][]{},
-                new String[]{"STT", "ID", "Tên Môn", "Số Tín Chỉ", "Phòng", ""}) {
+                new String[]{"No", "ID", "Course Name", "Credit", "Room", ""}) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false; // Ngăn chặn việc chỉnh sửa ô
@@ -198,10 +198,10 @@ public class AssigmentDetailGV extends JFrame {
 
         JPanel panelRight = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         panelRight.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
-        btnSave = new JButton("Lưu");
+        btnSave = new JButton("Save");
         btnSave.addActionListener((ActionEvent e) -> {
             int confirmed = JOptionPane.showConfirmDialog(null,
-                    "Bạn có chắc chắn muốn lưu thay đổi không?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+                    "Are you sure you want to save this change?", "Confirm", JOptionPane.YES_NO_OPTION);
             if (confirmed == JOptionPane.YES_OPTION) {
                 PersonEntity instructor = new PersonEntity();
                 List<CourseEntity> courses = new ArrayList<>();
@@ -219,17 +219,17 @@ public class AssigmentDetailGV extends JFrame {
                     Logger.getLogger(AssigmentDetailGV.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-                JOptionPane.showMessageDialog(null, "Thay đổi đã được lưu thành công.", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Save change successfully1.", "Success", JOptionPane.INFORMATION_MESSAGE);
             }
         });
 
-        btnAddMon = new JButton("thêm");
+        btnAddMon = new JButton("Add");
         btnAddMon.addActionListener((ActionEvent e) -> {
             panel.setVisible(false);
             panelBelow.setVisible(true);
         });
 
-        btnCloseFrame = new JButton("Đóng");
+        btnCloseFrame = new JButton("Close");
         btnCloseFrame.addActionListener((e) -> {
             this.dispose();
         });
@@ -255,11 +255,11 @@ public class AssigmentDetailGV extends JFrame {
                 BorderFactory.createEmptyBorder(0, 10, 10, 10),
                 BorderFactory.createTitledBorder(
                         BorderFactory.createEtchedBorder(EtchedBorder.LOWERED, Color.WHITE, Color.GRAY),
-                        "Danh sách các môn", TitledBorder.LEADING, TitledBorder.TOP)));
+                        "Course List", TitledBorder.LEADING, TitledBorder.TOP)));
 
         modeltable1 = new DefaultTableModel(
                 new Object[][]{},
-                new String[]{"STT", "ID", "Tên Môn", "Số Tín Chỉ", "Phòng", ""}) {
+                new String[]{"No", "ID", "Course Name", "Credit", "Room", ""}) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false; // Ngăn chặn việc chỉnh sửa ô
@@ -328,13 +328,13 @@ public class AssigmentDetailGV extends JFrame {
         searchValue = new JTextField();
         searchValue.setPreferredSize(new Dimension(200, 30));
         searchValue.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        btnSearch = new JButton("Lọc");
+        btnSearch = new JButton("Filter");
         panelRight.add(searchValue);
         panelRight.add(btnSearch);
         panelBelow.add(panelRight, BorderLayout.NORTH);
         JPanel panelRight1 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         panelRight1.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 10));
-        JButton btnClose = new JButton("Đóng");
+        JButton btnClose = new JButton("Close");
         btnClose.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -351,7 +351,7 @@ public class AssigmentDetailGV extends JFrame {
         for (int i = 0; i < model.getRowCount(); i++) {
             int existingCourseID = Integer.parseInt((String) model.getValueAt(i, 1));
             if (existingCourseID == courseID) {
-                JOptionPane.showMessageDialog(null, "Môn học đã được thêm!", "", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Add course successfully!", "Success", JOptionPane.WARNING_MESSAGE);
                 return;
             }
         }
@@ -398,7 +398,7 @@ public class AssigmentDetailGV extends JFrame {
                 label.setHorizontalAlignment(SwingConstants.CENTER);
                 label.setVerticalAlignment(SwingConstants.CENTER);
             } else {
-                label.setText("thêm");
+                label.setText("Add");
                 System.out.println("không có");
                 return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
             }

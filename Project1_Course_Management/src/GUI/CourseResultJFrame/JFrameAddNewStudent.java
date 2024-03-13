@@ -82,20 +82,20 @@ public class JFrameAddNewStudent extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("THÊM MỚI HỌC SINH VÀO KHÓA HỌC");
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("ADD NEW STUDENT TO COURSE");
 
+        jLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel.setText("Last Name:");
         jLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        jLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel.setPreferredSize(new java.awt.Dimension(63, 40));
 
         lastNameTxt.setPreferredSize(new java.awt.Dimension(220, 40));
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("First Name:");
         jLabel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setPreferredSize(new java.awt.Dimension(63, 40));
 
         firstNameTxt.setPreferredSize(new java.awt.Dimension(220, 40));
@@ -103,7 +103,7 @@ public class JFrameAddNewStudent extends javax.swing.JFrame {
         closeFrameBtn.setBackground(new java.awt.Color(128, 128, 128));
         closeFrameBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         closeFrameBtn.setForeground(new java.awt.Color(255, 255, 255));
-        closeFrameBtn.setText("Đóng");
+        closeFrameBtn.setText("Close");
         closeFrameBtn.setBorder(null);
         closeFrameBtn.setPreferredSize(new java.awt.Dimension(75, 38));
         closeFrameBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -112,11 +112,11 @@ public class JFrameAddNewStudent extends javax.swing.JFrame {
             }
         });
 
-        addCourseBtn.setText("Thêm");
         addCourseBtn.setBackground(new java.awt.Color(101, 183, 65));
-        addCourseBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(193, 242, 176)));
         addCourseBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         addCourseBtn.setForeground(new java.awt.Color(255, 255, 255));
+        addCourseBtn.setText("Add");
+        addCourseBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(193, 242, 176)));
         addCourseBtn.setPreferredSize(new java.awt.Dimension(75, 38));
         addCourseBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,9 +124,9 @@ public class JFrameAddNewStudent extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Enrollment Date:");
         jLabel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setPreferredSize(new java.awt.Dimension(63, 40));
 
         enrollmentDateTxt.setEditable(false);
