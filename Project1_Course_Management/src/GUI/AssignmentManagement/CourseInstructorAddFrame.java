@@ -184,16 +184,16 @@ public class CourseInstructorAddFrame extends javax.swing.JFrame {
 
     private void cbViewItemStateChanged(java.awt.event.ItemEvent evt) {
         if (evt.getStateChange() == ItemEvent.SELECTED) {
-            switch (cbView.getSelectedItem().toString()) {
-                case "Theo khóa học" -> {
+            switch (cbView.getSelectedIndex()) {
+                case 0 -> {
                     pnContainerChange.removeAll();
-                    pnContainerChange.add(pnCourse);
+                    pnContainerChange.add(pnInstructor);
                     pnContainerChange.revalidate();
                     pnContainerChange.repaint();
                 }
-                case "Theo giảng viên" -> {
+                case 1 -> {
                     pnContainerChange.removeAll();
-                    pnContainerChange.add(pnInstructor);
+                    pnContainerChange.add(pnCourse);
                     pnContainerChange.revalidate();
                     pnContainerChange.repaint();
                 }
