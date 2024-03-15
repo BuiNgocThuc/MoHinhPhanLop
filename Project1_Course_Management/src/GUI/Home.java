@@ -4,20 +4,20 @@
  */
 package GUi;
 
-import GUI.MainPanel.CoursePanel;
-import GUI.MainPanel.OnlineCoursePanel;
+
+import GUI.AssignmentManagement.CourseInstrutorPanel;
+import GUI.CourseInfo.CoursePanel;
+import GUI.CourseInfo.CourseResultsPanel;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.Timer;
-import GUI.MainPanel.OnsiteCoursePanel;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ASUS
@@ -30,20 +30,31 @@ public class Home extends javax.swing.JFrame {
     private final Color yellow = new Color(255, 188, 0);
     private final Color lightBlue = new Color(0, 158, 248);
     private final Color darkBlue = new Color(0, 158, 248);
-    private final Color lightGray = new Color(242,242,242);
+
+    private final Color lightGray = new Color(242, 242, 242);
 //    private final OnsiteCoursePanel onsiteCoursePanel = new OnsiteCoursePanel();
 //    private final OnlineCoursePanel onlineCoursePanel = new OnlineCoursePanel();
+    private CourseInstrutorPanel courseInstrutorPanel = null;
+    ;
     private final CoursePanel coursePanel = new CoursePanel();
+    private final CourseResultsPanel courseResultPanel = new CourseResultsPanel();
+
     private boolean dropdownToggle = false;
     private JButton currentBtn = null;
     private final ArrayList<JButton> allBtnLeftBar = new ArrayList<>();
     private final ArrayList<JButton> allBtnLeftSubBar = new ArrayList<>();
 
     public Home() {
+        try {
+            this.courseInstrutorPanel = new CourseInstrutorPanel();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Lỗi hệ thống");
+        }
+
         initComponents();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/assets/icons8-graduate-60.png")));
         allBtnLeftBar.addAll(Arrays.asList(courseBtn, scheduleBtn, resultBtn));
-        allBtnLeftSubBar.addAll(Arrays.asList(onlineCourseBtn, onsiteCourseBtn));
     }
 
     /**
@@ -57,14 +68,11 @@ public class Home extends javax.swing.JFrame {
 
         sidebarMenu = new javax.swing.JPanel();
         courseBtn = new javax.swing.JButton();
-        dropdownCourses = new javax.swing.JPanel();
-        onsiteCourseBtn = new javax.swing.JButton();
-        onlineCourseBtn = new javax.swing.JButton();
         scheduleBtn = new javax.swing.JButton();
         resultBtn = new javax.swing.JButton();
         cardPanel = new javax.swing.JPanel();
-        schedulePanel = new javax.swing.JPanel();
-        resultPanel = new javax.swing.JPanel();
+        startPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Course Management");
@@ -74,8 +82,7 @@ public class Home extends javax.swing.JFrame {
 
         courseBtn.setBackground(new java.awt.Color(242, 242, 242));
         courseBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        courseBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8-arrow-down-20.png"))); // NOI18N
-        courseBtn.setText("Các khóa học");
+        courseBtn.setText("Course Management");
         courseBtn.setToolTipText("");
         courseBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 15));
         courseBtn.setBorderPainted(false);
@@ -91,48 +98,9 @@ public class Home extends javax.swing.JFrame {
         });
         sidebarMenu.add(courseBtn);
 
-        dropdownCourses.setBackground(new java.awt.Color(0, 0, 0));
-        dropdownCourses.setOpaque(false);
-        dropdownCourses.setPreferredSize(new java.awt.Dimension(0, 0));
-        dropdownCourses.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0));
-
-        onsiteCourseBtn.setBackground(new java.awt.Color(0, 0, 0));
-        onsiteCourseBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        onsiteCourseBtn.setForeground(new java.awt.Color(255, 255, 255));
-        onsiteCourseBtn.setText("Khóa học onsite");
-        onsiteCourseBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 15));
-        onsiteCourseBtn.setBorderPainted(false);
-        onsiteCourseBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        onsiteCourseBtn.setOpaque(true);
-        onsiteCourseBtn.setPreferredSize(new java.awt.Dimension(250, 56));
-        onsiteCourseBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                onsiteCourseBtnActionPerformed(evt);
-            }
-        });
-        dropdownCourses.add(onsiteCourseBtn);
-
-        onlineCourseBtn.setBackground(new java.awt.Color(0, 0, 0));
-        onlineCourseBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        onlineCourseBtn.setForeground(new java.awt.Color(255, 255, 255));
-        onlineCourseBtn.setText("Khóa học online");
-        onlineCourseBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 15));
-        onlineCourseBtn.setBorderPainted(false);
-        onlineCourseBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        onlineCourseBtn.setOpaque(true);
-        onlineCourseBtn.setPreferredSize(new java.awt.Dimension(250, 56));
-        onlineCourseBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                onlineCourseBtnActionPerformed(evt);
-            }
-        });
-        dropdownCourses.add(onlineCourseBtn);
-
-        sidebarMenu.add(dropdownCourses);
-
         scheduleBtn.setBackground(new java.awt.Color(242, 242, 242));
         scheduleBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        scheduleBtn.setText("Lịch phân công");
+        scheduleBtn.setText("Assignment Management");
         scheduleBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 15));
         scheduleBtn.setBorderPainted(false);
         scheduleBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -146,7 +114,7 @@ public class Home extends javax.swing.JFrame {
 
         resultBtn.setBackground(new java.awt.Color(242, 242, 242));
         resultBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        resultBtn.setText("Kết quả khóa học");
+        resultBtn.setText("Course Result Management");
         resultBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 15));
         resultBtn.setBorderPainted(false);
         resultBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -161,36 +129,27 @@ public class Home extends javax.swing.JFrame {
         getContentPane().add(sidebarMenu, java.awt.BorderLayout.LINE_START);
 
         cardPanel.setLayout(new java.awt.CardLayout());
+        startPanel.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/banner (2).png"))); // NOI18N
+        javax.swing.GroupLayout startPanelLayout = new javax.swing.GroupLayout(startPanel);
+        startPanel.setLayout(startPanelLayout);
+        startPanelLayout.setHorizontalGroup(
+            startPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(startPanelLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(jLabel1)
+                .addGap(0, 0, Short.MAX_VALUE))
 
-        schedulePanel.setBackground(new java.awt.Color(51, 204, 255));
-
-        javax.swing.GroupLayout schedulePanelLayout = new javax.swing.GroupLayout(schedulePanel);
-        schedulePanel.setLayout(schedulePanelLayout);
-        schedulePanelLayout.setHorizontalGroup(
-            schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1000, Short.MAX_VALUE)
         );
-        schedulePanelLayout.setVerticalGroup(
-            schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
-        );
-
-        cardPanel.add(schedulePanel, "card5");
-
-        resultPanel.setBackground(new java.awt.Color(0, 255, 153));
-
-        javax.swing.GroupLayout resultPanelLayout = new javax.swing.GroupLayout(resultPanel);
-        resultPanel.setLayout(resultPanelLayout);
-        resultPanelLayout.setHorizontalGroup(
-            resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1000, Short.MAX_VALUE)
-        );
-        resultPanelLayout.setVerticalGroup(
-            resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
+        startPanelLayout.setVerticalGroup(
+            startPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(startPanelLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
 
-        cardPanel.add(resultPanel, "card4");
+        cardPanel.add(startPanel, "card4");
 
         getContentPane().add(cardPanel, java.awt.BorderLayout.CENTER);
 
@@ -199,7 +158,6 @@ public class Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void courseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_courseBtnActionPerformed
-        toggleDropdown();
         cardPanel.removeAll();
         cardPanel.add(coursePanel);
         cardPanel.repaint();
@@ -211,82 +169,24 @@ public class Home extends javax.swing.JFrame {
 
     private void scheduleBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scheduleBtnActionPerformed
 
-        switchPanel(schedulePanel,scheduleBtn);
+        cardPanel.removeAll();
+        cardPanel.add(courseInstrutorPanel);
+        cardPanel.repaint();
+        cardPanel.revalidate();
+        setBackgroundDefaultAllButton();
+        scheduleBtn.setBackground(lightBlue);
+//        switchPanel(schedulePanel,scheduleBtn);
 
     }//GEN-LAST:event_scheduleBtnActionPerformed
 
     private void resultBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resultBtnActionPerformed
-
-        switchPanel(resultPanel,resultBtn);
+        cardPanel.removeAll();
+        cardPanel.add(courseResultPanel);
+        cardPanel.repaint();
+        cardPanel.revalidate();
+        setBackgroundDefaultAllButton();
+        resultBtn.setBackground(lightBlue);
     }//GEN-LAST:event_resultBtnActionPerformed
-
-    private void onsiteCourseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onsiteCourseBtnActionPerformed
-        // TODO add your handling code here:
-        cardPanel.removeAll();
-//        cardPanel.add(onsiteCoursePanel);
-        cardPanel.repaint();
-        cardPanel.revalidate();
-//        onsiteCoursePanel.getEditOnsiteCoursePanel().setVisible(false);
-        setBackgroundDefaultAllButton();
-        onsiteCourseBtn.setBackground(lightBlue);
-    }//GEN-LAST:event_onsiteCourseBtnActionPerformed
-
-    private void onlineCourseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onlineCourseBtnActionPerformed
-        // TODO add your handling code here:
-        cardPanel.removeAll();
-//        cardPanel.add(onlineCoursePanel);
-//        onlineCoursePanel.getEditOnsiteCoursePanel().setVisible(false);
-        cardPanel.repaint();
-        cardPanel.revalidate();
-        setBackgroundDefaultAllButton();
-        onlineCourseBtn.setBackground(lightBlue);
-    }//GEN-LAST:event_onlineCourseBtnActionPerformed
-
-    public void openMenu() {
-        int initialHeight = dropdownCourses.getPreferredSize().height; // Change to height
-        int steps = 100 / 10; // 10 ms interval between each step
-        int stepHeight = 250 / steps; // Change to height
-
-        Timer timer = new Timer(10, new ActionListener() {
-            int currentHeight = initialHeight; // Change to height
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                currentHeight += stepHeight; // Change to height
-                if (currentHeight >= 112) {
-                    currentHeight = 112;
-                    ((Timer) e.getSource()).stop();
-                }
-                Dimension newPreferredSize = new Dimension(250, currentHeight); // Change to height
-                dropdownCourses.setPreferredSize(newPreferredSize);
-                dropdownCourses.revalidate();
-            }
-        });
-        timer.start();
-    }
-
-    public void closeMenu() {
-        int initialHeight = dropdownCourses.getPreferredSize().height;
-        int steps = 100 / 10; // 10 ms interval between each step
-        int stepWidth = initialHeight / steps;
-
-        Timer timer = new Timer(10, new ActionListener() {
-            int currentHeight = initialHeight;
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                currentHeight -= stepWidth;
-                if (currentHeight <= 0) {
-                    currentHeight = 0;
-                    ((Timer) e.getSource()).stop();
-                }
-                Dimension newPreferredSize = new Dimension(250, currentHeight);
-                dropdownCourses.setPreferredSize(newPreferredSize);
-                dropdownCourses.revalidate();
-            }
-        });
-        timer.start();
-    }
 
     public void setBackgroundDefaultAllButton() {
         for (JButton btn : allBtnLeftBar) {
@@ -297,18 +197,7 @@ public class Home extends javax.swing.JFrame {
         }
     }
 
-    private void toggleDropdown() {
-    dropdownToggle = !dropdownToggle;
-    if (dropdownToggle) {
-        courseBtn.setIcon(new ImageIcon(getClass().getResource("/assets/icons8-arrow-up-20.png")));
-        openMenu();
-    } else {
-        courseBtn.setIcon(new ImageIcon(getClass().getResource("/assets/icons8-arrow-down-20.png")));
-        closeMenu();
-    }
-}
-    
-    private void switchPanel(Component panel,JButton btn) {
+    private void switchPanel(Component panel, JButton btn) {
         cardPanel.removeAll();
         cardPanel.add(panel);
         cardPanel.repaint();
@@ -317,19 +206,16 @@ public class Home extends javax.swing.JFrame {
         btn.setBackground(lightBlue);
         courseBtn.setIcon(new ImageIcon(getClass().getResource("/assets/icons8-arrow-down-20.png")));
         dropdownToggle = false;
-        closeMenu();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel cardPanel;
     private javax.swing.JButton courseBtn;
-    private javax.swing.JPanel dropdownCourses;
-    private javax.swing.JButton onlineCourseBtn;
-    private javax.swing.JButton onsiteCourseBtn;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton resultBtn;
-    private javax.swing.JPanel resultPanel;
     private javax.swing.JButton scheduleBtn;
     private javax.swing.JPanel schedulePanel;
     private javax.swing.JPanel sidebarMenu;
+    private javax.swing.JPanel startPanel;
     // End of variables declaration//GEN-END:variables
 }

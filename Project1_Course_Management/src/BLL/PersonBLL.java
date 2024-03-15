@@ -3,27 +3,44 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package BLL;
-import DTO.PersonDTO;
+
+import BLL.Entity.PersonEntity;
 import DAL.PersonDAL;
+import java.sql.SQLException;
 import java.util.ArrayList;
+
 /**
  *
  * @author buing
  */
 public class PersonBLL {
-    PersonDAL personDAL=new PersonDAL();
-    public ArrayList<PersonDTO> getAllList(){
+    PersonDAL personDAL = new PersonDAL();
+
+    public ArrayList<PersonEntity> getAllList() {
         return personDAL.getAllList();
     }
-    public PersonDTO detailsPerson(int id){
+
+    public PersonEntity detailsPerson(int id) {
         return personDAL.detailsPerson(id);
     }
-    
-    public ArrayList<PersonDTO> getListStudent(){
+
+    public boolean addPerson(PersonEntity person) throws SQLException {
+        return personDAL.addPerson(person);
+    }
+
+    public ArrayList<PersonEntity> getListStudent() {
         return personDAL.getListStudent();
     }
-    
-    public ArrayList<PersonDTO> getListInstructor(){
+
+    public ArrayList<PersonEntity> getListInstructor() {
         return personDAL.getListInstructor();
+    }
+    
+    public boolean insertPerson(PersonEntity person) {
+        return personDAL.insertPerson(person);
+    }
+    
+    public int getAutoIncrement() {
+        return personDAL.getAutoIncrement();
     }
 }

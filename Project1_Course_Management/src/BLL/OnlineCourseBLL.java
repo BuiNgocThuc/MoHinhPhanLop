@@ -6,7 +6,7 @@ package BLL;
 
 import DAL.CourseDAL;
 import DAL.OnlineCourseDAL;
-import DTO.OnlineCourseDTO;
+import BLL.Entity.OnlineCourseEntity;
 import java.util.List;
 
 /**
@@ -24,43 +24,30 @@ public class OnlineCourseBLL {
         onlCourseDAL = new OnlineCourseDAL();
     }
 
-    public List<OnlineCourseDTO> selectAllOnlineCourse() {
+    public List<OnlineCourseEntity> selectAllOnlineCourse() {
         return courseDAL.selectAllOnlineCourse();
     }
 
-    public boolean insertOnlineCourse(OnlineCourseDTO onlCourse) {
-        boolean success = courseBLL.insertCourse(onlCourse);
-        if (success)
-        {
-            return onlCourseDAL.insertOnlineCourse(onlCourse);
-        } else
-        {
-            System.out.println("Them khoa hoc online that bai");
-        }
-        return false;
+    public boolean insertOnlineCourse(OnlineCourseEntity onlCourse) {
+        return onlCourseDAL.insertOnlineCourse(onlCourse);
     }
-    
-    public OnlineCourseDTO selectByID(int CourseID) {
+
+    public OnlineCourseEntity selectByID(int CourseID) {
         return onlCourseDAL.selectByID(CourseID);
     }
 
-    public boolean updateOnlineCourse(OnlineCourseDTO onlCourse) {
-        boolean success = courseBLL.updateCourse(onlCourse);
-        if (success)
-        {
-            return onlCourseDAL.updateOnlineCourse(onlCourse);
-        } else {
-            System.out.println("Sua khoa hoc online that bai");
-        }
-        return false;
+    public boolean updateOnlineCourse(OnlineCourseEntity onlCourse) {
+        return onlCourseDAL.updateOnlineCourse(onlCourse);
+
     }
 
     public boolean deleteOnlineCourse(int CourseID) {
-        boolean success =  onlCourseDAL.deleteOnlineCourse(CourseID);
+        boolean success = onlCourseDAL.deleteOnlineCourse(CourseID);
         if (success)
         {
             return courseBLL.deleteCourse(CourseID);
-        } else {
+        } else
+        {
             System.out.println("Xoa khoa hoc online that bai");
         }
         return false;
