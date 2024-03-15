@@ -4,6 +4,7 @@
  */
 package GUi;
 
+
 import GUI.AssignmentManagement.CourseInstrutorPanel;
 import GUI.CourseInfo.CoursePanel;
 import GUI.CourseInfo.CourseResultsPanel;
@@ -29,6 +30,7 @@ public class Home extends javax.swing.JFrame {
     private final Color yellow = new Color(255, 188, 0);
     private final Color lightBlue = new Color(0, 158, 248);
     private final Color darkBlue = new Color(0, 158, 248);
+
     private final Color lightGray = new Color(242, 242, 242);
 //    private final OnsiteCoursePanel onsiteCoursePanel = new OnsiteCoursePanel();
 //    private final OnlineCoursePanel onlineCoursePanel = new OnlineCoursePanel();
@@ -36,6 +38,7 @@ public class Home extends javax.swing.JFrame {
     ;
     private final CoursePanel coursePanel = new CoursePanel();
     private final CourseResultsPanel courseResultPanel = new CourseResultsPanel();
+
     private boolean dropdownToggle = false;
     private JButton currentBtn = null;
     private final ArrayList<JButton> allBtnLeftBar = new ArrayList<>();
@@ -126,11 +129,8 @@ public class Home extends javax.swing.JFrame {
         getContentPane().add(sidebarMenu, java.awt.BorderLayout.LINE_START);
 
         cardPanel.setLayout(new java.awt.CardLayout());
-
         startPanel.setBackground(new java.awt.Color(255, 255, 255));
-
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/banner (2).png"))); // NOI18N
-
         javax.swing.GroupLayout startPanelLayout = new javax.swing.GroupLayout(startPanel);
         startPanel.setLayout(startPanelLayout);
         startPanelLayout.setHorizontalGroup(
@@ -139,6 +139,7 @@ public class Home extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(jLabel1)
                 .addGap(0, 0, Short.MAX_VALUE))
+
         );
         startPanelLayout.setVerticalGroup(
             startPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,6 +214,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton resultBtn;
     private javax.swing.JButton scheduleBtn;
+    private javax.swing.JPanel schedulePanel;
     private javax.swing.JPanel sidebarMenu;
     private javax.swing.JPanel startPanel;
     // End of variables declaration//GEN-END:variables
