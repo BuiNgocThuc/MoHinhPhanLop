@@ -7,9 +7,9 @@ package GUI.AssignmentManagement;
 import BLL.CourseBLL;
 import BLL.CourseInstructorBLL;
 import BLL.PersonBLL;
-import DTO.CourseDTO;
-import DTO.CourseInstructorDTO;
-import DTO.PersonDTO;
+import BLL.Entity.CourseEntity;
+import BLL.Entity.CourseInstructorEntity;
+import BLL.Entity.PersonEntity;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.event.ItemEvent;
 import java.sql.SQLException;
@@ -34,7 +34,7 @@ public class CourseInstructorAddFrame extends javax.swing.JFrame {
     private CourseInstructorBLL courseInstructorBLL = new CourseInstructorBLL();
     private CourseBLL courseBLL = new CourseBLL();
     private PersonBLL personBLL = new PersonBLL();
-    private final List<CourseInstructorDTO> courseInstructorList;
+    private final List<CourseInstructorEntity> courseInstructorList;
 
     public CourseInstructorAddFrame() throws SQLException {
         initComponents();
@@ -56,7 +56,7 @@ public class CourseInstructorAddFrame extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         pnContainer = new javax.swing.JPanel();
@@ -82,7 +82,7 @@ public class CourseInstructorAddFrame extends javax.swing.JFrame {
         pnContainerCloseSave.setLayout(flowLayout1);
 
         btClose.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btClose.setText("Đóng");
+        btClose.setText("Close");
         btClose.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btClose.setPreferredSize(new java.awt.Dimension(100, 40));
         btClose.addActionListener(new java.awt.event.ActionListener() {
@@ -95,7 +95,7 @@ public class CourseInstructorAddFrame extends javax.swing.JFrame {
         btSave.setBackground(new java.awt.Color(56, 122, 223));
         btSave.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btSave.setForeground(new java.awt.Color(255, 255, 255));
-        btSave.setText("Lưu");
+        btSave.setText("Save");
         btSave.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(80, 196, 237)));
         btSave.setPreferredSize(new java.awt.Dimension(100, 40));
         btSave.addActionListener(new java.awt.event.ActionListener() {
@@ -111,7 +111,7 @@ public class CourseInstructorAddFrame extends javax.swing.JFrame {
         flowLayout2.setAlignOnBaseline(true);
         jPanel1.setLayout(flowLayout2);
 
-        cbView.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Theo giảng viên", "Theo khóa học" }));
+        cbView.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "By instructor", "By course" }));
         cbView.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
         cbView.setPreferredSize(new java.awt.Dimension(200, 40));
         cbView.addItemListener(new java.awt.event.ItemListener() {
@@ -129,7 +129,7 @@ public class CourseInstructorAddFrame extends javax.swing.JFrame {
         btInstructorAdd.setBackground(new java.awt.Color(155, 207, 83));
         btInstructorAdd.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btInstructorAdd.setForeground(new java.awt.Color(255, 255, 255));
-        btInstructorAdd.setText("Thêm");
+        btInstructorAdd.setText("Add");
         btInstructorAdd.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(191, 234, 124)));
         btInstructorAdd.setPreferredSize(new java.awt.Dimension(100, 40));
         btInstructorAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -142,47 +142,41 @@ public class CourseInstructorAddFrame extends javax.swing.JFrame {
         javax.swing.GroupLayout pnContainerLayout = new javax.swing.GroupLayout(pnContainer);
         pnContainer.setLayout(pnContainerLayout);
         pnContainerLayout.setHorizontalGroup(
-                pnContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnContainerLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(pnContainerLayout
-                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(pnContainerCloseSave, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, 888, Short.MAX_VALUE)
-                                        .addComponent(pnContainerChange, javax.swing.GroupLayout.Alignment.TRAILING,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap()));
+            pnContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnContainerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnContainerCloseSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 888, Short.MAX_VALUE)
+                    .addComponent(pnContainerChange, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
         pnContainerLayout.setVerticalGroup(
-                pnContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnContainerLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(pnContainerChange, javax.swing.GroupLayout.DEFAULT_SIZE, 474,
-                                        Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(pnContainerCloseSave, javax.swing.GroupLayout.PREFERRED_SIZE, 50,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap()));
+            pnContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnContainerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnContainerChange, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnContainerCloseSave, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(pnContainer, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(0, 0, 0)));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(pnContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, 0)
-                                .addComponent(pnContainer, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(pnContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         pack();
         setLocationRelativeTo(null);
@@ -216,21 +210,21 @@ public class CourseInstructorAddFrame extends javax.swing.JFrame {
     private void btSaveActionPerformed(java.awt.event.ActionEvent evt) {
 
         if (cbView.getSelectedItem().toString().equals("Theo giảng viên")) {
-            List<CourseDTO> selectedCourses = (List<CourseDTO>) pnInstructor.getSelectedCourses();
+            List<CourseEntity> selectedCourses = (List<CourseEntity>) pnInstructor.getSelectedCourses();
             Integer idInstructor = pnInstructor.getFirstColumnDataOfSelectedRow();
             if (idInstructor != null) {
                 if (!selectedCourses.isEmpty()) {
                     int idCourse = courseInstructorBLL.checkCourseExist(idInstructor, selectedCourses);
                     if (idCourse != 0) {
-                        CourseDTO courseDTO = courseBLL.courseDetail(idCourse);
+                        CourseEntity courseDTO = courseBLL.courseDetail(idCourse);
                         JOptionPane.showMessageDialog(null, "Khóa học " + courseDTO.getTitle() + " đã được phân công!");
                     } else {
                         int confirmationResult = JOptionPane.showConfirmDialog(null,
                                 "Bạn có muốn thêm giảng viên được phân công với các khóa học này không?", "Xác nhận",
                                 JOptionPane.YES_NO_OPTION);
                         if (confirmationResult == JOptionPane.YES_OPTION) {
-                            for (CourseDTO courseDTO : selectedCourses) {
-                                CourseInstructorDTO courseInstructorDTO = new CourseInstructorDTO(
+                            for (CourseEntity courseDTO : selectedCourses) {
+                                CourseInstructorEntity courseInstructorDTO = new CourseInstructorEntity(
                                         courseDTO.getCourseID(), idInstructor);
                                 try {
                                     courseInstructorBLL.insertCourseInstructor(courseInstructorDTO);
@@ -250,13 +244,13 @@ public class CourseInstructorAddFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Chưa chọn giảng viên nào!");
             }
         } else {
-            List<PersonDTO> selectedInstructors = (List<PersonDTO>) pnCourse.getSelectedCourses();
+            List<PersonEntity> selectedInstructors = (List<PersonEntity>) pnCourse.getSelectedCourses();
             Integer idCourse = pnCourse.getFirstColumnDataOfSelectedRow();
             if (idCourse != null) {
                 if (!selectedInstructors.isEmpty()) {
                     int idInstructor = courseInstructorBLL.checkInstructorExist(idCourse, selectedInstructors);
                     if (idInstructor != 0) {
-                        PersonDTO personDTO = personBLL.detailsPerson(idInstructor);
+                        PersonEntity personDTO = personBLL.detailsPerson(idInstructor);
                         JOptionPane.showMessageDialog(null,
                                 "Giảng viên " + personDTO.getFirstName() + " đã được phân công!");
                     } else {
@@ -264,8 +258,8 @@ public class CourseInstructorAddFrame extends javax.swing.JFrame {
                                 "Bạn có muốn thêm giảng viên được phân công với các khóa học này không?", "Xác nhận",
                                 JOptionPane.YES_NO_OPTION);
                         if (confirmationResult == JOptionPane.YES_OPTION) {
-                            for (PersonDTO personDTO : selectedInstructors) {
-                                CourseInstructorDTO courseInstructorDTO = new CourseInstructorDTO(idCourse,
+                            for (PersonEntity personDTO : selectedInstructors) {
+                                CourseInstructorEntity courseInstructorDTO = new CourseInstructorEntity(idCourse,
                                         personDTO.getPersonID());
                                 try {
                                     courseInstructorBLL.insertCourseInstructor(courseInstructorDTO);

@@ -6,8 +6,8 @@ package GUI.CourseResultJFrame;
 
 import BLL.PersonBLL;
 import BLL.StudentGradeBLL;
-import DTO.PersonDTO;
-import DTO.StudentGradeDTO;
+import BLL.Entity.PersonEntity;
+import BLL.Entity.StudentGradeEntity;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
@@ -73,7 +73,7 @@ public class JFrameStatistical extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "STT", "PersonID", "LastName", "FirstName", "Grade"
+                "No", "PersonID", "LastName", "FirstName", "Grade"
             }
         ));
         jScrollPane1.setViewportView(jTableChart);
@@ -167,11 +167,11 @@ public class JFrameStatistical extends javax.swing.JFrame {
             model.addColumn(i);
         }
         int stt=0;
-        for(StudentGradeDTO i:studentGradeBLL.Statistical(CourseID, text)){
+        for(StudentGradeEntity i:studentGradeBLL.Statistical(CourseID, text)){
             Vector t=new Vector();
             t.add(stt+=1);
             t.add(i.getStudentID());
-            PersonDTO person=personBLL.detailsPerson(i.getStudentID());
+            PersonEntity person=personBLL.detailsPerson(i.getStudentID());
             t.add(person.getFirstName());
             t.add(person.getLastName());
             t.add(i.getGrade());

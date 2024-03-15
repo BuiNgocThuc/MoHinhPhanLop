@@ -5,7 +5,7 @@
 package GUI.CourseResultJFrame;
 
 import BLL.PersonBLL;
-import DTO.PersonDTO;
+import BLL.Entity.PersonEntity;
 
 /**
  *
@@ -19,7 +19,7 @@ public class JFrameStudentInformationDetails extends javax.swing.JFrame {
     public JFrameStudentInformationDetails(int id) {
         initComponents();
         
-        PersonDTO personDTO=personBLL.detailsPerson(id);
+        PersonEntity personDTO=personBLL.detailsPerson(id);
         jTextFieldPersonID.setText(id+"");
         jTextFieldFirstName.setText(personDTO.getFirstName());
         jTextFieldLastName.setText(personDTO.getLastName());
@@ -54,19 +54,19 @@ public class JFrameStudentInformationDetails extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("PersonID");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("FirstName");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("HireDate");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("EnrollmentDate");
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("LastName");
 
         jTextFieldPersonID.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -92,7 +92,7 @@ public class JFrameStudentInformationDetails extends javax.swing.JFrame {
         closeFrameBtn.setBackground(new java.awt.Color(128, 128, 128));
         closeFrameBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         closeFrameBtn.setForeground(new java.awt.Color(255, 255, 255));
-        closeFrameBtn.setText("Đóng");
+        closeFrameBtn.setText("Close");
         closeFrameBtn.setBorder(null);
         closeFrameBtn.setPreferredSize(new java.awt.Dimension(75, 38));
         closeFrameBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -102,7 +102,7 @@ public class JFrameStudentInformationDetails extends javax.swing.JFrame {
         });
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel7.setText("THÔNG TIN CHI TIẾT HỌC SINH");
+        jLabel7.setText("STUDENT DETAIL INFORMATION");
         jLabel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 5, 10, 0));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

@@ -6,8 +6,8 @@ package GUI.CourseResultJFrame;
 
 import BLL.PersonBLL;
 import BLL.StudentGradeBLL;
-import DTO.PersonDTO;
-import DTO.StudentGradeDTO;
+import BLL.Entity.PersonEntity;
+import BLL.Entity.StudentGradeEntity;
 import java.util.Vector;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -86,7 +86,7 @@ public class JFrameListStudent extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "STT", "PersonID", "FirstName", "LastName"
+                "No", "PersonID", "FirstName", "LastName"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -110,7 +110,7 @@ public class JFrameListStudent extends javax.swing.JFrame {
         jButtonSave.setBackground(new java.awt.Color(155, 207, 83));
         jButtonSave.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonSave.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonSave.setText("Thêm");
+        jButtonSave.setText("Add");
         jButtonSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSaveActionPerformed(evt);
@@ -118,7 +118,7 @@ public class JFrameListStudent extends javax.swing.JFrame {
         });
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel7.setText("THÊM SINH VIÊN VÀO KHÓA HỌC");
+        jLabel7.setText("ADD STUDENT TO COURSE");
         jLabel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 5, 10, 0));
 
         jButtonClearSearch.setText("X");
@@ -145,7 +145,7 @@ public class JFrameListStudent extends javax.swing.JFrame {
         closeFrameBtn.setBackground(new java.awt.Color(128, 128, 128));
         closeFrameBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         closeFrameBtn.setForeground(new java.awt.Color(255, 255, 255));
-        closeFrameBtn.setText("Đóng");
+        closeFrameBtn.setText("Close");
         closeFrameBtn.setBorder(null);
         closeFrameBtn.setPreferredSize(new java.awt.Dimension(75, 38));
         closeFrameBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -238,7 +238,7 @@ public class JFrameListStudent extends javax.swing.JFrame {
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
         // TODO add your handling code here:
         if(studentGradeBll.getEnrollment(courseID, studentID) == 0) {
-            StudentGradeDTO studentGrade = new StudentGradeDTO();
+            StudentGradeEntity studentGrade = new StudentGradeEntity();
             studentGrade.setCourseID(courseID);
             studentGrade.setStudentID(studentID);
             studentGrade.setGrade(null);
@@ -280,7 +280,7 @@ public class JFrameListStudent extends javax.swing.JFrame {
             model.addColumn(i);
         }
         int stt=0;
-        for(PersonDTO i : personBLL.getListStudent()){
+        for(PersonEntity i : personBLL.getListStudent()){
            Vector t=new Vector();
            t.add(stt+=1);
            t.add(i.getPersonID());

@@ -6,11 +6,11 @@ package GUI.CourseResultJFrame;
 
 import BLL.PersonBLL;
 import BLL.StudentGradeBLL;
-import DTO.StudentGradeDTO;
+import BLL.Entity.StudentGradeEntity;
 import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import DTO.PersonDTO;
+import BLL.Entity.PersonEntity;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -345,7 +345,7 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "STT", "PersonID", "FirstName", "LastName", "Grade"
+                "No", "PersonID", "FirstName", "LastName", "Grade"
             }
         ));
         jTableStudentGrade.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -385,13 +385,13 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
         jLabel4.setText("ID");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel7.setText("QUẢN LÝ KẾT QUẢ KHÓA HỌC");
+        jLabel7.setText("COURSE RESULT MANAGMENT");
         jLabel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 5, 10, 0));
 
         jButtonAdd.setBackground(new java.awt.Color(155, 207, 83));
         jButtonAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonAdd.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonAdd.setText("Thêm");
+        jButtonAdd.setText("Add");
         jButtonAdd.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(191, 234, 124)));
         jButtonAdd.setPreferredSize(new java.awt.Dimension(100, 40));
         jButtonAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -407,7 +407,7 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
         jButtonDelete.setBackground(new java.awt.Color(255, 104, 104));
         jButtonDelete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonDelete.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonDelete.setText("Xóa");
+        jButtonDelete.setText("Delete");
         jButtonDelete.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 128, 128)));
         jButtonDelete.setPreferredSize(new java.awt.Dimension(100, 40));
         jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -419,7 +419,7 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
         jButtonAddNew.setBackground(new java.awt.Color(155, 207, 83));
         jButtonAddNew.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonAddNew.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonAddNew.setText("Thêm mới");
+        jButtonAddNew.setText("Add New");
         jButtonAddNew.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(191, 234, 124)));
         jButtonAddNew.setPreferredSize(new java.awt.Dimension(100, 40));
         jButtonAddNew.addActionListener(new java.awt.event.ActionListener() {
@@ -431,7 +431,7 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
         jButtonSave.setBackground(new java.awt.Color(64, 162, 227));
         jButtonSave.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonSave.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonSave.setText("Lưu");
+        jButtonSave.setText("Save");
         jButtonSave.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(187, 226, 236)));
         jButtonSave.setPreferredSize(new java.awt.Dimension(100, 40));
         jButtonSave.addActionListener(new java.awt.event.ActionListener() {
@@ -443,7 +443,7 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
         jButtonDetail.setBackground(new java.awt.Color(128, 128, 128));
         jButtonDetail.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonDetail.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonDetail.setText("Chi tiết");
+        jButtonDetail.setText("Detail");
         jButtonDetail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(191, 234, 124)));
         jButtonDetail.setPreferredSize(new java.awt.Dimension(100, 40));
         jButtonDetail.addActionListener(new java.awt.event.ActionListener() {
@@ -572,7 +572,7 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
             Double gradeValue;
             if (row != -1) {
                 int EnrollmentID = studentGradeBLL.getEnrollment(CourseID, Integer.parseInt(jTableStudentGrade.getModel().getValueAt(row, 1).toString()));
-                StudentGradeDTO studentGrade = new StudentGradeDTO();
+                StudentGradeEntity studentGrade = new StudentGradeEntity();
                 studentGrade.setCourseID(CourseID);
                 studentGrade.setEnrollmentID(EnrollmentID);
                 TableCellEditor edit = jTableStudentGrade.getCellEditor();
@@ -705,7 +705,7 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
                     return;
                 }
                 int EnrollmentID = studentGradeBLL.getEnrollment(CourseID, Integer.parseInt(jTextPersonID.getText().toString()));
-                StudentGradeDTO studentGrade = new StudentGradeDTO();
+                StudentGradeEntity studentGrade = new StudentGradeEntity();
                 studentGrade.setCourseID(CourseID);
                 studentGrade.setEnrollmentID(EnrollmentID);
                 studentGrade.setGrade(Double.parseDouble(jTextGrade.getText().toString()));
@@ -767,11 +767,11 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
             model.addColumn(i);
         }
         int stt = 0;
-        for (StudentGradeDTO i : studentGradeBLL.serchAllStudentGrade(CourseID, txt)) {
+        for (StudentGradeEntity i : studentGradeBLL.serchAllStudentGrade(CourseID, txt)) {
             Vector t = new Vector();
             t.add(stt += 1);
             t.add(i.getStudentID());
-            PersonDTO person = personBLL.detailsPerson(i.getStudentID());
+            PersonEntity person = personBLL.detailsPerson(i.getStudentID());
             t.add(person.getFirstName());
             t.add(person.getLastName());
             t.add(i.getGrade());
@@ -806,11 +806,11 @@ public class JFrameManageCourseResults extends javax.swing.JFrame {
             model.addColumn(i);
         }
         int stt = 0;
-        for (StudentGradeDTO i : studentGradeBLL.getAllList(CourseID)) {
+        for (StudentGradeEntity i : studentGradeBLL.getAllList(CourseID)) {
             Vector t = new Vector();
             t.add(stt += 1);
             t.add(i.getStudentID());
-            PersonDTO person = personBLL.detailsPerson(i.getStudentID());
+            PersonEntity person = personBLL.detailsPerson(i.getStudentID());
             t.add(person.getFirstName());
             t.add(person.getLastName());
             t.add(i.getGrade());

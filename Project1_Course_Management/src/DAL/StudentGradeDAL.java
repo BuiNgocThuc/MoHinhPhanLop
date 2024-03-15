@@ -4,7 +4,7 @@
  */
 package DAL;
 import DAL.ConnectDB;
-import DTO.StudentGradeDTO;
+import BLL.Entity.StudentGradeEntity;
 import java.util.ArrayList;
 import java.sql.*;
 /**
@@ -13,15 +13,15 @@ import java.sql.*;
  */
 public class StudentGradeDAL {
     ConnectDB con=new ConnectDB();
-    public  ArrayList<StudentGradeDTO> getAllList(int CourseID){
-        ArrayList<StudentGradeDTO> listStudentGrade=new ArrayList<StudentGradeDTO>();
+    public  ArrayList<StudentGradeEntity> getAllList(int CourseID){
+        ArrayList<StudentGradeEntity> listStudentGrade=new ArrayList<StudentGradeEntity>();
         try{
             String query="select * from studentgrade where CourseID=?";
             PreparedStatement pre=con.getConnectDB().prepareStatement(query);
             pre.setInt(1, CourseID);
             ResultSet rs=pre.executeQuery();
             while(rs.next()){
-                StudentGradeDTO studentGrade=new StudentGradeDTO();
+                StudentGradeEntity studentGrade=new StudentGradeEntity();
                 studentGrade.setEnrollmentID(rs.getInt("EnrollmentID"));
                 studentGrade.setCourseID(rs.getInt("CourseID"));
                 studentGrade.setStudentID(rs.getInt("StudentID"));
@@ -41,8 +41,8 @@ public class StudentGradeDAL {
         }
         return null;
     }
-    public  ArrayList<StudentGradeDTO> getAllListR(int CourseID,String text){
-        ArrayList<StudentGradeDTO> listStudentGrade=new ArrayList<StudentGradeDTO>();
+    public  ArrayList<StudentGradeEntity> getAllListR(int CourseID,String text){
+        ArrayList<StudentGradeEntity> listStudentGrade=new ArrayList<StudentGradeEntity>();
         try{
             String query;
             if(text.equals("Đậu")){
@@ -54,7 +54,7 @@ public class StudentGradeDAL {
             pre.setInt(1, CourseID);
             ResultSet rs=pre.executeQuery();
             while(rs.next()){
-                StudentGradeDTO studentGrade=new StudentGradeDTO();
+                StudentGradeEntity studentGrade=new StudentGradeEntity();
                 studentGrade.setEnrollmentID(rs.getInt("EnrollmentID"));
                 studentGrade.setCourseID(rs.getInt("CourseID"));
                 studentGrade.setStudentID(rs.getInt("StudentID"));
@@ -68,9 +68,9 @@ public class StudentGradeDAL {
         return null;
     }
     
-    public boolean updateGrade(StudentGradeDTO student){
+    public boolean updateGrade(StudentGradeEntity student){
         try{
-            StudentGradeDTO studentGradeDTO=new StudentGradeDTO();
+            StudentGradeEntity studentGradeDTO=new StudentGradeEntity();
             String query="update studentgrade set CourseID=?,Grade=? where EnrollmentID=?";
             PreparedStatement pre=con.getConnectDB().prepareStatement(query);
             pre.setInt(1, student.getCourseID());
@@ -113,7 +113,7 @@ public class StudentGradeDAL {
         return 0;
     }
     
-    public boolean insertStudentGrade(StudentGradeDTO studentGradeDTO) {
+    public boolean insertStudentGrade(StudentGradeEntity studentGradeDTO) {
         int result = -1;
         
         int EnrollmentID = studentGradeDTO.getEnrollmentID();
@@ -144,8 +144,8 @@ public class StudentGradeDAL {
         }
         return false;
     }
-    public  ArrayList<StudentGradeDTO> serchAllStudentGrade(int CourseID,String text){
-        ArrayList<StudentGradeDTO> listStudentGrade=new ArrayList<StudentGradeDTO>();
+    public  ArrayList<StudentGradeEntity> serchAllStudentGrade(int CourseID,String text){
+        ArrayList<StudentGradeEntity> listStudentGrade=new ArrayList<StudentGradeEntity>();
         try{
             String query="select studentgrade.EnrollmentID,studentgrade.CourseID,"
                     + "studentgrade.StudentID,studentgrade.Grade "
@@ -157,7 +157,7 @@ public class StudentGradeDAL {
             PreparedStatement pre=con.getConnectDB().prepareStatement(query);
             ResultSet rs=pre.executeQuery();
             while(rs.next()){
-                StudentGradeDTO studentGrade=new StudentGradeDTO();
+                StudentGradeEntity studentGrade=new StudentGradeEntity();
                 studentGrade.setEnrollmentID(rs.getInt("studentgrade.EnrollmentID"));
                 studentGrade.setCourseID(rs.getInt("studentgrade.CourseID"));
                 studentGrade.setStudentID(rs.getInt("studentgrade.StudentID"));
@@ -170,8 +170,8 @@ public class StudentGradeDAL {
         }
         return null;
     }
-    public  ArrayList<StudentGradeDTO> Statistical(int CourseID,String text){
-        ArrayList<StudentGradeDTO> listStatistical=new ArrayList<>();
+    public  ArrayList<StudentGradeEntity> Statistical(int CourseID,String text){
+        ArrayList<StudentGradeEntity> listStatistical=new ArrayList<>();
         try{
             String query;
             if(text.equals("Passing")){
@@ -183,7 +183,7 @@ public class StudentGradeDAL {
             pre.setInt(1, CourseID);
             ResultSet rs=pre.executeQuery();
             while(rs.next()){
-                StudentGradeDTO studentGrade=new StudentGradeDTO();
+                StudentGradeEntity studentGrade=new StudentGradeEntity();
                 studentGrade.setEnrollmentID(rs.getInt("EnrollmentID"));
                 studentGrade.setCourseID(rs.getInt("CourseID"));
                 studentGrade.setStudentID(rs.getInt("StudentID"));

@@ -6,8 +6,8 @@ package GUI.AssignmentManagement;
 
 import BLL.CourseBLL;
 import BLL.PersonBLL;
-import DTO.CourseDTO;
-import DTO.PersonDTO;
+import BLL.Entity.CourseEntity;
+import BLL.Entity.PersonEntity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -66,14 +66,14 @@ public class PnCourse extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(900, 650));
 
         pnSelectedInstructorList.setBackground(new java.awt.Color(255, 255, 255));
-        pnSelectedInstructorList.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách giảng viên đã chọn", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
+        pnSelectedInstructorList.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Instructor Choosen List", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
 
         tableSelectedInstructorList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "STT", "Mã giảng viên", "Tên giảng viên"
+                "No", "InstructorID", "Instructor Name"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -87,7 +87,7 @@ public class PnCourse extends javax.swing.JPanel {
         tableSelectedInstructorList.setToolTipText("");
         spSelectedCourseList.setViewportView(tableSelectedInstructorList);
 
-        btDeleteInstructor.setText("Xóa");
+        btDeleteInstructor.setText("Delete");
         btDeleteInstructor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
         btDeleteInstructor.setPreferredSize(new java.awt.Dimension(72, 40));
         btDeleteInstructor.addActionListener(new java.awt.event.ActionListener() {
@@ -118,7 +118,7 @@ public class PnCourse extends javax.swing.JPanel {
         );
 
         pnInstructorList.setBackground(new java.awt.Color(255, 255, 255));
-        pnInstructorList.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách giảng viên", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
+        pnInstructorList.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Instructors List", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
         pnInstructorList.setPreferredSize(new java.awt.Dimension(22, 310));
 
         tableInstructorList.setModel(new javax.swing.table.DefaultTableModel(
@@ -129,7 +129,7 @@ public class PnCourse extends javax.swing.JPanel {
                 {null, null}
             },
             new String [] {
-                "Mã giảng viên", "Tên giảng viên"
+                "InstructorID", "Instructor Name"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -142,7 +142,7 @@ public class PnCourse extends javax.swing.JPanel {
         });
         spCourseList.setViewportView(tableInstructorList);
 
-        btSelectedInstructor.setText("Thêm");
+        btSelectedInstructor.setText("Add");
         btSelectedInstructor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
         btSelectedInstructor.setPreferredSize(new java.awt.Dimension(72, 40));
         btSelectedInstructor.addActionListener(new java.awt.event.ActionListener() {
@@ -151,7 +151,7 @@ public class PnCourse extends javax.swing.JPanel {
             }
         });
 
-        btSeeAllInstructorList.setText("Xem tất cả");
+        btSeeAllInstructorList.setText("All List");
         btSeeAllInstructorList.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
         btSeeAllInstructorList.setPreferredSize(new java.awt.Dimension(86, 40));
         btSeeAllInstructorList.addActionListener(new java.awt.event.ActionListener() {
@@ -187,7 +187,7 @@ public class PnCourse extends javax.swing.JPanel {
         );
 
         pnCourseList.setBackground(new java.awt.Color(255, 255, 255));
-        pnCourseList.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách khóa học", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
+        pnCourseList.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Course List", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
         pnCourseList.setPreferredSize(new java.awt.Dimension(22, 100));
 
         tableCourseList.setModel(new javax.swing.table.DefaultTableModel(
@@ -198,7 +198,7 @@ public class PnCourse extends javax.swing.JPanel {
                 {null, null}
             },
             new String [] {
-                "Mã khóa học", "Tên khóa học"
+                "Course ID", "Course Name"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -229,7 +229,7 @@ public class PnCourse extends javax.swing.JPanel {
 
         tfCourseSearch.setPreferredSize(new java.awt.Dimension(64, 40));
 
-        btCourseSearch.setText("Tìm");
+        btCourseSearch.setText("Search");
         btCourseSearch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
         btCourseSearch.setPreferredSize(new java.awt.Dimension(72, 40));
         btCourseSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -240,7 +240,7 @@ public class PnCourse extends javax.swing.JPanel {
 
         tfInstructorSearch.setPreferredSize(new java.awt.Dimension(64, 40));
 
-        btInstructorSearch.setText("Tìm");
+        btInstructorSearch.setText("Search");
         btInstructorSearch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
         btInstructorSearch.setPreferredSize(new java.awt.Dimension(72, 40));
         btInstructorSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -249,7 +249,7 @@ public class PnCourse extends javax.swing.JPanel {
             }
         });
 
-        btSeeAllCourseList.setText("Xem tất cả");
+        btSeeAllCourseList.setText("All List");
         btSeeAllCourseList.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
         btSeeAllCourseList.setPreferredSize(new java.awt.Dimension(86, 40));
         btSeeAllCourseList.addActionListener(new java.awt.event.ActionListener() {
@@ -313,7 +313,7 @@ public class PnCourse extends javax.swing.JPanel {
             try {
                 int id = Integer.parseInt(idText);
 
-                CourseDTO courseDTO = courseBLL.courseDetail(id);
+                CourseEntity courseDTO = courseBLL.courseDetail(id);
 
                 if (courseDTO.getTitle() != null) {
                     System.out.println(courseDTO);
@@ -329,7 +329,7 @@ public class PnCourse extends javax.swing.JPanel {
                 DefaultTableModel tableModel = (DefaultTableModel) tableCourseList.getModel();
                 tableModel.setRowCount(0);
                 boolean found = false;
-                for (CourseDTO courseDTO : courseBLL.getAllist()) {
+                for (CourseEntity courseDTO : courseBLL.getAllist()) {
                     String title = courseDTO.getTitle().toLowerCase();
                     String searchText = idText.toLowerCase();
                     if (title.contains(searchText)) {
@@ -358,7 +358,7 @@ public class PnCourse extends javax.swing.JPanel {
 
         int instructorId = (int) tableInstructorList.getValueAt(row, 0);
         String instructorName = tableInstructorList.getValueAt(row, 1).toString();
-        PersonDTO personDTO = personBLL.detailsPerson(instructorId);
+        PersonEntity personDTO = personBLL.detailsPerson(instructorId);
         DefaultTableModel tableInstructorSelectedListModel = (DefaultTableModel) tableSelectedInstructorList.getModel();
 
         boolean isDuplicate = false;
@@ -403,10 +403,10 @@ public class PnCourse extends javax.swing.JPanel {
         if (!idText.isEmpty()) {
             try {
                 int id = Integer.parseInt(idText);
-                ArrayList<PersonDTO> instructorList = personBLL.getListInstructor();
+                ArrayList<PersonEntity> instructorList = personBLL.getListInstructor();
 
-                PersonDTO instructor = new PersonDTO();
-                for (PersonDTO personDTO : instructorList) {
+                PersonEntity instructor = new PersonEntity();
+                for (PersonEntity personDTO : instructorList) {
                     if (id == personDTO.getPersonID()) {
                         instructor = personDTO;
                     }
@@ -425,7 +425,7 @@ public class PnCourse extends javax.swing.JPanel {
                 DefaultTableModel tableModel = (DefaultTableModel) tableInstructorList.getModel();
                 tableModel.setRowCount(0);
                 boolean found = false;
-                for (PersonDTO personDTO : personBLL.getListInstructor()) {
+                for (PersonEntity personDTO : personBLL.getListInstructor()) {
                     String instructorName = personDTO.getFirstName() + " " + personDTO.getLastName();
                     String searchText = idText.toLowerCase();
                     if (instructorName.toLowerCase().contains(searchText)) {
@@ -456,7 +456,7 @@ public class PnCourse extends javax.swing.JPanel {
     private void updateInstructorList() {
         DefaultTableModel tableInstructorListModel = (DefaultTableModel) tableInstructorList.getModel();
         tableInstructorListModel.setRowCount(0);
-        for (PersonDTO personDTO : personBLL.getListInstructor()) {
+        for (PersonEntity personDTO : personBLL.getListInstructor()) {
             Object[] rowData = {personDTO.getPersonID(), personDTO.getFirstName()};
             tableInstructorListModel.addRow(rowData);
         }
@@ -465,21 +465,21 @@ public class PnCourse extends javax.swing.JPanel {
     private void updateCourseList() {
         DefaultTableModel tableCourseListModel = (DefaultTableModel) tableCourseList.getModel();
         tableCourseListModel.setRowCount(0);
-        for (CourseDTO courseDTO : courseBLL.selectAllCourse()) {
+        for (CourseEntity courseDTO : courseBLL.selectAllCourse()) {
             Object[] rowData = {courseDTO.getCourseID(), courseDTO.getTitle()};
             tableCourseListModel.addRow(rowData);
         }
     }
 
-    public List<PersonDTO> getSelectedCourses() {
-        List<PersonDTO> selectedInstructors = new ArrayList<>();
+    public List<PersonEntity> getSelectedCourses() {
+        List<PersonEntity> selectedInstructors = new ArrayList<>();
 
         DefaultTableModel tableModel = (DefaultTableModel) tableSelectedInstructorList.getModel();
         int rowCount = tableModel.getRowCount();
 
         for (int i = 0; i < rowCount; i++) {
             int instructorId = (int) tableModel.getValueAt(i, 1);
-            PersonDTO personDTO = personBLL.detailsPerson(instructorId);
+            PersonEntity personDTO = personBLL.detailsPerson(instructorId);
             selectedInstructors.add(personDTO);
         }
 

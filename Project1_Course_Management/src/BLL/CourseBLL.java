@@ -5,7 +5,7 @@
 package BLL;
 
 import DAL.CourseDAL;
-import DTO.CourseDTO;
+import BLL.Entity.CourseEntity;
 import java.util.ArrayList;
 import java.util.List;
 import util.ValidateUtil;
@@ -22,7 +22,7 @@ public class CourseBLL {
         courseDAL = new CourseDAL();
     }
 
-    public List<CourseDTO> selectAllCourse() {
+    public List<CourseEntity> selectAllCourse() {
         return courseDAL.selectAll();
     }
 
@@ -30,11 +30,11 @@ public class CourseBLL {
         return courseDAL.selectLastID();
     }
 
-    public boolean insertCourse(CourseDTO course) {
+    public boolean insertCourse(CourseEntity course) {
         return courseDAL.insertCourse(course);
     }
 
-    public boolean updateCourse(CourseDTO course) {
+    public boolean updateCourse(CourseEntity course) {
         return courseDAL.updateCourse(course);
     }
 
@@ -42,19 +42,19 @@ public class CourseBLL {
         return courseDAL.deleteCourse(CourseID);
     }
 
-    public ArrayList<CourseDTO> getAllist() {
+    public ArrayList<CourseEntity> getAllist() {
         return courseDAL.getAllList();
     }
 
-    public ArrayList<CourseDTO> getAllist(String text) {
+    public ArrayList<CourseEntity> getAllist(String text) {
         return courseDAL.getAllList(text);
     }
 
-    public ArrayList<CourseDTO> searchAllCourse(String text){
+    public ArrayList<CourseEntity> searchAllCourse(String text){
         return courseDAL.searchAllCourse(text);
     }
     
-    public CourseDTO courseDetail(int id){
+    public CourseEntity courseDetail(int id){
         return courseDAL.courseDetail(id);
     }
 
@@ -62,15 +62,15 @@ public class CourseBLL {
         return courseDAL.checkCourseEmpty(CourseID);
     }
     
-    public List<CourseDTO> selectOnsiteAllCourse() {
+    public List<CourseEntity> selectOnsiteAllCourse() {
         return courseDAL.selectOnsiteAll();
     }
     
-    public List<CourseDTO> selectOnlineAllCourse() {
+    public List<CourseEntity> selectOnlineAllCourse() {
         return courseDAL.selectOnlineAll();
     }
     
-    public ArrayList<CourseDTO> findCoursesAll(String text) {
+    public ArrayList<CourseEntity> findCoursesAll(String text) {
         if (ValidateUtil.isInteger(text)) {
             return courseDAL.findCoursesByIdAll(Integer.parseInt(text));
         } else {
@@ -78,7 +78,7 @@ public class CourseBLL {
         }
     }
 
-    public ArrayList<CourseDTO> findCoursesOnsite(String text) {
+    public ArrayList<CourseEntity> findCoursesOnsite(String text) {
         if (ValidateUtil.isInteger(text)) {
             return courseDAL.findCoursesByIdOnsite(Integer.parseInt(text));
         } else {
@@ -86,7 +86,7 @@ public class CourseBLL {
         }
     }
 
-    public ArrayList<CourseDTO> findCoursesOnline(String text) {
+    public ArrayList<CourseEntity> findCoursesOnline(String text) {
         if (ValidateUtil.isInteger(text)) {
             return courseDAL.findCoursesByIdOnline(Integer.parseInt(text));
         } else {

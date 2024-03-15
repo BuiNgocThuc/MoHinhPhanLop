@@ -6,8 +6,8 @@ package GUI.AssignmentManagement;
 
 import BLL.CourseBLL;
 import BLL.PersonBLL;
-import DTO.CourseDTO;
-import DTO.PersonDTO;
+import BLL.Entity.CourseEntity;
+import BLL.Entity.PersonEntity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -316,7 +316,7 @@ public class PnInstructor extends javax.swing.JPanel {
 
         int courseId = (int) tableCourseList.getValueAt(row, 0);
         String courseName = tableCourseList.getValueAt(row, 1).toString();
-        CourseDTO courseDTO = courseBLL.courseDetail(courseId);
+        CourseEntity courseDTO = courseBLL.courseDetail(courseId);
         DefaultTableModel tableCourseSelectedListModel = (DefaultTableModel) tableSelectedCourseList.getModel();
 
         boolean isDuplicate = false;
@@ -362,7 +362,7 @@ public class PnInstructor extends javax.swing.JPanel {
             try {
                 int id = Integer.parseInt(idText);
 
-                CourseDTO courseDTO = courseBLL.courseDetail(id);
+                CourseEntity courseDTO = courseBLL.courseDetail(id);
 
                 if (courseDTO.getTitle() != null) {
                     System.out.println(courseDTO);
@@ -378,7 +378,7 @@ public class PnInstructor extends javax.swing.JPanel {
                 DefaultTableModel tableModel = (DefaultTableModel) tableCourseList.getModel();
                 tableModel.setRowCount(0);
                 boolean found = false;
-                for (CourseDTO courseDTO : courseBLL.getAllist()) {
+                for (CourseEntity courseDTO : courseBLL.getAllist()) {
                     String title = courseDTO.getTitle().toLowerCase();
                     String searchText = idText.toLowerCase();
                     if (title.contains(searchText)) {
@@ -412,10 +412,10 @@ public class PnInstructor extends javax.swing.JPanel {
         if (!idText.isEmpty()) {
             try {
                 int id = Integer.parseInt(idText);
-                ArrayList<PersonDTO> instructorList = personBLL.getListInstructor();
+                ArrayList<PersonEntity> instructorList = personBLL.getListInstructor();
 
-                PersonDTO instructor = new PersonDTO();
-                for (PersonDTO personDTO : instructorList) {
+                PersonEntity instructor = new PersonEntity();
+                for (PersonEntity personDTO : instructorList) {
                     if (id == personDTO.getPersonID()) {
                         instructor = personDTO;
                     }
@@ -434,7 +434,7 @@ public class PnInstructor extends javax.swing.JPanel {
                 DefaultTableModel tableModel = (DefaultTableModel) tableInstructorList.getModel();
                 tableModel.setRowCount(0);
                 boolean found = false;
-                for (PersonDTO personDTO : personBLL.getListInstructor()) {
+                for (PersonEntity personDTO : personBLL.getListInstructor()) {
                     String instructorName = personDTO.getFirstName() + " " + personDTO.getLastName();
                     String searchText = idText.toLowerCase();
                     if (instructorName.toLowerCase().contains(searchText)) {
@@ -457,7 +457,7 @@ public class PnInstructor extends javax.swing.JPanel {
     private void updateInstructorList() {
         DefaultTableModel tableInstructorListModel = (DefaultTableModel) tableInstructorList.getModel();
         tableInstructorListModel.setRowCount(0);
-        for (PersonDTO personDTO : personBLL.getListInstructor()) {
+        for (PersonEntity personDTO : personBLL.getListInstructor()) {
             String instructorName = personDTO.getFirstName() + " " + personDTO.getLastName();
             Object[] rowData = {personDTO.getPersonID(), instructorName};
             tableInstructorListModel.addRow(rowData);
@@ -467,21 +467,21 @@ public class PnInstructor extends javax.swing.JPanel {
     private void updateCourseList() {
         DefaultTableModel tableCourseListModel = (DefaultTableModel) tableCourseList.getModel();
         tableCourseListModel.setRowCount(0);
-        for (CourseDTO courseDTO : courseBLL.selectAllCourse()) {
+        for (CourseEntity courseDTO : courseBLL.selectAllCourse()) {
             Object[] rowData = {courseDTO.getCourseID(), courseDTO.getTitle()};
             tableCourseListModel.addRow(rowData);
         }
     }
 
-    public List<CourseDTO> getSelectedCourses() {
-        List<CourseDTO> selectedCourses = new ArrayList<>();
+    public List<CourseEntity> getSelectedCourses() {
+        List<CourseEntity> selectedCourses = new ArrayList<>();
 
         DefaultTableModel tableModel = (DefaultTableModel) tableSelectedCourseList.getModel();
         int rowCount = tableModel.getRowCount();
 
         for (int i = 0; i < rowCount; i++) {
             int courseId = (int) tableModel.getValueAt(i, 1);
-            CourseDTO course = courseBLL.courseDetail(courseId);
+            CourseEntity course = courseBLL.courseDetail(courseId);
             selectedCourses.add(course);
         }
 

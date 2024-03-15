@@ -60,14 +60,14 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="lbInstructorAdd">
       <Properties>
-        <Property name="text" type="java.lang.String" value="TH&#xca;M GI&#x1ea2;NG VI&#xca;N M&#x1eda;I"/>
+        <Property name="text" type="java.lang.String" value="ADD NEW INSTRUCTOR"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="pnContainer">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder position="2" title="Th&#xf4;ng tin gi&#x1ea3;ng vi&#xea;n"/>
+            <TitledBorder position="2" title="Instructor information"/>
           </Border>
         </Property>
       </Properties>
@@ -109,7 +109,7 @@
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder position="2" title="H&#x1ecd;"/>
+                <TitledBorder position="2" title="First name"/>
               </Border>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -145,7 +145,7 @@
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder position="2" title="T&#xea;n"/>
+                <TitledBorder position="2" title="Last name"/>
               </Border>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -181,7 +181,7 @@
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder position="2" title="Ng&#xe0;y thu&#xea;"/>
+                <TitledBorder position="2" title="Hire date"/>
               </Border>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">

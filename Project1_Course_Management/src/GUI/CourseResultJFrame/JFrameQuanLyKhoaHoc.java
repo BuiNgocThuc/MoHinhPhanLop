@@ -4,7 +4,7 @@
  */
 package GUI.CourseResultJFrame;
 
-import GUI.MainPanel.CourseResultsPanel;
+import GUI.CourseInfo.CourseResultsPanel;
 
 /**
  *

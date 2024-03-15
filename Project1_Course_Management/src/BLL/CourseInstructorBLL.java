@@ -3,9 +3,9 @@ package BLL;
 import DAL.CourseInstructorDAL;
 import DAL.CourseDAL;
 import DAL.PersonDAL;
-import DTO.CourseDTO;
-import DTO.CourseInstructorDTO;
-import DTO.PersonDTO;
+import BLL.Entity.CourseEntity;
+import BLL.Entity.CourseInstructorEntity;
+import BLL.Entity.PersonEntity;
 import java.sql.SQLException;
 import java.util.List;
 import util.Paginate;
@@ -26,11 +26,11 @@ public class CourseInstructorBLL {
 
     }
 
-    public List<CourseInstructorDTO> getAllCourseInstructors() throws SQLException {
+    public List<CourseInstructorEntity> getAllCourseInstructors() throws SQLException {
         return courseInstructorDAL.selectAll();
     }
 
-    public List<CourseInstructorDTO> getListCourseInstructorsByPersonID(int personID) throws SQLException {
+    public List<CourseInstructorEntity> getListCourseInstructorsByPersonID(int personID) throws SQLException {
         try {
             return courseInstructorDAL.selectByPersonID(personID);
         } catch (SQLException e) {
@@ -39,41 +39,39 @@ public class CourseInstructorBLL {
         }
     }
 
-    public List<CourseDTO> getListCourseAssignInstructor() throws SQLException {
-        List<CourseDTO> courses = courseDAL.getAllList();
+    public List<CourseEntity> getListCourseAssignInstructor() throws SQLException {
+        List<CourseEntity> courses = courseDAL.getAllList();
         courseDAL.populateInstructors(courses);
         return courses;
 
     }
 
-    public List<PersonDTO> getListInstructorAssignCourse() throws SQLException {
-        List<PersonDTO> instructors = personDAL.getListInstructor();
+    public List<PersonEntity> getListInstructorAssignCourse() throws SQLException {
+        List<PersonEntity> instructors = personDAL.getListInstructor();
         personDAL.populateCourses(instructors);
         return instructors;
     }
 
-    public Paginate<PersonDTO> getListInstructorAssignedCourse(int offset, int limit, String querySearch) throws SQLException {
-        Paginate<PersonDTO> paginate = personDAL.getListInstructorAssignedCourse(offset, limit, querySearch);
+    public Paginate<PersonEntity> getListInstructorAssignedCourse(int offset, int limit, String querySearch) throws SQLException {
+        Paginate<PersonEntity> paginate = personDAL.getListInstructorAssignedCourse(offset, limit, querySearch);
 
         personDAL.populateCourses(paginate.getItems());
 
         return paginate;
     }
     
-    public Paginate<CourseDTO> getListCourseAssignedInstructor(int offset, int limit, String querySearch) throws SQLException {
-        Paginate<CourseDTO> paginate = courseDAL.getListCourseAssignedInstructor(offset, limit, querySearch);
-
+    public Paginate<CourseEntity> getListCourseAssignedInstructor(int offset, int limit, String querySearch) throws SQLException {
+        Paginate<CourseEntity> paginate = courseDAL.getListCourseAssignedInstructor(offset, limit, querySearch);
         courseDAL.populateInstructors(paginate.getItems());
-
         return paginate;
     }
 
-    public CourseInstructorDTO getCourseInstructorByID(int courseID, int personID) throws SQLException {
+    public CourseInstructorEntity getCourseInstructorByID(int courseID, int personID) throws SQLException {
         return courseInstructorDAL.selectByID(courseID, personID);
     }
 
-    public List<CourseDTO> findCourses(String text) throws SQLException {
-        List<CourseDTO> courses = null;
+    public List<CourseEntity> findCourses(String text) throws SQLException {
+        List<CourseEntity> courses = null;
         if (ValidateUtil.isInteger(text)) {
             courses = courseDAL.findCoursesByIdAll(Integer.parseInt(text));
         } else {
@@ -83,8 +81,8 @@ public class CourseInstructorBLL {
         return courses;
     }
 
-    public List<PersonDTO> findInstructors(String text) throws SQLException {
-        List<PersonDTO> instructors = null;
+    public List<PersonEntity> findInstructors(String text) throws SQLException {
+        List<PersonEntity> instructors = null;
         if (ValidateUtil.isInteger(text)) {
             instructors = personDAL.findInstructorsById(Integer.parseInt(text));
         } else {
@@ -94,15 +92,15 @@ public class CourseInstructorBLL {
         return instructors;
     }
 
-    public void insertCourseInstructor(CourseInstructorDTO courseInstructor) throws SQLException {
+    public void insertCourseInstructor(CourseInstructorEntity courseInstructor) throws SQLException {
         courseInstructorDAL.insertCourseInstructor(courseInstructor);
     }
 
-    public boolean updateCourseInstructor(CourseInstructorDTO courseInstructor) throws SQLException {
+    public boolean updateCourseInstructor(CourseInstructorEntity courseInstructor) throws SQLException {
         return courseInstructorDAL.updateCourseInstructor(courseInstructor);
     }
 
-    public void deleteCourseInstructor(CourseInstructorDTO courseInstructor) throws SQLException {
+    public void deleteCourseInstructor(CourseInstructorEntity courseInstructor) throws SQLException {
         courseInstructorDAL.deleteCourseInstructor(courseInstructor);
     }
 
@@ -114,7 +112,7 @@ public class CourseInstructorBLL {
         courseInstructorDAL.deleteAllInstructorAssignCourse(courseID);
     }
 
-    public List<CourseInstructorDTO> getListCourseInstructorsByCourseID(int id_Course) throws SQLException {
+    public List<CourseInstructorEntity> getListCourseInstructorsByCourseID(int id_Course) throws SQLException {
         try {
             return courseInstructorDAL.selectByCourseID(id_Course);
         } catch (SQLException e) {
@@ -123,28 +121,28 @@ public class CourseInstructorBLL {
         }
     }
 
-    public void updateCourseInstructors(PersonDTO instructor) throws SQLException {
+    public void updateCourseInstructors(PersonEntity instructor) throws SQLException {
         deleteAllCourseAssignInstructor(instructor.getPersonID());
-        for (CourseDTO course : instructor.getCourses()) {
-            CourseInstructorDTO courseInstructor = new CourseInstructorDTO(course.getCourseID(),
+        for (CourseEntity course : instructor.getCourses()) {
+            CourseInstructorEntity courseInstructor = new CourseInstructorEntity(course.getCourseID(),
                     instructor.getPersonID());
             insertCourseInstructor(courseInstructor);
         }
     }
 
-    public void updateCourseInstructors(CourseDTO course) throws SQLException {
+    public void updateCourseInstructors(CourseEntity course) throws SQLException {
         deleteAllInstructorAssignCourse(course.getCourseID());
-        for (PersonDTO person : course.getInstructors()) {
-            CourseInstructorDTO courseInstructor = new CourseInstructorDTO(course.getCourseID(), person.getPersonID());
+        for (PersonEntity person : course.getInstructors()) {
+            CourseInstructorEntity courseInstructor = new CourseInstructorEntity(course.getCourseID(), person.getPersonID());
             insertCourseInstructor(courseInstructor);
         }
     }
 
     public int checkCourseExist(int instructorId,
-            List<CourseDTO> selectedCourses) {
+            List<CourseEntity> selectedCourses) {
         try {
-            for (CourseInstructorDTO courseInstructorDTO : getAllCourseInstructors()) {
-                for (CourseDTO courseDTO : selectedCourses) {
+            for (CourseInstructorEntity courseInstructorDTO : getAllCourseInstructors()) {
+                for (CourseEntity courseDTO : selectedCourses) {
                     if (courseInstructorDTO.getCourseID() == courseDTO.getCourseID()
                             && instructorId == courseInstructorDTO.getPersonID()) {
                         return courseDTO.getCourseID();
@@ -158,10 +156,10 @@ public class CourseInstructorBLL {
     }
 
     public int checkInstructorExist(int courseId,
-            List<PersonDTO> selectedPerson) {
+            List<PersonEntity> selectedPerson) {
         try {
-            for (CourseInstructorDTO courseInstructorDTO : getAllCourseInstructors()) {
-                for (PersonDTO personDTO : selectedPerson) {
+            for (CourseInstructorEntity courseInstructorDTO : getAllCourseInstructors()) {
+                for (PersonEntity personDTO : selectedPerson) {
                     if (courseInstructorDTO.getPersonID() == personDTO.getPersonID()
                             && courseId == courseInstructorDTO.getCourseID()) {
                         return personDTO.getPersonID();

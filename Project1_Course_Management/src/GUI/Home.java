@@ -4,21 +4,16 @@
  */
 package GUi;
 
-import GUI.MainPanel.CourseInstrutorPanel;
-import GUI.MainPanel.CoursePanel;
-import GUI.MainPanel.CourseResultsPanel;
-import GUI.MainPanel.OnlineCoursePanel;
+import GUI.AssignmentManagement.CourseInstrutorPanel;
+import GUI.CourseInfo.CoursePanel;
+import GUI.CourseInfo.CourseResultsPanel;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.Timer;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -73,8 +68,8 @@ public class Home extends javax.swing.JFrame {
         scheduleBtn = new javax.swing.JButton();
         resultBtn = new javax.swing.JButton();
         cardPanel = new javax.swing.JPanel();
-        schedulePnl = new javax.swing.JPanel();
-        resultPanel = new javax.swing.JPanel();
+        startPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Course Management");
@@ -84,7 +79,7 @@ public class Home extends javax.swing.JFrame {
 
         courseBtn.setBackground(new java.awt.Color(242, 242, 242));
         courseBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        courseBtn.setText("Các khóa học");
+        courseBtn.setText("Course Management");
         courseBtn.setToolTipText("");
         courseBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 15));
         courseBtn.setBorderPainted(false);
@@ -102,7 +97,7 @@ public class Home extends javax.swing.JFrame {
 
         scheduleBtn.setBackground(new java.awt.Color(242, 242, 242));
         scheduleBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        scheduleBtn.setText("Lịch phân công");
+        scheduleBtn.setText("Assignment Management");
         scheduleBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 15));
         scheduleBtn.setBorderPainted(false);
         scheduleBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -116,7 +111,7 @@ public class Home extends javax.swing.JFrame {
 
         resultBtn.setBackground(new java.awt.Color(242, 242, 242));
         resultBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        resultBtn.setText("Kết quả khóa học");
+        resultBtn.setText("Course Result Management");
         resultBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 15));
         resultBtn.setBorderPainted(false);
         resultBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -132,35 +127,28 @@ public class Home extends javax.swing.JFrame {
 
         cardPanel.setLayout(new java.awt.CardLayout());
 
-        schedulePnl.setBackground(new java.awt.Color(51, 204, 255));
+        startPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout schedulePnlLayout = new javax.swing.GroupLayout(schedulePnl);
-        schedulePnl.setLayout(schedulePnlLayout);
-        schedulePnlLayout.setHorizontalGroup(
-            schedulePnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1000, Short.MAX_VALUE)
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/banner (2).png"))); // NOI18N
+
+        javax.swing.GroupLayout startPanelLayout = new javax.swing.GroupLayout(startPanel);
+        startPanel.setLayout(startPanelLayout);
+        startPanelLayout.setHorizontalGroup(
+            startPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(startPanelLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(jLabel1)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
-        schedulePnlLayout.setVerticalGroup(
-            schedulePnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
-        );
-
-        cardPanel.add(schedulePnl, "card5");
-
-        resultPanel.setBackground(new java.awt.Color(0, 255, 153));
-
-        javax.swing.GroupLayout resultPanelLayout = new javax.swing.GroupLayout(resultPanel);
-        resultPanel.setLayout(resultPanelLayout);
-        resultPanelLayout.setHorizontalGroup(
-            resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1000, Short.MAX_VALUE)
-        );
-        resultPanelLayout.setVerticalGroup(
-            resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
+        startPanelLayout.setVerticalGroup(
+            startPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(startPanelLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
 
-        cardPanel.add(resultPanel, "card4");
+        cardPanel.add(startPanel, "card4");
 
         getContentPane().add(cardPanel, java.awt.BorderLayout.CENTER);
 
@@ -222,10 +210,10 @@ public class Home extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel cardPanel;
     private javax.swing.JButton courseBtn;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton resultBtn;
-    private javax.swing.JPanel resultPanel;
     private javax.swing.JButton scheduleBtn;
-    private javax.swing.JPanel schedulePnl;
     private javax.swing.JPanel sidebarMenu;
+    private javax.swing.JPanel startPanel;
     // End of variables declaration//GEN-END:variables
 }

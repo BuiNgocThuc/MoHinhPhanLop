@@ -5,7 +5,7 @@
 package DAL;
 
 import java.util.ArrayList;
-import DTO.OnlineCourseDTO;
+import BLL.Entity.OnlineCourseEntity;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -20,7 +20,7 @@ public class OnlineCourseDAL {
 
     private Connection conn;
     private PreparedStatement preStm;
-    private List<OnlineCourseDTO> listOnlCourses = new ArrayList<>();
+    private List<OnlineCourseEntity> listOnlCourses = new ArrayList<>();
 
     public OnlineCourseDAL() {
         ConnectDB connectDB = new ConnectDB();
@@ -29,8 +29,8 @@ public class OnlineCourseDAL {
     }
 
     // xem danh sách
-    public List<OnlineCourseDTO> selectAll() {
-        List<OnlineCourseDTO> list = new ArrayList<>();
+    public List<OnlineCourseEntity> selectAll() {
+        List<OnlineCourseEntity> list = new ArrayList<>();
         String query = "SELECT * FROM onlinecourse";
         try
         {
@@ -41,7 +41,7 @@ public class OnlineCourseDAL {
                 int CourseID = rs.getInt("CourseID");
                 String url = rs.getString("url");
 
-                OnlineCourseDTO OnlCourse = new OnlineCourseDTO();
+                OnlineCourseEntity OnlCourse = new OnlineCourseEntity();
                 OnlCourse.setCourseID(CourseID);
                 OnlCourse.setUrl(url);
 
@@ -56,8 +56,8 @@ public class OnlineCourseDAL {
     }
 
     // xem chi tiết
- public OnlineCourseDTO selectByID(int CourseID) {
-        OnlineCourseDTO course = null;
+ public OnlineCourseEntity selectByID(int CourseID) {
+        OnlineCourseEntity course = null;
         String query = "SELECT * FROM onlinecourse WHERE CourseID = ?";
          try
         {
@@ -69,7 +69,7 @@ public class OnlineCourseDAL {
             {
                 String url = rs.getString("Url");
 
-               course = new OnlineCourseDTO();
+               course = new OnlineCourseEntity();
                course.setUrl(url);
             }
             
@@ -80,7 +80,7 @@ public class OnlineCourseDAL {
         return course;
     }
 
-    public boolean insertOnlineCourse(OnlineCourseDTO onlCourse) {
+    public boolean insertOnlineCourse(OnlineCourseEntity onlCourse) {
         int result = -1;
 
         int CourseID = onlCourse.getCourseID();
@@ -106,7 +106,7 @@ public class OnlineCourseDAL {
         return false;
     }
 
-    public boolean updateOnlineCourse(OnlineCourseDTO onlCourse) {
+    public boolean updateOnlineCourse(OnlineCourseEntity onlCourse) {
         int result = -1;
 
         int CourseID = onlCourse.getCourseID();
@@ -160,7 +160,7 @@ public class OnlineCourseDAL {
 //        {
 //            return listOnlCourses;
 //        }
-//        for (OnlineCourseDTO onlCourse : listOnlCourses)
+//        for (OnlineCourseEntity onlCourse : listOnlCourses)
 //        {
 //            if (onlCourse.getTitle().toLowerCase().contains(sequenceChar.toLowerCase()))
 //            {
