@@ -26,7 +26,7 @@ public class Device {
     @Column(name = "MoTaTB")
     private String description;
 
-     @ManyToMany(mappedBy = "device")
+     @ManyToMany(mappedBy = "devices")
     private Set<Member> members = new HashSet<>();
 
     public Device() {

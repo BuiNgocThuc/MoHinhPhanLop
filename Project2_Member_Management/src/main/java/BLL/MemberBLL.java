@@ -49,4 +49,11 @@ public class MemberBLL {
     public List<Member> timeBasedStatistics(String startDate, String endDate) {
         return memberDAL.timeBasedStatistics(startDate, endDate);
     }
+    public static void main(String[] args) {
+        Logger.getLogger("org.hibernate").setLevel(Level.OFF);
+        MemberBLL memberBLL = new MemberBLL();
+        List<Member> members =memberBLL.selectAll();
+        members.forEach(System.out::println);
+        
+    }
 }
