@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 
 import java.util.HashSet;
 import java.util.Set;
+
 /**
  *
  * @author buing
@@ -15,6 +16,7 @@ import java.util.Set;
 @Entity
 @Table(name = "thanhvien")
 public class Member {
+
     @Id
     @Column(name = "MaTV")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,8 +31,12 @@ public class Member {
     @Column(name = "Nganh")
     private String major;
 
-    @OneToMany(mappedBy = "member")
-    private Set<Usage> usage_member = new HashSet<>();
+    @ManyToMany
+    @JoinTable(name = "thongtinsd", // Specify the join table
+            joinColumns = @JoinColumn(name = "MaTV"), // Foreign key to Member
+            inverseJoinColumns = @JoinColumn(name = "MaTB")) // Foreign key to Device
+    private Set<Device> devices = new HashSet<>();
+
     public Member() {
 
     }
@@ -67,13 +73,21 @@ public class Member {
         this.major = major;
     }
 
+    public Set<Device> getDevices() {
+        return devices;
+    }
+
+    public void setDevices(Set<Device> devices) {
+        this.devices = devices;
+    }
+
     @Override
     public String toString() {
-        return "Member{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", department='" + department + '\'' +
-                ", major='" + major + '\'' +
-                '}';
+        return "Member{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", department='" + department + '\''
+                + ", major='" + major + '\''
+                + '}';
     }
 }

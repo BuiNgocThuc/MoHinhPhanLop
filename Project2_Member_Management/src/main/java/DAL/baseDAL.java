@@ -90,23 +90,23 @@ public class baseDAL<T> {
         }
     }
 
-    public List<T> statistic(String hql) {
+    public List<T> statistic(String hql, Object...params) {
         Transaction transaction = null;
         Session session;
         List<T> results = new ArrayList<>();
-        try
-        {
+        try {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
 
             Query query = session.createQuery(hql);
+            for (int i = 0; i < params.length; i += 2) {
+                query.setParameter((String) params[i], params[i + 1]);
+            }
             results = query.getResultList();
 
             transaction.commit();
-        } catch (Exception e)
-        {
-            if (transaction != null)
-            {
+        } catch (Exception e) {
+            if (transaction != null) {
                 transaction.rollback();
             }
             e.printStackTrace();

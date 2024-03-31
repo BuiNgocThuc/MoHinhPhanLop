@@ -26,8 +26,8 @@ public class Device {
     @Column(name = "MoTaTB")
     private String description;
 
-    @OneToMany(mappedBy = "device")
-    private Set<Usage> usage_device = new HashSet<>();
+     @ManyToMany(mappedBy = "device")
+    private Set<Member> members = new HashSet<>();
 
     public Device() {
 
@@ -55,6 +55,14 @@ public class Device {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<Member> getMembers() {
+        return members;
+    }
+
+    public void setMembers(Set<Member> members) {
+        this.members = members;
     }
 
     @Override
