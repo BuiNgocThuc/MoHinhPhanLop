@@ -35,10 +35,12 @@ public class baseDAL<T> {
 
     public void save(T object) {
         Transaction transaction = null;
-        try (Session session = sessionFactory.openSession())
+        Session session = null;
+        try 
         {
+            session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            session.persist(object);
+            session.save(object);
             transaction.commit();
         } catch (Exception e)
         {

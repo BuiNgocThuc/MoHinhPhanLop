@@ -19,7 +19,6 @@ public class Member {
 
     @Id
     @Column(name = "MaTV")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "HoTen")
@@ -32,9 +31,9 @@ public class Member {
     private String major;
 
     @ManyToMany
-    @JoinTable(name = "thongtinsd", // Specify the join table
-            joinColumns = @JoinColumn(name = "MaTV"), // Foreign key to Member
-            inverseJoinColumns = @JoinColumn(name = "MaTB")) // Foreign key to Device
+    @JoinTable(name = "thongtinsd", 
+            joinColumns = @JoinColumn(name = "MaTV"), 
+            inverseJoinColumns = @JoinColumn(name = "MaTB")) 
     private Set<Device> devices = new HashSet<>();
 
     public Member() {

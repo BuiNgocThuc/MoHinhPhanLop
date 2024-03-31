@@ -3,8 +3,10 @@ package BLL;
 import DAL.MemberDAL;
 import DAL.baseDAL;
 import POJOs.Member;
+import POJOs.Device;
 
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -50,10 +52,18 @@ public class MemberBLL {
         return memberDAL.timeBasedStatistics(startDate, endDate);
     }
     public static void main(String[] args) {
-        Logger.getLogger("org.hibernate").setLevel(Level.OFF);
-        MemberBLL memberBLL = new MemberBLL();
-        List<Member> members =memberBLL.selectAll();
-        members.forEach(System.out::println);
-        
+         Logger.getLogger("org.hibernate").setLevel(Level.OFF);
+        DeviceBLL deviceBLL = new DeviceBLL();
+
+
+        Device device = new Device();
+        device.setId(1000028);
+        device.setName("TV2");
+        device.setDescription("TV2 test");
+        device.setStatus(1);
+        deviceBLL.insertDevice(device);
+
+        List<Device> devices = deviceBLL.selectAll();
+        devices.forEach(System.out::println);
     }
 }
