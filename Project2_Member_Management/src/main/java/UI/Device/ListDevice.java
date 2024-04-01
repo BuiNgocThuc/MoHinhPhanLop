@@ -3,32 +3,22 @@ package UI.Device;
 import BLL.*;
 import DAL.*;
 import POJOs.Device;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-
 import java.util.List;
 
 public class ListDevice extends JPanel {
     DeviceBLL deviceBLL = new DeviceBLL();
     List<Device> ListDevices = deviceBLL.selectAll();
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("Customer Panel");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.add(new ListDevice(), BorderLayout.CENTER);
-            frame.setSize(900, 600);
-            frame.setVisible(true);
-        });
-    }
 
     public ListDevice() {
         setLayout(new BorderLayout());
@@ -42,11 +32,12 @@ public class ListDevice extends JPanel {
 
     private void initTop() {
         JPanel panelTop = new JPanel();
-        panelTop.setLayout(new FlowLayout(FlowLayout.LEFT));
-        JLabel titleLabel = new JLabel("Danh Sách Thiết Bị");
+        panelTop.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        panelTop.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        JLabel titleLabel = new JLabel("Chỗ này làm thanh search");
         titleLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         panelTop.add(titleLabel);
-        // add(panelTop, BorderLayout.WEST);
+        add(panelTop, BorderLayout.NORTH);
     }
 
     private void initCenter() {
@@ -54,11 +45,14 @@ public class ListDevice extends JPanel {
         panelCenter.setLayout(new BorderLayout());
         panel_Table = new JPanel();
         panel_Table.setLayout(new BorderLayout());
+        Border titledBorder = BorderFactory.createTitledBorder(
+                BorderFactory.createEtchedBorder(EtchedBorder.LOWERED, Color.WHITE, Color.GRAY),
+                "Danh sách thiết bị", TitledBorder.LEADING, TitledBorder.TOP);
+        ((TitledBorder) titledBorder)
+                .setTitleFont(((TitledBorder) titledBorder).getTitleFont().deriveFont(Font.BOLD, 14));
         panel_Table.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createEmptyBorder(0, 10, 10, 10),
-                BorderFactory.createTitledBorder(
-                        BorderFactory.createEtchedBorder(EtchedBorder.LOWERED, Color.WHITE, Color.GRAY),
-                        "Danh sách thiết bị", TitledBorder.LEADING, TitledBorder.TOP)));
+                BorderFactory.createEmptyBorder(0, 10, 50, 10),
+                titledBorder));
         modeltable = new DefaultTableModel(
                 new Object[][] {},
                 new String[] { "STT", "Mã Thiết Bị", "Tên Thiết Bị", "Mô Tả", "" }) {
@@ -71,14 +65,16 @@ public class ListDevice extends JPanel {
         table = new JTable(modeltable);
         int stt = 1;
         for (Device device : ListDevices) {
-            Object[] rowData = new String[4];
-            rowData[0] = String.valueOf(stt++);
-            rowData[1] = String.valueOf(device.getId());
-            rowData[2] = device.getName();
-            rowData[3] = device.getDescription();
-            // rowData[4] = device.getStatus();
-            // rowData[4] = "/assets/icons8-trash-35.png";
-            modeltable.addRow(rowData);
+            if (device.getStatus() != 0) {
+                Object[] rowData = new String[4];
+                rowData[0] = String.valueOf(stt++);
+                rowData[1] = String.valueOf(device.getId());
+                rowData[2] = device.getName();
+                rowData[3] = device.getDescription();
+                // rowData[4] = device.getStatus();
+                // rowData[4] = "/assets/icons8-trash-35.png";
+                modeltable.addRow(rowData);
+            }
         }
 
         table.setRowHeight(35);
@@ -122,32 +118,15 @@ public class ListDevice extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 JTable target = (JTable) e.getSource();
                 int column = target.columnAtPoint(e.getPoint());
-                // if (column == 5) {
-                // int row = target.rowAtPoint(e.getPoint());
-                // // removeRowFromTable(modeltable, row);
-                // int choice = JOptionPane.showConfirmDialog(null,
-                // "Bạn có chắc chắn muốn đặt lại mật khẩu?", "Xác nhận",
-                // JOptionPane.YES_NO_OPTION);
-
-                // // Xử lý dựa trên sự lựa chọn của người dùng
-                // if (choice == JOptionPane.YES_OPTION) {
-                // JOptionPane.showMessageDialog(null, "Hành động đã được thực hiện!");
-                // }
-                // }
-
                 if (column == 4) {
                     int choice = JOptionPane.showConfirmDialog(null,
                             "Bạn có chắc chắn muốn xóa thông tin thiết bị này?", "Xác nhận", JOptionPane.YES_NO_OPTION);
                     if (choice == JOptionPane.YES_OPTION) {
                         int row = target.rowAtPoint(e.getPoint());
                         int value = Integer.parseInt((String) target.getValueAt(row, 1));
-                        // Device device = deviceBLL.getDeviceById(value);
-                        // device.setStatus(0);
-                        // deviceBLL.updateDevice(device);
                         System.out.println(value);
                         deviceBLL.changeStatus(value);
-                        // removeRowFromTable(modeltable, row);
-                        // deviceBLL.deleteDevice(value);
+                        removeRowFromTable(modeltable, row);
                     }
                 }
             }

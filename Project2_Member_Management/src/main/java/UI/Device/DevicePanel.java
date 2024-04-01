@@ -11,7 +11,6 @@ public class DevicePanel extends JPanel {
             JFrame frame = new JFrame("Device Panel");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.add(new DevicePanel(), BorderLayout.CENTER);
-            // frame.setPreferredSize(new Dimension(1100, 700));
             frame.setSize(1100, 700);
             frame.setVisible(true);
             frame.setLocationRelativeTo(null);
@@ -31,53 +30,39 @@ public class DevicePanel extends JPanel {
 
     private void initLeft() {
         panelLeft = new JPanel();
-        // panelLeft.setBackground(new Color(0, 191, 255));
         panelLeft.setBackground(null);
 
         menuPanel = new JPanel(new GridBagLayout());
-        // menuPanel.setBackground(new Color(0, 191, 255));
         menuPanel.setBackground(Color.WHITE);
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.insets = new Insets(5, 5, 5, 5); // Thay đổi các giá trị để phù hợp với nhu cầu của bạn
+        gbc.insets = new Insets(5, 5, 5, 5);
 
         Button btnMenu1 = new Button("Danh sách thiết bị");
-        // Button btnMenu2 = new Button("Chi tiết khách hàng");
-        Button btnMenu3 = new Button("Thêm thiết bị");
-        Button btnMenu4 = new Button("Thu gọn");
-        Button btnMenu5 = new Button("|||");
+        Button btnMenu2 = new Button("Thêm thiết bị");
+        Button btnMenu3 = new Button("Thu gọn");
+        Button btnMenu4 = new Button("|||");
 
         btnMenu1.setButton(165, 30, Color.white);
-        // btnMenu2.setButton(165, 30, Color.white);
-        btnMenu3.setButton(165, 30, Color.white);
+        btnMenu2.setButton(165, 30, Color.white);
 
         btnMenu1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(contentPanel, "Menu 1");
-                // btnMenu2.setBackground(Color.WHITE);
-                btnMenu3.setBackground(Color.WHITE);
+                btnMenu2.setBackground(Color.WHITE);
             }
         });
-        // btnMenu2.addActionListener(new ActionListener() {
-        // @Override
-        // public void actionPerformed(ActionEvent e) {
-        // cardLayout.show(contentPanel, "Menu 2");
-        // btnMenu1.setBackground(Color.WHITE);
-        // btnMenu3.setBackground(Color.WHITE);
-        // }
-        // });
-        btnMenu3.addActionListener(new ActionListener() {
+        btnMenu2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(contentPanel, "Menu 3");
+                cardLayout.show(contentPanel, "Menu 2");
                 btnMenu1.setBackground(Color.WHITE);
-                // btnMenu2.setBackground(Color.WHITE);
             }
         });
 
-        btnMenu4.addActionListener(new ActionListener() {
+        btnMenu3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Timer timer = new Timer(30, new ActionListener() { // Tăng thời gian giữa các bước lên 50
@@ -90,7 +75,7 @@ public class DevicePanel extends JPanel {
                             ((Timer) e.getSource()).stop(); // Dừng Timer
                             panelLeft.removeAll(); // Xóa tất cả các thành phần trong panelLeft
                             panelLeft.setBackground(null);
-                            panelLeft.add(btnMenu5); // Thêm btnMenu5 vào panelLeft
+                            panelLeft.add(btnMenu4); // Thêm btnMenu4 vào panelLeft
                             panelLeft.revalidate(); // Yêu cầu panelLeft cập nhật lại layout
                             panelLeft.repaint(); // Vẽ lại panelLeft
                         } else {
@@ -106,7 +91,7 @@ public class DevicePanel extends JPanel {
             }
         });
 
-        btnMenu5.addActionListener(new ActionListener() {
+        btnMenu4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("nhấn");
@@ -142,11 +127,10 @@ public class DevicePanel extends JPanel {
 
         menuPanel.add(btnMenu1, gbc);
         gbc.gridy++;
-        // menuPanel.add(btnMenu2, gbc);
+        gbc.gridy++;
+        menuPanel.add(btnMenu2, gbc);
         gbc.gridy++;
         menuPanel.add(btnMenu3, gbc);
-        gbc.gridy++;
-        menuPanel.add(btnMenu4, gbc);
         panelLeft.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
         panelLeft.add(menuPanel);
         add(panelLeft, BorderLayout.WEST);
@@ -160,13 +144,9 @@ public class DevicePanel extends JPanel {
 
         // Thêm nội dung vào content panel
         JPanel panel1 = new ListDevice();
-        JPanel panel2 = new JPanel(); // new panel chi tiết
-        panel2.add(new JLabel("Content of Menu 2"));
-        JPanel panel3 = new JPanel(); // new panel thêm
-        panel3.add(new JLabel("Content of Menu 3"));
+        JPanel panel2 = new AddDevice();
         contentPanel.add(panel1, "Menu 1");
         contentPanel.add(panel2, "Menu 2");
-        contentPanel.add(panel3, "Menu 3");
 
         add(contentPanel, BorderLayout.CENTER);
     }
@@ -181,16 +161,12 @@ public class DevicePanel extends JPanel {
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
         panelTop.add(titleLabel);
         add(panelTop, BorderLayout.NORTH);
-        panelSouth = new JPanel();
-        panelSouth.setPreferredSize(new Dimension(1100, 50));
-        this.add(panelSouth, BorderLayout.SOUTH);
     }
 
     private CardLayout cardLayout;
     private JPanel menuPanel;
     private JPanel contentPanel;
     private JPanel panelLeft;
-    private JPanel panelSouth;
     private int widthLeft;
 
 }
