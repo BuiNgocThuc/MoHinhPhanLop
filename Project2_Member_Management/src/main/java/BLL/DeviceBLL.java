@@ -36,12 +36,18 @@ public class DeviceBLL {
     public void deleteDevice(int id) {
         baseDeviceDAL.delete(id);
     }
-    
-    public List<Device> statisticDeviceBorrowed(String name , String startDate, String endDate) throws ParseException {
+
+    public void changeStatus(int id) {
+        Device device = getDeviceById(id);
+        device.setStatus(0);
+        updateDevice(device);
+    }
+
+    public List<Device> statisticDeviceBorrowed(String name, String startDate, String endDate) throws ParseException {
         return deviceDAL.statisticDeviceBorrowed(name, startDate, endDate);
     }
     
-    public List<Device> statisticDeviceIsBorrowing(String startDate, String endDate) throws ParseException {
-        return deviceDAL.statisticDeviceIsBorrowing(startDate, endDate);
+    public List<Device> statisticDeviceIsBorrowing(String name , String startDate, String endDate) throws ParseException {
+        return deviceDAL.statisticDeviceIsBorrowing(name, startDate, endDate);
     }
 }

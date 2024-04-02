@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) throws ParseException {
         Logger.getLogger("org.hibernate").setLevel(Level.OFF);
         DeviceBLL dvBLL = new DeviceBLL();
-        List<Device> devices = dvBLL.statisticDeviceIsBorrowing(null, "2024-04-25");
+        List<Device> devices = dvBLL.statisticDeviceIsBorrowing(null, "2024-04-05", "2024-04-19");
         
         for(Device d : devices) {
             System.out.println("id: " + d.getId());
