@@ -25,8 +25,11 @@ public class DeviceDAL {
         this.baseDAL = new baseDAL<>(Device.class);
     }
 
-//    Thống kê các thiết bị đã được mượn theo tên, khoảng thời gian
-    public List<Device> statisticDeviceBorrowed(String name, String startDateStr, String endDateStr) {
+    // Thống kê các thiết bị đã được mượn theo tên, khoảng thời gian
+
+    @SuppressWarnings("unchecked")
+    public List<Device> statisticDeviceBorrowed(String name, String startDateStr, String endDateStr)
+            throws ParseException {
         Session session;
         String hql = "FROM Device m JOIN Usage u ON m.id = u.device WHERE u.borrowedTime IS NOT NULL AND u.paidTime IS NOT NULL ";
 
@@ -48,14 +51,14 @@ public class DeviceDAL {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        
+
         Map<String, Object> params = new HashMap<>();
 
         if (name != null) {
             hql += " AND m.name LIKE :name";
             params.put("name", "%" + name + "%");
         }
-        
+
         if (startTimeStamp != null) {
             hql += " AND u.borrowedTime >= :startTimeStamp";
             params.put("startTimeStamp", startTimeStamp);
@@ -64,7 +67,6 @@ public class DeviceDAL {
             hql += " AND u.paidTime <= :endTimeStamp";
             params.put("endTimeStamp", endTimeStamp);
         }
-
 
         List<Device> results = new ArrayList<>();
         try {
@@ -75,7 +77,7 @@ public class DeviceDAL {
             for (Map.Entry<String, Object> entry : params.entrySet()) {
                 query.setParameter(entry.getKey(), entry.getValue());
             }
-            
+
             results = query.getResultList();
 
         } catch (Exception e) {
@@ -83,9 +85,10 @@ public class DeviceDAL {
         }
         return results;
     }
-    
 
-//        Thống kê thiết bị đang mượn và các thiết bị đang mượn theo khoảng thời gian
+    // Thống kê thiết bị đang mượn và các thiết bị đang mượn theo khoảng thời gian
+
+    @SuppressWarnings("unchecked")
     public List<Device> statisticDeviceIsBorrowing(String name, String startDateStr, String endDateStr) {
         Session session;
         String hql = "FROM Device m JOIN Usage u ON m.id = u.device WHERE u.device IS NOT NULL AND u.paidTime IS NULL ";
@@ -109,7 +112,7 @@ public class DeviceDAL {
             hql += " AND m.name LIKE :name";
             params.put("name", "%" + name + "%");
         }
-        
+
         if (startTimeStamp != null) {
             hql += " AND u.borrowedTime >= :startTimeStamp";
             params.put("startTimeStamp", startTimeStamp);
@@ -119,12 +122,13 @@ public class DeviceDAL {
         try {
             session = sessionFactory.openSession();
 
+            @SuppressWarnings("deprecation")
             Query query = session.createQuery(hql);
 
             for (Map.Entry<String, Object> entry : params.entrySet()) {
                 query.setParameter(entry.getKey(), entry.getValue());
             }
-            
+
             results = query.getResultList();
 
         } catch (Exception e) {
