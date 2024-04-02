@@ -41,7 +41,7 @@ public class DeviceBLL {
         return deviceDAL.statisticDeviceBorrowed(name, startDate, endDate);
     }
     
-    public List<Device> statisticDeviceIsBorrowing(String startDate, String endDate) throws ParseException {
-        return deviceDAL.statisticDeviceIsBorrowing(startDate, endDate);
+    public List<Device> statisticDeviceIsBorrowing(String name , String startDate, String endDate) throws ParseException {
+        return deviceDAL.statisticDeviceIsBorrowing(name, startDate, endDate);
     }
 }
