@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 
 import java.util.HashSet;
 import java.util.Set;
+
 /**
  *
  * @author buing
@@ -15,8 +16,8 @@ import java.util.Set;
 @Entity
 @Table(name = "thietbi")
 public class Device {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MaTB")
     private int id;
 
@@ -26,8 +27,11 @@ public class Device {
     @Column(name = "MoTaTB")
     private String description;
 
-    @OneToMany(mappedBy = "device")
-    private Set<Usage> usage_device = new HashSet<>();
+    @Column(name = "status")
+    private int status;
+
+    @ManyToMany(mappedBy = "devices")
+    private Set<Member> members = new HashSet<>();
 
     public Device() {
 
@@ -57,12 +61,28 @@ public class Device {
         this.description = description;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public Set<Member> getMembers() {
+        return members;
+    }
+
+    public void setMembers(Set<Member> members) {
+        this.members = members;
+    }
+
     @Override
     public String toString() {
-        return "Device{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+        return "Device{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", description='" + description + '\''
+                + '}';
     }
 }

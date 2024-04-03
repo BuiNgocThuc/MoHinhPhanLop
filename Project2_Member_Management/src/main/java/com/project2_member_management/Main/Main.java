@@ -1,15 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
 
 package com.project2_member_management.Main;
-
+import BLL.DeviceBLL;
 import POJOs.Device;
-import Utils.hibernateUtil;
-import jakarta.persistence.Query;
+import java.text.ParseException;
 import java.util.List;
-import org.hibernate.SessionFactory;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author buing
@@ -17,5 +13,6 @@ import org.hibernate.SessionFactory;
 public class Main {
     public static void main(String[] args) {
         System.out.println("Hello World!");
+        
     }
 }
