@@ -9,7 +9,6 @@ public class ImageRender extends DefaultTableCellRenderer {
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
             int row, int column) {
-        System.out.println((String) value);
         label = new JLabel();
         if (value instanceof String && (((String) value).endsWith(".png") || ((String) value).endsWith(".jpg"))) {
             ImageIcon originalIcon = new ImageIcon(getClass().getResource((String) value));
