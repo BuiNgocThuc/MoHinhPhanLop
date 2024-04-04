@@ -8,42 +8,44 @@ import java.util.List;
 
 public class DisciplineBLL {
 
-    private baseDAL<Discipline> baseDiscipline;
+    //private baseDAL<Discipline> baseDiscipline;
     private DisciplineDAL disciplineDAL;
 
     public DisciplineBLL() {
         this.disciplineDAL = new DisciplineDAL();
-        this.baseDiscipline = new baseDAL<>(Discipline.class);
+        //this.baseDiscipline = new baseDAL<>(Discipline.class);
+        
     }
 
     public List<Discipline> selectAll() {
-        return this.baseDiscipline.selectAll();
+        //return this.baseDiscipline.selectAll();
+        return disciplineDAL.selectAll();
     }
 
-    public Discipline getById(int id) {
-        return this.baseDiscipline.getById(id);
-    }
+//    public Discipline getById(int id) {
+//        //return this.baseDiscipline.getById(id);
+//    }
+//
+//    public void insertDiscipline(Discipline discipline) {
+//        //this.baseDiscipline.save(discipline);
+//    }
+//
+//    public void updateDiscipline(Discipline discipline) {
+//        //this.baseDiscipline.update(discipline);
+//    }
+//
+//    public void deleteDiscipline(int id) {
+//        //this.baseDiscipline.delete(id);
+//    }
 
-    public void insertDiscipline(Discipline discipline) {
-        this.baseDiscipline.save(discipline);
-    }
-
-    public void updateDiscipline(Discipline discipline) {
-        this.baseDiscipline.update(discipline);
-    }
-
-    public void deleteDiscipline(int id) {
-        this.baseDiscipline.delete(id);
-    }
-
-    public boolean isWarning(int id) {
-        Discipline discipline = getById(id);
-        if (discipline.getStatus() == 1)
-        {
-            return true;
-        } else
-        {
-            return false;
-        }
-    }
+//    public boolean isWarning(int id) {
+//        Discipline discipline = getById(id);
+//        if (discipline.getStatus() == 1)
+//        {
+//            return true;
+//        } else
+//        {
+//            return false;
+//        }
+//    }
 }

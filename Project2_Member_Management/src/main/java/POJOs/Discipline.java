@@ -5,6 +5,7 @@
 package POJOs;
 
 import jakarta.persistence.*;
+import java.io.Serializable;
 
 import java.sql.Timestamp;
 /**
@@ -13,7 +14,7 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name = "xuly")
-public class Discipline {
+public class Discipline implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MaXL")
@@ -25,7 +26,7 @@ public class Discipline {
     @Column(name = "SoTien")
     private int fine;
 
-    @Column(name = "NgayXuLy")
+    @Column(name = "NgayXL")
     private Timestamp date;
 
     @Column(name = "TrangThaiXL")
@@ -59,6 +60,11 @@ public class Discipline {
 
     public void setFine(int fine) {
         this.fine = fine;
+    }
+
+    @Override
+    public String toString() {
+        return "Discipline{" + "id=" + id + ", description=" + description + ", fine=" + fine + ", date=" + date + ", status=" + status + ", memberID=" + memberID + '}';
     }
 
     public Timestamp getDate() {
