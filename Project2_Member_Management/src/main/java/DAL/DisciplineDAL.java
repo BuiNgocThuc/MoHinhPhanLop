@@ -48,6 +48,23 @@ public class DisciplineDAL {
         }catch(Exception e){
             System.out.println("Error");
         }
-        
+    }
+    public void update(Discipline discipline) {
+         Transaction transaction = session.beginTransaction();
+         try{
+            Discipline udiscipline=session.get(Discipline.class, discipline.getId());
+            udiscipline.setFine(discipline.getFine());
+            udiscipline.setStatus(discipline.getStatus());
+            udiscipline.setDescription(discipline.getDescription());
+            session.update(udiscipline);
+            transaction.commit();
+        } catch (Exception e)
+        {
+            if (transaction != null)
+            {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
     }
 }

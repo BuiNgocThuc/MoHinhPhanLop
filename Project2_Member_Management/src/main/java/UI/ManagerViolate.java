@@ -145,7 +145,7 @@ public class ManagerViolate extends javax.swing.JFrame {
 
     private void jBtnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAddActionPerformed
         // TODO add your handling code here:
-        AddViolate addViolate=new AddViolate();
+        AddDiscipline addViolate=new AddDiscipline();
         addViolate.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         addViolate.setLocationRelativeTo(null);
         addViolate.setVisible(true);
@@ -154,16 +154,20 @@ public class ManagerViolate extends javax.swing.JFrame {
 
     private void jBtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditActionPerformed
         // TODO add your handling code here:
-        EditViolate editViolate=new EditViolate();
-        editViolate.jMaXuLy.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),0).toString());
-        editViolate.jMaThanhVien.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),1).toString()+"-"+jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),2).toString());
-        editViolate.jNgayXuLy.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),5).toString());
-        editViolate.jSoTien.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),4).toString());
-        editViolate.jHinhThucXuLy.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),3).toString());
-        editViolate.jComboBoxTrangThaiXuLy.setSelectedItem(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),5).toString());
-        editViolate.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        editViolate.setLocationRelativeTo(null);
-        editViolate.setVisible(true);
+        if(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),6).toString().equals("1")){
+            JOptionPane.showMessageDialog(rootPane,"Has been processed");
+        }else{
+            EditDiscipline editViolate=new EditDiscipline();
+            editViolate.jMaXuLy.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),0).toString());
+            editViolate.jMaThanhVien.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),1).toString()+"-"+jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),2).toString());
+            editViolate.jNgayXuLy.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),5).toString());
+            editViolate.jSoTien.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),4).toString());
+            editViolate.jHinhThucXuLy.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),3).toString());
+            editViolate.jComboBoxTrangThaiXuLy.setSelectedItem(0);
+            editViolate.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            editViolate.setLocationRelativeTo(null);
+            editViolate.setVisible(true);
+        }
     }//GEN-LAST:event_jBtnEditActionPerformed
 
     private void jBtnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnDeleteActionPerformed
@@ -224,7 +228,7 @@ public class ManagerViolate extends javax.swing.JFrame {
         }
         jTableCategory.setModel(model);
         */
-        String columns[]=new String[]{"Mã Xử Lý","Mã Thành Viên","Hình Thức xử Lý","Số Tiền","Ngày Xử Lý","Trạng Thái Xử Lý"};
+        String columns[]=new String[]{"Mã Xử Lý","Mã Thành Viên","Tên Thành Viên","Hình Thức xử Lý","Số Tiền","Ngày Xử Lý","Trạng Thái Xử Lý"};
         DefaultTableModel model=new DefaultTableModel();
         for(String i:columns){
             model.addColumn(i);

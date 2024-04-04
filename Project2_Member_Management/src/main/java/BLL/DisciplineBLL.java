@@ -36,9 +36,10 @@ public class DisciplineBLL {
         disciplineDAL.insertDiscipline(discipline);
     }
 //
-//    public void updateDiscipline(Discipline discipline) {
-//        //this.baseDiscipline.update(discipline);
-//    }
+    public void updateDiscipline(Discipline discipline) {
+        //this.baseDiscipline.update(discipline);
+        disciplineDAL.update(discipline);
+    }
 //
 //    public void deleteDiscipline(int id) {
 //        //this.baseDiscipline.delete(id);

@@ -4,16 +4,19 @@
  */
 package UI;
 
+import BLL.DisciplineBLL;
+import POJOs.Discipline;
+
 /**
  *
  * @author MSI
  */
-public class EditViolate extends javax.swing.JFrame {
-
+public class EditDiscipline extends javax.swing.JFrame {
+    DisciplineBLL disciplineBLL=new DisciplineBLL();
     /**
      * Creates new form EditViolate
      */
-    public EditViolate() {
+    public EditDiscipline() {
         initComponents();
     }
 
@@ -61,7 +64,7 @@ public class EditViolate extends javax.swing.JFrame {
 
         jLabel6.setText("Trạng Thái Xử Lý");
 
-        jComboBoxTrangThaiXuLy.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "0" }));
+        jComboBoxTrangThaiXuLy.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1" }));
 
         jBtnEdit.setText("Edit");
         jBtnEdit.addActionListener(new java.awt.event.ActionListener() {
@@ -154,6 +157,13 @@ public class EditViolate extends javax.swing.JFrame {
         String sotien=jSoTien.getText().toString();
         String trangthai=jComboBoxTrangThaiXuLy.getSelectedItem().toString();
         System.out.println(mavipham+"-"+mathanhvien[0]+"-"+hinhthucxuly+"-"+sotien+"-"+trangthai);
+        Discipline discipline=new Discipline();
+        discipline.setId(Integer.parseInt(mavipham));
+        discipline.setFine(Integer.parseInt(sotien));
+        discipline.setDescription(hinhthucxuly);
+        discipline.setStatus(1);
+        disciplineBLL.updateDiscipline(discipline);
+        
     }//GEN-LAST:event_jBtnEditActionPerformed
 
     /**
@@ -173,20 +183,21 @@ public class EditViolate extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EditViolate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditDiscipline.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EditViolate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditDiscipline.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EditViolate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditDiscipline.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EditViolate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditDiscipline.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EditViolate().setVisible(true);
+                new EditDiscipline().setVisible(true);
             }
         });
     }
