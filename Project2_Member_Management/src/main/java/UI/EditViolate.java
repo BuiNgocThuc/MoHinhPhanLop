@@ -64,6 +64,11 @@ public class EditViolate extends javax.swing.JFrame {
         jComboBoxTrangThaiXuLy.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "0" }));
 
         jBtnEdit.setText("Edit");
+        jBtnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnEditActionPerformed(evt);
+            }
+        });
 
         jCancel.setText("Cancel");
         jCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -140,6 +145,16 @@ public class EditViolate extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jCancelActionPerformed
+
+    private void jBtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditActionPerformed
+        // TODO add your handling code here:
+        String mavipham=jMaXuLy.getText().toString();
+        String[] mathanhvien=jMaThanhVien.getText().toString().split("-");
+        String hinhthucxuly=jHinhThucXuLy.getText().toString();
+        String sotien=jSoTien.getText().toString();
+        String trangthai=jComboBoxTrangThaiXuLy.getSelectedItem().toString();
+        System.out.println(mavipham+"-"+mathanhvien[0]+"-"+hinhthucxuly+"-"+sotien+"-"+trangthai);
+    }//GEN-LAST:event_jBtnEditActionPerformed
 
     /**
      * @param args the command line arguments
