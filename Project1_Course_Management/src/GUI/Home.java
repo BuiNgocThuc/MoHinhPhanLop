@@ -43,6 +43,7 @@ public class Home extends javax.swing.JFrame {
     private JButton currentBtn = null;
     private final ArrayList<JButton> allBtnLeftBar = new ArrayList<>();
     private final ArrayList<JButton> allBtnLeftSubBar = new ArrayList<>();
+    
 
     public Home() {
         try {
