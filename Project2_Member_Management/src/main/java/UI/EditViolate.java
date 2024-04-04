@@ -49,11 +49,15 @@ public class EditViolate extends javax.swing.JFrame {
 
         jLabel2.setText("Thành Viên");
 
+        jMaThanhVien.setEnabled(false);
+
         jLabel3.setText("Hình Thức Xử Lý");
 
         jLabel4.setText("Số Tiền");
 
         jLabel5.setText("Ngày Xử Lý");
+
+        jNgayXuLy.setEditable(false);
 
         jLabel6.setText("Trạng Thái Xử Lý");
 

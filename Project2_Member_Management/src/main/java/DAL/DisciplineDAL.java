@@ -6,10 +6,12 @@ package DAL;
 
 import POJOs.Device;
 import POJOs.Discipline;
+import POJOs.Member;
 import Utils.hibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  *
@@ -30,5 +32,22 @@ public class DisciplineDAL {
         listDiscipline=session.createQuery("FROM Discipline",Discipline.class).list();
         session.getTransaction().commit();
         return listDiscipline;
+    }
+    public List<Member> selectMember(){
+        List<Member> listselectMember=new ArrayList<>();
+        session.getTransaction().begin();
+        listselectMember=session.createQuery("FROM Member",Member.class).list();
+        session.getTransaction().commit();
+        return listselectMember;
+    }
+    public void insertDiscipline(Discipline discipline) {
+        try{
+            Transaction transaction = session.beginTransaction();
+            session.save(discipline);
+            transaction.commit();
+        }catch(Exception e){
+            System.out.println("Error");
+        }
+        
     }
 }

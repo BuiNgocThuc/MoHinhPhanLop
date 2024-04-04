@@ -55,13 +55,13 @@ public class ManagerViolate extends javax.swing.JFrame {
 
         jTableDiscipline.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã Xử Lý", "Thành Viên", "Hình Thức Xử Lý", "Số Tiền", "Ngày Xử Lý", "Trạng Thái Xử Lý"
+                "Mã Xử Lý", "Mã Thành Viên", "Thành Viên", "Hình Thức Xử Lý", "Số Tiền", "Ngày Xử Lý", "Trạng Thái Xử Lý"
             }
         ));
         jTableDiscipline.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -149,16 +149,17 @@ public class ManagerViolate extends javax.swing.JFrame {
         addViolate.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         addViolate.setLocationRelativeTo(null);
         addViolate.setVisible(true);
+        //LoadData();
     }//GEN-LAST:event_jBtnAddActionPerformed
 
     private void jBtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditActionPerformed
         // TODO add your handling code here:
         EditViolate editViolate=new EditViolate();
         editViolate.jMaXuLy.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),0).toString());
-        editViolate.jMaThanhVien.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),1).toString());
-        editViolate.jNgayXuLy.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),4).toString());
-        editViolate.jSoTien.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),3).toString());
-        editViolate.jHinhThucXuLy.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),2).toString());
+        editViolate.jMaThanhVien.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),1).toString()+"-"+jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),2).toString());
+        editViolate.jNgayXuLy.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),5).toString());
+        editViolate.jSoTien.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),4).toString());
+        editViolate.jHinhThucXuLy.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),3).toString());
         editViolate.jComboBoxTrangThaiXuLy.setSelectedItem(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),5).toString());
         editViolate.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         editViolate.setLocationRelativeTo(null);
@@ -190,23 +191,7 @@ public class ManagerViolate extends javax.swing.JFrame {
                           System.out.println(row.getCell(1).getRichStringCellValue().toString());
                           System.out.println(row.getCell(2).getRichStringCellValue().toString());
                           System.out.println(row.getCell(3).getNumericCellValue());
-                          System.out.println(row.getCell(4).getNumericCellValue());
-                          
-//                        LopHoc lop = new LopHoc();
-//                        lop.setMaLopHoc(row.getCell(0).getStringCellValue());
-//                        lop.setTenLopHoc(row.getCell(1).getStringCellValue());
-//                        lop.setMaKhoiLop(row.getCell(2).getStringCellValue());
-//                        lop.setMaGVCN(row.getCell(3).getStringCellValue());
-//                        lop.setSiSo((int) row.getCell(4).getNumericCellValue());
-//                        if (formklp.getDslop().SearchLopHoc(lop.getMaLopHoc()) == -1) {
-//                            if (dblop.AddLopHoc(lop)) {
-//                                formklp.getDslop().getLophoc().add(lop);
-//                            }
-//                        }
-//                    long currentTimeMillis = System.currentTimeMillis();
-//                    Date currentDate = new java.util.Date(currentTimeMillis);
-//                    Timestamp timestamp = new Timestamp(currentDate.getTime());
-//                    System.out.println(timestamp);   
+                          System.out.println(row.getCell(4).getNumericCellValue());  
                     }
                 }
                 //formklp.LoadDataLopHoc(formklp.getTblophoc());
@@ -247,6 +232,7 @@ public class ManagerViolate extends javax.swing.JFrame {
         for(Discipline i:disciplineBLL.selectAll()){
             Vector t=new Vector();
             t.add(i.getId());
+            t.add(i.getMemberID().getId());
             t.add(i.getMemberID().getName());
             t.add(i.getDescription());
             t.add(i.getFine());

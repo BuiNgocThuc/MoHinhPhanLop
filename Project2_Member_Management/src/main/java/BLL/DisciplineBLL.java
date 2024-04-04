@@ -3,6 +3,7 @@ package BLL;
 import POJOs.Discipline;
 import DAL.DisciplineDAL;
 import DAL.baseDAL;
+import POJOs.Member;
 
 import java.util.List;
 
@@ -21,14 +22,19 @@ public class DisciplineBLL {
         //return this.baseDiscipline.selectAll();
         return disciplineDAL.selectAll();
     }
+    public List<Member> selectMenber() {
+        //return this.baseDiscipline.selectAll();
+        return disciplineDAL.selectMember();
+    }
 
 //    public Discipline getById(int id) {
 //        //return this.baseDiscipline.getById(id);
 //    }
 //
-//    public void insertDiscipline(Discipline discipline) {
-//        //this.baseDiscipline.save(discipline);
-//    }
+    public void insertDiscipline(Discipline discipline) {
+        //this.baseDiscipline.save(discipline);
+        disciplineDAL.insertDiscipline(discipline);
+    }
 //
 //    public void updateDiscipline(Discipline discipline) {
 //        //this.baseDiscipline.update(discipline);

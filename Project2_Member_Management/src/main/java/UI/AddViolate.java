@@ -4,17 +4,26 @@
  */
 package UI;
 
+import BLL.DisciplineBLL;
+import POJOs.Discipline;
+import POJOs.Member;
+import java.sql.Timestamp;
+import java.util.Date;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author MSI
  */
 public class AddViolate extends javax.swing.JFrame {
-
+    DisciplineBLL disciplineBLL=new DisciplineBLL();
     /**
      * Creates new form AddViolate
      */
     public AddViolate() {
         initComponents();
+        LoadData();
     }
 
     /**
@@ -50,6 +59,11 @@ public class AddViolate extends javax.swing.JFrame {
         jLabel3.setText("Số Tiền");
 
         jBtnAddViolet.setText("Add");
+        jBtnAddViolet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAddVioletActionPerformed(evt);
+            }
+        });
 
         jBtnCancel.setText("Cancel");
         jBtnCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +131,36 @@ public class AddViolate extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jBtnCancelActionPerformed
 
+    private void jBtnAddVioletActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAddVioletActionPerformed
+        // TODO add your handling code here:
+        String[] thanhvien=jComboBoxThanhVien.getSelectedItem().toString().split("-");
+        String hinhthucxuly=jHinhThucXuLy.getText().toString();
+        String sotien=jSoTien.getText().toString();
+        long currentTimeMillis = System.currentTimeMillis();
+        Date currentDate = new java.util.Date(currentTimeMillis);
+        Timestamp timestamp = new Timestamp(currentDate.getTime());
+        Discipline discipline=new Discipline();
+        discipline.setDate(timestamp);
+        discipline.setStatus(0);
+        discipline.setDescription(hinhthucxuly);
+        discipline.setFine(Integer.parseInt(sotien));
+        Member member=new Member();
+        member.setId(Integer.parseInt(thanhvien[0]));
+        discipline.setMemberID(member);
+        try{
+            disciplineBLL.insertDiscipline(discipline);
+            System.out.println("Lỗi");
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(rootPane,"Add Failed!");
+        }
+    }//GEN-LAST:event_jBtnAddVioletActionPerformed
+    public void LoadData(){
+        DefaultComboBoxModel model=new DefaultComboBoxModel();
+        for(Member i:disciplineBLL.selectMenber()){
+            model.addElement(i.getId()+"-"+i.getName());
+        }
+        jComboBoxThanhVien.setModel(model);
+    }
     /**
      * @param args the command line arguments
      */
