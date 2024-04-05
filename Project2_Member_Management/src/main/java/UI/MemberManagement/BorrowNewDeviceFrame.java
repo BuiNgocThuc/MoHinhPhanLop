@@ -65,7 +65,7 @@ public class BorrowNewDeviceFrame extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(0, 143, 143));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8-chevron-18-down.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-chevron-18-down.png"))); // NOI18N
         jButton1.setText("Add ");
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jButton1.setIconTextGap(10);
@@ -75,7 +75,7 @@ public class BorrowNewDeviceFrame extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(241, 51, 51));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8-chevron-18-up.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-chevron-18-up.png"))); // NOI18N
         jButton2.setText("Delete");
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jButton2.setIconTextGap(10);

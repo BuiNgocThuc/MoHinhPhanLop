@@ -131,7 +131,7 @@ public class Home extends javax.swing.JFrame {
         });
         sideBar.add(punishBtn);
 
-        statisticsBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8-arrow-down-20.png"))); // NOI18N
+        statisticsBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-arrow-down-20.png"))); // NOI18N
         statisticsBtn.setText("Statistics Management");
         statisticsBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 15, 0, 0));
         statisticsBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -310,10 +310,10 @@ public class Home extends javax.swing.JFrame {
     private void toggleDropdown() {
         dropdownToggle = !dropdownToggle;
         if (dropdownToggle) {
-            statisticsBtn.setIcon(new ImageIcon(getClass().getResource("/assets/icons8-arrow-up-20.png")));
+            statisticsBtn.setIcon(new ImageIcon(getClass().getResource("/images/icons8-arrow-up-20.png")));
             openMenu();
         } else {
-            statisticsBtn.setIcon(new ImageIcon(getClass().getResource("/assets/icons8-arrow-down-20.png")));
+            statisticsBtn.setIcon(new ImageIcon(getClass().getResource("/images/icons8-arrow-down-20.png")));
             closeMenu();
         }
     }
