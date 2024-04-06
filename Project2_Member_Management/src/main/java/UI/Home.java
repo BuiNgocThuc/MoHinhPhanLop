@@ -83,6 +83,7 @@ public class Home extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Member App");
         setBackground(new java.awt.Color(255, 255, 255));
 
         container.setBackground(new java.awt.Color(255, 255, 255));
@@ -94,6 +95,7 @@ public class Home extends javax.swing.JFrame {
         flowLayout1.setAlignOnBaseline(true);
         sideBar.setLayout(flowLayout1);
 
+        memberBtn.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         memberBtn.setText("Member Management");
         memberBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 15, 0, 0));
         memberBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -106,6 +108,7 @@ public class Home extends javax.swing.JFrame {
         });
         sideBar.add(memberBtn);
 
+        deviceBtn.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         deviceBtn.setText("Device Management");
         deviceBtn.setToolTipText("");
         deviceBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 15, 0, 0));
@@ -120,6 +123,7 @@ public class Home extends javax.swing.JFrame {
         });
         sideBar.add(deviceBtn);
 
+        punishBtn.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         punishBtn.setText("Punish Management");
         punishBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 15, 0, 0));
         punishBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -132,6 +136,7 @@ public class Home extends javax.swing.JFrame {
         });
         sideBar.add(punishBtn);
 
+        statisticsBtn.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         statisticsBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-arrow-down-20.png"))); // NOI18N
         statisticsBtn.setText("Statistics Management");
         statisticsBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 15, 0, 0));
@@ -154,24 +159,42 @@ public class Home extends javax.swing.JFrame {
         subBarStat.setLayout(flowLayout2);
 
         memberStatBtn.setBackground(new java.awt.Color(226, 226, 226));
+        memberStatBtn.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         memberStatBtn.setText("Member");
         memberStatBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 40, 0, 0));
         memberStatBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         memberStatBtn.setPreferredSize(new java.awt.Dimension(219, 50));
+        memberStatBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                memberStatBtnActionPerformed(evt);
+            }
+        });
         subBarStat.add(memberStatBtn);
 
         deviceStatBtn.setBackground(new java.awt.Color(226, 226, 226));
+        deviceStatBtn.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         deviceStatBtn.setText("Device");
         deviceStatBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 40, 0, 0));
         deviceStatBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         deviceStatBtn.setPreferredSize(new java.awt.Dimension(219, 50));
+        deviceStatBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deviceStatBtnActionPerformed(evt);
+            }
+        });
         subBarStat.add(deviceStatBtn);
 
         punishStatBtn.setBackground(new java.awt.Color(226, 226, 226));
+        punishStatBtn.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         punishStatBtn.setText("Punish");
         punishStatBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 40, 0, 0));
         punishStatBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         punishStatBtn.setPreferredSize(new java.awt.Dimension(219, 50));
+        punishStatBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                punishStatBtnActionPerformed(evt);
+            }
+        });
         subBarStat.add(punishStatBtn);
 
         sideBar.add(subBarStat);
@@ -284,6 +307,18 @@ public class Home extends javax.swing.JFrame {
     private void punishBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_punishBtnActionPerformed
         switchPanel(punishPnl, punishBtn);
     }//GEN-LAST:event_punishBtnActionPerformed
+
+    private void memberStatBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_memberStatBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_memberStatBtnActionPerformed
+
+    private void deviceStatBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deviceStatBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deviceStatBtnActionPerformed
+
+    private void punishStatBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_punishStatBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_punishStatBtnActionPerformed
     public void setBackgroundDefaultAllButton() {
         for (JButton btn : allBtnLeftBar) {
             btn.setBackground(Color.WHITE);

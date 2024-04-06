@@ -64,7 +64,9 @@ public class MemberPanel extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        jPanel4 = new javax.swing.JPanel();
+        searchValue = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         addMemberBtn = new javax.swing.JButton();
         editMemberBtn = new javax.swing.JButton();
@@ -82,13 +84,40 @@ public class MemberPanel extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setPreferredSize(new java.awt.Dimension(601, 50));
 
-        jTextField1.setPreferredSize(new java.awt.Dimension(71, 40));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel4.setPreferredSize(new java.awt.Dimension(100, 40));
+
+        searchValue.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        searchValue.setText("search");
+        searchValue.setBorder(null);
+        searchValue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                searchValueActionPerformed(evt);
             }
         });
+
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-search-25.png"))); // NOI18N
+        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(searchValue, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(searchValue, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setPreferredSize(new java.awt.Dimension(200, 40));
@@ -96,7 +125,7 @@ public class MemberPanel extends javax.swing.JPanel {
         flowLayout1.setAlignOnBaseline(true);
         jPanel3.setLayout(flowLayout1);
 
-        addMemberBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        addMemberBtn.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         addMemberBtn.setForeground(new java.awt.Color(0, 143, 143));
         addMemberBtn.setText("+ Add");
         addMemberBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 143, 143), 1, true));
@@ -109,7 +138,7 @@ public class MemberPanel extends javax.swing.JPanel {
         });
         jPanel3.add(addMemberBtn);
 
-        editMemberBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        editMemberBtn.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         editMemberBtn.setForeground(new java.awt.Color(0, 143, 143));
         editMemberBtn.setText("! Edit");
         editMemberBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 143, 143), 1, true));
@@ -122,7 +151,7 @@ public class MemberPanel extends javax.swing.JPanel {
         });
         jPanel3.add(editMemberBtn);
 
-        deleteMemberBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        deleteMemberBtn.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         deleteMemberBtn.setForeground(new java.awt.Color(0, 143, 143));
         deleteMemberBtn.setText("- Delete");
         deleteMemberBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 143, 143), 1, true));
@@ -131,7 +160,7 @@ public class MemberPanel extends javax.swing.JPanel {
         jPanel3.add(deleteMemberBtn);
 
         deviceFrameBtn.setBackground(new java.awt.Color(0, 143, 143));
-        deviceFrameBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        deviceFrameBtn.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         deviceFrameBtn.setForeground(new java.awt.Color(255, 255, 255));
         deviceFrameBtn.setText("Borrow/Return Device");
         deviceFrameBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 143, 143), 1, true));
@@ -149,21 +178,22 @@ public class MemberPanel extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        tblMember.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         tblMember.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -171,7 +201,19 @@ public class MemberPanel extends javax.swing.JPanel {
             new String [] {
                 "No.", "ID", "Name", "Department", "Major", "Email"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblMember.setGridColor(new java.awt.Color(242, 242, 242));
+        tblMember.setRowHeight(30);
+        tblMember.setShowGrid(true);
+        tblMember.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblMember);
         if (tblMember.getColumnModel().getColumnCount() > 0) {
             tblMember.getColumnModel().getColumn(0).setResizable(false);
@@ -190,15 +232,15 @@ public class MemberPanel extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 845, Short.MAX_VALUE)
             .addComponent(jScrollPane1)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -222,10 +264,6 @@ public class MemberPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void deviceFrameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deviceFrameBtnActionPerformed
         borrowDeviceFrame.setVisible(true);
     }//GEN-LAST:event_deviceFrameBtnActionPerformed
@@ -240,6 +278,10 @@ public class MemberPanel extends javax.swing.JPanel {
         memberForm.setVisible(true);
     }//GEN-LAST:event_editMemberBtnActionPerformed
 
+    private void searchValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchValueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchValueActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addMemberBtn;
@@ -247,13 +289,15 @@ public class MemberPanel extends javax.swing.JPanel {
     private javax.swing.JButton deviceFrameBtn;
     private javax.swing.JButton editMemberBtn;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSlider jSlider1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField searchValue;
     private javax.swing.JTable tblMember;
     // End of variables declaration//GEN-END:variables
 }
