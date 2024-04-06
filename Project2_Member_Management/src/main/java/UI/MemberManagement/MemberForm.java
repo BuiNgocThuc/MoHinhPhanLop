@@ -35,10 +35,10 @@ public class MemberForm extends javax.swing.JFrame {
         jPanel10 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         lblDepartment = new javax.swing.JLabel();
-        txtDepartment = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jPanel8 = new javax.swing.JPanel();
         lblMajor = new javax.swing.JLabel();
-        txtMajor = new javax.swing.JTextField();
+        jComboBox2 = new javax.swing.JComboBox<>();
         jPanel11 = new javax.swing.JPanel();
         lblPhone = new javax.swing.JLabel();
         txtPhone = new javax.swing.JTextField();
@@ -95,7 +95,7 @@ public class MemberForm extends javax.swing.JFrame {
         lblDepartment.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblDepartment.setText("Department:");
 
-        txtDepartment.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -104,15 +104,16 @@ public class MemberForm extends javax.swing.JFrame {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addComponent(lblDepartment)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(txtDepartment, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addComponent(jComboBox1, 0, 289, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addComponent(lblDepartment)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtDepartment, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+                .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE))
         );
 
         jPanel10.add(jPanel9);
@@ -122,7 +123,7 @@ public class MemberForm extends javax.swing.JFrame {
         lblMajor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblMajor.setText("Major:");
 
-        txtMajor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -131,15 +132,14 @@ public class MemberForm extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addComponent(lblMajor)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(txtMajor, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+            .addComponent(jComboBox2, 0, 305, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addComponent(lblMajor)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtMajor, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+                .addComponent(jComboBox2, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE))
         );
 
         jPanel10.add(jPanel8);
@@ -296,6 +296,8 @@ public class MemberForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -309,9 +311,7 @@ public class MemberForm extends javax.swing.JFrame {
     private javax.swing.JLabel lblFullName;
     private javax.swing.JLabel lblMajor;
     private javax.swing.JLabel lblPhone;
-    private javax.swing.JTextField txtDepartment;
     private javax.swing.JTextField txtFullName;
-    private javax.swing.JTextField txtMajor;
     private javax.swing.JTextField txtPhone;
     // End of variables declaration//GEN-END:variables
 }
