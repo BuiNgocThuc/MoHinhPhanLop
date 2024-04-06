@@ -34,15 +34,15 @@ public class EditDiscipline extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jMaThanhVien = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jHinhThucXuLy = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jSoTien = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jNgayXuLy = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jComboBoxTrangThaiXuLy = new javax.swing.JComboBox<>();
+        jTrangThaiXuLy = new javax.swing.JComboBox<>();
         jBtnEdit = new javax.swing.JButton();
         jCancel = new javax.swing.JButton();
+        jHinhThucXuLy = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,7 +64,7 @@ public class EditDiscipline extends javax.swing.JFrame {
 
         jLabel6.setText("Trạng Thái Xử Lý");
 
-        jComboBoxTrangThaiXuLy.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1" }));
+        jTrangThaiXuLy.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1" }));
 
         jBtnEdit.setText("Edit");
         jBtnEdit.addActionListener(new java.awt.event.ActionListener() {
@@ -79,6 +79,8 @@ public class EditDiscipline extends javax.swing.JFrame {
                 jCancelActionPerformed(evt);
             }
         });
+
+        jHinhThucXuLy.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Khóa thẻ 1 tháng", "Khóa thẻ 2 tháng", "Khóa thẻ vĩnh viễn", "Bồi thường", "Khóa thẻ 1 tháng và bồi thường" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,13 +100,13 @@ public class EditDiscipline extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jMaThanhVien)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jHinhThucXuLy)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSoTien)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jNgayXuLy)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxTrangThaiXuLy, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jTrangThaiXuLy, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jHinhThucXuLy, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -122,7 +124,7 @@ public class EditDiscipline extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jHinhThucXuLy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSoTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -133,12 +135,12 @@ public class EditDiscipline extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBoxTrangThaiXuLy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTrangThaiXuLy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnEdit)
                     .addComponent(jCancel))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -153,15 +155,15 @@ public class EditDiscipline extends javax.swing.JFrame {
         // TODO add your handling code here:
         String mavipham=jMaXuLy.getText().toString();
         String[] mathanhvien=jMaThanhVien.getText().toString().split("-");
-        String hinhthucxuly=jHinhThucXuLy.getText().toString();
+        String hinhthucxuly=jHinhThucXuLy.getSelectedItem().toString();
         String sotien=jSoTien.getText().toString();
-        String trangthai=jComboBoxTrangThaiXuLy.getSelectedItem().toString();
+        String trangthai=jTrangThaiXuLy.getSelectedItem().toString();
         System.out.println(mavipham+"-"+mathanhvien[0]+"-"+hinhthucxuly+"-"+sotien+"-"+trangthai);
         Discipline discipline=new Discipline();
         discipline.setId(Integer.parseInt(mavipham));
         discipline.setFine(Integer.parseInt(sotien));
         discipline.setDescription(hinhthucxuly);
-        discipline.setStatus(1);
+        discipline.setStatus(Integer.parseInt(jTrangThaiXuLy.getSelectedItem().toString()));
         disciplineBLL.updateDiscipline(discipline);
         
     }//GEN-LAST:event_jBtnEditActionPerformed
@@ -205,8 +207,7 @@ public class EditDiscipline extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnEdit;
     private javax.swing.JButton jCancel;
-    public javax.swing.JComboBox<String> jComboBoxTrangThaiXuLy;
-    public javax.swing.JTextField jHinhThucXuLy;
+    public javax.swing.JComboBox<String> jHinhThucXuLy;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -217,5 +218,6 @@ public class EditDiscipline extends javax.swing.JFrame {
     public javax.swing.JTextField jMaXuLy;
     public javax.swing.JTextField jNgayXuLy;
     public javax.swing.JTextField jSoTien;
+    public javax.swing.JComboBox<String> jTrangThaiXuLy;
     // End of variables declaration//GEN-END:variables
 }

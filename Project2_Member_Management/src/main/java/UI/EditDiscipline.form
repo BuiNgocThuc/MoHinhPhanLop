@@ -38,13 +38,13 @@
                   <Component id="jLabel2" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
                   <Component id="jMaThanhVien" alignment="0" max="32767" attributes="0"/>
                   <Component id="jLabel3" min="-2" pref="96" max="-2" attributes="0"/>
-                  <Component id="jHinhThucXuLy" alignment="0" max="32767" attributes="0"/>
                   <Component id="jLabel4" min="-2" pref="89" max="-2" attributes="0"/>
                   <Component id="jSoTien" alignment="0" max="32767" attributes="0"/>
                   <Component id="jLabel5" min="-2" pref="91" max="-2" attributes="0"/>
                   <Component id="jNgayXuLy" alignment="0" max="32767" attributes="0"/>
                   <Component id="jLabel6" min="-2" pref="103" max="-2" attributes="0"/>
-                  <Component id="jComboBoxTrangThaiXuLy" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jTrangThaiXuLy" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jHinhThucXuLy" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="22" max="32767" attributes="0"/>
           </Group>
@@ -65,7 +65,7 @@
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jHinhThucXuLy" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jSoTien" min="-2" max="-2" attributes="0"/>
@@ -76,13 +76,13 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jComboBoxTrangThaiXuLy" min="-2" max="-2" attributes="0"/>
+              <Component id="jTrangThaiXuLy" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jBtnEdit" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jCancel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="20" max="32767" attributes="0"/>
+              <EmptySpace pref="14" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -119,11 +119,6 @@
         <Property name="text" type="java.lang.String" value="H&#xec;nh Th&#x1ee9;c X&#x1eed; L&#xfd;"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jHinhThucXuLy">
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-      </AuxValues>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
         <Property name="text" type="java.lang.String" value="S&#x1ed1; Ti&#x1ec1;n"/>
@@ -152,7 +147,7 @@
         <Property name="text" type="java.lang.String" value="Tr&#x1ea1;ng Th&#xe1;i X&#x1eed; L&#xfd;"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBoxTrangThaiXuLy">
+    <Component class="javax.swing.JComboBox" name="jTrangThaiXuLy">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="2">
@@ -181,6 +176,23 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCancelActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jHinhThucXuLy">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="5">
+            <StringItem index="0" value="Kh&#xf3;a th&#x1ebb; 1 th&#xe1;ng"/>
+            <StringItem index="1" value="Kh&#xf3;a th&#x1ebb; 2 th&#xe1;ng"/>
+            <StringItem index="2" value="Kh&#xf3;a th&#x1ebb; v&#x129;nh vi&#x1ec5;n"/>
+            <StringItem index="3" value="B&#x1ed3;i th&#x1b0;&#x1edd;ng"/>
+            <StringItem index="4" value="Kh&#xf3;a th&#x1ebb; 1 th&#xe1;ng v&#xe0; b&#x1ed3;i th&#x1b0;&#x1edd;ng"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

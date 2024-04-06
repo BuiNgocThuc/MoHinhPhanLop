@@ -158,16 +158,17 @@ public class ManagerDiscipline extends javax.swing.JFrame {
 
     private void jBtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditActionPerformed
         // TODO add your handling code here:
-        if(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),6).toString().equals("1")){
+        if(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),6).toString().equals("0")){
             JOptionPane.showMessageDialog(rootPane,"Has been processed");
         }else{
             EditDiscipline editDiscipline=new EditDiscipline();
             editDiscipline.jMaXuLy.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),0).toString());
             editDiscipline.jMaThanhVien.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),1).toString()+"-"+jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),2).toString());
             editDiscipline.jNgayXuLy.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),5).toString());
-            editDiscipline.jSoTien.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),4).toString());
-            editDiscipline.jHinhThucXuLy.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),3).toString());
-            editDiscipline.jComboBoxTrangThaiXuLy.setSelectedItem(0);
+            Object value = jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(), 4);
+            editDiscipline.jSoTien.setText(value==null?"":value+"");
+            editDiscipline.jHinhThucXuLy.setSelectedItem(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),3).toString());
+            editDiscipline.jTrangThaiXuLy.setSelectedItem(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),6).toString());
             editDiscipline.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             editDiscipline.setLocationRelativeTo(null);
             editDiscipline.setVisible(true);
@@ -177,7 +178,9 @@ public class ManagerDiscipline extends javax.swing.JFrame {
     private void jBtnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnDeleteActionPerformed
         // TODO add your handling code here:
         if(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),6).toString().equals("1")){
-            System.out.println(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),6).toString());
+            
+        }else{
+            JOptionPane.showMessageDialog(rootPane,"Not processed yet!");
         }
     }//GEN-LAST:event_jBtnDeleteActionPerformed
 
