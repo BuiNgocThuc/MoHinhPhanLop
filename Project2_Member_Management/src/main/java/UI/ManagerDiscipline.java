@@ -23,12 +23,12 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author MSI
  */
-public class ManagerViolate extends javax.swing.JFrame {
+public class ManagerDiscipline extends javax.swing.JFrame {
     DisciplineBLL disciplineBLL=new DisciplineBLL();
     /**
      * Creates new form ManagerViolate
      */
-    public ManagerViolate() {
+    public ManagerDiscipline() {
         initComponents();
         LoadData();
     }
@@ -157,16 +157,16 @@ public class ManagerViolate extends javax.swing.JFrame {
         if(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),6).toString().equals("1")){
             JOptionPane.showMessageDialog(rootPane,"Has been processed");
         }else{
-            EditDiscipline editViolate=new EditDiscipline();
-            editViolate.jMaXuLy.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),0).toString());
-            editViolate.jMaThanhVien.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),1).toString()+"-"+jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),2).toString());
-            editViolate.jNgayXuLy.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),5).toString());
-            editViolate.jSoTien.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),4).toString());
-            editViolate.jHinhThucXuLy.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),3).toString());
-            editViolate.jComboBoxTrangThaiXuLy.setSelectedItem(0);
-            editViolate.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            editViolate.setLocationRelativeTo(null);
-            editViolate.setVisible(true);
+            EditDiscipline editDiscipline=new EditDiscipline();
+            editDiscipline.jMaXuLy.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),0).toString());
+            editDiscipline.jMaThanhVien.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),1).toString()+"-"+jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),2).toString());
+            editDiscipline.jNgayXuLy.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),5).toString());
+            editDiscipline.jSoTien.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),4).toString());
+            editDiscipline.jHinhThucXuLy.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),3).toString());
+            editDiscipline.jComboBoxTrangThaiXuLy.setSelectedItem(0);
+            editDiscipline.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            editDiscipline.setLocationRelativeTo(null);
+            editDiscipline.setVisible(true);
         }
     }//GEN-LAST:event_jBtnEditActionPerformed
 
@@ -263,20 +263,21 @@ public class ManagerViolate extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ManagerViolate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManagerDiscipline.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ManagerViolate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManagerDiscipline.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ManagerViolate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManagerDiscipline.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ManagerViolate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManagerDiscipline.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ManagerViolate().setVisible(true);
+                new ManagerDiscipline().setVisible(true);
             }
         });
     }

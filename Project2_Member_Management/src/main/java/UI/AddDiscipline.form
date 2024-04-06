@@ -26,19 +26,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel1" min="-2" pref="87" max="-2" attributes="0"/>
-                  <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                          <Component id="jLabel2" min="-2" pref="101" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel3" min="-2" pref="89" max="-2" attributes="0"/>
-                                  <Component id="jSoTien" min="-2" pref="334" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jHinhThucXuLy" alignment="1" min="-2" pref="334" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Component id="jComboBoxThanhVien" alignment="1" min="-2" pref="334" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="jHinhThucXuLy" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
@@ -47,8 +37,21 @@
                       <Component id="jBtnCancel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel1" min="-2" pref="87" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel2" min="-2" pref="101" max="-2" attributes="0"/>
+                                  <Component id="jLabel3" min="-2" pref="89" max="-2" attributes="0"/>
+                                  <Component id="jSoTien" min="-2" pref="334" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="jComboBoxThanhVien" alignment="1" min="-2" pref="334" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -63,7 +66,7 @@
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jHinhThucXuLy" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
               <Component id="jSoTien" min="-2" max="-2" attributes="0"/>
@@ -72,7 +75,7 @@
                   <Component id="jBtnAddViolet" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jBtnCancel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="22" max="32767" attributes="0"/>
+              <EmptySpace pref="16" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -97,8 +100,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="H&#xec;nh Th&#x1ee9;c X&#x1eed; L&#xfd;"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="jHinhThucXuLy">
     </Component>
     <Component class="javax.swing.JTextField" name="jSoTien">
       <Events>
@@ -125,6 +126,22 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnCancelActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jHinhThucXuLy">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="5">
+            <StringItem index="0" value="Kh&#xf3;a th&#x1ebb; 1 th&#xe1;ng"/>
+            <StringItem index="1" value="Kh&#xf3;a th&#x1ebb; 2 th&#xe1;ng"/>
+            <StringItem index="2" value="Kh&#xf3;a th&#x1ebb; v&#x129;nh vi&#x1ec5;n"/>
+            <StringItem index="3" value="B&#x1ed3;i th&#x1b0;&#x1edd;ng"/>
+            <StringItem index="4" value="Kh&#xf3;a th&#x1ebb; 1 th&#xe1;ng v&#xe0; b&#x1ed3;i th&#x1b0;&#x1edd;ng"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>
