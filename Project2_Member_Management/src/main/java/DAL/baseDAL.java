@@ -5,9 +5,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import Utils.hibernateUtil;
+import java.lang.reflect.Field;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
 
 public class baseDAL<T> {
 
@@ -36,7 +38,7 @@ public class baseDAL<T> {
     public void save(T object) {
         Transaction transaction = null;
         Session session = null;
-        try 
+        try
         {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
@@ -54,8 +56,10 @@ public class baseDAL<T> {
 
     public void update(T object) {
         Transaction transaction = null;
-        try (Session session = sessionFactory.openSession())
+        Session session = null;
+        try
         {
+            session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             session.merge(object);
             transaction.commit();
@@ -69,10 +73,12 @@ public class baseDAL<T> {
         }
     }
 
-    public void delete(int id) {
+    public <K> void delete(K id) {
         Transaction transaction = null;
-        try (Session session = sessionFactory.openSession())
+        Session session = null;
+        try
         {
+            session = sessionFactory.openSession();
             transaction = session.beginTransaction();
 
             String hql = "UPDATE " + clazz.getName() + " set status = :active " + "WHERE id = :ID";
@@ -92,23 +98,27 @@ public class baseDAL<T> {
         }
     }
 
-    public List<T> statistic(String hql, Object...params) {
+    public List<T> statistic(String hql, Object... params) {
         Transaction transaction = null;
         Session session;
         List<T> results = new ArrayList<>();
-        try {
+        try
+        {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
 
             Query query = session.createQuery(hql);
-            for (int i = 0; i < params.length; i += 2) {
+            for (int i = 0; i < params.length; i += 2)
+            {
                 query.setParameter((String) params[i], params[i + 1]);
             }
             results = query.getResultList();
 
             transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
+        } catch (Exception e)
+        {
+            if (transaction != null)
+            {
                 transaction.rollback();
             }
             e.printStackTrace();

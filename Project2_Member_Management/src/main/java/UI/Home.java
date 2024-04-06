@@ -42,7 +42,6 @@ public class Home extends javax.swing.JFrame {
         allBtnLeftBar.addAll(Arrays.asList(memberBtn, deviceBtn, punishBtn, memberStatBtn, deviceStatBtn, punishStatBtn));
         switchPanel(memberPanel, memberBtn);
         this.setLocationRelativeTo(null);
-
     }
 
     /**

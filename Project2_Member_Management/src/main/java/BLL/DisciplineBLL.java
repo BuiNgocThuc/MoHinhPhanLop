@@ -32,7 +32,7 @@ public class DisciplineBLL {
         this.baseDiscipline.update(discipline);
     }
 
-    public void deleteDiscipline(int id) {
+    public <Integer> void deleteDiscipline(int id) {
         this.baseDiscipline.delete(id);
     }
 
