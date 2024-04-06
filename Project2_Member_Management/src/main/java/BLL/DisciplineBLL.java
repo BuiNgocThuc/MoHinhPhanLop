@@ -22,6 +22,9 @@ public class DisciplineBLL {
         //return this.baseDiscipline.selectAll();
         return disciplineDAL.selectAll();
     }
+    public List<Discipline> search(String text){
+        return disciplineDAL.search(text);
+    }
     public List<Member> selectMenber() {
         //return this.baseDiscipline.selectAll();
         return disciplineDAL.selectMember();

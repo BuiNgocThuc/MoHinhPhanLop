@@ -8,6 +8,8 @@ import BLL.DisciplineBLL;
 import POJOs.Discipline;
 import POJOs.Member;
 import com.mysql.cj.result.Row;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.sql.Timestamp;
@@ -17,6 +19,8 @@ import java.util.Vector;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.ss.usermodel.Cell;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -35,6 +39,23 @@ public class ManagerDiscipline extends javax.swing.JFrame {
     public ManagerDiscipline() {
         initComponents();
         LoadData();
+        jBtnSearch.setVisible(false);
+        jSearch.getDocument().addDocumentListener(new DocumentListener() {
+        @Override
+        public void insertUpdate(DocumentEvent e) {
+              SearchAll();
+        }
+
+        @Override
+        public void removeUpdate(DocumentEvent e) {
+              SearchAll();
+        }
+
+       @Override
+       public void changedUpdate(DocumentEvent e) {
+        
+      }
+      });
     }
 
     /**
@@ -76,6 +97,11 @@ public class ManagerDiscipline extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTableDiscipline);
 
         jBtnSearch.setText("X");
+        jBtnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnSearchActionPerformed(evt);
+            }
+        });
 
         jBtnAdd.setText("Add");
         jBtnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -149,32 +175,59 @@ public class ManagerDiscipline extends javax.swing.JFrame {
 
     private void jBtnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAddActionPerformed
         // TODO add your handling code here:
-        AddDiscipline addViolate=new AddDiscipline();
-        addViolate.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        addViolate.setLocationRelativeTo(null);
-        addViolate.setVisible(true);
+        AddDiscipline addDiscipline=new AddDiscipline();
+        addDiscipline.addWindowListener(new WindowAdapter(){
+            @Override
+            public void windowClosing(WindowEvent e){
+                LoadData();
+            }
+        });
+        
+        addDiscipline.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        addDiscipline.setLocationRelativeTo(null);
+        addDiscipline.setVisible(true);
+        
         //LoadData();
     }//GEN-LAST:event_jBtnAddActionPerformed
 
     private void jBtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditActionPerformed
         // TODO add your handling code here:
-        if(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),6).toString().equals("0")){
+        int n=jTableDiscipline.getSelectedRow();
+        if(n!=-1){
+            if(jTableDiscipline.getValueAt(n,6).toString().equals("0")){
             JOptionPane.showMessageDialog(rootPane,"Has been processed");
+            }else{
+                    EditDiscipline editDiscipline=new EditDiscipline();
+                    editDiscipline.addWindowListener(new WindowAdapter(){
+                        @Override
+                        public void windowClosing(WindowEvent e){
+                            LoadData();
+                        }
+                    });
+                    editDiscipline.jMaXuLy.setText(jTableDiscipline.getValueAt(n,0).toString());
+                    editDiscipline.jMaThanhVien.setText(jTableDiscipline.getValueAt(n,1).toString()+"-"+jTableDiscipline.getValueAt(n,2).toString());
+                    editDiscipline.jNgayXuLy.setText(jTableDiscipline.getValueAt(n,5).toString());
+                    Object value = jTableDiscipline.getValueAt(n, 4);
+                    editDiscipline.jSoTien.setText(value==null?"":value+"");
+                    editDiscipline.jHinhThucXuLy.setSelectedItem(jTableDiscipline.getValueAt(n,3).toString());
+                    editDiscipline.jTrangThaiXuLy.setSelectedItem(jTableDiscipline.getValueAt(n,6).toString());
+                    editDiscipline.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    editDiscipline.setLocationRelativeTo(null);
+                    editDiscipline.setVisible(true);
+            }
         }else{
-            EditDiscipline editDiscipline=new EditDiscipline();
-            editDiscipline.jMaXuLy.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),0).toString());
-            editDiscipline.jMaThanhVien.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),1).toString()+"-"+jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),2).toString());
-            editDiscipline.jNgayXuLy.setText(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),5).toString());
-            Object value = jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(), 4);
-            editDiscipline.jSoTien.setText(value==null?"":value+"");
-            editDiscipline.jHinhThucXuLy.setSelectedItem(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),3).toString());
-            editDiscipline.jTrangThaiXuLy.setSelectedItem(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),6).toString());
-            editDiscipline.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            editDiscipline.setLocationRelativeTo(null);
-            editDiscipline.setVisible(true);
+            JOptionPane.showMessageDialog(rootPane,"Please Choose");
         }
     }//GEN-LAST:event_jBtnEditActionPerformed
 
+    public void SearchAll(){
+        if(jSearch.getText().toString().isEmpty()){
+            LoadData();
+        }else{
+            jBtnSearch.setVisible(true);
+            LoadData(jSearch.getText().toString());
+        }
+    }
     private void jBtnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnDeleteActionPerformed
         // TODO add your handling code here:
         if(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),6).toString().equals("1")){
@@ -240,14 +293,38 @@ public class ManagerDiscipline extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jTableDisciplineMouseClicked
 
-    public void LoadData(){
-        
+    private void jBtnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSearchActionPerformed
+        // TODO add your handling code here:
+        jSearch.setText("");
+        jBtnSearch.setVisible(false);
+    }//GEN-LAST:event_jBtnSearchActionPerformed
+
+    public void LoadData(){ 
         String columns[]=new String[]{"Mã Xử Lý","Mã Thành Viên","Tên Thành Viên","Hình Thức xử Lý","Số Tiền","Ngày Xử Lý","Trạng Thái Xử Lý"};
         DefaultTableModel model=new DefaultTableModel();
         for(String i:columns){
             model.addColumn(i);
         }
         for(Discipline i:disciplineBLL.selectAll()){
+            Vector t=new Vector();
+            t.add(i.getId());
+            t.add(i.getMemberID().getId());
+            t.add(i.getMemberID().getName());
+            t.add(i.getDescription());
+            t.add(i.getFine());
+            t.add(i.getDate());
+            t.add(i.getStatus());
+            model.addRow(t);
+        }
+        jTableDiscipline.setModel(model);
+    }
+    public void LoadData(String text){ 
+        String columns[]=new String[]{"Mã Xử Lý","Mã Thành Viên","Tên Thành Viên","Hình Thức xử Lý","Số Tiền","Ngày Xử Lý","Trạng Thái Xử Lý"};
+        DefaultTableModel model=new DefaultTableModel();
+        for(String i:columns){
+            model.addColumn(i);
+        }
+        for(Discipline i:disciplineBLL.search(text)){
             Vector t=new Vector();
             t.add(i.getId());
             t.add(i.getMemberID().getId());

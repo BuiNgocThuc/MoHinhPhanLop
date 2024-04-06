@@ -6,6 +6,7 @@ package UI;
 
 import BLL.DisciplineBLL;
 import POJOs.Discipline;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -164,8 +165,12 @@ public class EditDiscipline extends javax.swing.JFrame {
         discipline.setFine(Integer.parseInt(sotien));
         discipline.setDescription(hinhthucxuly);
         discipline.setStatus(Integer.parseInt(jTrangThaiXuLy.getSelectedItem().toString()));
-        disciplineBLL.updateDiscipline(discipline);
-        
+        try{
+            disciplineBLL.updateDiscipline(discipline);
+            JOptionPane.showMessageDialog(rootPane,"Edit Success!");
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(rootPane,"Edit Faild!");
+        }
     }//GEN-LAST:event_jBtnEditActionPerformed
 
     /**

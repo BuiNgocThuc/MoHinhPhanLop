@@ -33,6 +33,15 @@ public class DisciplineDAL {
         session.getTransaction().commit();
         return listDiscipline;
     }
+    public List<Discipline> search(String text){
+        List<Discipline> listDiscipline=new ArrayList<>();
+        session.getTransaction().begin();
+        listDiscipline=session.createQuery("FROM Discipline WHERE CONCAT(id,description,description,fine,memberID) LIKE :searchText",Discipline.class)
+                .setParameter("searchText","%"+text+"%").list();
+        //id + ", description=" + description + ", fine=" + fine + ", date=" + date + ", status=" + status + ", memberID=" + memberID
+        session.getTransaction().commit();
+        return listDiscipline;
+    }
     public List<Member> selectMember(){
         List<Member> listselectMember=new ArrayList<>();
         session.getTransaction().begin();
