@@ -7,6 +7,7 @@ package UI.MemberManagement;
 import java.util.List;
 import POJOs.Member;
 import BLL.MemberBLL;
+import Utils.sharedFunction;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,6 +22,7 @@ public class MemberPanel extends javax.swing.JPanel {
     private final BorrowDeviceFrame borrowDeviceFrame = new BorrowDeviceFrame();
     private final MemberForm memberForm = new MemberForm();
     private MemberBLL memberBLL = new MemberBLL();
+    sharedFunction func = new sharedFunction();
 
     public MemberPanel() {
         initComponents();
@@ -31,9 +33,16 @@ public class MemberPanel extends javax.swing.JPanel {
         List<Member> memberList = memberBLL.selectAll();
 
         DefaultTableModel model = (DefaultTableModel) tblMember.getModel();
+        model.setRowCount(0);
+        
         int STT = 1;
         for (Member member : memberList)
         {
+            int status = member.getStatus();
+            if (status == 0)
+            {
+                continue;
+            }
             String ID = member.getId();
             String name = member.getName();
             String department = member.getDepartment();
@@ -157,6 +166,11 @@ public class MemberPanel extends javax.swing.JPanel {
         deleteMemberBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 143, 143), 1, true));
         deleteMemberBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         deleteMemberBtn.setPreferredSize(new java.awt.Dimension(80, 40));
+        deleteMemberBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteMemberBtnActionPerformed(evt);
+            }
+        });
         jPanel3.add(deleteMemberBtn);
 
         deviceFrameBtn.setBackground(new java.awt.Color(0, 143, 143));
@@ -281,6 +295,18 @@ public class MemberPanel extends javax.swing.JPanel {
     private void searchValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchValueActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_searchValueActionPerformed
+    private void deleteMemberBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMemberBtnActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tblMember.getSelectedRow();
+        if(selectedRow != -1) {
+            String memberId = tblMember.getValueAt(selectedRow, 1).toString();
+            memberBLL.deleteMember(memberId);
+            readMembers();
+            func.displayConfirmMessage("Delete Successfully !!");
+        } else {
+            func.displayErrorMessage("Please choose a record !!");
+        }
+    }//GEN-LAST:event_deleteMemberBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

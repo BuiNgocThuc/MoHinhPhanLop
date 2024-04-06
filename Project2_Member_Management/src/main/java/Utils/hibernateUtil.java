@@ -26,7 +26,7 @@ public class hibernateUtil {
         pros.put(Environment.URL, "jdbc:mysql://localhost:3306/qlthanhvien");
         pros.put(Environment.USER, "root");
         pros.put(Environment.PASS, "");
-        pros.put(Environment.SHOW_SQL, false);
+        pros.put(Environment.SHOW_SQL, true);
         pros.put(Environment.GLOBALLY_QUOTED_IDENTIFIERS, true);
         pros.put(Environment.ENABLE_LAZY_LOAD_NO_TRANS,true);
 

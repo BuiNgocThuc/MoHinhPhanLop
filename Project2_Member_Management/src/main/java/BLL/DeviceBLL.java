@@ -33,7 +33,7 @@ public class DeviceBLL {
         baseDeviceDAL.update(device);
     }
 
-    public void deleteDevice(int id) {
+    public <Integer> void deleteDevice(int id) {
         baseDeviceDAL.delete(id);
     }
 

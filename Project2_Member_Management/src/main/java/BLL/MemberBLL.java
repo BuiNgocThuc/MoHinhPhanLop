@@ -36,7 +36,7 @@ public class MemberBLL {
         baseMemberDAL.update(member);
     }
 
-    public void deleteMember(int id) {
+    public <String> void deleteMember(String id) {
         baseMemberDAL.delete(id);
     }
 

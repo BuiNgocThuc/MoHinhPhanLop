@@ -33,7 +33,7 @@ public class UsageBLL {
         baseUsageDAL.update(usage);
     }
 
-    public void delete(int id) {
+    public <Integer>  void delete(int id) {
         baseUsageDAL.delete(id);
     }
 }
