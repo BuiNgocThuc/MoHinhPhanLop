@@ -64,7 +64,6 @@ public class MemberForm extends javax.swing.JFrame {
         lblFullName.setText("Full Name:");
 
         txtFullName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtFullName.setText("jTextField2");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -97,7 +96,6 @@ public class MemberForm extends javax.swing.JFrame {
         lblDepartment.setText("Department:");
 
         txtDepartment.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtDepartment.setText("jTextField2");
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -125,7 +123,6 @@ public class MemberForm extends javax.swing.JFrame {
         lblMajor.setText("Major:");
 
         txtMajor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtMajor.setText("jTextField2");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -154,7 +151,6 @@ public class MemberForm extends javax.swing.JFrame {
         lblPhone.setText("Phone number:");
 
         txtPhone.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtPhone.setText("jTextField2");
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -213,7 +209,6 @@ public class MemberForm extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

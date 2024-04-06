@@ -4,6 +4,11 @@
  */
 package UI.MemberManagement;
 
+import java.util.List;
+import POJOs.Member;
+import BLL.MemberBLL;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ASUS
@@ -13,11 +18,36 @@ public class MemberPanel extends javax.swing.JPanel {
     /**
      * Creates new form MemberPanel
      */
-    
     private final BorrowDeviceFrame borrowDeviceFrame = new BorrowDeviceFrame();
-    
+    private final MemberForm memberForm = new MemberForm();
+    private MemberBLL memberBLL = new MemberBLL();
+
     public MemberPanel() {
         initComponents();
+        readMembers(); // load data to table members
+    }
+
+    public void readMembers() {
+        List<Member> memberList = memberBLL.selectAll();
+
+        DefaultTableModel model = (DefaultTableModel) tblMember.getModel();
+        int STT = 1;
+        for (Member member : memberList)
+        {
+            String ID = member.getId();
+            String name = member.getName();
+            String department = member.getDepartment();
+            String major = member.getMajor();
+            String email = member.getEmail();
+
+            Object[] row
+                    =
+                    {
+                        STT++, ID, name, department, major, email
+                    };
+            model.addRow(row);
+        }
+        model.fireTableDataChanged();
     }
 
     /**
@@ -28,7 +58,6 @@ public class MemberPanel extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jSlider1 = new javax.swing.JSlider();
         jLabel1 = new javax.swing.JLabel();
@@ -42,19 +71,18 @@ public class MemberPanel extends javax.swing.JPanel {
         deleteMemberBtn = new javax.swing.JButton();
         deviceFrameBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblMember = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        jLabel1.setText("MEMBER MANAGEMENT");
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel1.setText("MEMBER MANAGEMENT");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTextField1.setText("jTextField1");
         jTextField1.setPreferredSize(new java.awt.Dimension(71, 40));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,6 +102,11 @@ public class MemberPanel extends javax.swing.JPanel {
         addMemberBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 143, 143), 1, true));
         addMemberBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addMemberBtn.setPreferredSize(new java.awt.Dimension(80, 40));
+        addMemberBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addMemberBtnActionPerformed(evt);
+            }
+        });
         jPanel3.add(addMemberBtn);
 
         editMemberBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -82,6 +115,11 @@ public class MemberPanel extends javax.swing.JPanel {
         editMemberBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 143, 143), 1, true));
         editMemberBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         editMemberBtn.setPreferredSize(new java.awt.Dimension(80, 40));
+        editMemberBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editMemberBtnActionPerformed(evt);
+            }
+        });
         jPanel3.add(editMemberBtn);
 
         deleteMemberBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -126,18 +164,27 @@ public class MemberPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblMember.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "No.", "ID", "Name", "Department", "Major", "Email"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblMember);
+        if (tblMember.getColumnModel().getColumnCount() > 0) {
+            tblMember.getColumnModel().getColumn(0).setResizable(false);
+            tblMember.getColumnModel().getColumn(0).setPreferredWidth(30);
+            tblMember.getColumnModel().getColumn(1).setResizable(false);
+            tblMember.getColumnModel().getColumn(1).setPreferredWidth(60);
+            tblMember.getColumnModel().getColumn(2).setPreferredWidth(150);
+            tblMember.getColumnModel().getColumn(3).setPreferredWidth(100);
+            tblMember.getColumnModel().getColumn(4).setResizable(false);
+            tblMember.getColumnModel().getColumn(4).setPreferredWidth(50);
+            tblMember.getColumnModel().getColumn(5).setResizable(false);
+            tblMember.getColumnModel().getColumn(5).setPreferredWidth(150);
+        }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -183,6 +230,16 @@ public class MemberPanel extends javax.swing.JPanel {
         borrowDeviceFrame.setVisible(true);
     }//GEN-LAST:event_deviceFrameBtnActionPerformed
 
+    private void addMemberBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMemberBtnActionPerformed
+        // TODO add your handling code here:
+        memberForm.setVisible(true);
+    }//GEN-LAST:event_addMemberBtnActionPerformed
+
+    private void editMemberBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMemberBtnActionPerformed
+        // TODO add your handling code here:
+        memberForm.setVisible(true);
+    }//GEN-LAST:event_editMemberBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addMemberBtn;
@@ -196,7 +253,7 @@ public class MemberPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSlider jSlider1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tblMember;
     // End of variables declaration//GEN-END:variables
 }

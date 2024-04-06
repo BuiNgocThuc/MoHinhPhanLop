@@ -19,7 +19,7 @@ public class Member {
 
     @Id
     @Column(name = "MaTV")
-    private int id;
+    private String id;
 
     @Column(name = "HoTen")
     private String name;
@@ -29,22 +29,32 @@ public class Member {
 
     @Column(name = "Nganh")
     private String major;
+    
+    @Column(name = "Password")
+    private String password;
+    
+    @Column(name = "Email")
+    private String email;
+    
+    @Column(name = "status")
+    private int status;
+    
 
     @ManyToMany
     @JoinTable(name = "thongtinsd", 
             joinColumns = @JoinColumn(name = "MaTV"), 
-            inverseJoinColumns = @JoinColumn(name = "MaTB")) 
+            inverseJoinColumns = @JoinColumn(name = "MaTB"))
     private Set<Device> devices = new HashSet<>();
 
     public Member() {
 
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -71,6 +81,32 @@ public class Member {
     public void setMajor(String major) {
         this.major = major;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+    
+    
 
     public Set<Device> getDevices() {
         return devices;
