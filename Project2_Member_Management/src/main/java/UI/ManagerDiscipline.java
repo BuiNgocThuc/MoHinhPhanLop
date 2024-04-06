@@ -6,9 +6,13 @@ package UI;
 
 import BLL.DisciplineBLL;
 import POJOs.Discipline;
+import POJOs.Member;
 import com.mysql.cj.result.Row;
 import java.io.File;
 import java.io.FileInputStream;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Vector;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -172,6 +176,9 @@ public class ManagerDiscipline extends javax.swing.JFrame {
 
     private void jBtnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnDeleteActionPerformed
         // TODO add your handling code here:
+        if(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),6).toString().equals("1")){
+            System.out.println(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),6).toString());
+        }
     }//GEN-LAST:event_jBtnDeleteActionPerformed
 
     private void jBtnImportExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnImportExcelActionPerformed
@@ -182,7 +189,7 @@ public class ManagerDiscipline extends javax.swing.JFrame {
                 JFileChooser choose = new JFileChooser();
                 FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel Files", "xls", "xlsx");
                 choose.setFileFilter(filter);
-                int excelchoose = choose.showSaveDialog(null);
+                int excelchoose = choose.showOpenDialog(null);
                 if (excelchoose == JFileChooser.APPROVE_OPTION) {
                     File fl = choose.getSelectedFile();
                     fileIn = new FileInputStream(fl);
@@ -191,16 +198,34 @@ public class ManagerDiscipline extends javax.swing.JFrame {
                     XSSFRow row;
                     for (int i = 1; i <= sheet.getLastRowNum(); i++) {  
                           row = sheet.getRow(i);
-                          System.out.println(row.getCell(0).getNumericCellValue());
-                          System.out.println(row.getCell(1).getRichStringCellValue().toString());
-                          System.out.println(row.getCell(2).getRichStringCellValue().toString());
-                          System.out.println(row.getCell(3).getNumericCellValue());
-                          System.out.println(row.getCell(4).getNumericCellValue());  
+                          int maXL=(int)row.getCell(0).getNumericCellValue();
+                          String formattedNumber = String.format("%.0f", row.getCell(1).getNumericCellValue());
+                          String maTV=formattedNumber;
+                          String hinhthucXL=row.getCell(2).getStringCellValue().toString();
+                          int tmp=(int)row.getCell(3).getNumericCellValue();
+                          Integer sotien=tmp==0?null:tmp;
+                          SimpleDateFormat format=new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                          String dateTime=format.format(row.getCell(4).getDateCellValue());
+                          Date date=format.parse(dateTime);
+                          long time=date.getTime();
+                          Timestamp ngayXL=new Timestamp(time);
+                          int trangthaiXL=(int)row.getCell(5).getNumericCellValue();
+                          Discipline discipline=new Discipline();
+                          discipline.setFine(sotien);
+                          discipline.setStatus(trangthaiXL);
+                          discipline.setDate(ngayXL);
+                          Member member=new Member();
+                          member.setId(maTV);
+                          discipline.setMemberID(member);
+                          discipline.setDescription(hinhthucXL);
+                          disciplineBLL.insertDiscipline(discipline);
+                          LoadData();
                     }
                 }
                 //formklp.LoadDataLopHoc(formklp.getTblophoc());
                 JOptionPane.showMessageDialog(null, "Data import Success");
                 wb.close();
+                //LoadData();
             } catch (Exception u) {
                 u.printStackTrace();
             }

@@ -8,6 +8,7 @@ import BLL.DisciplineBLL;
 import POJOs.Discipline;
 import POJOs.Member;
 import java.sql.Timestamp;
+import static java.sql.Types.NULL;
 import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -43,6 +44,8 @@ public class AddDiscipline extends javax.swing.JFrame {
         jBtnAddViolet = new javax.swing.JButton();
         jBtnCancel = new javax.swing.JButton();
         jHinhThucXuLy = new javax.swing.JComboBox<>();
+        jTrangThaiXuLy = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,6 +77,10 @@ public class AddDiscipline extends javax.swing.JFrame {
 
         jHinhThucXuLy.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Khóa thẻ 1 tháng", "Khóa thẻ 2 tháng", "Khóa thẻ vĩnh viễn", "Bồi thường", "Khóa thẻ 1 tháng và bồi thường" }));
 
+        jTrangThaiXuLy.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "0" }));
+
+        jLabel4.setText("Trạng Thái Xử Lý");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -82,14 +89,16 @@ public class AddDiscipline extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jHinhThucXuLy, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTrangThaiXuLy, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
+                        .addComponent(jHinhThucXuLy, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jBtnAddViolet)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jBtnCancel)
-                        .addGap(64, 64, 64))
+                        .addGap(26, 26, 26))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -98,7 +107,8 @@ public class AddDiscipline extends javax.swing.JFrame {
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jSoTien, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jComboBoxThanhVien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jComboBoxThanhVien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -116,11 +126,15 @@ public class AddDiscipline extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(1, 1, 1)
                 .addComponent(jSoTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jTrangThaiXuLy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnAddViolet)
                     .addComponent(jBtnCancel))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
 
         pack();
@@ -140,20 +154,25 @@ public class AddDiscipline extends javax.swing.JFrame {
         String[] thanhvien=jComboBoxThanhVien.getSelectedItem().toString().split("-");
         String hinhthucxuly=jHinhThucXuLy.getSelectedItem().toString();
         String sotien=jSoTien.getText().toString();
+        String trangthaixuly=jTrangThaiXuLy.getSelectedItem().toString();
         long currentTimeMillis = System.currentTimeMillis();
         Date currentDate = new java.util.Date(currentTimeMillis);
         Timestamp timestamp = new Timestamp(currentDate.getTime());
         Discipline discipline=new Discipline();
         discipline.setDate(timestamp);
-        discipline.setStatus(0);
+        discipline.setStatus(Integer.parseInt(trangthaixuly));
         discipline.setDescription(hinhthucxuly);
-        discipline.setFine(Integer.parseInt(sotien));
+        if(sotien.isEmpty()){
+            discipline.setFine(null);
+        }else{
+            discipline.setFine(Integer.parseInt(sotien));
+        }
         Member member=new Member();
         member.setId(thanhvien[0]);
         discipline.setMemberID(member);
         try{
             disciplineBLL.insertDiscipline(discipline);
-            System.out.println("Lỗi");
+            JOptionPane.showMessageDialog(rootPane,"Add Success!");
         }catch(Exception ex){
             JOptionPane.showMessageDialog(rootPane,"Add Failed!");
         }
@@ -209,6 +228,8 @@ public class AddDiscipline extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField jSoTien;
+    private javax.swing.JComboBox<String> jTrangThaiXuLy;
     // End of variables declaration//GEN-END:variables
 }
