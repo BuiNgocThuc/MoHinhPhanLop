@@ -24,7 +24,7 @@ public class Discipline implements Serializable{
     private String description;
 
     @Column(name = "SoTien")
-    private int fine;
+    private Integer fine;
 
     @Column(name = "NgayXL")
     private Timestamp date;
@@ -54,11 +54,11 @@ public class Discipline implements Serializable{
         this.description = description;
     }
 
-    public int getFine() {
+    public Integer getFine() {
         return fine;
     }
 
-    public void setFine(int fine) {
+    public void setFine(Integer fine) {
         this.fine = fine;
     }
 

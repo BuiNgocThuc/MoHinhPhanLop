@@ -149,7 +149,7 @@ public class AddDiscipline extends javax.swing.JFrame {
         discipline.setDescription(hinhthucxuly);
         discipline.setFine(Integer.parseInt(sotien));
         Member member=new Member();
-        member.setId(Integer.parseInt(thanhvien[0]));
+        member.setId(thanhvien[0]);
         discipline.setMemberID(member);
         try{
             disciplineBLL.insertDiscipline(discipline);

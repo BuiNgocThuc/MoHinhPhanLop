@@ -213,21 +213,7 @@ public class ManagerDiscipline extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableDisciplineMouseClicked
 
     public void LoadData(){
-        /*
-        String columns[]=new String[]{"CategoryID","Name","Description"};
-        DefaultTableModel model=new DefaultTableModel();
-        for(String i:columns){
-            model.addColumn(i);
-        }
-        for(Category i:categoryBLL.getListCategory()){
-            Vector t=new Vector();
-            t.add(i.getCategoryID());
-            t.add(i.getName());
-            t.add(i.getDescription());
-            model.addRow(t);
-        }
-        jTableCategory.setModel(model);
-        */
+        
         String columns[]=new String[]{"Mã Xử Lý","Mã Thành Viên","Tên Thành Viên","Hình Thức xử Lý","Số Tiền","Ngày Xử Lý","Trạng Thái Xử Lý"};
         DefaultTableModel model=new DefaultTableModel();
         for(String i:columns){
