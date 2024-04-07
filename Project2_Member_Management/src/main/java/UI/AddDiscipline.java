@@ -53,6 +53,7 @@ public class AddDiscipline extends javax.swing.JFrame {
 
         jLabel2.setText("Hình Thức Xử Lý");
 
+        jSoTien.setEnabled(false);
         jSoTien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jSoTienActionPerformed(evt);
@@ -76,6 +77,16 @@ public class AddDiscipline extends javax.swing.JFrame {
         });
 
         jHinhThucXuLy.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Khóa thẻ 1 tháng", "Khóa thẻ 2 tháng", "Khóa thẻ vĩnh viễn", "Bồi thường", "Khóa thẻ 1 tháng và bồi thường" }));
+        jHinhThucXuLy.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jHinhThucXuLyMouseClicked(evt);
+            }
+        });
+        jHinhThucXuLy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jHinhThucXuLyActionPerformed(evt);
+            }
+        });
 
         jTrangThaiXuLy.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "0" }));
 
@@ -176,6 +187,26 @@ public class AddDiscipline extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane,"Add Failed!");
         }
     }//GEN-LAST:event_jBtnAddVioletActionPerformed
+
+    private void jHinhThucXuLyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jHinhThucXuLyMouseClicked
+        // TODO add your handling code here:
+//        String hinhthucxuly=jHinhThucXuLy.getSelectedItem().toString().toLowerCase();
+//        if(hinhthucxuly.contains("bồi thường")){
+//            jSoTien.setEnabled(true);
+//        }else{
+//            jSoTien.setEnabled(false);
+//        }
+    }//GEN-LAST:event_jHinhThucXuLyMouseClicked
+
+    private void jHinhThucXuLyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jHinhThucXuLyActionPerformed
+        // TODO add your handling code here:
+        String hinhthucxuly=jHinhThucXuLy.getSelectedItem().toString().toLowerCase();
+        if(hinhthucxuly.contains("bồi thường")){
+            jSoTien.setEnabled(true);
+        }else{
+            jSoTien.setEnabled(false);
+        }
+    }//GEN-LAST:event_jHinhThucXuLyActionPerformed
     public void LoadData(){
         DefaultComboBoxModel model=new DefaultComboBoxModel();
         for(Member i:disciplineBLL.selectMenber()){
