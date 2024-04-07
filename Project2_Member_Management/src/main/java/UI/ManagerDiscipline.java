@@ -231,11 +231,15 @@ public class ManagerDiscipline extends javax.swing.JFrame {
     }
     private void jBtnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnDeleteActionPerformed
         // TODO add your handling code here:
-        if(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),6).toString().equals("1")){
-            
-        }else{
-            JOptionPane.showMessageDialog(rootPane,"Not processed yet!");
-        }
+//        if(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),6).toString().equals("1")){
+//            
+//        }else{
+//            JOptionPane.showMessageDialog(rootPane,"Not processed yet!");
+//        }
+          int n=JOptionPane.showConfirmDialog(rootPane,"Do you want to delete","Confirm",JOptionPane.YES_NO_OPTION);
+          if(n==JOptionPane.YES_OPTION){
+              JOptionPane.showMessageDialog(rootPane,"Delete Success!");
+          }
     }//GEN-LAST:event_jBtnDeleteActionPerformed
 
     private void jBtnImportExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnImportExcelActionPerformed
@@ -275,12 +279,8 @@ public class ManagerDiscipline extends javax.swing.JFrame {
                           discipline.setMemberID(member);
                           discipline.setDescription(hinhthucXL);
                           disciplineBLL.insertDiscipline(discipline);
-                          //DefaultTableModel model=(DefaultTableModel)jTableDiscipline.getModel();
-                          //Vector t=new Vector();
-                          //;7  
                     }
                 }
-                //formklp.LoadDataLopHoc(formklp.getTblophoc());
                 JOptionPane.showMessageDialog(null, "Data import Success");
                 wb.close();
                 LoadData();
