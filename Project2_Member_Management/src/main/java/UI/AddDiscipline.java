@@ -167,8 +167,7 @@ public class AddDiscipline extends javax.swing.JFrame {
         }else{
             discipline.setFine(Integer.parseInt(sotien));
         }
-        Member member=new Member();
-        member.setId(thanhvien[0]);
+        Member member=disciplineBLL.getMember(thanhvien[0]);
         discipline.setMemberID(member);
         try{
             disciplineBLL.insertDiscipline(discipline);

@@ -15,6 +15,7 @@ import java.io.FileInputStream;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Stack;
 import java.util.Vector;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -180,7 +181,7 @@ public class ManagerDiscipline extends javax.swing.JFrame {
             @Override
             public void windowClosing(WindowEvent e){
                 LoadData();
-            }
+            } 
         });
         
         addDiscipline.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -270,18 +271,19 @@ public class ManagerDiscipline extends javax.swing.JFrame {
                           discipline.setFine(sotien);
                           discipline.setStatus(trangthaiXL);
                           discipline.setDate(ngayXL);
-                          Member member=new Member();
-                          member.setId(maTV);
+                          Member member=disciplineBLL.getMember(maTV);
                           discipline.setMemberID(member);
                           discipline.setDescription(hinhthucXL);
                           disciplineBLL.insertDiscipline(discipline);
-                          LoadData();
+                          //DefaultTableModel model=(DefaultTableModel)jTableDiscipline.getModel();
+                          //Vector t=new Vector();
+                          //;7  
                     }
                 }
                 //formklp.LoadDataLopHoc(formklp.getTblophoc());
                 JOptionPane.showMessageDialog(null, "Data import Success");
                 wb.close();
-                //LoadData();
+                LoadData();
             } catch (Exception u) {
                 u.printStackTrace();
             }

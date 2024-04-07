@@ -42,6 +42,17 @@ public class DisciplineDAL {
         session.getTransaction().commit();
         return listDiscipline;
     }
+    public Member getMember(String id){
+        Member member=null;
+         try{
+            Transaction transaction = session.beginTransaction();
+            member=session.get(Member.class, id);
+            transaction.commit();
+        }catch(Exception e){
+            System.out.println("Error");
+        }
+         return member;
+    }
     public List<Member> selectMember(){
         List<Member> listselectMember=new ArrayList<>();
         session.getTransaction().begin();

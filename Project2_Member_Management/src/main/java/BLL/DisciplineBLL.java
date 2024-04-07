@@ -17,7 +17,9 @@ public class DisciplineBLL {
         //this.baseDiscipline = new baseDAL<>(Discipline.class);
         
     }
-
+    public Member getMember(String id){
+        return disciplineDAL.getMember(id);
+    }
     public List<Discipline> selectAll() {
         //return this.baseDiscipline.selectAll();
         return disciplineDAL.selectAll();
