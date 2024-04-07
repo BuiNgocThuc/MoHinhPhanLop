@@ -223,6 +223,7 @@ public class ManagerDiscipline extends javax.swing.JFrame {
 
     public void SearchAll(){
         if(jSearch.getText().toString().isEmpty()){
+            jBtnSearch.setVisible(false);
             LoadData();
         }else{
             jBtnSearch.setVisible(true);
@@ -280,8 +281,8 @@ public class ManagerDiscipline extends javax.swing.JFrame {
                           discipline.setDescription(hinhthucXL);
                           disciplineBLL.insertDiscipline(discipline);
                     }
+                    JOptionPane.showMessageDialog(null, "Data import Success");
                 }
-                JOptionPane.showMessageDialog(null, "Data import Success");
                 wb.close();
                 LoadData();
             } catch (Exception u) {
