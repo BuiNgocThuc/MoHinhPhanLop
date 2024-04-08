@@ -244,6 +244,11 @@ public class CourseAddForm extends javax.swing.JFrame {
         jPanel3.add(jLabel2);
 
         txtTitle.setPreferredSize(new java.awt.Dimension(200, 35));
+        txtTitle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTitleActionPerformed(evt);
+            }
+        });
         jPanel3.add(txtTitle);
 
         jLabel3.setText("Credit:");
@@ -851,6 +856,10 @@ public class CourseAddForm extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void txtTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTitleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTitleActionPerformed
 
     private void selectPerson(JTable availaibleTable, JTable selectedTable) {
         int selectedRow = availaibleTable.getSelectedRow();

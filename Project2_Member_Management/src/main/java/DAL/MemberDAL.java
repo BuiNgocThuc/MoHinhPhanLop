@@ -5,8 +5,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import Utils.hibernateUtil;
+import jakarta.persistence.Query;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 import java.util.List;
+import java.util.Set;
 
 public class MemberDAL {
     private SessionFactory sessionFactory;
@@ -43,5 +47,57 @@ public class MemberDAL {
                 "AND u.enteredTime <= :endDate";
 
         return baseDAL.statistic(hql, "startDate", startDate, "endDate", endDate);
+    }
+    
+    public List<String> queryDepartment() {
+        Transaction transaction = null;
+        Session session;
+        List<String> results = new ArrayList<>();
+        try
+        {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            String hql = "SELECT DISTINCT department FROM Member WHERE status <> 0";
+
+            Query query = session.createQuery(hql);
+            
+            results = query.getResultList();
+
+            transaction.commit();
+        } catch (Exception e)
+        {
+            if (transaction != null)
+            {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+        return results;
+    }
+    
+    public List<String> queryMajorsByDeparment(String department) {
+        Transaction transaction = null;
+        Session session;
+        List<String> results = new ArrayList<>();
+        try
+        {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            String hql = "SELECT DISTINCT major FROM Member WHERE department = :department AND status <> 0";
+
+            Query query = session.createQuery(hql);
+            query.setParameter("department", department);
+            results = query.getResultList();
+
+            transaction.commit();
+        } catch (Exception e)
+        {
+            if (transaction != null)
+            {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+        return results;
     }
 }

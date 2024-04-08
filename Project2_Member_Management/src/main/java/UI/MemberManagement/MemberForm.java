@@ -4,17 +4,55 @@
  */
 package UI.MemberManagement;
 
+import BLL.MemberBLL;
+import POJOs.Member;
+import java.util.List;
+
 /**
  *
  * @author ASUS
  */
 public class MemberForm extends javax.swing.JFrame {
 
+    private MemberBLL memberBLL = new MemberBLL();
+    private Member member;
     /**
      * Creates new form MemberForm
+     * @param member
      */
-    public MemberForm() {
+    public MemberForm(Member member) {
+        this.member = member;
         initComponents();
+        readMember(member);
+       
+    }
+    
+    public MemberForm() {
+         initComponents();
+         readDepartments();
+    }
+    
+    private void readMember(Member member) {
+        readDepartments();
+        txtFullName.setText(member.getName());
+        txtPhone.setText(member.getPhone());
+        cbDepartment.setSelectedItem(member.getDepartment());
+        cbMajor.setSelectedItem(member.getMajor());
+//        txtID.setText(member.getId());
+//        txtEmail.setText(member.getEmail());
+    }
+    
+    
+
+    private void readDepartments() {
+        List<String> departments = memberBLL.queryDepartment();
+        departments.forEach(deparment -> cbDepartment.addItem(deparment));
+    }
+
+    private void readMajors(String department) {
+        List<String> majors = memberBLL.queryMajor(department);
+        cbMajor.removeAllItems();
+        majors.forEach(major -> cbMajor.addItem(major));
     }
 
     /**
@@ -35,10 +73,10 @@ public class MemberForm extends javax.swing.JFrame {
         jPanel10 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         lblDepartment = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbDepartment = new javax.swing.JComboBox<>();
         jPanel8 = new javax.swing.JPanel();
         lblMajor = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cbMajor = new javax.swing.JComboBox<>();
         jPanel11 = new javax.swing.JPanel();
         lblPhone = new javax.swing.JLabel();
         txtPhone = new javax.swing.JTextField();
@@ -95,7 +133,11 @@ public class MemberForm extends javax.swing.JFrame {
         lblDepartment.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblDepartment.setText("Department:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbDepartment.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbDepartmentItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -105,7 +147,7 @@ public class MemberForm extends javax.swing.JFrame {
                 .addComponent(lblDepartment)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addComponent(jComboBox1, 0, 289, Short.MAX_VALUE)
+                .addComponent(cbDepartment, 0, 289, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
@@ -113,7 +155,7 @@ public class MemberForm extends javax.swing.JFrame {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addComponent(lblDepartment)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE))
+                .addComponent(cbDepartment, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE))
         );
 
         jPanel10.add(jPanel9);
@@ -123,8 +165,6 @@ public class MemberForm extends javax.swing.JFrame {
         lblMajor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblMajor.setText("Major:");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
@@ -132,14 +172,14 @@ public class MemberForm extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addComponent(lblMajor)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(jComboBox2, 0, 305, Short.MAX_VALUE)
+            .addComponent(cbMajor, 0, 305, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addComponent(lblMajor)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE))
+                .addComponent(cbMajor, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE))
         );
 
         jPanel10.add(jPanel8);
@@ -176,6 +216,11 @@ public class MemberForm extends javax.swing.JFrame {
         jButton1.setText("Cancel");
         jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 143, 143), 1, true));
         jButton1.setPreferredSize(new java.awt.Dimension(100, 40));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(0, 143, 143));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -258,6 +303,17 @@ public class MemberForm extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cbDepartmentItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbDepartmentItemStateChanged
+        // TODO add your handling code here:
+        String department = cbDepartment.getSelectedItem().toString();
+        readMajors(department);
+    }//GEN-LAST:event_cbDepartmentItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -267,20 +323,27 @@ public class MemberForm extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+        try
+        {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
+            {
+                if ("Nimbus".equals(info.getName()))
+                {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex)
+        {
             java.util.logging.Logger.getLogger(MemberForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
+        } catch (InstantiationException ex)
+        {
             java.util.logging.Logger.getLogger(MemberForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
+        } catch (IllegalAccessException ex)
+        {
             java.util.logging.Logger.getLogger(MemberForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex)
+        {
             java.util.logging.Logger.getLogger(MemberForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
@@ -288,16 +351,16 @@ public class MemberForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MemberForm().setVisible(true);
+//                new MemberForm().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbDepartment;
+    private javax.swing.JComboBox<String> cbMajor;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;

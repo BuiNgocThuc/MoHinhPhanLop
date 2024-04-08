@@ -20,8 +20,7 @@ public class MemberPanel extends javax.swing.JPanel {
      * Creates new form MemberPanel
      */
     private final BorrowDeviceFrame borrowDeviceFrame = new BorrowDeviceFrame();
-    private final MemberForm memberForm = new MemberForm();
-    private MemberBLL memberBLL = new MemberBLL();
+    private final MemberBLL memberBLL = new MemberBLL();
     sharedFunction func = new sharedFunction();
 
     public MemberPanel() {
@@ -47,12 +46,13 @@ public class MemberPanel extends javax.swing.JPanel {
             String name = member.getName();
             String department = member.getDepartment();
             String major = member.getMajor();
+            String phone = member.getPhone();
             String email = member.getEmail();
 
             Object[] row
                     =
                     {
-                        STT++, ID, name, department, major, email
+                        STT++, ID, name, department, major, phone, email
                     };
             model.addRow(row);
         }
@@ -213,11 +213,11 @@ public class MemberPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "No.", "ID", "Name", "Department", "Major", "Email"
+                "No.", "ID", "Name", "Department", "Major", "Phone", "Email"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -234,12 +234,14 @@ public class MemberPanel extends javax.swing.JPanel {
             tblMember.getColumnModel().getColumn(0).setPreferredWidth(30);
             tblMember.getColumnModel().getColumn(1).setResizable(false);
             tblMember.getColumnModel().getColumn(1).setPreferredWidth(60);
-            tblMember.getColumnModel().getColumn(2).setPreferredWidth(150);
-            tblMember.getColumnModel().getColumn(3).setPreferredWidth(100);
+            tblMember.getColumnModel().getColumn(2).setPreferredWidth(120);
+            tblMember.getColumnModel().getColumn(3).setPreferredWidth(60);
             tblMember.getColumnModel().getColumn(4).setResizable(false);
-            tblMember.getColumnModel().getColumn(4).setPreferredWidth(50);
+            tblMember.getColumnModel().getColumn(4).setPreferredWidth(30);
             tblMember.getColumnModel().getColumn(5).setResizable(false);
-            tblMember.getColumnModel().getColumn(5).setPreferredWidth(150);
+            tblMember.getColumnModel().getColumn(5).setPreferredWidth(80);
+            tblMember.getColumnModel().getColumn(6).setResizable(false);
+            tblMember.getColumnModel().getColumn(6).setPreferredWidth(120);
         }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -284,12 +286,30 @@ public class MemberPanel extends javax.swing.JPanel {
 
     private void addMemberBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMemberBtnActionPerformed
         // TODO add your handling code here:
+        MemberForm memberForm = new MemberForm();
         memberForm.setVisible(true);
     }//GEN-LAST:event_addMemberBtnActionPerformed
 
     private void editMemberBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMemberBtnActionPerformed
         // TODO add your handling code here:
-        memberForm.setVisible(true);
+        
+        int row = tblMember.getSelectedRow();
+        if(row == -1) {
+            func.displayErrorMessage("Please choose a record!!");
+        } else {
+            String ID = tblMember.getValueAt(row, 1).toString();
+            String name = tblMember.getValueAt(row, 2).toString();
+            String department = tblMember.getValueAt(row, 3).toString();
+            String major = tblMember.getValueAt(row, 4).toString();
+            String phone =  tblMember.getValueAt(row, 5).toString();
+            String email = tblMember.getValueAt(row, 6).toString();
+            
+            Member member = new Member(ID, name, department, major, phone, email);
+            
+            MemberForm memberForm = new MemberForm(member);
+            memberForm.setVisible(true);
+  
+        }
     }//GEN-LAST:event_editMemberBtnActionPerformed
 
     private void searchValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchValueActionPerformed

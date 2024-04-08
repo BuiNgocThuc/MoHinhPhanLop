@@ -33,6 +33,9 @@ public class Member {
     @Column(name = "Password")
     private String password;
     
+    @Column(name = "SDT")
+    private String phone;
+    
     @Column(name = "Email")
     private String email;
     
@@ -47,7 +50,16 @@ public class Member {
     private Set<Device> devices = new HashSet<>();
 
     public Member() {
+        
+    }
 
+    public Member(String id, String name, String department, String major, String phone, String email) {
+        this.id = id;
+        this.name = name;
+        this.department = department;
+        this.major = major;
+        this.phone = phone;
+        this.email = email;
     }
 
     public String getId() {
@@ -105,8 +117,14 @@ public class Member {
     public void setStatus(int status) {
         this.status = status;
     }
-    
-    
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     public Set<Device> getDevices() {
         return devices;

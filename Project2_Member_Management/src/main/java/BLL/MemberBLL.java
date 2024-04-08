@@ -51,19 +51,12 @@ public class MemberBLL {
     public List<Member> timeBasedStatistics(String startDate, String endDate) {
         return memberDAL.timeBasedStatistics(startDate, endDate);
     }
-    public static void main(String[] args) {
-         Logger.getLogger("org.hibernate").setLevel(Level.OFF);
-        DeviceBLL deviceBLL = new DeviceBLL();
-
-
-        Device device = new Device();
-        device.setId(1000028);
-        device.setName("TV2");
-        device.setDescription("TV2 test");
-        device.setStatus(1);
-        deviceBLL.insertDevice(device);
-
-        List<Device> devices = deviceBLL.selectAll();
-        devices.forEach(System.out::println);
+    
+    public List<String> queryDepartment() {
+        return memberDAL.queryDepartment();
+    }
+    
+    public List<String> queryMajor(String department) {
+        return memberDAL.queryMajorsByDeparment(department);
     }
 }
