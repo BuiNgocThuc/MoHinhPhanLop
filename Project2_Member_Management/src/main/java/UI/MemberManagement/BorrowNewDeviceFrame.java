@@ -58,6 +58,8 @@ public class BorrowNewDeviceFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.setRowHeight(30);
+        jTable1.setShowGrid(true);
         jScrollPane1.setViewportView(jTable1);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -93,6 +95,8 @@ public class BorrowNewDeviceFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable2.setRowHeight(30);
+        jTable2.setShowGrid(true);
         jScrollPane2.setViewportView(jTable2);
 
         jButton3.setBackground(new java.awt.Color(0, 143, 143));
