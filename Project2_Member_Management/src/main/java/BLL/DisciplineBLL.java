@@ -20,7 +20,7 @@ public class DisciplineBLL {
         return this.baseDiscipline.selectAll();
     }
 
-    public Discipline getById(int id) {
+    public <Integer> Discipline getById(int id) {
         return this.baseDiscipline.getById(id);
     }
 
@@ -32,8 +32,9 @@ public class DisciplineBLL {
         this.baseDiscipline.update(discipline);
     }
 
-    public <Integer> void deleteDiscipline(int id) {
-        this.baseDiscipline.delete(id);
+    public void deleteDiscipline(int id) {
+        Discipline discipline = getById(id);
+        this.baseDiscipline.delete(discipline);
     }
 
     public boolean isWarning(int id) {

@@ -21,7 +21,7 @@ public class DeviceBLL {
         return baseDeviceDAL.selectAll();
     }
 
-    public Device getDeviceById(int id) {
+    public <Integer> Device getDeviceById(int id) {
         return baseDeviceDAL.getById(id);
     }
 
@@ -33,8 +33,9 @@ public class DeviceBLL {
         baseDeviceDAL.update(device);
     }
 
-    public <Integer> void deleteDevice(int id) {
-        baseDeviceDAL.delete(id);
+    public void deleteDevice(int id) {
+        Device device = getDeviceById(id);
+        baseDeviceDAL.delete(device);
     }
 
     public void changeStatus(int id) {

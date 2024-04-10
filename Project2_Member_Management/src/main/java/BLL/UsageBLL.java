@@ -21,7 +21,7 @@ public class UsageBLL {
         return baseUsageDAL.selectAll();
     }
 
-    public Usage getById(int id) {
+    public <Integer> Usage getById(int id) {
         return baseUsageDAL.getById(id);
     }
 
@@ -33,7 +33,8 @@ public class UsageBLL {
         baseUsageDAL.update(usage);
     }
 
-    public <Integer>  void delete(int id) {
-        baseUsageDAL.delete(id);
+    public void delete(int id) {
+        Usage usage = getById(id);
+        baseUsageDAL.delete(usage);
     }
 }

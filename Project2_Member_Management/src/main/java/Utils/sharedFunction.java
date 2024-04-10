@@ -19,4 +19,9 @@ public class sharedFunction {
     public void displayConfirmMessage(String message) {
         JOptionPane.showMessageDialog(null, message, "Notification", JOptionPane.INFORMATION_MESSAGE);
     }
+
+    public boolean displayConfirmQuestion(String question) {
+        int dialogResult = JOptionPane.showConfirmDialog(null, question, "Confirm", JOptionPane.YES_NO_OPTION);
+        return dialogResult == JOptionPane.YES_OPTION;
+    }
 }

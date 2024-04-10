@@ -33,7 +33,7 @@ public class Discipline {
 
     @ManyToOne
     @JoinColumn(name = "MaTV")
-    private Member memberID;
+    private Member member;
 
     public Discipline() {}
 
@@ -77,11 +77,11 @@ public class Discipline {
         this.status = status;
     }
 
-    public Member getMemberID() {
-        return memberID;
+    public Member getMember() {
+        return member;
     }
 
-    public void setMemberID(Member memberID) {
-        this.memberID = memberID;
+    public void setMember(Member member) {
+        this.member = member;
     }
 }

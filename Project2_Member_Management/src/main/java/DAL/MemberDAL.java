@@ -57,7 +57,7 @@ public class MemberDAL {
         {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            String hql = "SELECT DISTINCT department FROM Member WHERE status <> 0";
+            String hql = "SELECT DISTINCT department FROM Member";
 
             Query query = session.createQuery(hql);
             
@@ -83,7 +83,7 @@ public class MemberDAL {
         {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            String hql = "SELECT DISTINCT major FROM Member WHERE department = :department AND status <> 0";
+            String hql = "SELECT DISTINCT major FROM Member WHERE department = :department";
 
             Query query = session.createQuery(hql);
             query.setParameter("department", department);
@@ -99,5 +99,29 @@ public class MemberDAL {
             e.printStackTrace();
         }
         return results;
+    }
+    
+    public void deleteByMemberID(String tableName, Member member) {
+        Transaction transaction = null;
+        Session session;
+        try
+        {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            String hql = "DELETE FROM " + tableName + " WHERE member = :member";
+
+            Query query = session.createQuery(hql);
+            query.setParameter("member", member);
+            query.executeUpdate();
+
+            transaction.commit();
+        } catch (Exception e)
+        {
+            if (transaction != null)
+            {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
     }
 }

@@ -28,7 +28,7 @@ public class baseDAL<T> {
         }
     }
 
-    public T getById(int id) {
+    public <K> T getById(K id) {
         try (Session session = sessionFactory.openSession())
         {
             return session.get(clazz, id);
@@ -42,7 +42,7 @@ public class baseDAL<T> {
         {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            session.save(object);
+            session.persist(object);
             transaction.commit();
         } catch (Exception e)
         {
@@ -73,20 +73,14 @@ public class baseDAL<T> {
         }
     }
 
-    public <K> void delete(K id) {
+    public void delete(T object) {
         Transaction transaction = null;
         Session session = null;
         try
         {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-
-            String hql = "UPDATE " + clazz.getName() + " set status = :active " + "WHERE id = :ID";
-            Query query = session.createQuery(hql);
-            query.setParameter("active", 0);
-            query.setParameter("ID", id);
-            query.executeUpdate();
-
+            session.remove(object);
             transaction.commit();
         } catch (Exception e)
         {

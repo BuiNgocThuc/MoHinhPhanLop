@@ -6,6 +6,7 @@ package UI.MemberManagement;
 
 import BLL.MemberBLL;
 import POJOs.Member;
+import Utils.sharedFunction;
 import java.util.List;
 
 /**
@@ -14,20 +15,23 @@ import java.util.List;
  */
 public class MemberForm extends javax.swing.JFrame {
 
-    private MemberBLL memberBLL = new MemberBLL();
+    private final MemberBLL memberBLL = new MemberBLL();
     private Member member;
+    private final sharedFunction func = new sharedFunction();
+    private MemberPanel memberPanel;
     /**
      * Creates new form MemberForm
      * @param member
      */
-    public MemberForm(Member member) {
+    public MemberForm(Member member, MemberPanel memberPanel) {
+        this.memberPanel = memberPanel;
         this.member = member;
         initComponents();
         readMember(member);
-       
     }
     
-    public MemberForm() {
+    public MemberForm(MemberPanel memberPanel) {
+        this.memberPanel = memberPanel;
          initComponents();
          readDepartments();
     }
@@ -38,8 +42,10 @@ public class MemberForm extends javax.swing.JFrame {
         txtPhone.setText(member.getPhone());
         cbDepartment.setSelectedItem(member.getDepartment());
         cbMajor.setSelectedItem(member.getMajor());
-//        txtID.setText(member.getId());
-//        txtEmail.setText(member.getEmail());
+        txtID.setText(member.getId());
+        txtEmail.setText(member.getEmail());
+        
+        txtID.setEditable(false);
     }
     
     
@@ -69,7 +75,7 @@ public class MemberForm extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         idPnl = new javax.swing.JPanel();
         lblFullName = new javax.swing.JLabel();
-        txtFullName = new javax.swing.JTextField();
+        txtID = new javax.swing.JTextField();
         dmPnl = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         lblDepartment = new javax.swing.JLabel();
@@ -82,13 +88,13 @@ public class MemberForm extends javax.swing.JFrame {
         txtPhone = new javax.swing.JTextField();
         fullNamePnl = new javax.swing.JPanel();
         lblFullName1 = new javax.swing.JLabel();
-        txtFullName1 = new javax.swing.JTextField();
+        txtFullName = new javax.swing.JTextField();
         emailPnl = new javax.swing.JPanel();
         lblFullName2 = new javax.swing.JLabel();
-        txtFullName2 = new javax.swing.JTextField();
-        buttonPnl = new javax.swing.JPanel();
+        txtEmail = new javax.swing.JTextField();
+        btnCancel = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Member Form");
@@ -106,7 +112,7 @@ public class MemberForm extends javax.swing.JFrame {
         lblFullName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblFullName.setText("ID:");
 
-        txtFullName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout idPnlLayout = new javax.swing.GroupLayout(idPnl);
         idPnl.setLayout(idPnlLayout);
@@ -115,14 +121,14 @@ public class MemberForm extends javax.swing.JFrame {
             .addGroup(idPnlLayout.createSequentialGroup()
                 .addComponent(lblFullName)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(txtFullName)
+            .addComponent(txtID)
         );
         idPnlLayout.setVerticalGroup(
             idPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(idPnlLayout.createSequentialGroup()
                 .addComponent(lblFullName)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtFullName, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                .addComponent(txtID, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
 
@@ -218,7 +224,7 @@ public class MemberForm extends javax.swing.JFrame {
         lblFullName1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblFullName1.setText("Full Name:");
 
-        txtFullName1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtFullName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout fullNamePnlLayout = new javax.swing.GroupLayout(fullNamePnl);
         fullNamePnl.setLayout(fullNamePnlLayout);
@@ -227,14 +233,14 @@ public class MemberForm extends javax.swing.JFrame {
             .addGroup(fullNamePnlLayout.createSequentialGroup()
                 .addComponent(lblFullName1)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(txtFullName1)
+            .addComponent(txtFullName)
         );
         fullNamePnlLayout.setVerticalGroup(
             fullNamePnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(fullNamePnlLayout.createSequentialGroup()
                 .addComponent(lblFullName1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtFullName1, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                .addComponent(txtFullName, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
 
@@ -243,7 +249,7 @@ public class MemberForm extends javax.swing.JFrame {
         lblFullName2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblFullName2.setText("Email:");
 
-        txtFullName2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout emailPnlLayout = new javax.swing.GroupLayout(emailPnl);
         emailPnl.setLayout(emailPnlLayout);
@@ -252,18 +258,18 @@ public class MemberForm extends javax.swing.JFrame {
             .addGroup(emailPnlLayout.createSequentialGroup()
                 .addComponent(lblFullName2)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(txtFullName2)
+            .addComponent(txtEmail)
         );
         emailPnlLayout.setVerticalGroup(
             emailPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(emailPnlLayout.createSequentialGroup()
                 .addComponent(lblFullName2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtFullName2, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
 
-        buttonPnl.setBackground(new java.awt.Color(255, 255, 255));
+        btnCancel.setBackground(new java.awt.Color(255, 255, 255));
 
         jButton1.setForeground(new java.awt.Color(0, 143, 143));
         jButton1.setText("Cancel");
@@ -275,29 +281,34 @@ public class MemberForm extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(0, 143, 143));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Save");
-        jButton2.setPreferredSize(new java.awt.Dimension(100, 40));
+        btnSave.setBackground(new java.awt.Color(0, 143, 143));
+        btnSave.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSave.setForeground(new java.awt.Color(255, 255, 255));
+        btnSave.setText("Save");
+        btnSave.setPreferredSize(new java.awt.Dimension(100, 40));
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout buttonPnlLayout = new javax.swing.GroupLayout(buttonPnl);
-        buttonPnl.setLayout(buttonPnlLayout);
-        buttonPnlLayout.setHorizontalGroup(
-            buttonPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(buttonPnlLayout.createSequentialGroup()
+        javax.swing.GroupLayout btnCancelLayout = new javax.swing.GroupLayout(btnCancel);
+        btnCancel.setLayout(btnCancelLayout);
+        btnCancelLayout.setHorizontalGroup(
+            btnCancelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnCancelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        buttonPnlLayout.setVerticalGroup(
-            buttonPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(buttonPnlLayout.createSequentialGroup()
+        btnCancelLayout.setVerticalGroup(
+            btnCancelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnCancelLayout.createSequentialGroup()
                 .addContainerGap(27, Short.MAX_VALUE)
-                .addGroup(buttonPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(btnCancelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -314,7 +325,7 @@ public class MemberForm extends javax.swing.JFrame {
                     .addComponent(fullNamePnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(emailPnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addComponent(buttonPnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -329,7 +340,7 @@ public class MemberForm extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(phonePnl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(buttonPnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -372,6 +383,41 @@ public class MemberForm extends javax.swing.JFrame {
         String department = cbDepartment.getSelectedItem().toString();
         readMajors(department);
     }//GEN-LAST:event_cbDepartmentItemStateChanged
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+        if(this.member == null) {
+            // Add new member
+            String id = txtID.getText();
+            String name = txtFullName.getText();
+            String email = txtEmail.getText();
+            String phone = txtPhone.getText();
+            String department = cbDepartment.getSelectedItem().toString();
+            String major = cbMajor.getSelectedItem().toString();
+            
+            Member newMember = new Member(id, name, department, major, phone, email);
+            memberBLL.insertMember(newMember);
+            memberPanel.updateModelTable();
+            func.displayConfirmMessage("Insert member successfully!!");
+            
+            this.dispose();
+        } else {
+            // Update member
+             String id = txtID.getText();
+            String name = txtFullName.getText();
+            String email = txtEmail.getText();
+            String phone = txtPhone.getText();
+            String department = cbDepartment.getSelectedItem().toString();
+            String major = cbMajor.getSelectedItem().toString(); 
+  
+             Member editedMember = new Member(id, name, department, major, phone, email);
+             memberBLL.updateMember(editedMember);
+             memberPanel.updateModelTable();
+             func.displayConfirmMessage("Update member successfully!!");
+             
+             this.dispose();
+        }
+    }//GEN-LAST:event_btnSaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -416,7 +462,8 @@ public class MemberForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel buttonPnl;
+    private javax.swing.JPanel btnCancel;
+    private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<String> cbDepartment;
     private javax.swing.JComboBox<String> cbMajor;
     private javax.swing.JPanel dmPnl;
@@ -424,7 +471,6 @@ public class MemberForm extends javax.swing.JFrame {
     private javax.swing.JPanel fullNamePnl;
     private javax.swing.JPanel idPnl;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -437,9 +483,9 @@ public class MemberForm extends javax.swing.JFrame {
     private javax.swing.JLabel lblMajor;
     private javax.swing.JLabel lblPhone;
     private javax.swing.JPanel phonePnl;
+    private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtFullName;
-    private javax.swing.JTextField txtFullName1;
-    private javax.swing.JTextField txtFullName2;
+    private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtPhone;
     // End of variables declaration//GEN-END:variables
 }

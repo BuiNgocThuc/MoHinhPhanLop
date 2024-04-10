@@ -28,20 +28,15 @@ public class MemberPanel extends javax.swing.JPanel {
         readMembers(); // load data to table members
     }
 
-    public void readMembers() {
+    private void readMembers() {
         List<Member> memberList = memberBLL.selectAll();
 
         DefaultTableModel model = (DefaultTableModel) tblMember.getModel();
         model.setRowCount(0);
-        
+
         int STT = 1;
         for (Member member : memberList)
         {
-            int status = member.getStatus();
-            if (status == 0)
-            {
-                continue;
-            }
             String ID = member.getId();
             String name = member.getName();
             String department = member.getDepartment();
@@ -57,6 +52,10 @@ public class MemberPanel extends javax.swing.JPanel {
             model.addRow(row);
         }
         model.fireTableDataChanged();
+    }
+
+    public void updateModelTable() {
+        readMembers();
     }
 
     /**
@@ -286,29 +285,31 @@ public class MemberPanel extends javax.swing.JPanel {
 
     private void addMemberBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMemberBtnActionPerformed
         // TODO add your handling code here:
-        MemberForm memberForm = new MemberForm();
+        MemberForm memberForm = new MemberForm(this);
         memberForm.setVisible(true);
     }//GEN-LAST:event_addMemberBtnActionPerformed
 
     private void editMemberBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMemberBtnActionPerformed
         // TODO add your handling code here:
-        
+
         int row = tblMember.getSelectedRow();
-        if(row == -1) {
+        if (row == -1)
+        {
             func.displayErrorMessage("Please choose a record!!");
-        } else {
+        } else
+        {
             String ID = tblMember.getValueAt(row, 1).toString();
             String name = tblMember.getValueAt(row, 2).toString();
             String department = tblMember.getValueAt(row, 3).toString();
             String major = tblMember.getValueAt(row, 4).toString();
-            String phone =  tblMember.getValueAt(row, 5).toString();
+            String phone = tblMember.getValueAt(row, 5).toString();
             String email = tblMember.getValueAt(row, 6).toString();
-            
+
             Member member = new Member(ID, name, department, major, phone, email);
-            
-            MemberForm memberForm = new MemberForm(member);
+
+            MemberForm memberForm = new MemberForm(member, this);
             memberForm.setVisible(true);
-  
+
         }
     }//GEN-LAST:event_editMemberBtnActionPerformed
 
@@ -318,12 +319,18 @@ public class MemberPanel extends javax.swing.JPanel {
     private void deleteMemberBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMemberBtnActionPerformed
         // TODO add your handling code here:
         int selectedRow = tblMember.getSelectedRow();
-        if(selectedRow != -1) {
-            String memberId = tblMember.getValueAt(selectedRow, 1).toString();
-            memberBLL.deleteMember(memberId);
-            readMembers();
-            func.displayConfirmMessage("Delete Successfully !!");
-        } else {
+        if (selectedRow != -1)
+        {
+            boolean accept = func.displayConfirmQuestion("Do you confirm to remove this record ?");
+            if (accept)
+            {
+                String memberId = tblMember.getValueAt(selectedRow, 1).toString();
+                memberBLL.deleteMember(memberId);
+                updateModelTable();
+                func.displayConfirmMessage("Delete Member Successfully !!");
+            }
+        } else
+        {
             func.displayErrorMessage("Please choose a record !!");
         }
     }//GEN-LAST:event_deleteMemberBtnActionPerformed
