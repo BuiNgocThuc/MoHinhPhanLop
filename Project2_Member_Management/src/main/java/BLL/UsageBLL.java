@@ -3,6 +3,8 @@ package BLL;
 import DAL.UsageDAL;
 import DAL.baseDAL;
 import POJOs.Usage;
+import POJOs.Member;
+import POJOs.Device;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,5 +38,13 @@ public class UsageBLL {
     public void delete(int id) {
         Usage usage = getById(id);
         baseUsageDAL.delete(usage);
+    }
+    
+    public List<Usage> selectByMemberID(Member member) {
+        return usageDAL.selectByMemberID(member);
+    }
+    
+    public List<Device> selectAvailableDevices() {
+        return usageDAL.selectAvailableDevices();
     }
 }

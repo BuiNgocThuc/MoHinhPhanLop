@@ -5,8 +5,10 @@
 package POJOs;
 
 import jakarta.persistence.*;
+import java.util.ArrayList;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -44,7 +46,7 @@ public class Member {
     @JoinTable(name = "thongtinsd", 
             joinColumns = @JoinColumn(name = "MaTV"), 
             inverseJoinColumns = @JoinColumn(name = "MaTB"))
-    private Set<Device> devices = new HashSet<>();
+    private List<Device> devices = new ArrayList<>();
 
     public Member() {
         
@@ -115,11 +117,11 @@ public class Member {
         this.phone = phone;
     }
 
-    public Set<Device> getDevices() {
+    public List<Device> getDevices() {
         return devices;
     }
 
-    public void setDevices(Set<Device> devices) {
+    public void setDevices(List<Device> devices) {
         this.devices = devices;
     }
 

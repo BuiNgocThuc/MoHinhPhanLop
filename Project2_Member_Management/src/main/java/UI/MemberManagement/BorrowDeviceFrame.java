@@ -4,6 +4,18 @@
  */
 package UI.MemberManagement;
 
+import BLL.DeviceBLL;
+import BLL.UsageBLL;
+import POJOs.Device;
+import POJOs.Member;
+import POJOs.Usage;
+import Utils.sharedFunction;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ASUS
@@ -13,11 +25,50 @@ public class BorrowDeviceFrame extends javax.swing.JFrame {
     /**
      * Creates new form BorrowDevicePanel
      */
-    
-    private final BorrowNewDeviceFrame borrowNewDeviceFrame = new BorrowNewDeviceFrame();
-    
-    public BorrowDeviceFrame() {
+    private final UsageBLL usageBLL = new UsageBLL();
+    private final DeviceBLL deviceBLL = new DeviceBLL();
+    private final sharedFunction func = new sharedFunction();
+    private Member currentMember;
+    private List<Integer> usageIDList = new ArrayList<>();
+
+    public BorrowDeviceFrame(Member member) {
+        currentMember = member;
         initComponents();
+        borrowingHistory();
+    }
+
+    public Member getCurrentMember() {
+        return currentMember;
+    }
+
+    public void updateTable() {
+        borrowingHistory();
+    }
+
+    private void borrowingHistory() {
+        List<Usage> usageList = usageBLL.selectByMemberID(currentMember);
+        DefaultTableModel model = (DefaultTableModel) tblBorrowedDevice.getModel();
+        model.setRowCount(0);
+
+        int STT = 1;
+        for (Usage usage : usageList)
+        {
+            int usageID = usage.getId();
+            usageIDList.add(usageID);
+            Device device = usage.getDevice();
+            int deviceID = device.getId();
+            String deviceName = device.getName();
+            Timestamp borrowedTime = usage.getBorrowedTime();
+            Timestamp paidTime = usage.getPaidTime();
+            
+            Object[] row
+                    =
+                    {
+                        STT++, deviceID, deviceName, borrowedTime, paidTime
+                    };
+            model.addRow(row);
+        }
+        model.fireTableDataChanged();
     }
 
     /**
@@ -38,7 +89,7 @@ public class BorrowDeviceFrame extends javax.swing.JFrame {
         returnDeviceBtn = new javax.swing.JButton();
         borrowDeviceBtn = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblBorrowedDevice = new javax.swing.JTable();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -75,6 +126,11 @@ public class BorrowDeviceFrame extends javax.swing.JFrame {
         returnDeviceBtn.setText("- Return One");
         returnDeviceBtn.setBorder(null);
         returnDeviceBtn.setPreferredSize(new java.awt.Dimension(120, 40));
+        returnDeviceBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                returnDeviceBtnActionPerformed(evt);
+            }
+        });
         jPanel3.add(returnDeviceBtn);
 
         borrowDeviceBtn.setBackground(new java.awt.Color(0, 143, 143));
@@ -113,20 +169,27 @@ public class BorrowDeviceFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblBorrowedDevice.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "No.", "ID", "Name", "Borrowing Time", "Return Time"
             }
         ));
-        jTable2.setRowHeight(30);
-        jTable2.setShowGrid(true);
-        jScrollPane2.setViewportView(jTable2);
+        tblBorrowedDevice.setRowHeight(30);
+        tblBorrowedDevice.setShowGrid(true);
+        jScrollPane2.setViewportView(tblBorrowedDevice);
+        if (tblBorrowedDevice.getColumnModel().getColumnCount() > 0) {
+            tblBorrowedDevice.getColumnModel().getColumn(0).setPreferredWidth(50);
+            tblBorrowedDevice.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tblBorrowedDevice.getColumnModel().getColumn(2).setPreferredWidth(200);
+            tblBorrowedDevice.getColumnModel().getColumn(3).setPreferredWidth(200);
+            tblBorrowedDevice.getColumnModel().getColumn(4).setPreferredWidth(200);
+        }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -161,11 +224,42 @@ public class BorrowDeviceFrame extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    
     private void borrowDeviceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrowDeviceBtnActionPerformed
-            // TODO add your handling code here:
-            borrowNewDeviceFrame.setVisible(true);
+        // TODO add your handling code here:    
+        BorrowNewDeviceFrame borrowNewDeviceFrame = new BorrowNewDeviceFrame(this);
+        borrowNewDeviceFrame.setVisible(true);
     }//GEN-LAST:event_borrowDeviceBtnActionPerformed
+
+    private void returnDeviceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnDeviceBtnActionPerformed
+        // TODO add your handling code here:
+        int row = tblBorrowedDevice.getSelectedRow();
+        if (row == -1)
+        {
+            func.displayErrorMessage("Please choose a record!!");
+        } else
+        {
+            Object valPaidTime = tblBorrowedDevice.getValueAt(row, 4);
+            if (valPaidTime != null)
+            {
+                func.displayErrorMessage("The device has been returned");
+            } else
+            {
+                Instant now = Instant.now();
+                Timestamp currentTimestamp = Timestamp.from(now);
+                int STT = Integer.parseInt(tblBorrowedDevice.getValueAt(row, 0).toString());
+                int currentIndex = STT  - 1;
+                int usageID = usageIDList.get(currentIndex);
+                Usage currentUsage = usageBLL.getById(usageID);
+                currentUsage.setPaidTime(currentTimestamp);
+                usageBLL.update(currentUsage);
+                
+                borrowingHistory();
+                func.displayConfirmMessage("Return device successfully!!!");
+            }
+        }
+    }//GEN-LAST:event_returnDeviceBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,20 +270,27 @@ public class BorrowDeviceFrame extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+        try
+        {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
+            {
+                if ("Nimbus".equals(info.getName()))
+                {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex)
+        {
             java.util.logging.Logger.getLogger(BorrowDeviceFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
+        } catch (InstantiationException ex)
+        {
             java.util.logging.Logger.getLogger(BorrowDeviceFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
+        } catch (IllegalAccessException ex)
+        {
             java.util.logging.Logger.getLogger(BorrowDeviceFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex)
+        {
             java.util.logging.Logger.getLogger(BorrowDeviceFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
@@ -198,7 +299,7 @@ public class BorrowDeviceFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BorrowDeviceFrame().setVisible(true);
+//                new BorrowDeviceFrame().setVisible(true);
             }
         });
     }
@@ -212,7 +313,7 @@ public class BorrowDeviceFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JButton returnDeviceBtn;
+    private javax.swing.JTable tblBorrowedDevice;
     // End of variables declaration//GEN-END:variables
 }

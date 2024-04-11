@@ -4,17 +4,57 @@
  */
 package UI.MemberManagement;
 
+import BLL.DeviceBLL;
+import BLL.UsageBLL;
+import POJOs.Device;
+import POJOs.Member;
+import POJOs.Usage;
+import Utils.sharedFunction;
+import java.sql.Timestamp;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import java.time.Instant;
+
 /**
  *
  * @author ASUS
  */
 public class BorrowNewDeviceFrame extends javax.swing.JFrame {
 
+    private BorrowDeviceFrame bdf;
+    private final UsageBLL usageBLL = new UsageBLL();
+    private final sharedFunction func = new sharedFunction();
+    private final DeviceBLL deviceBLL = new DeviceBLL();
+
     /**
      * Creates new form BorrowNewDeviceFrame
      */
-    public BorrowNewDeviceFrame() {
+    public BorrowNewDeviceFrame(BorrowDeviceFrame bdf) {
+        this.bdf = bdf;
         initComponents();
+        readAvailableDevices();
+    }
+
+    private void readAvailableDevices() {
+        List<Device> availableDevices = usageBLL.selectAvailableDevices();
+        DefaultTableModel model = (DefaultTableModel) tblAvailableDevices.getModel();
+        model.setRowCount(0);
+
+        int STT = 1;
+        for (Device device : availableDevices)
+        {
+            int deviceID = device.getId();
+            String deviceName = device.getName();
+            String deviceDes = device.getDescription();
+
+            Object[] row
+                    =
+                    {
+                        STT++, deviceID, deviceName, deviceDes
+                    };
+            model.addRow(row);
+        }
+        model.fireTableDataChanged();
     }
 
     /**
@@ -30,13 +70,13 @@ public class BorrowNewDeviceFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblAvailableDevices = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        addDevice = new javax.swing.JButton();
+        removeDevice = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
+        tblSelectedDevices = new javax.swing.JTable();
+        saveBorrowedDevices = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Borrow new devices");
@@ -47,7 +87,7 @@ public class BorrowNewDeviceFrame extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel1.setText("LIST OF AVAILABLE DEVICES");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblAvailableDevices.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -55,55 +95,79 @@ public class BorrowNewDeviceFrame extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "No.", "ID", "Name", "Description"
             }
         ));
-        jTable1.setRowHeight(30);
-        jTable1.setShowGrid(true);
-        jScrollPane1.setViewportView(jTable1);
+        tblAvailableDevices.setRowHeight(30);
+        tblAvailableDevices.setShowGrid(true);
+        jScrollPane1.setViewportView(tblAvailableDevices);
+        if (tblAvailableDevices.getColumnModel().getColumnCount() > 0) {
+            tblAvailableDevices.getColumnModel().getColumn(0).setPreferredWidth(30);
+            tblAvailableDevices.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tblAvailableDevices.getColumnModel().getColumn(2).setPreferredWidth(200);
+            tblAvailableDevices.getColumnModel().getColumn(3).setPreferredWidth(220);
+        }
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton1.setBackground(new java.awt.Color(0, 143, 143));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-chevron-18-down.png"))); // NOI18N
-        jButton1.setText("Add ");
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jButton1.setIconTextGap(10);
-        jButton1.setPreferredSize(new java.awt.Dimension(120, 40));
-        jPanel2.add(jButton1);
+        addDevice.setBackground(new java.awt.Color(0, 143, 143));
+        addDevice.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        addDevice.setForeground(new java.awt.Color(255, 255, 255));
+        addDevice.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-chevron-18-down.png"))); // NOI18N
+        addDevice.setText("Add ");
+        addDevice.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        addDevice.setIconTextGap(10);
+        addDevice.setPreferredSize(new java.awt.Dimension(120, 40));
+        addDevice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addDeviceActionPerformed(evt);
+            }
+        });
+        jPanel2.add(addDevice);
 
-        jButton2.setBackground(new java.awt.Color(241, 51, 51));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-chevron-18-up.png"))); // NOI18N
-        jButton2.setText("Delete");
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jButton2.setIconTextGap(10);
-        jButton2.setPreferredSize(new java.awt.Dimension(120, 40));
-        jPanel2.add(jButton2);
+        removeDevice.setBackground(new java.awt.Color(241, 51, 51));
+        removeDevice.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        removeDevice.setForeground(new java.awt.Color(255, 255, 255));
+        removeDevice.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-chevron-18-up.png"))); // NOI18N
+        removeDevice.setText("Delete");
+        removeDevice.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        removeDevice.setIconTextGap(10);
+        removeDevice.setPreferredSize(new java.awt.Dimension(120, 40));
+        removeDevice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeDeviceActionPerformed(evt);
+            }
+        });
+        jPanel2.add(removeDevice);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblSelectedDevices.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "No.", "ID", "Name", "Description"
             }
         ));
-        jTable2.setRowHeight(30);
-        jTable2.setShowGrid(true);
-        jScrollPane2.setViewportView(jTable2);
+        tblSelectedDevices.setRowHeight(30);
+        tblSelectedDevices.setShowGrid(true);
+        jScrollPane2.setViewportView(tblSelectedDevices);
+        if (tblSelectedDevices.getColumnModel().getColumnCount() > 0) {
+            tblSelectedDevices.getColumnModel().getColumn(0).setPreferredWidth(30);
+            tblSelectedDevices.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tblSelectedDevices.getColumnModel().getColumn(2).setPreferredWidth(200);
+            tblSelectedDevices.getColumnModel().getColumn(3).setPreferredWidth(220);
+        }
 
-        jButton3.setBackground(new java.awt.Color(0, 143, 143));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Save");
-        jButton3.setPreferredSize(new java.awt.Dimension(120, 40));
+        saveBorrowedDevices.setBackground(new java.awt.Color(0, 143, 143));
+        saveBorrowedDevices.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        saveBorrowedDevices.setForeground(new java.awt.Color(255, 255, 255));
+        saveBorrowedDevices.setText("Save");
+        saveBorrowedDevices.setPreferredSize(new java.awt.Dimension(120, 40));
+        saveBorrowedDevices.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveBorrowedDevicesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -118,7 +182,7 @@ public class BorrowNewDeviceFrame extends javax.swing.JFrame {
             .addComponent(jScrollPane2)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(saveBorrowedDevices, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,7 +198,7 @@ public class BorrowNewDeviceFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(saveBorrowedDevices, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -153,6 +217,104 @@ public class BorrowNewDeviceFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addDeviceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDeviceActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tblAvailableDevices.getSelectedRow();
+        if (selectedRow == -1)
+        {
+            func.displayErrorMessage("Please select a device !!");
+        } else
+        {
+            DefaultTableModel model = (DefaultTableModel) tblSelectedDevices.getModel();
+            int STT = model.getRowCount() + 1;
+
+            // get data from selected row
+            Object ID = tblAvailableDevices.getValueAt(selectedRow, 1);
+            Object Name = tblAvailableDevices.getValueAt(selectedRow, 2);
+            Object Description = tblAvailableDevices.getValueAt(selectedRow, 3);
+
+            Object[] selectedData =
+            {
+                STT, ID, Name, Description
+            };
+
+            // check existed
+            for (int i = 0; i < model.getRowCount(); i++)
+            {
+                Object existedID = model.getValueAt(i, 1);
+                if (existedID == ID)
+                {
+                    func.displayErrorMessage("Device has selected");
+                    return;
+                }
+            }
+
+            model.addRow(selectedData);
+            model.fireTableDataChanged();
+        }
+    }//GEN-LAST:event_addDeviceActionPerformed
+
+    private void removeDeviceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeDeviceActionPerformed
+        // TODO add your handling code here:
+        int rowCount = tblSelectedDevices.getRowCount();
+        if (rowCount < 1)
+        {
+            func.displayErrorMessage("Selected device table is empty !!");
+            return;
+        }
+        int selectedRow = tblSelectedDevices.getSelectedRow();
+        if (selectedRow == -1)
+        {
+            func.displayErrorMessage("Please choose a selected device !!");
+        } else
+        {
+            DefaultTableModel model = (DefaultTableModel) tblSelectedDevices.getModel();
+
+            model.removeRow(selectedRow);
+
+            // reset No.
+            int STT = 1;
+            for (int i = 0; i < model.getRowCount(); i++)
+            {
+                model.setValueAt(STT++, i, 0);
+            }
+            model.fireTableDataChanged();
+
+        }
+    }//GEN-LAST:event_removeDeviceActionPerformed
+
+    private void saveBorrowedDevicesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBorrowedDevicesActionPerformed
+        // TODO add your handling code here:
+        Member currentMember = bdf.getCurrentMember();
+
+        int totalDevices = tblSelectedDevices.getRowCount();
+        if (totalDevices < 1)
+        {
+            func.displayErrorMessage("Selected device table is empty !!");
+            return;
+        }
+
+        for (int i = 0; i < totalDevices; i++)
+        {
+            int devceID = Integer.parseInt(tblSelectedDevices.getValueAt(i, 1).toString());
+            Device device = deviceBLL.getDeviceById(devceID);
+
+            Instant nowInstant = Instant.now();
+
+            Timestamp currentTimestamp = Timestamp.from(nowInstant);
+
+            Usage usage = new Usage();
+            usage.setMember(currentMember);
+            usage.setDevice(device);
+            usage.setBorrowedTime(currentTimestamp);
+
+            usageBLL.insert(usage);
+        }
+        this.dispose();
+        bdf.updateTable();
+        func.displayConfirmMessage("Device borrowed successfully!!");
+    }//GEN-LAST:event_saveBorrowedDevicesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -162,20 +324,27 @@ public class BorrowNewDeviceFrame extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+        try
+        {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
+            {
+                if ("Nimbus".equals(info.getName()))
+                {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex)
+        {
             java.util.logging.Logger.getLogger(BorrowNewDeviceFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
+        } catch (InstantiationException ex)
+        {
             java.util.logging.Logger.getLogger(BorrowNewDeviceFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
+        } catch (IllegalAccessException ex)
+        {
             java.util.logging.Logger.getLogger(BorrowNewDeviceFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex)
+        {
             java.util.logging.Logger.getLogger(BorrowNewDeviceFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
@@ -183,22 +352,22 @@ public class BorrowNewDeviceFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BorrowNewDeviceFrame().setVisible(true);
+                //new BorrowNewDeviceFrame().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton addDevice;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JButton removeDevice;
+    private javax.swing.JButton saveBorrowedDevices;
+    private javax.swing.JTable tblAvailableDevices;
+    private javax.swing.JTable tblSelectedDevices;
     // End of variables declaration//GEN-END:variables
 }

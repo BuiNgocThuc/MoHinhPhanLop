@@ -19,7 +19,6 @@ public class MemberPanel extends javax.swing.JPanel {
     /**
      * Creates new form MemberPanel
      */
-    private final BorrowDeviceFrame borrowDeviceFrame = new BorrowDeviceFrame();
     private final MemberBLL memberBLL = new MemberBLL();
     sharedFunction func = new sharedFunction();
 
@@ -280,7 +279,17 @@ public class MemberPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void deviceFrameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deviceFrameBtnActionPerformed
-        borrowDeviceFrame.setVisible(true);
+        int row = tblMember.getSelectedRow();
+        if (row == -1)
+        {
+            func.displayErrorMessage("Please choose a record!!");
+        } else
+        {
+            String memberID = tblMember.getValueAt(row, 1).toString();
+            Member member = memberBLL.getMemberById(memberID);
+            BorrowDeviceFrame borrowDeviceFrame = new BorrowDeviceFrame(member);
+            borrowDeviceFrame.setVisible(true);
+        }
     }//GEN-LAST:event_deviceFrameBtnActionPerformed
 
     private void addMemberBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMemberBtnActionPerformed
