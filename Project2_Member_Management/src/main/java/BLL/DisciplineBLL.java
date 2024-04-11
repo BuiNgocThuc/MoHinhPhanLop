@@ -6,6 +6,7 @@ import DAL.baseDAL;
 import POJOs.Member;
 
 import java.util.List;
+import org.hibernate.Transaction;
 
 public class DisciplineBLL {
 
@@ -31,12 +32,15 @@ public class DisciplineBLL {
         //return this.baseDiscipline.selectAll();
         return disciplineDAL.selectMember();
     }
+    public void delete(int id){
+        disciplineDAL.delete(id);
+    }
 
 //    public Discipline getById(int id) {
 //        //return this.baseDiscipline.getById(id);
 //    }
 //
-    public void insertDiscipline(Discipline discipline) {
+    public void insertDiscipline(Discipline discipline) throws Exception {
         //this.baseDiscipline.save(discipline);
         disciplineDAL.insertDiscipline(discipline);
     }

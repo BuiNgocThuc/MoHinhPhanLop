@@ -28,12 +28,15 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 /**
  *
  * @author MSI
  */
 public class ManagerDiscipline extends javax.swing.JFrame {
-    DisciplineBLL disciplineBLL=new DisciplineBLL();
+
+    DisciplineBLL disciplineBLL = new DisciplineBLL();
+
     /**
      * Creates new form ManagerViolate
      */
@@ -42,21 +45,21 @@ public class ManagerDiscipline extends javax.swing.JFrame {
         LoadData();
         jBtnSearch.setVisible(false);
         jSearch.getDocument().addDocumentListener(new DocumentListener() {
-        @Override
-        public void insertUpdate(DocumentEvent e) {
-              SearchAll();
-        }
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                SearchAll();
+            }
 
-        @Override
-        public void removeUpdate(DocumentEvent e) {
-              SearchAll();
-        }
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                SearchAll();
+            }
 
-       @Override
-       public void changedUpdate(DocumentEvent e) {
-        
-      }
-      });
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+
+            }
+        });
     }
 
     /**
@@ -176,124 +179,131 @@ public class ManagerDiscipline extends javax.swing.JFrame {
 
     private void jBtnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAddActionPerformed
         // TODO add your handling code here:
-        AddDiscipline addDiscipline=new AddDiscipline();
-        addDiscipline.addWindowListener(new WindowAdapter(){
+        AddDiscipline addDiscipline = new AddDiscipline();
+        addDiscipline.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(WindowEvent e){
+            public void windowClosing(WindowEvent e) {
                 LoadData();
-            } 
+            }
         });
-        
+
         addDiscipline.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         addDiscipline.setLocationRelativeTo(null);
         addDiscipline.setVisible(true);
-        
+
         //LoadData();
     }//GEN-LAST:event_jBtnAddActionPerformed
 
     private void jBtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditActionPerformed
         // TODO add your handling code here:
-        int n=jTableDiscipline.getSelectedRow();
-        if(n!=-1){
-            if(jTableDiscipline.getValueAt(n,6).toString().equals("0")){
-            JOptionPane.showMessageDialog(rootPane,"Has been processed");
-            }else{
-                    EditDiscipline editDiscipline=new EditDiscipline();
-                    editDiscipline.addWindowListener(new WindowAdapter(){
-                        @Override
-                        public void windowClosing(WindowEvent e){
-                            LoadData();
-                        }
-                    });
-                    editDiscipline.jMaXuLy.setText(jTableDiscipline.getValueAt(n,0).toString());
-                    editDiscipline.jMaThanhVien.setText(jTableDiscipline.getValueAt(n,1).toString()+"-"+jTableDiscipline.getValueAt(n,2).toString());
-                    editDiscipline.jNgayXuLy.setText(jTableDiscipline.getValueAt(n,5).toString());
-                    Object value = jTableDiscipline.getValueAt(n, 4);
-                    editDiscipline.jSoTien.setText(value==null?"":value+"");
-                    editDiscipline.jHinhThucXuLy.setSelectedItem(jTableDiscipline.getValueAt(n,3).toString());
-                    editDiscipline.jTrangThaiXuLy.setSelectedItem(jTableDiscipline.getValueAt(n,6).toString());
-                    editDiscipline.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                    editDiscipline.setLocationRelativeTo(null);
-                    editDiscipline.setVisible(true);
+        int n = jTableDiscipline.getSelectedRow();
+        if (n != -1) {
+            if (jTableDiscipline.getValueAt(n, 6).toString().equals("0")) {
+                JOptionPane.showMessageDialog(rootPane, "Has been processed");
+            } else {
+                EditDiscipline editDiscipline = new EditDiscipline();
+                editDiscipline.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosing(WindowEvent e) {
+                        LoadData();
+                    }
+                });
+                editDiscipline.jMaXuLy.setText(jTableDiscipline.getValueAt(n, 0).toString());
+                editDiscipline.jMaThanhVien.setText(jTableDiscipline.getValueAt(n, 1).toString() + "-" + jTableDiscipline.getValueAt(n, 2).toString());
+                editDiscipline.jNgayXuLy.setText(jTableDiscipline.getValueAt(n, 5).toString());
+                Object value = jTableDiscipline.getValueAt(n, 4);
+                editDiscipline.jSoTien.setText(value == null ? "" : value + "");
+                editDiscipline.jHinhThucXuLy.setSelectedItem(jTableDiscipline.getValueAt(n, 3).toString());
+                editDiscipline.jTrangThaiXuLy.setSelectedItem(jTableDiscipline.getValueAt(n, 6).toString());
+                editDiscipline.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                editDiscipline.setLocationRelativeTo(null);
+                editDiscipline.setVisible(true);
             }
-        }else{
-            JOptionPane.showMessageDialog(rootPane,"Please Choose");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Please Choose");
         }
     }//GEN-LAST:event_jBtnEditActionPerformed
 
-    public void SearchAll(){
-        if(jSearch.getText().toString().isEmpty()){
+    public void SearchAll() {
+        if (jSearch.getText().toString().isEmpty()) {
             jBtnSearch.setVisible(false);
             LoadData();
-        }else{
+        } else {
             jBtnSearch.setVisible(true);
             LoadData(jSearch.getText().toString());
         }
     }
     private void jBtnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnDeleteActionPerformed
         // TODO add your handling code here:
-//        if(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),6).toString().equals("1")){
-//            
-//        }else{
-//            JOptionPane.showMessageDialog(rootPane,"Not processed yet!");
-//        }
-          int n=JOptionPane.showConfirmDialog(rootPane,"Do you want to delete","Confirm",JOptionPane.YES_NO_OPTION);
-          if(n==JOptionPane.YES_OPTION){
-              JOptionPane.showMessageDialog(rootPane,"Delete Success!");
-          }
+        int n = JOptionPane.showConfirmDialog(rootPane, "Do you want to delete", "Confirm", JOptionPane.YES_NO_OPTION);
+        int maXL=Integer.parseInt(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),0).toString());
+        if (n == JOptionPane.YES_OPTION) {
+            try{
+                disciplineBLL.delete(maXL);
+                JOptionPane.showMessageDialog(rootPane, "Delete Success!");
+                LoadData();
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(rootPane, "Delete Fail!");
+            }
+        }
     }//GEN-LAST:event_jBtnDeleteActionPerformed
 
     private void jBtnImportExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnImportExcelActionPerformed
-        // TODO add your handling code here:
-         try {
-                XSSFWorkbook wb = null;
-                FileInputStream fileIn = null;
-                JFileChooser choose = new JFileChooser();
-                FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel Files", "xls", "xlsx");
-                choose.setFileFilter(filter);
-                int excelchoose = choose.showOpenDialog(null);
-                if (excelchoose == JFileChooser.APPROVE_OPTION) {
-                    File fl = choose.getSelectedFile();
-                    fileIn = new FileInputStream(fl);
-                    wb = new XSSFWorkbook(fileIn);
-                    XSSFSheet sheet = wb.getSheetAt(0);
-                    XSSFRow row;
-                    for (int i = 1; i <= sheet.getLastRowNum(); i++) {  
-                          row = sheet.getRow(i);
-                          int maXL=(int)row.getCell(0).getNumericCellValue();
-                          String formattedNumber = String.format("%.0f", row.getCell(1).getNumericCellValue());
-                          String maTV=formattedNumber;
-                          String hinhthucXL=row.getCell(2).getStringCellValue().toString();
-                          int tmp=(int)row.getCell(3).getNumericCellValue();
-                          Integer sotien=tmp==0?null:tmp;
-                          SimpleDateFormat format=new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-                          String dateTime=format.format(row.getCell(4).getDateCellValue());
-                          Date date=format.parse(dateTime);
-                          long time=date.getTime();
-                          Timestamp ngayXL=new Timestamp(time);
-                          int trangthaiXL=(int)row.getCell(5).getNumericCellValue();
-                          Discipline discipline=new Discipline();
-                          discipline.setFine(sotien);
-                          discipline.setStatus(trangthaiXL);
-                          discipline.setDate(ngayXL);
-                          Member member=disciplineBLL.getMember(maTV);
-                          discipline.setMemberID(member);
-                          discipline.setDescription(hinhthucXL);
-                          disciplineBLL.insertDiscipline(discipline);
-                    }
-                    JOptionPane.showMessageDialog(null, "Data import Success");
+        String errs = "";// TODO add your handling code here:
+
+        try {
+            XSSFWorkbook wb = null;
+            FileInputStream fileIn = null;
+            JFileChooser choose = new JFileChooser();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel Files", "xls", "xlsx");
+            choose.setFileFilter(filter);
+            int excelchoose = choose.showOpenDialog(null);
+            if (excelchoose == JFileChooser.APPROVE_OPTION) {
+                File fl = choose.getSelectedFile();
+                fileIn = new FileInputStream(fl);
+                wb = new XSSFWorkbook(fileIn);
+                XSSFSheet sheet = wb.getSheetAt(0);
+                XSSFRow row;
+                for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+                    row = sheet.getRow(i);
+                    int maXL = (int) row.getCell(0).getNumericCellValue();
+                    String formattedNumber = String.format("%.0f", row.getCell(1).getNumericCellValue());
+                    String maTV = formattedNumber;
+                    String hinhthucXL = row.getCell(2).getStringCellValue().toString();
+                    int tmp = (int) row.getCell(3).getNumericCellValue();
+                    Integer sotien = tmp == 0 ? null : tmp;
+                    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                    String dateTime = format.format(row.getCell(4).getDateCellValue());
+                    Date date = format.parse(dateTime);
+                    long time = date.getTime();
+                    Timestamp ngayXL = new Timestamp(time);
+                    int trangthaiXL = (int) row.getCell(5).getNumericCellValue();
+                    Discipline discipline = new Discipline();
+                    discipline.setFine(sotien);
+                    discipline.setStatus(trangthaiXL);
+                    discipline.setDate(ngayXL);
+                    Member member = disciplineBLL.getMember(maTV);
+                    discipline.setMemberID(member);
+                    discipline.setDescription(hinhthucXL);
+
+                    disciplineBLL.insertDiscipline(discipline);
                 }
-                wb.close();
-                LoadData();
-            } catch (Exception u) {
-                u.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Data import Success");
             }
+            wb.close();
+            LoadData();
+        } catch (Exception e) {
+            errs += e.getMessage() + '\n';
+        }
+        if (!errs.equals("")) {
+            JOptionPane.showMessageDialog(null, "Data import Fail:" + "\n" + errs);
+        }
     }//GEN-LAST:event_jBtnImportExcelActionPerformed
 
     private void jTableDisciplineMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableDisciplineMouseClicked
         // TODO add your handling code here:
-        
-        
+
+
     }//GEN-LAST:event_jTableDisciplineMouseClicked
 
     private void jBtnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSearchActionPerformed
@@ -302,14 +312,14 @@ public class ManagerDiscipline extends javax.swing.JFrame {
         jBtnSearch.setVisible(false);
     }//GEN-LAST:event_jBtnSearchActionPerformed
 
-    public void LoadData(){ 
-        String columns[]=new String[]{"Mã Xử Lý","Mã Thành Viên","Tên Thành Viên","Hình Thức xử Lý","Số Tiền","Ngày Xử Lý","Trạng Thái Xử Lý"};
-        DefaultTableModel model=new DefaultTableModel();
-        for(String i:columns){
+    public void LoadData() {
+        String columns[] = new String[]{"Mã Xử Lý", "Mã Thành Viên", "Tên Thành Viên", "Hình Thức xử Lý", "Số Tiền", "Ngày Xử Lý", "Trạng Thái Xử Lý"};
+        DefaultTableModel model = new DefaultTableModel();
+        for (String i : columns) {
             model.addColumn(i);
         }
-        for(Discipline i:disciplineBLL.selectAll()){
-            Vector t=new Vector();
+        for (Discipline i : disciplineBLL.selectAll()) {
+            Vector t = new Vector();
             t.add(i.getId());
             t.add(i.getMemberID().getId());
             t.add(i.getMemberID().getName());
@@ -321,14 +331,15 @@ public class ManagerDiscipline extends javax.swing.JFrame {
         }
         jTableDiscipline.setModel(model);
     }
-    public void LoadData(String text){ 
-        String columns[]=new String[]{"Mã Xử Lý","Mã Thành Viên","Tên Thành Viên","Hình Thức xử Lý","Số Tiền","Ngày Xử Lý","Trạng Thái Xử Lý"};
-        DefaultTableModel model=new DefaultTableModel();
-        for(String i:columns){
+
+    public void LoadData(String text) {
+        String columns[] = new String[]{"Mã Xử Lý", "Mã Thành Viên", "Tên Thành Viên", "Hình Thức xử Lý", "Số Tiền", "Ngày Xử Lý", "Trạng Thái Xử Lý"};
+        DefaultTableModel model = new DefaultTableModel();
+        for (String i : columns) {
             model.addColumn(i);
         }
-        for(Discipline i:disciplineBLL.search(text)){
-            Vector t=new Vector();
+        for (Discipline i : disciplineBLL.search(text)) {
+            Vector t = new Vector();
             t.add(i.getId());
             t.add(i.getMemberID().getId());
             t.add(i.getMemberID().getName());
@@ -340,6 +351,7 @@ public class ManagerDiscipline extends javax.swing.JFrame {
         }
         jTableDiscipline.setModel(model);
     }
+
     /**
      * @param args the command line arguments
      */
