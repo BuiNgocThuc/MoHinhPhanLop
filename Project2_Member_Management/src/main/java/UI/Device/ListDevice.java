@@ -69,7 +69,7 @@ public class ListDevice extends JPanel {
             rowData[1] = String.valueOf(device.getId());
             rowData[2] = device.getName();
             rowData[3] = device.getDescription();
-            rowData[4] = "/Resources/icons8-trash-35.png";
+            rowData[4] = "/images/icons8-trash-35.png";
             modeltable.addRow(rowData);
         }
 
