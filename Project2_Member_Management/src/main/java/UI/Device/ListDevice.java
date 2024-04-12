@@ -1,7 +1,6 @@
 package UI.Device;
 
 import BLL.*;
-import DAL.*;
 import POJOs.Device;
 import javax.swing.*;
 import java.awt.*;
@@ -61,23 +60,22 @@ public class ListDevice extends JPanel {
                 return false; // Ngăn chặn việc chỉnh sửa ô
             }
         };
-        table = new JTable();
+        // table = new JTable();
         table = new JTable(modeltable);
         int stt = 1;
         for (Device device : ListDevices) {
             if (device.getStatus() != 0) {
-                Object[] rowData = new String[4];
+                Object[] rowData = new String[5];
                 rowData[0] = String.valueOf(stt++);
                 rowData[1] = String.valueOf(device.getId());
                 rowData[2] = device.getName();
                 rowData[3] = device.getDescription();
-                // rowData[4] = device.getStatus();
-                // rowData[4] = "/assets/icons8-trash-35.png";
+                rowData[4] = "/Resources/icons8-trash-35.png";
                 modeltable.addRow(rowData);
             }
         }
 
-        table.setRowHeight(35);
+        table.setRowHeight(30);
         setColumnWidth(table, 0, 10);
         setColumnWidth(table, 1, 10);
         setColumnWidth(table, 2, 50);
@@ -91,11 +89,13 @@ public class ListDevice extends JPanel {
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
         for (int i = 0; i < table.getColumnCount(); i++) {
-            if (i != 2 && i != 3) {
+            if (i != 2) {
                 table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
             }
         }
-        // table.getColumnModel().getColumn(4).setCellRenderer(new ImageRender());
+        table.getColumnModel().getColumn(3).setCellRenderer(new MultiLineTableCellRenderer(3));
+        table.getColumnModel().getColumn(3).setCellRenderer(new MultiLineTableCellRenderer(4));
+        table.getColumnModel().getColumn(4).setCellRenderer(new ImageRender());
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -120,7 +120,8 @@ public class ListDevice extends JPanel {
                 int column = target.columnAtPoint(e.getPoint());
                 if (column == 4) {
                     int choice = JOptionPane.showConfirmDialog(null,
-                            "Bạn có chắc chắn muốn xóa thông tin thiết bị này?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+                            "Bạn có chắc chắn muốn xóa thông tin thiết bị này?", "Xác nhận",
+                            JOptionPane.YES_NO_OPTION);
                     if (choice == JOptionPane.YES_OPTION) {
                         int row = target.rowAtPoint(e.getPoint());
                         int value = Integer.parseInt((String) target.getValueAt(row, 1));
@@ -148,43 +149,6 @@ public class ListDevice extends JPanel {
             }
         } else {
             System.out.println("Invalid row index: " + rowIndex);
-        }
-    }
-
-    public class ImageRender extends DefaultTableCellRenderer {
-
-        @Override
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-                int row, int column) {
-            System.out.println((String) value);
-            JLabel label = new JLabel();
-            if (value instanceof String && (((String) value).endsWith(".png") || ((String) value).endsWith(".jpg"))) {
-                ImageIcon originalIcon = new ImageIcon(getClass().getResource((String) value));
-                Image originalImage = originalIcon.getImage();
-                Image resizedImage = originalImage.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
-                ImageIcon resizedIcon = new ImageIcon(resizedImage);
-                label.setIcon(resizedIcon);
-                label.setHorizontalAlignment(SwingConstants.CENTER);
-                label.setVerticalAlignment(SwingConstants.CENTER);
-                label.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        int choice = JOptionPane.showConfirmDialog(null,
-                                "Bạn có chắc chắn muốn lưu thay đổi không?", "Xác nhận", JOptionPane.YES_NO_OPTION);
-
-                        // Xử lý dựa trên sự lựa chọn của người dùng
-                        if (choice == JOptionPane.YES_OPTION) {
-                            JOptionPane.showMessageDialog(null, "Hành động đã được thực hiện!");
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Hành động đã bị hủy bỏ!");
-                        }
-                    }
-                });
-            } else {
-                System.out.println("không có");
-                return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-            }
-            return label;
         }
     }
 
