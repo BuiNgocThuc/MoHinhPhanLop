@@ -19,8 +19,10 @@ public class MemberForm extends javax.swing.JFrame {
     private Member member;
     private final sharedFunction func = new sharedFunction();
     private MemberPanel memberPanel;
+
     /**
      * Creates new form MemberForm
+     *
      * @param member
      */
     public MemberForm(Member member, MemberPanel memberPanel) {
@@ -29,13 +31,13 @@ public class MemberForm extends javax.swing.JFrame {
         initComponents();
         readMember(member);
     }
-    
+
     public MemberForm(MemberPanel memberPanel) {
         this.memberPanel = memberPanel;
-         initComponents();
-         readDepartments();
+        initComponents();
+        readDepartments();
     }
-    
+
     private void readMember(Member member) {
         readDepartments();
         txtFullName.setText(member.getName());
@@ -44,11 +46,9 @@ public class MemberForm extends javax.swing.JFrame {
         cbMajor.setSelectedItem(member.getMajor());
         txtID.setText(member.getId());
         txtEmail.setText(member.getEmail());
-        
+
         txtID.setEditable(false);
     }
-    
-    
 
     private void readDepartments() {
         List<String> departments = memberBLL.queryDepartment();
@@ -386,36 +386,33 @@ public class MemberForm extends javax.swing.JFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-        if(this.member == null) {
+        String id = txtID.getText();
+        String name = txtFullName.getText();
+        String email = txtEmail.getText();
+        String phone = txtPhone.getText();
+        String department = cbDepartment.getSelectedItem().toString();
+        String major = cbMajor.getSelectedItem().toString();
+
+        if (this.member == null)
+        {
             // Add new member
-            String id = txtID.getText();
-            String name = txtFullName.getText();
-            String email = txtEmail.getText();
-            String phone = txtPhone.getText();
-            String department = cbDepartment.getSelectedItem().toString();
-            String major = cbMajor.getSelectedItem().toString();
-            
+
             Member newMember = new Member(id, name, department, major, phone, email);
             memberBLL.insertMember(newMember);
             memberPanel.updateModelTable();
             func.displayConfirmMessage("Insert member successfully!!");
-            
+
             this.dispose();
-        } else {
+        } else
+        {
             // Update member
-             String id = txtID.getText();
-            String name = txtFullName.getText();
-            String email = txtEmail.getText();
-            String phone = txtPhone.getText();
-            String department = cbDepartment.getSelectedItem().toString();
-            String major = cbMajor.getSelectedItem().toString(); 
-  
-             Member editedMember = new Member(id, name, department, major, phone, email);
-             memberBLL.updateMember(editedMember);
-             memberPanel.updateModelTable();
-             func.displayConfirmMessage("Update member successfully!!");
-             
-             this.dispose();
+
+            Member editedMember = new Member(id, name, department, major, phone, email);
+            memberBLL.updateMember(editedMember);
+            memberPanel.updateModelTable();
+            func.displayConfirmMessage("Update member successfully!!");
+
+            this.dispose();
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 

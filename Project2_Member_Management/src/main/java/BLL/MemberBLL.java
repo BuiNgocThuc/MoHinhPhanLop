@@ -43,9 +43,18 @@ public class MemberBLL {
         baseMemberDAL.delete(member);
     }
     
+    public List<Member> searchMember(String keyword) {
+        String validKeyword = keyword.trim().toLowerCase();
+        return memberDAL.searchMember(validKeyword);
+    }
+    
     public void deleteByMemberID(String tableName, String id) {
         Member member = getMemberById(id);
         memberDAL.deleteByMemberID(tableName, member);
+    }
+    
+    public boolean checkViolation(Member member) {
+        return memberDAL.checkViolation(member);
     }
 
     public List<Member> statisticByDepartment(String department) {

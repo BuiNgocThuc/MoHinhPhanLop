@@ -8,6 +8,7 @@ import java.util.List;
 import POJOs.Member;
 import BLL.MemberBLL;
 import Utils.sharedFunction;
+import java.awt.event.KeyEvent;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -72,7 +73,7 @@ public class MemberPanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        searchValue = new javax.swing.JTextField();
+        txtSearch = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         addMemberBtn = new javax.swing.JButton();
@@ -97,12 +98,16 @@ public class MemberPanel extends javax.swing.JPanel {
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel4.setPreferredSize(new java.awt.Dimension(100, 40));
 
-        searchValue.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        searchValue.setText("search");
-        searchValue.setBorder(null);
-        searchValue.addActionListener(new java.awt.event.ActionListener() {
+        txtSearch.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        txtSearch.setBorder(null);
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchValueActionPerformed(evt);
+                txtSearchActionPerformed(evt);
+            }
+        });
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSearchKeyPressed(evt);
             }
         });
 
@@ -117,12 +122,12 @@ public class MemberPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(searchValue, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(searchValue, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -322,9 +327,9 @@ public class MemberPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_editMemberBtnActionPerformed
 
-    private void searchValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchValueActionPerformed
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_searchValueActionPerformed
+    }//GEN-LAST:event_txtSearchActionPerformed
     private void deleteMemberBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMemberBtnActionPerformed
         // TODO add your handling code here:
         int selectedRow = tblMember.getSelectedRow();
@@ -344,6 +349,43 @@ public class MemberPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_deleteMemberBtnActionPerformed
 
+    private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            String keyword = txtSearch.getText();
+            if (keyword == null || keyword.isEmpty() || keyword.isBlank())
+            {
+                readMembers();
+                return;
+            }
+
+            List<Member> results = memberBLL.searchMember(keyword);
+
+            DefaultTableModel model = (DefaultTableModel) tblMember.getModel();
+            model.setRowCount(0);
+
+            int STT = 1;
+            for (Member member : results)
+            {
+                String ID = member.getId();
+                String name = member.getName();
+                String department = member.getDepartment();
+                String major = member.getMajor();
+                String phone = member.getPhone();
+                String email = member.getEmail();
+
+                Object[] row
+                        =
+                        {
+                            STT++, ID, name, department, major, phone, email
+                        };
+                model.addRow(row);
+            }
+            model.fireTableDataChanged();
+        }
+    }//GEN-LAST:event_txtSearchKeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addMemberBtn;
@@ -359,7 +401,7 @@ public class MemberPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSlider jSlider1;
-    private javax.swing.JTextField searchValue;
     private javax.swing.JTable tblMember;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

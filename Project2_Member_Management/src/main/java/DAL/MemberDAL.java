@@ -1,5 +1,6 @@
 package DAL;
 
+import POJOs.Discipline;
 import POJOs.Member;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 public class MemberDAL {
+
     private SessionFactory sessionFactory;
     private baseDAL<Member> baseDAL;
 
@@ -22,33 +24,33 @@ public class MemberDAL {
     }
 
     public List<Member> statisticByDepartment(String department) {
-        String hql = "FROM Member m\n" +
-                "JOIN Usage u\n" +
-                "WHERE u.enteredTime IS NOT NULL\n" +
-                "AND m.department = :department";
-        
+        String hql = "FROM Member m\n"
+                + "JOIN Usage u\n"
+                + "WHERE u.enteredTime IS NOT NULL\n"
+                + "AND m.department = :department";
+
         return baseDAL.statistic(hql, "department", department);
     }
 
     public List<Member> statisticByMajor(String major) {
-        String hql = "FROM Member m\n" +
-                "JOIN Usage u\n" +
-                "WHERE u.enteredTime IS NOT NULL\n" +
-                "AND m.major = :major";
+        String hql = "FROM Member m\n"
+                + "JOIN Usage u\n"
+                + "WHERE u.enteredTime IS NOT NULL\n"
+                + "AND m.major = :major";
 
         return baseDAL.statistic(hql, "major", major);
     }
 
     public List<Member> timeBasedStatistics(String startDate, String endDate) {
-        String hql = "FROM Member m\n" +
-                "JOIN Usage u\n" +
-                "WHERE u.enteredTime IS NOT NULL\n" +
-                "AND u.enteredTime >= :startDate\n" +
-                "AND u.enteredTime <= :endDate";
+        String hql = "FROM Member m\n"
+                + "JOIN Usage u\n"
+                + "WHERE u.enteredTime IS NOT NULL\n"
+                + "AND u.enteredTime >= :startDate\n"
+                + "AND u.enteredTime <= :endDate";
 
         return baseDAL.statistic(hql, "startDate", startDate, "endDate", endDate);
     }
-    
+
     public List<String> queryDepartment() {
         Transaction transaction = null;
         Session session;
@@ -60,7 +62,7 @@ public class MemberDAL {
             String hql = "SELECT DISTINCT department FROM Member";
 
             Query query = session.createQuery(hql);
-            
+
             results = query.getResultList();
 
             transaction.commit();
@@ -74,7 +76,7 @@ public class MemberDAL {
         }
         return results;
     }
-    
+
     public List<String> queryMajorsByDeparment(String department) {
         Transaction transaction = null;
         Session session;
@@ -100,7 +102,7 @@ public class MemberDAL {
         }
         return results;
     }
-    
+
     public void deleteByMemberID(String tableName, Member member) {
         Transaction transaction = null;
         Session session;
@@ -123,5 +125,62 @@ public class MemberDAL {
             }
             e.printStackTrace();
         }
+    }
+
+    public List<Member> searchMember(String keyword) {
+        Transaction transaction = null;
+        Session session;
+        List<Member> results = new ArrayList<>();
+        try
+        {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            String hql = "FROM Member WHERE name LIKE :keyword OR id LIKE :keyword";
+
+            Query query = session.createQuery(hql);
+            query.setParameter("keyword", "%" + keyword + "%");
+            results = query.getResultList();
+
+            transaction.commit();
+        } catch (Exception e)
+        {
+            if (transaction != null)
+            {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+        return results;
+    }
+
+    public boolean checkViolation(Member  member) {
+        Transaction transaction = null;
+        Session session;
+        List<Discipline> results = new ArrayList<>();
+        try
+        {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            String hql = "FROM Discipline WHERE member = :member";
+
+            Query query = session.createQuery(hql);
+            query.setParameter("member", member);
+            results = query.getResultList();
+
+            transaction.commit();
+        } catch (Exception e)
+        {
+            if (transaction != null)
+            {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+        for(Discipline discipline : results) {
+            if(discipline.getStatus() == 1) {
+                return true;
+            }
+        }
+        return false;
     }
 }

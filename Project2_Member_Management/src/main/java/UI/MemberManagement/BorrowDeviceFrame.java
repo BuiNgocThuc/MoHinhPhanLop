@@ -256,7 +256,7 @@ public class BorrowDeviceFrame extends javax.swing.JFrame {
                 usageBLL.update(currentUsage);
                 
                 borrowingHistory();
-                func.displayConfirmMessage("Return device successfully!!!");
+                func.displayConfirmMessage("Device returned successfully!!");
             }
         }
     }//GEN-LAST:event_returnDeviceBtnActionPerformed

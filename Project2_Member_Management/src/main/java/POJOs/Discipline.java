@@ -23,9 +23,9 @@ public class Discipline {
     private String description;
 
     @Column(name = "SoTien")
-    private int fine;
+    private Integer fine;
 
-    @Column(name = "NgayXuLy")
+    @Column(name = "NgayXL")
     private Timestamp date;
 
     @Column(name = "TrangThaiXL")
