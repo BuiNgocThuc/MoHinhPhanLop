@@ -19,14 +19,14 @@ public class ListDevice extends JPanel {
     DeviceBLL deviceBLL = new DeviceBLL();
     List<Device> ListDevices = deviceBLL.selectAll();
 
-    public ListDevice() {
+    public ListDevice(DevicePanel devicePanel) {
         setLayout(new BorderLayout());
-        initComponents();
+        initComponents(devicePanel);
     }
 
-    private void initComponents() {
+    private void initComponents(DevicePanel devicePanel) {
         initTop();
-        initCenter();
+        initCenter(devicePanel);
     }
 
     private void initTop() {
@@ -39,7 +39,7 @@ public class ListDevice extends JPanel {
         add(panelTop, BorderLayout.NORTH);
     }
 
-    private void initCenter() {
+    private void initCenter(DevicePanel devicePanel) {
         panelCenter = new JPanel();
         panelCenter.setLayout(new BorderLayout());
         panel_Table = new JPanel();
@@ -64,15 +64,13 @@ public class ListDevice extends JPanel {
         table = new JTable(modeltable);
         int stt = 1;
         for (Device device : ListDevices) {
-            if (device.getStatus() != 0) {
-                Object[] rowData = new String[5];
-                rowData[0] = String.valueOf(stt++);
-                rowData[1] = String.valueOf(device.getId());
-                rowData[2] = device.getName();
-                rowData[3] = device.getDescription();
-                rowData[4] = "/Resources/icons8-trash-35.png";
-                modeltable.addRow(rowData);
-            }
+            Object[] rowData = new String[5];
+            rowData[0] = String.valueOf(stt++);
+            rowData[1] = String.valueOf(device.getId());
+            rowData[2] = device.getName();
+            rowData[3] = device.getDescription();
+            rowData[4] = "/Resources/icons8-trash-35.png";
+            modeltable.addRow(rowData);
         }
 
         table.setRowHeight(30);
@@ -124,11 +122,16 @@ public class ListDevice extends JPanel {
                             JOptionPane.YES_NO_OPTION);
                     if (choice == JOptionPane.YES_OPTION) {
                         int row = target.rowAtPoint(e.getPoint());
-                        int value = Integer.parseInt((String) target.getValueAt(row, 1));
-                        System.out.println(value);
-                        deviceBLL.changeStatus(value);
+                        int valueID = Integer.parseInt((String) target.getValueAt(row, 1));
+                        // deviceBLL.changeStatus(value);
+                        deviceBLL.deleteDevice(valueID);
                         removeRowFromTable(modeltable, row);
                     }
+                } else {
+                    int row = target.rowAtPoint(e.getPoint());
+                    int valueID = Integer.parseInt((String) target.getValueAt(row, 1));
+                    // devicePanel.inforDevicePanel(deviceBLL.getDeviceById(valueID));
+                    devicePanel.inforDevicePanel(valueID, modeltable, row);
                 }
             }
         });

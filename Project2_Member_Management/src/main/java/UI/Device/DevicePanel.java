@@ -1,6 +1,11 @@
 package UI.Device;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
+import BLL.DeviceBLL;
+import POJOs.Device;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -143,8 +148,8 @@ public class DevicePanel extends JPanel {
         contentPanel.setLayout(cardLayout);
 
         // Thêm nội dung vào content panel
-        JPanel panel1 = new ListDevice();
-        JPanel panel2 = new AddDevice();
+        panel1 = new ListDevice(this);
+        panel2 = new AddDevice();
         contentPanel.add(panel1, "Menu 1");
         contentPanel.add(panel2, "Menu 2");
 
@@ -163,10 +168,41 @@ public class DevicePanel extends JPanel {
         add(panelTop, BorderLayout.NORTH);
     }
 
+    public void inforDevicePanel(int valueID, DefaultTableModel model, int row) {
+        AddDevice panel3 = new AddDevice();
+        DeviceBLL deviceBLL = new DeviceBLL();
+        Device device = deviceBLL.getDeviceById(valueID);
+        panel3.setInforDevice(device);
+        contentPanel.add(panel3, "Menu 3");
+        cardLayout.show(contentPanel, "Menu 3");
+        panel3.btnExit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(contentPanel, "Menu 1");
+            }
+        });
+
+        panel3.btnDelete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int choice = JOptionPane.showConfirmDialog(null,
+                        "Bạn có chắc chắn muốn xóa thông tin thiết bị này?", "Xác nhận",
+                        JOptionPane.YES_NO_OPTION);
+                if (choice == JOptionPane.YES_OPTION) {
+                    deviceBLL.deleteDevice(valueID);
+                    panel1.removeRowFromTable(model, row);
+                    cardLayout.show(contentPanel, "Menu 1");
+                }
+            }
+        });
+    }
+
     private CardLayout cardLayout;
     private JPanel menuPanel;
     private JPanel contentPanel;
     private JPanel panelLeft;
     private int widthLeft;
+    private ListDevice panel1;
+    private AddDevice panel2;
 
 }

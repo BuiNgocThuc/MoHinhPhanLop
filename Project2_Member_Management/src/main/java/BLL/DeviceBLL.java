@@ -25,8 +25,21 @@ public class DeviceBLL {
         return baseDeviceDAL.getById(id);
     }
 
-    public void insertDevice(Device device) {
-        baseDeviceDAL.save(device);
+    public boolean insertDevice(Device device) {
+        try {
+            Device existingDevice = baseDeviceDAL.getById(device.getId());
+            if (existingDevice != null) {
+                System.err.println("Thiết bị đã tồn tại trong cơ sở dữ liệu với ID đã cho.");
+                return false;
+            }
+            baseDeviceDAL.save(device);
+            System.out.println("Thiết bị đã được lưu thành công vào cơ sở dữ liệu.");
+            return true;
+        } catch (Exception e) {
+            System.err.println("Đã xảy ra lỗi khi lưu thiết bị vào cơ sở dữ liệu:");
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public void updateDevice(Device device) {
@@ -47,8 +60,9 @@ public class DeviceBLL {
     public List<Device> statisticDeviceBorrowed(String name, String startDate, String endDate) throws ParseException {
         return deviceDAL.statisticDeviceBorrowed(name, startDate, endDate);
     }
-    
-    public List<Device> statisticDeviceIsBorrowing(String name , String startDate, String endDate) throws ParseException {
+
+    public List<Device> statisticDeviceIsBorrowing(String name, String startDate, String endDate)
+            throws ParseException {
         return deviceDAL.statisticDeviceIsBorrowing(name, startDate, endDate);
     }
 }

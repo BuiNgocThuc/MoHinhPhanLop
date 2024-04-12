@@ -21,18 +21,55 @@ public class AddDevice extends JPanel {
     }
 
     private void initComponents() {
-        // initTop();
         initCenter();
     }
 
-    private void initTop() {
-        JPanel panelTop = new JPanel();
-        panelTop.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        panelTop.setLayout(new FlowLayout(FlowLayout.LEFT));
-        JLabel titleLabel = new JLabel("Thêm Thiết Bị");
-        titleLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-        panelTop.add(titleLabel);
-        add(panelTop, BorderLayout.NORTH);
+    public void setInforDevice(Device device) {
+        jPanelButton.removeAll();
+        jPanelButton.revalidate();
+        jPanelButton.repaint();
+        Border titledBorder = BorderFactory.createTitledBorder(
+                BorderFactory.createEtchedBorder(EtchedBorder.LOWERED, Color.WHITE, Color.GRAY),
+                "Thông tin thiết bị", TitledBorder.LEADING, TitledBorder.TOP);
+        ((TitledBorder) titledBorder)
+                .setTitleFont(((TitledBorder) titledBorder).getTitleFont().deriveFont(Font.BOLD, 14));
+        panelCenter.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createEmptyBorder(10, 10, 50, 10),
+                titledBorder));
+        txtDeviceName.setText(String.valueOf(device.getId()));
+        txtDeviceName.setEditable(false);
+
+        txtDeviceID.setText(device.getName());
+        txtDeviceID.setEditable(false);
+
+        txtDescription.setText(device.getDescription());
+        txtDescription.setEditable(false);
+        initButton();
+    }
+
+    private void initButton() {
+        btnSave = new Button("Lưu");
+        btnSave.setButton(80, 30, new Color(0, 102, 204));
+        btnSave.addActionListener(saveButtonListener);
+
+        btnEdit = new Button("Sửa");
+        btnEdit.setButton(80, 30, new Color(0, 204, 102));
+        btnEdit.addActionListener(editButtonListener);
+
+        btnDelete = new Button("Xóa");
+        btnDelete.setButton(80, 30, new Color(255, 0, 0));
+        btnDelete.addActionListener(deleteButtonListener);
+
+        btnExit = new Button("Thoát");
+        btnExit.setButton(80, 30, new Color(255, 255, 0));
+
+        jPanelButton.setLayout(new FlowLayout(FlowLayout.CENTER));
+        jPanelButton.add(btnEdit);
+        jPanelButton.add(btnDelete);
+        jPanelButton.add(btnSave);
+        jPanelButton.add(btnExit);
+        btnSave.setVisible(false);
+
     }
 
     private void initCenter() {
@@ -84,6 +121,14 @@ public class AddDevice extends JPanel {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 1.0; // Đặt trọng số cho chiều ngang
 
+        JLabel lblDeviceID = new JLabel("Mã Thiết Bị:");
+        contentPanel.add(lblDeviceID, gbc);
+
+        gbc.gridy++;
+        txtDeviceID = new JTextField();
+        contentPanel.add(txtDeviceID, gbc);
+
+        gbc.gridy++;
         JLabel lblDeviceName = new JLabel("Tên Thiết Bị:");
         contentPanel.add(lblDeviceName, gbc);
 
@@ -103,8 +148,8 @@ public class AddDevice extends JPanel {
         contentPanel.add(scrollPane, gbc);
 
         gbc.gridy++;
-        Button btnSave = new Button("Save");
-        JPanel jPanelButton = new JPanel();
+        jPanelButton = new JPanel();
+        btnSave = new Button("Save");
         btnSave.setButton(130, 30, new Color(0, 102, 204));
         jPanelButton.add(btnSave);
         btnSave.addActionListener(new ActionListener() {
@@ -115,10 +160,19 @@ public class AddDevice extends JPanel {
                         JOptionPane.YES_NO_OPTION);
                 if (choice == JOptionPane.YES_OPTION) {
                     Device device = new Device();
+                    device.setId(Integer.parseInt(txtDeviceID.getText()));
                     device.setName(txtDeviceName.getText());
                     device.setDescription(txtDescription.getText());
                     device.setStatus(1);
-                    deviceBLL.insertDevice(device);
+                    boolean isSuccess = deviceBLL.insertDevice(device);
+                    if (isSuccess) {
+                        JOptionPane.showMessageDialog(null, "Thêm thiết bị thành công!");
+                        txtDeviceID.setText("");
+                        txtDeviceName.setText("");
+                        txtDescription.setText("");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Đã xảy ra lỗi khi thêm thiết bị. Vui lòng thử lại sau.");
+                    }
                 }
             }
         });
@@ -126,8 +180,50 @@ public class AddDevice extends JPanel {
         contentPanel.add(jPanelButton, gbc);
     }
 
+    ActionListener deleteButtonListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Xử lý hành động khi nút "Xóa" được nhấn
+            // Viết mã xử lý xóa ở đây
+        }
+    };
+
+    ActionListener exitButtonListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Xử lý hành động khi nút "Xóa" được nhấn
+            // Viết mã xử lý xóa ở đây
+        }
+    };
+
+    ActionListener editButtonListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            txtDeviceName.setEditable(true);
+            txtDeviceID.setEditable(true);
+            txtDescription.setEditable(true);
+            btnEdit.setVisible(false);
+            btnSave.setVisible(true);
+        }
+    };
+
+    ActionListener saveButtonListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Xử lý hành động khi nút "Xóa" được nhấn
+            // Viết mã xử lý xóa ở đây
+        }
+    };
+
     private JPanel panelCenter;
     private JPanel contentPanel;
     private JTextField txtDeviceName;
+    private JTextField txtDeviceID;
     private JTextArea txtDescription;
+    private JPanel jPanelButton;
+    private Button btnSave;
+    private Button btnEdit;
+    public Button btnDelete;
+    public Button btnExit;
+
 }
