@@ -32,10 +32,13 @@ public class ListDevice extends JPanel {
     private void initTop() {
         JPanel panelTop = new JPanel();
         panelTop.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        panelTop.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        JLabel titleLabel = new JLabel("Chỗ này làm thanh search");
-        titleLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-        panelTop.add(titleLabel);
+        JPanel panelSearch = new JPanel();
+        JPanel panelButton = new JPanel();
+        panelSearch.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+        // panelSearch.add(titleLabel);
+        panelTop.add(panelSearch);
+        panelTop.add(panelButton);
         add(panelTop, BorderLayout.NORTH);
     }
 
