@@ -13,10 +13,20 @@ public class Button extends JButton {
 
     private boolean isSelected = false;
 
+    public Button() {
+        super();
+    }
+
     public Button(String text) {
         super(text);
         setBorderPainted(false);
         setOpaque(false);
+        setBorder(new javax.swing.border.LineBorder(new Color(0, 143, 143), 1, true));
+        setBackground(new java.awt.Color(0, 143, 143));
+        setFont(new Font("Segoe UI", 1, 13));
+        setForeground(new Color(255, 255, 255));
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
+        setPreferredSize(new Dimension(130, 40));
     }
 
     public void setButton(int width, int height, Color color) {
@@ -37,16 +47,21 @@ public class Button extends JButton {
             public void mouseExited(MouseEvent e) {
                 if (!isSelected) {
                     setCursor(Cursor.getDefaultCursor());
-                    setForeground(Color.BLACK);
+                    setForeground(Color.WHITE);
                 }
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
-                setPressedColor(new Color(0, 102, 204));
-                setBackground(pressedColor); // Đặt màu khi nhấn nút
+                // setBackground(pressedColor); // Đặt màu khi nhấn nút
             }
         });
+    }
+
+    public void setIcon(String imagePath) {
+        ImageIcon icon = new ImageIcon(getClass().getResource(imagePath));
+        Image img = icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+        setIcon(new ImageIcon(img));
     }
 
     public void setHoverColor(Color color) {
@@ -69,13 +84,28 @@ public class Button extends JButton {
         g2.setColor(getBackground());
         g2.fillRoundRect(0, 0, getWidth(), getHeight(), arc, arc); // Vẽ hình tròn
 
-        // Vẽ văn bản ở giữa nút
+        // Tính toán vị trí vẽ văn bản và hình ảnh
+        Icon icon = getIcon();
         FontMetrics metrics = g2.getFontMetrics(getFont());
-        int x = (getWidth() - metrics.stringWidth(getText())) / 2;
-        int y = ((getHeight() - metrics.getHeight()) / 2) + metrics.getAscent();
+        int textWidth = metrics.stringWidth(getText());
+        int totalWidth = (icon != null ? icon.getIconWidth() : 0) + textWidth;
+        int xStart = (getWidth() - totalWidth) / 2;
+        int xIcon = xStart;
+        int xText = xIcon + (icon != null ? icon.getIconWidth() : 0);
+
+        // Vẽ hình ảnh (nếu có)
+        if (icon != null) {
+            int iconHeight = icon.getIconHeight();
+            int yIcon = (getHeight() - iconHeight) / 2; // Đưa hình ảnh vào giữa theo chiều dọc
+            icon.paintIcon(this, g2, xIcon, yIcon);
+        }
+
+        // Vẽ văn bản
+        int yText = ((getHeight() - metrics.getHeight()) / 2) + metrics.getAscent();
         g2.setColor(getForeground());
-        g2.drawString(getText(), x, y);
+        g2.drawString(getText(), xText, yText);
 
         g2.dispose();
     }
+
 }

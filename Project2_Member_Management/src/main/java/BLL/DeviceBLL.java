@@ -42,8 +42,16 @@ public class DeviceBLL {
         }
     }
 
-    public void updateDevice(Device device) {
-        baseDeviceDAL.update(device);
+    public boolean updateDevice(Device device) {
+        try {
+            baseDeviceDAL.update(device);
+            System.out.println("Thiết bị đã được cập nhật thành công trong cơ sở dữ liệu.");
+            return true;
+        } catch (Exception e) {
+            System.err.println("Đã xảy ra lỗi khi cập nhật thiết bị trong cơ sở dữ liệu:");
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public void deleteDevice(int id) {
