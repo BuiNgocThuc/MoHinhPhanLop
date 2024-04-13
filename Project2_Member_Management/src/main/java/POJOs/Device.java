@@ -27,9 +27,6 @@ public class Device {
     @Column(name = "MoTaTB")
     private String description;
 
-    @Column(name = "status")
-    private int status;
-
     @ManyToMany(mappedBy = "devices")
     private Set<Member> members = new HashSet<>();
 
@@ -59,14 +56,6 @@ public class Device {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
     }
 
     public Set<Member> getMembers() {

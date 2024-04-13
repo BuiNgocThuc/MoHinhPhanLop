@@ -51,12 +51,6 @@ public class DeviceBLL {
         baseDeviceDAL.delete(device);
     }
 
-    public void changeStatus(int id) {
-        Device device = getDeviceById(id);
-        device.setStatus(0);
-        updateDevice(device);
-    }
-
     public List<Device> statisticDeviceBorrowed(String name, String startDate, String endDate) throws ParseException {
         return deviceDAL.statisticDeviceBorrowed(name, startDate, endDate);
     }
