@@ -40,17 +40,11 @@ public class DisciplineBLL {
         return disciplineDAL.getDiscipline(id);
     }
 
-//    public Discipline getById(int id) {
-//        //return this.baseDiscipline.getById(id);
-//    }
-//
     public void insertDiscipline(Discipline discipline) throws Exception {
-        //this.baseDiscipline.save(discipline);
         disciplineDAL.insertDiscipline(discipline);
     }
-//
+
     public void updateDiscipline(Discipline discipline) {
-        //this.baseDiscipline.update(discipline);
         disciplineDAL.update(discipline);
     }
 //

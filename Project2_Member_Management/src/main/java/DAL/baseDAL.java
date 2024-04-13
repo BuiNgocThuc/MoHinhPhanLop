@@ -5,9 +5,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import Utils.hibernateUtil;
+import java.lang.reflect.Field;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
 
 public class baseDAL<T> {
 
@@ -26,7 +28,7 @@ public class baseDAL<T> {
         }
     }
 
-    public T getById(int id) {
+    public <K> T getById(K id) {
         try (Session session = sessionFactory.openSession())
         {
             return session.get(clazz, id);
@@ -36,11 +38,11 @@ public class baseDAL<T> {
     public void save(T object) {
         Transaction transaction = null;
         Session session = null;
-        try 
+        try
         {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            session.save(object);
+            session.persist(object);
             transaction.commit();
         } catch (Exception e)
         {
@@ -54,8 +56,10 @@ public class baseDAL<T> {
 
     public void update(T object) {
         Transaction transaction = null;
-        try (Session session = sessionFactory.openSession())
+        Session session = null;
+        try
         {
+            session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             session.merge(object);
             transaction.commit();
@@ -69,18 +73,14 @@ public class baseDAL<T> {
         }
     }
 
-    public void delete(int id) {
+    public void delete(T object) {
         Transaction transaction = null;
-        try (Session session = sessionFactory.openSession())
+        Session session = null;
+        try
         {
+            session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-
-            String hql = "UPDATE " + clazz.getName() + " set status = :active " + "WHERE id = :ID";
-            Query query = session.createQuery(hql);
-            query.setParameter("active", 0);
-            query.setParameter("ID", id);
-            query.executeUpdate();
-
+            session.remove(object);
             transaction.commit();
         } catch (Exception e)
         {
@@ -92,23 +92,27 @@ public class baseDAL<T> {
         }
     }
 
-    public List<T> statistic(String hql, Object...params) {
+    public List<T> statistic(String hql, Object... params) {
         Transaction transaction = null;
         Session session;
         List<T> results = new ArrayList<>();
-        try {
+        try
+        {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
 
             Query query = session.createQuery(hql);
-            for (int i = 0; i < params.length; i += 2) {
+            for (int i = 0; i < params.length; i += 2)
+            {
                 query.setParameter((String) params[i], params[i + 1]);
             }
             results = query.getResultList();
 
             transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
+        } catch (Exception e)
+        {
+            if (transaction != null)
+            {
                 transaction.rollback();
             }
             e.printStackTrace();

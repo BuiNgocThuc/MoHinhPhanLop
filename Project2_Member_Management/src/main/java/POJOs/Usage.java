@@ -36,6 +36,9 @@ public class Usage {
 
     @Column(name = "TGTra")
     private Timestamp paidTime;
+    
+    @Column(name = "TGDatCho")
+    private Timestamp reserveTime;
 
     public Usage() {}
 
@@ -86,6 +89,16 @@ public class Usage {
     public void setPaidTime(Timestamp paidTime) {
         this.paidTime = paidTime;
     }
+
+    public Timestamp getReserveTime() {
+        return reserveTime;
+    }
+
+    public void setReserveTime(Timestamp reserveTime) {
+        this.reserveTime = reserveTime;
+    }
+    
+    
 
     @Override
     public String toString() {

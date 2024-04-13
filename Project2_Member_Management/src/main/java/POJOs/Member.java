@@ -5,8 +5,10 @@
 package POJOs;
 
 import jakarta.persistence.*;
+import java.util.ArrayList;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -29,15 +31,34 @@ public class Member {
 
     @Column(name = "Nganh")
     private String major;
+    
+    @Column(name = "Password")
+    private String password;
+    
+    @Column(name = "SDT")
+    private String phone;
+    
+    @Column(name = "Email")
+    private String email;
+    
 
     @ManyToMany
     @JoinTable(name = "thongtinsd", 
             joinColumns = @JoinColumn(name = "MaTV"), 
-            inverseJoinColumns = @JoinColumn(name = "MaTB")) 
-    private Set<Device> devices = new HashSet<>();
+            inverseJoinColumns = @JoinColumn(name = "MaTB"))
+    private List<Device> devices = new ArrayList<>();
 
     public Member() {
+        
+    }
 
+    public Member(String id, String name, String department, String major, String phone, String email) {
+        this.id = id;
+        this.name = name;
+        this.department = department;
+        this.major = major;
+        this.phone = phone;
+        this.email = email;
     }
 
     public String getId() {
@@ -72,11 +93,35 @@ public class Member {
         this.major = major;
     }
 
-    public Set<Device> getDevices() {
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public List<Device> getDevices() {
         return devices;
     }
 
-    public void setDevices(Set<Device> devices) {
+    public void setDevices(List<Device> devices) {
         this.devices = devices;
     }
 
