@@ -23,24 +23,20 @@ public class DevicePanel extends JPanel {
     }
 
     public DevicePanel() {
+        removeAll();
         setLayout(new BorderLayout());
         initComponents();
+        revalidate();
+        repaint();
+        this.setVisible(true);
     }
 
-    private void initComponents() {
+    public void initComponents() {
         initTop();
         initContent();
     }
 
-    // btnMenu2.addActionListener(new ActionListener() {
-    // @Override
-    // public void actionPerformed(ActionEvent e) {
-    // cardLayout.show(contentPanel, "Menu 2");
-    // btnMenu1.setBackground(Color.WHITE);
-    // }
-    // });
-
-    private void initContent() {
+    public void initContent() {
         // Tạo content panel
         contentPanel = new JPanel();
         cardLayout = new CardLayout();
@@ -48,14 +44,20 @@ public class DevicePanel extends JPanel {
 
         // Thêm nội dung vào content panel
         panel1 = new ListDevice(this);
-        panel2 = new AddDevice();
+        panel1.btnAdd.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(contentPanel, "Menu 2");
+            }
+        });
+        panel2 = new AddDevice(this);
         contentPanel.add(panel1, "Menu 1");
         contentPanel.add(panel2, "Menu 2");
 
         add(contentPanel, BorderLayout.CENTER);
     }
 
-    private void initTop() {
+    public void initTop() {
         JPanel panelTop = new JPanel(new FlowLayout(FlowLayout.LEFT));
         panelTop.setBackground(Color.WHITE);
         panelTop.setBorder(BorderFactory.createCompoundBorder(
@@ -68,19 +70,12 @@ public class DevicePanel extends JPanel {
     }
 
     public void inforDevicePanel(int valueID, DefaultTableModel model, int row) {
-        AddDevice panel3 = new AddDevice();
+        AddDevice panel3 = new AddDevice(this);
         DeviceBLL deviceBLL = new DeviceBLL();
         Device device = deviceBLL.getDeviceById(valueID);
         panel3.setInforDevice(device);
         contentPanel.add(panel3, "Menu 3");
         cardLayout.show(contentPanel, "Menu 3");
-        panel3.btnExit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(contentPanel, "Menu 1");
-            }
-        });
-
         panel3.btnDelete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -94,6 +89,13 @@ public class DevicePanel extends JPanel {
                 }
             }
         });
+    }
+
+    public void upDateContent() {
+        remove(contentPanel);
+        initContent();
+        revalidate();
+        repaint();
     }
 
     private CardLayout cardLayout;

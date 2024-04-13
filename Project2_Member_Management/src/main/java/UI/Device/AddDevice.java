@@ -14,8 +14,10 @@ import javax.swing.border.TitledBorder;
 
 public class AddDevice extends JPanel {
     DeviceBLL deviceBLL = new DeviceBLL();
+    DevicePanel devicePanel;
 
-    public AddDevice() {
+    public AddDevice(DevicePanel devicePanel) {
+        this.devicePanel = devicePanel;
         setLayout(new BorderLayout());
         initComponents();
     }
@@ -36,21 +38,42 @@ public class AddDevice extends JPanel {
         panelCenter.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createEmptyBorder(10, 10, 50, 10),
                 titledBorder));
-        txtDeviceName.setText(String.valueOf(device.getId()));
-        txtDeviceName.setEditable(false);
-
-        txtDeviceID.setText(device.getName());
+        txtDeviceID.setText(String.valueOf(device.getId()));
         txtDeviceID.setEditable(false);
+
+        txtDeviceName.setText(device.getName());
+        txtDeviceName.setEditable(false);
 
         txtDescription.setText(device.getDescription());
         txtDescription.setEditable(false);
-        initButton();
+        initButton(device);
     }
 
-    private void initButton() {
+    private void initButton(Device device) {
         btnSave = new Button("Lưu");
         btnSave.setButton(80, 30, new Color(0, 102, 204));
-        btnSave.addActionListener(saveButtonListener);
+        btnSave.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int choice = JOptionPane.showConfirmDialog(null,
+                        "Bạn có chắc chắn muốn lưu thay đổi này?", "Xác nhận",
+                        JOptionPane.YES_NO_OPTION);
+                if (choice == JOptionPane.YES_OPTION) {
+                    device.setName(txtDeviceName.getText());
+                    device.setDescription(txtDescription.getText());
+                    boolean isSuccess = deviceBLL.updateDevice(device);
+                    if (isSuccess) {
+                        JOptionPane.showMessageDialog(null, "Sửa thông tin thiết bị thành công!");
+                        txtDeviceName.setEditable(false);
+                        txtDescription.setEditable(false);
+                        btnEdit.setVisible(true);
+                        btnSave.setVisible(false);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Đã xảy ra lỗi khi thêm thiết bị. Vui lòng thử lại sau.");
+                    }
+                }
+            }
+        });
 
         btnEdit = new Button("Sửa");
         btnEdit.setButton(80, 30, new Color(0, 204, 102));
@@ -62,6 +85,7 @@ public class AddDevice extends JPanel {
 
         btnExit = new Button("Thoát");
         btnExit.setButton(80, 30, new Color(255, 255, 0));
+        btnExit.addActionListener(exitButtonListener);
 
         jPanelButton.setLayout(new FlowLayout(FlowLayout.CENTER));
         jPanelButton.add(btnEdit);
@@ -149,9 +173,13 @@ public class AddDevice extends JPanel {
 
         gbc.gridy++;
         jPanelButton = new JPanel();
-        btnSave = new Button("Save");
+        btnSave = new Button("Lưu");
         btnSave.setButton(130, 30, new Color(0, 102, 204));
         jPanelButton.add(btnSave);
+        btnExit = new Button("Thoát");
+        btnExit.setButton(130, 30, new Color(255, 0, 0));
+        jPanelButton.add(btnExit);
+        btnExit.addActionListener(exitButtonListener);
         btnSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -179,6 +207,10 @@ public class AddDevice extends JPanel {
         contentPanel.add(jPanelButton, gbc);
     }
 
+    private void removePanel() {
+        this.setVisible(false);
+    }
+
     ActionListener deleteButtonListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -190,8 +222,9 @@ public class AddDevice extends JPanel {
     ActionListener exitButtonListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // Xử lý hành động khi nút "Xóa" được nhấn
-            // Viết mã xử lý xóa ở đây
+            removePanel();
+            devicePanel.upDateContent();
+            devicePanel.setVisible(true);
         }
     };
 
@@ -199,28 +232,19 @@ public class AddDevice extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             txtDeviceName.setEditable(true);
-            txtDeviceID.setEditable(true);
             txtDescription.setEditable(true);
             btnEdit.setVisible(false);
             btnSave.setVisible(true);
         }
     };
 
-    ActionListener saveButtonListener = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            // Xử lý hành động khi nút "Xóa" được nhấn
-            // Viết mã xử lý xóa ở đây
-        }
-    };
-
     private JPanel panelCenter;
-    private JPanel contentPanel;
+    public JPanel contentPanel;
     private JTextField txtDeviceName;
     private JTextField txtDeviceID;
     private JTextArea txtDescription;
     private JPanel jPanelButton;
-    private Button btnSave;
+    public Button btnSave;
     private Button btnEdit;
     public Button btnDelete;
     public Button btnExit;

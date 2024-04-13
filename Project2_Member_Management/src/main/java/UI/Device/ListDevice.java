@@ -18,31 +18,50 @@ import java.util.List;
 public class ListDevice extends JPanel {
     DeviceBLL deviceBLL = new DeviceBLL();
     List<Device> ListDevices = deviceBLL.selectAll();
+    DevicePanel devicePanel;
 
     public ListDevice(DevicePanel devicePanel) {
+        this.devicePanel = devicePanel;
         setLayout(new BorderLayout());
-        initComponents(devicePanel);
+        initComponents();
     }
 
-    private void initComponents(DevicePanel devicePanel) {
+    private void initComponents() {
         initTop();
-        initCenter(devicePanel);
+        initCenter();
     }
 
     private void initTop() {
-        JPanel panelTop = new JPanel();
-        panelTop.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        btnAdd = new Button("+ Add");
+        btnImport = new Button(" Import");
+        btnImport.setIcon("/images/icons8-excel-30.png");
+        JPanel panelTop = new JPanel(new BorderLayout());
+        panelTop.setBackground(Color.WHITE);
         JPanel panelSearch = new JPanel();
-        JPanel panelButton = new JPanel();
-        panelSearch.setLayout(new FlowLayout(FlowLayout.LEFT));
+        panelSearch.setBackground(Color.WHITE);
+        panelSearch.setPreferredSize(new Dimension(300, 40));
+        JPanel panelButton = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        panelButton.setBackground(Color.WHITE);
+        JLabel jLabelSearch = new JLabel();
+        txtSearch = new JTextField();
+        txtSearch.setBorder(null);
+        panelTop.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        panelSearch.setLayout(new BorderLayout());
+        panelSearch.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
 
-        // panelSearch.add(titleLabel);
-        panelTop.add(panelSearch);
-        panelTop.add(panelButton);
+        jLabelSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-search-25.png")));
+        jLabelSearch.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
+        panelSearch.add(jLabelSearch, BorderLayout.WEST);
+        panelSearch.add(txtSearch, BorderLayout.CENTER);
+
+        panelButton.add(btnAdd);
+        panelButton.add(btnImport);
+        panelTop.add(panelSearch, BorderLayout.WEST);
+        panelTop.add(panelButton, BorderLayout.EAST);
         add(panelTop, BorderLayout.NORTH);
     }
 
-    private void initCenter(DevicePanel devicePanel) {
+    public void initCenter() {
         panelCenter = new JPanel();
         panelCenter.setLayout(new BorderLayout());
         panel_Table = new JPanel();
@@ -78,9 +97,9 @@ public class ListDevice extends JPanel {
 
         table.setRowHeight(30);
         setColumnWidth(table, 0, 10);
-        setColumnWidth(table, 1, 10);
-        setColumnWidth(table, 2, 50);
-        setColumnWidth(table, 3, 350);
+        setColumnWidth(table, 1, 50);
+        setColumnWidth(table, 2, 100);
+        setColumnWidth(table, 3, 250);
         setColumnWidth(table, 4, 10);
         table.setModel(modeltable);
         table.setShowGrid(false);
@@ -94,6 +113,7 @@ public class ListDevice extends JPanel {
                 table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
             }
         }
+        table.getColumnModel().getColumn(2).setCellRenderer(new MultiLineTableCellRenderer(3));
         table.getColumnModel().getColumn(3).setCellRenderer(new MultiLineTableCellRenderer(3));
         table.getColumnModel().getColumn(3).setCellRenderer(new MultiLineTableCellRenderer(4));
         table.getColumnModel().getColumn(4).setCellRenderer(new ImageRender());
@@ -133,7 +153,6 @@ public class ListDevice extends JPanel {
                 } else {
                     int row = target.rowAtPoint(e.getPoint());
                     int valueID = Integer.parseInt((String) target.getValueAt(row, 1));
-                    // devicePanel.inforDevicePanel(deviceBLL.getDeviceById(valueID));
                     devicePanel.inforDevicePanel(valueID, modeltable, row);
                 }
             }
@@ -162,4 +181,7 @@ public class ListDevice extends JPanel {
     private JPanel panel_Table;
     private DefaultTableModel modeltable;
     private JTable table;
+    private JTextField txtSearch;
+    public Button btnAdd;
+    public Button btnImport;
 }
