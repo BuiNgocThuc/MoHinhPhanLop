@@ -28,6 +28,7 @@ public class DevicePanel extends JPanel {
         initComponents();
         revalidate();
         repaint();
+        this.setVisible(true);
     }
 
     public void initComponents() {

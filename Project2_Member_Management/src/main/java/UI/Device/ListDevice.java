@@ -97,9 +97,9 @@ public class ListDevice extends JPanel {
 
         table.setRowHeight(30);
         setColumnWidth(table, 0, 10);
-        setColumnWidth(table, 1, 10);
-        setColumnWidth(table, 2, 50);
-        setColumnWidth(table, 3, 350);
+        setColumnWidth(table, 1, 50);
+        setColumnWidth(table, 2, 100);
+        setColumnWidth(table, 3, 250);
         setColumnWidth(table, 4, 10);
         table.setModel(modeltable);
         table.setShowGrid(false);
@@ -113,6 +113,7 @@ public class ListDevice extends JPanel {
                 table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
             }
         }
+        table.getColumnModel().getColumn(2).setCellRenderer(new MultiLineTableCellRenderer(3));
         table.getColumnModel().getColumn(3).setCellRenderer(new MultiLineTableCellRenderer(3));
         table.getColumnModel().getColumn(3).setCellRenderer(new MultiLineTableCellRenderer(4));
         table.getColumnModel().getColumn(4).setCellRenderer(new ImageRender());
