@@ -35,11 +35,9 @@ public class MemberForm extends javax.swing.JFrame {
     public MemberForm(MemberPanel memberPanel) {
         this.memberPanel = memberPanel;
         initComponents();
-        readDepartments();
     }
 
     private void readMember(Member member) {
-        readDepartments();
         txtFullName.setText(member.getName());
         txtPhone.setText(member.getPhone());
         cbDepartment.setSelectedItem(member.getDepartment());
@@ -50,16 +48,47 @@ public class MemberForm extends javax.swing.JFrame {
         txtID.setEditable(false);
     }
 
-    private void readDepartments() {
-        List<String> departments = memberBLL.queryDepartment();
-        departments.forEach(deparment -> cbDepartment.addItem(deparment));
+private void readMajors(String department) {
+    // Xóa tất cả các mục hiện có trong JComboBox trước khi thêm các mục mới
+    cbMajor.removeAllItems();
+    
+    // Xử lý các ngành tương ứng với khoa
+    switch (department) {
+        case "CNTT" ->
+            {
+                cbMajor.addItem("Kỹ thuật phần mềm");
+                cbMajor.addItem("Hệ thống thông tin");
+                cbMajor.addItem("Khoa học máy tính");
+                cbMajor.addItem("Kỹ thuật máy tính");
+            }
+        case "Ngoại ngữ" ->
+            {
+                cbMajor.addItem("Sư phạm Anh");
+                cbMajor.addItem("Ngôn ngữ Anh");
+            }
+        case "SP KHTN" ->
+            {
+                cbMajor.addItem("Sư phạm Toán");
+                cbMajor.addItem("Sư phạm Lý");
+                cbMajor.addItem("Sư phạm Hóa");
+                cbMajor.addItem("Sư phạm Sinh");
+            }
+        case "SP KHXH" ->
+            {
+                cbMajor.addItem("Sư phạm Văn");
+                cbMajor.addItem("Sư phạm Địa");
+                cbMajor.addItem("Sư phạm Sử");
+            }
+        case "Nghệ thuật" ->
+            {
+                cbMajor.addItem("Sư phạm Âm nhạc");
+                cbMajor.addItem("Sư phạm Mĩ thuật");
+            }
+        default -> // Nếu khoa không được xác định, bạn có thể xử lý lỗi hoặc thông báo cho người dùng.
+            throw new IllegalArgumentException("Khoa không hợp lệ: " + department);
     }
+}
 
-    private void readMajors(String department) {
-        List<String> majors = memberBLL.queryMajor(department);
-        cbMajor.removeAllItems();
-        majors.forEach(major -> cbMajor.addItem(major));
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -143,9 +172,15 @@ public class MemberForm extends javax.swing.JFrame {
         lblDepartment.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblDepartment.setText("Department:");
 
+        cbDepartment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CNTT", "Ngoại ngữ", "SP KHTN", "SP KHXH", "Nghệ thuật" }));
         cbDepartment.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbDepartmentItemStateChanged(evt);
+            }
+        });
+        cbDepartment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbDepartmentActionPerformed(evt);
             }
         });
 
@@ -174,6 +209,13 @@ public class MemberForm extends javax.swing.JFrame {
 
         lblMajor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblMajor.setText("Major:");
+
+        cbMajor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kỹ thuật phần mềm", "Hệ thống thông tin", "Kỹ thuật máy tính", "Khoa học máy tính" }));
+        cbMajor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbMajorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -415,6 +457,14 @@ public class MemberForm extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void cbDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDepartmentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbDepartmentActionPerformed
+
+    private void cbMajorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMajorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbMajorActionPerformed
 
     /**
      * @param args the command line arguments

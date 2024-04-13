@@ -234,15 +234,15 @@ public class MemberPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tblMember);
         if (tblMember.getColumnModel().getColumnCount() > 0) {
             tblMember.getColumnModel().getColumn(0).setResizable(false);
-            tblMember.getColumnModel().getColumn(0).setPreferredWidth(30);
+            tblMember.getColumnModel().getColumn(0).setPreferredWidth(5);
             tblMember.getColumnModel().getColumn(1).setResizable(false);
             tblMember.getColumnModel().getColumn(1).setPreferredWidth(60);
             tblMember.getColumnModel().getColumn(2).setPreferredWidth(120);
-            tblMember.getColumnModel().getColumn(3).setPreferredWidth(60);
+            tblMember.getColumnModel().getColumn(3).setPreferredWidth(40);
             tblMember.getColumnModel().getColumn(4).setResizable(false);
-            tblMember.getColumnModel().getColumn(4).setPreferredWidth(30);
+            tblMember.getColumnModel().getColumn(4).setPreferredWidth(80);
             tblMember.getColumnModel().getColumn(5).setResizable(false);
-            tblMember.getColumnModel().getColumn(5).setPreferredWidth(80);
+            tblMember.getColumnModel().getColumn(5).setPreferredWidth(60);
             tblMember.getColumnModel().getColumn(6).setResizable(false);
             tblMember.getColumnModel().getColumn(6).setPreferredWidth(120);
         }
