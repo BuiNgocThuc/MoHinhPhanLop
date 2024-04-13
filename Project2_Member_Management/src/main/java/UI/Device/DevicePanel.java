@@ -11,16 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class DevicePanel extends JPanel {
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("Device Panel");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.add(new DevicePanel(), BorderLayout.CENTER);
-            frame.setSize(1100, 700);
-            frame.setVisible(true);
-            frame.setLocationRelativeTo(null);
-        });
-    }
 
     public DevicePanel() {
         removeAll();
@@ -61,10 +51,10 @@ public class DevicePanel extends JPanel {
         JPanel panelTop = new JPanel(new FlowLayout(FlowLayout.LEFT));
         panelTop.setBackground(Color.WHITE);
         panelTop.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createMatteBorder(1, 1, 1, 1, Color.GRAY),
+                BorderFactory.createMatteBorder(0, 0, 2, 0, Color.GRAY),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
         JLabel titleLabel = new JLabel("MEMBER MANAGEMENT");
-        titleLabel.setFont(new Font("Segoe UI", 1, 20));
+        titleLabel.setFont(new Font("Segoe UI", 1, 16));
         panelTop.add(titleLabel);
         add(panelTop, BorderLayout.NORTH);
     }
