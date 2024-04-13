@@ -16,7 +16,6 @@ import java.sql.Timestamp;
 @Table(name = "xuly")
 public class Discipline implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MaXL")
     private int id;
 
