@@ -6,10 +6,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -40,6 +42,7 @@ public class ListDevice extends JPanel {
         btnImport = new Button(" Import");
         btnImport.setButton(130, 40, new Color(0, 143, 143));
         btnImport.setIcon("/images/icons8-excel-30.png");
+        btnImport.addActionListener(btnImportListener);
         btnMultiDelete = new Button("- Multi Delete");
         btnMultiDelete.setButton(130, 40, new Color(0, 143, 143));
         btnMultiDelete.addActionListener(multiDeleteListener);
@@ -263,6 +266,33 @@ public class ListDevice extends JPanel {
                 }
             }
             deviceBLL.deleteDeviecByYear(year);
+        }
+    };
+
+    ActionListener btnImportListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent arg0) {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Chọn tệp Excel để nhập");
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel Files", "xls", "xlsx");
+            fileChooser.setFileFilter(filter);
+            int userSelection = fileChooser.showOpenDialog(null);
+            if (userSelection == JFileChooser.APPROVE_OPTION) {
+                File fileToImport = fileChooser.getSelectedFile();
+                int importedCount = deviceBLL.importExcel(fileToImport);
+                if (importedCount != 0) {
+                    JOptionPane.showMessageDialog(null,
+                            "Đã nhập thành công " + importedCount + " thiết bị từ tệp Excel.",
+                            "Thành công",
+                            JOptionPane.INFORMATION_MESSAGE);
+                    devicePanel.upDateContent();
+                } else {
+                    JOptionPane.showMessageDialog(null,
+                            "Đã xảy ra lỗi khi nhập từ tệp Excel.",
+                            "Lỗi",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+            }
         }
     };
     private JPanel panelCenter;
