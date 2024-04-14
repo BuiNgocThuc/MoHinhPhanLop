@@ -7,6 +7,7 @@ package POJOs;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -26,6 +27,9 @@ public class Device {
 
     @Column(name = "MoTaTB")
     private String description;
+    
+    @OneToMany(mappedBy = "device", cascade = CascadeType.REMOVE)
+    private List<Usage> listUsage;
 
     @ManyToMany(mappedBy = "devices")
     private Set<Member> members = new HashSet<>();
@@ -65,6 +69,15 @@ public class Device {
     public void setMembers(Set<Member> members) {
         this.members = members;
     }
+
+    public List<Usage> getListUsage() {
+        return listUsage;
+    }
+
+    public void setListUsage(List<Usage> listUsage) {
+        this.listUsage = listUsage;
+    }
+    
 
     @Override
     public String toString() {
