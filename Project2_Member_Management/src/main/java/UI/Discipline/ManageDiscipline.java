@@ -36,12 +36,12 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author MSI
  */
-public class ManagerDiscipline extends javax.swing.JFrame {
+public class ManageDiscipline extends javax.swing.JFrame {
     DisciplineBLL disciplineBLL=new DisciplineBLL();
     /**
      * Creates new form ManagerViolate
      */
-    public ManagerDiscipline() {
+    public ManageDiscipline() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -288,16 +288,22 @@ public class ManagerDiscipline extends javax.swing.JFrame {
     }
     private void jBtnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnDeleteActionPerformed
         // TODO add your handling code here:
-        int n = JOptionPane.showConfirmDialog(rootPane, "Do you want to delete", "Confirm", JOptionPane.YES_NO_OPTION);
-        int maXL=Integer.parseInt(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),0).toString());
-        if (n == JOptionPane.YES_OPTION) {
-            try{
-                disciplineBLL.delete(maXL);
-                JOptionPane.showMessageDialog(rootPane, "Delete Success!");
-                LoadData();
-            }catch(Exception ex){
-                JOptionPane.showMessageDialog(rootPane, "Delete Fail!");
+        int choose=jTableDiscipline.getSelectedRow();
+        if(choose != -1) {
+            int n = JOptionPane.showConfirmDialog(rootPane, "Do you want to delete", "Confirm", JOptionPane.YES_NO_OPTION);
+            int maXL=Integer.parseInt(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),0).toString());
+            if (n == JOptionPane.YES_OPTION) {
+                try{
+                    disciplineBLL.delete(maXL);
+                    JOptionPane.showMessageDialog(rootPane, "Delete Success!");
+                    LoadData();
+                }catch(Exception ex){
+                    JOptionPane.showMessageDialog(rootPane, "Delete Fail!");
+                }
             }
+        }
+        else {
+            JOptionPane.showMessageDialog(rootPane,"Please Choose");
         }
     }//GEN-LAST:event_jBtnDeleteActionPerformed
 
@@ -374,11 +380,12 @@ public class ManagerDiscipline extends javax.swing.JFrame {
             t.add(i.getDescription());
             t.add(i.getFine());
             t.add(i.getDate());
-            t.add(i.getStatus());
+            t.add(i.getStatus() == 0 ? "Đã xử lý" : "Chưa xử lý");
             model.addRow(t);
         }
         jTableDiscipline.setModel(model);
     }
+    
     public void LoadData(String text){ 
         String columns[]=new String[]{"Mã Xử Lý","Mã Thành Viên","Tên Thành Viên","Hình Thức xử Lý","Số Tiền","Ngày Xử Lý","Trạng Thái Xử Lý"};
         DefaultTableModel model=new DefaultTableModel();
@@ -393,7 +400,7 @@ public class ManagerDiscipline extends javax.swing.JFrame {
             t.add(i.getDescription());
             t.add(i.getFine());
             t.add(i.getDate());
-            t.add(i.getStatus());
+            t.add(i.getStatus() == 0 ? "Đã xử lý" : "Chưa xử lý");
             model.addRow(t);
         }
         jTableDiscipline.setModel(model);

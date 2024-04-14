@@ -19,7 +19,7 @@ public class Main {
             try {
                 UIManager.setLookAndFeel(new FlatLightLaf());
             } catch (UnsupportedLookAndFeelException ex) {
-                System.err.println("Failed to initialize LaF");
+                System.err.println("Failed to initialize LaF"); 
             }
             new Home().setVisible(true);
         });
