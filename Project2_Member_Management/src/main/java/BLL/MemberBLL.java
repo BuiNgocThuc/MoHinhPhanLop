@@ -24,7 +24,7 @@ public class MemberBLL {
         return baseMemberDAL.selectAll();
     }
 
-    public <String> Member getMemberById(String id) {
+    public <String> Member getMemberById(int id) {
         return baseMemberDAL.getById(id);
     }
 
@@ -36,7 +36,7 @@ public class MemberBLL {
         baseMemberDAL.update(member);
     }
 
-    public void deleteMember(String id) {
+    public void deleteMember(int id) {
         Member member = getMemberById(id);
         deleteByMemberID("Usage", id);
         deleteByMemberID("Discipline", id);
@@ -48,7 +48,7 @@ public class MemberBLL {
         return memberDAL.searchMember(validKeyword);
     }
     
-    public void deleteByMemberID(String tableName, String id) {
+    public void deleteByMemberID(String tableName, int id) {
         Member member = getMemberById(id);
         memberDAL.deleteByMemberID(tableName, member);
     }

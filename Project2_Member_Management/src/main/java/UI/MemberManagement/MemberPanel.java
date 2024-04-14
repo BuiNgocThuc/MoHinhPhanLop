@@ -37,7 +37,7 @@ public class MemberPanel extends javax.swing.JPanel {
         int STT = 1;
         for (Member member : memberList)
         {
-            String ID = member.getId();
+            int ID = member.getId();
             String name = member.getName();
             String department = member.getDepartment();
             String major = member.getMajor();
@@ -321,7 +321,7 @@ public class MemberPanel extends javax.swing.JPanel {
             func.displayErrorMessage("Please choose a record!!");
         } else
         {
-            String memberID = tblMember.getValueAt(row, 1).toString();
+            int memberID = Integer.parseInt(tblMember.getValueAt(row, 1).toString());
             Member member = memberBLL.getMemberById(memberID);
             BorrowDeviceFrame borrowDeviceFrame = new BorrowDeviceFrame(member);
             borrowDeviceFrame.setVisible(true);
@@ -343,7 +343,7 @@ public class MemberPanel extends javax.swing.JPanel {
             func.displayErrorMessage("Please choose a record!!");
         } else
         {
-            String ID = tblMember.getValueAt(row, 1).toString();
+            int ID = Integer.parseInt(tblMember.getValueAt(row, 1).toString());
             String name = tblMember.getValueAt(row, 2).toString();
             String department = tblMember.getValueAt(row, 3).toString();
             String major = tblMember.getValueAt(row, 4).toString();
@@ -369,7 +369,7 @@ public class MemberPanel extends javax.swing.JPanel {
             boolean accept = func.displayConfirmQuestion("Do you confirm to remove this record ?");
             if (accept)
             {
-                String memberId = tblMember.getValueAt(selectedRow, 1).toString();
+                int memberId =Integer.parseInt(tblMember.getValueAt(selectedRow, 1).toString());
                 memberBLL.deleteMember(memberId);
                 updateModelTable();
                 func.displayConfirmMessage("Delete Member Successfully !!");
@@ -399,7 +399,7 @@ public class MemberPanel extends javax.swing.JPanel {
             int STT = 1;
             for (Member member : results)
             {
-                String ID = member.getId();
+                int ID = member.getId();
                 String name = member.getName();
                 String department = member.getDepartment();
                 String major = member.getMajor();
