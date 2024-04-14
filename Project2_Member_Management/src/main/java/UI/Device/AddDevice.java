@@ -32,7 +32,7 @@ public class AddDevice extends JPanel {
         jPanelButton.repaint();
         Border titledBorder = BorderFactory.createTitledBorder(
                 BorderFactory.createEtchedBorder(EtchedBorder.LOWERED, Color.WHITE, Color.GRAY),
-                "Thông tin thiết bị", TitledBorder.LEADING, TitledBorder.TOP);
+                "Device Information", TitledBorder.LEADING, TitledBorder.TOP);
         ((TitledBorder) titledBorder)
                 .setTitleFont(((TitledBorder) titledBorder).getTitleFont().deriveFont(Font.BOLD, 14));
         panelCenter.setBorder(BorderFactory.createCompoundBorder(
@@ -50,40 +50,41 @@ public class AddDevice extends JPanel {
     }
 
     private void initButton(Device device) {
-        btnSave = new Button("Lưu");
+        btnSave = new Button("Save");
         btnSave.setButton(80, 30, new Color(0, 102, 204));
         btnSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int choice = JOptionPane.showConfirmDialog(null,
-                        "Bạn có chắc chắn muốn lưu thay đổi này?", "Xác nhận",
+                        "Are you sure save this change?", "Confirm",
                         JOptionPane.YES_NO_OPTION);
                 if (choice == JOptionPane.YES_OPTION) {
                     device.setName(txtDeviceName.getText());
                     device.setDescription(txtDescription.getText());
                     boolean isSuccess = deviceBLL.updateDevice(device);
                     if (isSuccess) {
-                        JOptionPane.showMessageDialog(null, "Sửa thông tin thiết bị thành công!");
+                        JOptionPane.showMessageDialog(null, "Edit device information successfully!");
                         txtDeviceName.setEditable(false);
                         txtDescription.setEditable(false);
                         btnEdit.setVisible(true);
                         btnSave.setVisible(false);
                     } else {
-                        JOptionPane.showMessageDialog(null, "Đã xảy ra lỗi khi thêm thiết bị. Vui lòng thử lại sau.");
+                        JOptionPane.showMessageDialog(null,
+                                "An error occurred while adding a device. Please try again later.");
                     }
                 }
             }
         });
 
-        btnEdit = new Button("Sửa");
+        btnEdit = new Button("Edit");
         btnEdit.setButton(80, 30, new Color(0, 204, 102));
         btnEdit.addActionListener(editButtonListener);
 
-        btnDelete = new Button("Xóa");
+        btnDelete = new Button("Delete");
         btnDelete.setButton(80, 30, new Color(255, 0, 0));
         btnDelete.addActionListener(deleteButtonListener);
 
-        btnExit = new Button("Thoát");
+        btnExit = new Button("Exit");
         btnExit.setButton(80, 30, new Color(255, 0, 0));
         btnExit.addActionListener(exitButtonListener);
 
@@ -101,7 +102,7 @@ public class AddDevice extends JPanel {
         panelCenter.setLayout(new BorderLayout());
         Border titledBorder = BorderFactory.createTitledBorder(
                 BorderFactory.createEtchedBorder(EtchedBorder.LOWERED, Color.WHITE, Color.GRAY),
-                "Thêm Thiết Bị", TitledBorder.LEADING, TitledBorder.TOP);
+                "Add Device", TitledBorder.LEADING, TitledBorder.TOP);
         ((TitledBorder) titledBorder)
                 .setTitleFont(((TitledBorder) titledBorder).getTitleFont().deriveFont(Font.BOLD, 14));
         panelCenter.setBorder(BorderFactory.createCompoundBorder(
@@ -145,7 +146,7 @@ public class AddDevice extends JPanel {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 1.0; // Đặt trọng số cho chiều ngang
 
-        JLabel lblDeviceID = new JLabel("Mã Thiết Bị:");
+        JLabel lblDeviceID = new JLabel("Device ID:");
         contentPanel.add(lblDeviceID, gbc);
 
         gbc.gridy++;
@@ -153,7 +154,7 @@ public class AddDevice extends JPanel {
         contentPanel.add(txtDeviceID, gbc);
 
         gbc.gridy++;
-        JLabel lblDeviceName = new JLabel("Tên Thiết Bị:");
+        JLabel lblDeviceName = new JLabel("Device Name:");
         contentPanel.add(lblDeviceName, gbc);
 
         gbc.gridy++;
@@ -161,7 +162,7 @@ public class AddDevice extends JPanel {
         contentPanel.add(txtDeviceName, gbc);
 
         gbc.gridy++;
-        JLabel lblDescription = new JLabel("Mô Tả:");
+        JLabel lblDescription = new JLabel("Description:");
         contentPanel.add(lblDescription, gbc);
 
         gbc.gridy++;
@@ -173,10 +174,10 @@ public class AddDevice extends JPanel {
 
         gbc.gridy++;
         jPanelButton = new JPanel();
-        btnSave = new Button("Lưu");
+        btnSave = new Button("Save");
         btnSave.setButton(130, 30, new Color(0, 102, 204));
         jPanelButton.add(btnSave);
-        btnExit = new Button("Thoát");
+        btnExit = new Button("Exit");
         btnExit.setButton(130, 30, new Color(255, 0, 0));
         jPanelButton.add(btnExit);
         btnExit.addActionListener(exitButtonListener);
@@ -184,7 +185,7 @@ public class AddDevice extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int choice = JOptionPane.showConfirmDialog(null,
-                        "Bạn có chắc chắn muốn thêm thiết bị này?", "Xác nhận",
+                        "Are you sure add this device?", "Confirm",
                         JOptionPane.YES_NO_OPTION);
                 if (choice == JOptionPane.YES_OPTION) {
                     Device device = new Device();
@@ -193,12 +194,13 @@ public class AddDevice extends JPanel {
                     device.setDescription(txtDescription.getText());
                     boolean isSuccess = deviceBLL.insertDevice(device);
                     if (isSuccess) {
-                        JOptionPane.showMessageDialog(null, "Thêm thiết bị thành công!");
+                        JOptionPane.showMessageDialog(null, "Device added successfully!");
                         txtDeviceID.setText("");
                         txtDeviceName.setText("");
                         txtDescription.setText("");
                     } else {
-                        JOptionPane.showMessageDialog(null, "Đã xảy ra lỗi khi thêm thiết bị. Vui lòng thử lại sau.");
+                        JOptionPane.showMessageDialog(null,
+                                "An error occurred while adding the device. Please try again later.");
                     }
                 }
             }

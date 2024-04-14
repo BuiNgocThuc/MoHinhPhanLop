@@ -86,7 +86,7 @@ public class ListDevice extends JPanel {
         panel_Table.setLayout(new BorderLayout());
         Border titledBorder = BorderFactory.createTitledBorder(
                 BorderFactory.createEtchedBorder(EtchedBorder.LOWERED, Color.WHITE, Color.GRAY),
-                "Danh sách thiết bị", TitledBorder.LEADING, TitledBorder.TOP);
+                "Device List", TitledBorder.LEADING, TitledBorder.TOP);
         ((TitledBorder) titledBorder)
                 .setTitleFont(((TitledBorder) titledBorder).getTitleFont().deriveFont(Font.BOLD, 14));
         panel_Table.setBorder(BorderFactory.createCompoundBorder(
@@ -94,7 +94,7 @@ public class ListDevice extends JPanel {
                 titledBorder));
         modeltable = new DefaultTableModel(
                 new Object[][] {},
-                new String[] { "STT", "Mã Thiết Bị", "Tên Thiết Bị", "Mô Tả", "" }) {
+                new String[] { "STT", "Device ID", "Device Name", "Description", "" }) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false; // Ngăn chặn việc chỉnh sửa ô
@@ -158,7 +158,7 @@ public class ListDevice extends JPanel {
                 int column = target.columnAtPoint(e.getPoint());
                 if (column == 4) {
                     int choice = JOptionPane.showConfirmDialog(null,
-                            "Bạn có chắc chắn muốn xóa thông tin thiết bị này?", "Xác nhận",
+                            "Are you sure delete this device information?", "Confirm",
                             JOptionPane.YES_NO_OPTION);
                     if (choice == JOptionPane.YES_OPTION) {
                         int row = target.rowAtPoint(e.getPoint());
@@ -242,7 +242,7 @@ public class ListDevice extends JPanel {
             boolean validInput = false;
             int year = 0;
             while (!validInput) {
-                String input = JOptionPane.showInputDialog(null, "Nhập năm cần xóa:");
+                String input = JOptionPane.showInputDialog(null, "Enter the year to delete:");
                 if (input != null) {
                     if (!input.isEmpty()) {
                         try {
@@ -250,15 +250,16 @@ public class ListDevice extends JPanel {
                             if (year > 0) {
                                 validInput = true;
                             } else {
-                                JOptionPane.showMessageDialog(null, "Vui lòng nhập một năm hợp lệ (lớn hơn 0)!", "Lỗi",
+                                JOptionPane.showMessageDialog(null, "Please enter a valid year (greater than 0)!",
+                                        "Error",
                                         JOptionPane.ERROR_MESSAGE);
                             }
                         } catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(null, "Vui lòng nhập một số năm hợp lệ!", "Lỗi",
+                            JOptionPane.showMessageDialog(null, "Please enter a valid year!", "Error",
                                     JOptionPane.ERROR_MESSAGE);
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Vui lòng nhập năm cần xóa!", "Lỗi",
+                        JOptionPane.showMessageDialog(null, "Please enter the year to delete!", "Error",
                                 JOptionPane.ERROR_MESSAGE);
                     }
                 } else {
@@ -273,7 +274,7 @@ public class ListDevice extends JPanel {
         @Override
         public void actionPerformed(ActionEvent arg0) {
             JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setDialogTitle("Chọn tệp Excel để nhập");
+            fileChooser.setDialogTitle("Select Excel file to import");
             FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel Files", "xls", "xlsx");
             fileChooser.setFileFilter(filter);
             int userSelection = fileChooser.showOpenDialog(null);
@@ -282,14 +283,14 @@ public class ListDevice extends JPanel {
                 int importedCount = deviceBLL.importExcel(fileToImport);
                 if (importedCount != 0) {
                     JOptionPane.showMessageDialog(null,
-                            "Đã nhập thành công " + importedCount + " thiết bị từ tệp Excel.",
-                            "Thành công",
+                            "Successfully imported " + importedCount + " devices from Excel file.",
+                            "Success",
                             JOptionPane.INFORMATION_MESSAGE);
                     devicePanel.upDateContent();
                 } else {
                     JOptionPane.showMessageDialog(null,
-                            "Đã xảy ra lỗi khi nhập từ tệp Excel.",
-                            "Lỗi",
+                            "An error occurred while importing from Excel file.",
+                            "Error",
                             JOptionPane.ERROR_MESSAGE);
                 }
             }

@@ -70,7 +70,7 @@ public class DevicePanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int choice = JOptionPane.showConfirmDialog(null,
-                        "Bạn có chắc chắn muốn xóa thông tin thiết bị này?", "Xác nhận",
+                        "Are you sure delete this device information?", "Confirm",
                         JOptionPane.YES_NO_OPTION);
                 if (choice == JOptionPane.YES_OPTION) {
                     deviceBLL.deleteDevice(valueID);
