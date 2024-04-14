@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 public class DeviceDAL {
 
@@ -25,6 +26,50 @@ public class DeviceDAL {
         this.baseDAL = new baseDAL<>(Device.class);
     }
 
+    public List<Device> searchDevice(String keyword) {
+        Transaction transaction = null;
+        Session session;
+        List<Device> results = new ArrayList<>();
+        try {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            String hql = "FROM Device WHERE name LIKE :keyword OR id LIKE :keyword";
+            Query query = session.createQuery(hql);
+            query.setParameter("keyword", "%" + keyword + "%");
+            results = query.getResultList();
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+        return results;
+    }
+
+    // Chọn thiết bị theo năm
+    public List<Device> selectDeviecByYear(int year) {
+        List<Device> result = new ArrayList<>();
+        int lastTwoDigits = year % 100;
+        List<Device> listDevices = baseDAL.selectAll();
+        for (Device d : listDevices) {
+            int id = d.getId();
+            int lastTwoDigitsId = (id % 1000) / 10;
+            if (lastTwoDigits == lastTwoDigitsId) {
+                result.add(d);
+            }
+        }
+        return result;
+    }
+    // Xóa thiết bị theo năm
+    public void deleteDeviceByYear(int year){
+        List<Device> listDevice = selectDeviecByYear(year);
+        for (Device d : listDevice) {
+            baseDAL.delete(d);
+        }
+    }
+    
     // Thống kê các thiết bị đã được mượn theo tên, khoảng thời gian
 
     @SuppressWarnings("unchecked")

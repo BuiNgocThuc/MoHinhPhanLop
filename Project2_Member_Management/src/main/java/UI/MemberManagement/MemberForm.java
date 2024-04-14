@@ -42,7 +42,7 @@ public class MemberForm extends javax.swing.JFrame {
         txtPhone.setText(member.getPhone());
         cbDepartment.setSelectedItem(member.getDepartment());
         cbMajor.setSelectedItem(member.getMajor());
-        txtID.setText(member.getId());
+        txtID.setText(member.getId()+"");
         txtEmail.setText(member.getEmail());
 
         txtID.setEditable(false);
@@ -428,7 +428,7 @@ private void readMajors(String department) {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-        String id = txtID.getText();
+        int id = Integer.parseInt(txtID.getText());
         String name = txtFullName.getText();
         String email = txtEmail.getText();
         String phone = txtPhone.getText();
