@@ -267,6 +267,7 @@ public class ListDevice extends JPanel {
                 }
             }
             deviceBLL.deleteDeviecByYear(year);
+            devicePanel.upDateContent();
         }
     };
 
