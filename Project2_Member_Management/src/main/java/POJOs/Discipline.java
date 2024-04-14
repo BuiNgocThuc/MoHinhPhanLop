@@ -5,6 +5,7 @@
 package POJOs;
 
 import jakarta.persistence.*;
+import java.io.Serializable;
 
 import java.sql.Timestamp;
 /**
@@ -13,9 +14,8 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name = "xuly")
-public class Discipline {
+public class Discipline implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MaXL")
     private int id;
 
@@ -33,7 +33,7 @@ public class Discipline {
 
     @ManyToOne
     @JoinColumn(name = "MaTV")
-    private Member member;
+    private Member memberID;
 
     public Discipline() {}
 
@@ -53,12 +53,17 @@ public class Discipline {
         this.description = description;
     }
 
-    public int getFine() {
+    public Integer getFine() {
         return fine;
     }
 
-    public void setFine(int fine) {
+    public void setFine(Integer fine) {
         this.fine = fine;
+    }
+
+    @Override
+    public String toString() {
+        return "Discipline{" + "id=" + id + ", description=" + description + ", fine=" + fine + ", date=" + date + ", status=" + status + ", memberID=" + memberID + '}';
     }
 
     public Timestamp getDate() {
@@ -77,11 +82,11 @@ public class Discipline {
         this.status = status;
     }
 
-    public Member getMember() {
-        return member;
+    public Member getMemberID() {
+        return memberID;
     }
 
-    public void setMember(Member member) {
-        this.member = member;
+    public void setMemberID(Member memberID) {
+        this.memberID = memberID;
     }
 }

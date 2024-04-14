@@ -22,7 +22,6 @@ public class MemberDAL {
         sessionFactory = hibernateUtil.getSessionFactory();
         this.baseDAL = new baseDAL<>(Member.class);
     }
-
     public List<Member> statisticByDepartment(String department) {
         String hql = "FROM Member m\n"
                 + "JOIN Usage u\n"
