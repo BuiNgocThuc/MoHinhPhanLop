@@ -48,6 +48,28 @@ public class DeviceDAL {
         return results;
     }
 
+    // Chọn thiết bị theo năm
+    public List<Device> selectDeviecByYear(int year) {
+        List<Device> result = new ArrayList<>();
+        int lastTwoDigits = year % 100;
+        List<Device> listDevices = baseDAL.selectAll();
+        for (Device d : listDevices) {
+            int id = d.getId();
+            int lastTwoDigitsId = (id % 1000) / 10;
+            if (lastTwoDigits == lastTwoDigitsId) {
+                result.add(d);
+            }
+        }
+        return result;
+    }
+    // Xóa thiết bị theo năm
+    public void deleteDeviceByYear(int year){
+        List<Device> listDevice = selectDeviecByYear(year);
+        for (Device d : listDevice) {
+            baseDAL.delete(d);
+        }
+    }
+    
     // Thống kê các thiết bị đã được mượn theo tên, khoảng thời gian
 
     @SuppressWarnings("unchecked")

@@ -72,6 +72,14 @@ public class DeviceBLL {
             baseDeviceDAL.delete(getDeviceById(id));
         }
     }
+    
+    public List<Device> selectDeviecByYear (int year) {
+        return deviceDAL.selectDeviecByYear(year);
+    }
+    
+    public void deleteDeviecByYear (int year) {
+        deviceDAL.deleteDeviceByYear(year);
+    }
 
     public List<Device> searchDevice(String keyword) {
         String validKeyword = keyword.trim().toLowerCase();
