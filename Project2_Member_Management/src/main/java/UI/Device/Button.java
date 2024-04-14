@@ -21,7 +21,6 @@ public class Button extends JButton {
         super(text);
         setBorderPainted(false);
         setOpaque(false);
-        setBorder(new javax.swing.border.LineBorder(new Color(0, 143, 143), 1, true));
         setBackground(new java.awt.Color(0, 143, 143));
         setFont(new Font("Segoe UI", 1, 13));
         setForeground(new Color(255, 255, 255));

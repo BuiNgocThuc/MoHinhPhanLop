@@ -84,12 +84,12 @@ public class AddDevice extends JPanel {
         btnDelete.addActionListener(deleteButtonListener);
 
         btnExit = new Button("Thoát");
-        btnExit.setButton(80, 30, new Color(255, 255, 0));
+        btnExit.setButton(80, 30, new Color(255, 0, 0));
         btnExit.addActionListener(exitButtonListener);
 
         jPanelButton.setLayout(new FlowLayout(FlowLayout.CENTER));
-        jPanelButton.add(btnEdit);
         jPanelButton.add(btnDelete);
+        jPanelButton.add(btnEdit);
         jPanelButton.add(btnSave);
         jPanelButton.add(btnExit);
         btnSave.setVisible(false);
@@ -234,6 +234,7 @@ public class AddDevice extends JPanel {
             txtDeviceName.setEditable(true);
             txtDescription.setEditable(true);
             btnEdit.setVisible(false);
+            btnDelete.setVisible(false);
             btnSave.setVisible(true);
         }
     };

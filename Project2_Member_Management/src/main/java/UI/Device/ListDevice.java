@@ -14,6 +14,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.util.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 public class ListDevice extends JPanel {
@@ -34,8 +36,13 @@ public class ListDevice extends JPanel {
 
     private void initTop() {
         btnAdd = new Button("+ Add");
+        btnAdd.setButton(130, 40, new Color(0, 143, 143));
         btnImport = new Button(" Import");
+        btnImport.setButton(130, 40, new Color(0, 143, 143));
         btnImport.setIcon("/images/icons8-excel-30.png");
+        btnMultiDelete = new Button("- Multi Delete");
+        btnMultiDelete.setButton(130, 40, new Color(0, 143, 143));
+        btnMultiDelete.addActionListener(multiDeleteListener);
         JPanel panelTop = new JPanel(new BorderLayout());
         panelTop.setBackground(Color.WHITE);
         JPanel panelSearch = new JPanel();
@@ -62,6 +69,7 @@ public class ListDevice extends JPanel {
         panelSearch.add(txtSearch, BorderLayout.CENTER);
 
         panelButton.add(btnAdd);
+        panelButton.add(btnMultiDelete);
         panelButton.add(btnImport);
         panelTop.add(panelSearch, BorderLayout.WEST);
         panelTop.add(panelButton, BorderLayout.EAST);
@@ -225,6 +233,38 @@ public class ListDevice extends JPanel {
         }
     }
 
+    ActionListener multiDeleteListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent arg0) {
+            boolean validInput = false;
+            int year = 0;
+            while (!validInput) {
+                String input = JOptionPane.showInputDialog(null, "Nhập năm cần xóa:");
+                if (input != null) {
+                    if (!input.isEmpty()) {
+                        try {
+                            year = Integer.parseInt(input);
+                            if (year > 0) {
+                                validInput = true;
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Vui lòng nhập một năm hợp lệ (lớn hơn 0)!", "Lỗi",
+                                        JOptionPane.ERROR_MESSAGE);
+                            }
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "Vui lòng nhập một số năm hợp lệ!", "Lỗi",
+                                    JOptionPane.ERROR_MESSAGE);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Vui lòng nhập năm cần xóa!", "Lỗi",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    return;
+                }
+            }
+            deviceBLL.deleteDeviecByYear(year);
+        }
+    };
     private JPanel panelCenter;
     private JPanel panel_Table;
     private DefaultTableModel modeltable;
@@ -232,4 +272,5 @@ public class ListDevice extends JPanel {
     private JTextField txtSearch;
     public Button btnAdd;
     public Button btnImport;
+    public Button btnMultiDelete;
 }
