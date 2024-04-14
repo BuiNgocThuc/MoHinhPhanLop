@@ -21,7 +21,7 @@ public class Member {
 
     @Id
     @Column(name = "MaTV")
-    private String id;
+    private int id;
 
     @Column(name = "HoTen")
     private String name;
@@ -52,7 +52,7 @@ public class Member {
         
     }
 
-    public Member(String id, String name, String department, String major, String phone, String email) {
+    public Member(int id, String name, String department, String major, String phone, String email) {
         this.id = id;
         this.name = name;
         this.department = department;
@@ -61,11 +61,11 @@ public class Member {
         this.email = email;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

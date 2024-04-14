@@ -9,6 +9,7 @@ import POJOs.Member;
 import BLL.MemberBLL;
 import Utils.sharedFunction;
 import java.awt.event.KeyEvent;
+import java.util.Set;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,6 +27,7 @@ public class MemberPanel extends javax.swing.JPanel {
     public MemberPanel() {
         initComponents();
         readMembers(); // load data to table members
+        readYearOfActivation();
     }
 
     private void readMembers() {
@@ -37,7 +39,7 @@ public class MemberPanel extends javax.swing.JPanel {
         int STT = 1;
         for (Member member : memberList)
         {
-            String ID = member.getId();
+            int ID = member.getId();
             String name = member.getName();
             String department = member.getDepartment();
             String major = member.getMajor();
@@ -54,8 +56,15 @@ public class MemberPanel extends javax.swing.JPanel {
         model.fireTableDataChanged();
     }
 
+    private void readYearOfActivation() {
+        cbYearOfActivation.removeAllItems();
+        List<String> yearsOfActivation = memberBLL.queryYearOfActivation();
+        yearsOfActivation.forEach(year -> cbYearOfActivation.addItem(year));
+    }
+
     public void updateModelTable() {
         readMembers();
+        readYearOfActivation();
     }
 
     /**
@@ -80,8 +89,8 @@ public class MemberPanel extends javax.swing.JPanel {
         editMemberBtn = new javax.swing.JButton();
         deleteMemberBtn = new javax.swing.JButton();
         deviceFrameBtn = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        cbYearOfActivation = new javax.swing.JComboBox<>();
+        btnDelByFilter = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblMember = new javax.swing.JTable();
@@ -193,13 +202,17 @@ public class MemberPanel extends javax.swing.JPanel {
         });
         jPanel3.add(deviceFrameBtn);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setPreferredSize(new java.awt.Dimension(100, 40));
+        cbYearOfActivation.setPreferredSize(new java.awt.Dimension(100, 40));
 
-        jButton1.setBackground(new java.awt.Color(0, 143, 143));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Delete By Filter");
+        btnDelByFilter.setBackground(new java.awt.Color(0, 143, 143));
+        btnDelByFilter.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        btnDelByFilter.setForeground(new java.awt.Color(255, 255, 255));
+        btnDelByFilter.setText("Delete By Filter");
+        btnDelByFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelByFilterActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(0, 143, 143));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
@@ -215,9 +228,9 @@ public class MemberPanel extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbYearOfActivation, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnDelByFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -236,8 +249,8 @@ public class MemberPanel extends javax.swing.JPanel {
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbYearOfActivation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDelByFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
@@ -321,7 +334,7 @@ public class MemberPanel extends javax.swing.JPanel {
             func.displayErrorMessage("Please choose a record!!");
         } else
         {
-            String memberID = tblMember.getValueAt(row, 1).toString();
+            int memberID = Integer.parseInt(tblMember.getValueAt(row, 1).toString());
             Member member = memberBLL.getMemberById(memberID);
             BorrowDeviceFrame borrowDeviceFrame = new BorrowDeviceFrame(member);
             borrowDeviceFrame.setVisible(true);
@@ -343,7 +356,7 @@ public class MemberPanel extends javax.swing.JPanel {
             func.displayErrorMessage("Please choose a record!!");
         } else
         {
-            String ID = tblMember.getValueAt(row, 1).toString();
+            int ID = Integer.parseInt(tblMember.getValueAt(row, 1).toString());
             String name = tblMember.getValueAt(row, 2).toString();
             String department = tblMember.getValueAt(row, 3).toString();
             String major = tblMember.getValueAt(row, 4).toString();
@@ -369,7 +382,7 @@ public class MemberPanel extends javax.swing.JPanel {
             boolean accept = func.displayConfirmQuestion("Do you confirm to remove this record ?");
             if (accept)
             {
-                String memberId = tblMember.getValueAt(selectedRow, 1).toString();
+                int memberId = Integer.parseInt(tblMember.getValueAt(selectedRow, 1).toString());
                 memberBLL.deleteMember(memberId);
                 updateModelTable();
                 func.displayConfirmMessage("Delete Member Successfully !!");
@@ -399,7 +412,7 @@ public class MemberPanel extends javax.swing.JPanel {
             int STT = 1;
             for (Member member : results)
             {
-                String ID = member.getId();
+                int ID = member.getId();
                 String name = member.getName();
                 String department = member.getDepartment();
                 String major = member.getMajor();
@@ -417,15 +430,27 @@ public class MemberPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtSearchKeyPressed
 
+    private void btnDelByFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelByFilterActionPerformed
+        // TODO add your handling code here:
+        String year = cbYearOfActivation.getSelectedItem().toString();
+        boolean ans = func.displayConfirmQuestion("Do you want to remove members activated in " + year + "?");
+        if (ans)
+        {
+            memberBLL.deleteMemberByActiveYear(year);
+            updateModelTable();
+            func.displayConfirmMessage("Delete successfully!!");
+        }
+    }//GEN-LAST:event_btnDelByFilterActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addMemberBtn;
+    private javax.swing.JButton btnDelByFilter;
+    private javax.swing.JComboBox<String> cbYearOfActivation;
     private javax.swing.JButton deleteMemberBtn;
     private javax.swing.JButton deviceFrameBtn;
     private javax.swing.JButton editMemberBtn;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
