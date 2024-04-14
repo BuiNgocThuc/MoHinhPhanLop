@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 public class DeviceDAL {
 
@@ -23,6 +24,28 @@ public class DeviceDAL {
     public DeviceDAL() {
         sessionFactory = hibernateUtil.getSessionFactory();
         this.baseDAL = new baseDAL<>(Device.class);
+    }
+
+    public List<Device> searchDevice(String keyword) {
+        Transaction transaction = null;
+        Session session;
+        List<Device> results = new ArrayList<>();
+        try {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            String hql = "FROM Device WHERE name LIKE :keyword OR id LIKE :keyword";
+            Query query = session.createQuery(hql);
+            query.setParameter("keyword", "%" + keyword + "%");
+            results = query.getResultList();
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+        return results;
     }
 
     // Thống kê các thiết bị đã được mượn theo tên, khoảng thời gian

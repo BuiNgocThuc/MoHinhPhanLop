@@ -59,6 +59,11 @@ public class DeviceBLL {
         baseDeviceDAL.delete(device);
     }
 
+    public List<Device> searchDevice(String keyword) {
+        String validKeyword = keyword.trim().toLowerCase();
+        return deviceDAL.searchDevice(validKeyword);
+    }
+
     public List<Device> statisticDeviceBorrowed(String name, String startDate, String endDate) throws ParseException {
         return deviceDAL.statisticDeviceBorrowed(name, startDate, endDate);
     }

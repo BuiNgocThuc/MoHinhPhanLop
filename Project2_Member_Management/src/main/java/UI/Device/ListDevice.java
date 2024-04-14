@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.util.List;
+import java.awt.event.KeyEvent;
 
 public class ListDevice extends JPanel {
     DeviceBLL deviceBLL = new DeviceBLL();
@@ -45,6 +46,12 @@ public class ListDevice extends JPanel {
         JLabel jLabelSearch = new JLabel();
         txtSearch = new JTextField();
         txtSearch.setBorder(null);
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSearchKeyPressed(evt);
+            }
+        });
+
         panelTop.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         panelSearch.setLayout(new BorderLayout());
         panelSearch.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
@@ -82,7 +89,6 @@ public class ListDevice extends JPanel {
                 return false; // Ngăn chặn việc chỉnh sửa ô
             }
         };
-        // table = new JTable();
         table = new JTable(modeltable);
         int stt = 1;
         for (Device device : ListDevices) {
@@ -146,7 +152,6 @@ public class ListDevice extends JPanel {
                     if (choice == JOptionPane.YES_OPTION) {
                         int row = target.rowAtPoint(e.getPoint());
                         int valueID = Integer.parseInt((String) target.getValueAt(row, 1));
-                        // deviceBLL.changeStatus(value);
                         deviceBLL.deleteDevice(valueID);
                         removeRowFromTable(modeltable, row);
                     }
@@ -174,6 +179,49 @@ public class ListDevice extends JPanel {
             }
         } else {
             System.out.println("Invalid row index: " + rowIndex);
+        }
+    }
+
+    private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_txtSearchKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String keyword = txtSearch.getText();
+            if (keyword == null || keyword.isEmpty() || keyword.isBlank()) {
+                System.out.println("enter");
+                List<Device> ListDevices = deviceBLL.selectAll();
+                updateTable(ListDevices, modeltable);
+                return;
+            } else {
+                List<Device> results = deviceBLL.searchDevice(keyword);
+
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
+                model.setRowCount(0);
+
+                int stt = 1;
+                for (Device device : results) {
+                    Object[] rowData = new Object[5];
+                    rowData[0] = String.valueOf(stt++);
+                    rowData[1] = String.valueOf(device.getId());
+                    rowData[2] = device.getName();
+                    rowData[3] = device.getDescription();
+                    rowData[4] = "/images/icons8-trash-35.png";
+                    model.addRow(rowData);
+                }
+                model.fireTableDataChanged();
+            }
+        }
+    }
+
+    public void updateTable(List<Device> devices, DefaultTableModel model) {
+        model.setRowCount(0);
+        int stt = 1;
+        for (Device device : devices) {
+            Object[] rowData = new Object[5];
+            rowData[0] = String.valueOf(stt++);
+            rowData[1] = String.valueOf(device.getId());
+            rowData[2] = device.getName();
+            rowData[3] = device.getDescription();
+            rowData[4] = "/images/icons8-trash-35.png";
+            model.addRow(rowData);
         }
     }
 
