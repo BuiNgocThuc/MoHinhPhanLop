@@ -5,6 +5,7 @@
 package UI;
 
 import UI.Device.DevicePanel;
+import UI.Discipline.ManageDiscipline;
 import UI.MemberManagement.MemberPanel;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
@@ -36,6 +37,7 @@ public class Home extends javax.swing.JFrame {
     private final ArrayList<JButton> allBtnLeftSubBar = new ArrayList<>();
     private final MemberPanel memberPanel = new MemberPanel();
     private final DevicePanel devicePanel = new DevicePanel();
+    private final ManageDiscipline disciplinePanel = new ManageDiscipline();
     private boolean dropdownToggle = false;
     private final int heightBar = 150;
 
@@ -300,7 +302,7 @@ public class Home extends javax.swing.JFrame {
     }// GEN-LAST:event_memberBtnActionPerformed
 
     private void punishBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_punishBtnActionPerformed
-        switchPanel(punishPnl, punishBtn);
+        switchPanel(disciplinePanel, punishBtn);
     }// GEN-LAST:event_punishBtnActionPerformed
 
     private void memberStatBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_memberStatBtnActionPerformed

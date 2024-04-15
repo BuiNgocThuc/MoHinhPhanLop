@@ -3,6 +3,10 @@ package DAL;
 import POJOs.Device;
 import Utils.hibernateUtil;
 import jakarta.persistence.Query;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -15,6 +19,10 @@ import java.util.Map;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class DeviceDAL {
 
@@ -62,14 +70,15 @@ public class DeviceDAL {
         }
         return result;
     }
+
     // Xóa thiết bị theo năm
-    public void deleteDeviceByYear(int year){
+    public void deleteDeviceByYear(int year) {
         List<Device> listDevice = selectDeviecByYear(year);
         for (Device d : listDevice) {
             baseDAL.delete(d);
         }
     }
-    
+
     // Thống kê các thiết bị đã được mượn theo tên, khoảng thời gian
 
     @SuppressWarnings("unchecked")
@@ -180,6 +189,49 @@ public class DeviceDAL {
             e.printStackTrace();
         }
         return results;
+    }
+
+    public int importExcel(File file) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = null;
+        int importedRecords = 0;
+
+        try {
+            transaction = session.beginTransaction();
+            try (FileInputStream fis = new FileInputStream(file); Workbook workbook = new XSSFWorkbook(fis)) {
+                Sheet sheet = workbook.getSheetAt(0);
+
+                for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+                    Row row = sheet.getRow(i);
+                    if (row == null) {
+                        continue;
+                    }
+
+                    Device obj = new Device();
+                    obj.setId((int) row.getCell(0).getNumericCellValue());
+                    obj.setName(row.getCell(1).getStringCellValue());
+                    obj.setDescription(row.getCell(2).getStringCellValue());
+                    session.save(obj);
+                    importedRecords++;
+                }
+
+                transaction.commit();
+            } catch (IOException e) {
+                e.printStackTrace();
+                if (transaction != null) {
+                    transaction.rollback();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+
+        return importedRecords;
     }
 
 }
