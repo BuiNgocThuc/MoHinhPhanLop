@@ -41,8 +41,8 @@ public class MemberBLL {
 
     public void deleteMember(int id) {
         Member member = getMemberById(id);
-        deleteByMemberID("Usage", id);
-        deleteByMemberID("Discipline", id);
+//        deleteByMemberID("Usage", id);
+//        deleteByMemberID("Discipline", id);
         baseMemberDAL.delete(member);
     }
     

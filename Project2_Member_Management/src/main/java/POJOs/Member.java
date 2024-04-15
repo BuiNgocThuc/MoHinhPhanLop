@@ -41,6 +41,9 @@ public class Member {
     @Column(name = "Email")
     private String email;
     
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Discipline> disciplines;
+    
 
     @ManyToMany
     @JoinTable(name = "thongtinsd", 
@@ -123,6 +126,14 @@ public class Member {
 
     public void setDevices(List<Device> devices) {
         this.devices = devices;
+    }
+
+    public Set<Discipline> getDisciplines() {
+        return disciplines;
+    }
+
+    public void setDisciplines(Set<Discipline> disciplines) {
+        this.disciplines = disciplines;
     }
 
     @Override
