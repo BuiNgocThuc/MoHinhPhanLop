@@ -347,7 +347,9 @@ public class ManageDiscipline extends javax.swing.JFrame {
                     }
                     JOptionPane.showMessageDialog(null, "Data import Success");
                 }
-                wb.close();
+                if(wb != null) {
+                    wb.close();
+                }
                 LoadData();
             } catch (Exception u) {
                 u.printStackTrace();

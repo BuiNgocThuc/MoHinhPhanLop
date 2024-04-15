@@ -41,7 +41,7 @@ public class Member {
     @Column(name = "Email")
     private String email;
     
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "memberID", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Discipline> disciplines;
     
 
