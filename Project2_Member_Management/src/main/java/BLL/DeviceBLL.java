@@ -57,20 +57,6 @@ public class DeviceBLL {
     }
 
     public void deleteDevice(int id) {
-//        UsageBLL usageBLL = new UsageBLL();
-//        int deviceIdToDelete = 0;
-//
-//        for (Usage usage : usageBLL.selectAll()) {
-//            if (usage.getDevice().getId() == id) {
-//                deviceIdToDelete = usage.getId();
-//                break;
-//            }
-//        }
-//
-//        if (deviceIdToDelete != 0) {
-//            usageBLL.delete(deviceIdToDelete);
-//            baseDeviceDAL.delete(getDeviceById(id));
-//        }
             Device d = getDeviceById(id);
             baseDeviceDAL.delete(d);
     }
@@ -82,13 +68,7 @@ public class DeviceBLL {
     public void deleteDeviecByYear (int year) {
         deviceDAL.deleteDeviceByYear(year);
     }
-    
-    
-    public static void main(String[] args) {
-        DeviceBLL d = new DeviceBLL();
-        d.deleteDeviecByYear(2020);
-    }
-    
+ 
     public List<Device> searchDevice(String keyword) {
         String validKeyword = keyword.trim().toLowerCase();
         return deviceDAL.searchDevice(validKeyword);
