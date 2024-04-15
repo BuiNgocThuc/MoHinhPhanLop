@@ -431,6 +431,11 @@ public class CoursePanel extends javax.swing.JPanel {
 
         cbDepartment.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(206, 206, 206)));
         cbDepartment.setPreferredSize(new java.awt.Dimension(150, 40));
+        cbDepartment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbDepartmentActionPerformed(evt);
+            }
+        });
         txtDepartmentPnl.add(cbDepartment);
 
         jPanel1.add(txtDepartmentPnl);
@@ -929,6 +934,10 @@ public class CoursePanel extends javax.swing.JPanel {
     private void searchOnsiteCourseValueInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_searchOnsiteCourseValueInputMethodTextChanged
 
     }//GEN-LAST:event_searchOnsiteCourseValueInputMethodTextChanged
+
+    private void cbDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDepartmentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbDepartmentActionPerformed
     public void loadCoursesOnsite() {
         DefaultTableModel model = (DefaultTableModel) tblCourse.getModel();
         model.setRowCount(0);

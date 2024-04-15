@@ -7,7 +7,9 @@ package POJOs;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
 /**
  *
  * @author buing
@@ -15,8 +17,8 @@ import java.util.Set;
 @Entity
 @Table(name = "thietbi")
 public class Device {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MaTB")
     private int id;
 
@@ -25,9 +27,12 @@ public class Device {
 
     @Column(name = "MoTaTB")
     private String description;
+    
+    @OneToMany(mappedBy = "device", cascade = CascadeType.REMOVE)
+    private List<Usage> listUsage;
 
-    @OneToMany(mappedBy = "device")
-    private Set<Usage> usage_device = new HashSet<>();
+    @ManyToMany(mappedBy = "devices")
+    private Set<Member> members = new HashSet<>();
 
     public Device() {
 
@@ -57,12 +62,29 @@ public class Device {
         this.description = description;
     }
 
+    public Set<Member> getMembers() {
+        return members;
+    }
+
+    public void setMembers(Set<Member> members) {
+        this.members = members;
+    }
+
+    public List<Usage> getListUsage() {
+        return listUsage;
+    }
+
+    public void setListUsage(List<Usage> listUsage) {
+        this.listUsage = listUsage;
+    }
+    
+
     @Override
     public String toString() {
-        return "Device{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+        return "Device{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", description='" + description + '\''
+                + '}';
     }
 }
