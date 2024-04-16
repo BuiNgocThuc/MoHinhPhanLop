@@ -21,7 +21,7 @@ public class test {
             } catch (UnsupportedLookAndFeelException ex) {
                 System.err.println("Failed to initialize LaF");
             }
-            new ManageDiscipline().setVisible(true);
+            
         });
     }
 }

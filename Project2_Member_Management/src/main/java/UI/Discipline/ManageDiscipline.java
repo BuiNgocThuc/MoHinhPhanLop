@@ -1,16 +1,12 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package UI.Discipline;
 
 import BLL.DisciplineBLL;
 import POJOs.Discipline;
 import POJOs.Member;
-import com.mysql.cj.result.Row;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -18,18 +14,15 @@ import java.io.FileInputStream;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Stack;
 import java.util.Vector;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.ss.usermodel.Cell;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -37,17 +30,13 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author MSI
  */
-public class ManageDiscipline extends javax.swing.JFrame {
+public class ManageDiscipline extends javax.swing.JPanel {
     DisciplineBLL disciplineBLL = new DisciplineBLL();
-
     /**
-     * Creates new form ManagerViolate
+     * Creates new form ManagerDiscipline
      */
     public ManageDiscipline() {
         initComponents();
-        this.setLocationRelativeTo(null);
-        this.setResizable(false);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         LoadData();
         jBtnSearch.setVisible(false);
         jSearch.getDocument().addDocumentListener(new DocumentListener() {
@@ -77,6 +66,7 @@ public class ManageDiscipline extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableDiscipline = new javax.swing.JTable();
         jSearch = new javax.swing.JTextField();
@@ -87,8 +77,6 @@ public class ManageDiscipline extends javax.swing.JFrame {
         jBtnImportExcel = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTableDiscipline.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -115,18 +103,6 @@ public class ManageDiscipline extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jTableDiscipline);
-        if (jTableDiscipline.getColumnModel().getColumnCount() > 0) {
-            jTableDiscipline.getColumnModel().getColumn(0).setResizable(false);
-            jTableDiscipline.getColumnModel().getColumn(0).setPreferredWidth(10);
-            jTableDiscipline.getColumnModel().getColumn(1).setResizable(false);
-            jTableDiscipline.getColumnModel().getColumn(1).setPreferredWidth(10);
-            jTableDiscipline.getColumnModel().getColumn(2).setResizable(false);
-            jTableDiscipline.getColumnModel().getColumn(3).setResizable(false);
-            jTableDiscipline.getColumnModel().getColumn(4).setResizable(false);
-            jTableDiscipline.getColumnModel().getColumn(5).setResizable(false);
-            jTableDiscipline.getColumnModel().getColumn(6).setResizable(false);
-            jTableDiscipline.getColumnModel().getColumn(6).setPreferredWidth(10);
-        }
 
         jBtnSearch.setText("X");
         jBtnSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -184,17 +160,17 @@ public class ManageDiscipline extends javax.swing.JFrame {
         jLabel7.setText("DISCIPLINE MANAGMENT");
         jLabel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 5, 10, 0));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 20, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jSeparator5)
-                        .addGroup(layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(jSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jBtnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -209,15 +185,15 @@ public class ManageDiscipline extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 841, Short.MAX_VALUE)))
                 .addGap(20, 20, 20))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(16, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnImportExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -229,8 +205,38 @@ public class ManageDiscipline extends javax.swing.JFrame {
                 .addGap(20, 20, 20))
         );
 
-        pack();
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 881, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 450, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTableDisciplineMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableDisciplineMouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jTableDisciplineMouseClicked
+
+    private void jBtnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSearchActionPerformed
+        // TODO add your handling code here:
+        jSearch.setText("");
+        jBtnSearch.setVisible(false);
+    }//GEN-LAST:event_jBtnSearchActionPerformed
 
     private void jBtnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAddActionPerformed
         // TODO add your handling code here:
@@ -249,12 +255,33 @@ public class ManageDiscipline extends javax.swing.JFrame {
         //LoadData();
     }//GEN-LAST:event_jBtnAddActionPerformed
 
+    private void jBtnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnDeleteActionPerformed
+        // TODO add your handling code here:
+        int choose=jTableDiscipline.getSelectedRow();
+        if(choose != -1) {
+            int n = JOptionPane.showConfirmDialog(this, "Do you want to delete", "Confirm", JOptionPane.YES_NO_OPTION);
+            int maXL=Integer.parseInt(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),0).toString());
+            if (n == JOptionPane.YES_OPTION) {
+                try{
+                    disciplineBLL.delete(maXL);
+                    JOptionPane.showMessageDialog(this, "Delete Success!");
+                    LoadData();
+                }catch(Exception ex){
+                    JOptionPane.showMessageDialog(this, "Delete Fail!");
+                }
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(this,"Please Choose");
+        }
+    }//GEN-LAST:event_jBtnDeleteActionPerformed
+
     private void jBtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditActionPerformed
         // TODO add your handling code here:
         int n = jTableDiscipline.getSelectedRow();
         if (n != -1) {
             if (jTableDiscipline.getValueAt(n, 6).toString().equals("0")) {
-                JOptionPane.showMessageDialog(rootPane, "Has been processed");
+                JOptionPane.showMessageDialog(this, "Has been processed");
             } else {
                 EditDiscipline editDiscipline = new EditDiscipline();
                 editDiscipline.addWindowListener(new WindowAdapter() {
@@ -275,39 +302,9 @@ public class ManageDiscipline extends javax.swing.JFrame {
                 editDiscipline.setVisible(true);
             }
         } else {
-            JOptionPane.showMessageDialog(rootPane, "Please Choose");
+            JOptionPane.showMessageDialog(this, "Please Choose");
         }
     }//GEN-LAST:event_jBtnEditActionPerformed
-
-    public void SearchAll() {
-        if (jSearch.getText().toString().isEmpty()) {
-            jBtnSearch.setVisible(false);
-            LoadData();
-        } else {
-            jBtnSearch.setVisible(true);
-            LoadData(jSearch.getText().toString());
-        }
-    }
-    private void jBtnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnDeleteActionPerformed
-        // TODO add your handling code here:
-        int choose=jTableDiscipline.getSelectedRow();
-        if(choose != -1) {
-            int n = JOptionPane.showConfirmDialog(rootPane, "Do you want to delete", "Confirm", JOptionPane.YES_NO_OPTION);
-            int maXL=Integer.parseInt(jTableDiscipline.getValueAt(jTableDiscipline.getSelectedRow(),0).toString());
-            if (n == JOptionPane.YES_OPTION) {
-                try{
-                    disciplineBLL.delete(maXL);
-                    JOptionPane.showMessageDialog(rootPane, "Delete Success!");
-                    LoadData();
-                }catch(Exception ex){
-                    JOptionPane.showMessageDialog(rootPane, "Delete Fail!");
-                }
-            }
-        }
-        else {
-            JOptionPane.showMessageDialog(rootPane,"Please Choose");
-        }
-    }//GEN-LAST:event_jBtnDeleteActionPerformed
 
     private void jBtnImportExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnImportExcelActionPerformed
         String errs = "";// TODO add your handling code here:
@@ -346,12 +343,13 @@ public class ManageDiscipline extends javax.swing.JFrame {
                     Member member = disciplineBLL.getMember(maTV);
                     discipline.setMemberID(member);
                     discipline.setDescription(hinhthucXL);
-
                     disciplineBLL.insertDiscipline(discipline);
                 }
                 JOptionPane.showMessageDialog(null, "Data import Success");
             }
-            wb.close();
+            if(wb!=null){
+                wb.close();
+            }
             LoadData();
         } catch (Exception e) {
             errs += e.getMessage() + '\n';
@@ -360,19 +358,15 @@ public class ManageDiscipline extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Data import Fail:" + "\n" + errs);
         }
     }//GEN-LAST:event_jBtnImportExcelActionPerformed
-
-    private void jTableDisciplineMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableDisciplineMouseClicked
-        // TODO add your handling code here:
-
-
-    }//GEN-LAST:event_jTableDisciplineMouseClicked
-
-    private void jBtnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSearchActionPerformed
-        // TODO add your handling code here:
-        jSearch.setText("");
-        jBtnSearch.setVisible(false);
-    }//GEN-LAST:event_jBtnSearchActionPerformed
-
+    public void SearchAll() {
+        if (jSearch.getText().toString().isEmpty()) {
+            jBtnSearch.setVisible(false);
+            LoadData();
+        } else {
+            jBtnSearch.setVisible(true);
+            LoadData(jSearch.getText().toString());
+        }
+    }
     public void LoadData() {
         String columns[] = new String[]{"Mã Xử Lý", "Mã Thành Viên", "Tên Thành Viên", "Hình Thức xử Lý", "Số Tiền", "Ngày Xử Lý", "Trạng Thái Xử Lý"};
         DefaultTableModel model = new DefaultTableModel();
@@ -413,42 +407,6 @@ public class ManageDiscipline extends javax.swing.JFrame {
         jTableDiscipline.setModel(model);
     }
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(ManagerDiscipline.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(ManagerDiscipline.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(ManagerDiscipline.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(ManagerDiscipline.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new ManagerDiscipline().setVisible(true);
-//            }
-//        });
-//    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnAdd;
     private javax.swing.JButton jBtnDelete;
@@ -456,6 +414,7 @@ public class ManageDiscipline extends javax.swing.JFrame {
     private javax.swing.JButton jBtnImportExcel;
     private javax.swing.JButton jBtnSearch;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jSearch;
     private javax.swing.JSeparator jSeparator5;
