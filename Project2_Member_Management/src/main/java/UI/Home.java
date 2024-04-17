@@ -223,7 +223,7 @@ public class Home extends javax.swing.JFrame {
         switchPanel(memberPanel, memberBtn);
     }// GEN-LAST:event_memberBtnActionPerformed
     private void punishBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_punishBtnActionPerformed
-        switchPanel(punishPnl, punishBtn);
+        switchPanel(disciplinePanel, punishBtn);
     }//GEN-LAST:event_punishBtnActionPerformed
 //    private void punishBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_punishBtnActionPerformed
 //        switchPanel(disciplinePanel, punishBtn);

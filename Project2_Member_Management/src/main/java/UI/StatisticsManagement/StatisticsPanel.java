@@ -21,6 +21,7 @@ public class StatisticsPanel extends javax.swing.JPanel {
      */
     public StatisticsPanel() {
         initComponents();
+        LoadStatisDiscipline();
     }
     public void LoadStatisDiscipline(){
         String[] statistics=disciplineBLL.StatisticsDiscipline().split(",");
