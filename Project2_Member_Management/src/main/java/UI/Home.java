@@ -40,12 +40,11 @@ public class Home extends javax.swing.JFrame {
     private final StatisticsPanel statisticsPanel = new StatisticsPanel();
     private final DevicePanel devicePanel = new DevicePanel();
     private final ManageDiscipline disciplinePanel = new ManageDiscipline();
-    private boolean dropdownToggle = false;
     private final int heightBar = 150;
 
     public Home() {
         initComponents();
-        allBtnLeftBar.addAll(Arrays.asList(memberBtn, deviceBtn, punishBtn,statisticsBtn));
+        allBtnLeftBar.addAll(Arrays.asList(memberBtn, deviceBtn, punishBtn, statisticsBtn));
         switchPanel(memberPanel, memberBtn);
         this.setLocationRelativeTo(null);
     }
@@ -57,7 +56,7 @@ public class Home extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel3 = new javax.swing.JPanel();
@@ -74,11 +73,13 @@ public class Home extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
-                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 100, Short.MAX_VALUE));
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
         jPanel3Layout.setVerticalGroup(
-                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 100, Short.MAX_VALUE));
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Member App");
@@ -156,14 +157,14 @@ public class Home extends javax.swing.JFrame {
         javax.swing.GroupLayout devicePnlLayout = new javax.swing.GroupLayout(devicePnl);
         devicePnl.setLayout(devicePnlLayout);
         devicePnlLayout.setHorizontalGroup(
-                devicePnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 866, Short.MAX_VALUE));
+            devicePnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 866, Short.MAX_VALUE)
+        );
         devicePnlLayout.setVerticalGroup(
             devicePnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 666, Short.MAX_VALUE)
         );
-                devicePnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 693, Short.MAX_VALUE));
+
         cardPanel.add(devicePnl, "card3");
 
         punishPnl.setBackground(new java.awt.Color(0, 0, 204));
@@ -171,75 +172,41 @@ public class Home extends javax.swing.JFrame {
         javax.swing.GroupLayout punishPnlLayout = new javax.swing.GroupLayout(punishPnl);
         punishPnl.setLayout(punishPnlLayout);
         punishPnlLayout.setHorizontalGroup(
-                punishPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 866, Short.MAX_VALUE));
+            punishPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 866, Short.MAX_VALUE)
+        );
         punishPnlLayout.setVerticalGroup(
             punishPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 666, Short.MAX_VALUE)
         );
 
         cardPanel.add(punishPnl, "card4");
-                punishPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 693, Short.MAX_VALUE));
 
-        cardPanel.add(punishPnl, "card4");
-
-        memberStatPnl.setBackground(new java.awt.Color(51, 255, 51));
-
-        javax.swing.GroupLayout memberStatPnlLayout = new javax.swing.GroupLayout(memberStatPnl);
-        memberStatPnl.setLayout(memberStatPnlLayout);
-        memberStatPnlLayout.setHorizontalGroup(
-                memberStatPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 866, Short.MAX_VALUE));
-        memberStatPnlLayout.setVerticalGroup(
-                memberStatPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 693, Short.MAX_VALUE));
-
-        cardPanel.add(memberStatPnl, "card5");
-
-        deviceStatPnl.setBackground(new java.awt.Color(0, 204, 204));
-
-        javax.swing.GroupLayout deviceStatPnlLayout = new javax.swing.GroupLayout(deviceStatPnl);
-        deviceStatPnl.setLayout(deviceStatPnlLayout);
-        deviceStatPnlLayout.setHorizontalGroup(
-                deviceStatPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 866, Short.MAX_VALUE));
-        deviceStatPnlLayout.setVerticalGroup(
-                deviceStatPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 693, Short.MAX_VALUE));
-
-        cardPanel.add(deviceStatPnl, "card6");
         javax.swing.GroupLayout containerLayout = new javax.swing.GroupLayout(container);
         container.setLayout(containerLayout);
         containerLayout.setHorizontalGroup(
-                containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(containerLayout.createSequentialGroup()
-                                .addComponent(sideBar, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(cardPanel, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+            containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(containerLayout.createSequentialGroup()
+                .addComponent(sideBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(cardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
         containerLayout.setVerticalGroup(
             containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(sideBar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addComponent(cardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE)
+            .addComponent(cardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-                containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(sideBar, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cardPanel, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -250,7 +217,6 @@ public class Home extends javax.swing.JFrame {
     }// GEN-LAST:event_deviceBtnActionPerformed
 
     private void statisticsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statisticsBtnActionPerformed
-//        toggleDropdown();
         switchPanel(statisticsPanel, statisticsBtn);
     }//GEN-LAST:event_statisticsBtnActionPerformed
     private void memberBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_memberBtnActionPerformed
@@ -262,6 +228,7 @@ public class Home extends javax.swing.JFrame {
 //    private void punishBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_punishBtnActionPerformed
 //        switchPanel(disciplinePanel, punishBtn);
 //    }// GEN-LAST:event_punishBtnActionPerformed
+
     public void setBackgroundDefaultAllButton() {
         for (JButton btn : allBtnLeftBar) {
             btn.setBackground(Color.WHITE);
@@ -272,6 +239,7 @@ public class Home extends javax.swing.JFrame {
             btn.setForeground(Color.BLACK);
         }
     }
+
     private void switchPanel(Component panel, JButton btn) {
         cardPanel.removeAll();
         cardPanel.add(panel);
@@ -280,8 +248,6 @@ public class Home extends javax.swing.JFrame {
         setBackgroundDefaultAllButton();
         btn.setBackground(darkGreen);
         btn.setForeground(Color.WHITE);
-//        dropdownToggle = false;
-//        closeMenu();
 
     }
 
@@ -295,7 +261,6 @@ public class Home extends javax.swing.JFrame {
 //            closeMenu();
 //        }
 //    }
-
 //    public void openMenu() {
 //        int initialHeight = subBarStat.getPreferredSize().height;
 //        int steps = 100 / 10; // 10 ms interval between each step
@@ -318,7 +283,6 @@ public class Home extends javax.swing.JFrame {
 //        });
 //        timer.start();
 //    }
-
 //    public void closeMenu() {
 //        int initialHeight = subBarStat.getPreferredSize().height;
 //        int steps = 100 / 10; // 10 ms interval between each step
@@ -341,7 +305,6 @@ public class Home extends javax.swing.JFrame {
 //        });
 //        timer.start();
 //    }
-
     /**
      * @param args the command line arguments
      */

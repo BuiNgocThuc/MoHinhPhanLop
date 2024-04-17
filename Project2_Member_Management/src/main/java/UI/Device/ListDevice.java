@@ -21,12 +21,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 public class ListDevice extends JPanel {
+
     DeviceBLL deviceBLL = new DeviceBLL();
     List<Device> ListDevices = deviceBLL.selectAll();
     DevicePanel devicePanel;
 
     public ListDevice(DevicePanel devicePanel) {
         this.devicePanel = devicePanel;
+        this.setBackground(Color.WHITE);
         setLayout(new BorderLayout());
         initComponents();
     }
@@ -49,6 +51,9 @@ public class ListDevice extends JPanel {
         JPanel panelTop = new JPanel(new BorderLayout());
         panelTop.setBackground(Color.WHITE);
         JPanel panelSearch = new JPanel();
+        JPanel panelSearchWrapper = new JPanel();
+        panelSearchWrapper.setLayout(new FlowLayout(FlowLayout.LEFT,0,5));
+        panelSearchWrapper.setBackground(Color.WHITE);
         panelSearch.setBackground(Color.WHITE);
         panelSearch.setPreferredSize(new Dimension(300, 40));
         JPanel panelButton = new JPanel(new FlowLayout(FlowLayout.RIGHT));
@@ -56,25 +61,25 @@ public class ListDevice extends JPanel {
         JLabel jLabelSearch = new JLabel();
         txtSearch = new JTextField();
         txtSearch.setBorder(null);
+        txtSearch.setFont(new Font("Segoe UI",Font.PLAIN,13));
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtSearchKeyPressed(evt);
             }
         });
 
-        panelTop.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        panelTop.setBorder(BorderFactory.createEmptyBorder(0, 10, 5, 10));
         panelSearch.setLayout(new BorderLayout());
-        panelSearch.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-
+        panelSearch.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK),BorderFactory.createEmptyBorder(5,5,5,5)));
         jLabelSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-search-25.png")));
-        jLabelSearch.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
+//        jLabelSearch.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
         panelSearch.add(jLabelSearch, BorderLayout.WEST);
         panelSearch.add(txtSearch, BorderLayout.CENTER);
-
         panelButton.add(btnAdd);
         panelButton.add(btnMultiDelete);
         panelButton.add(btnImport);
-        panelTop.add(panelSearch, BorderLayout.WEST);
+        panelSearchWrapper.add(panelSearch);
+        panelTop.add(panelSearchWrapper, BorderLayout.WEST);
         panelTop.add(panelButton, BorderLayout.EAST);
         add(panelTop, BorderLayout.NORTH);
     }
@@ -85,16 +90,15 @@ public class ListDevice extends JPanel {
         panel_Table = new JPanel();
         panel_Table.setLayout(new BorderLayout());
         Border titledBorder = BorderFactory.createTitledBorder(
-                BorderFactory.createEtchedBorder(EtchedBorder.LOWERED, Color.WHITE, Color.GRAY),
+                BorderFactory.createEtchedBorder(EtchedBorder.RAISED, Color.WHITE, Color.GRAY),
                 "Device List", TitledBorder.LEADING, TitledBorder.TOP);
         ((TitledBorder) titledBorder)
                 .setTitleFont(((TitledBorder) titledBorder).getTitleFont().deriveFont(Font.BOLD, 14));
         panel_Table.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createEmptyBorder(0, 10, 50, 10),
-                titledBorder));
+                BorderFactory.createEmptyBorder(0, 10, 10, 10), titledBorder));
         modeltable = new DefaultTableModel(
-                new Object[][] {},
-                new String[] { "STT", "Device ID", "Device Name", "Description", "" }) {
+                new Object[][]{},
+                new String[]{"STT", "Device ID", "Device Name", "Description", "Action"}) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false; // Ngăn chặn việc chỉnh sửa ô
@@ -119,7 +123,8 @@ public class ListDevice extends JPanel {
         setColumnWidth(table, 3, 250);
         setColumnWidth(table, 4, 10);
         table.setModel(modeltable);
-        table.setShowGrid(false);
+        table.setIntercellSpacing(new Dimension(1, 1));
+        table.setShowGrid(true);
         JScrollPane scrollPane = new JScrollPane(table);
         panel_Table.add(scrollPane, BorderLayout.CENTER);
         panelCenter.add(panel_Table, BorderLayout.CENTER);

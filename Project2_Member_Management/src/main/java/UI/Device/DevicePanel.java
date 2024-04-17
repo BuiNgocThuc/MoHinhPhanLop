@@ -18,6 +18,8 @@ public class DevicePanel extends JPanel {
         initComponents();
         revalidate();
         repaint();
+        this.setOpaque(true);
+        this.setBackground(Color.RED);
         this.setVisible(true);
     }
 
@@ -50,12 +52,14 @@ public class DevicePanel extends JPanel {
     public void initTop() {
         JPanel panelTop = new JPanel(new FlowLayout(FlowLayout.LEFT));
         panelTop.setBackground(Color.WHITE);
-        panelTop.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createMatteBorder(0, 0, 2, 0, Color.GRAY),
-                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-        JLabel titleLabel = new JLabel("MEMBER MANAGEMENT");
+        panelTop.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        JLabel titleLabel = new JLabel("DEVICE MANAGEMENT");
+        JSeparator jSeparator = new JSeparator();
+        jSeparator.setPreferredSize(new Dimension(840,5));
+//        jSeparator.setBorder(BorderFactory.createEmptyBorder(5,0,5,0));
         titleLabel.setFont(new Font("Segoe UI", 1, 16));
         panelTop.add(titleLabel);
+        panelTop.add(jSeparator);
         add(panelTop, BorderLayout.NORTH);
     }
 
