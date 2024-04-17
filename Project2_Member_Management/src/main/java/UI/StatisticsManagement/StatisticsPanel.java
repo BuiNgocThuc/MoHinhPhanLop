@@ -21,7 +21,9 @@ public class StatisticsPanel extends javax.swing.JPanel {
     public StatisticsPanel() {
         initComponents();
     }
-
+    public void LoadStatisDiscipline(){
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,13 +49,13 @@ public class StatisticsPanel extends javax.swing.JPanel {
         jPanel6 = new javax.swing.JPanel();
         pnlHandleCompleted = new javax.swing.JPanel();
         txtHandleCompleted = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jStatisticsDisciplineprocessed = new javax.swing.JLabel();
         pnlOnHandle = new javax.swing.JPanel();
         txtOnHandle = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        jStatisticsDisciplinenoprocessed = new javax.swing.JLabel();
         pnlTotal = new javax.swing.JPanel();
         txtTotalMoney = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        jStatisticsTotalamount = new javax.swing.JLabel();
         MemberStatPnl = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -201,12 +203,12 @@ public class StatisticsPanel extends javax.swing.JPanel {
         txtHandleCompleted.setPreferredSize(new java.awt.Dimension(145, 40));
         pnlHandleCompleted.add(txtHandleCompleted);
 
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel4.setText("1");
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setMinimumSize(new java.awt.Dimension(8, 8));
-        jLabel4.setPreferredSize(new java.awt.Dimension(175, 45));
-        pnlHandleCompleted.add(jLabel4);
+        jStatisticsDisciplineprocessed.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jStatisticsDisciplineprocessed.setText("1");
+        jStatisticsDisciplineprocessed.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jStatisticsDisciplineprocessed.setMinimumSize(new java.awt.Dimension(8, 8));
+        jStatisticsDisciplineprocessed.setPreferredSize(new java.awt.Dimension(175, 45));
+        pnlHandleCompleted.add(jStatisticsDisciplineprocessed);
 
         pnlOnHandle.setBackground(new java.awt.Color(255, 255, 255));
         pnlOnHandle.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
@@ -217,11 +219,11 @@ public class StatisticsPanel extends javax.swing.JPanel {
         txtOnHandle.setPreferredSize(new java.awt.Dimension(145, 40));
         pnlOnHandle.add(txtOnHandle);
 
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel6.setText("111");
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setPreferredSize(new java.awt.Dimension(175, 45));
-        pnlOnHandle.add(jLabel6);
+        jStatisticsDisciplinenoprocessed.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jStatisticsDisciplinenoprocessed.setText("111");
+        jStatisticsDisciplinenoprocessed.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jStatisticsDisciplinenoprocessed.setPreferredSize(new java.awt.Dimension(175, 45));
+        pnlOnHandle.add(jStatisticsDisciplinenoprocessed);
 
         pnlTotal.setBackground(new java.awt.Color(255, 255, 255));
         pnlTotal.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
@@ -232,11 +234,11 @@ public class StatisticsPanel extends javax.swing.JPanel {
         txtTotalMoney.setPreferredSize(new java.awt.Dimension(145, 40));
         pnlTotal.add(txtTotalMoney);
 
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel8.setText("1111");
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel8.setPreferredSize(new java.awt.Dimension(175, 45));
-        pnlTotal.add(jLabel8);
+        jStatisticsTotalamount.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jStatisticsTotalamount.setText("1111");
+        jStatisticsTotalamount.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jStatisticsTotalamount.setPreferredSize(new java.awt.Dimension(175, 45));
+        pnlTotal.add(jStatisticsTotalamount);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -322,12 +324,12 @@ public class StatisticsPanel extends javax.swing.JPanel {
         jPanel8.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         jPanel8.setPreferredSize(new java.awt.Dimension(415, 45));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Information Technology");
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("35");
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -350,12 +352,12 @@ public class StatisticsPanel extends javax.swing.JPanel {
         jPanel19.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         jPanel19.setPreferredSize(new java.awt.Dimension(415, 45));
 
-        jLabel26.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel26.setText("Information Technology");
+        jLabel26.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jLabel27.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel27.setText("35");
+        jLabel27.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
@@ -378,12 +380,12 @@ public class StatisticsPanel extends javax.swing.JPanel {
         jPanel20.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         jPanel20.setPreferredSize(new java.awt.Dimension(415, 45));
 
-        jLabel28.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel28.setText("Information Technology");
+        jLabel28.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jLabel29.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel29.setText("35");
+        jLabel29.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
@@ -406,12 +408,12 @@ public class StatisticsPanel extends javax.swing.JPanel {
         jPanel21.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         jPanel21.setPreferredSize(new java.awt.Dimension(415, 45));
 
-        jLabel30.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel30.setText("Information Technology");
+        jLabel30.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jLabel31.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel31.setText("35");
+        jLabel31.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
         jPanel21.setLayout(jPanel21Layout);
@@ -434,12 +436,12 @@ public class StatisticsPanel extends javax.swing.JPanel {
         jPanel22.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         jPanel22.setPreferredSize(new java.awt.Dimension(415, 45));
 
-        jLabel32.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel32.setText("Information Technology");
+        jLabel32.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jLabel33.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel33.setText("35");
+        jLabel33.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
         jPanel22.setLayout(jPanel22Layout);
@@ -462,12 +464,12 @@ public class StatisticsPanel extends javax.swing.JPanel {
         jPanel23.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         jPanel23.setPreferredSize(new java.awt.Dimension(415, 45));
 
-        jLabel34.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel34.setText("Information Technology");
+        jLabel34.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jLabel35.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel35.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel35.setText("35");
+        jLabel35.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
         jPanel23.setLayout(jPanel23Layout);
@@ -490,12 +492,12 @@ public class StatisticsPanel extends javax.swing.JPanel {
         jPanel24.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         jPanel24.setPreferredSize(new java.awt.Dimension(415, 45));
 
-        jLabel36.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel36.setText("Information Technology");
+        jLabel36.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jLabel37.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel37.setText("35");
+        jLabel37.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
         jPanel24.setLayout(jPanel24Layout);
@@ -518,12 +520,12 @@ public class StatisticsPanel extends javax.swing.JPanel {
         jPanel25.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         jPanel25.setPreferredSize(new java.awt.Dimension(415, 45));
 
-        jLabel38.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel38.setText("Information Technology");
+        jLabel38.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jLabel39.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel39.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel39.setText("35");
+        jLabel39.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
         jPanel25.setLayout(jPanel25Layout);
@@ -546,12 +548,12 @@ public class StatisticsPanel extends javax.swing.JPanel {
         jPanel26.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         jPanel26.setPreferredSize(new java.awt.Dimension(415, 45));
 
-        jLabel40.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel40.setText("Information Technology");
+        jLabel40.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jLabel41.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel41.setText("35");
+        jLabel41.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel26Layout = new javax.swing.GroupLayout(jPanel26);
         jPanel26.setLayout(jPanel26Layout);
@@ -574,12 +576,12 @@ public class StatisticsPanel extends javax.swing.JPanel {
         jPanel27.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         jPanel27.setPreferredSize(new java.awt.Dimension(415, 45));
 
-        jLabel42.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel42.setText("Information Technology");
+        jLabel42.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jLabel43.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel43.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel43.setText("35");
+        jLabel43.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel27Layout = new javax.swing.GroupLayout(jPanel27);
         jPanel27.setLayout(jPanel27Layout);
@@ -713,14 +715,11 @@ public class StatisticsPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel20;
@@ -736,6 +735,9 @@ public class StatisticsPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel jStatisticsDisciplinenoprocessed;
+    private javax.swing.JLabel jStatisticsDisciplineprocessed;
+    private javax.swing.JLabel jStatisticsTotalamount;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextPane jTextPane1;

@@ -106,14 +106,32 @@ public class DisciplineDAL {
     }
     
     public Discipline getDiscipline(int id) {
-    Discipline discipline = null;
-    try {
-        Transaction transaction = session.beginTransaction();
-        discipline = session.get(Discipline.class, id);
-        transaction.commit();
-    } catch (Exception e) {
-        System.out.println("Error getDiscipline");
+        Discipline discipline = null;
+        try {
+            Transaction transaction = session.beginTransaction();
+            discipline = session.get(Discipline.class, id);
+            transaction.commit();
+        } catch (Exception e) {
+            System.out.println("Error getDiscipline");
+        }
+        return discipline;
     }
-    return discipline;
-}
+    public String StatisticsDiscipline(){
+        List<Discipline> listDiscipline = new ArrayList<>();
+        session.getTransaction().begin();
+        listDiscipline = session.createQuery("FROM Discipline", Discipline.class).list();
+        session.getTransaction().commit();
+        int Processed=0;
+        int Noprocessed=0;
+        int toltalmount=0;
+        for(Discipline i:listDiscipline){
+            if(i.getStatus()==0){
+                Processed+=1;
+                toltalmount+=i.getFine()!=null?i.getFine():0;
+            }else{
+                Noprocessed+=1;
+            }
+        }
+        return Processed+","+Noprocessed+","+toltalmount;
+    }
 }

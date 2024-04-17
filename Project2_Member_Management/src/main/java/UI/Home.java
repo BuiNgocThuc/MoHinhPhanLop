@@ -259,9 +259,9 @@ public class Home extends javax.swing.JFrame {
     private void punishBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_punishBtnActionPerformed
         switchPanel(punishPnl, punishBtn);
     }//GEN-LAST:event_punishBtnActionPerformed
-    private void punishBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_punishBtnActionPerformed
-        switchPanel(disciplinePanel, punishBtn);
-    }// GEN-LAST:event_punishBtnActionPerformed
+//    private void punishBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_punishBtnActionPerformed
+//        switchPanel(disciplinePanel, punishBtn);
+//    }// GEN-LAST:event_punishBtnActionPerformed
     public void setBackgroundDefaultAllButton() {
         for (JButton btn : allBtnLeftBar) {
             btn.setBackground(Color.WHITE);
