@@ -7,6 +7,7 @@ package UI;
 import UI.Device.DevicePanel;
 import UI.Discipline.ManageDiscipline;
 import UI.MemberManagement.MemberPanel;
+import UI.StatisticsManagement.StatisticsPanel;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
 import java.awt.Component;
@@ -36,6 +37,7 @@ public class Home extends javax.swing.JFrame {
     private final ArrayList<JButton> allBtnLeftBar = new ArrayList<>();
     private final ArrayList<JButton> allBtnLeftSubBar = new ArrayList<>();
     private final MemberPanel memberPanel = new MemberPanel();
+    private final StatisticsPanel statisticsPanel = new StatisticsPanel();
     private final DevicePanel devicePanel = new DevicePanel();
     private final ManageDiscipline disciplinePanel = new ManageDiscipline();
     private boolean dropdownToggle = false;
@@ -43,8 +45,7 @@ public class Home extends javax.swing.JFrame {
 
     public Home() {
         initComponents();
-        allBtnLeftBar
-                .addAll(Arrays.asList(memberBtn, deviceBtn, punishBtn, memberStatBtn, deviceStatBtn, punishStatBtn));
+        allBtnLeftBar.addAll(Arrays.asList(memberBtn, deviceBtn, punishBtn,statisticsBtn));
         switchPanel(memberPanel, memberBtn);
         this.setLocationRelativeTo(null);
     }
@@ -66,15 +67,9 @@ public class Home extends javax.swing.JFrame {
         deviceBtn = new javax.swing.JButton();
         punishBtn = new javax.swing.JButton();
         statisticsBtn = new javax.swing.JButton();
-        subBarStat = new javax.swing.JPanel();
-        memberStatBtn = new javax.swing.JButton();
-        deviceStatBtn = new javax.swing.JButton();
-        punishStatBtn = new javax.swing.JButton();
         cardPanel = new javax.swing.JPanel();
         devicePnl = new javax.swing.JPanel();
         punishPnl = new javax.swing.JPanel();
-        memberStatPnl = new javax.swing.JPanel();
-        deviceStatPnl = new javax.swing.JPanel();
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -140,7 +135,6 @@ public class Home extends javax.swing.JFrame {
         sideBar.add(punishBtn);
 
         statisticsBtn.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        statisticsBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-arrow-down-20.png"))); // NOI18N
         statisticsBtn.setText("Statistics Management");
         statisticsBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 15, 0, 0));
         statisticsBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -155,53 +149,6 @@ public class Home extends javax.swing.JFrame {
         });
         sideBar.add(statisticsBtn);
 
-        subBarStat.setBackground(new java.awt.Color(255, 255, 255));
-        subBarStat.setPreferredSize(new java.awt.Dimension(219, 150));
-        java.awt.FlowLayout flowLayout2 = new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0);
-        flowLayout2.setAlignOnBaseline(true);
-        subBarStat.setLayout(flowLayout2);
-
-        memberStatBtn.setBackground(new java.awt.Color(226, 226, 226));
-        memberStatBtn.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        memberStatBtn.setText("Member");
-        memberStatBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 40, 0, 0));
-        memberStatBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        memberStatBtn.setPreferredSize(new java.awt.Dimension(219, 50));
-        memberStatBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                memberStatBtnActionPerformed(evt);
-            }
-        });
-        subBarStat.add(memberStatBtn);
-
-        deviceStatBtn.setBackground(new java.awt.Color(226, 226, 226));
-        deviceStatBtn.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        deviceStatBtn.setText("Device");
-        deviceStatBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 40, 0, 0));
-        deviceStatBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        deviceStatBtn.setPreferredSize(new java.awt.Dimension(219, 50));
-        deviceStatBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deviceStatBtnActionPerformed(evt);
-            }
-        });
-        subBarStat.add(deviceStatBtn);
-
-        punishStatBtn.setBackground(new java.awt.Color(226, 226, 226));
-        punishStatBtn.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        punishStatBtn.setText("Punish");
-        punishStatBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 40, 0, 0));
-        punishStatBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        punishStatBtn.setPreferredSize(new java.awt.Dimension(219, 50));
-        punishStatBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                punishStatBtnActionPerformed(evt);
-            }
-        });
-        subBarStat.add(punishStatBtn);
-
-        sideBar.add(subBarStat);
-
         cardPanel.setLayout(new java.awt.CardLayout());
 
         devicePnl.setBackground(new java.awt.Color(255, 102, 255));
@@ -212,9 +159,11 @@ public class Home extends javax.swing.JFrame {
                 devicePnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGap(0, 866, Short.MAX_VALUE));
         devicePnlLayout.setVerticalGroup(
+            devicePnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 666, Short.MAX_VALUE)
+        );
                 devicePnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGap(0, 693, Short.MAX_VALUE));
-
         cardPanel.add(devicePnl, "card3");
 
         punishPnl.setBackground(new java.awt.Color(0, 0, 204));
@@ -225,6 +174,11 @@ public class Home extends javax.swing.JFrame {
                 punishPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGap(0, 866, Short.MAX_VALUE));
         punishPnlLayout.setVerticalGroup(
+            punishPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 666, Short.MAX_VALUE)
+        );
+
+        cardPanel.add(punishPnl, "card4");
                 punishPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGap(0, 693, Short.MAX_VALUE));
 
@@ -255,7 +209,6 @@ public class Home extends javax.swing.JFrame {
                         .addGap(0, 693, Short.MAX_VALUE));
 
         cardPanel.add(deviceStatPnl, "card6");
-
         javax.swing.GroupLayout containerLayout = new javax.swing.GroupLayout(container);
         container.setLayout(containerLayout);
         containerLayout.setHorizontalGroup(
@@ -267,6 +220,10 @@ public class Home extends javax.swing.JFrame {
                                 .addComponent(cardPanel, javax.swing.GroupLayout.DEFAULT_SIZE,
                                         javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
         containerLayout.setVerticalGroup(
+            containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sideBar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(cardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE)
+        );
                 containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(sideBar, javax.swing.GroupLayout.DEFAULT_SIZE,
                                 javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -292,31 +249,19 @@ public class Home extends javax.swing.JFrame {
 
     }// GEN-LAST:event_deviceBtnActionPerformed
 
-    private void statisticsBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_statisticsBtnActionPerformed
-        toggleDropdown();
-    }// GEN-LAST:event_statisticsBtnActionPerformed
-
+    private void statisticsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statisticsBtnActionPerformed
+//        toggleDropdown();
+        switchPanel(statisticsPanel, statisticsBtn);
+    }//GEN-LAST:event_statisticsBtnActionPerformed
     private void memberBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_memberBtnActionPerformed
         switchPanel(memberPanel, memberBtn);
-
     }// GEN-LAST:event_memberBtnActionPerformed
-
+    private void punishBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_punishBtnActionPerformed
+        switchPanel(punishPnl, punishBtn);
+    }//GEN-LAST:event_punishBtnActionPerformed
     private void punishBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_punishBtnActionPerformed
         switchPanel(disciplinePanel, punishBtn);
     }// GEN-LAST:event_punishBtnActionPerformed
-
-    private void memberStatBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_memberStatBtnActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_memberStatBtnActionPerformed
-
-    private void deviceStatBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_deviceStatBtnActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_deviceStatBtnActionPerformed
-
-    private void punishStatBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_punishStatBtnActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_punishStatBtnActionPerformed
-
     public void setBackgroundDefaultAllButton() {
         for (JButton btn : allBtnLeftBar) {
             btn.setBackground(Color.WHITE);
@@ -327,7 +272,6 @@ public class Home extends javax.swing.JFrame {
             btn.setForeground(Color.BLACK);
         }
     }
-
     private void switchPanel(Component panel, JButton btn) {
         cardPanel.removeAll();
         cardPanel.add(panel);
@@ -336,67 +280,67 @@ public class Home extends javax.swing.JFrame {
         setBackgroundDefaultAllButton();
         btn.setBackground(darkGreen);
         btn.setForeground(Color.WHITE);
-        dropdownToggle = false;
-        closeMenu();
+//        dropdownToggle = false;
+//        closeMenu();
 
     }
 
-    private void toggleDropdown() {
-        dropdownToggle = !dropdownToggle;
-        if (dropdownToggle) {
-            statisticsBtn.setIcon(new ImageIcon(getClass().getResource("/images/icons8-arrow-up-20.png")));
-            openMenu();
-        } else {
-            statisticsBtn.setIcon(new ImageIcon(getClass().getResource("/images/icons8-arrow-down-20.png")));
-            closeMenu();
-        }
-    }
+//    private void toggleDropdown() {
+//        dropdownToggle = !dropdownToggle;
+//        if (dropdownToggle) {
+//            statisticsBtn.setIcon(new ImageIcon(getClass().getResource("/images/icons8-arrow-up-20.png")));
+//            openMenu();
+//        } else {
+//            statisticsBtn.setIcon(new ImageIcon(getClass().getResource("/images/icons8-arrow-down-20.png")));
+//            closeMenu();
+//        }
+//    }
 
-    public void openMenu() {
-        int initialHeight = subBarStat.getPreferredSize().height;
-        int steps = 100 / 10; // 10 ms interval between each step
-        int stepHeight = heightBar / steps;
+//    public void openMenu() {
+//        int initialHeight = subBarStat.getPreferredSize().height;
+//        int steps = 100 / 10; // 10 ms interval between each step
+//        int stepHeight = heightBar / steps;
+//
+//        Timer timer = new Timer(10, new ActionListener() {
+//            int currentHeight = initialHeight;
+//
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                currentHeight += stepHeight;
+//                if (currentHeight >= heightBar) {
+//                    currentHeight = heightBar;
+//                    ((Timer) e.getSource()).stop();
+//                }
+//                Dimension newPreferredSize = new Dimension(220, currentHeight);
+//                subBarStat.setPreferredSize(newPreferredSize);
+//                subBarStat.revalidate();
+//            }
+//        });
+//        timer.start();
+//    }
 
-        Timer timer = new Timer(10, new ActionListener() {
-            int currentHeight = initialHeight;
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                currentHeight += stepHeight;
-                if (currentHeight >= heightBar) {
-                    currentHeight = heightBar;
-                    ((Timer) e.getSource()).stop();
-                }
-                Dimension newPreferredSize = new Dimension(220, currentHeight);
-                subBarStat.setPreferredSize(newPreferredSize);
-                subBarStat.revalidate();
-            }
-        });
-        timer.start();
-    }
-
-    public void closeMenu() {
-        int initialHeight = subBarStat.getPreferredSize().height;
-        int steps = 100 / 10; // 10 ms interval between each step
-        int stepHeight = initialHeight / steps;
-
-        Timer timer = new Timer(10, new ActionListener() {
-            int currentHeight = initialHeight;
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                currentHeight -= stepHeight;
-                if (currentHeight <= 0) {
-                    currentHeight = 0;
-                    ((Timer) e.getSource()).stop();
-                }
-                Dimension newPreferredSize = new Dimension(220, currentHeight);
-                subBarStat.setPreferredSize(newPreferredSize);
-                subBarStat.revalidate();
-            }
-        });
-        timer.start();
-    }
+//    public void closeMenu() {
+//        int initialHeight = subBarStat.getPreferredSize().height;
+//        int steps = 100 / 10; // 10 ms interval between each step
+//        int stepHeight = initialHeight / steps;
+//
+//        Timer timer = new Timer(10, new ActionListener() {
+//            int currentHeight = initialHeight;
+//
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                currentHeight -= stepHeight;
+//                if (currentHeight <= 0) {
+//                    currentHeight = 0;
+//                    ((Timer) e.getSource()).stop();
+//                }
+//                Dimension newPreferredSize = new Dimension(220, currentHeight);
+//                subBarStat.setPreferredSize(newPreferredSize);
+//                subBarStat.revalidate();
+//            }
+//        });
+//        timer.start();
+//    }
 
     /**
      * @param args the command line arguments
@@ -429,17 +373,11 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel container;
     private javax.swing.JButton deviceBtn;
     private javax.swing.JPanel devicePnl;
-    private javax.swing.JButton deviceStatBtn;
-    private javax.swing.JPanel deviceStatPnl;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JButton memberBtn;
-    private javax.swing.JButton memberStatBtn;
-    private javax.swing.JPanel memberStatPnl;
     private javax.swing.JButton punishBtn;
     private javax.swing.JPanel punishPnl;
-    private javax.swing.JButton punishStatBtn;
     private javax.swing.JPanel sideBar;
     private javax.swing.JButton statisticsBtn;
-    private javax.swing.JPanel subBarStat;
     // End of variables declaration//GEN-END:variables
 }
