@@ -22,7 +22,6 @@ public class MemberDAL {
         sessionFactory = hibernateUtil.getSessionFactory();
         this.baseDAL = new baseDAL<>(Member.class);
     }
-
     public List<Member> statisticByDepartment(String department) {
         String hql = "FROM Member m\n"
                 + "JOIN Usage u\n"
@@ -50,8 +49,8 @@ public class MemberDAL {
 
         return baseDAL.statistic(hql, "startDate", startDate, "endDate", endDate);
     }
-
-    public List<String> queryDepartment() {
+    
+    public List<String> queryYearOfActivation(){
         Transaction transaction = null;
         Session session;
         List<String> results = new ArrayList<>();
@@ -59,9 +58,9 @@ public class MemberDAL {
         {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            String hql = "SELECT DISTINCT department FROM Member";
+            String hql = "SELECT DISTINCT CONCAT('20', SUBSTR(CAST(id AS string), 2, 2)) year FROM Member";
 
-            Query query = session.createQuery(hql);
+            Query query = session.createQuery(hql, String.class);
 
             results = query.getResultList();
 
@@ -77,31 +76,57 @@ public class MemberDAL {
         return results;
     }
 
-    public List<String> queryMajorsByDeparment(String department) {
-        Transaction transaction = null;
-        Session session;
-        List<String> results = new ArrayList<>();
-        try
-        {
-            session = sessionFactory.openSession();
-            transaction = session.beginTransaction();
-            String hql = "SELECT DISTINCT major FROM Member WHERE department = :department";
+//    public List<String> queryDepartment() {
+//        Transaction transaction = null;
+//        Session session;
+//        List<String> results = new ArrayList<>();
+//        try
+//        {
+//            session = sessionFactory.openSession();
+//            transaction = session.beginTransaction();
+//            String hql = "SELECT DISTINCT department FROM Member";
+//
+//            Query query = session.createQuery(hql);
+//
+//            results = query.getResultList();
+//
+//            transaction.commit();
+//        } catch (Exception e)
+//        {
+//            if (transaction != null)
+//            {
+//                transaction.rollback();
+//            }
+//            e.printStackTrace();
+//        }
+//        return results;
+//    }
 
-            Query query = session.createQuery(hql);
-            query.setParameter("department", department);
-            results = query.getResultList();
-
-            transaction.commit();
-        } catch (Exception e)
-        {
-            if (transaction != null)
-            {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
-        return results;
-    }
+//    public List<String> queryMajorsByDeparment(String department) {
+//        Transaction transaction = null;
+//        Session session;
+//        List<String> results = new ArrayList<>();
+//        try
+//        {
+//            session = sessionFactory.openSession();
+//            transaction = session.beginTransaction();
+//            String hql = "SELECT DISTINCT major FROM Member WHERE department = :department";
+//
+//            Query query = session.createQuery(hql);
+//            query.setParameter("department", department);
+//            results = query.getResultList();
+//
+//            transaction.commit();
+//        } catch (Exception e)
+//        {
+//            if (transaction != null)
+//            {
+//                transaction.rollback();
+//            }
+//            e.printStackTrace();
+//        }
+//        return results;
+//    }
 
     public void deleteByMemberID(String tableName, Member member) {
         Transaction transaction = null;

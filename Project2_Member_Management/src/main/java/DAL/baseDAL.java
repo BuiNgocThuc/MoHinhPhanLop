@@ -28,7 +28,7 @@ public class baseDAL<T> {
         }
     }
 
-    public <K> T getById(K id) {
+    public T getById(int id) {
         try (Session session = sessionFactory.openSession())
         {
             return session.get(clazz, id);

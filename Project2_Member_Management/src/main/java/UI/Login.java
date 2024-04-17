@@ -4,7 +4,15 @@
  */
 package UI;
 
+import BLL.MemberBLL;
+import BLL.UsageBLL;
+import POJOs.Member;
+import POJOs.Usage;
+import Utils.sharedFunction;
 import com.formdev.flatlaf.FlatLightLaf;
+import java.awt.event.KeyEvent;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
@@ -15,6 +23,10 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author ASUS
  */
 public class Login extends javax.swing.JFrame {
+
+    private sharedFunction func = new sharedFunction();
+    private MemberBLL memberBLL = new MemberBLL();
+    private Member member;
 
     /**
      * Creates new form Login
@@ -36,8 +48,7 @@ public class Login extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtID = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -52,10 +63,7 @@ public class Login extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         lblMajor = new javax.swing.JLabel();
         txtMajor = new javax.swing.JTextField();
-        jPanel11 = new javax.swing.JPanel();
-        lblPhone = new javax.swing.JLabel();
-        txtPhone = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        btnAccess = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
@@ -70,36 +78,37 @@ public class Login extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setPreferredSize(new java.awt.Dimension(200, 92));
 
-        jLabel1.setText("Enter student ID:");
+        jLabel1.setText("Enter member ID:");
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField1.setText("jTextField1");
+        txtID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIDActionPerformed(evt);
+            }
+        });
+        txtID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtIDKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-            .addComponent(jTextField1)
+            .addComponent(txtID)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
         );
 
         jPanel2.add(jPanel4, java.awt.BorderLayout.PAGE_START);
-
-        jButton1.setBackground(new java.awt.Color(0, 143, 143));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Login as admin");
-        jButton1.setBorder(null);
-        jButton1.setPreferredSize(new java.awt.Dimension(111, 45));
-        jPanel2.add(jButton1, java.awt.BorderLayout.PAGE_END);
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -111,7 +120,7 @@ public class Login extends javax.swing.JFrame {
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 244, Short.MAX_VALUE)
+            .addGap(0, 162, Short.MAX_VALUE)
         );
 
         jPanel2.add(jPanel5, java.awt.BorderLayout.CENTER);
@@ -132,7 +141,6 @@ public class Login extends javax.swing.JFrame {
         lblFullName.setText("Full Name:");
 
         txtFullName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtFullName.setText("jTextField2");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -166,7 +174,6 @@ public class Login extends javax.swing.JFrame {
         lblDepartment.setText("Department:");
 
         txtDepartment.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtDepartment.setText("jTextField2");
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -195,7 +202,6 @@ public class Login extends javax.swing.JFrame {
         lblMajor.setText("Major:");
 
         txtMajor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtMajor.setText("jTextField2");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -217,39 +223,17 @@ public class Login extends javax.swing.JFrame {
 
         jPanel10.add(jPanel8);
 
-        jPanel11.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel11.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 0, 5, 0));
-
-        lblPhone.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblPhone.setText("Phone number:");
-
-        txtPhone.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtPhone.setText("jTextField2");
-
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addComponent(lblPhone)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(txtPhone)
-        );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addComponent(lblPhone)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
-        );
-
-        jButton2.setBackground(new java.awt.Color(0, 143, 143));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Confirm access");
-        jButton2.setToolTipText("");
-        jButton2.setPreferredSize(new java.awt.Dimension(111, 45));
+        btnAccess.setBackground(new java.awt.Color(0, 143, 143));
+        btnAccess.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnAccess.setForeground(new java.awt.Color(255, 255, 255));
+        btnAccess.setText("Confirm access");
+        btnAccess.setToolTipText("");
+        btnAccess.setPreferredSize(new java.awt.Dimension(111, 45));
+        btnAccess.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAccessActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -258,10 +242,9 @@ public class Login extends javax.swing.JFrame {
             .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnAccess, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,10 +254,8 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAccess, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
 
@@ -300,7 +281,7 @@ public class Login extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -319,6 +300,76 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIDActionPerformed
+
+    private void txtIDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            String id = txtID.getText();
+            if (id == null || id.isBlank() || id.isEmpty())
+            {
+                func.displayErrorMessage("Invalid ID !!");
+                txtID.setText("");
+                return;
+            }
+            int memberID = 0;
+            try
+            {
+                memberID = Integer.parseInt(id);
+            } catch (Exception e)
+            {
+                func.displayErrorMessage("Invalid ID !!");
+                txtID.setText("");
+                return;
+            }
+            member = memberBLL.getMemberById(memberID);
+            if (member == null)
+            {
+                func.displayErrorMessage("The account doesn't exist");
+                txtID.setText("");
+                return;
+            }
+            boolean violation = memberBLL.checkViolation(member);
+            if (violation)
+            {
+                func.displayErrorMessage("The account has been blocked!!");
+                txtID.setText("");
+            } else
+            {
+                String name = member.getName();
+                String department = member.getDepartment();
+                String major = member.getMajor();
+
+                txtFullName.setText(name);
+                txtDepartment.setText(department);
+                txtMajor.setText(major);
+                txtID.setText("");
+
+                btnAccess.requestFocus();
+            }
+
+        }
+    }//GEN-LAST:event_txtIDKeyPressed
+
+    private void btnAccessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccessActionPerformed
+        Instant now = Instant.now();
+        Timestamp currentTimestamp = Timestamp.from(now);
+        Usage usage = new Usage();
+        usage.setMember(member);
+        usage.setEnteredTime(currentTimestamp);
+        UsageBLL usageBLL = new UsageBLL();
+        usageBLL.insert(usage);
+        func.displayConfirmMessage("Access successfully!!");
+        
+        txtFullName.setText("");
+        txtDepartment.setText("");
+        txtMajor.setText("");
+        txtID.requestFocus();
+    }//GEN-LAST:event_btnAccessActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -328,29 +379,39 @@ public class Login extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+        try
+        {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
+            {
+                if ("Nimbus".equals(info.getName()))
+                {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex)
+        {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
+        } catch (InstantiationException ex)
+        {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
+        } catch (IllegalAccessException ex)
+        {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex)
+        {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            try {
+        java.awt.EventQueue.invokeLater(() ->
+        {
+            try
+            {
                 UIManager.setLookAndFeel(new FlatLightLaf());
-            } catch (UnsupportedLookAndFeelException ex) {
+            } catch (UnsupportedLookAndFeelException ex)
+            {
                 Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
             }
             new Login().setVisible(true);
@@ -358,13 +419,11 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnAccess;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -373,14 +432,12 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblDepartment;
     private javax.swing.JLabel lblFullName;
     private javax.swing.JLabel lblMajor;
-    private javax.swing.JLabel lblPhone;
     private javax.swing.JTextField txtDepartment;
     private javax.swing.JTextField txtFullName;
+    private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtMajor;
-    private javax.swing.JTextField txtPhone;
     // End of variables declaration//GEN-END:variables
 }

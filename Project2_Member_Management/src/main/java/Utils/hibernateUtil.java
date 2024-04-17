@@ -23,10 +23,10 @@ public class hibernateUtil {
         Properties pros = new Properties();
         pros.put(Environment.DIALECT, "org.hibernate.dialect.MySQLDialect");
         pros.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
-        pros.put(Environment.URL, "jdbc:mysql://localhost:3306/qlthanhvien");
+        pros.put(Environment.URL, "jdbc:mysql://localhost/qlthanhvien");
         pros.put(Environment.USER, "root");
         pros.put(Environment.PASS, "");
-        pros.put(Environment.SHOW_SQL, true);
+        pros.put(Environment.SHOW_SQL, "true");
         pros.put(Environment.GLOBALLY_QUOTED_IDENTIFIERS, true);
         pros.put(Environment.ENABLE_LAZY_LOAD_NO_TRANS,true);
 
