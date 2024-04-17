@@ -4,6 +4,7 @@ import POJOs.Discipline;
 import DAL.DisciplineDAL;
 import DAL.baseDAL;
 import POJOs.Member;
+import java.util.ArrayList;
 
 import java.util.List;
 import org.hibernate.Transaction;
@@ -51,6 +52,9 @@ public class DisciplineBLL {
 
     public void updateDiscipline(Discipline discipline) {
         disciplineDAL.update(discipline);
+    }
+    public String StatisticsDiscipline(){
+       return disciplineDAL.StatisticsDiscipline();
     }
 //
 //    public void deleteDiscipline(int id) {

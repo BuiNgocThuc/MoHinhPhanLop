@@ -4,6 +4,7 @@
  */
 package UI.StatisticsManagement;
 
+import BLL.DisciplineBLL;
 import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.JLabel;
@@ -14,7 +15,7 @@ import javax.swing.JPanel;
  * @author ASUS
  */
 public class StatisticsPanel extends javax.swing.JPanel {
-
+    DisciplineBLL disciplineBLL=new DisciplineBLL();
     /**
      * Creates new form MemberStat
      */
@@ -22,7 +23,10 @@ public class StatisticsPanel extends javax.swing.JPanel {
         initComponents();
     }
     public void LoadStatisDiscipline(){
-        
+        String[] statistics=disciplineBLL.StatisticsDiscipline().split(",");
+        jStatisticsDisciplineprocessed.setText(statistics[0]);
+        jStatisticsDisciplinenoprocessed.setText(statistics[1]);
+        jStatisticsTotalamount.setText(statistics[2]);
     }
     /**
      * This method is called from within the constructor to initialize the form.
