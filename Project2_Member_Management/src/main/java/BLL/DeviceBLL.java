@@ -72,8 +72,8 @@ public class DeviceBLL {
     public List<Device> selectDeviecByYear(int year) {
         return deviceDAL.selectDeviceByYear(year);
     }
-    
-    public int deleteDeviecByYear (int year) {
+
+    public int deleteDeviecByYear(int year) {
         try {
             int count = deviceDAL.deleteDeviceByYear(year);
             return count;
@@ -83,7 +83,7 @@ public class DeviceBLL {
             return 0;
         }
     }
-    
+
     public List<Device> searchDevice(String keyword) {
         String validKeyword = keyword.trim().toLowerCase();
         return deviceDAL.searchDevice(validKeyword);

@@ -52,7 +52,7 @@ public class ListDevice extends JPanel {
         panelTop.setBackground(Color.WHITE);
         JPanel panelSearch = new JPanel();
         JPanel panelSearchWrapper = new JPanel();
-        panelSearchWrapper.setLayout(new FlowLayout(FlowLayout.LEFT,0,5));
+        panelSearchWrapper.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 5));
         panelSearchWrapper.setBackground(Color.WHITE);
         panelSearch.setBackground(Color.WHITE);
         panelSearch.setPreferredSize(new Dimension(300, 40));
@@ -61,7 +61,7 @@ public class ListDevice extends JPanel {
         JLabel jLabelSearch = new JLabel();
         txtSearch = new JTextField();
         txtSearch.setBorder(null);
-        txtSearch.setFont(new Font("Segoe UI",Font.PLAIN,13));
+        txtSearch.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtSearchKeyPressed(evt);
@@ -70,9 +70,10 @@ public class ListDevice extends JPanel {
 
         panelTop.setBorder(BorderFactory.createEmptyBorder(0, 10, 5, 10));
         panelSearch.setLayout(new BorderLayout());
-        panelSearch.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK),BorderFactory.createEmptyBorder(5,5,5,5)));
+        panelSearch.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK), BorderFactory.createEmptyBorder(5, 5, 5, 5)));
         jLabelSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-search-25.png")));
-//        jLabelSearch.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
+        // jLabelSearch.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
         panelSearch.add(jLabelSearch, BorderLayout.WEST);
         panelSearch.add(txtSearch, BorderLayout.CENTER);
         panelButton.add(btnAdd);
@@ -97,8 +98,8 @@ public class ListDevice extends JPanel {
         panel_Table.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createEmptyBorder(0, 10, 10, 10), titledBorder));
         modeltable = new DefaultTableModel(
-                new Object[][]{},
-                new String[]{"STT", "Device ID", "Device Name", "Description", "Action"}) {
+                new Object[][] {},
+                new String[] { "STT", "Device ID", "Device Name", "Description", "Action" }) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false; // Ngăn chặn việc chỉnh sửa ô
@@ -271,8 +272,19 @@ public class ListDevice extends JPanel {
                     return;
                 }
             }
-            deviceBLL.deleteDeviecByYear(year);
-            devicePanel.upDateContent();
+            int deletecount = deviceBLL.deleteDeviecByYear(year);
+            if (deletecount != 0) {
+                JOptionPane.showMessageDialog(null,
+                        "Successfully deleted " + deletecount + " devices",
+                        "Success",
+                        JOptionPane.INFORMATION_MESSAGE);
+                devicePanel.upDateContent();
+            } else {
+                JOptionPane.showMessageDialog(null,
+                        "An error occurred while deleting devices.",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         }
     };
 
