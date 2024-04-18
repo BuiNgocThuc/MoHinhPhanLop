@@ -57,7 +57,7 @@ public class DeviceDAL {
     }
 
     // Chọn thiết bị theo năm
-    public List<Device> selectDeviecByYear(int year) {
+    public List<Device> selectDeviceByYear(int year) {
         List<Device> result = new ArrayList<>();
         int lastTwoDigits = year % 100;
         List<Device> listDevices = baseDAL.selectAll();
@@ -72,13 +72,14 @@ public class DeviceDAL {
     }
 
     // Xóa thiết bị theo năm
-    public void deleteDeviceByYear(int year) {
-        List<Device> listDevice = selectDeviecByYear(year);
+    public int deleteDeviceByYear(int year) {
+        List<Device> listDevice = selectDeviceByYear(year);
         for (Device d : listDevice) {
-            baseDAL.delete(d);
+            baseDAL.delete(d);  
         }
+        return listDevice.size();
     }
-
+    
     // Thống kê các thiết bị đã được mượn theo tên, khoảng thời gian
 
     @SuppressWarnings("unchecked")

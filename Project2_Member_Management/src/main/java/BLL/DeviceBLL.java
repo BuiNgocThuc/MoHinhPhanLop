@@ -70,20 +70,20 @@ public class DeviceBLL {
     }
 
     public List<Device> selectDeviecByYear(int year) {
-        return deviceDAL.selectDeviecByYear(year);
+        return deviceDAL.selectDeviceByYear(year);
     }
     
-    public boolean deleteDeviecByYear (int year) {
+    public int deleteDeviecByYear (int year) {
         try {
-            deviceDAL.deleteDeviceByYear(year);
-            return true;
+            int count = deviceDAL.deleteDeviceByYear(year);
+            return count;
         } catch (Exception e) {
             System.err.println("Đã xảy ra lỗi khi xóa thiết bị theo năm:");
             e.printStackTrace();
-            return false;
+            return 0;
         }
     }
- 
+    
     public List<Device> searchDevice(String keyword) {
         String validKeyword = keyword.trim().toLowerCase();
         return deviceDAL.searchDevice(validKeyword);
