@@ -13,7 +13,6 @@ import Utils.sharedFunction;
 import java.sql.Timestamp;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import java.time.Instant;
 
 /**
  *
@@ -299,9 +298,8 @@ public class BorrowNewDeviceFrame extends javax.swing.JFrame {
             int devceID = Integer.parseInt(tblSelectedDevices.getValueAt(i, 1).toString());
             Device device = deviceBLL.getDeviceById(devceID);
 
-            Instant nowInstant = Instant.now();
 
-            Timestamp currentTimestamp = Timestamp.from(nowInstant);
+            Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());;
 
             Usage usage = new Usage();
             usage.setMember(currentMember);

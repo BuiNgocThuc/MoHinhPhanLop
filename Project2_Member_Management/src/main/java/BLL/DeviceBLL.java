@@ -29,16 +29,19 @@ public class DeviceBLL {
     }
 
     public boolean insertDevice(Device device) {
-        try {
+        try
+        {
             Device existingDevice = baseDeviceDAL.getById(device.getId());
-            if (existingDevice != null) {
+            if (existingDevice != null)
+            {
                 System.err.println("Thiết bị đã tồn tại trong cơ sở dữ liệu với ID đã cho.");
                 return false;
             }
             baseDeviceDAL.save(device);
             System.out.println("Thiết bị đã được lưu thành công vào cơ sở dữ liệu.");
             return true;
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             System.err.println("Đã xảy ra lỗi khi lưu thiết bị vào cơ sở dữ liệu:");
             e.printStackTrace();
             return false;
@@ -46,11 +49,13 @@ public class DeviceBLL {
     }
 
     public boolean updateDevice(Device device) {
-        try {
+        try
+        {
             baseDeviceDAL.update(device);
             System.out.println("Thiết bị đã được cập nhật thành công trong cơ sở dữ liệu.");
             return true;
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             System.err.println("Đã xảy ra lỗi khi cập nhật thiết bị trong cơ sở dữ liệu:");
             e.printStackTrace();
             return false;
@@ -58,11 +63,13 @@ public class DeviceBLL {
     }
 
     public boolean deleteDevice(int id) {
-        try {
+        try
+        {
             Device d = getDeviceById(id);
             baseDeviceDAL.delete(d);
             return true;
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             System.err.println("Đã xảy ra lỗi khi xóa thiết bị trong cơ sở dữ liệu:");
             e.printStackTrace();
             return false;
@@ -72,18 +79,20 @@ public class DeviceBLL {
     public List<Device> selectDeviecByYear(int year) {
         return deviceDAL.selectDeviceByYear(year);
     }
-    
-    public int deleteDeviecByYear (int year) {
-        try {
+
+    public int deleteDeviecByYear(int year) {
+        try
+        {
             int count = deviceDAL.deleteDeviceByYear(year);
             return count;
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             System.err.println("Đã xảy ra lỗi khi xóa thiết bị theo năm:");
             e.printStackTrace();
             return 0;
         }
     }
-    
+
     public List<Device> searchDevice(String keyword) {
         String validKeyword = keyword.trim().toLowerCase();
         return deviceDAL.searchDevice(validKeyword);
@@ -100,12 +109,19 @@ public class DeviceBLL {
 
     public int importExcel(File file) {
         int importedRecords = deviceDAL.importExcel(file);
-        if (importedRecords > 0) {
+        if (importedRecords > 0)
+        {
             System.out.println("Import thành công " + importedRecords + " bản ghi.");
-        } else {
+        } else
+        {
             System.out.println("Không có bản ghi nào được nhập.");
         }
         return importedRecords;
+    }
+
+    public Long statisticByName(int ID) {
+        Device device = getDeviceById(ID);
+        return deviceDAL.statisticByName(device);
     }
 
 }

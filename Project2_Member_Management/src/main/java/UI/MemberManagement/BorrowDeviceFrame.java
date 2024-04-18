@@ -11,7 +11,6 @@ import POJOs.Member;
 import POJOs.Usage;
 import Utils.sharedFunction;
 import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -246,8 +245,7 @@ public class BorrowDeviceFrame extends javax.swing.JFrame {
                 func.displayErrorMessage("The device has been returned");
             } else
             {
-                Instant now = Instant.now();
-                Timestamp currentTimestamp = Timestamp.from(now);
+                Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
                 int STT = Integer.parseInt(tblBorrowedDevice.getValueAt(row, 0).toString());
                 int currentIndex = STT  - 1;
                 int usageID = usageIDList.get(currentIndex);

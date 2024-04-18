@@ -4,31 +4,68 @@
  */
 package UI.StatisticsManagement;
 
+import BLL.DeviceBLL;
 import BLL.DisciplineBLL;
+import POJOs.Device;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author ASUS
  */
 public class StatisticsPanel extends javax.swing.JPanel {
-    DisciplineBLL disciplineBLL=new DisciplineBLL();
+
+    private final DisciplineBLL disciplineBLL = new DisciplineBLL();
+    private final DeviceBLL deviceBLL = new DeviceBLL();
+
     /**
      * Creates new form MemberStat
      */
     public StatisticsPanel() {
         initComponents();
-        LoadStatisDiscipline();
+        DisciplineStatistics();
+        DeviceStatistics(deviceBLL.selectAll());
     }
-    public void LoadStatisDiscipline(){
-        String[] statistics=disciplineBLL.StatisticsDiscipline().split(",");
+
+    private void DisciplineStatistics() {
+        String[] statistics = disciplineBLL.StatisticsDiscipline().split(",");
         jStatisticsDisciplineprocessed.setText(statistics[0]);
         jStatisticsDisciplinenoprocessed.setText(statistics[1]);
         jStatisticsTotalamount.setText(statistics[2]);
     }
+
+    private void DeviceStatistics(List<Device> principledDevices) {
+        List<Device> devices = principledDevices;
+        DefaultTableModel model = (DefaultTableModel)  tblDevice.getModel();
+        model.setRowCount(0);
+
+        int STT = 1;
+        for (Device device : devices)
+        {
+            int ID = device.getId();
+            String name = device.getName();
+            String description = device.getDescription();
+            Long borrowedCount = deviceBLL.statisticByName(ID);
+
+            Object[] row
+                    =
+                    {
+                        STT++, ID, name, description, borrowedCount
+                    };
+            model.addRow(row);
+        }
+        model.fireTableDataChanged();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,7 +85,7 @@ public class StatisticsPanel extends javax.swing.JPanel {
         datePicker2 = new com.github.lgooddatepicker.components.DatePicker();
         datePicker3 = new com.github.lgooddatepicker.components.DatePicker();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblDevice = new javax.swing.JTable();
         PunishStatPnl = new javax.swing.JPanel();
         punishStatTitle = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -126,29 +163,38 @@ public class StatisticsPanel extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(0, 143, 143));
         jLabel1.setPreferredSize(new java.awt.Dimension(40, 16));
 
-        optionDevice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        optionDevice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả thiết bị", "Thiết bị đã được mượn", "Thiết bị đang được mượn" }));
         optionDevice.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         optionDevice.setPreferredSize(new java.awt.Dimension(72, 30));
+        optionDevice.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                optionDeviceItemStateChanged(evt);
+            }
+        });
         optionDevice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 optionDeviceActionPerformed(evt);
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblDevice.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Device ID", "Device Name", "Description", "Total Borrow Time"
+                "No.", "ID", "Name", "Description", "Borrow Count "
             }
         ));
-        jTable1.setRowHeight(30);
-        jTable1.setShowGrid(true);
-        jScrollPane2.setViewportView(jTable1);
+        tblDevice.setRowHeight(30);
+        tblDevice.setShowGrid(true);
+        jScrollPane2.setViewportView(tblDevice);
+        if (tblDevice.getColumnModel().getColumnCount() > 0) {
+            tblDevice.getColumnModel().getColumn(0).setPreferredWidth(50);
+            tblDevice.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tblDevice.getColumnModel().getColumn(2).setPreferredWidth(230);
+            tblDevice.getColumnModel().getColumn(3).setPreferredWidth(200);
+            tblDevice.getColumnModel().getColumn(4).setPreferredWidth(150);
+        }
 
         javax.swing.GroupLayout DeviceStatPnlLayout = new javax.swing.GroupLayout(DeviceStatPnl);
         DeviceStatPnl.setLayout(DeviceStatPnlLayout);
@@ -159,7 +205,7 @@ public class StatisticsPanel extends javax.swing.JPanel {
                 .addGroup(DeviceStatPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(DeviceStatPnlLayout.createSequentialGroup()
-                        .addComponent(optionDevice, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(optionDevice, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(datePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -203,7 +249,7 @@ public class StatisticsPanel extends javax.swing.JPanel {
         flowLayout1.setAlignOnBaseline(true);
         pnlHandleCompleted.setLayout(flowLayout1);
 
-        txtHandleCompleted.setText("Đã được xử lý:");
+        txtHandleCompleted.setText("Đang xử lý:");
         txtHandleCompleted.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtHandleCompleted.setPreferredSize(new java.awt.Dimension(145, 40));
         pnlHandleCompleted.add(txtHandleCompleted);
@@ -219,7 +265,7 @@ public class StatisticsPanel extends javax.swing.JPanel {
         pnlOnHandle.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         pnlOnHandle.setPreferredSize(new java.awt.Dimension(107, 45));
 
-        txtOnHandle.setText("Đang xử lý:");
+        txtOnHandle.setText("Đã được xử lý:");
         txtOnHandle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtOnHandle.setPreferredSize(new java.awt.Dimension(145, 40));
         pnlOnHandle.add(txtOnHandle);
@@ -605,7 +651,7 @@ public class StatisticsPanel extends javax.swing.JPanel {
 
         pnlDisplayMemberStat.add(jPanel27);
 
-        optionMember.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        optionMember.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CNTT", "Ngoại ngữ", "SP KHTN", "SP KHXH", "Nghệ thuật" }));
         optionMember.setPreferredSize(new java.awt.Dimension(72, 40));
         optionMember.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -679,18 +725,23 @@ public class StatisticsPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int test = optionMember.getSelectedIndex();
         System.out.println(test);
-        if(test == 2){
+        if (test == 2)
+        {
             pnlDisplayMemberStat.removeAll();
             pnlDisplayMemberStat.revalidate();
             pnlDisplayMemberStat.repaint();
         }
     }//GEN-LAST:event_optionMemberActionPerformed
 
+    private void optionDeviceItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_optionDeviceItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_optionDeviceItemStateChanged
+
     public void customizePanelStat(JLabel title, JLabel number) {
         JPanel jp = new JPanel();
         jp.setPreferredSize(new Dimension(420, 45));
-        title.setFont(new Font("Segoe UI",Font.PLAIN,14));
-        number.setFont(new Font("Segoe UI",Font.BOLD,14));
+        title.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        number.setFont(new Font("Segoe UI", Font.BOLD, 14));
         jp.add(title);
         jp.add(number);
         jp.setVisible(true);
@@ -743,7 +794,6 @@ public class StatisticsPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jStatisticsDisciplinenoprocessed;
     private javax.swing.JLabel jStatisticsDisciplineprocessed;
     private javax.swing.JLabel jStatisticsTotalamount;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JComboBox<String> optionDevice;
@@ -754,6 +804,7 @@ public class StatisticsPanel extends javax.swing.JPanel {
     private javax.swing.JPanel pnlTimeMember;
     private javax.swing.JPanel pnlTotal;
     private javax.swing.JLabel punishStatTitle;
+    private javax.swing.JTable tblDevice;
     private javax.swing.JLabel txtHandleCompleted;
     private javax.swing.JLabel txtOnHandle;
     private javax.swing.JLabel txtTotalMoney;

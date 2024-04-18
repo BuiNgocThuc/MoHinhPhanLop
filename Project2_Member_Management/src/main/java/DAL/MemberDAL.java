@@ -76,58 +76,6 @@ public class MemberDAL {
         return results;
     }
 
-//    public List<String> queryDepartment() {
-//        Transaction transaction = null;
-//        Session session;
-//        List<String> results = new ArrayList<>();
-//        try
-//        {
-//            session = sessionFactory.openSession();
-//            transaction = session.beginTransaction();
-//            String hql = "SELECT DISTINCT department FROM Member";
-//
-//            Query query = session.createQuery(hql);
-//
-//            results = query.getResultList();
-//
-//            transaction.commit();
-//        } catch (Exception e)
-//        {
-//            if (transaction != null)
-//            {
-//                transaction.rollback();
-//            }
-//            e.printStackTrace();
-//        }
-//        return results;
-//    }
-
-//    public List<String> queryMajorsByDeparment(String department) {
-//        Transaction transaction = null;
-//        Session session;
-//        List<String> results = new ArrayList<>();
-//        try
-//        {
-//            session = sessionFactory.openSession();
-//            transaction = session.beginTransaction();
-//            String hql = "SELECT DISTINCT major FROM Member WHERE department = :department";
-//
-//            Query query = session.createQuery(hql);
-//            query.setParameter("department", department);
-//            results = query.getResultList();
-//
-//            transaction.commit();
-//        } catch (Exception e)
-//        {
-//            if (transaction != null)
-//            {
-//                transaction.rollback();
-//            }
-//            e.printStackTrace();
-//        }
-//        return results;
-//    }
-
     public void deleteByMemberID(String tableName, Member member) {
         Transaction transaction = null;
         Session session;

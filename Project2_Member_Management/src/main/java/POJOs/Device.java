@@ -27,12 +27,15 @@ public class Device {
 
     @Column(name = "MoTaTB")
     private String description;
-    
+
     @OneToMany(mappedBy = "device", cascade = CascadeType.REMOVE)
     private List<Usage> listUsage;
 
     @ManyToMany(mappedBy = "devices")
     private Set<Member> members = new HashSet<>();
+
+    @Transient
+    private int borrowedCount;
 
     public Device() {
 
@@ -77,7 +80,14 @@ public class Device {
     public void setListUsage(List<Usage> listUsage) {
         this.listUsage = listUsage;
     }
-    
+
+    public int getBorrowedCount() {
+        return borrowedCount;
+    }
+
+    public void setBorrowedCount(int borrowedCount) {
+        this.borrowedCount = borrowedCount;
+    }
 
     @Override
     public String toString() {
