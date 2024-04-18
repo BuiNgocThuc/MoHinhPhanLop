@@ -57,31 +57,33 @@ public class DeviceBLL {
         }
     }
 
-    public void deleteDevice(int id) {
-        UsageBLL usageBLL = new UsageBLL();
-        int deviceIdToDelete = 0;
-
-        for (Usage usage : usageBLL.selectAll()) {
-            if (usage.getDevice().getId() == id) {
-                deviceIdToDelete = usage.getId();
-                break;
-            }
-        }
-
-        if (deviceIdToDelete != 0) {
-            usageBLL.delete(deviceIdToDelete);
-            baseDeviceDAL.delete(getDeviceById(id));
+    public boolean deleteDevice(int id) {
+        try {
+            Device d = getDeviceById(id);
+            baseDeviceDAL.delete(d);
+            return true;
+        } catch (Exception e) {
+            System.err.println("Đã xảy ra lỗi khi xóa thiết bị trong cơ sở dữ liệu:");
+            e.printStackTrace();
+            return false;
         }
     }
 
     public List<Device> selectDeviecByYear(int year) {
         return deviceDAL.selectDeviecByYear(year);
     }
-
-    public void deleteDeviecByYear(int year) {
-        deviceDAL.deleteDeviceByYear(year);
+    
+    public boolean deleteDeviecByYear (int year) {
+        try {
+            deviceDAL.deleteDeviceByYear(year);
+            return true;
+        } catch (Exception e) {
+            System.err.println("Đã xảy ra lỗi khi xóa thiết bị theo năm:");
+            e.printStackTrace();
+            return false;
+        }
     }
-
+ 
     public List<Device> searchDevice(String keyword) {
         String validKeyword = keyword.trim().toLowerCase();
         return deviceDAL.searchDevice(validKeyword);
