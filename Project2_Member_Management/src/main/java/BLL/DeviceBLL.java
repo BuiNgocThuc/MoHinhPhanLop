@@ -5,6 +5,7 @@ import DAL.baseDAL;
 import POJOs.Device;
 import POJOs.Usage;
 
+import java.io.File;
 import java.text.ParseException;
 
 import java.util.List;
@@ -67,8 +68,8 @@ public class DeviceBLL {
             return false;
         }
     }
-    
-    public List<Device> selectDeviecByYear (int year) {
+
+    public List<Device> selectDeviecByYear(int year) {
         return deviceDAL.selectDeviecByYear(year);
     }
     
@@ -96,4 +97,15 @@ public class DeviceBLL {
             throws ParseException {
         return deviceDAL.statisticDeviceIsBorrowing(name, startDate, endDate);
     }
+
+    public int importExcel(File file) {
+        int importedRecords = deviceDAL.importExcel(file);
+        if (importedRecords > 0) {
+            System.out.println("Import thành công " + importedRecords + " bản ghi.");
+        } else {
+            System.out.println("Không có bản ghi nào được nhập.");
+        }
+        return importedRecords;
+    }
+
 }

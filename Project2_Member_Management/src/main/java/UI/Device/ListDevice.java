@@ -6,23 +6,29 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.util.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 public class ListDevice extends JPanel {
+
     DeviceBLL deviceBLL = new DeviceBLL();
     List<Device> ListDevices = deviceBLL.selectAll();
     DevicePanel devicePanel;
 
     public ListDevice(DevicePanel devicePanel) {
         this.devicePanel = devicePanel;
+        this.setBackground(Color.WHITE);
         setLayout(new BorderLayout());
         initComponents();
     }
@@ -34,11 +40,20 @@ public class ListDevice extends JPanel {
 
     private void initTop() {
         btnAdd = new Button("+ Add");
+        btnAdd.setButton(130, 40, new Color(0, 143, 143));
         btnImport = new Button(" Import");
+        btnImport.setButton(130, 40, new Color(0, 143, 143));
         btnImport.setIcon("/images/icons8-excel-30.png");
+        btnImport.addActionListener(btnImportListener);
+        btnMultiDelete = new Button("- Multi Delete");
+        btnMultiDelete.setButton(130, 40, new Color(0, 143, 143));
+        btnMultiDelete.addActionListener(multiDeleteListener);
         JPanel panelTop = new JPanel(new BorderLayout());
         panelTop.setBackground(Color.WHITE);
         JPanel panelSearch = new JPanel();
+        JPanel panelSearchWrapper = new JPanel();
+        panelSearchWrapper.setLayout(new FlowLayout(FlowLayout.LEFT,0,5));
+        panelSearchWrapper.setBackground(Color.WHITE);
         panelSearch.setBackground(Color.WHITE);
         panelSearch.setPreferredSize(new Dimension(300, 40));
         JPanel panelButton = new JPanel(new FlowLayout(FlowLayout.RIGHT));
@@ -46,24 +61,25 @@ public class ListDevice extends JPanel {
         JLabel jLabelSearch = new JLabel();
         txtSearch = new JTextField();
         txtSearch.setBorder(null);
+        txtSearch.setFont(new Font("Segoe UI",Font.PLAIN,13));
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtSearchKeyPressed(evt);
             }
         });
 
-        panelTop.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        panelTop.setBorder(BorderFactory.createEmptyBorder(0, 10, 5, 10));
         panelSearch.setLayout(new BorderLayout());
-        panelSearch.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-
+        panelSearch.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK),BorderFactory.createEmptyBorder(5,5,5,5)));
         jLabelSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-search-25.png")));
-        jLabelSearch.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
+//        jLabelSearch.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
         panelSearch.add(jLabelSearch, BorderLayout.WEST);
         panelSearch.add(txtSearch, BorderLayout.CENTER);
-
         panelButton.add(btnAdd);
+        panelButton.add(btnMultiDelete);
         panelButton.add(btnImport);
-        panelTop.add(panelSearch, BorderLayout.WEST);
+        panelSearchWrapper.add(panelSearch);
+        panelTop.add(panelSearchWrapper, BorderLayout.WEST);
         panelTop.add(panelButton, BorderLayout.EAST);
         add(panelTop, BorderLayout.NORTH);
     }
@@ -74,16 +90,15 @@ public class ListDevice extends JPanel {
         panel_Table = new JPanel();
         panel_Table.setLayout(new BorderLayout());
         Border titledBorder = BorderFactory.createTitledBorder(
-                BorderFactory.createEtchedBorder(EtchedBorder.LOWERED, Color.WHITE, Color.GRAY),
-                "Danh sách thiết bị", TitledBorder.LEADING, TitledBorder.TOP);
+                BorderFactory.createEtchedBorder(EtchedBorder.RAISED, Color.WHITE, Color.GRAY),
+                "Device List", TitledBorder.LEADING, TitledBorder.TOP);
         ((TitledBorder) titledBorder)
                 .setTitleFont(((TitledBorder) titledBorder).getTitleFont().deriveFont(Font.BOLD, 14));
         panel_Table.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createEmptyBorder(0, 10, 50, 10),
-                titledBorder));
+                BorderFactory.createEmptyBorder(0, 10, 10, 10), titledBorder));
         modeltable = new DefaultTableModel(
-                new Object[][] {},
-                new String[] { "STT", "Mã Thiết Bị", "Tên Thiết Bị", "Mô Tả", "" }) {
+                new Object[][]{},
+                new String[]{"STT", "Device ID", "Device Name", "Description", "Action"}) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false; // Ngăn chặn việc chỉnh sửa ô
@@ -108,7 +123,8 @@ public class ListDevice extends JPanel {
         setColumnWidth(table, 3, 250);
         setColumnWidth(table, 4, 10);
         table.setModel(modeltable);
-        table.setShowGrid(false);
+        table.setIntercellSpacing(new Dimension(1, 1));
+        table.setShowGrid(true);
         JScrollPane scrollPane = new JScrollPane(table);
         panel_Table.add(scrollPane, BorderLayout.CENTER);
         panelCenter.add(panel_Table, BorderLayout.CENTER);
@@ -147,7 +163,7 @@ public class ListDevice extends JPanel {
                 int column = target.columnAtPoint(e.getPoint());
                 if (column == 4) {
                     int choice = JOptionPane.showConfirmDialog(null,
-                            "Bạn có chắc chắn muốn xóa thông tin thiết bị này?", "Xác nhận",
+                            "Are you sure delete this device information?", "Confirm",
                             JOptionPane.YES_NO_OPTION);
                     if (choice == JOptionPane.YES_OPTION) {
                         int row = target.rowAtPoint(e.getPoint());
@@ -225,6 +241,67 @@ public class ListDevice extends JPanel {
         }
     }
 
+    ActionListener multiDeleteListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent arg0) {
+            boolean validInput = false;
+            int year = 0;
+            while (!validInput) {
+                String input = JOptionPane.showInputDialog(null, "Enter the year to delete:");
+                if (input != null) {
+                    if (!input.isEmpty()) {
+                        try {
+                            year = Integer.parseInt(input);
+                            if (year > 0) {
+                                validInput = true;
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Please enter a valid year (greater than 0)!",
+                                        "Error",
+                                        JOptionPane.ERROR_MESSAGE);
+                            }
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "Please enter a valid year!", "Error",
+                                    JOptionPane.ERROR_MESSAGE);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Please enter the year to delete!", "Error",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    return;
+                }
+            }
+            deviceBLL.deleteDeviecByYear(year);
+            devicePanel.upDateContent();
+        }
+    };
+
+    ActionListener btnImportListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent arg0) {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Select Excel file to import");
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel Files", "xls", "xlsx");
+            fileChooser.setFileFilter(filter);
+            int userSelection = fileChooser.showOpenDialog(null);
+            if (userSelection == JFileChooser.APPROVE_OPTION) {
+                File fileToImport = fileChooser.getSelectedFile();
+                int importedCount = deviceBLL.importExcel(fileToImport);
+                if (importedCount != 0) {
+                    JOptionPane.showMessageDialog(null,
+                            "Successfully imported " + importedCount + " devices from Excel file.",
+                            "Success",
+                            JOptionPane.INFORMATION_MESSAGE);
+                    devicePanel.upDateContent();
+                } else {
+                    JOptionPane.showMessageDialog(null,
+                            "An error occurred while importing from Excel file.",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    };
     private JPanel panelCenter;
     private JPanel panel_Table;
     private DefaultTableModel modeltable;
@@ -232,4 +309,5 @@ public class ListDevice extends JPanel {
     private JTextField txtSearch;
     public Button btnAdd;
     public Button btnImport;
+    public Button btnMultiDelete;
 }

@@ -21,7 +21,7 @@ public class Member {
 
     @Id
     @Column(name = "MaTV")
-    private String id;
+    private int id;
 
     @Column(name = "HoTen")
     private String name;
@@ -41,6 +41,9 @@ public class Member {
     @Column(name = "Email")
     private String email;
     
+    @OneToMany(mappedBy = "memberID", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Discipline> disciplines;
+    
 
     @ManyToMany
     @JoinTable(name = "thongtinsd", 
@@ -52,7 +55,7 @@ public class Member {
         
     }
 
-    public Member(String id, String name, String department, String major, String phone, String email) {
+    public Member(int id, String name, String department, String major, String phone, String email) {
         this.id = id;
         this.name = name;
         this.department = department;
@@ -61,11 +64,11 @@ public class Member {
         this.email = email;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -123,6 +126,14 @@ public class Member {
 
     public void setDevices(List<Device> devices) {
         this.devices = devices;
+    }
+
+    public Set<Discipline> getDisciplines() {
+        return disciplines;
+    }
+
+    public void setDisciplines(Set<Discipline> disciplines) {
+        this.disciplines = disciplines;
     }
 
     @Override

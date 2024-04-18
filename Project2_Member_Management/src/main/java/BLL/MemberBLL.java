@@ -4,6 +4,9 @@ import DAL.MemberDAL;
 import DAL.baseDAL;
 import POJOs.Member;
 import POJOs.Device;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 
 import java.util.List;
 import java.util.Set;
@@ -24,7 +27,7 @@ public class MemberBLL {
         return baseMemberDAL.selectAll();
     }
 
-    public <String> Member getMemberById(String id) {
+    public <String> Member getMemberById(int id) {
         return baseMemberDAL.getById(id);
     }
 
@@ -36,10 +39,10 @@ public class MemberBLL {
         baseMemberDAL.update(member);
     }
 
-    public void deleteMember(String id) {
+    public void deleteMember(int id) {
         Member member = getMemberById(id);
-        deleteByMemberID("Usage", id);
-        deleteByMemberID("Discipline", id);
+//        deleteByMemberID("Usage", id);
+//        deleteByMemberID("Discipline", id);
         baseMemberDAL.delete(member);
     }
     
@@ -48,7 +51,7 @@ public class MemberBLL {
         return memberDAL.searchMember(validKeyword);
     }
     
-    public void deleteByMemberID(String tableName, String id) {
+    public void deleteByMemberID(String tableName, int id) {
         Member member = getMemberById(id);
         memberDAL.deleteByMemberID(tableName, member);
     }
@@ -69,11 +72,39 @@ public class MemberBLL {
         return memberDAL.timeBasedStatistics(startDate, endDate);
     }
     
-    public List<String> queryDepartment() {
-        return memberDAL.queryDepartment();
+    public List<String> queryYearOfActivation() {
+//        return memberDAL.queryYearOfActivation();
+        List<Member> members = selectAll();
+        Set<String> yearsOfActivation = new HashSet<>();
+        for(Member member : members) {
+            int memberID = member.getId();
+            String year = "20" + String.valueOf(memberID).substring(1, 3);
+            yearsOfActivation.add(year);
+        }
+        List<String> list = new ArrayList<>(yearsOfActivation);
+        
+        Collections.sort(list);
+        return list;
     }
     
-    public List<String> queryMajor(String department) {
-        return memberDAL.queryMajorsByDeparment(department);
+    public void deleteMemberByActiveYear(String year) {
+        String subID = year.substring(2);
+        List<Member> memberList = selectAll();
+        for (Member member : memberList)
+        {
+            int memberID = member.getId();
+            String memberIDStr = String.valueOf(memberID).substring(1,3);
+            if(subID.equals(memberIDStr)) {
+                deleteMember(memberID);
+            }
+        }
     }
+    
+//    public List<String> queryDepartment() {
+//        return memberDAL.queryDepartment();
+//    }
+//    
+//    public List<String> queryMajor(String department) {
+//        return memberDAL.queryMajorsByDeparment(department);
+//    }
 }
