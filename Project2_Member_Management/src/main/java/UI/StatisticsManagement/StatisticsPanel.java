@@ -7,15 +7,16 @@ package UI.StatisticsManagement;
 import BLL.DeviceBLL;
 import BLL.DisciplineBLL;
 import POJOs.Device;
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -45,20 +46,18 @@ public class StatisticsPanel extends javax.swing.JPanel {
 
     private void DeviceStatistics(List<Device> principledDevices) {
         List<Device> devices = principledDevices;
-        DefaultTableModel model = (DefaultTableModel)  tblDevice.getModel();
+        DefaultTableModel model = (DefaultTableModel) tblDevice.getModel();
         model.setRowCount(0);
 
         int STT = 1;
-        for (Device device : devices)
-        {
+        for (Device device : devices) {
             int ID = device.getId();
             String name = device.getName();
             String description = device.getDescription();
             Long borrowedCount = deviceBLL.statisticByName(ID);
 
             Object[] row
-                    =
-                    {
+                    = {
                         STT++, ID, name, description, borrowedCount
                     };
             model.addRow(row);
@@ -725,11 +724,13 @@ public class StatisticsPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int test = optionMember.getSelectedIndex();
         System.out.println(test);
-        if (test == 2)
-        {
+        if (test == 2) {
             pnlDisplayMemberStat.removeAll();
             pnlDisplayMemberStat.revalidate();
             pnlDisplayMemberStat.repaint();
+            for (int i = 0; i < 10; i++) {
+                customizePanelStat("abc"+i, "123");
+            }
         }
     }//GEN-LAST:event_optionMemberActionPerformed
 
@@ -737,14 +738,19 @@ public class StatisticsPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_optionDeviceItemStateChanged
 
-    public void customizePanelStat(JLabel title, JLabel number) {
+    public void customizePanelStat(String title, String number) {
         JPanel jp = new JPanel();
-        jp.setPreferredSize(new Dimension(420, 45));
-        title.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        number.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        jp.add(title);
-        jp.add(number);
-        jp.setVisible(true);
+        jp.setLayout(new BorderLayout());
+        jp.setBorder(BorderFactory.createCompoundBorder(new MatteBorder(0, 0, 1, 0, Color.BLACK), new EmptyBorder(0, 0, 0, 0)));
+        jp.setBackground(Color.WHITE);
+        JLabel txtTitle = new JLabel(title);
+        JLabel txtNumber = new JLabel(number);
+        jp.setPreferredSize(new Dimension(415, 45));
+        txtTitle.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        txtNumber.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        jp.add(txtTitle, BorderLayout.WEST);
+        jp.add(txtNumber, BorderLayout.EAST);
+        pnlDisplayMemberStat.add(jp);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel DeviceStatPnl;
