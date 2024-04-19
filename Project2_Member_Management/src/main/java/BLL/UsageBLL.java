@@ -5,6 +5,7 @@ import DAL.baseDAL;
 import POJOs.Usage;
 import POJOs.Member;
 import POJOs.Device;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,5 +47,9 @@ public class UsageBLL {
     
     public List<Device> selectAvailableDevices() {
         return usageDAL.selectAvailableDevices();
+    }
+    
+    public void updateByBorrowedTime(Timestamp borrowedTime, Timestamp paidTime, Device device) {
+         usageDAL.updateByBorrowedTime(borrowedTime, paidTime, device);
     }
 }

@@ -59,7 +59,7 @@ public class BorrowDeviceFrame extends javax.swing.JFrame {
             String deviceName = device.getName();
             Timestamp borrowedTime = usage.getBorrowedTime();
             Timestamp paidTime = usage.getPaidTime();
-            
+
             Object[] row
                     =
                     {
@@ -223,8 +223,8 @@ public class BorrowDeviceFrame extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    
-    
+
+
     private void borrowDeviceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrowDeviceBtnActionPerformed
         // TODO add your handling code here:    
         BorrowNewDeviceFrame borrowNewDeviceFrame = new BorrowNewDeviceFrame(this);
@@ -246,13 +246,14 @@ public class BorrowDeviceFrame extends javax.swing.JFrame {
             } else
             {
                 Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
-                int STT = Integer.parseInt(tblBorrowedDevice.getValueAt(row, 0).toString());
-                int currentIndex = STT  - 1;
-                int usageID = usageIDList.get(currentIndex);
-                Usage currentUsage = usageBLL.getById(usageID);
-                currentUsage.setPaidTime(currentTimestamp);
-                usageBLL.update(currentUsage);
-                
+
+                String borrowedTime = tblBorrowedDevice.getValueAt(row, 3).toString();
+                Timestamp borrowedTimestamp = Timestamp.valueOf(borrowedTime);
+
+                int deviceID = Integer.parseInt(tblBorrowedDevice.getValueAt(row, 1).toString());
+                Device device = deviceBLL.getDeviceById(deviceID);
+                usageBLL.updateByBorrowedTime(borrowedTimestamp, currentTimestamp, device);
+
                 borrowingHistory();
                 func.displayConfirmMessage("Device returned successfully!!");
             }

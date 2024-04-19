@@ -10,6 +10,7 @@ import POJOs.Member;
 import POJOs.Device;
 import Utils.hibernateUtil;
 import jakarta.persistence.Query;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
@@ -83,5 +84,31 @@ public class UsageDAL {
             e.printStackTrace();
         }
         return results;
+    }
+    
+    public void updateByBorrowedTime(Timestamp borrowedTime, Timestamp paidTime, Device device) {
+        Transaction transaction = null;
+        Session session;
+        try
+        {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            String hql = "UPDATE Usage SET paidTime = :paidTime WHERE borrowedTime = :borrowedTime AND device = :device";
+
+            Query query = session.createQuery(hql);
+            query.setParameter("borrowedTime", borrowedTime);
+            query.setParameter("paidTime", paidTime);
+            query.setParameter("device", device);
+            query.executeUpdate();
+
+            transaction.commit();
+        } catch (Exception e)
+        {
+            if (transaction != null)
+            {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
     }
 }

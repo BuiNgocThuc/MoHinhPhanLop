@@ -87,69 +87,38 @@ public class DeviceDAL {
         return listDevice.size();
     }
 
-    // Thống kê các thiết bị đã được mượn theo tên, khoảng thời gian
-    @SuppressWarnings("unchecked")
-    public List<Device> statisticDeviceBorrowed(String name, String startDateStr, String endDateStr)
-            throws ParseException {
-        Session session;
-        String hql = "FROM Device m JOIN Usage u ON m.id = u.device WHERE u.borrowedTime IS NOT NULL AND u.paidTime IS NOT NULL ";
-
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Timestamp startTimeStamp = null;
-        Timestamp endTimeStamp = null;
-        Date startDate = null;
-        Date endDate = null;
-
-        try
-        {
-            if (startDateStr != null)
-            {
-                startDate = dateFormat.parse(startDateStr);
-                startTimeStamp = new Timestamp(startDate.getTime());
-            }
-            if (endDateStr != null)
-            {
-                endDate = dateFormat.parse(endDateStr);
-                endTimeStamp = new Timestamp(endDate.getTime());
-            }
-        } catch (ParseException e)
-        {
-            e.printStackTrace();
-        }
-
-        Map<String, Object> params = new HashMap<>();
-
-        if (name != null)
-        {
-            hql += " AND m.name LIKE :name";
-            params.put("name", "%" + name + "%");
-        }
-
-        if (startTimeStamp != null)
-        {
-            hql += " AND u.borrowedTime >= :startTimeStamp";
-            params.put("startTimeStamp", startTimeStamp);
-        }
-        if (endTimeStamp != null)
-        {
-            hql += " AND u.paidTime <= :endTimeStamp";
-            params.put("endTimeStamp", endTimeStamp);
-        }
-
+    public List<Device> statisticBorrowedDevice(Timestamp startDate, Timestamp endDate) {
         List<Device> results = new ArrayList<>();
-        try
+        try (Session session = sessionFactory.openSession())
         {
-            session = sessionFactory.openSession();
+            Transaction transaction = session.beginTransaction();
+            
+            Map<String, Object> params = new HashMap<>();
+            // Sử dụng truy vấn HQL để đếm số lượng
+            String hql = "FROM Device d JOIN Usage u ON d.id = u.device WHERE u.paidTime IS NOT NULL";
 
-            Query query = session.createQuery(hql);
+            if (startDate != null)
+            {
+                hql += " AND u.borrowedTime >= :startDate";
+                params.put("startDate", startDate);
+            }
+            if (endDate != null)
+            {
+                hql += " AND u.paidTime <= :endDate";
+                params.put("endDate", endDate);
+            }
 
+            Query query = session.createQuery(hql, Long.class);
             for (Map.Entry<String, Object> entry : params.entrySet())
             {
                 query.setParameter(entry.getKey(), entry.getValue());
             }
 
-            results = query.getResultList();
+            // Sử dụng uniqueResult() để lấy kết quả duy nhất
+             results = query.getResultList();
 
+            // Hoàn thành giao dịch
+            transaction.commit();
         } catch (Exception e)
         {
             e.printStackTrace();
@@ -157,57 +126,38 @@ public class DeviceDAL {
         return results;
     }
 
-    // Thống kê thiết bị đang mượn và các thiết bị đang mượn theo khoảng thời gian
-    @SuppressWarnings("unchecked")
-    public List<Device> statisticDeviceIsBorrowing(String name, String startDateStr, String endDateStr) {
-        Session session;
-        String hql = "FROM Device m JOIN Usage u ON m.id = u.device WHERE u.device IS NOT NULL AND u.paidTime IS NULL ";
-
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Timestamp startTimeStamp = null;
-        Date startDate = null;
-
-        try
+    public List<Device> statisticBorrowingDevice(Timestamp startDate, Timestamp endDate) {
+         List<Device> results = new ArrayList<>();
+        try (Session session = sessionFactory.openSession())
         {
-            if (startDateStr != null)
+            Transaction transaction = session.beginTransaction();
+            
+            Map<String, Object> params = new HashMap<>();
+            // Sử dụng truy vấn HQL để đếm số lượng
+            String hql = "FROM Device d JOIN Usage u ON d.id = u.device WHERE u.paidTime IS NULL";
+
+            if (startDate != null)
             {
-                startDate = dateFormat.parse(startDateStr);
-                startTimeStamp = new Timestamp(startDate.getTime());
+                hql += " AND u.borrowedTime >= :startDate";
+                params.put("startDate", startDate);
             }
-        } catch (ParseException e)
-        {
-            e.printStackTrace();
-        }
+            if (endDate != null)
+            {
+                hql += " AND u.borrowed <= :endDate";
+                params.put("endDate", endDate);
+            }
 
-        Map<String, Object> params = new HashMap<>();
-
-        if (name != null)
-        {
-            hql += " AND m.name LIKE :name";
-            params.put("name", "%" + name + "%");
-        }
-
-        if (startTimeStamp != null)
-        {
-            hql += " AND u.borrowedTime >= :startTimeStamp";
-            params.put("startTimeStamp", startTimeStamp);
-        }
-
-        List<Device> results = new ArrayList<>();
-        try
-        {
-            session = sessionFactory.openSession();
-
-            @SuppressWarnings("deprecation")
-            Query query = session.createQuery(hql);
-
+            Query query = session.createQuery(hql, Long.class);
             for (Map.Entry<String, Object> entry : params.entrySet())
             {
                 query.setParameter(entry.getKey(), entry.getValue());
             }
 
+            // Sử dụng uniqueResult() để lấy kết quả duy nhất
             results = query.getResultList();
 
+            // Hoàn thành giao dịch
+            transaction.commit();
         } catch (Exception e)
         {
             e.printStackTrace();
@@ -274,7 +224,7 @@ public class DeviceDAL {
             Transaction transaction = session.beginTransaction();
 
             // Sử dụng truy vấn HQL để đếm số lượng
-            String hql = "SELECT COUNT(*) FROM Usage u WHERE u.device = :device";
+            String hql = "SELECT COUNT(*) FROM Usage u WHERE u.device = :device AND u.paidTime IS NOT NULL";
             org.hibernate.query.Query<Long> query = session.createQuery(hql, Long.class);
             query.setParameter("device", device);
 

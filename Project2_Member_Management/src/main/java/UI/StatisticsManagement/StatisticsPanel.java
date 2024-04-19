@@ -51,9 +51,9 @@ public class StatisticsPanel extends javax.swing.JPanel {
 
     private void DisciplineStatistics() {
         String[] statistics = disciplineBLL.StatisticsDiscipline().split(",");
-        jStatisticsDisciplineprocessed.setText(statistics[0]);
-        jStatisticsDisciplinenoprocessed.setText(statistics[1]);
-        jStatisticsTotalamount.setText(statistics[2]);
+        txtProcessed.setText(statistics[0]);
+        txtNonProcessed.setText(statistics[1]);
+        txtTotalAmount.setText(statistics[2]);
     }
 
     private void DeviceStatistics(List<Device> principledDevices) {
@@ -117,8 +117,8 @@ public class StatisticsPanel extends javax.swing.JPanel {
         DeviceStatPnl = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         cbOptionDevice = new javax.swing.JComboBox<>();
-        datePicker2 = new com.github.lgooddatepicker.components.DatePicker();
-        datePicker3 = new com.github.lgooddatepicker.components.DatePicker();
+        txtStartDateDevice = new com.github.lgooddatepicker.components.DatePicker();
+        txtEndDateDevice = new com.github.lgooddatepicker.components.DatePicker();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblDevice = new javax.swing.JTable();
         PunishStatPnl = new javax.swing.JPanel();
@@ -126,13 +126,13 @@ public class StatisticsPanel extends javax.swing.JPanel {
         jPanel6 = new javax.swing.JPanel();
         pnlHandleCompleted = new javax.swing.JPanel();
         txtHandleCompleted = new javax.swing.JLabel();
-        jStatisticsDisciplineprocessed = new javax.swing.JLabel();
+        txtProcessed = new javax.swing.JLabel();
         pnlOnHandle = new javax.swing.JPanel();
         txtOnHandle = new javax.swing.JLabel();
-        jStatisticsDisciplinenoprocessed = new javax.swing.JLabel();
+        txtNonProcessed = new javax.swing.JLabel();
         pnlTotal = new javax.swing.JPanel();
         txtTotalMoney = new javax.swing.JLabel();
-        jStatisticsTotalamount = new javax.swing.JLabel();
+        txtTotalAmount = new javax.swing.JLabel();
         MemberStatPnl = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -212,6 +212,18 @@ public class StatisticsPanel extends javax.swing.JPanel {
             }
         });
 
+        txtStartDateDevice.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                txtStartDateDevicePropertyChange(evt);
+            }
+        });
+
+        txtEndDateDevice.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                txtEndDateDevicePropertyChange(evt);
+            }
+        });
+
         tblDevice.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -242,9 +254,9 @@ public class StatisticsPanel extends javax.swing.JPanel {
                     .addGroup(DeviceStatPnlLayout.createSequentialGroup()
                         .addComponent(cbOptionDevice, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(datePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtStartDateDevice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(datePicker3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtEndDateDevice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -255,8 +267,8 @@ public class StatisticsPanel extends javax.swing.JPanel {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(DeviceStatPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(datePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(datePicker3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtStartDateDevice, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEndDateDevice, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbOptionDevice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -289,12 +301,12 @@ public class StatisticsPanel extends javax.swing.JPanel {
         txtHandleCompleted.setPreferredSize(new java.awt.Dimension(145, 40));
         pnlHandleCompleted.add(txtHandleCompleted);
 
-        jStatisticsDisciplineprocessed.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jStatisticsDisciplineprocessed.setText("1");
-        jStatisticsDisciplineprocessed.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jStatisticsDisciplineprocessed.setMinimumSize(new java.awt.Dimension(8, 8));
-        jStatisticsDisciplineprocessed.setPreferredSize(new java.awt.Dimension(175, 45));
-        pnlHandleCompleted.add(jStatisticsDisciplineprocessed);
+        txtProcessed.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        txtProcessed.setText("1");
+        txtProcessed.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtProcessed.setMinimumSize(new java.awt.Dimension(8, 8));
+        txtProcessed.setPreferredSize(new java.awt.Dimension(175, 45));
+        pnlHandleCompleted.add(txtProcessed);
 
         pnlOnHandle.setBackground(new java.awt.Color(255, 255, 255));
         pnlOnHandle.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
@@ -305,11 +317,11 @@ public class StatisticsPanel extends javax.swing.JPanel {
         txtOnHandle.setPreferredSize(new java.awt.Dimension(145, 40));
         pnlOnHandle.add(txtOnHandle);
 
-        jStatisticsDisciplinenoprocessed.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jStatisticsDisciplinenoprocessed.setText("111");
-        jStatisticsDisciplinenoprocessed.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jStatisticsDisciplinenoprocessed.setPreferredSize(new java.awt.Dimension(175, 45));
-        pnlOnHandle.add(jStatisticsDisciplinenoprocessed);
+        txtNonProcessed.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        txtNonProcessed.setText("111");
+        txtNonProcessed.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtNonProcessed.setPreferredSize(new java.awt.Dimension(175, 45));
+        pnlOnHandle.add(txtNonProcessed);
 
         pnlTotal.setBackground(new java.awt.Color(255, 255, 255));
         pnlTotal.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
@@ -320,11 +332,11 @@ public class StatisticsPanel extends javax.swing.JPanel {
         txtTotalMoney.setPreferredSize(new java.awt.Dimension(145, 40));
         pnlTotal.add(txtTotalMoney);
 
-        jStatisticsTotalamount.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jStatisticsTotalamount.setText("1111");
-        jStatisticsTotalamount.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jStatisticsTotalamount.setPreferredSize(new java.awt.Dimension(175, 45));
-        pnlTotal.add(jStatisticsTotalamount);
+        txtTotalAmount.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        txtTotalAmount.setText("1111");
+        txtTotalAmount.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtTotalAmount.setPreferredSize(new java.awt.Dimension(175, 45));
+        pnlTotal.add(txtTotalAmount);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -777,47 +789,52 @@ public class StatisticsPanel extends javax.swing.JPanel {
 
     private void cbOptionDeviceItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbOptionDeviceItemStateChanged
         // TODO add your handling code here:
-        int selectedItem = cbOptionDevice.getSelectedIndex();
-        List<Device> principledDevcies = new ArrayList<>();
-        if (selectedItem == 0)
-        {
-            try
-            {
-                principledDevcies = deviceBLL.statisticDeviceBorrowed(null, null, null);
-            } catch (ParseException ex)
-            {
-                Logger.getLogger(StatisticsPanel.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            DeviceStatistics(principledDevcies);
-        } else
-        {
-            try
-            {
-                principledDevcies = deviceBLL.statisticDeviceIsBorrowing(null, null, null);
-            } catch (ParseException ex)
-            {
-                Logger.getLogger(StatisticsPanel.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            BorrowingDeviceStatistics(principledDevcies);
-        }
+        handleDateChangeDevice();
     }//GEN-LAST:event_cbOptionDeviceItemStateChanged
 
     private void optionMemberItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_optionMemberItemStateChanged
         // TODO add your handling code here:
-        handleDateChange();
+        handleDateChangeMember();
     }//GEN-LAST:event_optionMemberItemStateChanged
 
     private void txtStartDatePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtStartDatePropertyChange
         // TODO add your handling code here:
-        handleDateChange();
+        handleDateChangeMember();
     }//GEN-LAST:event_txtStartDatePropertyChange
 
     private void txtEndDatePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtEndDatePropertyChange
         // TODO add your handling code here:
-        handleDateChange();
+        handleDateChangeMember();
     }//GEN-LAST:event_txtEndDatePropertyChange
 
-    private void handleDateChange() {
+    private void txtStartDateDevicePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtStartDateDevicePropertyChange
+        // TODO add your handling code here:
+        handleDateChangeDevice();
+    }//GEN-LAST:event_txtStartDateDevicePropertyChange
+
+    private void txtEndDateDevicePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtEndDateDevicePropertyChange
+        // TODO add your handling code here:
+        handleDateChangeDevice();
+    }//GEN-LAST:event_txtEndDateDevicePropertyChange
+
+    private void handleDateChangeDevice() {
+        LocalDate startDate = txtStartDateDevice.getDate();
+        LocalDate endDate = txtEndDateDevice.getDate();
+        int selectedItem = cbOptionDevice.getSelectedIndex();
+        List<Device> principledDevcies = new ArrayList<>();
+        if (selectedItem == 0)
+        {
+            principledDevcies = deviceBLL.statisticDeviceBorrowed(startDate, endDate);
+            DeviceStatistics(principledDevcies);
+        } else
+        {
+            principledDevcies = deviceBLL.statisticDeviceIsBorrowing(startDate, endDate);
+            BorrowingDeviceStatistics(principledDevcies);
+        }
+
+    }
+
+    private void handleDateChangeMember() {
         LocalDate startDate = txtStartDate.getDate();
         LocalDate endDate = txtEndDate.getDate();
         String department = optionMember.getSelectedItem().toString();
@@ -880,8 +897,6 @@ public class StatisticsPanel extends javax.swing.JPanel {
     private javax.swing.JPanel MemberStatPnl;
     private javax.swing.JPanel PunishStatPnl;
     private javax.swing.JComboBox<String> cbOptionDevice;
-    private com.github.lgooddatepicker.components.DatePicker datePicker2;
-    private com.github.lgooddatepicker.components.DatePicker datePicker3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel26;
@@ -919,9 +934,6 @@ public class StatisticsPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel jStatisticsDisciplinenoprocessed;
-    private javax.swing.JLabel jStatisticsDisciplineprocessed;
-    private javax.swing.JLabel jStatisticsTotalamount;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JComboBox<String> optionMember;
@@ -933,9 +945,14 @@ public class StatisticsPanel extends javax.swing.JPanel {
     private javax.swing.JLabel punishStatTitle;
     private javax.swing.JTable tblDevice;
     private com.github.lgooddatepicker.components.DatePicker txtEndDate;
+    private com.github.lgooddatepicker.components.DatePicker txtEndDateDevice;
     private javax.swing.JLabel txtHandleCompleted;
+    private javax.swing.JLabel txtNonProcessed;
     private javax.swing.JLabel txtOnHandle;
+    private javax.swing.JLabel txtProcessed;
     private com.github.lgooddatepicker.components.DatePicker txtStartDate;
+    private com.github.lgooddatepicker.components.DatePicker txtStartDateDevice;
+    private javax.swing.JLabel txtTotalAmount;
     private javax.swing.JLabel txtTotalMoney;
     // End of variables declaration//GEN-END:variables
 }

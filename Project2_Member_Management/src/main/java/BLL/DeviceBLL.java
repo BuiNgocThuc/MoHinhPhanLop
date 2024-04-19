@@ -6,7 +6,9 @@ import POJOs.Device;
 import POJOs.Usage;
 
 import java.io.File;
+import java.sql.Timestamp;
 import java.text.ParseException;
+import java.time.LocalDate;
 
 import java.util.List;
 
@@ -98,13 +100,32 @@ public class DeviceBLL {
         return deviceDAL.searchDevice(validKeyword);
     }
 
-    public List<Device> statisticDeviceBorrowed(String name, String startDate, String endDate) throws ParseException {
-        return deviceDAL.statisticDeviceBorrowed(name, startDate, endDate);
+    public List<Device> statisticDeviceBorrowed(LocalDate startDate, LocalDate endDate) {
+        Timestamp startTimestamp = null;
+        Timestamp endTimestamp = null;
+        if (startDate != null)
+        {
+            startTimestamp = Timestamp.valueOf(startDate.atStartOfDay());
+        }
+        if (endDate != null)
+        {
+            endTimestamp = Timestamp.valueOf(endDate.atStartOfDay());
+        }
+        return deviceDAL.statisticBorrowedDevice(startTimestamp, endTimestamp);
     }
 
-    public List<Device> statisticDeviceIsBorrowing(String name, String startDate, String endDate)
-            throws ParseException {
-        return deviceDAL.statisticDeviceIsBorrowing(name, startDate, endDate);
+    public List<Device> statisticDeviceIsBorrowing(LocalDate startDate, LocalDate endDate) {
+        Timestamp startTimestamp = null;
+        Timestamp endTimestamp = null;
+        if (startDate != null)
+        {
+            startTimestamp = Timestamp.valueOf(startDate.atStartOfDay());
+        }
+        if (endDate != null)
+        {
+            endTimestamp = Timestamp.valueOf(endDate.atStartOfDay());
+        }
+        return deviceDAL.statisticBorrowingDevice(startTimestamp, endTimestamp);
     }
 
     public int importExcel(File file) {
