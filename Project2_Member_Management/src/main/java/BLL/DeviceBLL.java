@@ -100,33 +100,23 @@ public class DeviceBLL {
         return deviceDAL.searchDevice(validKeyword);
     }
 
-    public List<Device> statisticDeviceBorrowed(LocalDate startDate, LocalDate endDate) {
-        Timestamp startTimestamp = null;
-        Timestamp endTimestamp = null;
-        if (startDate != null)
-        {
-            startTimestamp = Timestamp.valueOf(startDate.atStartOfDay());
-        }
-        if (endDate != null)
-        {
-            endTimestamp = Timestamp.valueOf(endDate.atStartOfDay());
-        }
-        return deviceDAL.statisticBorrowedDevice(startTimestamp, endTimestamp);
+    public List<Device> queryDeviceByName(String name, int flag) {
+        return deviceDAL.queryDeviceByName(name, flag);
     }
 
-    public List<Device> statisticDeviceIsBorrowing(LocalDate startDate, LocalDate endDate) {
-        Timestamp startTimestamp = null;
-        Timestamp endTimestamp = null;
-        if (startDate != null)
-        {
-            startTimestamp = Timestamp.valueOf(startDate.atStartOfDay());
-        }
-        if (endDate != null)
-        {
-            endTimestamp = Timestamp.valueOf(endDate.atStartOfDay());
-        }
-        return deviceDAL.statisticBorrowingDevice(startTimestamp, endTimestamp);
-    }
+//    public List<Device> statisticDeviceIsBorrowing(LocalDate startDate, LocalDate endDate) {
+//        Timestamp startTimestamp = null;
+//        Timestamp endTimestamp = null;
+//        if (startDate != null)
+//        {
+//            startTimestamp = Timestamp.valueOf(startDate.atStartOfDay());
+//        }
+//        if (endDate != null)
+//        {
+//            endTimestamp = Timestamp.valueOf(endDate.atStartOfDay());
+//        }
+//        return deviceDAL.statisticBorrowingDevice(startTimestamp, endTimestamp);
+//    }
 
     public int importExcel(File file) {
         int importedRecords = deviceDAL.importExcel(file);
@@ -140,9 +130,21 @@ public class DeviceBLL {
         return importedRecords;
     }
 
-    public Long statisticByName(int ID) {
+    public Long queryBorrowedCount(int ID, LocalDate startDate, LocalDate endDate, int flag) {
         Device device = getDeviceById(ID);
-        return deviceDAL.statisticByName(device);
+        
+        Timestamp startTimestamp = null;
+        Timestamp endTimestamp = null;
+        if (startDate != null)
+        {
+            startTimestamp = Timestamp.valueOf(startDate.atStartOfDay());
+        }
+        if (endDate != null)
+        {
+            endTimestamp = Timestamp.valueOf(endDate.atStartOfDay());
+        }
+        
+        return deviceDAL.queryBorrowedCount(device, startTimestamp, endTimestamp, flag);
     }
 
 }

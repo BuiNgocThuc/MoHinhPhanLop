@@ -13,6 +13,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.KeyEvent;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.time.LocalDate;
@@ -46,7 +47,7 @@ public class StatisticsPanel extends javax.swing.JPanel {
     public StatisticsPanel() {
         initComponents();
         DisciplineStatistics();
-        DeviceStatistics(deviceBLL.selectAll());
+        DeviceStatistics(deviceBLL.selectAll(), null, null, 0);
         MemberStatistics("Tất cả các khoa", null, null);
     }
 
@@ -57,45 +58,23 @@ public class StatisticsPanel extends javax.swing.JPanel {
         txtTotalAmount.setText(statistics[2]);
     }
 
-    private void DeviceStatistics(List<Device> principledDevices) {
+    private void DeviceStatistics(List<Device> principledDevices, LocalDate startDate, LocalDate endDate, int flag) {
         List<Device> devices = principledDevices;
         DefaultTableModel model = (DefaultTableModel) tblDevice.getModel();
         model.setRowCount(0);
-
+        
         int STT = 1;
         for (Device device : devices)
         {
             int ID = device.getId();
             String name = device.getName();
             String description = device.getDescription();
-            Long borrowedCount = deviceBLL.statisticByName(ID);
+            Long borrowedCount = deviceBLL.queryBorrowedCount(ID, startDate, endDate, flag);
 
             Object[] row
                     =
                     {
                         STT++, ID, name, description, borrowedCount
-                    };
-            model.addRow(row);
-        }
-        model.fireTableDataChanged();
-    }
-
-    private void BorrowingDeviceStatistics(List<Device> principledDevices) {
-        List<Device> devices = principledDevices;
-        DefaultTableModel model = (DefaultTableModel) tblDevice.getModel();
-        model.setRowCount(0);
-
-        int STT = 1;
-        for (Device device : devices)
-        {
-            int ID = device.getId();
-            String name = device.getName();
-            String description = device.getDescription();
-
-            Object[] row
-                    =
-                    {
-                        STT++, ID, name, description, 1
                     };
             model.addRow(row);
         }
@@ -232,8 +211,13 @@ public class StatisticsPanel extends javax.swing.JPanel {
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel5.setPreferredSize(new java.awt.Dimension(100, 40));
 
-        txtSearchDevice.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         txtSearchDevice.setBorder(null);
+        txtSearchDevice.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        txtSearchDevice.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSearchDeviceKeyPressed(evt);
+            }
+        });
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-search-25.png"))); // NOI18N
@@ -274,7 +258,7 @@ public class StatisticsPanel extends javax.swing.JPanel {
                                 .addComponent(txtStartDateDevice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtEndDateDevice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 292, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         DeviceStatPnlLayout.setVerticalGroup(
@@ -836,19 +820,29 @@ public class StatisticsPanel extends javax.swing.JPanel {
         handleDateChangeDevice();
     }//GEN-LAST:event_txtEndDateDevicePropertyChange
 
+    private void txtSearchDeviceKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchDeviceKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            handleDateChangeDevice();
+        }
+    }//GEN-LAST:event_txtSearchDeviceKeyPressed
+
     private void handleDateChangeDevice() {
         LocalDate startDate = txtStartDateDevice.getDate();
         LocalDate endDate = txtEndDateDevice.getDate();
+        String nameDevice = txtSearchDevice.getText().trim();
         int selectedItem = cbOptionDevice.getSelectedIndex();
+
         List<Device> principledDevcies = new ArrayList<>();
         if (selectedItem == 0)
         {
-            principledDevcies = deviceBLL.statisticDeviceBorrowed(startDate, endDate);
-            DeviceStatistics(principledDevcies);
+            principledDevcies = deviceBLL.queryDeviceByName(nameDevice, selectedItem);
+            DeviceStatistics(principledDevcies, startDate, endDate, selectedItem);
         } else
         {
-            principledDevcies = deviceBLL.statisticDeviceIsBorrowing(startDate, endDate);
-            BorrowingDeviceStatistics(principledDevcies);
+            principledDevcies = deviceBLL.queryDeviceByName(nameDevice, selectedItem);
+            DeviceStatistics(principledDevcies, startDate, endDate, selectedItem);
         }
 
     }
@@ -864,7 +858,7 @@ public class StatisticsPanel extends javax.swing.JPanel {
         pnlDisplayMemberStat.removeAll();
         pnlDisplayMemberStat.revalidate();
         pnlDisplayMemberStat.repaint();
-        if (option == "Tất cả các khoa")
+        if (option.equals("Tất cả các khoa"))
         {
             List<String> departments = memberBLL.queryDepartments();
 
@@ -949,7 +943,6 @@ public class StatisticsPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel25;
     private javax.swing.JPanel jPanel26;
     private javax.swing.JPanel jPanel27;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
@@ -968,7 +961,6 @@ public class StatisticsPanel extends javax.swing.JPanel {
     private javax.swing.JLabel txtNonProcessed;
     private javax.swing.JLabel txtOnHandle;
     private javax.swing.JLabel txtProcessed;
-    private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtSearchDevice;
     private com.github.lgooddatepicker.components.DatePicker txtStartDate;
     private com.github.lgooddatepicker.components.DatePicker txtStartDateDevice;

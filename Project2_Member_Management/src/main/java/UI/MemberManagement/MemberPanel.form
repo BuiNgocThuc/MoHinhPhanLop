@@ -115,7 +115,7 @@
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jButton2" min="-2" pref="159" max="-2" attributes="0"/>
+                              <Component id="txtExcel" min="-2" pref="159" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -133,7 +133,7 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="cbYearOfActivation" max="32767" attributes="0"/>
                           <Component id="btnDelByFilter" max="32767" attributes="0"/>
-                          <Component id="jButton2" max="32767" attributes="0"/>
+                          <Component id="txtExcel" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -483,7 +483,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDelByFilterActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton2">
+            <Component class="javax.swing.JButton" name="txtExcel">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="8f" green="8f" red="0" type="rgb"/>
@@ -502,6 +502,9 @@
                   <Border info="null"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtExcelActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

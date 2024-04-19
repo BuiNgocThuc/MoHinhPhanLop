@@ -7,10 +7,22 @@ package UI.MemberManagement;
 import java.util.List;
 import POJOs.Member;
 import BLL.MemberBLL;
+import POJOs.Discipline;
 import Utils.sharedFunction;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Set;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -91,7 +103,7 @@ public class MemberPanel extends javax.swing.JPanel {
         deviceFrameBtn = new javax.swing.JButton();
         cbYearOfActivation = new javax.swing.JComboBox<>();
         btnDelByFilter = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        txtExcel = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblMember = new javax.swing.JTable();
 
@@ -214,12 +226,17 @@ public class MemberPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(0, 143, 143));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-excel-30.png"))); // NOI18N
-        jButton2.setText("Import");
-        jButton2.setBorder(null);
+        txtExcel.setBackground(new java.awt.Color(0, 143, 143));
+        txtExcel.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        txtExcel.setForeground(new java.awt.Color(255, 255, 255));
+        txtExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-excel-30.png"))); // NOI18N
+        txtExcel.setText("Import");
+        txtExcel.setBorder(null);
+        txtExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtExcelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -238,7 +255,7 @@ public class MemberPanel extends javax.swing.JPanel {
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
         jPanel2Layout.setVerticalGroup(
@@ -251,7 +268,7 @@ public class MemberPanel extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cbYearOfActivation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnDelByFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(txtExcel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         tblMember.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
@@ -442,6 +459,50 @@ public class MemberPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnDelByFilterActionPerformed
 
+    private void txtExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtExcelActionPerformed
+        // TODO add your handling code here:
+        String errs = "";// TODO add your handling code here:
+
+        try {
+            XSSFWorkbook wb = null;
+            FileInputStream fileIn = null;
+            JFileChooser choose = new JFileChooser();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel Files", "xls", "xlsx");
+            choose.setFileFilter(filter);
+            int excelchoose = choose.showOpenDialog(null);
+            if (excelchoose == JFileChooser.APPROVE_OPTION) {
+                File fl = choose.getSelectedFile();
+                fileIn = new FileInputStream(fl);
+                wb = new XSSFWorkbook(fileIn);
+                XSSFSheet sheet = wb.getSheetAt(0);
+                XSSFRow row;
+                for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+                    row = sheet.getRow(i);
+                    int id = (int) row.getCell(0).getNumericCellValue();
+                    String name = row.getCell(1).getStringCellValue();
+                    String department = row.getCell(2).getStringCellValue();
+                    String major = row.getCell(3).getStringCellValue();
+                    int phone = (int) row.getCell(4).getNumericCellValue();
+                    int password = (int) row.getCell(5).getNumericCellValue();
+                    String email = row.getCell(6).getStringCellValue();
+                    Member member = new Member(id, name, department, major, String.valueOf(phone), email);
+                    member.setPassword(String.valueOf(password));
+                    memberBLL.insertMember(member);
+                }
+                JOptionPane.showMessageDialog(null, "Data import Success");
+            }
+            if(wb!=null){
+                wb.close();
+            }
+            updateModelTable();
+        } catch (Exception e) {
+            errs += e.getMessage() + '\n';
+        }
+        if (!errs.equals("")) {
+            JOptionPane.showMessageDialog(null, "Data import Fail:" + "\n" + errs);
+        }
+    }//GEN-LAST:event_txtExcelActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addMemberBtn;
@@ -450,7 +511,6 @@ public class MemberPanel extends javax.swing.JPanel {
     private javax.swing.JButton deleteMemberBtn;
     private javax.swing.JButton deviceFrameBtn;
     private javax.swing.JButton editMemberBtn;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -461,6 +521,7 @@ public class MemberPanel extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSlider jSlider1;
     private javax.swing.JTable tblMember;
+    private javax.swing.JButton txtExcel;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }
