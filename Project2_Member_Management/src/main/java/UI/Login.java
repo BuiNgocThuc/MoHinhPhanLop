@@ -355,8 +355,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtIDKeyPressed
 
     private void btnAccessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccessActionPerformed
-        Instant now = Instant.now();
-        Timestamp currentTimestamp = Timestamp.from(now);
+        Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
         Usage usage = new Usage();
         usage.setMember(member);
         usage.setEnteredTime(currentTimestamp);

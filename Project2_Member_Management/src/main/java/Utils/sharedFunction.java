@@ -5,6 +5,14 @@
 package Utils;
 
 import javax.swing.JOptionPane;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 /**
  *
@@ -24,4 +32,24 @@ public class sharedFunction {
         int dialogResult = JOptionPane.showConfirmDialog(null, question, "Confirm", JOptionPane.YES_NO_OPTION);
         return dialogResult == JOptionPane.YES_OPTION;
     }
+
+    public Timestamp transTimestamp(LocalDate date) {
+
+        // Chuyển đổi LocalDate thành LocalDateTime (thêm thời gian là 00:00)
+        LocalDateTime localDateTime = date.atStartOfDay();
+
+        // Chuyển đổi LocalDateTime thành Timestamp
+        Timestamp timestamp = Timestamp.valueOf(localDateTime);
+
+        // In ra kết quả
+        System.out.println("Timestamp: " + timestamp);
+        
+        return timestamp;
+    }
+    
+//    public static void main(String[] args) {
+//        sharedFunction func = new sharedFunction();
+//        
+//        func.transTimestamp("2024-04-16");
+//    }
 }

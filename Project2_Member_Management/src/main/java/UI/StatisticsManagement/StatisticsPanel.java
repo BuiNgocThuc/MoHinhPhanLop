@@ -6,12 +6,21 @@ package UI.StatisticsManagement;
 
 import BLL.DeviceBLL;
 import BLL.DisciplineBLL;
+import BLL.MemberBLL;
 import POJOs.Device;
+import Utils.sharedFunction;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -27,6 +36,8 @@ public class StatisticsPanel extends javax.swing.JPanel {
 
     private final DisciplineBLL disciplineBLL = new DisciplineBLL();
     private final DeviceBLL deviceBLL = new DeviceBLL();
+    private final MemberBLL memberBLL = new MemberBLL();
+    private final sharedFunction func = new sharedFunction();
 
     /**
      * Creates new form MemberStat
@@ -35,6 +46,7 @@ public class StatisticsPanel extends javax.swing.JPanel {
         initComponents();
         DisciplineStatistics();
         DeviceStatistics(deviceBLL.selectAll());
+        MemberStatistics("Tất cả các khoa", null, null);
     }
 
     private void DisciplineStatistics() {
@@ -50,15 +62,39 @@ public class StatisticsPanel extends javax.swing.JPanel {
         model.setRowCount(0);
 
         int STT = 1;
-        for (Device device : devices) {
+        for (Device device : devices)
+        {
             int ID = device.getId();
             String name = device.getName();
             String description = device.getDescription();
             Long borrowedCount = deviceBLL.statisticByName(ID);
 
             Object[] row
-                    = {
+                    =
+                    {
                         STT++, ID, name, description, borrowedCount
+                    };
+            model.addRow(row);
+        }
+        model.fireTableDataChanged();
+    }
+
+    private void BorrowingDeviceStatistics(List<Device> principledDevices) {
+        List<Device> devices = principledDevices;
+        DefaultTableModel model = (DefaultTableModel) tblDevice.getModel();
+        model.setRowCount(0);
+
+        int STT = 1;
+        for (Device device : devices)
+        {
+            int ID = device.getId();
+            String name = device.getName();
+            String description = device.getDescription();
+
+            Object[] row
+                    =
+                    {
+                        STT++, ID, name, description, 1
                     };
             model.addRow(row);
         }
@@ -80,7 +116,7 @@ public class StatisticsPanel extends javax.swing.JPanel {
         jTextPane1 = new javax.swing.JTextPane();
         DeviceStatPnl = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        optionDevice = new javax.swing.JComboBox<>();
+        cbOptionDevice = new javax.swing.JComboBox<>();
         datePicker2 = new com.github.lgooddatepicker.components.DatePicker();
         datePicker3 = new com.github.lgooddatepicker.components.DatePicker();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -101,8 +137,8 @@ public class StatisticsPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         pnlTimeMember = new javax.swing.JPanel();
-        datePicker4 = new com.github.lgooddatepicker.components.DatePicker();
-        datePicker1 = new com.github.lgooddatepicker.components.DatePicker();
+        txtStartDate = new com.github.lgooddatepicker.components.DatePicker();
+        txtEndDate = new com.github.lgooddatepicker.components.DatePicker();
         pnlDisplayMemberStat = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -162,17 +198,17 @@ public class StatisticsPanel extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(0, 143, 143));
         jLabel1.setPreferredSize(new java.awt.Dimension(40, 16));
 
-        optionDevice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả thiết bị", "Thiết bị đã được mượn", "Thiết bị đang được mượn" }));
-        optionDevice.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        optionDevice.setPreferredSize(new java.awt.Dimension(72, 30));
-        optionDevice.addItemListener(new java.awt.event.ItemListener() {
+        cbOptionDevice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Thiết bị đã được mượn", "Thiết bị đang được mượn" }));
+        cbOptionDevice.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        cbOptionDevice.setPreferredSize(new java.awt.Dimension(72, 30));
+        cbOptionDevice.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                optionDeviceItemStateChanged(evt);
+                cbOptionDeviceItemStateChanged(evt);
             }
         });
-        optionDevice.addActionListener(new java.awt.event.ActionListener() {
+        cbOptionDevice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                optionDeviceActionPerformed(evt);
+                cbOptionDeviceActionPerformed(evt);
             }
         });
 
@@ -204,7 +240,7 @@ public class StatisticsPanel extends javax.swing.JPanel {
                 .addGroup(DeviceStatPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(DeviceStatPnlLayout.createSequentialGroup()
-                        .addComponent(optionDevice, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbOptionDevice, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(datePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -221,7 +257,7 @@ public class StatisticsPanel extends javax.swing.JPanel {
                 .addGroup(DeviceStatPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(datePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(datePicker3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(optionDevice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbOptionDevice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -345,11 +381,21 @@ public class StatisticsPanel extends javax.swing.JPanel {
         flowLayout2.setAlignOnBaseline(true);
         pnlTimeMember.setLayout(flowLayout2);
 
-        datePicker4.setPreferredSize(new java.awt.Dimension(143, 40));
-        pnlTimeMember.add(datePicker4);
+        txtStartDate.setPreferredSize(new java.awt.Dimension(143, 40));
+        txtStartDate.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                txtStartDatePropertyChange(evt);
+            }
+        });
+        pnlTimeMember.add(txtStartDate);
 
-        datePicker1.setPreferredSize(new java.awt.Dimension(143, 40));
-        pnlTimeMember.add(datePicker1);
+        txtEndDate.setPreferredSize(new java.awt.Dimension(143, 40));
+        txtEndDate.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                txtEndDatePropertyChange(evt);
+            }
+        });
+        pnlTimeMember.add(txtEndDate);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -650,8 +696,13 @@ public class StatisticsPanel extends javax.swing.JPanel {
 
         pnlDisplayMemberStat.add(jPanel27);
 
-        optionMember.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CNTT", "Ngoại ngữ", "SP KHTN", "SP KHXH", "Nghệ thuật" }));
+        optionMember.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả các khoa", "CNTT", "Ngoại ngữ", "SP KHTN", "SP KHXH", "Nghệ thuật" }));
         optionMember.setPreferredSize(new java.awt.Dimension(72, 40));
+        optionMember.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                optionMemberItemStateChanged(evt);
+            }
+        });
         optionMember.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 optionMemberActionPerformed(evt);
@@ -716,38 +767,110 @@ public class StatisticsPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void optionDeviceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionDeviceActionPerformed
+    private void cbOptionDeviceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOptionDeviceActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_optionDeviceActionPerformed
+    }//GEN-LAST:event_cbOptionDeviceActionPerformed
 
     private void optionMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionMemberActionPerformed
         // TODO add your handling code here:
-        int test = optionMember.getSelectedIndex();
-        System.out.println(test);
-        if (test == 2) {
-            pnlDisplayMemberStat.removeAll();
-            pnlDisplayMemberStat.revalidate();
-            pnlDisplayMemberStat.repaint();
-            for (int i = 0; i < 10; i++) {
-                customizePanelStat("abc"+i, "123");
-            }
-        }
     }//GEN-LAST:event_optionMemberActionPerformed
 
-    private void optionDeviceItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_optionDeviceItemStateChanged
+    private void cbOptionDeviceItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbOptionDeviceItemStateChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_optionDeviceItemStateChanged
+        int selectedItem = cbOptionDevice.getSelectedIndex();
+        List<Device> principledDevcies = new ArrayList<>();
+        if (selectedItem == 0)
+        {
+            try
+            {
+                principledDevcies = deviceBLL.statisticDeviceBorrowed(null, null, null);
+            } catch (ParseException ex)
+            {
+                Logger.getLogger(StatisticsPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            DeviceStatistics(principledDevcies);
+        } else
+        {
+            try
+            {
+                principledDevcies = deviceBLL.statisticDeviceIsBorrowing(null, null, null);
+            } catch (ParseException ex)
+            {
+                Logger.getLogger(StatisticsPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            BorrowingDeviceStatistics(principledDevcies);
+        }
+    }//GEN-LAST:event_cbOptionDeviceItemStateChanged
 
-    public void customizePanelStat(String title, String number) {
+    private void optionMemberItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_optionMemberItemStateChanged
+        // TODO add your handling code here:
+        handleDateChange();
+    }//GEN-LAST:event_optionMemberItemStateChanged
+
+    private void txtStartDatePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtStartDatePropertyChange
+        // TODO add your handling code here:
+        handleDateChange();
+    }//GEN-LAST:event_txtStartDatePropertyChange
+
+    private void txtEndDatePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtEndDatePropertyChange
+        // TODO add your handling code here:
+        handleDateChange();
+    }//GEN-LAST:event_txtEndDatePropertyChange
+
+    private void handleDateChange() {
+        LocalDate startDate = txtStartDate.getDate();
+        LocalDate endDate = txtEndDate.getDate();
+        String department = optionMember.getSelectedItem().toString();
+        MemberStatistics(department, startDate, endDate);
+    }
+
+    private void MemberStatistics(String option, LocalDate startDate, LocalDate endDate) {
+        pnlDisplayMemberStat.removeAll();
+        pnlDisplayMemberStat.revalidate();
+        pnlDisplayMemberStat.repaint();
+        if (option == "Tất cả các khoa")
+        {
+            List<String> departments = memberBLL.queryDepartments();
+
+            int total = 0;
+            for (String department : departments)
+            {
+                Long enteredCount = memberBLL.statisticByDepartment(department, startDate, endDate);
+                total += enteredCount;
+                customizePanelStat(department, enteredCount.toString(), 415);
+            }
+            customizePanelStat("Tổng cộng", String.valueOf(total), 835);
+        } else
+        {
+            List<String> majors = memberBLL.queryMajor(option);
+
+            int total = 0;
+            for (String major : majors)
+            {
+                Long enteredCount = memberBLL.statisticByMajor(major, startDate, endDate);
+                total += enteredCount;
+                customizePanelStat(major, enteredCount.toString(), 415);
+            }
+            customizePanelStat("Tổng cộng", String.valueOf(total), 835);
+        }
+
+    }
+
+    public void customizePanelStat(String title, String number, int width) {
         JPanel jp = new JPanel();
         jp.setLayout(new BorderLayout());
         jp.setBorder(BorderFactory.createCompoundBorder(new MatteBorder(0, 0, 1, 0, Color.BLACK), new EmptyBorder(0, 0, 0, 0)));
         jp.setBackground(Color.WHITE);
         JLabel txtTitle = new JLabel(title);
         JLabel txtNumber = new JLabel(number);
-        jp.setPreferredSize(new Dimension(415, 45));
+        jp.setPreferredSize(new Dimension(width, 45));
         txtTitle.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         txtNumber.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        if (title.equals("Tổng cộng"))
+        {
+            txtTitle.setForeground(Color.red);
+            txtNumber.setForeground(Color.red);
+        }
         jp.add(txtTitle, BorderLayout.WEST);
         jp.add(txtNumber, BorderLayout.EAST);
         pnlDisplayMemberStat.add(jp);
@@ -756,10 +879,9 @@ public class StatisticsPanel extends javax.swing.JPanel {
     private javax.swing.JPanel DeviceStatPnl;
     private javax.swing.JPanel MemberStatPnl;
     private javax.swing.JPanel PunishStatPnl;
-    private com.github.lgooddatepicker.components.DatePicker datePicker1;
+    private javax.swing.JComboBox<String> cbOptionDevice;
     private com.github.lgooddatepicker.components.DatePicker datePicker2;
     private com.github.lgooddatepicker.components.DatePicker datePicker3;
-    private com.github.lgooddatepicker.components.DatePicker datePicker4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel26;
@@ -802,7 +924,6 @@ public class StatisticsPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jStatisticsTotalamount;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextPane jTextPane1;
-    private javax.swing.JComboBox<String> optionDevice;
     private javax.swing.JComboBox<String> optionMember;
     private javax.swing.JPanel pnlDisplayMemberStat;
     private javax.swing.JPanel pnlHandleCompleted;
@@ -811,8 +932,10 @@ public class StatisticsPanel extends javax.swing.JPanel {
     private javax.swing.JPanel pnlTotal;
     private javax.swing.JLabel punishStatTitle;
     private javax.swing.JTable tblDevice;
+    private com.github.lgooddatepicker.components.DatePicker txtEndDate;
     private javax.swing.JLabel txtHandleCompleted;
     private javax.swing.JLabel txtOnHandle;
+    private com.github.lgooddatepicker.components.DatePicker txtStartDate;
     private javax.swing.JLabel txtTotalMoney;
     // End of variables declaration//GEN-END:variables
 }
