@@ -32,17 +32,26 @@ public class LoginController {
 
     @GetMapping("/")
     public String home(Model theModel) {
-        return "home";
+        return "users/profile";
     }
 
-    @GetMapping("/loginPage")
+    @GetMapping("/login")
     public String login(Model theModel) {
         Member member = new Member();
         theModel.addAttribute("member", member);
         return "login";
     }
+    @GetMapping("/reservation")
+    public String reservation(Model theModel){
+        return "users/reservation";
+    }
 
-    @GetMapping("/registerPage")
+    @GetMapping("/profile")
+    public String user() {
+        return "users/profile";
+    }
+
+    @GetMapping("/register")
     public String register(Model theModel) {
         Member member = new Member();
         theModel.addAttribute("member", member);
@@ -58,8 +67,7 @@ public class LoginController {
             return "redirect:/loginPage?errorUsername";
         }
         Member member = memberService.findById(memberId);
-        if (!memberService.checkPasswordUser(member, password))
-        {
+        if (!memberService.checkPasswordUser(member, password)) {
             return "redirect:/loginPage?errorPassword";
         }
 //        if (disciplineService.findStatusByMember(member) != null) {
