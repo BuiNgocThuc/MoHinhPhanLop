@@ -1,6 +1,6 @@
-<!-- users/profile.html -->
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="base">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" th:replace="~{base}">
     <head>
         <title>User Profile</title>
     </head>
@@ -9,6 +9,8 @@
             <!-- Profile-specific content goes here -->
             <h2>User Profile Page</h2>
             <p>This is the profile page content.</p>
+            <span th:text="'Hi ' + ${session.user.name}"></span>
+
         </div>
     </body>
 </html>
