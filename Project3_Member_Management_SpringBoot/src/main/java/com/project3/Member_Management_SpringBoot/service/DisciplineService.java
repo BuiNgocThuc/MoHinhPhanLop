@@ -8,13 +8,16 @@ import com.project3.Member_Management_SpringBoot.model.Discipline;
 import com.project3.Member_Management_SpringBoot.model.Member;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author buing
  */
+@Service
 public interface DisciplineService {
     @Autowired
      Discipline findStatusByMember(Member member);
+     @Autowired
      List<Discipline> findByMember(Member member);
 }

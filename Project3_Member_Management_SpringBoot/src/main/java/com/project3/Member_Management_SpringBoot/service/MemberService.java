@@ -6,11 +6,13 @@ package com.project3.Member_Management_SpringBoot.service;
 
 import com.project3.Member_Management_SpringBoot.model.Member;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author buing
  */
+@Service
 public interface MemberService {
     @Autowired
     Member findById(Integer id);

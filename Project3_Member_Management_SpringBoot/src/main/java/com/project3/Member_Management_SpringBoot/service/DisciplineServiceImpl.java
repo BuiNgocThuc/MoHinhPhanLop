@@ -16,14 +16,16 @@ import org.springframework.stereotype.Service;
  * @author buing
  */
 @Service
-public class DisciplineServiceImpl {
+public class DisciplineServiceImpl implements DisciplineService{
     @Autowired
     private DisciplineRepository disciplineRepository;
     
+    @Override
     public Discipline findStatusByMember(Member member) {
         return disciplineRepository.findByMemberAndStatusAndDescriptionLike(member, 1, "%Khoa the%");
     }
     
+    @Override
     public List<Discipline> findByMember(Member member) {
         return disciplineRepository.findByMember(member);
     }

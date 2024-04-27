@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
  * @author buing
  */
 @Service
-public class DeviceServiceImpl {
+public class DeviceServiceImpl implements DeviceService{
     @Autowired
     private DeviceRepository deviceRepository;
 }
