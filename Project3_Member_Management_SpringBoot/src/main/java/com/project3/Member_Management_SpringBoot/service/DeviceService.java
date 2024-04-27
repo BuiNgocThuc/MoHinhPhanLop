@@ -4,10 +4,13 @@
  */
 package com.project3.Member_Management_SpringBoot.service;
 
+import org.springframework.stereotype.Service;
+
 /**
  *
  * @author buing
  */
+@Service
 public interface DeviceService {
     
 }
