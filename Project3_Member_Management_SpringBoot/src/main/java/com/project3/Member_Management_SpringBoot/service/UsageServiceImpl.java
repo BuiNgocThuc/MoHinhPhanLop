@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
  * @author buing
  */
 @Service
-public class UsageServiceImpl {
+public class UsageServiceImpl implements UsageService{
     @Autowired
     private UsageRepository usageRepository;
 }
