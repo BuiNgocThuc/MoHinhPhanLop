@@ -7,9 +7,7 @@ package com.project3.Member_Management_SpringBoot.controller;
 import com.project3.Member_Management_SpringBoot.annotation.RestrictTo;
 import com.project3.Member_Management_SpringBoot.model.Member;
 import com.project3.Member_Management_SpringBoot.service.DisciplineService;
-import com.project3.Member_Management_SpringBoot.service.DisciplineServiceImpl;
 import com.project3.Member_Management_SpringBoot.service.MemberService;
-import com.project3.Member_Management_SpringBoot.service.MemberServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +30,7 @@ public class LoginController {
     private DisciplineService disciplineService;
 
     @GetMapping("/")
+    @RestrictTo({"user"})
     public String home(Model theModel) {
         return "users/profile";
     }
