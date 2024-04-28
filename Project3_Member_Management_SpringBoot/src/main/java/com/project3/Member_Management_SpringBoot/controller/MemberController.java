@@ -33,10 +33,10 @@ public class MemberController {
         return "redirect:/loginPage?successSignUp";
     }
     
-    @GetMapping("/profile")
-    public String showProfile() {
-        return "users/change-password";
-    }
+//    @GetMapping("/profile")
+//    public String showProfile() {
+//        return "users/change-password";
+//    }
     
     @PostMapping("/changePassword")
     public String changePassword( HttpSession session,

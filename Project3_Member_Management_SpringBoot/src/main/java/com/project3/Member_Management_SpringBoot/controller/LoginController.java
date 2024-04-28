@@ -4,6 +4,7 @@
  */
 package com.project3.Member_Management_SpringBoot.controller;
 
+import com.project3.Member_Management_SpringBoot.annotation.RestrictTo;
 import com.project3.Member_Management_SpringBoot.model.Member;
 import com.project3.Member_Management_SpringBoot.service.DisciplineService;
 import com.project3.Member_Management_SpringBoot.service.DisciplineServiceImpl;
@@ -32,35 +33,46 @@ public class LoginController {
 
     @GetMapping("/")
     public String home(Model theModel) {
-        return "home";
+        return "users/profile";
     }
 
-    @GetMapping("/loginPage")
+    @GetMapping("/login")
     public String login(Model theModel) {
         Member member = new Member();
         theModel.addAttribute("member", member);
         return "login";
     }
 
-    @GetMapping("/registerPage")
+    @GetMapping("/reservation")
+    @RestrictTo({"user"})
+    public String reservation(Model theModel) {
+        return "users/reservation";
+    }
+
+    @GetMapping("/profile")
+    @RestrictTo({"user"})
+    public String user() {
+        return "users/profile";
+    }
+
+    @GetMapping("/register")
     public String register(Model theModel) {
         Member member = new Member();
         theModel.addAttribute("member", member);
         return "register";
     }
 
-    @PostMapping("/authentication")
-    public String authentication(@ModelAttribute("member") Member loginMember, HttpSession session, Model theModel) {
+    @PostMapping("/login")
+    public String login(@ModelAttribute("member") Member loginMember, HttpSession session, Model theModel) {
         Integer memberId = loginMember.getId();
         String password = loginMember.getPassword();
         if (!memberService.checkUserExists(memberId)) // kiểm tra ID có tồn tại không
         {
-            return "redirect:/loginPage?errorUsername";
+            return "redirect:/login?errorUsername";
         }
         Member member = memberService.findById(memberId);
-        if (!memberService.checkPasswordUser(member, password))
-        {
-            return "redirect:/loginPage?errorPassword";
+        if (!memberService.checkPasswordUser(member, password)) {
+            return "redirect:/login?errorPassword";
         }
 //        if (disciplineService.findStatusByMember(member) != null) {
 //            return "redirect:/loginPage?isBlocked";
@@ -72,6 +84,6 @@ public class LoginController {
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "redirect:/loginPage?logout";
+        return "redirect:/login?logout";
     }
 }
