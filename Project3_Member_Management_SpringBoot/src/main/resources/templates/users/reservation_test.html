@@ -1,0 +1,63 @@
+<!-- users/profile.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="base">
+    <head>
+        <title>Reservation</title>
+    </head>
+    <body>
+        <div class="container" th:fragment="content">
+            <h3>Register Device Borrowing</h3>
+            <hr>
+            <div class="d-flex justify-content-between align-items-start h-100">
+                <div class="h-100 w-50 p-3">
+                    <div th:if="${param.success}">
+                        <div class="alert alert-info">Your reservation has been confirmed.</div>
+                    </div>
+                    <div th:if="${param.unavailable}">
+                        <div class="alert alert-danger">The device has been booked for borrowing on this day.</div>
+                    </div>
+                    <form action="#" th:action="@{/reservation}" method="POST" th:object="${usage}">
+                        <input type="text" class="form-control mb-4 w-50" placeholder="Date" required th:field="*{reserveTime}"/>
+                        <input type="text" class="form-control mb-4 w-50" placeholder="Device ID" required th:field="*{device.id}"/>
+
+                        <button type="submit" class="btn btn-info col-2" onclick="changeReserveTime()">Save</button>
+                    </form>
+
+                    <hr>
+                    <a th:href="@{/}">Back to Home</a>
+                </div>
+
+                <div class="h-100 w-50">
+                    <div class="input-group rounded my-2">
+                        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                        <span class="input-group-text border-0" id="search-addon">
+                            <i class="fas fa-search"></i>
+                        </span>
+                    </div>
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="device : ${availableDevices}">
+                                <td th:text="${device.id}">...</td>
+                                <td th:text="${device.name}">...</td>
+                                <td th:text="${device.description}">...</td>
+                                <td>
+                                    <button type="button" class="btn btn-info"
+                                            onclick="if (!(confirm('Are you sure you want to reserve this device?')))
+                                                        return false">Borrow</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -5,10 +5,15 @@
 package com.project3.Member_Management_SpringBoot.controller;
 
 import com.project3.Member_Management_SpringBoot.annotation.RestrictTo;
+import com.project3.Member_Management_SpringBoot.model.Device;
 import com.project3.Member_Management_SpringBoot.model.Member;
+import com.project3.Member_Management_SpringBoot.model.Usage;
+import com.project3.Member_Management_SpringBoot.service.DeviceService;
+import com.project3.Member_Management_SpringBoot.service.DeviceServiceImpl;
 import com.project3.Member_Management_SpringBoot.service.DisciplineService;
 import com.project3.Member_Management_SpringBoot.service.MemberService;
 import jakarta.servlet.http.HttpSession;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +33,10 @@ public class LoginController {
 
     @Autowired
     private DisciplineService disciplineService;
-
+    
+    @Autowired
+    private DeviceService deviceService;
+    
     @GetMapping("/")
     @RestrictTo({"user"})
     public String home(Model theModel) {
@@ -46,6 +54,16 @@ public class LoginController {
     @RestrictTo({"user"})
     public String reservation(Model theModel) {
         return "users/reservation";
+    }
+    
+     @GetMapping("/reservation_test")
+    @RestrictTo({"user"})
+    public String reservation_test(Model theModel) {
+         List<Device> availableDevices = deviceService.getAvailableDevices();
+        theModel.addAttribute("availableDevices", availableDevices);
+         Usage usage = new Usage();
+        theModel.addAttribute("usage", usage);
+        return "users/reservation_test";
     }
 
     @GetMapping("/profile")
