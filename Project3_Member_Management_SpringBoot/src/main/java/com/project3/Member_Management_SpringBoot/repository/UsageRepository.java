@@ -6,6 +6,9 @@ package com.project3.Member_Management_SpringBoot.repository;
 
 import com.project3.Member_Management_SpringBoot.model.Device;
 import com.project3.Member_Management_SpringBoot.model.Usage;
+import java.util.Date;
+import java.util.List;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,4 +19,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UsageRepository extends CrudRepository<Usage, Integer>{
     
+    @Query("SELECT u FROM Usage u WHERE u.device = ?1 AND DATE(u.reserveTime) = ?2")
+    List<Usage> checkValidateDevice(Device selectedDevice, Date reserveDate);
 }
