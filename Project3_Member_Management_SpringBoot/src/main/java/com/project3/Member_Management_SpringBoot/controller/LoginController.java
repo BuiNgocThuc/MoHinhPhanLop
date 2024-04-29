@@ -33,10 +33,10 @@ public class LoginController {
 
     @Autowired
     private DisciplineService disciplineService;
-    
+
     @Autowired
     private DeviceService deviceService;
-    
+
     @GetMapping("/")
     @RestrictTo({"user"})
     public String home(Model theModel) {
@@ -53,18 +53,22 @@ public class LoginController {
     @GetMapping("/reservation")
     @RestrictTo({"user"})
     public String reservation(Model theModel) {
+        List<Device> availableDevices = deviceService.getAvailableDevices();
+        theModel.addAttribute("availableDevices", availableDevices);
+        Usage usage = new Usage();
+        theModel.addAttribute("usage", usage);
         return "users/reservation";
     }
-    
-     @GetMapping("/reservation_test")
-    @RestrictTo({"user"})
-    public String reservation_test(Model theModel) {
-         List<Device> availableDevices = deviceService.getAvailableDevices();
-        theModel.addAttribute("availableDevices", availableDevices);
-         Usage usage = new Usage();
-        theModel.addAttribute("usage", usage);
-        return "users/reservation_test";
-    }
+
+//     @GetMapping("/reservation_test")
+//    @RestrictTo({"user"})
+//    public String reservation_test(Model theModel) {
+//        List<Device> availableDevices = deviceService.getAvailableDevices();
+//        theModel.addAttribute("availableDevices", availableDevices);
+//        Usage usage = new Usage();
+//        theModel.addAttribute("usage", usage);
+//        return "users/reservation_test";
+//    }
 
     @GetMapping("/profile")
     @RestrictTo({"user"})
