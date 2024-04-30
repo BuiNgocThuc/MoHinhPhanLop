@@ -5,13 +5,17 @@
 package com.project3.Member_Management_SpringBoot.controller;
 
 import com.project3.Member_Management_SpringBoot.model.Member;
+import com.project3.Member_Management_SpringBoot.model.Usage;
 import com.project3.Member_Management_SpringBoot.service.MemberService;
 import com.project3.Member_Management_SpringBoot.service.MemberServiceImpl;
 import jakarta.servlet.http.HttpSession;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,6 +40,16 @@ public class MemberController {
     @GetMapping("/profile")
     public String showProfile() {
         return "users/change-password";
+    }
+    @GetMapping("/detailborrowed/{userId}")
+    public String showDeviceBorrowed(@PathVariable("userId") String userId, Model model) {
+        Member member=memberService.findById(Integer.parseInt(userId));
+        Iterable<Usage> borrowedDevices=member.getUsages();
+        if (member == null) {
+        return "error";
+        }
+        model.addAttribute("borrowedDevices", borrowedDevices);
+        return "users/detail-borrowed-device";
     }
     
     @PostMapping("/changePassword")
