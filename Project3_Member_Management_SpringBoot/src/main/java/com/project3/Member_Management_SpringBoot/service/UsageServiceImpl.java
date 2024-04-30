@@ -7,6 +7,7 @@ package com.project3.Member_Management_SpringBoot.service;
 import com.project3.Member_Management_SpringBoot.model.Device;
 import com.project3.Member_Management_SpringBoot.model.Usage;
 import com.project3.Member_Management_SpringBoot.repository.UsageRepository;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,11 @@ public class UsageServiceImpl implements UsageService{
         usageRepository.save(usage);
     }
     
+     @Override
+    public void deleteAll(Iterable<Usage> usages) {
+        usageRepository.deleteAll(usages);
+    }
+    
     @Override
     public Boolean reserveDevice(Usage usage) {
         Device selectedDevice = usage.getDevice();
@@ -39,5 +45,9 @@ public class UsageServiceImpl implements UsageService{
          return false;
     }
 
+    @Override
+    public List<Usage> findOverdueReservation(Timestamp deadline) {
+        return usageRepository.findOverdueReservation(deadline);
+    }
     
 }
