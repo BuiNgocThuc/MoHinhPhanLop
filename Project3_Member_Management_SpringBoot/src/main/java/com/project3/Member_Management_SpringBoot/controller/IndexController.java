@@ -5,11 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@Controller
-public class IndexController {
-    @GetMapping("/")
-    @RestrictTo({ "user" })
-    public String home(Model theModel) {
-        return "users/profile";
-    }
-}
+//@Controller
+//public class IndexController {
+//    @GetMapping("/")
+//    @RestrictTo({ "user" })
+//    public String home(Model theModel) {
+//        return "users/profile";
+//    }
+//}

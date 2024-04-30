@@ -19,10 +19,12 @@
                 </tr>
               </thead>
               <tbody>
-                 <tr th:each="i : ${borrowedDevices}">
-            <td th:text="${i.device != null ? i.device.id : 'N/A'}">Device ID</td>
-            <td th:text="${i.device != null ? i.device.name : 'N/A'}">Device Name</td>
-            <td th:text="${#dates.format(i.borrowedTime, 'dd/MM/yyyy HH:mm')}">Borrowed Time</td>
+                 <tr th:each="i : ${borrowedDevices}" th:if="${i.device != null}">
+    <td th:text="${i.device.id}">Device ID</td>
+    <td th:text="${i.device.name}">Device Name</td>
+    <td th:text="${#dates.format(i.borrowedTime, 'dd/MM/yyyy HH:mm')}">Borrowed Time</td>
+</tr>
+
         </tr>
               </tbody>
             </table>
