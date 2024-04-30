@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.project3.Member_Management_SpringBoot.controller;
 
 import com.project3.Member_Management_SpringBoot.model.Discipline;
@@ -16,22 +12,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-/**
- *
- * @author buing
- */
 @Controller
-@RequiredArgsConstructor
 @RequestMapping("/disciplines")
 public class DisciplineController {
-    
-    private final DisciplineService  disciplineService;
-    
+    @Autowired
+    private DisciplineService disciplineService;
+
     @GetMapping("/violation_history")
     public String violationHistory(HttpSession session, Model theModel) {
         Member member = (Member) session.getAttribute("user");
         List<Discipline> disciplinesByUser = disciplineService.findByMember(member);
-        
+
         theModel.addAttribute("data", disciplinesByUser);
         return "users/violation-history";
     }
