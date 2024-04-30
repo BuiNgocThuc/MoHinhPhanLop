@@ -1,0 +1,111 @@
+<!-- users/profile.html -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base">
+    <head>
+        <title>Reservation</title>
+    </head>
+    <body>
+        <!--Register device borrowing-->
+        <form class="container" th:fragment="content" method='POST' action='#'>
+            <div class='d-flex flex-column'>
+                <h1 style="margin-bottom: 0px !important;">Register Device Borrowing</h1>
+                <hr>
+            </div>
+            <fieldset disabled class='mb-3'>
+                <!--<legend class='h5'>Device information</legend>-->
+                <div class='row'>
+                    <div class="col">
+                        <label for="disabledTextInput" class="form-label">Device ID</label>
+                        <input type="text" id="disabledTextInput" class="form-control" placeholder="120191" value='120191'>
+                    </div>
+                    <div class="col">
+                        <label for="disabledSelect" class="form-label">Device Name</label>
+                        <input type="text" id="disabledTextInput" class="form-control" placeholder="Micro không dây 01">
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset disabled class='mb-3'>
+                <!--<legend class='h5'>User information</legend>-->
+                <div class='row'>
+                    <div class="col">
+                        <label for="disabledTextInput" class="form-label">User ID</label>
+                        <input type="text" id="disabledTextInput" class="form-control" th:placeholder="${session.user.id}" th:value="${session.user.id}">
+                    </div>
+                    <div class="col">
+                        <label for="disabledSelect" class="form-label">Username</label>
+                        <input type="text" id="disabledTextInput" class="form-control" th:placeholder="${session.user.name}" th:value="${session.user.name}">
+                    </div>
+                </div>
+            </fieldset>
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label">Choose date to borrow</label>
+                <input type="date" class="form-control" id="formGroupExampleInput">
+            </div>
+            <button class='btn btn-primary'>Save</button>
+        </form>
+        
+        <!--Table display device--> 
+        <!--        <div class="container" th:fragment="content">
+                    <form class="d-flex my-2 rounded">
+                        <input class="form-control me-1" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </form>
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="device : ${availableDevices}">
+                                <td th:text="${device.id}">...</td>
+                                <td th:text="${device.name}">...</td>
+                                <td th:text="${device.description}">...</td>
+                                <td>
+                                    <button 
+                                        type='button' data-toggle="modal"
+                                        th:data-target="${device.id}"
+                                        class="btn btn-info reservationButton">
+                                        Borrow
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>-->
+        
+        <!--Modal to add user to confirm-->
+        <div class="modal fade" tabindex="-1" role="dialog"
+             aria-hidden="true" id="120214" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Reservation Confirm</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to reserve this device?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                        <button type="button" class="btn btn-primary">Yes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            alert("ready!");
+        });
+    </script>
+</html>

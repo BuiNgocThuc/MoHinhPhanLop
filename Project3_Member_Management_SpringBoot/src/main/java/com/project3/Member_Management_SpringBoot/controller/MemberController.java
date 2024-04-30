@@ -1,13 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.project3.Member_Management_SpringBoot.controller;
 
 import com.project3.Member_Management_SpringBoot.model.Member;
 import com.project3.Member_Management_SpringBoot.model.Usage;
 import com.project3.Member_Management_SpringBoot.service.MemberService;
-import com.project3.Member_Management_SpringBoot.service.MemberServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-/**
- *
- * @author buing
- */
 @Controller
 @RequestMapping("/members")
 public class MemberController {
@@ -53,11 +44,11 @@ public class MemberController {
     }
     
     @PostMapping("/changePassword")
-    public String changePassword( HttpSession session,
+    public String changePassword(HttpSession session,
             @RequestParam("oldPassword") String oldPassword,
             @RequestParam("newPassword") String newPassword) {
         Member member = (Member) session.getAttribute("user");
-        if(!memberService.checkPasswordUser(member, oldPassword)) {
+        if (!memberService.checkPasswordUser(member, oldPassword)) {
             return "redirect:/members/profile?wrongOldPassword";
         }
         member.setPassword(newPassword);
