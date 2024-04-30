@@ -36,6 +36,7 @@ public class Usage {
     private Timestamp paidTime;
 
     @Column(name = "TGDatcho")
+    @Temporal(TemporalType.TIMESTAMP)
     private Timestamp reserveTime;
 
     @ManyToOne(fetch = FetchType.LAZY)

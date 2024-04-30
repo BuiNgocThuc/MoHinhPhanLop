@@ -17,5 +17,5 @@ import org.springframework.stereotype.Service;
 public interface DeviceService {
     @Autowired
     List<Device> getAvailableDevices();
-    
+    List<Device> searchDeviceByName(String name);
 }

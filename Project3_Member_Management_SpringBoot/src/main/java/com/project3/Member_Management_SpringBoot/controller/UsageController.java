@@ -32,30 +32,56 @@ public class UsageController {
 
         usage.setMember(member);
         Boolean reserve = usageService.reserveDevice(usage);
-        if (reserve) {
+        if (reserve)
+        {
             return "redirect:/reservation_test?success";
         }
         return "redirect:/reservation_test?unavailable";
     }
 
     @GetMapping("/reservation")
-    @RestrictTo({ "user" })
+    @RestrictTo(
+    {
+        "user"
+    })
     public String reservation(Model theModel) {
         List<Device> availableDevices = deviceService.getAvailableDevices();
         theModel.addAttribute("availableDevices", availableDevices);
         Usage usage = new Usage();
         theModel.addAttribute("usage", usage);
+        Device device = new Device();
+        theModel.addAttribute("device", device);
         return "users/reservation";
     }
 
-    // @GetMapping("/reservation_test")
-    // @RestrictTo({"user"})
-    // public String reservation_test(Model theModel) {
-    // List<Device> availableDevices = deviceService.getAvailableDevices();
-    // theModel.addAttribute("availableDevices", availableDevices);
-    // Usage usage = new Usage();
-    // theModel.addAttribute("usage", usage);
-    // return "users/reservation_test";
-    // }
+    @GetMapping("/reservation_test")
+    @RestrictTo(
+    {
+        "user"
+    })
+    public String reservation_test(Model theModel) {
+        List<Device> availableDevices = deviceService.getAvailableDevices();
+        theModel.addAttribute("availableDevices", availableDevices);
+        Usage usage = new Usage();
+        theModel.addAttribute("usage", usage);
+        Device device = new Device();
+        theModel.addAttribute("device", device);
+        return "users/reservation_test";
+    }
+    
+    @PostMapping("/searchDevice")
+    public String searchDeviceByName(@ModelAttribute("device") Device device, Model theModel) {
+        String name = device.getName();
+        if(name.isEmpty()) {
+            return reservation_test(theModel);
+        }
+        List<Device> results = deviceService.searchDeviceByName(name);
+         theModel.addAttribute("availableDevices", results);
+        Usage usage = new Usage();
+        theModel.addAttribute("usage", usage);
+        theModel.addAttribute("device", device);
+        return "users/reservation_test";
+    }
+    
 
 }
