@@ -51,6 +51,13 @@
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
+        
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>jquery</artifactId>
+            <version>3.7.1</version>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -60,15 +60,15 @@ public class LoginController {
         return "users/reservation";
     }
 
-//     @GetMapping("/reservation_test")
-//    @RestrictTo({"user"})
-//    public String reservation_test(Model theModel) {
-//        List<Device> availableDevices = deviceService.getAvailableDevices();
-//        theModel.addAttribute("availableDevices", availableDevices);
-//        Usage usage = new Usage();
-//        theModel.addAttribute("usage", usage);
-//        return "users/reservation_test";
-//    }
+     @GetMapping("/reservation_test")
+    @RestrictTo({"user"})
+    public String reservation_test(Model theModel) {
+        List<Device> availableDevices = deviceService.getAvailableDevices();
+        theModel.addAttribute("availableDevices", availableDevices);
+        Usage usage = new Usage();
+        theModel.addAttribute("usage", usage);
+        return "users/reservation_test";
+    }
 
     @GetMapping("/profile")
     @RestrictTo({"user"})

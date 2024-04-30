@@ -49,9 +49,7 @@
                                 <td th:text="${device.name}">...</td>
                                 <td th:text="${device.description}">...</td>
                                 <td>
-                                    <button type="button" class="btn btn-info"
-                                            onclick="if (!(confirm('Are you sure you want to reserve this device?')))
-                                                        return false">Borrow</button>
+                                    <button type="button" class="btn btn-info btn-borrow">Borrow</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -59,5 +57,15 @@
                 </div>
             </div>
         </div>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript">
+                            $(document).ready(function () {
+                                $('.btn-borrow').click(function () {
+                                    // Hiển thị thông báo đã mượn
+                                    alert('Device borrowed successfully!');
+                                });
+                            });
+        </script>
     </body>
+
 </html>
