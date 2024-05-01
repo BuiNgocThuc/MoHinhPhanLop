@@ -1,18 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.project3.Member_Management_SpringBoot.model;
 
-/**
- *
- * @author buing
- */
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.sql.Timestamp;
 
 @Data
@@ -45,4 +36,23 @@ public class Usage {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MaTB", nullable = true)
     private Device device;
+
+    private String borrowedTimeString;
+    private String reserveTimeString;
+
+    public String getBorrowedTimeString() {
+        return borrowedTimeString;
+    }
+
+    public void setBorrowedTimeString(String borrowedTimeString) {
+        this.borrowedTimeString = borrowedTimeString;
+    }
+
+    public String getReserveTimeString() {
+        return reserveTimeString;
+    }
+
+    public void setReserveTimeString(String reserveTimeString) {
+        this.reserveTimeString = reserveTimeString;
+    }
 }

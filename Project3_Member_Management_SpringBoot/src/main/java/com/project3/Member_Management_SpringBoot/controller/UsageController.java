@@ -8,6 +8,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +36,27 @@ public class UsageController {
         theModel.addAttribute("member", member);
 
         List<Usage> usages = usageService.findByMemberIdAndReserveTimeNotNull(member.getId());
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        for (Usage usage : usages) {
+            if (usage.getBorrowedTime() != null) {
+                LocalDateTime borrowedTime = usage.getBorrowedTime().toLocalDateTime();
+                usage.setBorrowedTimeString(borrowedTime.format(formatter));
+            }
+            if (usage.getReserveTime() != null) {
+                LocalDateTime reserveTime = usage.getReserveTime().toLocalDateTime();
+                usage.setReserveTimeString(reserveTime.format(formatter));
+            }
+        }
+
+        
+        for (Usage usage : usages) {
+          System.out.println(usage.getReserveTimeString());
+        }
+
         theModel.addAttribute("usages", usages);
 
         return "reservation-device";
     }
-
 }
