@@ -6,9 +6,11 @@ package com.project3.Member_Management_SpringBoot.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
 import com.project3.Member_Management_SpringBoot.model.Usage;
+import java.sql.Timestamp;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
@@ -17,8 +19,21 @@ import com.project3.Member_Management_SpringBoot.model.Usage;
 @Service
 public interface UsageService {
     List<Usage> getAllUsage();
+
     Usage getUsageById(Integer id);
+
     Usage saveUsage(Usage usage);
+
     void deleteUsageById(Integer id);
+
     List<Usage> findByMemberIdAndReserveTimeNotNull(Integer memberId);
+
+    @Autowired
+    void save(Usage usage);
+
+    void deleteAll(Iterable<Usage> usages);
+
+    Boolean reserveDevice(Usage usage);
+
+    List<Usage> findOverdueReservation(Timestamp deadline);
 }

@@ -9,6 +9,7 @@ import com.project3.Member_Management_SpringBoot.repository.DeviceRepository;
 
 import java.util.List;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,34 +21,14 @@ import org.springframework.stereotype.Service;
 public class DeviceServiceImpl implements DeviceService{
     @Autowired
     private DeviceRepository deviceRepository;
-
+    
     @Override
-    public void addDevice(Device device) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addDevice'");
+    public List<Device> getAvailableDevices() {
+        return deviceRepository.findAvailableDevices();
     }
 
     @Override
-    public Device findDeviceById(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findDeviceById'");
-    }
-
-    @Override
-    public void updateDevice(Device device) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateDevice'");
-    }
-
-    @Override
-    public void deleteDevice(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteDevice'");
-    }
-
-    @Override
-    public List<Device> findAllDevices() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAllDevices'");
+    public List<Device> searchDeviceByName(String name) {
+        return deviceRepository.findByNameLike("%" + name + "%");
     }
 }

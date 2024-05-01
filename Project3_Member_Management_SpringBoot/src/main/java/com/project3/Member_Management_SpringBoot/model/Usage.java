@@ -27,6 +27,7 @@ public class Usage {
     private Timestamp paidTime;
 
     @Column(name = "tgdatcho", nullable = true)
+    @Temporal(TemporalType.TIMESTAMP)
     private Timestamp reserveTime;
 
     @ManyToOne(fetch = FetchType.LAZY)

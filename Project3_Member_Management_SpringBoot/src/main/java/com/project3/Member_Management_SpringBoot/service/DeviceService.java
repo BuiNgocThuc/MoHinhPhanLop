@@ -6,6 +6,9 @@ package com.project3.Member_Management_SpringBoot.service;
 
 import java.util.List;
 
+import com.project3.Member_Management_SpringBoot.model.Device;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project3.Member_Management_SpringBoot.model.Device;
@@ -16,13 +19,7 @@ import com.project3.Member_Management_SpringBoot.model.Device;
  */
 @Service
 public interface DeviceService {
-    void addDevice(Device device);
-
-    Device findDeviceById(Integer id);
-
-    void updateDevice(Device device);
-
-    void deleteDevice(Integer id);
-
-    List<Device> findAllDevices();
+    @Autowired
+    List<Device> getAvailableDevices();
+    List<Device> searchDeviceByName(String name);
 }
