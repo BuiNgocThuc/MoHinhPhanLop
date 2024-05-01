@@ -26,16 +26,16 @@ public class Usage {
     @Column(name = "MaTT")
     private Integer id;
 
-    @Column(name = "TGVao")
+    @Column(name = "tgvao", nullable = true)
     private Timestamp enteredTime;
 
-    @Column(name = "TGMuon")
+    @Column(name = "tgmuon", nullable = true)
     private Timestamp borrowedTime;
 
-    @Column(name = "TGTra")
+    @Column(name = "tgtra", nullable = true)
     private Timestamp paidTime;
 
-    @Column(name = "TGDatcho")
+    @Column(name = "tgdatcho", nullable = true)
     private Timestamp reserveTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -43,6 +43,6 @@ public class Usage {
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "MaTB")
+    @JoinColumn(name = "MaTB", nullable = true)
     private Device device;
 }

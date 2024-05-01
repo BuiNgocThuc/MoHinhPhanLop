@@ -1,16 +1,42 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.project3.Member_Management_SpringBoot.controller;
 
-import org.springframework.stereotype.Controller;
+import com.project3.Member_Management_SpringBoot.model.Member;
+import com.project3.Member_Management_SpringBoot.model.Usage;
+import com.project3.Member_Management_SpringBoot.service.UsageService;
 
-/**
- *
- * @author buing
- */
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
+import java.io.IOException;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
 @Controller
 public class UsageController {
-    
+
+    @Autowired
+    private UsageService usageService;
+
+    @GetMapping("/reservation-device")
+    public String getReservationDevice(Model theModel, HttpSession session, HttpServletResponse response)
+            throws IOException {
+        Member member = (Member) session.getAttribute("user");
+
+        if (member == null) {
+            response.sendRedirect("/loginPage");
+            return null;
+        }
+
+        theModel.addAttribute("member", member);
+
+        List<Usage> usages = usageService.findByMemberIdAndReserveTimeNotNull(member.getId());
+        theModel.addAttribute("usages", usages);
+
+        return "reservation-device";
+    }
+
 }
