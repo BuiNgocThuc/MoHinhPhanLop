@@ -21,6 +21,7 @@ import java.util.List;
 @Entity
 @Table(name = "thanhvien")
 public class Member {
+
     @Id
     @Column(name = "MaTV")
     private Integer id;

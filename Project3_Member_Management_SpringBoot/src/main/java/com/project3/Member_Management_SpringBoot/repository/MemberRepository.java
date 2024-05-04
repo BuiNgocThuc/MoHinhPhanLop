@@ -4,8 +4,8 @@
  */
 package com.project3.Member_Management_SpringBoot.repository;
 
-import com.project3.Member_Management_SpringBoot.model.Device;
 import com.project3.Member_Management_SpringBoot.model.Member;
+import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,4 +16,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MemberRepository extends CrudRepository<Member, Integer>{
     Member findMemberById(Integer id);
+    
+    Optional<Member> findByEmail(String email);
 }

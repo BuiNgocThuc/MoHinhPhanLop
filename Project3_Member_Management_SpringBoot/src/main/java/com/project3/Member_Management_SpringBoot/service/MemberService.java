@@ -19,4 +19,5 @@ public interface MemberService {
     void saveMember(Member member);
     Boolean checkPasswordUser(Member member,String password);
     Boolean checkUserExists(Integer ID);
+    Member findByEmail(String email);
 }
