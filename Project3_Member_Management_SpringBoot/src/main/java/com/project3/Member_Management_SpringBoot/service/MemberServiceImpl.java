@@ -6,6 +6,7 @@ package com.project3.Member_Management_SpringBoot.service;
 
 import com.project3.Member_Management_SpringBoot.model.Member;
 import com.project3.Member_Management_SpringBoot.repository.MemberRepository;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,5 +37,11 @@ public class MemberServiceImpl  implements MemberService{
     @Override
     public Boolean checkUserExists(Integer ID) {
         return memberRepository.findMemberById(ID) != null;
+    }
+
+    @Override
+    public Member findByEmail(String email) {
+        Optional<Member> optMember = memberRepository.findByEmail(email);
+        return optMember.isPresent() ? optMember.get() : null;
     }
 }
