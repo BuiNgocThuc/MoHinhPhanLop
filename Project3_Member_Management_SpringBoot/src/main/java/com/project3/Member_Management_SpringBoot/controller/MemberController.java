@@ -2,11 +2,8 @@ package com.project3.Member_Management_SpringBoot.controller;
 
 import com.project3.Member_Management_SpringBoot.model.Email;
 import com.project3.Member_Management_SpringBoot.model.Member;
-<<<<<<< HEAD
 import com.project3.Member_Management_SpringBoot.model.Usage;
-=======
 import com.project3.Member_Management_SpringBoot.service.EmailService;
->>>>>>> eedb3f96f31bdead81a565974c20bee7a14bd849
 import com.project3.Member_Management_SpringBoot.service.MemberService;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
