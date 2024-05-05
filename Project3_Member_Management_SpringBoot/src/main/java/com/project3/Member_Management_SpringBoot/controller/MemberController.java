@@ -44,7 +44,7 @@ public class MemberController {
         memberService.saveMember(member);
         return "redirect:/members/profile?changePasswordSuccess";
     }
-    
+
     @PostMapping(value = "/send-email")
     public void sendEmail(@RequestBody Member member) throws Exception {
         try {

@@ -21,10 +21,10 @@ public class AuthController {
 
     @Autowired
     private MemberService memberService;
-    
+
     @Autowired
     private EmailService emailService;
-    
+
     @Autowired
     private TokenRepository tokenRepository;
 
@@ -51,6 +51,13 @@ public class AuthController {
         // return "redirect:/loginPage?isBlocked";
         // }
         session.setAttribute("user", member);
+
+        // FIXME: role should be retrieved from database
+        String role = "user";
+        if (memberId == 123456) {
+            role = "admin";
+        }
+        session.setAttribute("role", role);
         return "redirect:/";
     }
 
@@ -63,14 +70,15 @@ public class AuthController {
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
+        session.invalidate();
         return "redirect:/login?logout";
     }
-    
+
     @GetMapping("/forgotPassword")
     public String forgotPassword() {
         return "users/forgot-password";
     }
-    
+
     @PostMapping("/forgotPassword")
     public String forgotPassordProcess(@ModelAttribute Member memberDTO) {
         try {
@@ -80,36 +88,35 @@ public class AuthController {
                 output = emailService.sendEmail(user);
             }
             if (output.equals("success"))
-                return  "redirect:/forgotPassword?success";
+                return "redirect:/forgotPassword?success";
             else {
                 System.out.println("Lỗi cc");
                 return "redirect:/login?error";
             }
-        } catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return "redirect:/login?error";
         }
     }
-    
+
     @GetMapping("/resetPassword/{token}")
     public String resetPasswordForm(@PathVariable String token, Model model) {
-	PasswordResetToken reset = tokenRepository.findByToken(token);
+        PasswordResetToken reset = tokenRepository.findByToken(token);
         if (reset != null && emailService.hasExpired(reset.getExpiryDateTime())) {
             model.addAttribute("email", reset.getMember().getEmail());
             return "users/resetPassword";
         }
         return "redirect:/forgotPassword?error";
     }
-    
+
     @PostMapping("/resetPassword")
     public String passwordResetProcess(@ModelAttribute Member memberDTO) {
-	Member member = memberService.findByEmail(memberDTO.getEmail());
+        Member member = memberService.findByEmail(memberDTO.getEmail());
         if (member != null) {
             member.setPassword(memberDTO.getPassword());
             memberService.saveMember(member);
         }
         return "login";
     }
-    
-    
+
 }
