@@ -24,20 +24,16 @@
 
                                 <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log in</h3>
 
-                                <div th:if="${param.errorUsername}">
-                                    <div class="alert alert-danger">ID is not correct</div>
+                                <div th:if="${param.error}">
+                                    <div class="alert alert-danger" th:text="${param.error}">...</div>
                                 </div>
 
-                                <div th:if="${param.errorPassword}">
+<!--                                <div th:if="${param.errorPassword}">
                                     <div class="alert alert-danger">Password is not correct</div>
-                                </div>
+                                </div>-->
 
                                 <div th:if="${param.logout}">
                                     <div class="alert alert-info">You have been logged out</div>
-                                </div>
-
-                                <div th:if="${param.isBlocked}">
-                                    <div class="alert alert-danger">Your account have been blocked</div>
                                 </div>
                                 
                                 <div th:if="${param.successSignUp}">
@@ -45,7 +41,7 @@
                                 </div>
 
                                 <div data-mdb-input-init class="form-outline mb-2">
-                                    <input type="text" id="usernameForm" class="form-control form-control-lg" required name="username" th:field="*{id}"/>
+                                    <input type="text" id="usernameForm" class="form-control form-control-lg" required name="username" th:field="*{id}" maxlength="10"/>
                                     <label class="form-label" for="usernameForm">Member ID</label>
                                 </div>
 

@@ -35,15 +35,22 @@ public class AuthController {
 
     @PostMapping("/login")
     public String login(@ModelAttribute("member") Member loginMember, HttpSession session, Model theModel) {
-        Integer memberId = loginMember.getId();
+        Integer memberId = 0;
+        try
+        {
+            memberId = loginMember.getId();
+        } catch (NumberFormatException  e)
+        {
+            return "redirect:/login?error=ID is not correct";
+        }
         String password = loginMember.getPassword();
         if (!memberService.checkUserExists(memberId)) // kiểm tra ID có tồn tại không
         {
-            return "redirect:/login?errorUsername";
+            return "redirect:/login?error=ID is not correct";
         }
         Member member = memberService.findById(memberId);
         if (!memberService.checkPasswordUser(member, password)) {
-            return "redirect:/login?errorPassword";
+            return "redirect:/login?error=password is not correct";
         }
         session.setAttribute("user", member);
 
