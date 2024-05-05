@@ -58,7 +58,7 @@ public class AuthController {
             role = "admin";
         }
         session.setAttribute("role", role);
-        return "redirect:/";
+        return "redirect:/profile";
     }
 
     @GetMapping("/register")
