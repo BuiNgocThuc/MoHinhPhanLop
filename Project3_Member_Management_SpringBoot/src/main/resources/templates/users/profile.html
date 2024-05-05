@@ -68,7 +68,10 @@
                     </div>
                 </div>
                 <div class="mt-3">
-                    <a class="btn btn-info"  th:href="@{/members/detailborrowed/{userId}(userId=${session.user.id})}">Borrowed Devices</a>
+                    <a class="btn btn-info"  th:href="@{/detailborrowed/{userId}(userId=${session.user.id})}">Borrowed Devices List</a>
+                </div>
+                <div>
+                    <p><a class="btn btn-info my-3" th:href="@{/reservedDevicesList}">Reserved Devices List</a></p>
                 </div>
             </div>
         </div>

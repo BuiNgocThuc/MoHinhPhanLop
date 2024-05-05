@@ -10,7 +10,11 @@ import com.project3.Member_Management_SpringBoot.model.Member;
 import com.project3.Member_Management_SpringBoot.model.Usage;
 import com.project3.Member_Management_SpringBoot.service.DeviceService;
 import com.project3.Member_Management_SpringBoot.service.UsageService;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +29,7 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @Controller
 public class ReservationController {
+
     @Autowired
     private UsageService usageService;
 
@@ -67,15 +72,16 @@ public class ReservationController {
         theModel.addAttribute("device", device);
         return "users/reservation_test";
     }
-    
+
     @PostMapping("/searchDevice")
     public String searchDeviceByName(@ModelAttribute("device") Device device, Model theModel) {
         String name = device.getName();
-        if(name.isEmpty()) {
+        if (name.isEmpty())
+        {
             return reservation_test(theModel);
         }
         List<Device> results = deviceService.searchDeviceByName(name);
-         theModel.addAttribute("availableDevices", results);
+        theModel.addAttribute("availableDevices", results);
         Usage usage = new Usage();
         theModel.addAttribute("usage", usage);
         theModel.addAttribute("device", device);

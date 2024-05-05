@@ -1,6 +1,7 @@
 package com.project3.Member_Management_SpringBoot.controller;
 
 import com.project3.Member_Management_SpringBoot.annotation.AuthRequire;
+import com.project3.Member_Management_SpringBoot.annotation.RoleRequire;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,8 @@ public class IndexController {
     }
     
     @GetMapping("/admin")
+    @AuthRequire
+    @RoleRequire({"admin"})
     public String dashboard(Model theModel) {
         return "admin/dashboard";
     }

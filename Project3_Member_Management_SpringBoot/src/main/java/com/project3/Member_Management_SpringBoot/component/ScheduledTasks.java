@@ -28,7 +28,7 @@ public class ScheduledTasks {
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private final UsageService usageService;
     
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 3600000)
     public void deleteReservationAutomatically() {
         List<Usage> overdueReservation = findOverdueReservation();
         if (!overdueReservation.isEmpty())

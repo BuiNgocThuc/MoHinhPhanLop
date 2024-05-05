@@ -6,7 +6,6 @@ import com.project3.Member_Management_SpringBoot.repository.TokenRepository;
 import com.project3.Member_Management_SpringBoot.service.EmailService;
 import com.project3.Member_Management_SpringBoot.service.MemberService;
 import jakarta.servlet.http.HttpSession;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,7 +53,11 @@ public class AuthController {
             role = "admin";
         }
         session.setAttribute("role", role);
-        return "redirect:/profile";
+        if (role.equals("admin"))
+        {
+            return "redirect:/admin";
+        }
+        return "redirect:/";
     }
 
     @GetMapping("/register")
