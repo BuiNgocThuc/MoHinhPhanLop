@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Reservation Device</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <!-- <div th:replace="header :: header"></div> -->
+      <div class="group">
+        <div class="member-info">
+          <h1 class="text-center">Reservation Device Page</h1>
+          <h3>Member Information</h3>
+          <p><strong>Name:</strong> <span th:text="${member.name}"></span></p>
+          <p>
+            <strong>Department:</strong>
+            <span th:text="${member.department}"></span>
+          </p>
+          <p><strong>Major:</strong> <span th:text="${member.major}"></span></p>
+          <p><strong>Phone:</strong> <span th:text="${member.phone}"></span></p>
+          <p><strong>Email:</strong> <span th:text="${member.email}"></span></p>
+        </div>
+
+        <div class="content">
+          <h3>Devices Reserved</h3>
+          <table class="table table-striped">
+            <div th:if="${!#lists.isEmpty(usages)}">
+              <thead>
+                <tr>
+                  <th>Usage ID</th>
+                  <th>Device Name</th>
+                  <th>Borrowed Time</th>
+                  <th>Reserve Time</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+            </div>
+            <tbody>
+              <tr th:if="${#lists.isEmpty(usages)}">
+                <td colspan="5" class="text-center">No devices reserved.</td>
+              </tr>
+              <tr th:each="usage : ${usages}">
+                <td th:text="${usage.id}"></td>
+                <td
+                  th:text="${usage.device != null ? usage.device.name : 'No name'}"
+                ></td>
+                <td
+                  th:text="${usage.borrowedTimeString != null ? usage.borrowedTimeString : 'N/A'}"
+                ></td>
+                <td th:text="${usage.reserveTimeString}"></td>
+                <td>
+                  <span th:if="${usage.borrowedTime == null}"
+                    >Not borrowed</span
+                  >
+                  <span
+                    th:if="${usage.borrowedTime != null and usage.paidTime == null}"
+                    >Currently borrowed</span
+                  >
+                  <span th:if="${usage.paidTime != null}">Borrowed</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

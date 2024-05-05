@@ -1,3 +1,6 @@
+CREATE DATABASE IF NOT EXISTS `qlthanhvien` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+USE `qlthanhvien`;
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/

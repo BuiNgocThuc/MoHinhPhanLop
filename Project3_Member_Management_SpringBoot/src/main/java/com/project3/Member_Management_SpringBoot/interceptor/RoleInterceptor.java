@@ -1,22 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.project3.Member_Management_SpringBoot.interceptor;
 
-import com.project3.Member_Management_SpringBoot.annotation.RestrictTo;
+import com.project3.Member_Management_SpringBoot.annotation.RoleRequire;
 import com.project3.Member_Management_SpringBoot.model.Member;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
 
-/**
- *
- * @author ASUS
- */
 public class RoleInterceptor implements HandlerInterceptor {
 
     @Override
@@ -24,12 +14,13 @@ public class RoleInterceptor implements HandlerInterceptor {
             throws Exception {
         if (handler instanceof HandlerMethod) {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
-            RestrictTo restrictToAnnotation = handlerMethod.getMethodAnnotation(RestrictTo.class);
+            RoleRequire roleRequireAnnotation = handlerMethod.getMethodAnnotation(RoleRequire.class);
 
-            if (restrictToAnnotation != null) {
-                String role = getRoleForUser(request);
-                if (role == null || !containsRole(restrictToAnnotation.value(), role)) {
-                    // Redirect to login page if user is not authenticated or does not have the required role
+            if (roleRequireAnnotation != null) {
+                String[] requiredRoles = roleRequireAnnotation.value();
+                Member member = (Member) request.getSession().getAttribute("user");
+                String role = (String) request.getSession().getAttribute("role");
+                if (member == null || !hasRequiredRole(role, requiredRoles)) {
                     response.sendRedirect("/login");
                     return false;
                 }
@@ -38,36 +29,13 @@ public class RoleInterceptor implements HandlerInterceptor {
         return true;
     }
 
-    private String getRoleForUser(HttpServletRequest request) {
-        Member member = (Member) request.getSession().getAttribute("user");
-        if (member != null) {
-            if (member.getId() == 123456) {
-                return "admin";
-            } else {
-                return "user";
-            }
-        }
-        return null;
-    }
-
-    private boolean containsRole(String[] roles, String role) {
-        for (String r : roles) {
-            if (r.equals(role)) {
+    private boolean hasRequiredRole(String userRole, String[] requiredRoles) {
+        for (String role : requiredRoles) {
+            if (role.equals(userRole)) {
                 return true;
             }
         }
         return false;
     }
 
-    @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-            ModelAndView modelAndView) throws Exception {
-        // This method is called after the handler is executed
-    }
-
-    @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler,
-            Exception ex) throws Exception {
-        // This method is called after the request is completed
-    }
 }
