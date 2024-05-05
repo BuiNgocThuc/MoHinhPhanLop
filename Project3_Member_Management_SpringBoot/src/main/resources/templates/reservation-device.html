@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Reservation Device</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header
+        class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom"
+      >
+        <a
+          href="/"
+          class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none"
+        >
+          <svg
+            class="bi me-2"
+            width="40"
+            height="32"
+            role="img"
+            aria-label="Bootstrap"
+          >
+            <use xlink:href="#bootstrap"></use>
+          </svg>
+        </a>
+        <ul
+          class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0"
+          th:if="${session.user}"
+        >
+          <li><a href="#" class="nav-link px-2 link-secondary">Device</a></li>
+          <li>
+            <a
+              href="#"
+              class="nav-link px-2 link-dark"
+              th:href="@{/disciplines/violation_history}"
+              >Discipline</a
+            >
+          </li>
+          <li>
+            <a href="#" class="nav-link px-2 link-dark" th:href="@{/booking}"
+              >Booking</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="nav-link px-2 link-dark"
+              th:href="@{/members/profile}"
+              >Profile</a
+            >
+          </li>
+        </ul>
+
+        <div class="col-md-3 text-end me-5">
+          <div th:if="${session.user}">
+            <a
+              type="button"
+              class="btn btn-outline-primary"
+              th:href="@{/logout}"
+              >Log out</a
+            >
+            <span th:text="'Hi ' + ${session.user.name}"></span>
+          </div>
+          <div th:unless="${session.user}">
+            <a
+              type="button"
+              class="btn btn-outline-primary me-2"
+              th:href="@{/loginPage}"
+              >Login</a
+            >
+            <a type="button" class="btn btn-primary" th:href="@{/signup}"
+              >Sign-up</a
+            >
+          </div>
+        </div>
+      </header>
+
+      <div class="group">
+        <div class="member-info">
+          <h1 class="text-center">Reservation Device Page</h1>
+          <h3>Member Information</h3>
+          <p><strong>Name:</strong> <span th:text="${member.name}"></span></p>
+          <p>
+            <strong>Department:</strong>
+            <span th:text="${member.department}"></span>
+          </p>
+          <p><strong>Major:</strong> <span th:text="${member.major}"></span></p>
+          <p><strong>Phone:</strong> <span th:text="${member.phone}"></span></p>
+          <p><strong>Email:</strong> <span th:text="${member.email}"></span></p>
+        </div>
+
+        <div class="content">
+          <h3>Devices Reserved</h3>
+          <table class="table table-striped">
+            <div th:if="${!#lists.isEmpty(usages)}">
+              <thead>
+                <tr>
+                  <th>Usage ID</th>
+                  <th>Device Name</th>
+                  <th>Borrowed Time</th>
+                  <th>Reserve Time</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+            </div>
+            <tbody>
+              <tr th:if="${#lists.isEmpty(usages)}">
+                <td colspan="5" class="text-center">No devices reserved.</td>
+              </tr>
+              <tr th:each="usage : ${usages}">
+                <td th:text="${usage.id}"></td>
+                <td
+                  th:text="${usage.device != null ? usage.device.name : 'No name'}"
+                ></td>
+                <td
+                  th:text="${usage.borrowedTimeString != null ? usage.borrowedTimeString : 'N/A'}"
+                ></td>
+                <td th:text="${usage.reserveTimeString}"></td>
+                <td>
+                  <span th:if="${usage.borrowedTime == null}"
+                    >Not borrowed</span
+                  >
+                  <span
+                    th:if="${usage.borrowedTime != null and usage.paidTime == null}"
+                    >Currently borrowed</span
+                  >
+                  <span th:if="${usage.paidTime != null}">Borrowed</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
