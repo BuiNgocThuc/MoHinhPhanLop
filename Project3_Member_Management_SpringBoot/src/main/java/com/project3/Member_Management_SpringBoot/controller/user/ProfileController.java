@@ -12,6 +12,7 @@ import com.project3.Member_Management_SpringBoot.service.MemberService;
 import com.project3.Member_Management_SpringBoot.service.UsageService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -24,13 +25,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequiredArgsConstructor
 public class ProfileController {
-
-    private final MemberService memberService;
-    private final EmailService emailService;
-    private final DisciplineService disciplineService;
-    private final UsageService usageService;
+    @Autowired
+    private MemberService memberService;
+    @Autowired
+    private EmailService emailService;
+    @Autowired
+    private DisciplineService disciplineService;
+    @Autowired
+    private UsageService usageService;
 
     @PostMapping("/changePassword")
     public String changePassword(HttpSession session,
@@ -45,7 +48,6 @@ public class ProfileController {
         memberService.saveMember(member);
         return "redirect:/?changePasswordSuccess";
     }
-
     @PostMapping(value = "/send-email")
     public void sendEmail(@RequestBody Member member) throws Exception {
         try
@@ -62,11 +64,23 @@ public class ProfileController {
     public String violationHistory(HttpSession session, Model theModel) {
         Member member = (Member) session.getAttribute("user");
         List<Discipline> disciplinesByUser = disciplineService.findByMember(member);
-
         theModel.addAttribute("data", disciplinesByUser);
-        return "users/violation-history";
+        return "users/violationHistory";
     }
-    
+    @GetMapping("/borrowedEquipment")
+    @AuthRequire
+    @Transactional
+    public String getBorrowedEquipment(Model model, HttpSession session, HttpServletResponse response) throws IOException{
+        Member member = (Member) session.getAttribute("user");
+        System.out.println(member.getId());
+        if (member == null) {
+            return "error";
+        }
+        member.getUsages().size();
+        Iterable<Usage> borrowedDevices = member.getUsages();
+        model.addAttribute("borrowedDevices", borrowedDevices);
+        return "users/detail-borrowed-device";
+    }
     @GetMapping("/reservedDevicesList")
     @AuthRequire
     public String getReservationDevice(Model theModel, HttpSession session, HttpServletResponse response)

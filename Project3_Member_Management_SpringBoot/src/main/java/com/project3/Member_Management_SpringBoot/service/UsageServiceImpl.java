@@ -79,4 +79,8 @@ public class UsageServiceImpl implements UsageService {
     public List<Usage> findOverdueReservation(Timestamp deadline) {
         return usageRepository.findOverdueReservation(deadline);
     }
+    @Override
+    public List<Usage> findBorrowedDevicesByMemberId(Integer memberId) {
+        return usageRepository.findByMemberIdAndBorrowedTimeIsNotNull(memberId);
+    }
 }

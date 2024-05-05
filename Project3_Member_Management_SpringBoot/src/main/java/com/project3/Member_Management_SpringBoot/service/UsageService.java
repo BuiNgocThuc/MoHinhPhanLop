@@ -36,4 +36,5 @@ public interface UsageService {
     Boolean reserveDevice(Usage usage);
 
     List<Usage> findOverdueReservation(Timestamp deadline);
+    List<Usage> findBorrowedDevicesByMemberId(Integer memberId);
 }
