@@ -14,9 +14,8 @@ public class IndexController {
     }
     
     @GetMapping("/admin")
-    @RestrictTo({"admin"})
     public String dashboard(Model theModel) {
-        return "admin/dasboard";
+        return "admin/dashboard";
     }
 }
 

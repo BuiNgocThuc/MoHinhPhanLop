@@ -1,10 +1,8 @@
 package com.project3.Member_Management_SpringBoot.controller.user;
 
+import com.project3.Member_Management_SpringBoot.annotation.AuthRequire;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.project3.Member_Management_SpringBoot.annotation.RestrictTo;
 import com.project3.Member_Management_SpringBoot.model.Discipline;
 import com.project3.Member_Management_SpringBoot.model.Member;
 import com.project3.Member_Management_SpringBoot.service.DisciplineService;
@@ -53,6 +51,7 @@ public class ProfileController {
     }
 
     @GetMapping("/violation_history")
+    @AuthRequire
     public String violationHistory(HttpSession session, Model theModel) {
         Member member = (Member) session.getAttribute("user");
         List<Discipline> disciplinesByUser = disciplineService.findByMember(member);

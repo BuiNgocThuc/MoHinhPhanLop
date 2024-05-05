@@ -4,7 +4,7 @@
  */
 package com.project3.Member_Management_SpringBoot.controller.user;
 
-import com.project3.Member_Management_SpringBoot.annotation.RestrictTo;
+import com.project3.Member_Management_SpringBoot.annotation.AuthRequire;
 import com.project3.Member_Management_SpringBoot.model.Device;
 import com.project3.Member_Management_SpringBoot.model.Member;
 import com.project3.Member_Management_SpringBoot.model.Usage;
@@ -45,10 +45,7 @@ public class ReservationController {
     }
 
     @GetMapping("/reservation")
-    @RestrictTo(
-    {
-        "user"
-    })
+    @AuthRequire
     public String reservation(Model theModel) {
         List<Device> availableDevices = deviceService.getAvailableDevices();
         theModel.addAttribute("availableDevices", availableDevices);
@@ -60,10 +57,7 @@ public class ReservationController {
     }
 
     @GetMapping("/reservation_test")
-    @RestrictTo(
-    {
-        "user"
-    })
+    @AuthRequire
     public String reservation_test(Model theModel) {
         List<Device> availableDevices = deviceService.getAvailableDevices();
         theModel.addAttribute("availableDevices", availableDevices);
