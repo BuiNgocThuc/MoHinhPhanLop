@@ -15,7 +15,7 @@
                 <div class="col-md-6">
                     <div class="form-group mb-2">
                         <label for="maTV" class="form-label">Member ID:</label>
-                        <input type="text" id="maTV" class="form-control" th:value="${session.user.id}" readonly>
+                        <input type="text" id="maTV" class="form-control" th:value="${session.user.id}" readonly> 
                     </div>
                     <div class="form-group mb-2">
                         <label for="hoten" class="form-label">Full Name:</label>
@@ -71,7 +71,13 @@
                     <a class="btn btn-info"  th:href="@{/detailborrowed/{userId}(userId=${session.user.id})}">Borrowed Devices List</a>
                 </div>
                 <div>
-                    <p><a class="btn btn-info my-3" th:href="@{/reservedDevicesList}">Reserved Devices List</a></p>
+                    <p><a class="btn btn-info" th:href="@{/reservedDevicesList}">Reserved Devices List</a></p>
+                </div>
+                <div>
+                    <p><a class="btn btn-info" th:href="@{/violation_history}">Violation History</a></p>
+                </div>
+                <div>
+                    <p><a class="btn btn-info" th:href="@{/resetPassword}">Change Password</a></p>
                 </div>
             </div>
         </div>

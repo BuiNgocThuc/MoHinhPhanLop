@@ -120,7 +120,6 @@ public class AuthController {
         }
         return "redirect:/forgotPassword?error";
     }
-
     @PostMapping("/resetPassword")
     public String passwordResetProcess(@ModelAttribute Member memberDTO) {
         Member member = memberService.findByEmail(memberDTO.getEmail());
