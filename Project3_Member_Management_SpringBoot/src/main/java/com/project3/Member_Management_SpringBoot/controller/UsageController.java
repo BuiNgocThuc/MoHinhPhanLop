@@ -64,7 +64,7 @@ public class UsageController {
 
         theModel.addAttribute("usages", usages);
 
-        return "reservation-device";
+        return "users/reservation-device";
     }
 
     @Autowired

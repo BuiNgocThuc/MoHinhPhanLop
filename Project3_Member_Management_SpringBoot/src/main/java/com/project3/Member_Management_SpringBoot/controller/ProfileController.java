@@ -8,12 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.project3.Member_Management_SpringBoot.annotation.RoleRequire;
 
 @Controller
-//@RequestMapping("/profile")
 public class ProfileController {
-    @GetMapping("/")
+    @GetMapping("/profile")
     @RoleRequire({ "user" })
     public String user() {
         return "users/profile";
     }
-    
 }
+
