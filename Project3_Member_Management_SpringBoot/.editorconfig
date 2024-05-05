@@ -16,3 +16,6 @@ trim_trailing_whitespace = false
 [**/target/**]
 ignore = true
 
+[*.html]
+indent_style = space
+indent_size = 4

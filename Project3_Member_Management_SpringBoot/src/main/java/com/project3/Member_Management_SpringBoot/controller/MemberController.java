@@ -24,7 +24,7 @@ public class MemberController {
     @PostMapping("/save")
     public String saveMember(@ModelAttribute("member") Member member) {
         memberService.saveMember(member);
-        return "redirect:/loginPage?successSignUp";
+        return "redirect:/login?successSignUp";
     }
 
     // @GetMapping("/profile")

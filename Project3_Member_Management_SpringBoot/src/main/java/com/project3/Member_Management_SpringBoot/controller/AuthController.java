@@ -48,7 +48,7 @@ public class AuthController {
             return "redirect:/login?errorPassword";
         }
         // if (disciplineService.findStatusByMember(member) != null) {
-        // return "redirect:/loginPage?isBlocked";
+        // return "redirect:/login?isBlocked";
         // }
         session.setAttribute("user", member);
 
