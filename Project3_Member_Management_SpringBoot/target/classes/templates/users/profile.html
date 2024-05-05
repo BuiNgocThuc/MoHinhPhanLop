@@ -1,81 +1,76 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security" th:replace="~{base}">
-<head>
-    <title>User Profile</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<body>
-<div th:fragment="content" class="container">
-    <!-- Profile-specific content goes here -->
-    <h2>User Profile Page</h2>
-    <p>This is the profile page content.</p>
-    <span th:text="'Hi ' + ${session.user.name}"></span>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="maTV">Mã thành viên:</label>
-                <input type="text" id="maTV" class="form-control" th:value="${session.user.id}" readonly>
+    <head>
+        <title>User Profile</title>
+    </head>
+    <body>
+        <div th:fragment="content" class="container mt-3">
+            <!-- Profile-specific content goes here -->
+            <div class="d-flex gap-2 justify-content-start align-items-center">
+                <i class="fa-regular fa-user" style="font-size: 35px"></i>
+                <span style="font-size: 35px;font-weight: 500;" th:text="${session.user.name}">...</span>
             </div>
-            <div class="form-group">
-                <label for="hoten">Họ và tên:</label>
-                <input type="text" id="hoten" class="form-control" th:value="${session.user.name}" readonly>
-            </div>
-            <div class="form-group">
-                <label for="khoa">Khoa:</label>
-                <input type="text" id="khoa" class="form-control" th:value="${session.user.department}" readonly>
-            </div>
-            <div class="form-group">
-                <label for="nghanh">Ngành:</label>
-                <input type="text" id="nghanh" class="form-control" th:value="${session.user.major}" readonly>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="sdt">Số điện thoại:</label>
-                <input type="text" id="sdt" class="form-control" th:value="${session.user.phone}" readonly>
-            </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="text" id="email" class="form-control" th:value="${session.user.email}" readonly>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <div class="input-group">
-                    <input type="password" id="password" class="form-control" th:value="${session.user.password}" readonly>
-                    <div class="input-group-append">
-                        <span class="input-group-text" style="cursor: pointer;" id="show-password">
-                            <i class="fas fa-eye"></i>
-                        </span>
+            <hr>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group mb-2">
+                        <label for="maTV" class="form-label">Member ID:</label>
+                        <input type="text" id="maTV" class="form-control" th:value="${session.user.id}" readonly>
                     </div>
+                    <div class="form-group mb-2">
+                        <label for="hoten" class="form-label">Full Name:</label>
+                        <input type="text" id="hoten" class="form-control" th:value="${session.user.name}" readonly>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="khoa" class="form-label">Department:</label>
+                        <input type="text" id="khoa" class="form-control" th:value="${session.user.department}" readonly>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="nghanh" class="form-label">Major:</label>
+                        <input type="text" id="nghanh" class="form-control" th:value="${session.user.major}" readonly>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group mb-2">
+                        <label for="sdt" class="form-label">Phone Number:</label>
+                        <input type="text" id="sdt" class="form-control" th:value="${session.user.phone}" readonly>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="text" id="email" class="form-control" th:value="${session.user.email}" readonly>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="password" class="form-label">Password:</label>
+                        <div class="input-group">
+                            <input type="password" id="password" class="form-control" th:value="${session.user.password}" readonly>
+                            <!--<div class="input-group-append">-->
+                            <span class="input-group-text" style="cursor: pointer;background-color: #fff" id="show-password">
+                                <i class="fas fa-eye"></i>
+                            </span>
+                            <!--</div>-->
+                        </div>
+                        <script th:inline="javascript" type="text/javascript">
+                            document.addEventListener("DOMContentLoaded", function () {
+                                const showPasswordIcon = document.getElementById("show-password");
+                                const passwordInput = document.getElementById("password");
+
+                                showPasswordIcon.addEventListener("click", function () {
+                                    if (passwordInput.type === "password") {
+                                        passwordInput.type = "text";
+                                        showPasswordIcon.innerHTML = '<i class="fas fa-eye-slash"></i>';
+                                    } else {
+                                        passwordInput.type = "password";
+                                        showPasswordIcon.innerHTML = '<i class="fas fa-eye"></i>';
+                                    }
+                                });
+                            });
+                        </script>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <a class="btn btn-info"  th:href="@{/members/detailborrowed/{userId}(userId=${session.user.id})}">Borrowed Devices</a>
                 </div>
             </div>
         </div>
-        <div>
-            <p><a th:href="@{/members/detailborrowed/{userId}(userId=${session.user.id})}">Borrowed Equipment</a></p>
-        </div>
-    </div>
-</div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const showPasswordIcon = document.getElementById("show-password");
-        const passwordInput = document.getElementById("password");
-
-        showPasswordIcon.addEventListener("click", function() {
-            if (passwordInput.type === "password") {
-                passwordInput.type = "text";
-                showPasswordIcon.innerHTML = '<i class="fas fa-eye-slash"></i>';
-            } else {
-                passwordInput.type = "password";
-                showPasswordIcon.innerHTML = '<i class="fas fa-eye"></i>';
-            }
-        });
-    });
-</script>
-</body>
+    </body>
 </html>

@@ -1,18 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.project3.Member_Management_SpringBoot.model;
 
-/**
- *
- * @author buing
- */
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.sql.Timestamp;
 
 @Data
@@ -26,16 +17,16 @@ public class Usage {
     @Column(name = "MaTT")
     private Integer id;
 
-    @Column(name = "TGVao")
+    @Column(name = "tgvao", nullable = true)
     private Timestamp enteredTime;
 
-    @Column(name = "TGMuon")
+    @Column(name = "tgmuon", nullable = true)
     private Timestamp borrowedTime;
 
-    @Column(name = "TGTra")
+    @Column(name = "tgtra", nullable = true)
     private Timestamp paidTime;
 
-    @Column(name = "TGDatcho")
+    @Column(name = "tgdatcho", nullable = true)
     @Temporal(TemporalType.TIMESTAMP)
     private Timestamp reserveTime;
 
@@ -44,6 +35,25 @@ public class Usage {
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "MaTB")
+    @JoinColumn(name = "MaTB", nullable = true)
     private Device device;
+
+    private String borrowedTimeString;
+    private String reserveTimeString;
+
+    public String getBorrowedTimeString() {
+        return borrowedTimeString;
+    }
+
+    public void setBorrowedTimeString(String borrowedTimeString) {
+        this.borrowedTimeString = borrowedTimeString;
+    }
+
+    public String getReserveTimeString() {
+        return reserveTimeString;
+    }
+
+    public void setReserveTimeString(String reserveTimeString) {
+        this.reserveTimeString = reserveTimeString;
+    }
 }

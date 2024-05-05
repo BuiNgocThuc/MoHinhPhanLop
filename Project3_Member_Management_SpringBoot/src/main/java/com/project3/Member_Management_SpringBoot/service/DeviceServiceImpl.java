@@ -6,6 +6,9 @@ package com.project3.Member_Management_SpringBoot.service;
 
 import com.project3.Member_Management_SpringBoot.model.Device;
 import com.project3.Member_Management_SpringBoot.repository.DeviceRepository;
+
+import java.util.List;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
