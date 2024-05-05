@@ -12,4 +12,10 @@ public class IndexController {
     public String home(Model theModel) {
         return "users/profile";
     }
+    
+    @GetMapping("/admin")
+    @RestrictTo({"admin"})
+    public String dashboard(Model theModel) {
+        return "admin/dasboard";
+    }
 }

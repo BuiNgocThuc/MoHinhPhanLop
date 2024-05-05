@@ -11,7 +11,7 @@
             <h3>Register Member</h3>
             <hr>
             <div>
-                <form action="#" th:action="@{/members/save}" th:object="${member}" method="POST">
+                <form action="#" th:action="@{/register}" th:object="${member}" method="POST">
                     <input type="text" th:field="*{id}" class="form-control mb-4 w-25" placeholder="ID"/>
                     <input type="text" th:field="*{name}" class="form-control mb-4 w-25" placeholder="Name"/>
                     <input type="text" th:field="*{department}" class="form-control mb-4 w-25" placeholder="Department"/>

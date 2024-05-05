@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-@RequiredArgsConstructor
 public class AuthController {
 
     @Autowired
@@ -47,9 +46,6 @@ public class AuthController {
         if (!memberService.checkPasswordUser(member, password)) {
             return "redirect:/login?errorPassword";
         }
-        // if (disciplineService.findStatusByMember(member) != null) {
-        // return "redirect:/loginPage?isBlocked";
-        // }
         session.setAttribute("user", member);
         return "redirect:/";
     }
@@ -60,6 +56,12 @@ public class AuthController {
         theModel.addAttribute("member", member);
         return "register";
     }
+    
+    @PostMapping("/register")
+    public String register(@ModelAttribute("member") Member member) {
+        memberService.saveMember(member);
+        return "redirect:/loginPage?successSignUp";
+    }
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
@@ -68,11 +70,11 @@ public class AuthController {
     
     @GetMapping("/forgotPassword")
     public String forgotPassword() {
-        return "users/forgot-password";
+        return "users/forgotPassword";
     }
     
     @PostMapping("/forgotPassword")
-    public String forgotPassordProcess(@ModelAttribute Member memberDTO) {
+    public String forgotPassword(@ModelAttribute Member memberDTO) {
         try {
             String output = "";
             Member user = memberService.findByEmail(memberDTO.getEmail());
