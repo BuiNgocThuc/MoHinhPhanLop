@@ -1,15 +1,62 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Xử Lý</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+  <h2 class="my-4">Form Xử Lý</h2>
+  
+  <form th:object="${discipline}" th:action="@{save}" method="post">
+    <div class="form-group">
+      <label for="maXuLy">Mã Xử Lý</label>
+      <input type="text" class="form-control" id="maXuLy" placeholder="Nhập mã xử lý">
+    </div>
+    <div class="form-group">
+      <label for="thanhVien">Thành Viên</label>
+      <select class="form-control" id="thanhVien">
+        <option value="">Chọn thành viên</option>
+        <option value="TV001">Thành viên 1</option>
+        <option value="TV002">Thành viên 2</option>
+        <option value="TV003">Thành viên 3</option>
+        <!-- Thêm các option khác tương tự -->
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="hinhThucXuLy">Hình Thức Xử Lý</label>
+      <select class="form-control" id="hinhThucXuLy">
+        <option value="">Chọn hình thức</option>
+        <option value="TT001">Thanh toán</option>
+        <option value="GH001">Ghi nợ</option>
+        <option value="GN001">Ghi nợ 1</option>
+        <!-- Thêm các option khác tương tự -->
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="soTien">Số Tiền</label>
+      <input type="text" class="form-control" id="soTien" placeholder="Nhập số tiền">
+    </div>
+    <div class="form-group">
+      <label for="trangThai">Trạng Thái</label>
+      <select class="form-control" id="trangThai">
+        <option value="">Chọn trạng thái</option>
+        <option value="DXL">Đã xử lý</option>
+        <option value="CX">Chưa xử lý</option>
+        <!-- Thêm các option khác tương tự -->
+      </select>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script th:src="@{/js/discipline.js}"></script>
+</body>
 </html>
