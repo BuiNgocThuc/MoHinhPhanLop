@@ -66,8 +66,8 @@
                 <tr th:each="usage : ${usages}">
                     <td th:text="${usage.id}"></td>
                     <td th:text="${usage.device != null ? usage.device.name : 'No name'}"></td>
-<!--                    <td th:text="${usage.borrowedTimeString != null ? usage.borrowedTimeString : 'N/A'}"></td>-->
-                    <td th:text="${#dates.format(usage.borrowedTime , 'dd/MM/yyyy HH:mm')}"></td>
+                    <td th:text="${usage.borrowedTimeString != null ? usage.borrowedTimeString : 'N/A'}"></td>
+                    <!--<td th:text="${#dates.format(usage.borrowedTime , 'dd/MM/yyyy HH:mm')}"></td>-->
                     
                     <td th:text="${usage.reserveTimeString}"></td>
                     <td>
