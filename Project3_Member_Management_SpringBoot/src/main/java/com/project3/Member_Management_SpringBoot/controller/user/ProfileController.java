@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ProfileController {
+
     @Autowired
     private MemberService memberService;
     @Autowired
@@ -35,26 +36,29 @@ public class ProfileController {
     @Autowired
     private UsageService usageService;
 
+    @GetMapping("/changePassword")
+    public String changePassword() {
+        return "users/changePassword";
+    }
+
     @PostMapping("/changePassword")
     public String changePassword(HttpSession session,
             @RequestParam("oldPassword") String oldPassword,
             @RequestParam("newPassword") String newPassword) {
         Member member = (Member) session.getAttribute("user");
-        if (!memberService.checkPasswordUser(member, oldPassword))
-        {
+        if (!memberService.checkPasswordUser(member, oldPassword)) {
             return "redirect:/?wrongOldPassword";
         }
         member.setPassword(newPassword);
         memberService.saveMember(member);
         return "redirect:/?changePasswordSuccess";
     }
+
     @PostMapping(value = "/send-email")
     public void sendEmail(@RequestBody Member member) throws Exception {
-        try
-        {
+        try {
             emailService.sendEmail(member);
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             throw new Exception();
         }
     }
@@ -67,28 +71,27 @@ public class ProfileController {
         theModel.addAttribute("data", disciplinesByUser);
         return "users/violationHistory";
     }
+
     @GetMapping("/borrowedEquipment")
     @AuthRequire
     @Transactional
-    public String getBorrowedEquipment(Model model, HttpSession session, HttpServletResponse response) throws IOException{
+    public String getBorrowedEquipment(Model model, HttpSession session) throws IOException {
         Member member = (Member) session.getAttribute("user");
-        System.out.println(member.getId());
         if (member == null) {
             return "error";
         }
-        member.getUsages().size();
         Iterable<Usage> borrowedDevices = member.getUsages();
         model.addAttribute("borrowedDevices", borrowedDevices);
         return "users/detail-borrowed-device";
     }
+
     @GetMapping("/reservedDevicesList")
     @AuthRequire
     public String getReservationDevice(Model theModel, HttpSession session, HttpServletResponse response)
             throws IOException {
         Member member = (Member) session.getAttribute("user");
 
-        if (member == null)
-        {
+        if (member == null) {
             response.sendRedirect("/login");
             return null;
         }
@@ -99,22 +102,18 @@ public class ProfileController {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-        for (Usage usage : usages)
-        {
-            if (usage.getBorrowedTime() != null)
-            {
+        for (Usage usage : usages) {
+            if (usage.getBorrowedTime() != null) {
                 LocalDateTime borrowedTime = usage.getBorrowedTime().toLocalDateTime();
                 usage.setBorrowedTimeString(borrowedTime.format(formatter));
             }
-            if (usage.getReserveTime() != null)
-            {
+            if (usage.getReserveTime() != null) {
                 LocalDateTime reserveTime = usage.getReserveTime().toLocalDateTime();
                 usage.setReserveTimeString(reserveTime.format(formatter));
             }
         }
 
-        for (Usage usage : usages)
-        {
+        for (Usage usage : usages) {
             System.out.println(usage.getReserveTimeString());
         }
 
