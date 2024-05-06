@@ -6,12 +6,18 @@
     <body>
         <!--Table display device--> 
         <div class="container" th:fragment="content">
-            <form class="d-flex my-2 rounded">
-                <input class="form-control me-1" type="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex my-2 rounded" th:action="@{/searchDevice}" method="POST" th:object="${device}">
+                <input class="form-control me-1" type="search" placeholder="Search" aria-label="Search"  th:field="*{name}">
                 <button class="btn btn-primary" type="submit">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
             </form>
+             <div th:if="${param.success}">
+                        <div class="alert alert-info">Your reservation has been confirmed.</div>
+                    </div>
+                    <div th:if="${param.unavailable}">
+                        <div class="alert alert-danger">The device has been booked for borrowing on this day.</div>
+                    </div>
             <table class="table table-bordered table-striped">
                 <thead class="table-dark">
                     <tr>
@@ -72,13 +78,13 @@
                             <!-- Modal Body -->
                             <div class="modal-body">
                                 <!-- Your form content goes here -->
-                                <form th:fragment="content">
+                                <form th:fragment="content" th:object="${usage}" th:action="@{/reservation}" method="POST">
                                     <fieldset class="mb-3">
                                         <legend class="h5">Device information</legend>
                                         <div class="row">
                                             <div class="col">
                                                 <label for="deviceID" class="form-label">Device ID</label>
-                                                <input type="text" id="deviceID" class="form-control" placeholder="120191" disabled>
+                                                <input type="text" id="deviceID" class="form-control" placeholder="120191" disabled th:field="*{device.id}">
                                             </div>
                                             <div class="col">
                                                 <label for="deviceName" class="form-label">Device Name</label>
@@ -101,9 +107,27 @@
                                     </fieldset>
                                     <div class="mb-3">
                                         <label for="borrowDate" class="form-label">Choose date to borrow</label>
-                                        <input type="datetime-local" class="form-control" id="borrowDate">
+                                        <input type="datetime-local" class="form-control" id="datetimeInput">
+                                        <input type="hidden" id="hiddenInput"  th:field="*{reserveTime}">
                                     </div>
                                     <button type="submit" class="btn btn-primary">Save</button>
+                                    <script th:inline="javascript" type="text/javascript">
+                                        // Retrieve the input elements
+                                        var datetimeInput = document.getElementById('datetimeInput');
+                                        var hiddenInput = document.getElementById('hiddenInput');
+
+                                        // Add event listener for input change
+                                        datetimeInput.addEventListener('change', function () {
+                                            // Retrieve the value of the datetime input field
+                                            var inputValue = datetimeInput.value;
+
+                                            // Format the datetime value to be compatible with SQL datetime format
+                                            var formattedDateTime = inputValue.replace("T", " ") + ':00';
+
+                                            // Set the formatted datetime value to the hidden input field
+                                            hiddenInput.value = formattedDateTime;
+                                        });
+                                    </script>
                                 </form>
                             </div>
 

@@ -22,7 +22,7 @@ public class MemberController {
     public String getAllMembers(Model theModel) {
          List<Member> members = memberService.getAllMembers();
         theModel.addAttribute("data", members);
-        return "admin/member-table";
+        return "admin/membersList";
     }
     
     @GetMapping("/showFormForAdd")
@@ -42,13 +42,13 @@ public class MemberController {
     @PostMapping("/saveMember")
     public String saveMember(@ModelAttribute("member") Member member) {
         memberService.saveMember(member);
-        return "redirect:/admin/members/list";
+        return "redirect:/memberlist";
     }
     
     @GetMapping("/deleteMember")
     public String deleteMember(@RequestParam("memberId") Integer ID) {
         memberService.deleteById(ID);
-        return "redirect:/admin/members/list";
+        return "redirect:/memberlist";
     }
     
 }
