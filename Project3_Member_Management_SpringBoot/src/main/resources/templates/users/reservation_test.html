@@ -19,7 +19,7 @@
                     <form action="#" th:action="@{/reservation}" method="POST" th:object="${usage}">
                         <input type="datetime-local" class="form-control mb-4 w-50" placeholder="Date" required id="datetimeInput"/>
                         <input type="hidden" id="hiddenInput"  th:field="*{reserveTime}">
-                        <input type="text" class="form-control mb-4 w-50" placeholder="Device ID" required th:field="*{device.id}"/>
+                        <input type="text" id="deviceId" class="form-control mb-4 w-50" placeholder="Device ID" required th:field="*{device.id}"/>
 
                         <button type="submit" class="btn btn-info col-2" onclick="changeReserveTime()">Save</button>
                         <script th:inline="javascript" type="text/javascript">
@@ -67,7 +67,12 @@
                                 <td th:text="${device.name}">...</td>
                                 <td th:text="${device.description}">...</td>
                                 <td>
-                                    <button type="button" class="btn btn-info btn-borrow">Borrow</button>
+                                    <button type="button" class="btn btn-info btn-borrow" th:attr="onclick=|setId(${device.id})|">Borrow</button>
+                                    <script th:inline="javascript">
+                                        window.setId = (id) => {
+                                            document.querySelector("#deviceId").value = id;
+                                        };
+                                    </script>
                                 </td>
                             </tr>
                         </tbody>
