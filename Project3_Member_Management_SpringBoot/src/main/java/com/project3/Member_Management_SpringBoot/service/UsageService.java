@@ -4,6 +4,7 @@
  */
 package com.project3.Member_Management_SpringBoot.service;
 
+import com.project3.Member_Management_SpringBoot.model.Device;
 import java.util.List;
 
 import com.project3.Member_Management_SpringBoot.model.Usage;
@@ -30,11 +31,12 @@ public interface UsageService {
 
     @Autowired
     void save(Usage usage);
-
     void deleteAll(Iterable<Usage> usages);
-
     Boolean reserveDevice(Usage usage);
-
     List<Usage> findOverdueReservation(Timestamp deadline);
-    List<Usage> findBorrowedDevicesByMemberId(Integer memberId);
+    List<Usage> getBorrowedDevices();
+    List<Device> getAvailableDevices();
+    Usage findById(Integer ID);
+    void returnDevice(Usage usage);
+    void borrowDevice(Usage usage);
 }
