@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html
-xmlns:th="http://www.thymeleaf.org" th:replace="base"
->
+    xmlns:th="http://www.thymeleaf.org" th:replace="base"
+    >
     <head>
         <meta charset="UTF-8" />
         <title>Reservation Device</title>
@@ -10,7 +10,7 @@ xmlns:th="http://www.thymeleaf.org" th:replace="base"
             rel="stylesheet"
             integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
             crossorigin="anonymous"
-        />
+            />
     </head>
     <body>
         <div class="container" th:fragment="content">
@@ -64,21 +64,21 @@ xmlns:th="http://www.thymeleaf.org" th:replace="base"
                                 <td th:text="${usage.id}"></td>
                                 <td
                                     th:text="${usage.device != null ? usage.device.name : 'No name'}"
-                                ></td>
+                                    ></td>
                                 <td
                                     th:text="${usage.borrowedTimeString != null ? usage.borrowedTimeString : 'N/A'}"
-                                ></td>
+                                    ></td>
                                 <td th:text="${usage.reserveTimeString}"></td>
                                 <td>
                                     <span th:if="${usage.borrowedTime == null}"
-                                        >Not borrowed</span
+                                          >Not borrowed</span
                                     >
                                     <span
                                         th:if="${usage.borrowedTime != null and usage.paidTime == null}"
                                         >Currently borrowed</span
                                     >
                                     <span th:if="${usage.paidTime != null}"
-                                        >Borrowed</span
+                                          >Borrowed</span
                                     >
                                 </td>
                             </tr>
@@ -86,6 +86,9 @@ xmlns:th="http://www.thymeleaf.org" th:replace="base"
                     </table>
                 </div>
             </div>
+            <hr>
+            <a class="btn btn-primary" style="display: inline-block; width: 200px;" th:href="@{/}">Back to Profile Page</a>
+
         </div>
     </body>
 </html>
