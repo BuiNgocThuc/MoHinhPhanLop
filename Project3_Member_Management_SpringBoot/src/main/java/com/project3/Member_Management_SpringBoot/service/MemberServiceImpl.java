@@ -6,6 +6,8 @@ package com.project3.Member_Management_SpringBoot.service;
 
 import com.project3.Member_Management_SpringBoot.model.Member;
 import com.project3.Member_Management_SpringBoot.repository.MemberRepository;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,5 +45,17 @@ public class MemberServiceImpl  implements MemberService{
     public Member findByEmail(String email) {
         Optional<Member> optMember = memberRepository.findByEmail(email);
         return optMember.isPresent() ? optMember.get() : null;
+    }
+
+    @Override
+    public List<Member> getAllMembers() {
+        List<Member> members = new ArrayList<>();
+        memberRepository.findAll().forEach(members::add);
+        return members;
+    }
+
+    @Override
+    public void deleteById(Integer ID) {
+        memberRepository.deleteById(ID);
     }
 }

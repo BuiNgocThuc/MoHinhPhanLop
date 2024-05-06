@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html
-xmlns:th="http://www.thymeleaf.org" th:replace="base"
->
+    xmlns:th="http://www.thymeleaf.org" th:replace="base"
+    >
     <head>
         <meta charset="UTF-8" />
         <title>Reservation Device</title>
@@ -10,7 +10,7 @@ xmlns:th="http://www.thymeleaf.org" th:replace="base"
             rel="stylesheet"
             integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
             crossorigin="anonymous"
-        />
+            />
     </head>
     <head>
         <title>Borrowed Devices List</title>
@@ -18,24 +18,24 @@ xmlns:th="http://www.thymeleaf.org" th:replace="base"
     <body>
         <div class="container mt-3" th:fragment="content">
             <h3>Borrowed Devices List</h2>
-            
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Device ID</th>
-                        <th>Device Name</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="i:${borrowedDevices}" th:if="${i.device != null}">
-                        <td th:text="${i.device.id}">Device ID</td>
-                        <td th:text="${i.device.name}">Device Name</td>
-                        <td th:text="${#dates.format(i.borrowedTime, 'dd/MM/yyyy HH:mm')}">Borrowed Time</td>
-                    </tr>
-                </tbody>
-            </table>
-            <a href="/profile" class="btn btn-primary">Back to profile</a>
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Device ID</th>
+                            <th>Device Name</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="i:${borrowedDevices}" th:if="${i.device != null}">
+                            <td th:text="${i.device.id}">Device ID</td>
+                            <td th:text="${i.device.name}">Device Name</td>
+                            <td th:text="${#dates.format(i.borrowedTime, 'dd/MM/yyyy HH:mm')}">Borrowed Time</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="/" class="btn btn-primary">Back to profile</a>
         </div>
     </body>
 </html>

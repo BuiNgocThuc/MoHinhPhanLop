@@ -17,10 +17,28 @@
                         <div class="alert alert-danger">The device has been booked for borrowing on this day.</div>
                     </div>
                     <form action="#" th:action="@{/reservation}" method="POST" th:object="${usage}">
-                        <input type="text" class="form-control mb-4 w-50" placeholder="Date" required th:field="*{reserveTime}"/>
-                        <input type="text" class="form-control mb-4 w-50" placeholder="Device ID" required th:field="*{device.id}"/>
+                        <input type="datetime-local" class="form-control mb-4 w-50" placeholder="Date" required id="datetimeInput"/>
+                        <input type="hidden" id="hiddenInput"  th:field="*{reserveTime}">
+                        <input type="text" id="deviceId" class="form-control mb-4 w-50" placeholder="Device ID" required th:field="*{device.id}"/>
 
                         <button type="submit" class="btn btn-info col-2" onclick="changeReserveTime()">Save</button>
+                        <script th:inline="javascript" type="text/javascript">
+                            // Retrieve the input elements
+                            var datetimeInput = document.getElementById('datetimeInput');
+                            var hiddenInput = document.getElementById('hiddenInput');
+
+                            // Add event listener for input change
+                            datetimeInput.addEventListener('change', function () {
+                                // Retrieve the value of the datetime input field
+                                var inputValue = datetimeInput.value;
+
+                                // Format the datetime value to be compatible with SQL datetime format
+                                var formattedDateTime = inputValue.replace("T", " ") + ':00';
+
+                                // Set the formatted datetime value to the hidden input field
+                                hiddenInput.value = formattedDateTime;
+                            });
+                        </script>
                     </form>
 
                     <hr>
@@ -49,7 +67,12 @@
                                 <td th:text="${device.name}">...</td>
                                 <td th:text="${device.description}">...</td>
                                 <td>
-                                    <button type="button" class="btn btn-info btn-borrow">Borrow</button>
+                                    <button type="button" class="btn btn-info btn-borrow" th:attr="onclick=|setId(${device.id})|">Borrow</button>
+                                    <script th:inline="javascript">
+                                        window.setId = (id) => {
+                                            document.querySelector("#deviceId").value = id;
+                                        };
+                                    </script>
                                 </td>
                             </tr>
                         </tbody>
@@ -57,15 +80,6 @@
                 </div>
             </div>
         </div>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script type="text/javascript">
-                            $(document).ready(function () {
-                                $('.btn-borrow').click(function () {
-                                    // Hiển thị thông báo đã mượn
-                                    alert('Device borrowed successfully!');
-                                });
-                            });
-        </script>
     </body>
 
 </html>

@@ -73,9 +73,9 @@
                                     th:text="${usage.device != null ? usage.device.name : 'No name'}"
                                     ></td>
                                 <td
-                                    th:text="${usage.borrowedTimeString != null ? usage.borrowedTimeString : 'N/A'}"
+                                    th:text="${usage.borrowedTime != null ? usage.borrowedTime : 'N/A'}"
                                     ></td>
-                                <td th:text="${usage.reserveTimeString}"></td>
+                                    <td th:text="${usage.reserveTime}"></td>
                                 <td>
                                     <span th:if="${usage.borrowedTime == null}"
                                           >Not borrowed</span
