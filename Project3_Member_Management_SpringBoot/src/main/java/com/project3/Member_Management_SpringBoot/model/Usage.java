@@ -12,6 +12,7 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "thongtinsd")
 public class Usage {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MaTT")
@@ -34,7 +35,7 @@ public class Usage {
     @JoinColumn(name = "MaTV")
     private Member member;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "MaTB", nullable = true)
     private Device device;
 
