@@ -10,11 +10,13 @@ import com.project3.Member_Management_SpringBoot.repository.UsageRepository;
 import java.util.List;
 
 import com.project3.Member_Management_SpringBoot.model.Device;
+import com.project3.Member_Management_SpringBoot.model.Member;
 import com.project3.Member_Management_SpringBoot.model.Usage;
 import com.project3.Member_Management_SpringBoot.repository.UsageRepository;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,11 +25,14 @@ import org.springframework.stereotype.Service;
  * @author buing
  */
 @Service
+@RequiredArgsConstructor
 public class UsageServiceImpl implements UsageService {
 
-    @Autowired
-    private UsageRepository usageRepository;
+    private final UsageRepository usageRepository;
 
+    private final DeviceService deviceService;
+
+    private final MemberService memberService;
     @Override
     public List<Usage> getAllUsage() {
         return (List<Usage>) usageRepository.findAll();
@@ -78,5 +83,40 @@ public class UsageServiceImpl implements UsageService {
     @Override
     public List<Usage> findOverdueReservation(Timestamp deadline) {
         return usageRepository.findOverdueReservation(deadline);
+    }
+
+    @Override
+    public List<Usage> getBorrowedDevices() {
+        return usageRepository.findByDeviceNotNullAndPaidTimeIsNull();
+    }
+
+    @Override
+    public List<Device> getAvailableDevices() {
+        return usageRepository.findAvailableDevices();
+    }
+
+    @Override
+    public Usage findById(Integer ID) {
+        return usageRepository.findById(ID).get();
+    }
+
+    @Override
+    public void returnDevice(Usage usage) {
+        Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+        usage.setPaidTime(currentTimestamp);
+        saveUsage(usage);
+    }
+
+    @Override
+    public void borrowDevice(Usage usage) {
+        int memberID = usage.getMember().getId();
+        int deviceID = usage.getDevice().getId();
+        Member member = memberService.findById(memberID);
+        Device device = deviceService.findById(deviceID);
+        usage.setMember(member);
+        usage.setDevice(device);
+        Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+        usage.setBorrowedTime(currentTimestamp);
+        saveUsage(usage);
     }
 }

@@ -5,6 +5,7 @@
 package com.project3.Member_Management_SpringBoot.service;
 
 import com.project3.Member_Management_SpringBoot.model.Member;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,4 +21,6 @@ public interface MemberService {
     Boolean checkPasswordUser(Member member,String password);
     Boolean checkUserExists(Integer ID);
     Member findByEmail(String email);
+    List<Member> getAllMembers();
+    void deleteById(Integer ID);
 }

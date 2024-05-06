@@ -32,4 +32,9 @@ public interface UsageRepository extends CrudRepository<Usage, Integer> {
     
     @Query(value = "SELECT * FROM `thongtinsd` u WHERE DATE_ADD(u.tgdatcho, INTERVAL 1 HOUR) <=  :deadline", nativeQuery = true)
     List<Usage> findOverdueReservation(Timestamp deadline);
+    
+    List<Usage> findByDeviceNotNullAndPaidTimeIsNull();
+    
+    @Query("SELECT d FROM Device d LEFT JOIN Usage u ON d.id = u.device.id AND u.paidTime IS NULL WHERE u.device IS NULL")
+    List<Device> findAvailableDevices();
 }

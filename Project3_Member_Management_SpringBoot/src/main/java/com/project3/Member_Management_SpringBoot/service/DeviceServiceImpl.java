@@ -31,4 +31,9 @@ public class DeviceServiceImpl implements DeviceService{
     public List<Device> searchDeviceByName(String name) {
         return deviceRepository.findByNameLike("%" + name + "%");
     }
+
+    @Override
+    public Device findById(Integer ID) {
+        return deviceRepository.findById(ID).get();
+    }
 }

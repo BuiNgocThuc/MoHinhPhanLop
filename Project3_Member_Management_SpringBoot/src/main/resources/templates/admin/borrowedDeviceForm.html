@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Member Management</title>
+    </head>
+    <body>
+        <div class="container">
+            <h3>Register Device Borrowing</h3>
+            <hr>
+            <div class="d-flex justify-content-between align-items-start h-100">
+                <div class="h-100 w-50 p-3">
+                    <form action="#" th:action="@{/admin/usages/borrowDevice}" method="POST" th:object="${usage}">
+                        <input type="text" class="form-control mb-4 w-50" placeholder="Member ID" required th:field="*{member.id}"/>
+                        <input type="text" class="form-control mb-4 w-50" placeholder="Device ID" required th:field="*{device.id}"/>
+
+                        <button type="submit" class="btn btn-info col-2">Save</button>
+                    </form>
+
+                    <hr>
+                    <a th:href="@{/admin/usages/showListBorrowedDevices}">Back to Borrowed Devices List</a>
+                </div>
+
+                <div class="h-100 w-50">
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="device : ${availableDevices}">
+                                <td th:text="${device.id}">...</td>
+                                <td th:text="${device.name}">...</td>
+                                <td th:text="${device.description}">...</td>
+                                <td>
+                                    <a class="btn btn-info"
+                                       onclick="if (!(confirm('Are you sure you want to borrow this device?')))
+                                                               return false">Borrow</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

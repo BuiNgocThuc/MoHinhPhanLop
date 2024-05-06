@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Member Management</title>
+    </head>
+    <body>
+        <div class="container">
+            <h3>Save Member</h3>
+            <hr>
+            <div>
+                <form action="#" th:action="@{/saveMember}" th:object="${member}" method="POST">
+                    <input type="text" th:field="*{id}" class="form-control mb-4 w-25" placeholder="ID"/>
+                    <input type="text" th:field="*{name}" class="form-control mb-4 w-25" placeholder="Name"/>
+                    <input type="text" th:field="*{department}" class="form-control mb-4 w-25" placeholder="Department"/>
+                    <input type="text" th:field="*{major}" class="form-control mb-4 w-25" placeholder="Major"/>
+                    <input type="text" th:field="*{phone}" class="form-control mb-4 w-25" placeholder="Phone number"/>
+                    <input type="text" th:field="*{email}" class="form-control mb-4 w-25" placeholder="Email"/>
+                    <input type="text" th:field="*{password}" class="form-control mb-4 w-25" placeholder="Password"/>
+
+                    <button type="submit" class="btn btn-info col-2">Save</button>
+                </form>
+
+                <hr>
+                <a th:href="@{/admin/members/list}">Back to Members List</a>
+            </div>
+        </div>
+    </body>
+</html>
