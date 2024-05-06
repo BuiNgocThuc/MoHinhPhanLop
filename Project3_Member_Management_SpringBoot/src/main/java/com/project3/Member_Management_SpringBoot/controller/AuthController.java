@@ -95,14 +95,14 @@ public class AuthController {
     public String forgotPassword(@ModelAttribute Member memberDTO) {
         try {
             String output = "";
+            System.out.println(memberDTO.getEmail());
             Member user = memberService.findByEmail(memberDTO.getEmail());
             if (user != null) {
                 output = emailService.sendEmail(user);
             }
             if (output.equals("success"))
-                return "redirect:/forgotPassword?success";
+                return "redirect:/forgotPassword?success&email="+memberDTO.getEmail();
             else {
-                System.out.println("Lỗi cc");
                 return "redirect:/login?error";
             }
         } catch (Exception e) {
