@@ -47,6 +47,7 @@ public class Member {
     @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "member")
     private List<Discipline> disciplines;
 
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "member")
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "member", fetch = FetchType.EAGER)
     private List<Usage> usages;
+
 }
