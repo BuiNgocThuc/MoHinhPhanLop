@@ -31,7 +31,7 @@
                         <div class="d-flex gap-3 mb-3">
                             <div class="col">
                                 <label for="departmentForm" class="form-label">Department</label>
-                                <input type="text" id="departmentForm" class="form-control form-control-lg bg-light fs-6" placeholder="Email address" th:field="*{department}"  />
+                                <input type="text" id="departmentForm" class="form-control form-control-lg bg-light fs-6" placeholder="Department" th:field="*{department}"  />
                             </div>
                             <div class="col">
                                 <label for="majorForm" class="form-label">Major</label>
@@ -55,12 +55,11 @@
                             <button type="submit" class="btn btn-lg btn-primary w-100 fs-6">Sign up</button>
                         </div>
                         <div class="row">
-                            <small>Already have acoount? <a th:href="@{/login}">Login here</a></small>
+                            <small>Already have account? <a th:href="@{/login}">Login here</a></small>
                         </div>
                     </form>
                 </div> 
                 <!-------------------- ------ Right Box ---------------------------->
-
                 <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box" style="background: #103cbe;">
                     <div class="featured-image mb-3">
                         <img class="img-fluid" th:src="@{/icon.png}" alt="Logo" style="width: 150px;height: 150px">
@@ -70,25 +69,5 @@
                 </div> 
             </div>
         </div>
-        <!--        <div class="container">
-                    <h3>Register Member</h3>
-                    <hr>
-                    <div>
-                        <form action="#" th:action="@{/register}" th:object="${member}" method="POST">
-                            <input type="text" th:field="*{id}" class="form-control mb-4 w-25" placeholder="ID"/>
-                            <input type="text" th:field="*{name}" class="form-control mb-4 w-25" placeholder="Name"/>
-                            <input type="text" th:field="*{department}" class="form-control mb-4 w-25" placeholder="Department"/>
-                            <input type="text" th:field="*{major}" class="form-control mb-4 w-25" placeholder="Major"/>
-                            <input type="text" th:field="*{phone}" class="form-control mb-4 w-25" placeholder="Phone number"/>
-                            <input type="text" th:field="*{email}" class="form-control mb-4 w-25" placeholder="Email"/>
-                            <input type="text" th:field="*{password}" class="form-control mb-4 w-25" placeholder="Password"/>
-        
-                            <button type="submit" class="btn btn-info col-2 btn-lg">Sign Up</button>
-                        </form>
-        
-                        <hr>
-                        <a th:href="@{/login}">I've already an account</a>
-                    </div>
-                </div>-->
     </body>
 </html>
