@@ -1,5 +1,6 @@
 package com.project3.Member_Management_SpringBoot.controller;
 
+import com.project3.Member_Management_SpringBoot.annotation.AuthRequire;
 import com.project3.Member_Management_SpringBoot.model.Device;
 import com.project3.Member_Management_SpringBoot.model.Usage;
 import com.project3.Member_Management_SpringBoot.service.DeviceService;
@@ -20,31 +21,34 @@ public class UsageController {
     private final UsageService usageService;
     
     @GetMapping("/showListBorrowedDevices")
+    @AuthRequire
     public String showListBorrowedDevices(Model theModel) {
         List<Usage> borrowedDevices = usageService.getBorrowedDevices();
         theModel.addAttribute("borrowedDevices", borrowedDevices);
-        return "members/borrowedDevice-table";
+        return "admin/borrowedDevicesList";
     }
 
     @GetMapping("/showFormRegisterBorrowDevice")
+    @AuthRequire
     public String showFormRegisterBorrowDevice(Model theModel) {
         List<Device> availableDevices = usageService.getAvailableDevices();
         theModel.addAttribute("availableDevices", availableDevices);
         Usage usage = new Usage();
         theModel.addAttribute("usage", usage);
-        return "members/borrowedDevice-form";
+        return "admin/borrowedDeviceForm";
     }
 
     @GetMapping("/returnDevice")
+    @AuthRequire
     public String returnDevice(@RequestParam("usageId") Integer ID, Model theModel) {
         Usage usage = usageService.findById(ID);
         usageService.returnDevice(usage);
-        return "redirect:/admin/usages/showListBorrowedDevices";
+        return "redirect:/showListBorrowedDevices";
     }
 
     @PostMapping("/borrowDevice")
     public String borrowDevice(@ModelAttribute("usage") Usage usage) {
         usageService.borrowDevice(usage);
-        return "redirect:/admin/usages/showFormRegisterBorrowDevice";
+        return "redirect:/showFormRegisterBorrowDevice?success";
     }
 }

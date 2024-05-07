@@ -87,7 +87,7 @@ public class UsageServiceImpl implements UsageService {
 
     @Override
     public List<Usage> getBorrowedDevices() {
-        return usageRepository.findByDeviceNotNullAndPaidTimeIsNull();
+        return usageRepository.findByBorrowedTimeNotNullAndPaidTimeIsNull();
     }
 
     @Override
