@@ -38,7 +38,7 @@
       <tr th:each="discipline : ${disciplineList}">  
             <td th:text="${discipline.id}"></td>
             <td th:text="${discipline.member.getId()}"></td>
-<!--            <td th:text="${discipline.member.}"></td>-->
+<!--            <td th:text="${discipline.member.name}"></td>-->
             <td th:text="${discipline.description}"></td>
             <td th:text="${discipline.fine}"></td> 
             <td th:text="${#dates.format(discipline.date, 'dd/MM/yyyy HH:mm')}"></td> 

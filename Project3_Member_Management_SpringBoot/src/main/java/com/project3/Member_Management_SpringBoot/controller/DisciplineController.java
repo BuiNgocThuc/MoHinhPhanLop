@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequiredArgsConstructor
 public class DisciplineController {
     private final DisciplineService disciplineService;
+    private final MemberService memberService;
     @GetMapping("/disciplineList")
     public String getAllDiscipline(Model model) {
         Iterable<Discipline> disciplineList=disciplineService.getAllDiscipline();
