@@ -29,15 +29,17 @@ public class Discipline {
     @Column(name = "HinhthucXL")
     private String description;
 
-    @Column(name = "Sotien")
+    @Column(name = "Sotien",nullable = true)
     private Integer fine;
 
-    @Column(name = "NgayXL")
+    @Column(name = "NgayXL",nullable = true)
+    @Temporal(TemporalType.TIMESTAMP)
     private Timestamp date;
 
     @Column(name = "TrangthaiXL")
     private Integer status;
 
+    //@ManyToOne(fetch = FetchType.LAZY)
     @ManyToOne
     @JoinColumn(name = "MaTV")
     private Member member;

@@ -29,4 +29,15 @@ public class DisciplineServiceImpl implements DisciplineService{
     public List<Discipline> findByMember(Member member) {
         return disciplineRepository.findByMember(member);
     }
+
+    @Override
+    public List<Discipline> getAllDiscipline() {
+        return (List<Discipline>)disciplineRepository.findAll();
+    }    
+
+    @Override
+    public void saveDiscipline(Discipline discipline) {
+        disciplineRepository.save(discipline);
+    }
+
 }

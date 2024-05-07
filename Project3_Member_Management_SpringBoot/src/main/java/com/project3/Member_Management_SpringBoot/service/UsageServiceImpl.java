@@ -121,6 +121,10 @@ public class UsageServiceImpl implements UsageService {
     }
 
     @Override
+    public List<Usage> findByMemberIdAndBorrowedTimeNotNull(Integer memberId) {
+        return usageRepository.findByMemberIdAndBorrowedTimeNotNull(memberId);
+    }
+    @Override
     public List<Usage> findUsageListYetPaid(Integer deviceId) {
         return usageRepository.findUsageListYetPaid(deviceId);
     }

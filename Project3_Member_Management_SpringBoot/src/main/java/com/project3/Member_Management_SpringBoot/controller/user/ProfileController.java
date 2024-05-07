@@ -80,7 +80,8 @@ public class ProfileController {
         if (member == null) {
             return "error";
         }
-        Iterable<Usage> borrowedDevices = member.getUsages();
+        //Iterable<Usage> borrowedDevices = member.getUsages();
+        Iterable<Usage> borrowedDevices = usageService.findByMemberIdAndBorrowedTimeNotNull(member.getId());
         model.addAttribute("borrowedDevices", borrowedDevices);
         return "users/detail-borrowed-device";
     }

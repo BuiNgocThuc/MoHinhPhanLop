@@ -7,6 +7,7 @@ package com.project3.Member_Management_SpringBoot.repository;
 import com.project3.Member_Management_SpringBoot.model.Discipline;
 import com.project3.Member_Management_SpringBoot.model.Member;
 import java.util.List;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -18,4 +19,6 @@ import org.springframework.stereotype.Repository;
 public interface DisciplineRepository extends CrudRepository<Discipline, Integer>{
     Discipline findByMemberAndStatusAndDescriptionLike(Member member, Integer status, String description);
     List<Discipline> findByMember(Member member);
+    @Query("SELECT m FROM Member m")
+    List<Member> getAllMember();
 }
