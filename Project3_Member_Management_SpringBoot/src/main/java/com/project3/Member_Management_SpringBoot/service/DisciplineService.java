@@ -20,4 +20,6 @@ public interface DisciplineService {
      Discipline findStatusByMember(Member member);
      @Autowired
      List<Discipline> findByMember(Member member);
+     List<Discipline> getAllDiscipline();
+     void saveDiscipline(Discipline discipline);
 }

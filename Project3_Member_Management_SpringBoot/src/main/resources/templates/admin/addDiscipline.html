@@ -14,43 +14,31 @@
   <form th:object="${discipline}" th:action="@{save}" method="post">
     <div class="form-group">
       <label for="maXuLy">Mã Xử Lý</label>
-      <input type="text" class="form-control" id="maXuLy" placeholder="Nhập mã xử lý">
+      <input type="text" class="form-control" id="maXuLy" th:field="*{id}" placeholder="Nhập mã xử lý">
     </div>
     <div class="form-group">
-      <label for="thanhVien">Thành Viên</label>
-      <select class="form-control" id="thanhVien">
-        <option value="">Chọn thành viên</option>
-        <option value="TV001">Thành viên 1</option>
-        <option value="TV002">Thành viên 2</option>
-        <option value="TV003">Thành viên 3</option>
-        <!-- Thêm các option khác tương tự -->
+      <label for="MaXL">Thành Viên</label>
+      <select class="form-control" id="thanhVien" th:field="*{member}">
       </select>
     </div>
     <div class="form-group">
       <label for="hinhThucXuLy">Hình Thức Xử Lý</label>
-      <select class="form-control" id="hinhThucXuLy">
-        <option value="">Chọn hình thức</option>
-        <option value="TT001">Thanh toán</option>
-        <option value="GH001">Ghi nợ</option>
-        <option value="GN001">Ghi nợ 1</option>
-        <!-- Thêm các option khác tương tự -->
+      <select class="form-control" id="hinhThucXuLy" th:field="*{description}">
       </select>
     </div>
     <div class="form-group">
       <label for="soTien">Số Tiền</label>
-      <input type="text" class="form-control" id="soTien" placeholder="Nhập số tiền">
+      <input type="text" class="form-control" id="soTien" placeholder="Nhập số tiền" th:field="*{fine}">
     </div>
     <div class="form-group">
       <label for="trangThai">Trạng Thái</label>
-      <select class="form-control" id="trangThai">
-        <option value="">Chọn trạng thái</option>
-        <option value="DXL">Đã xử lý</option>
-        <option value="CX">Chưa xử lý</option>
-        <!-- Thêm các option khác tương tự -->
+      <select class="form-control" id="trangThai" th:field="*{status}">
+        <option value="0">Đã xử lý</option>
+        <option value="1">Chưa xử lý</option>
       </select>
     </div>
     
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Save</button>
   </form>
 </div>
 

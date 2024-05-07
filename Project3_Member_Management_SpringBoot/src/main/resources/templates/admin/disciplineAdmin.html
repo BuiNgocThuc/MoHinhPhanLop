@@ -18,20 +18,7 @@
         <button class="btn btn-outline-secondary" type="button">X</button>
       </div>
     </div>
-    
-    <!-- Nút Add -->
-<!--    <button type="button" class="btn btn-primary" data-toggle="modal" href="/addDiscipline">
-      Add
-    </button>-->
     <a href="/addDiscipline" class="btn btn-success">Add</a>  
-    
-    <!-- Nút Update -->
-    <button type="button" class="btn btn-warning">Update</button>
-    
-    <!-- Nút Delete -->
-    <button type="button" class="btn btn-danger">Delete</button>
-    
-    <!-- Nút Import Excel -->
     <button type="button" class="btn btn-success">Import Excel</button>
   </div>
   <table class="table">
@@ -39,25 +26,28 @@
       <tr>
         <th scope="col">Mã Xử Lý</th>
         <th scope="col">Mã Thành Viên</th>
-        <th scope="col">Tên Thành Viên</th>
+<!--        <th scope="col">Tên Thành Viên</th>-->
         <th scope="col">Hình Thức Xử Lý</th>
         <th scope="col">Số Tiền</th>
         <th scope="col">Ngày Xử Lý</th>
         <th scope="col">Trạng Thái Xử Lý</th>
-      </tr>
+        <th scope="col">Hành Động</th>
+      </tr>    
     </thead>
     <tbody>
-      <!-- Thêm dữ liệu vào đây -->
-      <tr>
-        <td>001</td>
-        <td>TV001</td>
-        <td>Nguyễn Văn A</td>
-        <td>Thanh toán</td>
-        <td>100.000 VND</td>
-        <td>2024-05-01</td>
-        <td>Đã xử lý</td>
-      </tr>
-      <!-- Thêm các hàng dữ liệu khác tương tự -->
+      <tr th:each="discipline : ${disciplineList}">  
+            <td th:text="${discipline.id}"></td>
+            <td th:text="${discipline.member.getId()}"></td>
+<!--            <td th:text="${discipline.member.}"></td>-->
+            <td th:text="${discipline.description}"></td>
+            <td th:text="${discipline.fine}"></td> 
+            <td th:text="${#dates.format(discipline.date, 'dd/MM/yyyy HH:mm')}"></td> 
+            <td th:text="${discipline.status}"></td>
+            <td>  
+                <a th:href="@{/editDiscipline?id={id}(id=${discipline.id})}" class="btn btn-primary">Edit</a>  
+                <a th:href="@{/deleteDiscipline?id={id}(id=${discipline.id})}" class="btn btn-danger">Delete</a>  
+            </td>  
+        </tr>  
     </tbody>
   </table>
 </div>

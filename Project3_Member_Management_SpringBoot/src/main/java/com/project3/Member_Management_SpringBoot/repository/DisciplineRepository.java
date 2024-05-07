@@ -7,6 +7,7 @@ package com.project3.Member_Management_SpringBoot.repository;
 import com.project3.Member_Management_SpringBoot.model.Discipline;
 import com.project3.Member_Management_SpringBoot.model.Member;
 import java.util.List;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
