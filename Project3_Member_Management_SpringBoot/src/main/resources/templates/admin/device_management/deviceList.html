@@ -42,14 +42,25 @@
             </div>
             <div class="container">
                 <h2>Batch Delete</h2>
-                <button
-                    type="button"
-                    class="btn btn-info btn-lg"
-                    data-toggle="modal"
-                    data-target="#myModal"
-                >
-                    Open Modal
-                </button>
+                <div class="row">
+                    <div class="col-md-6">
+                        <button
+                            type="button"
+                            class="btn btn-info btn-lg"
+                            data-toggle="modal"
+                            data-target="#myModal"
+                        >
+                            Open Modal
+                        </button>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <a
+                            th:href="@{/admin/device-management/add}"
+                            class="btn btn-success"
+                            >Add Device</a
+                        >
+                    </div>
+                </div>
 
                 <div class="modal fade" id="myModal" role="dialog">
                     <div class="modal-dialog">
@@ -170,7 +181,7 @@
                     var deviceSelectValue = $("#deviceSelect").val();
                     var yearInputValue = $("#yearInput").val();
                     if (deviceSelectValue != "" && yearInputValue != "") {
-                        $("#myModal form").submit(); // Gửi yêu cầu POST khi nhấn nút "Delete"
+                        $("#myModal form").submit();
                         $("#myModal").modal("hide");
                     } else {
                         console.error("Invalid values!");

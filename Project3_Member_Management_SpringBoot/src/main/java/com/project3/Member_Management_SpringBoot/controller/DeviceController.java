@@ -39,9 +39,24 @@ public class DeviceController {
     }
 
     @PostMapping("/add-device")
-    public String addDeviceSubmit(@ModelAttribute Device device) {
+    public String addDeviceSubmit(@RequestParam("id") int id, @RequestParam("name") String name,
+            @RequestParam("description") String description) {
+
+        Device existingDeviceById = deviceService.findDeviceById(id);
+        if (existingDeviceById != null) {
+            String err = "Device ID already exists!";
+            return "redirect:/admin/device-management/add?err=" + err;
+        }
+
+        Device device = new Device();
+        device.setId(id);
+        device.setName(name);
+        device.setDescription(description);
         deviceService.saveDevice(device);
-        return "redirect:/admin/device-management/add";
+        deviceService.saveDevice(device);
+
+        String success = "Add device successfully";
+        return "redirect:/admin/device-management/add?success=" + success;
     }
 
     @GetMapping("/admin/device-management/{id}")
@@ -51,15 +66,17 @@ public class DeviceController {
         return "admin/device_management/editDeviceForm";
     }
 
-    @PostMapping("/edit-device/{id}")
-    public String editDeviceSubmit(@PathVariable int id, @ModelAttribute Device updatedDevice) {
+    @PostMapping("/edit-device")
+    public String editDeviceSubmit(@RequestParam("id") int id, @RequestParam("name") String name,
+            @RequestParam("description") String description) {
         Device existingDevice = deviceService.findDeviceById(id);
         if (existingDevice != null) {
-            existingDevice.setName(updatedDevice.getName());
-            existingDevice.setDescription(updatedDevice.getDescription());
+            existingDevice.setName(name);
+            existingDevice.setDescription(description);
             deviceService.saveDevice(existingDevice);
         }
-        return "redirect:/admin/device-management/" + id;
+        String success = "Update device successfully";
+        return "redirect:/admin/device-management/" + id + "?success=" + success;
     }
 
     @PostMapping("/delete-device/{id}")
