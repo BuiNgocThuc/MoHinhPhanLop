@@ -74,8 +74,8 @@
                                     ></td>
                                 <td
                                     th:text="${usage.borrowedTime != null ? usage.borrowedTime : 'N/A'}"
-                                    ></td>
-                                    <td th:text="${usage.reserveTime}"></td>
+                                    ></td>+
+                                <td th:text="${usage.reserveTime}"></td>
                                 <td>
                                     <span th:if="${usage.borrowedTime == null}"
                                           >Not borrowed</span
