@@ -4,23 +4,25 @@
  */
 package com.project3.Member_Management_SpringBoot.service;
 
+import com.project3.Member_Management_SpringBoot.model.Device;
+
 import java.util.List;
 
-import com.project3.Member_Management_SpringBoot.model.Device;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import com.project3.Member_Management_SpringBoot.model.Device;
-
-/**
- *
- * @author buing
- */
-@Service
 public interface DeviceService {
     @Autowired
+    List<Device> findAllDevices();
+
+    List<Device> findAllDevicesLikeId(int deviceId);
+
     List<Device> getAvailableDevices();
+
     List<Device> searchDeviceByName(String name);
-    Device findById(Integer ID);
+
+    Device saveDevice(Device device);
+
+    Device findDeviceById(int id);
+
+    void deleteDeviceById(int id);
 }

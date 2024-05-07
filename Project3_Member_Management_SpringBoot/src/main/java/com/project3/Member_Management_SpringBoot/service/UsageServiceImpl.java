@@ -33,6 +33,7 @@ public class UsageServiceImpl implements UsageService {
     private final DeviceService deviceService;
 
     private final MemberService memberService;
+
     @Override
     public List<Usage> getAllUsage() {
         return (List<Usage>) usageRepository.findAll();
@@ -61,23 +62,22 @@ public class UsageServiceImpl implements UsageService {
     public void save(Usage usage) {
         usageRepository.save(usage);
     }
-    
-     @Override
+
+    @Override
     public void deleteAll(Iterable<Usage> usages) {
         usageRepository.deleteAll(usages);
     }
-    
+
     @Override
     public Boolean reserveDevice(Usage usage) {
         Device selectedDevice = usage.getDevice();
         Date reserveDate = new Date(usage.getReserveTime().getTime());
         List<Usage> existedUsage = usageRepository.checkValidateDevice(selectedDevice, reserveDate);
-        if (existedUsage.isEmpty())
-        {
+        if (existedUsage.isEmpty()) {
             save(usage);
             return true;
         }
-         return false;
+        return false;
     }
 
     @Override
@@ -112,11 +112,21 @@ public class UsageServiceImpl implements UsageService {
         int memberID = usage.getMember().getId();
         int deviceID = usage.getDevice().getId();
         Member member = memberService.findById(memberID);
-        Device device = deviceService.findById(deviceID);
+        Device device = deviceService.findDeviceById(deviceID);
         usage.setMember(member);
         usage.setDevice(device);
         Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
         usage.setBorrowedTime(currentTimestamp);
         saveUsage(usage);
+    }
+
+    @Override
+    public List<Usage> findUsageListYetPaid(Integer deviceId) {
+        return usageRepository.findUsageListYetPaid(deviceId);
+    }
+
+    @Override
+    public List<Usage> findUsageListYetPaidLikeId(Integer deviceIdPattern) {
+        return usageRepository.findUsageListYetPaidLikeId(deviceIdPattern);
     }
 }

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Edit Device</title>
+        <link
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <div class="container">
+            <h1>Edit Device</h1>
+            <div id="message"></div>
+            <form id="deviceForm">
+                <input
+                    type="hidden"
+                    id="id"
+                    name="id"
+                    th:value="${device.id}"
+                />
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="name"
+                        name="name"
+                        th:value="${device.name}"
+                        required
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea
+                        class="form-control"
+                        id="description"
+                        name="description"
+                        rows="3"
+                        th:text="${device.description}"
+                    ></textarea>
+                </div>
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    onclick="submitForm()"
+                >
+                    Submit
+                </button>
+            </form>
+        </div>
+
+        <script>
+            function submitForm() {
+                var form = document.getElementById("deviceForm");
+                var formData = new FormData(form);
+
+                fetch("/edit-device/" + formData.get("id"), {
+                    method: "POST",
+                    body: formData,
+                })
+                    .then((response) => {
+                        if (response.ok) {
+                            showMessage("Device updated successfully!", true);
+                        } else {
+                            showMessage(
+                                "Failed to update device. Please try again later." ,
+                                false
+                            );
+                            console.log(response)
+                            
+                        }
+                    })
+                    .catch((error) => {
+                        showMessage(
+                            "An error occurred. Please try again later.",
+                            false
+                        );
+                        console.error("Error:", error);
+                    });
+            }
+
+            function showMessage(message, isSuccess) {
+                var messageContainer = document.getElementById("message");
+                var alertClass = isSuccess ? "alert-success" : "alert-danger";
+                var alertMessage =
+                    '<div class="alert ' +
+                    alertClass +
+                    '" role="alert">' +
+                    message +
+                    "</div>";
+                messageContainer.innerHTML = alertMessage;
+            }
+        </script>
+    </body>
+</html>

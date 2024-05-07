@@ -11,6 +11,7 @@ import com.project3.Member_Management_SpringBoot.model.Usage;
 import java.sql.Timestamp;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 /**
@@ -29,14 +30,26 @@ public interface UsageService {
 
     List<Usage> findByMemberIdAndReserveTimeNotNull(Integer memberId);
 
+    List<Usage> findUsageListYetPaid(Integer deviceId);
+
+    List<Usage> findUsageListYetPaidLikeId(Integer deviceId);
+
     @Autowired
     void save(Usage usage);
+
     void deleteAll(Iterable<Usage> usages);
+
     Boolean reserveDevice(Usage usage);
+
     List<Usage> findOverdueReservation(Timestamp deadline);
+
     List<Usage> getBorrowedDevices();
+
     List<Device> getAvailableDevices();
+
     Usage findById(Integer ID);
+
     void returnDevice(Usage usage);
+
     void borrowDevice(Usage usage);
 }
