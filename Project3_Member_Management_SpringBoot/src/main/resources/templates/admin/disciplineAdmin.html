@@ -35,9 +35,11 @@
             </div>
             <div class="d-flex gap-2 my-3">
                 <a href="/addDiscipline" class="btn btn-success">Add Violation</a>  
-                <a type="button" class="btn btn-success">
-                    <i class="fa-solid fa-file-excel"></i>
-                    Import Excel</a>
+                <form method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath }/product/process">
+		<input type="file" name="file">
+		<br>
+		<input type="submit" value="Import">
+	</form>
             </div>
             <table class="table table-bordered table-striped table-responsive-md">
                 <thead class="table-dark">
