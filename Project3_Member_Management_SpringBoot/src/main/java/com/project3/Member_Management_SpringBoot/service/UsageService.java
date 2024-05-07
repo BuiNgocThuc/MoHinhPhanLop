@@ -28,7 +28,7 @@ public interface UsageService {
     void deleteUsageById(Integer id);
 
     List<Usage> findByMemberIdAndReserveTimeNotNull(Integer memberId);
-
+    List<Usage> findByMemberIdAndBorrowedTimeNotNull(Integer memberId);
     @Autowired
     void save(Usage usage);
     void deleteAll(Iterable<Usage> usages);

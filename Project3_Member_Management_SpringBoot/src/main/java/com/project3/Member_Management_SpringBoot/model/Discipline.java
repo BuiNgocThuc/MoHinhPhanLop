@@ -39,7 +39,8 @@ public class Discipline {
     @Column(name = "TrangthaiXL")
     private Integer status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    //@ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "MaTV")
     private Member member;
 }

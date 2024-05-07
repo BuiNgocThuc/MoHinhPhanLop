@@ -27,6 +27,8 @@ public class DisciplineController {
     }
     @GetMapping("/addDiscipline")
     public String addDiscipline(Model model) {
+        Iterable<Member> members=memberService.getAllMembers();
+        model.addAttribute("memberList", members);
         model.addAttribute("discipline", new Discipline());
         return "admin/addDiscipline";
     }

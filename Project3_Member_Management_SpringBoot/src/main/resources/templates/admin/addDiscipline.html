@@ -19,7 +19,7 @@
     <div class="form-group">
     <label for="thanhVien">Thành Viên</label>
     <select class="form-control" id="thanhVien" th:field="*{member}">
-<!--        <option th:each="member : ${memberList}" th:value="${member.id}" th:text="${member.name}"></option>-->
+        <option th:each="member : ${memberList}" th:value="${member.id}" th:text="${member.id + '-' + member.name}"></option>
     </select>
    </div>
     <div class="form-group">

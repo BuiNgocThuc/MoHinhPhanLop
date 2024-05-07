@@ -119,4 +119,9 @@ public class UsageServiceImpl implements UsageService {
         usage.setBorrowedTime(currentTimestamp);
         saveUsage(usage);
     }
+
+    @Override
+    public List<Usage> findByMemberIdAndBorrowedTimeNotNull(Integer memberId) {
+        return usageRepository.findByMemberIdAndBorrowedTimeNotNull(memberId);
+    }
 }

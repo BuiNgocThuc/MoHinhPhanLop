@@ -19,18 +19,18 @@
       </div>
     </div>
     <a href="/addDiscipline" class="btn btn-success">Add</a>  
-    <button type="button" class="btn btn-success">Import Excel</button>
+    <a type="button" class="btn btn-success">Import Excel</a>
   </div>
   <table class="table">
     <thead>
       <tr>
         <th scope="col">Mã Xử Lý</th>
         <th scope="col">Mã Thành Viên</th>
-<!--        <th scope="col">Tên Thành Viên</th>-->
+        <th scope="col">Tên Thành Viên</th>
         <th scope="col">Hình Thức Xử Lý</th>
         <th scope="col">Số Tiền</th>
         <th scope="col">Ngày Xử Lý</th>
-        <th scope="col">Trạng Thái Xử Lý</th>
+        <th scope="col">Trạng Thái</th>
         <th scope="col">Hành Động</th>
       </tr>    
     </thead>
@@ -38,7 +38,7 @@
       <tr th:each="discipline : ${disciplineList}">  
             <td th:text="${discipline.id}"></td>
             <td th:text="${discipline.member.getId()}"></td>
-<!--            <td th:text="${discipline.member.name}"></td>-->
+            <td th:text="${discipline.member.name}"></td>
             <td th:text="${discipline.description}"></td>
             <td th:text="${discipline.fine}"></td> 
             <td th:text="${#dates.format(discipline.date, 'dd/MM/yyyy HH:mm')}"></td> 
