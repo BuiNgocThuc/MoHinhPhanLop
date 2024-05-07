@@ -14,6 +14,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Data
 @NoArgsConstructor
@@ -31,7 +32,8 @@ public class Discipline {
 
     @Column(name = "Sotien",nullable = true)
     private Integer fine;
-
+    //
+    @CreationTimestamp
     @Column(name = "NgayXL",nullable = true)
     @Temporal(TemporalType.TIMESTAMP)
     private Timestamp date;

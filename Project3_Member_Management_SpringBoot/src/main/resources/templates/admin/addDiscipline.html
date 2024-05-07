@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Form Xử Lý</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
 
@@ -12,10 +13,6 @@
   <h2 class="my-4">Form Xử Lý</h2>
   
   <form th:object="${discipline}" th:action="@{save}" method="post">
-    <div class="form-group">
-      <label for="maXuLy">Mã Xử Lý</label>
-      <input type="text" class="form-control" id="maXuLy" th:field="*{id}" placeholder="Nhập mã xử lý">
-    </div>
     <div class="form-group">
     <label for="thanhVien">Thành Viên</label>
     <select class="form-control" id="thanhVien" th:field="*{member}">
@@ -25,9 +22,11 @@
     <div class="form-group">
       <label for="hinhThucXuLy">Hình Thức Xử Lý</label>
       <select class="form-control" id="hinhThucXuLy" th:field="*{description}">
-          <option th:value="'Khóa Thẻ 1 Tháng'">Khóa Thẻ 1 Tháng</option>
-          <option th:value="'Khóa Thẻ 2 Tháng'">Khóa Thẻ 2 Tháng</option>
-          <option th:value="'Bồi Thường'">Bồi Thường</option>
+          <option th:value="'Khóa thẻ 1 tháng'">Khóa thẻ 1 tháng</option>
+          <option th:value="'Khóa thẻ 2 tháng'">Khóa thẻ 2 tháng</option>
+          <option th:value="'Khóa thẻ vĩnh viễn'">Khóa thẻ vĩnh viễn</option>
+          <option th:value="'Khóa thẻ 1 tháng và bồi thường'">Khóa thẻ 1 tháng và bồi thường</option>
+          <option th:value="'Bồi thường'">Bồi thường</option>
       </select>
     </div>
     <div class="form-group">

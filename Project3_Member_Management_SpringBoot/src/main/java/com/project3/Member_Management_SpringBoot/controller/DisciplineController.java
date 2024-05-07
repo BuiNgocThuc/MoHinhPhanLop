@@ -35,6 +35,6 @@ public class DisciplineController {
     @RequestMapping(value="save",method = RequestMethod.POST)
     public String save(Discipline discipline){
         disciplineService.saveDiscipline(discipline);
-        return "redirect:/";
+        return "redirect:/disciplineList";
     }
 }
