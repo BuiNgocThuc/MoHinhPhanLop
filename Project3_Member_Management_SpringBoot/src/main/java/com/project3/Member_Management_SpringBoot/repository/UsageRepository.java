@@ -26,7 +26,7 @@ public interface UsageRepository extends CrudRepository<Usage, Integer> {
 
     Usage findMemberById(Integer id);
 
-    @Query("SELECT u FROM Usage u WHERE u.member.id = :memberId AND u.reserveTime IS NOT NULL")
+    @Query("SELECT u FROM Usage u WHERE u.member.id = :memberId AND u.reserveTime IS NOT NULL AND u.paidTime IS NULL")
     List<Usage> findByMemberIdAndReserveTimeNotNull(@Param("memberId") Integer memberId);
 
     @Query("SELECT u FROM Usage u WHERE u.device = ?1 AND DATE(u.reserveTime) = ?2")
@@ -45,4 +45,11 @@ public interface UsageRepository extends CrudRepository<Usage, Integer> {
 
     @Query("SELECT m FROM Member m JOIN FETCH m.usages WHERE m.id = :memberId")
     Member findMemberWithUsages(@Param("memberId") Integer memberId);
+
+    @Query("SELECT u FROM Usage u where u.device.id = :deviceId AND u.paidTime IS NULL")
+    List<Usage> findUsageListYetPaid(@Param("deviceId") Integer deviceId);
+
+    @Query("SELECT u FROM Usage u WHERE CAST(u.device.id AS string) LIKE CONCAT(:deviceIdPattern, '%') AND u.paidTime IS NULL")
+    List<Usage> findUsageListYetPaidLikeId(@Param("deviceIdPattern") int deviceId);
+
 }
