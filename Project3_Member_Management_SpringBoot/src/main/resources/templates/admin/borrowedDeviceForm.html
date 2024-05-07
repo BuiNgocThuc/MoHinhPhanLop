@@ -15,7 +15,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             <hr>
             <div class="d-flex justify-content-between align-items-start h-100">
                 <div class="h-100 w-50 p-3">
-                    <form action="#" th:action="@{/admin/usages/borrowDevice}" method="POST" th:object="${usage}">
+                     <div th:if="${param.successt}">
+                            <div class="alert alert-success">Borrow device successfully</div>
+                        </div>
+                    <form action="#" th:action="@{/borrowDevice}" method="POST" th:object="${usage}">
                         <input type="text" class="form-control mb-4 w-50" placeholder="Member ID" required th:field="*{member.id}"/>
                         <input type="text" class="form-control mb-4 w-50" placeholder="Device ID" required th:field="*{device.id}"/>
 
@@ -23,7 +26,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     </form>
 
                     <hr>
-                    <a th:href="@{/admin/usages/showListBorrowedDevices}">Back to Borrowed Devices List</a>
+                    <a th:href="@{/showListBorrowedDevices}">Back to Borrowed Devices List</a>
                 </div>
 
                 <div class="h-100 w-50">

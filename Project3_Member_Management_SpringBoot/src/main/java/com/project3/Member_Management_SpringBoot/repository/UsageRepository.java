@@ -26,7 +26,7 @@ public interface UsageRepository extends CrudRepository<Usage, Integer> {
 
     Usage findMemberById(Integer id);
 
-    @Query("SELECT u FROM Usage u WHERE u.member.id = :memberId AND u.reserveTime IS NOT NULL")
+    @Query("SELECT u FROM Usage u WHERE u.member.id = :memberId AND u.reserveTime IS NOT NULL AND u.paidTime IS NULL")
     List<Usage> findByMemberIdAndReserveTimeNotNull(@Param("memberId") Integer memberId);
     @Query("SELECT u FROM Usage u WHERE u.member.id = :memberId AND u.borrowedTime IS NOT NULL")
     List<Usage> findByMemberIdAndBorrowedTimeNotNull(@Param("memberId") Integer memberId);
@@ -37,7 +37,7 @@ public interface UsageRepository extends CrudRepository<Usage, Integer> {
     @Query(value = "SELECT * FROM `thongtinsd` u WHERE DATE_ADD(u.tgdatcho, INTERVAL 1 HOUR) <=  :deadline", nativeQuery = true)
     List<Usage> findOverdueReservation(Timestamp deadline);
 
-    List<Usage> findByDeviceNotNullAndPaidTimeIsNull();
+    List<Usage> findByBorrowedTimeNotNullAndPaidTimeIsNull();
 
     @Query("SELECT d FROM Device d LEFT JOIN Usage u ON d.id = u.device.id AND u.paidTime IS NULL WHERE u.device IS NULL")
     List<Device> findAvailableDevices();
@@ -47,4 +47,11 @@ public interface UsageRepository extends CrudRepository<Usage, Integer> {
 
     @Query("SELECT m FROM Member m JOIN FETCH m.usages WHERE m.id = :memberId")
     Member findMemberWithUsages(@Param("memberId") Integer memberId);
+
+    @Query("SELECT u FROM Usage u where u.device.id = :deviceId AND u.paidTime IS NULL")
+    List<Usage> findUsageListYetPaid(@Param("deviceId") Integer deviceId);
+
+    @Query("SELECT u FROM Usage u WHERE CAST(u.device.id AS string) LIKE CONCAT(:deviceIdPattern, '%') AND u.paidTime IS NULL")
+    List<Usage> findUsageListYetPaidLikeId(@Param("deviceIdPattern") int deviceId);
+
 }

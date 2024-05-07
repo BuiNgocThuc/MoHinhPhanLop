@@ -41,22 +41,22 @@ public class Usage {
     @JoinColumn(name = "MaTB", nullable = true)
     private Device device;
 
-    private String borrowedTimeString;
-    private String reserveTimeString;
+    // private String borrowedTimeString;
+    // private String reserveTimeString;
 
-    public String getBorrowedTimeString() {
-        return borrowedTimeString;
-    }
+    // public String getBorrowedTimeString() {
+    //     return borrowedTimeString;
+    // }
 
-    public void setBorrowedTimeString(String borrowedTimeString) {
-        this.borrowedTimeString = borrowedTimeString;
-    }
+    // public void setBorrowedTimeString(String borrowedTimeString) {
+    //     this.borrowedTimeString = borrowedTimeString;
+    // }
 
-    public String getReserveTimeString() {
-        return reserveTimeString;
-    }
+    // public String getReserveTimeString() {
+    //     return reserveTimeString;
+    // }
 
-    public void setReserveTimeString(String reserveTimeString) {
-        this.reserveTimeString = reserveTimeString;
-    }
+    // public void setReserveTimeString(String reserveTimeString) {
+    //     this.reserveTimeString = reserveTimeString;
+    // }
 }

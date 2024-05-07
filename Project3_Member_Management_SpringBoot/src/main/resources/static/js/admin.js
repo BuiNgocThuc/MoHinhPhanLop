@@ -4,7 +4,6 @@ hamBurger.addEventListener("click", function () {
 });
 $(document).ready(function () {
     $('.sidebar-item .sidebar-link').on("click", function (e) {
-        e.preventDefault(); // Prevent default link behavior
 
         // Remove 'active' class from all sidebar links
         $('.sidebar-link').removeClass('active');
