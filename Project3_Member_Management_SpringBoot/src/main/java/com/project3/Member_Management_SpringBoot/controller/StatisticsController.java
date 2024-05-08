@@ -4,6 +4,8 @@
  */
 package com.project3.Member_Management_SpringBoot.controller;
 
+import com.project3.Member_Management_SpringBoot.annotation.AuthRequire;
+import com.project3.Member_Management_SpringBoot.annotation.RoleRequire;
 import com.project3.Member_Management_SpringBoot.service.DeviceService;
 import com.project3.Member_Management_SpringBoot.service.DisciplineService;
 import com.project3.Member_Management_SpringBoot.service.MemberService;
@@ -25,9 +27,11 @@ public class StatisticsController {
     private final DeviceService deviceService;
     private final DisciplineService disciplineService;
 
-    @GetMapping("/admin/dashboard_test")
+    @GetMapping("/admin/dashboard")
+     @AuthRequire
+    @RoleRequire({"admin"})
     public String dashboard(Model theModel) {
-        Integer memberCount = memberService.statisticsMember("CNTT", "Hệ thống thông tin", null, null);
+        Integer memberCount = memberService.statisticsMember("CNTT", null, null, null);
         theModel.addAttribute("memberData", memberCount);
         Integer borrowedDeviceData = deviceService.statisticsBorrowedDevice("Micro", null, null);
         theModel.addAttribute("borrowedDeviceData", borrowedDeviceData);
@@ -39,7 +43,6 @@ public class StatisticsController {
         theModel.addAttribute("totalFineData", totalFineData);
         Integer unresolvedDisciplineData = disciplineService.findByStatus(1);
         theModel.addAttribute("unresolvedDisciplineData", unresolvedDisciplineData);
-
-        return "admin/dashboard_test";
+        return "admin/statistics";
     }
 }

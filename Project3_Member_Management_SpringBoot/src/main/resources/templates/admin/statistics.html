@@ -77,15 +77,15 @@
                     <div class="d-flex flex-column gap-3">
                         <div class="d-flex justify-content-between" style="border-bottom: 1px solid #000; padding-bottom: 4px">
                             <span>On handling:</span>
-                            <span class="fw-bold">123</span>
+                            <span class="fw-bold" th:text="${unresolvedDisciplineData}">...</span>
                         </div>
                         <div class="d-flex justify-content-between" style="border-bottom: 1px solid #000; padding-bottom: 4px">
                             <span>Done:</span>
-                            <span class="fw-bold">456</span>
+                            <span class="fw-bold" th:text="${resolvedDisciplineData}">...</span>
                         </div>
                         <div class="d-flex justify-content-between" style="border-bottom: 1px solid #000; padding-bottom: 4px">
                             <span>Total Money:</span>
-                            <span class="fw-bold">789</span>
+                            <span class="fw-bold" th:text="${totalFineData}">...</span>
                         </div>
                     </div>
                 </div>
@@ -97,8 +97,8 @@
                     <div class="d-flex w-100 gap-2">
                         <div class="col">
                             <select class="form-select w-100" id="departmentForm" aria-label="Default select example">
-                                <option selected value="SP KHTN">SP KHTN</option>
-                                <option value="CNTT">CNTT</option>
+                                 <option selected value="CNTT">CNTT</option>
+                                <option value="SP KHTN">SP KHTN</option>
                                 <option value="Ngoại Ngữ">Ngoại Ngữ</option>
                                 <option value="SP KHXH">SP KHXH</option>
                                 <option value="Nghệ Thuật">Nghệ Thuật</option>
@@ -111,7 +111,7 @@
                     </div>
                 </div>
                 <div class="d-flex flex-column gap-3 w-100 overflow-hidden">
-                    <div class="row gap-3">
+                    <div class="row gap-3" th:each="member : ${memberData}">
                         <div class="col d-flex justify-content-between" style="border-bottom: 1px solid #000; padding-bottom: 4px">
                             <span>Done:</span>
                             <span class="fw-bold">456</span>
