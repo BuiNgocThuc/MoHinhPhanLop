@@ -13,10 +13,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <div class="container">
             <div class="d-flex justify-content-between align-items-center mt-3">
                 <h3>Borrowed Devices List</h3>
-                <a th:href="@{/admin/members/list}">Back to Members List</a>
+                <a th:href="@{/membersList}">Back to Members List</a>
             </div>
             <hr>
-            <a th:href="@{/admin/usages/showFormRegisterBorrowDevice}" class="btn btn-info me-3 btn-lg mb-3">Borrow Device</a>
+            <a th:href="@{/showFormRegisterBorrowDevice}" class="btn btn-info me-3 btn-lg mb-3">Borrow Device</a>
             <!-- Table -->
             <table class="table table-bordered table-striped">
                 <thead class="table-dark">
@@ -38,7 +38,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         <td th:text="${usage.borrowedTime}">...</td>
                         <td>
                             <a class="btn btn-danger"
-                               th:href="@{/admin/usages/returnDevice(usageId=${usage.id})}"
+                               th:href="@{/returnDevice(usageId=${usage.id})}"
                                onclick="if (!(confirm('Are you sure you want to return this device?')))
                                                return false">Return</a>
                         </td>

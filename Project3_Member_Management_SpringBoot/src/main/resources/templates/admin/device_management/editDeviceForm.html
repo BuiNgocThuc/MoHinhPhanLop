@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Edit Device</title>
+        <link
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Edit Device</h1>
+            <div
+                th:if="${param.err}"
+                class="alert alert-danger alert-dismissible"
+            >
+                <a
+                    href="#"
+                    class="close"
+                    data-dismiss="alert"
+                    aria-label="close"
+                    >&times;</a
+                >
+                <span th:text="${param.err}"></span>
+            </div>
+            <div
+                th:if="${param.success}"
+                class="alert alert-success alert-dismissible"
+            >
+                <a
+                    href="#"
+                    class="close"
+                    data-dismiss="alert"
+                    aria-label="close"
+                    >&times;</a
+                >
+                <span th:text="${param.success}"></span>
+            </div>
+            <div id="message"></div>
+            <form method="post" action="/edit-device" id="deviceForm">
+                <input
+                    type="hidden"
+                    id="id"
+                    name="id"
+                    th:value="${device.id}"
+                />
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="name"
+                        name="name"
+                        th:value="${device.name}"
+                        required
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea
+                        class="form-control"
+                        id="description"
+                        name="description"
+                        rows="3"
+                        th:text="${device.description}"
+                    ></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </body>
+</html>

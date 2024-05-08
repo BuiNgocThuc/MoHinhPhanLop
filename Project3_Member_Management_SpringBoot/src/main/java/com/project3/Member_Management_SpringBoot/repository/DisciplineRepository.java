@@ -19,4 +19,6 @@ import org.springframework.stereotype.Repository;
 public interface DisciplineRepository extends CrudRepository<Discipline, Integer>{
     Discipline findByMemberAndStatusAndDescriptionLike(Member member, Integer status, String description);
     List<Discipline> findByMember(Member member);
+    @Query("SELECT m FROM Member m")
+    List<Member> getAllMember();
 }

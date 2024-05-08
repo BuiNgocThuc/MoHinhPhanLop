@@ -6,22 +6,22 @@ package com.project3.Member_Management_SpringBoot.service;
 
 import com.project3.Member_Management_SpringBoot.model.Device;
 import com.project3.Member_Management_SpringBoot.repository.DeviceRepository;
-
-import java.util.List;
-
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- *
- * @author buing
- */
+import java.util.List;
+
 @Service
-public class DeviceServiceImpl implements DeviceService{
+public class DeviceServiceImpl implements DeviceService {
+
     @Autowired
     private DeviceRepository deviceRepository;
-    
+
+    @Override
+    public List<Device> findAllDevices() {
+        return (List<Device>) deviceRepository.findAll();
+    }
+
     @Override
     public List<Device> getAvailableDevices() {
         return deviceRepository.findAvailableDevices();
@@ -33,7 +33,22 @@ public class DeviceServiceImpl implements DeviceService{
     }
 
     @Override
-    public Device findById(Integer ID) {
-        return deviceRepository.findById(ID).get();
+    public Device saveDevice(Device device) {
+        return deviceRepository.save(device);
+    }
+
+    @Override
+    public Device findDeviceById(int id) {
+        return deviceRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void deleteDeviceById(int id) {
+        deviceRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Device> findAllDevicesLikeId(int deviceId) {
+        return deviceRepository.findAllDevicesLikeId(deviceId);
     }
 }

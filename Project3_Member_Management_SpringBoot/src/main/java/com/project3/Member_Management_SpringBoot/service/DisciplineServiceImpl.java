@@ -39,4 +39,5 @@ public class DisciplineServiceImpl implements DisciplineService{
     public void saveDiscipline(Discipline discipline) {
         disciplineRepository.save(discipline);
     }
+
 }

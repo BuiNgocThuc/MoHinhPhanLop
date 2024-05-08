@@ -31,30 +31,32 @@ public class Usage {
     @Temporal(TemporalType.TIMESTAMP)
     private Timestamp reserveTime;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    //@ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "MaTV")
     private Member member;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    //@ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "MaTB", nullable = true)
     private Device device;
 
-    private String borrowedTimeString;
-    private String reserveTimeString;
+    // private String borrowedTimeString;
+    // private String reserveTimeString;
 
-    public String getBorrowedTimeString() {
-        return borrowedTimeString;
-    }
+    // public String getBorrowedTimeString() {
+    //     return borrowedTimeString;
+    // }
 
-    public void setBorrowedTimeString(String borrowedTimeString) {
-        this.borrowedTimeString = borrowedTimeString;
-    }
+    // public void setBorrowedTimeString(String borrowedTimeString) {
+    //     this.borrowedTimeString = borrowedTimeString;
+    // }
 
-    public String getReserveTimeString() {
-        return reserveTimeString;
-    }
+    // public String getReserveTimeString() {
+    //     return reserveTimeString;
+    // }
 
-    public void setReserveTimeString(String reserveTimeString) {
-        this.reserveTimeString = reserveTimeString;
-    }
+    // public void setReserveTimeString(String reserveTimeString) {
+    //     this.reserveTimeString = reserveTimeString;
+    // }
 }
