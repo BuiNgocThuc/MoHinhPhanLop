@@ -28,7 +28,7 @@ public class UsageController {
         return "admin/borrowedDevicesList";
     }
 
-    @GetMapping("/showFormRegisterBorrowDevice")
+    @GetMapping("/admin/membersList/showFormRegisterBorrowDevice")
     @AuthRequire
     public String showFormRegisterBorrowDevice(Model theModel) {
         List<Device> availableDevices = usageService.getAvailableDevices();
@@ -38,7 +38,7 @@ public class UsageController {
         return "admin/borrowedDeviceForm";
     }
 
-    @GetMapping("/returnDevice")
+    @GetMapping("/admin/membersList/returnDevice")
     @AuthRequire
     public String returnDevice(@RequestParam("usageId") Integer ID, Model theModel) {
         Usage usage = usageService.findById(ID);
@@ -46,7 +46,7 @@ public class UsageController {
         return "redirect:/showListBorrowedDevices";
     }
 
-    @PostMapping("/borrowDevice")
+    @PostMapping("/admin/membersList/borrowDevice")
     public String borrowDevice(@ModelAttribute("usage") Usage usage) {
         usageService.borrowDevice(usage);
         return "redirect:/showFormRegisterBorrowDevice?success";
