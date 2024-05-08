@@ -20,7 +20,7 @@ public class MemberController {
 
     private final MemberService memberService;
     
-     @GetMapping("/membersList")
+     @GetMapping("/admin/membersList")
      @AuthRequire
     public String getAllMembers(Model theModel) {
          List<Member> members = memberService.getAllMembers();
@@ -28,14 +28,14 @@ public class MemberController {
         return "admin/membersList";
     }
     
-    @GetMapping("/showFormForAdd")
+    @GetMapping("/admin/membersList/showFormForAdd")
     public String showFormForAdd(Model theModel) {
         Member member = new Member();
         theModel.addAttribute("member", member);
         return "admin/memberForm";
     }
     
-    @GetMapping("/showFormForUpdate")
+    @GetMapping("/admin/membersList/showFormForUpdate")
     @AuthRequire
     public String showFormForUpdate(@RequestParam("memberId") Integer ID, Model theModel) {
         Member member = memberService.findById(ID);
@@ -43,17 +43,17 @@ public class MemberController {
         return "admin/memberForm";
     }
     
-    @PostMapping("/saveMember")
+    @PostMapping("/admin/membersList/saveMember")
     public String saveMember(@ModelAttribute("member") Member member) {
         memberService.saveMember(member);
-        return "redirect:/memberlist";
+        return "redirect:/admin/memberslist";
     }
     
-    @GetMapping("/deleteMember")
+    @GetMapping("/admin/membersList/deleteMember")
     @AuthRequire
     public String deleteMember(@RequestParam("memberId") Integer ID) {
         memberService.deleteById(ID);
-        return "redirect:/memberlist";
+        return "redirect:/admin/memberslist";
     }
     
 }
