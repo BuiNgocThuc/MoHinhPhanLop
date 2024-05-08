@@ -18,7 +18,7 @@ public class IndexController {
     @AuthRequire
     @RoleRequire({"admin"})
     public String dashboard(Model theModel) {
-        return "admin/dashboard";
+        return "admin/statistics.html";
     }
 }
 

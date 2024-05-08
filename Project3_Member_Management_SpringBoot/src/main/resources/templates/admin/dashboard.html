@@ -25,10 +25,16 @@
                         <img th:src="@{/icon.png}" alt="Your logo" style="width:50px;height: 50px">
                     </button>
                     <div class="sidebar-logo">
-                        <a href="#">Admin</a>
+                        <a href="/admin">Admin</a>
                     </div>
                 </div>
                 <ul class="sidebar-nav">
+                    <li class="sidebar-item">
+                        <a href="/admin" class="sidebar-link">
+                            <i class="fa-solid fa-chart-column"></i><!-- Font Awesome user icon -->
+                            <span>Statistics Management</span>
+                        </a>
+                    </li>
                     <li class="sidebar-item">
                         <a href="/admin/membersList" class="sidebar-link">
                             <i class="fas fa-user"></i> <!-- Font Awesome user icon -->
@@ -55,7 +61,7 @@
                     </a>
                 </div>
             </aside>
-            <div class="displayContent main container-fluid px-5 py-3 ">
+            <div class="displayContent main container-fluid px-5 py-3 bg-white">
                 <div th:replace="~{${contentAdmin} :: contentAdmin}"></div> 
             </div>
         </div>
