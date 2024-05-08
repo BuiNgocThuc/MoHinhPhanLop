@@ -3,7 +3,7 @@
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
 -->
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  th:replace="~{/admin/dashboard}">
     <head>
         <title>Member Management</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -13,10 +13,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <div class="container">
             <div class="d-flex justify-content-between align-items-center mt-3">
                 <h3>Borrowed Devices List</h3>
-                <a th:href="@{/membersList}">Back to Members List</a>
+                <a th:href="@{/admin/membersList}">Back to Members List</a>
             </div>
             <hr>
-            <a th:href="@{/showFormRegisterBorrowDevice}" class="btn btn-info me-3 btn-lg mb-3">Borrow Device</a>
+            <a th:href="@{/admin/membersList/showFormRegisterBorrowDevice}" class="btn btn-info me-3 btn-lg mb-3">Borrow Device</a>
             <!-- Table -->
             <table class="table table-bordered table-striped">
                 <thead class="table-dark">
@@ -38,7 +38,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         <td th:text="${usage.borrowedTime}">...</td>
                         <td>
                             <a class="btn btn-danger"
-                               th:href="@{/returnDevice(usageId=${usage.id})}"
+                               th:href="@{/admin/membersList/returnDevice(usageId=${usage.id})}"
                                onclick="if (!(confirm('Are you sure you want to return this device?')))
                                                return false">Return</a>
                         </td>

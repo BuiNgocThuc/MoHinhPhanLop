@@ -19,6 +19,9 @@ import org.springframework.stereotype.Repository;
 public interface DisciplineRepository extends CrudRepository<Discipline, Integer>{
     Discipline findByMemberAndStatusAndDescriptionLike(Member member, Integer status, String description);
     List<Discipline> findByMember(Member member);
-    @Query("SELECT m FROM Member m")
-    List<Member> getAllMember();
+    
+    List<Discipline> findByStatus(Integer status);
+    
+    @Query("SELECT SUM(d.fine) FROM Discipline d WHERE d.status = 0")
+    Integer findSumFine();
 }

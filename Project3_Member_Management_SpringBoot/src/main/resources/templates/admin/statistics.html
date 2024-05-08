@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{/admin/dashboard}">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Statistics</title>
+    </head>
+
+    <body>
+        <div th:fragment="contentAdmin" class="w-100 h-100 gap-2 d-flex flex-column">
+            <div class="gap-2 d-flex">
+                <!--Device statistics-->
+                <div class="flex-grow-1 d-flex flex-column gap-3 p-3 h-100 border" style="border-color: #000 !important;">
+                    <div class="d-flex align-items-center">
+                        <h5 class="fw-bold w-100" style="margin-bottom: 0px !important; color: #0e2238;">Device</h5>
+                        <div class="input-group w-100">
+                            <input id="inputSearchDevice" type="search" class="form-control" placeholder="Search...">
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <div class="col w-100">
+                            <select onchange="getStatictisDevice()" id="selectDevice" class="form-select w-50" aria-label="Default select example">
+                                <option selected value="Thiết bị được mượn">Thiết bị được mượn</option>
+                                <option value="Thiết bị đang được mượn">Thiết bị đang được mượn</option>
+                            </select>
+                        </div>
+                        <div class="col d-flex gap-1">
+                            <input id="inputDateStartDevice" type="datetime-local" class="form-control" placeholder="Date" required />
+                            <input id="inputDateEndDevice" type="datetime-local" class="form-control" placeholder="Date" required />
+                        </div>
+                    </div>
+                    <table style="margin-bottom: 0px;" class="table table-bordered table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>...</td>
+                                <td>...</td>
+                                <td>...</td>
+                                <td>123</td>
+                            </tr>
+                            <tr>
+                                <td>...</td>
+                                <td>...</td>
+                                <td>...</td>
+                                <td>123</td>
+                            </tr>
+                            <tr>
+                                <td>...</td>
+                                <td>...</td>
+                                <td>...</td>
+                                <td>123</td>
+                            </tr>
+                            <tr>
+                                <td>...</td>
+                                <td>...</td>
+                                <td>...</td>
+                                <td>123</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <!--Punish statistics-->
+                <div class="flex-grow-1 d-flex flex-column gap-3 p-3 border h-100" style="border-color: #000 !important;">
+                    <div class="d-flex align-items-center">
+                        <h5 class="fw-bold w-100" style="margin-bottom: 0px !important; color: #0e2238;">Punishment</h5>
+                    </div>
+                    <div class="d-flex flex-column gap-3">
+                        <div class="d-flex justify-content-between" style="border-bottom: 1px solid #000; padding-bottom: 4px">
+                            <span>On handling:</span>
+                            <span class="fw-bold">123</span>
+                        </div>
+                        <div class="d-flex justify-content-between" style="border-bottom: 1px solid #000; padding-bottom: 4px">
+                            <span>Done:</span>
+                            <span class="fw-bold">456</span>
+                        </div>
+                        <div class="d-flex justify-content-between" style="border-bottom: 1px solid #000; padding-bottom: 4px">
+                            <span>Total Money:</span>
+                            <span class="fw-bold">789</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Member statistics-->
+            <div class="flex-grow-1 d-flex flex-column gap-3 p-2 col w-100 border h-100" style="border-color: #000 !important;">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="fw-bold w-100" style="margin-bottom: 0px !important; color: #0e2238;">Device</h5>
+                    <div class="d-flex w-100 gap-2">
+                        <div class="col">
+                            <select class="form-select w-100" id="departmentForm" aria-label="Default select example">
+                                <option selected value="SP KHTN">SP KHTN</option>
+                                <option value="CNTT">CNTT</option>
+                                <option value="Ngoại Ngữ">Ngoại Ngữ</option>
+                                <option value="SP KHXH">SP KHXH</option>
+                                <option value="Nghệ Thuật">Nghệ Thuật</option>
+                            </select>
+                        </div>
+                        <div class="col d-flex gap-1">
+                            <input type="datetime-local" class="form-control" placeholder="Date" required id="datetimeInput"/>
+                            <input type="datetime-local" class="form-control" placeholder="Date" required id="datetimeInput"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-column gap-3 w-100 overflow-hidden">
+                    <div class="row gap-3">
+                        <div class="col d-flex justify-content-between" style="border-bottom: 1px solid #000; padding-bottom: 4px">
+                            <span>Done:</span>
+                            <span class="fw-bold">456</span>
+                        </div>
+                        <div class=" col d-flex justify-content-between" style="border-bottom: 1px solid #000; padding-bottom: 4px">
+                            <span>Done:</span>
+                            <span class="fw-bold">456</span>
+                        </div>
+                    </div>
+                    <div class="row gap-3">
+                        <div class="col d-flex justify-content-between" style="border-bottom: 1px solid #000; padding-bottom: 4px">
+                            <span>Done:</span>
+                            <span class="fw-bold">456</span>
+                        </div>
+                        <div class=" col d-flex justify-content-between" style="border-bottom: 1px solid #000; padding-bottom: 4px">
+                            <span>Done:</span>
+                            <span class="fw-bold">456</span>
+                        </div>
+                    </div>
+                    <div class="row gap-3">
+                        <div class="col d-flex justify-content-between" style="border-bottom: 1px solid #000; padding-bottom: 4px">
+                            <span>Done:</span>
+                            <span class="fw-bold">456</span>
+                        </div>
+                        <div class=" col d-flex justify-content-between" style="border-bottom: 1px solid #000; padding-bottom: 4px">
+                            <span>Done:</span>
+                            <span class="fw-bold">456</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>

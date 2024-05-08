@@ -4,9 +4,14 @@
  */
 package com.project3.Member_Management_SpringBoot.service;
 
+import com.project3.Member_Management_SpringBoot.model.Device;
+import com.project3.Member_Management_SpringBoot.model.Discipline;
 import com.project3.Member_Management_SpringBoot.model.Member;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,12 +20,24 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface MemberService {
+
     @Autowired
     Member findById(Integer id);
+
     void saveMember(Member member);
-    Boolean checkPasswordUser(Member member,String password);
+
+    Boolean checkPasswordUser(Member member, String password);
+
     Boolean checkUserExists(Integer ID);
+
     Member findByEmail(String email);
+
     List<Member> getAllMembers();
+
     void deleteById(Integer ID);
+
+    void deleteByActiveYear(String activeYear);
+
+    Integer statisticsMember(String department, String major, Date startDate, Date endDate);
+
 }

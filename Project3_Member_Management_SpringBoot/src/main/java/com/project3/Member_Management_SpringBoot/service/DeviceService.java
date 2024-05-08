@@ -5,10 +5,13 @@
 package com.project3.Member_Management_SpringBoot.service;
 
 import com.project3.Member_Management_SpringBoot.model.Device;
+import java.sql.Timestamp;
+import java.util.Date;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 
 public interface DeviceService {
     @Autowired
@@ -25,4 +28,8 @@ public interface DeviceService {
     Device findDeviceById(int id);
 
     void deleteDeviceById(int id);
+    
+    Integer statisticsBorrowedDevice(String name, Date startDate, Date endDate);
+
+    Integer statisticsBorrowingDevice(Date startDate, Date endDate);
 }
