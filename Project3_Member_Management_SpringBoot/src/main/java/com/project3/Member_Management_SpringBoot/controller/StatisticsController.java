@@ -24,7 +24,7 @@ public class StatisticsController {
     private final DeviceService deviceService;
     private final DisciplineService disciplineService;
 
-    @GetMapping("/dashboard_test")
+    @GetMapping("/admin/dashboard")
     public String dashboard(Model theModel) {
         Integer memberCount = memberService.statisticsMember("CNTT", "Hệ thống thông tin", null, null);
         theModel.addAttribute("memberData", memberCount);
@@ -39,6 +39,6 @@ public class StatisticsController {
         Integer unresolvedDisciplineData = disciplineService.findByStatus(1);
         theModel.addAttribute("unresolvedDisciplineData", unresolvedDisciplineData);
 
-        return "admin/dashboard_test";
+        return "admin/dashboard";
     }
 }

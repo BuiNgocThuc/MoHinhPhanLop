@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org"
-       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html  xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Admin Page</title>
         <meta charset="UTF-8">
@@ -25,12 +24,12 @@
                         <img th:src="@{/icon.png}" alt="Your logo" style="width:50px;height: 50px">
                     </button>
                     <div class="sidebar-logo">
-                        <a href="/admin">Admin</a>
+                        <a href="/admin/dashboard">Admin</a>
                     </div>
                 </div>
                 <ul class="sidebar-nav">
                     <li class="sidebar-item">
-                        <a href="/admin" class="sidebar-link">
+                        <a href="/admin/dashboard" class="sidebar-link">
                             <i class="fa-solid fa-chart-column"></i><!-- Font Awesome user icon -->
                             <span>Statistics Management</span>
                         </a>
