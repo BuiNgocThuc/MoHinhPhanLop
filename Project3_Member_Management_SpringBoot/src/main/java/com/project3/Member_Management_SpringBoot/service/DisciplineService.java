@@ -26,4 +26,7 @@ public interface DisciplineService {
     Integer findByStatus(Integer status);
 
     Integer findSumFine();
+
+     List<Discipline> getAllDiscipline();
+     void saveDiscipline(Discipline discipline);
 }

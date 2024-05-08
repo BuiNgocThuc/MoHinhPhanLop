@@ -29,14 +29,13 @@ public interface UsageService {
     void deleteUsageById(Integer id);
 
     List<Usage> findByMemberIdAndReserveTimeNotNull(Integer memberId);
+    List<Usage> findByMemberIdAndBorrowedTimeNotNull(Integer memberId);
 
     List<Usage> findUsageListYetPaid(Integer deviceId);
 
     List<Usage> findUsageListYetPaidLikeId(Integer deviceId);
-
     @Autowired
     void save(Usage usage);
-
     void deleteAll(Iterable<Usage> usages);
 
     Boolean reserveDevice(Usage usage);

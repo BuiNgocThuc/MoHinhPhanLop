@@ -41,4 +41,13 @@ public class DisciplineServiceImpl implements DisciplineService {
     public Integer findSumFine() {
         return disciplineRepository.findSumFine();
     }
+    public List<Discipline> getAllDiscipline() {
+        return (List<Discipline>)disciplineRepository.findAll();
+    }    
+
+    @Override
+    public void saveDiscipline(Discipline discipline) {
+        disciplineRepository.save(discipline);
+    }
+
 }

@@ -30,6 +30,7 @@ public class Device {
     @Column(name = "MotaTB")
     private String description;
 
-    @OneToMany(mappedBy = "device", cascade = CascadeType.ALL, orphanRemoval = true)
+    //@OneToMany(mappedBy = "device", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "device",cascade = CascadeType.ALL)
     private List<Usage> usages;
 }

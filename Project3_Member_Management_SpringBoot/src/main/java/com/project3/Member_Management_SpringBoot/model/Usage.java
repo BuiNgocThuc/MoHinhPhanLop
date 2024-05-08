@@ -31,11 +31,13 @@ public class Usage {
     @Temporal(TemporalType.TIMESTAMP)
     private Timestamp reserveTime;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    //@ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "MaTV")
     private Member member;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    //@ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "MaTB", nullable = true)
     private Device device;
 
