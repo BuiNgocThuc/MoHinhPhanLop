@@ -32,7 +32,7 @@ public class DisciplineController {
         model.addAttribute("discipline", new Discipline());
         return "admin/addDiscipline";
     }
-    @RequestMapping(value="save",method = RequestMethod.POST)
+    @RequestMapping(value="admin/disciplineList/save",method = RequestMethod.POST)
     public String save(Discipline discipline){
         disciplineService.saveDiscipline(discipline);
         return "redirect:/admin/disciplineList";

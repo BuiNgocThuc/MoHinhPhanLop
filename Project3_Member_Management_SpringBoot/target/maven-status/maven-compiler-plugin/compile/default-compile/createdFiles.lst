@@ -17,6 +17,7 @@ com\project3\Member_Management_SpringBoot\service\UsageServiceImpl.class
 com\project3\Member_Management_SpringBoot\service\MemberServiceImpl.class
 com\project3\Member_Management_SpringBoot\MemberManagementSpringBootApplication.class
 com\project3\Member_Management_SpringBoot\repository\DeviceRepository.class
+helpers\ExcelToModelUtils.class
 com\project3\Member_Management_SpringBoot\config\EmailConfig.class
 com\project3\Member_Management_SpringBoot\interceptor\AuthInterceptor.class
 com\project3\Member_Management_SpringBoot\config\WebConfig.class
