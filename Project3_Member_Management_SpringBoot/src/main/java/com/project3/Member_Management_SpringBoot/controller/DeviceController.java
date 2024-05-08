@@ -103,10 +103,12 @@ public class DeviceController {
             return "redirect:/admin/device-management?err=" + err;
         }
         List<Device> devices = deviceService.findAllDevicesLikeId(Integer.parseInt(idString));
-
+        if (devices == null || devices.isEmpty()) {
+            String err = "No devices found with the specified ID and year!";
+            return "redirect:/admin/device-management?err=" + err;
+        }
         for (Device device : devices) {
             deviceService.deleteDeviceById(device.getId());
-
         }
         String success = "Batch delete devices successfully";
         return "redirect:/admin/device-management?success=" + success;
