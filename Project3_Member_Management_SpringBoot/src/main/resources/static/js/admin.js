@@ -23,3 +23,24 @@ $(document).ready(function () {
         }
     });
 });
+
+const getStatictisDevice = () => {
+    const searchDeviceVal = $('#inputSearchDevice').val();
+    const selectDeviceVal = $('#selectDevice').val();
+    const startDateDevice = $('#inputDateStartDevice').val();
+    const endDateDevice = $('#inputDateEndDevice').val();
+    // call ajax
+    $.ajax({
+        url: '/admin/device/statictis',
+        type: 'GET',
+        data: {
+            search: searchDeviceVal,
+            select: selectDeviceVal,
+            startDate: startDateDevice,
+            endDate: endDateDevice
+        },
+        success: function (data) {
+            console.log(data)
+        }
+    });
+}

@@ -28,12 +28,14 @@
                     <hr style="margin: 0;" />
             </div>
             <div class="d-flex justify-content-between align-items-center">
-                <!-- Ô tìm kiếm -->
                 <div class="input-group">
-                    <input type="search" class="form-control" placeholder="Search...">
+                    <input type="text" class="form-control" id="searchDiscipline" placeholder="Search...">
+                    <button class="btn btn-outline-secondary" type="button" id="clearSearch"><i class="fas fa-times"></i></button>
                 </div>
             </div>
             <div class="d-flex gap-2 my-3">
+
+<!--                <a href="/addDiscipline" class="btn btn-success">Add Violation</a>  -->
                 <a href="/admin/disciplineList/addDiscipline" class="btn btn-success">Add Violation</a>  
                 <a type="button" class="btn btn-success">
                     <i class="fa-solid fa-file-excel"></i>
@@ -60,11 +62,15 @@
                         <td style="vertical-align: middle" th:text="${discipline.description}"></td>
                         <td style="vertical-align: middle" th:text="${discipline.fine}"></td> 
                         <td style="vertical-align: middle" th:text="${#dates.format(discipline.date, 'dd/MM/yyyy HH:mm')}"></td> 
-                        <td style="vertical-align: middle" th:text="${discipline.status}"></td>
+<!--                        <td style="vertical-align: middle" th:text="${discipline.status}"></td>-->
+                        <td style="vertical-align: middle">
+                                   <span th:if="${discipline.status == 0}" class="badge bg-success">Đã xử lý</span>
+                                   <span th:if="${discipline.status == 1}" class="badge bg-danger">Chưa xử lý</span>
+                        </td> 
                         <td>  
                             <div class="d-flex gap-1">
-                                <a href="/admin/editDiscipline?id={id}(id=${discipline.id})}" class="btn btn-primary">Edit</a>  
-                                <a href="/admin/deleteDiscipline?id={id}(id=${discipline.id})}" class="btn btn-danger">Delete</a>  
+                                <a th:href="@{/admin/editDiscipline?id={id}(id=${discipline.id})}" class="btn btn-primary">Edit</a>  
+                                <a th:href="@{/admin/deleteDiscipline?id={id}(id=${discipline.id})}" class="btn btn-danger">Delete</a>  
                             </div>
                         </td>  
                     </tr>  
@@ -77,3 +83,22 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </body>
 </html>
+<script>
+          $(document).ready(function () {
+        $('#searchDiscipline').on('input', function () {
+            var searchText = $(this).val().toLowerCase();
+            filterTable(searchText);
+        });
+        $('#clearSearch').click(function () {
+            $('#searchDiscipline').val('');
+            filterTable(''); 
+        });
+        function filterTable(searchText) {
+            $('tbody tr').each(function () {
+                var content = $(this).text().toLowerCase();
+                var match = content.indexOf(searchText) !== -1;
+                $(this).toggle(match);
+            });
+        }
+        });
+        </script>
