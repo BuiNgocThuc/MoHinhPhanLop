@@ -19,13 +19,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class DisciplineController {
     private final DisciplineService disciplineService;
     private final MemberService memberService;
-    @GetMapping("/disciplineList")
+    @GetMapping("/admin/disciplineList")
     public String getAllDiscipline(Model model) {
         Iterable<Discipline> disciplineList=disciplineService.getAllDiscipline();
         model.addAttribute("disciplineList",disciplineList);
         return "admin/disciplineAdmin";
     }
-    @GetMapping("/addDiscipline")
+    @GetMapping("/admin/disciplineList/addDiscipline")
     public String addDiscipline(Model model) {
         Iterable<Member> members=memberService.getAllMembers();
         model.addAttribute("memberList", members);
@@ -35,6 +35,6 @@ public class DisciplineController {
     @RequestMapping(value="save",method = RequestMethod.POST)
     public String save(Discipline discipline){
         disciplineService.saveDiscipline(discipline);
-        return "redirect:/disciplineList";
+        return "redirect:/admin/disciplineList";
     }
 }
