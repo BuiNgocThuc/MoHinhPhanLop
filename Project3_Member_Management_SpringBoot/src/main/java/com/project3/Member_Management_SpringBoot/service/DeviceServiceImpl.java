@@ -6,6 +6,8 @@ package com.project3.Member_Management_SpringBoot.service;
 
 import com.project3.Member_Management_SpringBoot.model.Device;
 import com.project3.Member_Management_SpringBoot.repository.DeviceRepository;
+import java.sql.Timestamp;
+import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,5 +52,39 @@ public class DeviceServiceImpl implements DeviceService {
     @Override
     public List<Device> findAllDevicesLikeId(int deviceId) {
         return deviceRepository.findAllDevicesLikeId(deviceId);
+    }
+
+    @Override
+    public Integer statisticsBorrowedDevice(String name, Date startDate, Date endDate) {
+        Timestamp startDateTimestamp = null;
+        Timestamp endDateTimestamp = null;
+        if (startDate != null)
+        {
+            startDateTimestamp = new Timestamp(startDate.getTime());
+        }
+        if (endDate != null)
+        {
+            endDateTimestamp = new Timestamp(endDate.getTime());
+        }
+        List<Device> devices = deviceRepository.statisticsBorrowedDevice("%" + name + "%", startDateTimestamp, endDateTimestamp);
+
+        return devices.size();
+    }
+
+    @Override
+    public Integer statisticsBorrowingDevice(Date startDate, Date endDate) {
+        Timestamp startDateTimestamp = null;
+        Timestamp endDateTimestamp = null;
+        if (startDate != null)
+        {
+            startDateTimestamp = new Timestamp(startDate.getTime());
+        }
+        if (endDate != null)
+        {
+            endDateTimestamp = new Timestamp(endDate.getTime());
+        }
+        List<Device> devices = deviceRepository.statisticsBorrowingDevice(startDateTimestamp, endDateTimestamp);
+
+        return devices.size();
     }
 }

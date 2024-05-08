@@ -16,8 +16,14 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface DisciplineService {
-     @Autowired
-     Discipline findStatusByMember(Member member);
-     @Autowired
-     List<Discipline> findByMember(Member member);
+
+    @Autowired
+    Discipline findStatusByMember(Member member);
+
+    @Autowired
+    List<Discipline> findByMember(Member member);
+
+    Integer findByStatus(Integer status);
+
+    Integer findSumFine();
 }

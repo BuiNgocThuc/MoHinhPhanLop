@@ -2,6 +2,8 @@ package com.project3.Member_Management_SpringBoot.controller;
 
 import com.project3.Member_Management_SpringBoot.annotation.AuthRequire;
 import com.project3.Member_Management_SpringBoot.model.Member;
+import com.project3.Member_Management_SpringBoot.service.DeviceService;
+import com.project3.Member_Management_SpringBoot.service.DisciplineService;
 import com.project3.Member_Management_SpringBoot.service.MemberService;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
@@ -19,22 +21,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MemberController {
 
     private final MemberService memberService;
-    
-     @GetMapping("/membersList")
-     @AuthRequire
+
+    @GetMapping("/membersList")
+    @AuthRequire
     public String getAllMembers(Model theModel) {
-         List<Member> members = memberService.getAllMembers();
+        List<Member> members = memberService.getAllMembers();
         theModel.addAttribute("data", members);
         return "admin/membersList";
     }
-    
+
     @GetMapping("/showFormForAdd")
     public String showFormForAdd(Model theModel) {
         Member member = new Member();
         theModel.addAttribute("member", member);
         return "admin/memberForm";
     }
-    
+
     @GetMapping("/showFormForUpdate")
     @AuthRequire
     public String showFormForUpdate(@RequestParam("memberId") Integer ID, Model theModel) {
@@ -42,18 +44,23 @@ public class MemberController {
         theModel.addAttribute("member", member);
         return "admin/memberForm";
     }
-    
+
     @PostMapping("/saveMember")
     public String saveMember(@ModelAttribute("member") Member member) {
         memberService.saveMember(member);
         return "redirect:/memberlist";
     }
-    
+
     @GetMapping("/deleteMember")
     @AuthRequire
     public String deleteMember(@RequestParam("memberId") Integer ID) {
         memberService.deleteById(ID);
         return "redirect:/memberlist";
     }
-    
+
+    @PostMapping("/deleteByYear")
+    public String deleteMembersByYear(@RequestParam("activeYear") String activeYear) {
+
+        return "admin/dashboard_test?success";
+    }
 }
