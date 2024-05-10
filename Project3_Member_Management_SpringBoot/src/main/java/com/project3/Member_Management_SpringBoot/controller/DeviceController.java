@@ -27,7 +27,7 @@ public class DeviceController {
     private UsageService usageService;
 
     @GetMapping("/admin/device-management")
-    @RoleRequire({"admin"})
+    @RoleRequire({ "admin" })
     public String deviceManagement(Model model,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int limit,
@@ -38,11 +38,13 @@ public class DeviceController {
         model.addAttribute("size", devicePage.getSize());
         model.addAttribute("totalPages", devicePage.getTotalPages());
         model.addAttribute("totalElements", devicePage.getTotalElements());
+        model.addAttribute("currentPage", page); // Add current page number
+        model.addAttribute("query", query); // Add query for search persistence
         return "admin/device_management/deviceList";
     }
 
     @GetMapping("/admin/device-management/add")
-    @RoleRequire({"admin"})
+    @RoleRequire({ "admin" })
     public String addDeviceForm(Model model) {
         model.addAttribute("device", new Device());
         return "admin/device_management/addDeviceForm";
@@ -70,7 +72,7 @@ public class DeviceController {
     }
 
     @GetMapping("/admin/device-management/{id}")
-    @RoleRequire({"admin"})
+    @RoleRequire({ "admin" })
     public String editDeviceForm(@PathVariable int id, Model model) {
         Device device = deviceService.findDeviceById(id);
         model.addAttribute("device", device);
