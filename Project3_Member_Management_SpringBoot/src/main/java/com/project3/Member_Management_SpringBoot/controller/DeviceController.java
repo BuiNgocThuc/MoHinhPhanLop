@@ -4,10 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project3.Member_Management_SpringBoot.annotation.RoleRequire;
@@ -15,8 +13,10 @@ import com.project3.Member_Management_SpringBoot.model.Device;
 import com.project3.Member_Management_SpringBoot.model.Usage;
 import com.project3.Member_Management_SpringBoot.service.DeviceService;
 import com.project3.Member_Management_SpringBoot.service.UsageService;
-
 import java.util.List;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
 
 @Controller
 public class DeviceController {
@@ -27,15 +27,22 @@ public class DeviceController {
     private UsageService usageService;
 
     @GetMapping("/admin/device-management")
-    @RoleRequire({ "admin" })
-    public String deviceManagement(Model model) {
-        List<Device> devices = deviceService.findAllDevices();
-        model.addAttribute("devices", devices);
+    @RoleRequire({"admin"})
+    public String deviceManagement(Model model,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int limit,
+            @RequestParam(defaultValue = "") String query) {
+        Pageable pageable = PageRequest.of(page, limit);
+        Page<Device> devicePage = deviceService.findAllByNameOrID(query, pageable);
+        model.addAttribute("devices", devicePage.getContent());
+        model.addAttribute("size", devicePage.getSize());
+        model.addAttribute("totalPages", devicePage.getTotalPages());
+        model.addAttribute("totalElements", devicePage.getTotalElements());
         return "admin/device_management/deviceList";
     }
 
     @GetMapping("/admin/device-management/add")
-    @RoleRequire({ "admin" })
+    @RoleRequire({"admin"})
     public String addDeviceForm(Model model) {
         model.addAttribute("device", new Device());
         return "admin/device_management/addDeviceForm";
@@ -63,7 +70,7 @@ public class DeviceController {
     }
 
     @GetMapping("/admin/device-management/{id}")
-    @RoleRequire({ "admin" })
+    @RoleRequire({"admin"})
     public String editDeviceForm(@PathVariable int id, Model model) {
         Device device = deviceService.findDeviceById(id);
         model.addAttribute("device", device);

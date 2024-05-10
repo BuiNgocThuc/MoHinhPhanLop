@@ -29,10 +29,11 @@ const getStatictisDevice = () => {
     const selectDeviceVal = $('#selectDevice').val();
     const startDateDevice = $('#inputDateStartDevice').val();
     const endDateDevice = $('#inputDateEndDevice').val();
+
     // call ajax
     $.ajax({
-        url: '/admin/device/statictis',
-        type: 'GET',
+        url: '/admin/dashboard/statisticDevice',
+        type: 'POST',
         data: {
             search: searchDeviceVal,
             select: selectDeviceVal,
@@ -40,7 +41,98 @@ const getStatictisDevice = () => {
             endDate: endDateDevice
         },
         success: function (data) {
-            console.log(data)
+            dataJSON = JSON.parse(data);
+            updateTableDevice(dataJSON);
+            updateTotalDevices(dataJSON);
+        },
+        error: function (xhr, status, error) {
+            // Xử lý lỗi nếu có
+            console.error(error);
+            console.error(xhr.responseText);
         }
     });
-}
+};
+
+$(document).ready(function () {
+    $('#inputSearchDevice').on('keypress', function (e) {
+        if (e.which === 13) {
+            getStatictisDevice();
+        }
+    });
+});
+
+const updateTableDevice = (data) => {
+    const tbody = $('#tableDevice tbody');
+    tbody.empty(); // Xóa nội dung hiện tại của tbody
+    if (data && data.device && data.device.length > 0) {
+        // Lặp qua mảng các đối tượng trong thuộc tính "device"
+        data.device.forEach((item, index) => {
+            const row = $('<tr>');
+            row.append($('<td>').text(index + 1));
+            row.append($('<td>').text(item.deviceID)); // Truy cập thuộc tính "deviceID"
+            row.append($('<td>').text(item.deviceName)); // Truy cập thuộc tính "deviceName"
+            row.append($('<td>').text(item.deviceDescription)); // Truy cập thuộc tính "deviceDescription"
+            row.append($('<td>').text(item.borrowedTime)); // Truy cập thuộc tính "borrowedTime"
+            tbody.append(row); // Thêm dòng mới vào tbody
+        });
+    } else {
+        tbody.append($('<tr>').append($('<td colspan="5">').text('No data available')));
+    }
+};
+
+const updateTotalDevices = (data) => {
+    $('#totalDevices').text(data.total);
+};
+
+const getStatisticMember = () => {
+    const selectedDepartment = $('#departmentForm').val();
+    const selectedMajor = $('#majorForm').val();
+    const startDateInput = $('#startDateInput').val();
+    const endDateInput = $('#endDateInput').val();
+
+    // call ajax
+    $.ajax({
+        url: '/admin/dashboard/statisticMember',
+        type: 'POST',
+        data: {
+            department: selectedDepartment,
+            major: selectedMajor,
+            startDate: startDateInput,
+            endDate: endDateInput
+        },
+        success: function (data) {
+            dataJSON = JSON.parse(data);
+            updateTableMember(dataJSON);
+            updateTotalMembers(dataJSON);
+        },
+        error: function (xhr, status, error) {
+            // Xử lý lỗi nếu có
+            console.error(error);
+            console.error(xhr.responseText);
+        }
+    });
+};
+
+const updateTableMember = (data) => {
+    const tbody = $('#tableMember tbody');
+    tbody.empty(); // Xóa nội dung hiện tại của tbody
+    if (data && data.members && data.members.length > 0) {
+        $.each(data.members, function (index, item) {
+            const row = $('<tr>');
+            row.append($('<td>').text(index + 1));
+            row.append($('<td>').text(item.memberID));
+            row.append($('<td>').text(item.memberName));
+            row.append($('<td>').text(item.memberDepartment));
+            row.append($('<td>').text(item.memberMajor));
+            row.append($('<td>').text(item.enteredTime));
+            tbody.append(row);
+        });
+
+    } else {
+        tbody.append($('<tr>').append($('<td colspan="6">').text('No data available')));
+    }
+};
+
+const updateTotalMembers = (data) => {
+    $('#totalMembers').text(data.total);
+};
