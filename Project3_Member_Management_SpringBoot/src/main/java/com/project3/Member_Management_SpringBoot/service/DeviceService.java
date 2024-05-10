@@ -11,12 +11,14 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface DeviceService {
     @Autowired
     List<Device> findAllDevices();
-
+    
+    public Page<Device> findAllByNameOrID(String query, Pageable pageable);
     List<Device> findAllDevicesLikeId(int deviceId);
 
     List<Device> getAvailableDevices();

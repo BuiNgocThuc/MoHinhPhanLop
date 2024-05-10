@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 @Service
 public class DeviceServiceImpl implements DeviceService {
@@ -23,7 +25,7 @@ public class DeviceServiceImpl implements DeviceService {
     public List<Device> findAllDevices() {
         return (List<Device>) deviceRepository.findAll();
     }
-
+    
     @Override
     public List<Device> getAvailableDevices() {
         return deviceRepository.findAvailableDevices();
@@ -86,5 +88,10 @@ public class DeviceServiceImpl implements DeviceService {
         List<Device> devices = deviceRepository.statisticsBorrowingDevice(startDateTimestamp, endDateTimestamp);
 
         return devices.size();
+    }
+
+    @Override
+    public Page<Device> findAllByNameOrID(String query, Pageable pageable) {
+        return deviceRepository.findAllByNameOrID(query, pageable);
     }
 }
