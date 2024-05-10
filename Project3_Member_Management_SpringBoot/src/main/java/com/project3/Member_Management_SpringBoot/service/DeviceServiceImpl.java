@@ -7,6 +7,7 @@ package com.project3.Member_Management_SpringBoot.service;
 import com.project3.Member_Management_SpringBoot.model.Device;
 import com.project3.Member_Management_SpringBoot.repository.DeviceRepository;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,37 +58,44 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
-    public Integer statisticsBorrowedDevice(String name, Date startDate, Date endDate) {
-        Timestamp startDateTimestamp = null;
+    public Integer statisticsTotalBorrowedDevice(String name, String startDateStr, String endDateStr) {
+       Timestamp startDateTimestamp = null;
         Timestamp endDateTimestamp = null;
-        if (startDate != null)
+        if (startDateStr != null && !startDateStr.isBlank() && !startDateStr.isEmpty())
         {
-            startDateTimestamp = new Timestamp(startDate.getTime());
+            LocalDate startDateLocal = LocalDate.parse(startDateStr);
+            startDateTimestamp = Timestamp.valueOf(startDateLocal.atStartOfDay());
         }
-        if (endDate != null)
+        if (endDateStr != null && !endDateStr.isBlank() && !endDateStr.isEmpty())
         {
-            endDateTimestamp = new Timestamp(endDate.getTime());
+            LocalDate endDateLocal = LocalDate.parse(endDateStr);
+            endDateTimestamp = Timestamp.valueOf(endDateLocal.atStartOfDay());
         }
-        List<Device> devices = deviceRepository.statisticsBorrowedDevice("%" + name + "%", startDateTimestamp, endDateTimestamp);
-
-        return devices.size();
+        if (name != null && !name.isBlank() && !name.isEmpty())
+        {
+            name = "%".concat(name).concat("%");
+        } else {
+            name = null;
+        }
+        return deviceRepository.statisticsTotalBorrowedDevice(name, startDateTimestamp, endDateTimestamp);
     }
 
     @Override
-    public Integer statisticsBorrowingDevice(Date startDate, Date endDate) {
+    public Integer statisticsTotalBorrowingDevice(String startDateStr, String endDateStr) {
         Timestamp startDateTimestamp = null;
         Timestamp endDateTimestamp = null;
-        if (startDate != null)
+        if (startDateStr != null && !startDateStr.isBlank() && !startDateStr.isEmpty())
         {
-            startDateTimestamp = new Timestamp(startDate.getTime());
+            LocalDate startDateLocal = LocalDate.parse(startDateStr);
+            startDateTimestamp = Timestamp.valueOf(startDateLocal.atStartOfDay());
         }
-        if (endDate != null)
+        if (endDateStr != null && !endDateStr.isBlank() && !endDateStr.isEmpty())
         {
-            endDateTimestamp = new Timestamp(endDate.getTime());
+            LocalDate endDateLocal = LocalDate.parse(endDateStr);
+            endDateTimestamp = Timestamp.valueOf(endDateLocal.atStartOfDay());
         }
-        List<Device> devices = deviceRepository.statisticsBorrowingDevice(startDateTimestamp, endDateTimestamp);
 
-        return devices.size();
+        return deviceRepository.statisticsTotalBorrowingDevice(startDateTimestamp, endDateTimestamp);
     }
 
     @Override

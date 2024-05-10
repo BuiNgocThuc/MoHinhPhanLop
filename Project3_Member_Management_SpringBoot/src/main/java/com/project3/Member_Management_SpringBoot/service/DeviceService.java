@@ -31,7 +31,7 @@ public interface DeviceService {
 
     void deleteDeviceById(int id);
     
-    Integer statisticsBorrowedDevice(String name, Date startDate, Date endDate);
-
-    Integer statisticsBorrowingDevice(Date startDate, Date endDate);
+    Integer statisticsTotalBorrowedDevice(String name, String startDate, String endDate);
+    
+    Integer statisticsTotalBorrowingDevice(String startDate, String endDate);
 }

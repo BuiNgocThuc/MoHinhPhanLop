@@ -24,8 +24,8 @@ public interface MemberRepository extends CrudRepository<Member, Integer> {
 
     Member findMemberById(Integer id);
 
-    Optional<Member> findByEmail(String email);
-
-    @Query("SELECT m FROM Usage u JOIN u.member m WHERE (:department IS NULL OR m.department = :department) AND (:major IS NULL OR m.major = :major) AND u.enteredTime IS NOT NULL AND (:startDate IS NULL OR u.enteredTime >= :startDate) AND (:endDate IS NULL OR u.enteredTime <= :endDate)")
-    List<Member> statisticsMember(@Param("department") String department, @Param("major") String major, @Param("startDate") Timestamp startDate, @Param("endDate") Timestamp endDate);
+    Optional<Member> findByEmail(String email); 
+    
+     @Query("SELECT COUNT(DISTINCT m.id) FROM Member m JOIN Usage u ON u.member.id = m.id WHERE (:department IS NULL OR m.department = :department) AND (:major IS NULL OR m.major = :major) AND u.enteredTime IS NOT NULL AND (:startDate IS NULL OR u.enteredTime >= :startDate) AND (:endDate IS NULL OR u.enteredTime <= :endDate)")
+    Integer statisticsTotalMember(@Param("department") String department, @Param("major") String major, @Param("startDate") Timestamp startDate, @Param("endDate") Timestamp endDate);
 }
