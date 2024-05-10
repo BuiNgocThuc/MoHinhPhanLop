@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UsageController {
     private final UsageService usageService;
     
-    @GetMapping("/showListBorrowedDevices")
+    @GetMapping("/admin/membersList/showListBorrowedDevices")
     @AuthRequire
     public String showListBorrowedDevices(Model theModel) {
         List<Usage> borrowedDevices = usageService.getBorrowedDevices();

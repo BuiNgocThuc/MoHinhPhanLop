@@ -14,10 +14,11 @@ public class IndexController {
         return "users/profile";
     }
     
-    @GetMapping("/admin/dashboard")
-    @AuthRequire
-    public String dashboard(Model theModel) {
-        return "admin/statistics";
-    }
+//    @GetMapping("/admin/dashboard")
+//    @AuthRequire
+//    @RoleRequire({"admin"})
+//    public String dashboard(Model theModel) {
+//        return "admin/statistics";
+//    }
 }
 

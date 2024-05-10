@@ -14,6 +14,7 @@ import com.project3.Member_Management_SpringBoot.model.Member;
 import com.project3.Member_Management_SpringBoot.model.Usage;
 import com.project3.Member_Management_SpringBoot.repository.UsageRepository;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -73,7 +74,8 @@ public class UsageServiceImpl implements UsageService {
         Device selectedDevice = usage.getDevice();
         Date reserveDate = new Date(usage.getReserveTime().getTime());
         List<Usage> existedUsage = usageRepository.checkValidateDevice(selectedDevice, reserveDate);
-        if (existedUsage.isEmpty()) {
+        if (existedUsage.isEmpty())
+        {
             save(usage);
             return true;
         }
@@ -124,6 +126,7 @@ public class UsageServiceImpl implements UsageService {
     public List<Usage> findByMemberIdAndBorrowedTimeNotNull(Integer memberId) {
         return usageRepository.findByMemberIdAndBorrowedTimeNotNull(memberId);
     }
+
     @Override
     public List<Usage> findUsageListYetPaid(Integer deviceId) {
         return usageRepository.findUsageListYetPaid(deviceId);
@@ -132,5 +135,68 @@ public class UsageServiceImpl implements UsageService {
     @Override
     public List<Usage> findUsageListYetPaidLikeId(Integer deviceIdPattern) {
         return usageRepository.findUsageListYetPaidLikeId(deviceIdPattern);
+    }
+
+    @Override
+    public List<Usage> statisticsMember(String department, String major, String startDate, String endDate) {
+        Timestamp startDateTimestamp = null;
+        Timestamp endDateTimestamp = null;
+        if (startDate != null && !startDate.isBlank() && !startDate.isEmpty())
+        {
+            LocalDate startDateLocal = LocalDate.parse(startDate);
+            startDateTimestamp = Timestamp.valueOf(startDateLocal.atStartOfDay());
+        }
+        if (endDate != null && !endDate.isBlank() && !endDate.isEmpty())
+        {
+            LocalDate endDateLocal = LocalDate.parse(endDate);
+            endDateTimestamp = Timestamp.valueOf(endDateLocal.atStartOfDay());
+        }
+        List<Usage> members = usageRepository.statisticsMember(department, major, startDateTimestamp, endDateTimestamp);
+
+        return members;
+    }
+
+    @Override
+    public List<Usage> statisticsBorrowedDevice(String name, String startDate, String endDate) {
+        Timestamp startDateTimestamp = null;
+        Timestamp endDateTimestamp = null;
+        if (startDate != null && !startDate.isBlank() && !startDate.isEmpty())
+        {
+            LocalDate startDateLocal = LocalDate.parse(startDate);
+            startDateTimestamp = Timestamp.valueOf(startDateLocal.atStartOfDay());
+        }
+        if (endDate != null && !endDate.isBlank() && !endDate.isEmpty())
+        {
+            LocalDate endDateLocal = LocalDate.parse(endDate);
+            endDateTimestamp = Timestamp.valueOf(endDateLocal.atStartOfDay());
+        }
+        if (name != null && !name.isBlank() && !name.isEmpty())
+        {
+            name = "%".concat(name).concat("%");
+        } else {
+            name = null;
+        }
+        List<Usage> devices = usageRepository.statisticsBorrowedDevice(name, startDateTimestamp, endDateTimestamp);
+
+        return devices;
+    }
+
+    @Override
+    public List<Usage> statisticsBorrowingDevice(String startDate, String endDate) {
+        Timestamp startDateTimestamp = null;
+        Timestamp endDateTimestamp = null;
+        if (startDate != null && !startDate.isBlank() && !startDate.isEmpty())
+        {
+            LocalDate startDateLocal = LocalDate.parse(startDate);
+            startDateTimestamp = Timestamp.valueOf(startDateLocal.atStartOfDay());
+        }
+        if (endDate != null && !endDate.isBlank() && !endDate.isEmpty())
+        {
+            LocalDate endDateLocal = LocalDate.parse(endDate);
+            endDateTimestamp = Timestamp.valueOf(endDateLocal.atStartOfDay());
+        }
+        List<Usage> devices = usageRepository.statisticsBorrowingDevice(startDateTimestamp, endDateTimestamp);
+
+        return devices;
     }
 }
