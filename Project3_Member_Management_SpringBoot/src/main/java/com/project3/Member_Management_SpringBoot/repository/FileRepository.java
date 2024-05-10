@@ -4,10 +4,16 @@
  */
 package com.project3.Member_Management_SpringBoot.repository;
 
+import com.project3.Member_Management_SpringBoot.model.Device;
+import com.project3.Member_Management_SpringBoot.model.Member;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
 /**
  *
  * @author buing
  */
-public class FileRepository {
+@Repository
+public interface FileRepository extends CrudRepository<Member, Integer>{
     
 }

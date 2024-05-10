@@ -30,6 +30,17 @@
                     <i class="fa-solid fa-file-excel"></i>
                     Import Excel
                 </a>
+                <form name="fileUpload" method="POST" action="#" th:action="@{/admin/membersList/importExcel}" enctype="multipart/form-data">
+                    <label>Select File:</label> <br />
+                    <input type="file" name="file" />
+                    <input type="submit" name="submit" value="Upload" />
+                </form>
+            </div>
+            <div th:if="${param.importExcelFailed}">
+                <div class="alert alert-danger">Please upload csv file!</div>
+            </div>
+            <div th:if="${param.importExcelSuccessfully}">
+                <div class="alert alert-info">Import Excel Successfully!</div>
             </div>
             <table class="table table-bordered table-striped table-responsive-md">
                 <thead class="table-dark">

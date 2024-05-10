@@ -24,7 +24,30 @@ $(document).ready(function () {
     });
 });
 
-const getStatictisDevice = () => {
+const updateTableDevice = (data) => {
+    const tbody = $('#tableDevice tbody');
+    tbody.empty(); // Xóa nội dung hiện tại của tbody
+    if (data && data.device && data.device.length > 0) {
+        // Lặp qua mảng các đối tượng trong thuộc tính "device"
+        data.device.forEach((item, index) => {
+            const row = $('<tr>');
+            row.append($('<td>').text(index + 1));
+            row.append($('<td>').text(item.deviceID)); // Truy cập thuộc tính "deviceID"
+            row.append($('<td>').text(item.deviceName)); // Truy cập thuộc tính "deviceName"
+            row.append($('<td>').text(item.deviceDescription)); // Truy cập thuộc tính "deviceDescription"
+            row.append($('<td>').text(item.borrowedTime)); // Truy cập thuộc tính "borrowedTime"
+            tbody.append(row); // Thêm dòng mới vào tbody
+        });
+    } else {
+        tbody.append($('<tr>').append($('<td colspan="5">').text('No data available')));
+    }
+};
+
+const updateTotalDevices = (data) => {
+    $('#totalDevices').text(data.total);
+};
+
+const getStatisticDevice = () => {
     const searchDeviceVal = $('#inputSearchDevice').val();
     const selectDeviceVal = $('#selectDevice').val();
     const startDateDevice = $('#inputDateStartDevice').val();
@@ -66,40 +89,19 @@ function handleDeleteDiscipline(id) {
     window.location.href = `/deleteDiscipline?id=${id}`
 }
 
-document.getElementById('soTien2').addEventListener('input', function (e) {
-    e.target.value = e.target.value.replace(/[^0-9]/g, '');
-});
+//document.getElementById('soTien2').addEventListener('input', function (e) {
+//    e.target.value = e.target.value.replace(/[^0-9]/g, '');
+//});
 
 $(document).ready(function () {
     $('#inputSearchDevice').on('keypress', function (e) {
         if (e.which === 13) {
-            getStatictisDevice();
+            getStatisticDevice();
         }
     });
 });
 
-const updateTableDevice = (data) => {
-    const tbody = $('#tableDevice tbody');
-    tbody.empty(); // Xóa nội dung hiện tại của tbody
-    if (data && data.device && data.device.length > 0) {
-        // Lặp qua mảng các đối tượng trong thuộc tính "device"
-        data.device.forEach((item, index) => {
-            const row = $('<tr>');
-            row.append($('<td>').text(index + 1));
-            row.append($('<td>').text(item.deviceID)); // Truy cập thuộc tính "deviceID"
-            row.append($('<td>').text(item.deviceName)); // Truy cập thuộc tính "deviceName"
-            row.append($('<td>').text(item.deviceDescription)); // Truy cập thuộc tính "deviceDescription"
-            row.append($('<td>').text(item.borrowedTime)); // Truy cập thuộc tính "borrowedTime"
-            tbody.append(row); // Thêm dòng mới vào tbody
-        });
-    } else {
-        tbody.append($('<tr>').append($('<td colspan="5">').text('No data available')));
-    }
-};
 
-const updateTotalDevices = (data) => {
-    $('#totalDevices').text(data.total);
-};
 
 const getStatisticMember = () => {
     const selectedDepartment = $('#departmentForm').val();
