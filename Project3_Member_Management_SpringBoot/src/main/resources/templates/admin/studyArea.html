@@ -1,0 +1,40 @@
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" th:replace="~{/admin/dashboard}">
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div th:fragment="contentAdmin">
+            <div class="d-flex gap-2">
+                <form action="#" method="POST" style="padding-right: 8px;border-right: 1px solid #000;">
+                    <label for="memberID" class="form-label">Enter member ID</label>
+                    <input id="memberID" name="memberID" type="text" class="form-control"/>
+                </form>
+                <div class="d-flex flex-column">
+                    <div class="d-flex flex-column mb-3">
+                        <h3 class="fw-bold">Member Information</h3>
+                        <hr style="margin: 0;" />
+                    </div>
+                    <form class="">
+                        <div class="mb-2">
+                            <label for="fullName" class="form-label">Full Name</label>
+                            <input type="text" id="fullName" name="fullName" class="form-control"/>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-2">
+                                <label for="department" class="form-label">Department</label>
+                                <input type="text" id="department" name="department" class="form-control"/>
+                            </div>
+                            <div class="col mb-2">
+                                <label for="major" class="form-label">Major</label>
+                                <input type="text" id="major" name="major" class="form-control"/>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-2">Confirm Access</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
