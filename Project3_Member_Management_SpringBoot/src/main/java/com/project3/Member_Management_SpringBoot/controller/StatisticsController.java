@@ -112,4 +112,54 @@ public class StatisticsController {
         return json.toString();
 
     }
+    
+    @PostMapping("/admin/dashboard/statisticMember")
+    @AuthRequire
+    @RoleRequire("admin")
+    public @ResponseBody
+    String statisticMember(Model theModel, @RequestParam("department") String department, @RequestParam("major") String major, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate) {
+        List<Usage> memberData = new ArrayList<>();
+        Integer totalMember = 0;
+
+        if (department.equals("ALL"))
+        {
+            department = null;
+        }
+        if (major.equals("--Tất cả ngành--"))
+        {
+            major = null;
+        }
+        
+        // member statistic
+        memberData = usageService.statisticsMember(department, major, startDate, endDate);
+
+        totalMember = memberService.statisticsTotalMember(department, major, startDate, endDate);
+
+    
+        JSONArray array = new JSONArray();
+        JSONObject json = new JSONObject();
+        for (Usage usage : memberData)
+        {
+            Integer memberID = usage.getMember().getId();
+            String memberName = usage.getMember().getName();
+            String memberDepartment = usage.getMember().getDepartment();
+            String memberMajor = usage.getMember().getMajor();
+            Timestamp enteredTime = usage.getEnteredTime();
+            
+            JSONObject item = new JSONObject();
+            item.put("memberID", memberID);
+            item.put("memberName", memberName);
+            item.put("memberDepartment", memberDepartment);
+            item.put("memberMajor", memberMajor);
+             item.put("enteredTime", enteredTime);
+             
+             array.put(item);
+        }
+        json.put("members", array);
+        json.put("total", totalMember);
+        
+
+        return json.toString();
+
+    }
 }
