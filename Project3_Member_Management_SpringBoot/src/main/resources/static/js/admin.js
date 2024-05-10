@@ -44,3 +44,21 @@ const getStatictisDevice = () => {
         }
     });
 }
+
+function CheckFineReadonly() {
+    var isBoiThuong = $("#hinhThucXuLy2").val() === "Bồi thường" || $("#hinhThucXuLy2").val() === "Khóa thẻ 1 tháng và bồi thường";
+    $("#soTien2").prop('readonly', !isBoiThuong).val(!isBoiThuong ? '' : $("#soTien2").val());
+}
+
+$(document).ready(CheckFineReadonly);
+
+$(document).on("change", "#hinhThucXuLy2", CheckFineReadonly);
+
+function handleDeleteDiscipline(id) {
+    window.location.href = `/deleteDiscipline?id=${id}`
+}
+
+document.getElementById('soTien2').addEventListener('input', function (e) {
+    e.target.value = e.target.value.replace(/[^0-9]/g, '');
+});
+

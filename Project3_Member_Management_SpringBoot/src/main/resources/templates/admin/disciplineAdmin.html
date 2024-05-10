@@ -27,6 +27,28 @@
                 <h3 class="fw-bold">Violation Management</h3>
                     <hr style="margin: 0;" />
             </div>
+            
+            <div
+                th:if="${param.err}"
+                class="alert alert-danger alert-dismissible"
+            >
+                <a
+                    href="#"
+                    class="close"
+                    data-dismiss="alert"
+                    aria-label="close"
+                    >&times;</a
+                >
+                <span th:text="${param.err}"></span>
+            </div>
+            <div
+                th:if="${param.success}"
+                class="alert alert-success alert-dismissible"
+            >
+                <a href="#" class="close" data-dismiss="alert" aria-label="close" >&times;</a>
+                <span th:text="${param.success}"></span>
+            </div>
+            
             <div class="d-flex justify-content-between align-items-center">
                 <div class="input-group">
                     <input type="text" class="form-control" id="searchDiscipline" placeholder="Search...">
@@ -62,15 +84,21 @@
                         <td style="vertical-align: middle" th:text="${discipline.description}"></td>
                         <td style="vertical-align: middle" th:text="${discipline.fine}"></td> 
                         <td style="vertical-align: middle" th:text="${#dates.format(discipline.date, 'dd/MM/yyyy HH:mm')}"></td> 
-<!--                        <td style="vertical-align: middle" th:text="${discipline.status}"></td>-->
                         <td style="vertical-align: middle">
                                    <span th:if="${discipline.status == 0}" class="badge bg-success">Đã xử lý</span>
                                    <span th:if="${discipline.status == 1}" class="badge bg-danger">Chưa xử lý</span>
                         </td> 
                         <td>  
                             <div class="d-flex gap-1">
-                                <a th:href="@{/admin/editDiscipline?id={id}(id=${discipline.id})}" class="btn btn-primary">Edit</a>  
-                                <a th:href="@{/admin/deleteDiscipline?id={id}(id=${discipline.id})}" class="btn btn-danger">Delete</a>  
+                                <a th:href="@{/admin/disciplineList/editDisciplineForm?id={id}(id=${discipline.id})}" 
+                                   class="btn btn-primary">
+                                    Edit
+                                </a>
+                                
+                                <a class="btn btn-danger"
+                                   th:onclick="'confirm(\'Are you sure you want to delete this discipline ?\') && handleDeleteDiscipline(' + ${discipline.id} + ');'" >
+                                    Delete
+                                </a>
                             </div>
                         </td>  
                     </tr>  
@@ -84,21 +112,26 @@
     </body>
 </html>
 <script>
-          $(document).ready(function () {
-        $('#searchDiscipline').on('input', function () {
-            var searchText = $(this).val().toLowerCase();
-            filterTable(searchText);
-        });
-        $('#clearSearch').click(function () {
-            $('#searchDiscipline').val('');
-            filterTable(''); 
-        });
-        function filterTable(searchText) {
-            $('tbody tr').each(function () {
-                var content = $(this).text().toLowerCase();
-                var match = content.indexOf(searchText) !== -1;
-                $(this).toggle(match);
+        $(document).ready(function () {
+            $('#searchDiscipline').on('input', function () {
+                var searchText = $(this).val().toLowerCase();
+                filterTable(searchText);
             });
-        }
+            $('#clearSearch').click(function () {
+                $('#searchDiscipline').val('');
+                filterTable(''); 
+            });
+            function filterTable(searchText) {
+                $('tbody tr').each(function () {
+                    var content = $(this).text().toLowerCase();
+                    var match = content.indexOf(searchText) !== -1;
+                    $(this).toggle(match);
+                });
+            }
+            $(document).on("click",".close",function (){ 
+                console.log("close OKK")
+                $(this).parent().hide();
+            })
         });
-        </script>
+</script>
+
