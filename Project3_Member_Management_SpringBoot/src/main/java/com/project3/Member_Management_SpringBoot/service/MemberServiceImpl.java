@@ -9,6 +9,7 @@ import com.project3.Member_Management_SpringBoot.model.Discipline;
 import com.project3.Member_Management_SpringBoot.model.Member;
 import com.project3.Member_Management_SpringBoot.repository.MemberRepository;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -80,19 +81,22 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public Integer statisticsMember(String department, String major, Date startDate, Date endDate) {
+    public Integer statisticsTotalMember(String department, String major, String startDateStr, String endDateStr) {
         Timestamp startDateTimestamp = null;
         Timestamp endDateTimestamp = null;
-        if (startDate != null)
+        if (startDateStr != null && !startDateStr.isBlank() && !startDateStr.isEmpty())
         {
-            startDateTimestamp = new Timestamp(startDate.getTime());
+            LocalDate startDateLocal = LocalDate.parse(startDateStr);
+            startDateTimestamp = Timestamp.valueOf(startDateLocal.atStartOfDay());
         }
-        if (endDate != null)
+        if (endDateStr != null && !endDateStr.isBlank() && !endDateStr.isEmpty())
         {
-            endDateTimestamp = new Timestamp(endDate.getTime());
+            LocalDate endDateLocal = LocalDate.parse(endDateStr);
+            endDateTimestamp = Timestamp.valueOf(endDateLocal.atStartOfDay());
         }
-        List<Member> members = memberRepository.statisticsMember(department, major, startDateTimestamp, endDateTimestamp);
-
-        return members.size();
+        
+        return memberRepository.statisticsTotalMember(department, major, startDateTimestamp, endDateTimestamp);
     }
+
+    
 }

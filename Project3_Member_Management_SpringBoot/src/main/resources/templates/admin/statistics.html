@@ -22,19 +22,20 @@
                     <div class="d-flex">
                         <div class="col w-100">
                             <select onchange="getStatictisDevice()" id="selectDevice" class="form-select w-50" aria-label="Default select example">
-                                <option selected value="Thiết bị được mượn">Thiết bị được mượn</option>
-                                <option value="Thiết bị đang được mượn">Thiết bị đang được mượn</option>
+                                <option selected value="borrowed">Thiết bị được mượn</option>
+                                <option value="borrowing">Thiết bị đang được mượn</option>
                             </select>
                         </div>
                         <div class="col d-flex gap-1">
-                            <input id="inputDateStartDevice" type="datetime-local" class="form-control" placeholder="Date" required />
-                            <input id="inputDateEndDevice" type="datetime-local" class="form-control" placeholder="Date" required />
+                            <input onchange="getStatictisDevice()" id="inputDateStartDevice" type="date" class="form-control" placeholder="Date" required />
+                            <input onchange="getStatictisDevice()" id="inputDateEndDevice" type="date" class="form-control" placeholder="Date" required />
                         </div>
                     </div>
                     <div style="max-height: 247px;overflow-y: scroll">
-                        <table style="margin-bottom: 0px;" class="table table-bordered table-striped">
+                        <table style="margin-bottom: 0px;" class="table table-bordered table-striped" id="tableDevice">
                             <thead class="table-dark" style="position: sticky;top: 0">
                                 <tr>
+                                    <th scope="col">No.</th>
                                     <th scope="col">ID</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Description</th>
@@ -42,47 +43,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>...</td>
-                                    <td>...</td>
-                                    <td>...</td>
-                                    <td>123</td>
-                                </tr>
-                                <tr>
-                                    <td>...</td>
-                                    <td>...</td>
-                                    <td>...</td>
-                                    <td>123</td>
-                                </tr>
-                                <tr>
-                                    <td>...</td>
-                                    <td>...</td>
-                                    <td>...</td>
-                                    <td>123</td>
-                                </tr>
-                                <tr>
-                                    <td>...</td>
-                                    <td>...</td>
-                                    <td>...</td>
-                                    <td>123</td>
-                                </tr>
-                                <tr>
-                                    <td>...</td>
-                                    <td>...</td>
-                                    <td>...</td>
-                                    <td>123</td>
-                                </tr>
-                                <tr>
-                                    <td>...</td>
-                                    <td>...</td>
-                                    <td>...</td>
-                                    <td>123</td>
-                                </tr>
-                                <tr>
-                                    <td>...</td>
-                                    <td>...</td>
-                                    <td>...</td>
-                                    <td>123</td>
+                                <tr th:each="u, stat : ${borrowedDeviceData}">
+                                    <td th:text="${stat.index + 1}">...</td>
+                                    <td th:text="${u.device.id}">...</td>
+                                    <td  th:text="${u.device.name}">...</td>
+                                    <td  th:text="${u.device.description}">...</td>
+                                    <td  th:text="${u.borrowedTime}">...</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -90,7 +56,7 @@
                     <div class="d-flex justify-content-end align-items-center">
                         <div class="d-flex gap-2">
                             <span>Total: </span>
-                            <span class="fw-bold" th:text="${unresolvedDisciplineData}">...</span>
+                            <span class="fw-bold" th:text="${totalDevices}" id="totalDevices">...</span>
                         </div>
                     </div>
                 </div>
@@ -123,7 +89,8 @@
                         <div class="d-flex gap-1">
                             <div class="w-100">
                                 <select class="form-select" id="departmentForm" aria-label="Default select example">
-                                    <option selected value="SP KHTN">SP KHTN</option>
+                                     <option selected value="ALL">--Tất cả các khoa--</option>
+                                    <option value="SP KHTN">SP KHTN</option>
                                     <option value="CNTT">CNTT</option>
                                     <option value="Ngoại Ngữ">Ngoại Ngữ</option>
                                     <option value="SP KHXH">SP KHXH</option>
@@ -142,11 +109,12 @@
 
                                         // Define a mapping of departments to corresponding majors
                                         const departmentMajors = {
-                                            'SP KHTN': ['Sư phạm Toán', 'Sư phạm Lí', 'Sư phạm Hóa'],
-                                            'CNTT': ['Hệ thống thông tin', 'Kĩ thuật máy tính', 'Khoa học máy tính', 'Kĩ thuật phần mềm'],
-                                            'Nghệ Thuật': ['Sư phạm Âm nhạc', 'Sư phạm Mỹ Thuật'],
-                                            'Ngoại Ngữ': ['Sư phạm Anh', 'Ngôn Ngữ Anh'],
-                                            'SP KHXH': ['Sư phạm Văn', 'Sử', 'Địa']
+                                            'ALL':['--Tất cả ngành--'],
+                                            'SP KHTN': ['--Tất cả ngành--', 'Sư phạm Toán', 'Sư phạm Lí', 'Sư phạm Hóa'],
+                                            'CNTT': ['--Tất cả ngành--', 'Hệ thống thông tin', 'Kĩ thuật máy tính', 'Khoa học máy tính', 'Kĩ thuật phần mềm'],
+                                            'Nghệ Thuật': ['--Tất cả ngành--', 'Sư phạm Âm nhạc', 'Sư phạm Mỹ Thuật'],
+                                            'Ngoại Ngữ': ['--Tất cả ngành--', 'Sư phạm Anh', 'Ngôn Ngữ Anh'],
+                                            'SP KHXH': ['--Tất cả ngành--', 'Sư phạm Văn', 'Sử', 'Địa']
                                         };
 
                                         // Function to update majors based on selected department
@@ -179,8 +147,8 @@
                             </div>
                         </div>
                         <div class="d-flex gap-1">
-                            <input type="datetime-local" class="form-control"  placeholder="Date" required id="datetimeInput"/>
-                            <input type="datetime-local" class="form-control" placeholder="Date" required id="datetimeInput"/>
+                            <input type="date" class="form-control"  placeholder="Date" required id="datetimeInput"/>
+                            <input type="date" class="form-control" placeholder="Date" required id="datetimeInput"/>
                         </div>
                     </div>
                 </div>
@@ -188,72 +156,30 @@
                     <table style="margin-bottom: 0px;" class="table table-bordered table-striped">
                         <thead class="table-dark" style="position:sticky;top: 0">
                             <tr>
+                                <th scope="col">No.</th>
                                 <th scope="col">ID</th>
                                 <th scope="col">Name</th>
-                                <th scope="col">Major</th>
                                 <th scope="col">Department</th>
-                                <th scope="col">Enrollment Date</th>
+                                <th scope="col">Major</th>
+                                <th scope="col">Entered Date</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>...</td>
-                                <td>...</td>
-                                <td>...</td>
-                                <td>123</td>
-                                <td>123</td>
-                            </tr>
-                            <tr>
-                                <td>...</td>
-                                <td>...</td>
-                                <td>...</td>
-                                <td>123</td>
-                                <td>123</td>
-
-                            </tr>
-                            <tr>
-                                <td>...</td>
-                                <td>...</td>
-                                <td>...</td>
-                                <td>123</td>
-                                <td>123</td>
-
-                            </tr>
-                            <tr>
-                                <td>...</td>
-                                <td>...</td>
-                                <td>...</td>
-                                <td>123</td>
-                                <td>123</td>
-                            </tr>
-                            <tr>
-                                <td>...</td>
-                                <td>...</td>
-                                <td>...</td>
-                                <td>123</td>
-                                <td>123</td>
-                            </tr>
-                            <tr>
-                                <td>...</td>
-                                <td>...</td>
-                                <td>...</td>
-                                <td>123</td>
-                                <td>123</td>
-                            </tr>
-                            <tr>
-                                <td>...</td>
-                                <td>...</td>
-                                <td>...</td>
-                                <td>123</td>
-                                <td>123</td>
+                            <tr th:each="usage, stat : ${memberData}">
+                                <td th:text="${stat.index + 1}">...</td>
+                                <td th:text="${usage.member.id}">...</td>
+                                <td th:text="${usage.member.name}">...</td>
+                                <td th:text="${usage.member.department}">...</td>
+                                <td th:text="${usage.member.major}">...</td>
+                                <td th:text="${usage.enteredTime}">...</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="d-flex justify-content-end align-items-center">
                     <div class="d-flex gap-2">
-                        <span>Total: </span>
-                        <span class="fw-bold" th:text="${unresolvedDisciplineData}">...</span>
+                        <span>Total Members: </span>
+                        <span class="fw-bold" th:text="${totalMembers}">...</span>
                     </div>
                 </div>
             </div>

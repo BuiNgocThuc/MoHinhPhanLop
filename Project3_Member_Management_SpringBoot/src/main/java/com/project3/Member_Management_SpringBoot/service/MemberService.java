@@ -37,7 +37,6 @@ public interface MemberService {
     void deleteById(Integer ID);
 
     void deleteByActiveYear(String activeYear);
-
-    Integer statisticsMember(String department, String major, Date startDate, Date endDate);
-
+    
+    Integer statisticsTotalMember(String department, String major, String startDate,String endDate);
 }

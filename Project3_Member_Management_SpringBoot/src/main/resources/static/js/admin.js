@@ -25,14 +25,15 @@ $(document).ready(function () {
 });
 
 const getStatictisDevice = () => {
-    const searchDeviceVal = $('#inputSearchDevice').val();
+    const searchDeviceVal = $('#inputSearchDevice').val().trim();
     const selectDeviceVal = $('#selectDevice').val();
-    const startDateDevice = $('#inputDateStartDevice').val();
-    const endDateDevice = $('#inputDateEndDevice').val();
+    const startDateDevice = $('#inputDateStartDevice').val().trim();
+    const endDateDevice = $('#inputDateEndDevice').val().trim();
+
     // call ajax
     $.ajax({
-        url: '/admin/device/statictis',
-        type: 'GET',
+        url: '/admin/dashboard/statisticDevice',
+        type: 'POST',
         data: {
             search: searchDeviceVal,
             select: selectDeviceVal,
@@ -40,7 +41,42 @@ const getStatictisDevice = () => {
             endDate: endDateDevice
         },
         success: function (data) {
-            console.log(data)
+            dataJSON = JSON.parse(data);
+           updateTable(dataJSON);
+           updateTotalDevices(dataJSON);
+        },
+        error: function (xhr, status, error) {
+            // Xử lý lỗi nếu có
+            console.error(error);
+            console.error(xhr.responseText);
         }
     });
-}
+};
+
+$(document).ready(function () {
+    $('#inputSearchDevice').on('keypress', function (e) {
+        if (e.which === 13) {
+            getStatictisDevice();
+        }
+    });
+});
+
+// Hàm cập nhật dữ liệu trên giao diện
+const updateTable = (data) => {
+   const tbody = $('#tableDevice tbody');
+    tbody.empty(); // Xóa nội dung hiện tại của tbody
+    
+    $.each(data.device, function(index, item) {
+        const row = $('<tr>');
+        row.append($('<td>').text(index + 1)); // Số thứ tự
+        row.append($('<td>').text(item.deviceID)); // ID của thiết bị
+        row.append($('<td>').text(item.deviceName)); // Tên của thiết bị
+        row.append($('<td>').text(item.deviceDescription)); // Mô tả của thiết bị
+        row.append($('<td>').text(item.borrowedTime)); // Thời gian mượn
+        tbody.append(row); // Thêm dòng mới vào tbody
+    });
+};
+
+const updateTotalDevices = (data) => {
+    $('#totalDevices').text(data.total);
+};

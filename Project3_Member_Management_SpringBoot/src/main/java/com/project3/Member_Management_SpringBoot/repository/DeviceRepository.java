@@ -18,6 +18,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface DeviceRepository extends CrudRepository<Device, Integer> {
+
     @Query("SELECT d FROM Device d")
     List<Device> findAllDevices();
 
@@ -30,9 +31,9 @@ public interface DeviceRepository extends CrudRepository<Device, Integer> {
     @Query("SELECT d FROM Device d WHERE CAST(d.id AS string) LIKE CONCAT(:id, '%')")
     List<Device> findAllDevicesLikeId(@Param("id") int id);
     
-    @Query("SELECT d FROM Usage u JOIN u.device d WHERE u.paidTime IS NOT NULL AND (:startDate IS NULL OR u.borrowedTime >= :startDate) AND (:endDate IS NULL OR u.paidTime <= :endDate) AND (:name IS NULL OR d.name LIKE :name)")
-    List<Device> statisticsBorrowedDevice(@Param("name") String name, @Param("startDate") Timestamp startDate, @Param("endDate") Timestamp endDate);
+    @Query("SELECT COUNT(DISTINCT d.id) FROM Device d JOIN Usage u ON u.device.id = d.id WHERE u.paidTime IS NOT NULL AND (:startDate IS NULL OR u.borrowedTime >= :startDate) AND (:endDate IS NULL OR u.paidTime <= :endDate) AND (:name IS NULL OR d.name LIKE :name)")
+    Integer statisticsTotalBorrowedDevice(@Param("name") String name, @Param("startDate") Timestamp startDate, @Param("endDate") Timestamp endDate);
     
-    @Query("SELECT d FROM Usage u JOIN u.device d WHERE u.borrowedTime IS NOT NULL AND u.paidTime IS NULL AND (:startDate IS NULL OR u.borrowedTime >= :startDate) AND (:endDate IS NULL OR u.borrowedTime <= :endDate)")
-    List<Device> statisticsBorrowingDevice(@Param("startDate") Timestamp startDate, @Param("endDate") Timestamp endDate);
+    @Query("SELECT COUNT(DISTINCT d.id) FROM Device d JOIN Usage u ON u.device.id = d.id WHERE u.borrowedTime IS NOT NULL AND u.paidTime IS NULL AND (:startDate IS NULL OR u.borrowedTime >= :startDate) AND (:endDate IS NULL OR u.borrowedTime <= :endDate)")
+    Integer statisticsTotalBorrowingDevice(@Param("startDate") Timestamp startDate, @Param("endDate") Timestamp endDate);
 }
