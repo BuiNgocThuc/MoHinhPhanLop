@@ -99,6 +99,7 @@
                     >Add Device</a
                 >
             </div>
+            <!--Modal Popup for multi delete-->
             <div class="modal fade" id="myModal" role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -168,6 +169,7 @@
                     </div>
                 </div>
             </div>
+            <!--Table display items-->
             <table
                 class="table table-bordered table-striped table-responsive-md"
                 id="deviceTable"
@@ -214,18 +216,6 @@
                                 </form>
                             </div>
                         </td>
-                        th:value="${query}"
-                    /tr>
-                </div>
-            </div>
-
-            <!-- ... (existing code for table and modals) ... -->
-
-            <table class="table table-bordered table-striped table-responsive-md" id="deviceTable">
-                <!-- ... (existing table header) ... -->
-                <tbody>
-                    <tr th:each="device : ${devices}">
-                        <!-- ... (existing table rows) ... -->
                     </tr>
                     <tr th:if="${#lists.isEmpty(devices)}">
                         <td colspan="4" class="text-center">No devices available</td>
@@ -233,46 +223,21 @@
                     <tr id="noResults" style="display: none">
                         <td colspan="4" class="text-center">No results found</td>
                     </tr>
-                </tbody>
             </table>
             <!-- Pagination -->
-            <nav aria-label="Device pagination" th:if="${totalPages > 0}">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item" th:classappend="${page == 0} ? 'disabled'">
-                        <a
-                            class="page-link"
-                            th:href="@{/admin/device-management(page=${page - 1}, limit=${limit}, query=${query})}"
-                            aria-label="Previous"
-                        >
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li
-                        class="page-item"
-                        th:classappend="${currentPage == page} ? 'active'"
-                        th:each="currentPage : ${#numbers.sequence(0, totalPages - 1)}"
-                    >
-                        <a
-                            class="page-link"
-                            th:href="@{/admin/device-management(page=${currentPage}, limit=${limit}, query=${query})}"
-                            th:text="${currentPage + 1}"
-                        ></a>
-                    </li>
-                    <li class="page-item" th:classappend="${page == (totalPages - 1)} ? 'disabled'">
-                        <a
-                            class="page-link"
-                            th:href="@{/admin/device-management(page=${page + 1}, limit=${limit}, query=${query})}"
-                            aria-label="Next"
-                        >
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+            <div class="d-flex justify-content-end align-items-center">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
-
         <!-- ... (existing JavaScript code) ... -->
-
         <script>
             $(document).ready(function () {
                 var initialColumnWidths = [];
