@@ -64,5 +64,5 @@ public interface UsageService {
 
     List<Usage> statisticsBorrowingDevice(String startDate, String endDate);
 
-   void enteringStudyArea(Member member);
+   Boolean enteringStudyArea(Member member);
 }

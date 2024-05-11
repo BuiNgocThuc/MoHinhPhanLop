@@ -45,8 +45,8 @@ public interface UsageRepository extends CrudRepository<Usage, Integer> {
     @Query("SELECT u FROM Usage u WHERE u.member.id = :memberId AND u.paidTime IS NOT NULL")
     public List<Usage> findByMemberIdAndBorrowedTimeIsNotNull(@Param("memberId") Integer memberId);
 
-    @Query("SELECT m FROM Member m JOIN FETCH m.usages WHERE m.id = :memberId")
-    Member findMemberWithUsages(@Param("memberId") Integer memberId);
+//    @Query("SELECT m FROM Member m JOIN FETCH m.usages WHERE m.id = :memberId")
+//    Member findMemberWithUsages(@Param("memberId") Integer memberId);
 
     @Query("SELECT u FROM Usage u where u.device.id = :deviceId AND u.paidTime IS NULL")
     List<Usage> findUsageListYetPaid(@Param("deviceId") Integer deviceId);
@@ -62,5 +62,4 @@ public interface UsageRepository extends CrudRepository<Usage, Integer> {
     
     @Query("SELECT u FROM Usage u JOIN u.device d WHERE u.borrowedTime IS NOT NULL AND u.paidTime IS NULL AND (:startDate IS NULL OR u.borrowedTime >= :startDate) AND (:endDate IS NULL OR u.borrowedTime <= :endDate)")
     List<Usage> statisticsBorrowingDevice(@Param("startDate") Timestamp startDate, @Param("endDate") Timestamp endDate);
-
 }

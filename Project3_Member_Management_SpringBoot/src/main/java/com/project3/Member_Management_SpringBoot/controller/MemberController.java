@@ -88,4 +88,5 @@ public class MemberController {
         theModel.addAttribute("member", checkedMember);
         return "admin/studyArea";
     }
+    
 }

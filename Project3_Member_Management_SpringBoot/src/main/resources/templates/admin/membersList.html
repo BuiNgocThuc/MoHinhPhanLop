@@ -17,9 +17,33 @@
                 <hr style="margin: 0;" />
             </div>
             <div class="d-flex justify-content-between align-items-center">
-                <!-- Ô tìm kiếm -->
+                <!-- Search input and button -->
                 <div class="input-group">
-                    <input type="search" class="form-control" placeholder="Search...">
+                    <input type="search" class="form-control" placeholder="Search by name or ID..." id="searchInput" th:value="${query}" />
+
+                    <button id="searchButton" class="btn btn-primary">Search</button>
+                    <script>
+                        $(document).ready(function () {
+                            // Event listener for the search button click
+                            $("#searchButton").click(function () {
+                                performSearch();
+                            });
+
+                            // Event listener for pressing Enter key in the search input field
+                            $("#searchInput").keypress(function (event) {
+                                if (event.which === 13) { // Enter key pressed
+                                    event.preventDefault(); // Prevent form submission
+                                    performSearch();
+                                }
+                            });
+
+                            // Function to perform search
+                            function performSearch() {
+                                var query = $("#searchInput").val();
+                                window.location.href = "/admin/membersList?query=" + query;
+                            }
+                        });
+                    </script>
                 </div>
             </div>
             <!-- Button group -->

@@ -34,6 +34,8 @@ public class UsageServiceImpl implements UsageService {
 
     private final MemberService memberService;
 
+    private final DisciplineService disciplineService;
+
     @Override
     public List<Usage> getAllUsage() {
         return (List<Usage>) usageRepository.findAll();
@@ -172,7 +174,8 @@ public class UsageServiceImpl implements UsageService {
         if (name != null && !name.isBlank() && !name.isEmpty())
         {
             name = "%".concat(name).concat("%");
-        } else {
+        } else
+        {
             name = null;
         }
         List<Usage> devices = usageRepository.statisticsBorrowedDevice(name, startDateTimestamp, endDateTimestamp);
@@ -200,11 +203,16 @@ public class UsageServiceImpl implements UsageService {
     }
 
     @Override
-    public void enteringStudyArea(Member member) {
+    public Boolean enteringStudyArea(Member member) {
+        if (disciplineService.findStatusByMember(member) != null)
+        {
+            return false;
+        }
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
         Usage usage = new Usage();
         usage.setMember(member);
         usage.setEnteredTime(currentTime);
         saveUsage(usage);
+        return true;
     }
 }

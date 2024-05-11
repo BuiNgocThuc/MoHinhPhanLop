@@ -55,7 +55,11 @@ public class UsageController {
     
     @PostMapping("/admin/studyAreaManagement/enteringStudyArea")
     public String enteringStudyArea(@ModelAttribute("member") Member member) {
-       usageService.enteringStudyArea(member);
+       Boolean entered = usageService.enteringStudyArea(member);
+        if (!entered)
+        {
+            return "redirect:/admin/studyAreaManagement?hasBlocked";
+        }
         return "redirect:/admin/studyAreaManagement?enterSuccessfully";
     }
 }

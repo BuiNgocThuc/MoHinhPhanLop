@@ -33,6 +33,9 @@
                     <div th:if="${param.enterSuccessfully}" class="my-3">
                         <div class="alert alert-success">Enter successfully!!</div>
                     </div>
+                    <div th:if="${param.hasBlocked}" class="my-3">
+                        <div class="alert alert-danger">Your account has been blocked!!</div>
+                    </div>
                     <form id="formInfo" th:action="@{/admin/studyAreaManagement/enteringStudyArea}" th:object="${member}" method="POST">
                         <input type="hidden" th:field="*{id}"/>
                         <div class="mb-2">
