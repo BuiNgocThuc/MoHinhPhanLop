@@ -2,6 +2,7 @@ package com.project3.Member_Management_SpringBoot.controller;
 
 import com.project3.Member_Management_SpringBoot.annotation.AuthRequire;
 import com.project3.Member_Management_SpringBoot.model.Device;
+import com.project3.Member_Management_SpringBoot.model.Member;
 import com.project3.Member_Management_SpringBoot.model.Usage;
 import com.project3.Member_Management_SpringBoot.service.DeviceService;
 import com.project3.Member_Management_SpringBoot.service.MemberService;
@@ -50,5 +51,11 @@ public class UsageController {
     public String borrowDevice(@ModelAttribute("usage") Usage usage) {
         usageService.borrowDevice(usage);
         return "redirect:/showFormRegisterBorrowDevice?success";
+    }
+    
+    @PostMapping("/admin/studyAreaManagement/enteringStudyArea")
+    public String enteringStudyArea(@ModelAttribute("member") Member member) {
+       usageService.enteringStudyArea(member);
+        return "redirect:/admin/studyAreaManagement?enterSuccessfully";
     }
 }

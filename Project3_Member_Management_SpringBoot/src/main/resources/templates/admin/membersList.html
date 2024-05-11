@@ -24,10 +24,11 @@
             </div>
             <!-- Button group -->
             <div class="d-flex justify-content-start align-items-center my-3">
-                <button type="button" class="btn btn-info me-3" data-bs-toggle="modal" data-bs-target="#myModal">
+                <a href="/admin/membersList/showFormForAdd" class="btn btn-success me-3">Add Member</a>
+                <button type="button" class="btn btn-danger me-3" data-bs-toggle="modal" data-bs-target="#myModal">
                     Batch Delete
                 </button>
-                <a href="/admin/membersList/showFormForAdd" class="btn btn-success me-3">Add Member</a>
+
                 <a href="/admin/membersList/showListBorrowedDevices" class="btn btn-info me-3">Borrow / Return Device</a>
                 <form 
                     name="fileUpload" method="POST" 
@@ -36,6 +37,7 @@
                     <input type="file" name="file" id="excelFile" class="form-control" />
                     <button type="submit" id="uploadExcelFile" class="btn btn-primary">Upload</button>
                 </form>
+                <a href="/admin/studyAreaManagement" class="btn btn-info ms-5">Entering study area</a>
             </div>
             <!-- Modal Popup for multi delete -->
             <div class="modal fade" id="myModal" role="dialog">
@@ -46,14 +48,22 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form method="post" action="/batch-delete">
+                            <form th:action="@{/admin/membersList/deleteByYear}" method="POST">
                                 <div class="form-group mb-2">
                                     <label for="yearInput" class="form-label">Year:</label>
-                                    <input value="2000" type="number" class="form-control" id="yearInput" name="yearInput" placeholder="Enter year" />
+                                    <input  type="number" step="any" class="form-control" id="yearInput" name="activeYear" placeholder="Enter active year" />
                                 </div>
                                 <div class="d-flex gap-2 justify-content-end mt-3">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button id="deleteButton" type="submit" class="btn btn-danger">Delete</button>
+                                    <button id="deleteButton" type="submit" class="btn btn-danger" onclick="">Delete</button>
+                                    <script>
+                                        $(document).ready(function () {
+                                            $("#deleteButton").click(function () {
+                                                var yearValue = $("#yearInput").val();
+                                                console.log("Year value:", yearValue);
+                                            });
+                                        });
+                                    </script>
                                 </div>
                             </form>
                         </div>
@@ -80,7 +90,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="state: ${data}">
+                    <tr th:each="state: ${members}">
                         <td style="vertical-align: middle" th:text="${state.id}">...</td>
                         <td style="vertical-align: middle" th:text="${state.name}">...</td>
                         <td style="vertical-align: middle" th:text="${state.department}">...</td>
@@ -99,6 +109,30 @@
                     </tr>
                 </tbody>
             </table>
+            <!-- Pagination -->
+            <div class="d-flex justify-content-end align-items-center" th:if="${totalPages > 0}">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li th:class="${currentPage == 0 ? 'page-item disabled' : 'page-item'}">
+                            <a th:href="@{/admin/membersList(page=0, query=${query})}" class="page-link">First</a>
+                        </li>
+                        <li th:class="${currentPage == 0 ? 'page-item disabled' : 'page-item'}">
+                            <a th:href="@{/admin/membersList(page=${currentPage - 1}, query=${query})}" class="page-link">Previous</a>
+                        </li>
+                        <th:block th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+                            <li th:class="${currentPage == i ? 'page-item active' : 'page-item'}">
+                                <a th:href="@{/admin/membersList(page=${i}, query=${query})}" class="page-link" th:text="${i + 1}"></a>
+                            </li>
+                        </th:block>
+                        <li th:class="${currentPage == totalPages - 1 ? 'page-item disabled' : 'page-item'}">
+                            <a th:href="@{/admin/membersList(page=${currentPage + 1}, query=${query})}" class="page-link">Next</a>
+                        </li>
+                        <li th:class="${currentPage == totalPages - 1 ? 'page-item disabled' : 'page-item'}">
+                            <a th:href="@{/admin/membersList(page=${totalPages - 1}, query=${query})}" class="page-link">Last</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
     </body>
 </html>

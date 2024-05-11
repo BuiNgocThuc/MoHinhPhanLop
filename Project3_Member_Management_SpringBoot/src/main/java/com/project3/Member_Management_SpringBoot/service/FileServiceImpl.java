@@ -84,12 +84,12 @@ public class FileServiceImpl implements FileService {
 
                 // Đọc dữ liệu từ mỗi ô trong dòng và tạo thành đối tượng Member
                 Member member = new Member();
-                member.setId((int) row.getCell(0).getNumericCellValue());
+                member.setId(Integer.valueOf(row.getCell(0).getStringCellValue()));
                 member.setName(row.getCell(1).getStringCellValue());
                 member.setDepartment(row.getCell(2).getStringCellValue());
                 member.setMajor(row.getCell(3).getStringCellValue());
-                member.setPhone("0" + String.valueOf((int) row.getCell(4).getNumericCellValue()));
-                member.setPassword(String.valueOf((int) row.getCell(5).getNumericCellValue()));
+                member.setPhone( row.getCell(4).getStringCellValue());
+                member.setPassword( row.getCell(5).getStringCellValue());
                 member.setEmail(row.getCell(6).getStringCellValue());
 
                 members.add(member);

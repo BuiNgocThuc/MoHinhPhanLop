@@ -18,7 +18,6 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -198,5 +197,14 @@ public class UsageServiceImpl implements UsageService {
         List<Usage> devices = usageRepository.statisticsBorrowingDevice(startDateTimestamp, endDateTimestamp);
 
         return devices;
+    }
+
+    @Override
+    public void enteringStudyArea(Member member) {
+        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+        Usage usage = new Usage();
+        usage.setMember(member);
+        usage.setEnteredTime(currentTime);
+        saveUsage(usage);
     }
 }

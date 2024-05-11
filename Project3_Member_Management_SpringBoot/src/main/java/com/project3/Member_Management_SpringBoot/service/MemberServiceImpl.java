@@ -15,6 +15,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -68,11 +70,13 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void deleteByActiveYear(String activeYear) {
         String subID = activeYear.substring(2);
+        System.out.println(subID);
         List<Member> memberList = getAllMembers();
         for (Member member : memberList)
         {
             int memberID = member.getId();
             String memberIDStr = String.valueOf(memberID).substring(1, 3);
+            System.out.println(memberIDStr);
             if (subID.equals(memberIDStr))
             {
                 deleteById(memberID);
@@ -96,6 +100,11 @@ public class MemberServiceImpl implements MemberService {
         }
         
         return memberRepository.statisticsTotalMember(department, major, startDateTimestamp, endDateTimestamp);
+    }
+
+    @Override
+    public Page<Member> findAllByNameOrID(String query, Pageable pageable) {
+        return memberRepository.findAllByNameOrID(query, pageable);
     }
 
     

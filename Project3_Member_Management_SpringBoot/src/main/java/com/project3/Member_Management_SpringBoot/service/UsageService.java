@@ -5,6 +5,7 @@
 package com.project3.Member_Management_SpringBoot.service;
 
 import com.project3.Member_Management_SpringBoot.model.Device;
+import com.project3.Member_Management_SpringBoot.model.Member;
 import java.util.List;
 
 import com.project3.Member_Management_SpringBoot.model.Usage;
@@ -62,4 +63,6 @@ public interface UsageService {
     List<Usage> statisticsBorrowedDevice(String name, String startDate, String endDate);
 
     List<Usage> statisticsBorrowingDevice(String startDate, String endDate);
+
+   void enteringStudyArea(Member member);
 }
