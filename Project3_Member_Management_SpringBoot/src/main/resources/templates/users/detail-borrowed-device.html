@@ -25,7 +25,6 @@
                             <th>Device ID</th>
                             <th>Device Name</th>
                             <th>Borrowed Time</th>
-                            <th>Paid Time</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,7 +32,6 @@
                             <td th:text="${i.device.id}">Device ID</td>
                             <td th:text="${i.device.name}">Device Name</td>
                             <td th:text="${#dates.format(i.borrowedTime, 'dd/MM/yyyy HH:mm')}">Borrowed Time</td>
-                            <td th:text="${#dates.format(i.paidTime, 'dd/MM/yyyy HH:mm')}">Paid Time</td>
                         </tr>
                     </tbody>
                 </table>
