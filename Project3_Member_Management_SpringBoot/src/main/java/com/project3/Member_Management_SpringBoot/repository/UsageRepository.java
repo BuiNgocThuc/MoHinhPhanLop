@@ -28,6 +28,7 @@ public interface UsageRepository extends CrudRepository<Usage, Integer> {
 
     @Query("SELECT u FROM Usage u WHERE u.member.id = :memberId AND u.reserveTime IS NOT NULL AND u.paidTime IS NULL")
     List<Usage> findByMemberIdAndReserveTimeNotNull(@Param("memberId") Integer memberId);
+    @Query("SELECT u FROM Usage u WHERE u.member.id = :memberId AND u.borrowedTime IS NOT NULL AND u.paidTime IS NOT NULL AND u.paidTime>=u.borrowedTime AND u.paidTime>=CURRENT_TIMESTAMP()")
 
     @Query("SELECT u FROM Usage u WHERE u.member.id = :memberId AND u.borrowedTime IS NOT NULL")
     List<Usage> findByMemberIdAndBorrowedTimeNotNull(@Param("memberId") Integer memberId);
