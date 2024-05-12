@@ -80,48 +80,12 @@ public class ProfileController {
         if (member == null) {
             return "error";
         }
-        //Iterable<Usage> borrowedDevices = member.getUsages();
+        // Iterable<Usage> borrowedDevices = member.getUsages();
         Iterable<Usage> borrowedDevices = usageService.findByMemberIdAndBorrowedTimeNotNull(member.getId());
         model.addAttribute("borrowedDevices", borrowedDevices);
         return "users/detail-borrowed-device";
     }
 
-//    @GetMapping("/reservedDevicesList")
-//    @AuthRequire
-//    public String getReservationDevice(Model theModel, HttpSession session, HttpServletResponse response)
-//            throws IOException {
-//        Member member = (Member) session.getAttribute("user");
-//
-//        if (member == null) {
-//            response.sendRedirect("/login");
-//            return null;
-//        }
-//
-//        theModel.addAttribute("member", member);
-//
-//        List<Usage> usages = usageService.findByMemberIdAndReserveTimeNotNull(member.getId());
-//
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-//
-//        for (Usage usage : usages) {
-//            if (usage.getBorrowedTime() != null) {
-//                LocalDateTime borrowedTime = usage.getBorrowedTime().toLocalDateTime();
-//                usage.setBorrowedTimeString(borrowedTime.format(formatter));
-//            }
-//            if (usage.getReserveTime() != null) {
-//                LocalDateTime reserveTime = usage.getReserveTime().toLocalDateTime();
-//                usage.setReserveTimeString(reserveTime.format(formatter));
-//            }
-//        }
-//
-//        for (Usage usage : usages) {
-//            System.out.println(usage.getReserveTimeString());
-//        }
-//
-//        theModel.addAttribute("usages", usages);
-//
-//        return "users/reservedDevicesList";
-//    }
     @GetMapping("/reservedDevicesList")
     @AuthRequire
     @Transactional
@@ -132,9 +96,8 @@ public class ProfileController {
         }
         List<Usage> reservedDevices = usageService.findByMemberIdAndReserveTimeNotNull(member.getId());
         model.addAttribute("usages", reservedDevices);
-        model.addAttribute("member", member); // Add member information to the model
-        System.out.println(reservedDevices.size());
-        return "users/reservedDevicesList"; // Return the name of the Thymeleaf template
+        model.addAttribute("member", member);
+        return "users/reservedDevicesList";
     }
 
 }

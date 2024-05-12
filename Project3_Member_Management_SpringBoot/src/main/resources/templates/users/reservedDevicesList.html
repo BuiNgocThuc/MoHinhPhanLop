@@ -55,9 +55,11 @@
 
                 <div class="content">
                     <h3>Devices Reserved</h3>
-                    <table class="table table-striped">
+                    <table
+                        class="table table-bordered table-striped table-responsive-md"
+                    >
                         <div th:if="${!#lists.isEmpty(usages)}">
-                            <thead>
+                            <thead class="table-dark">
                                 <tr>
                                     <th>Usage ID</th>
                                     <th>Device Name</th>
@@ -69,7 +71,10 @@
                         </div>
                         <tbody>
                             <tr th:if="${#lists.isEmpty(usages)}">
-                                <td colspan="5" class="text-center">
+                                <td
+                                    colspan="5"
+                                    class="text-center text-light bg-secondary"
+                                >
                                     No devices reserved.
                                 </td>
                             </tr>
@@ -83,10 +88,13 @@
                                 ></td>
                                 <td th:text="${usage.reserveTime}"></td>
                                 <td>
-                                    <span th:if="${usage.borrowedTime == null}"
-                                        >Not borrowed</span
+                                    <span
+                                        class="badge bg-danger"
+                                        th:if="${usage.borrowedTime == null}"
+                                        >Not borrowed yet</span
                                     >
                                     <span
+                                        class="badge bg-success"
                                         th:if="${usage.borrowedTime != null and usage.paidTime == null}"
                                         >Currently borrowed</span
                                     >
