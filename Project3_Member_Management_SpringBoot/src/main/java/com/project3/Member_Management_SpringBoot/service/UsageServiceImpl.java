@@ -227,7 +227,6 @@ public class UsageServiceImpl implements UsageService {
        List<Usage> reservedOnToday = usageRepository.checkValidateDevice(device, today);
         if (reservedOnToday.isEmpty())
         {
-            deleteAll(reservedOnToday);
             return true; // hasn't been reserved on today
         }
         Usage reservedToday = reservedOnToday.get(0);
