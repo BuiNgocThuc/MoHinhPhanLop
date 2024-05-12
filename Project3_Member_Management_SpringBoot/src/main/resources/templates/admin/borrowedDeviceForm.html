@@ -26,17 +26,20 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             </div>
             <div class="d-flex justify-content-between align-items-start h-100">
                 <div class="h-100 w-50">
-                    <div th:if="${param.successt}">
-                        <div class="alert alert-success">Borrow device successfully</div>
-                    </div>
-                    <form action="#" th:action="@{/admin/membersList//borrowDevice}" method="POST" th:object="${usage}">
+                    <form action="#" th:action="@{/admin/membersList/borrowDevice}" method="POST" th:object="${usage}">
+                        <div th:if="${param.success}">
+                            <div class="alert alert-success">Borrow device successfully</div>
+                        </div>
+                        <div th:if="${param.hasReserved}">
+                            <div class="alert alert-danger">This device has been reserved</div>
+                        </div>
                         <div class="mb-2">
                             <label class="form-label">Member ID</label>
                             <input type="text" class="form-control w-50" placeholder="Member ID" required th:field="*{member.id}"/>
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Device ID</label>
-                        <input type="text" class="form-control w-50" placeholder="Device ID" required th:field="*{device.id}"/>
+                            <input id="deviceId" type="text" class="form-control w-50" placeholder="Device ID" required th:field="*{device.id}"/>
                         </div>
                         <button type="submit" class="btn btn-success mt-3" style="width: 100px;">Save</button>
                     </form>
@@ -58,9 +61,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                 <td style="vertical-align: middle" th:text="${device.name}">...</td>
                                 <td style="vertical-align: middle" th:text="${device.description}">...</td>
                                 <td>
-                                    <a class="btn btn-info"
-                                       onclick="if (!(confirm('Are you sure you want to borrow this device?')))
-                                                   return false">Borrow</a>
+                                    <button type="button" class="btn btn-info btn-borrow" th:attr="onclick=|setId(${device.id})|">Borrow</button>
+                                    <script th:inline="javascript">
+                                        window.setId = (id) => {
+                                            document.querySelector("#deviceId").value = id;
+                                        };
+                                    </script>
                                 </td>
                             </tr>
                         </tbody>

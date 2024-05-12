@@ -17,6 +17,7 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -116,11 +117,12 @@ public class UsageServiceImpl implements UsageService {
         int deviceID = usage.getDevice().getId();
         Member member = memberService.findById(memberID);
         Device device = deviceService.findDeviceById(deviceID);
-        usage.setMember(member);
-        usage.setDevice(device);
         Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
-        usage.setBorrowedTime(currentTimestamp);
-        saveUsage(usage);
+        Usage newBorrow = new Usage();
+        newBorrow.setMember(member);
+        newBorrow.setDevice(device);
+        newBorrow.setBorrowedTime(currentTimestamp);
+        saveUsage(newBorrow);
     }
 
     @Override
@@ -214,5 +216,27 @@ public class UsageServiceImpl implements UsageService {
         usage.setEnteredTime(currentTime);
         saveUsage(usage);
         return true;
+    }
+
+    @Override
+    public Boolean checkAvailableDevice(Usage usage) {
+        Integer deviceID = usage.getDevice().getId();
+        Device device = deviceService.findDeviceById(deviceID);
+        Integer memberID = usage.getMember().getId();
+        Date today = new Date();
+       List<Usage> reservedOnToday = usageRepository.checkValidateDevice(device, today);
+        if (reservedOnToday.isEmpty())
+        {
+            deleteAll(reservedOnToday);
+            return true; // hasn't been reserved on today
+        }
+        Usage reservedToday = reservedOnToday.get(0);
+        Integer reMemberID = reservedToday.getMember().getId();
+        if (Objects.equals(memberID, reMemberID))
+        {
+            deleteAll(reservedOnToday);
+            return true;
+        }
+        return false;
     }
 }

@@ -65,4 +65,6 @@ public interface UsageService {
     List<Usage> statisticsBorrowingDevice(String startDate, String endDate);
 
    Boolean enteringStudyArea(Member member);
+
+    Boolean checkAvailableDevice(Usage usage);
 }

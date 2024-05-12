@@ -44,11 +44,11 @@ public class Member {
     @Column(name = "Password")
     private String password;
 
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "member")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "member")
     private List<Discipline> disciplines;
 
     //@OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "member", fetch = FetchType.EAGER)
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "member",fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "member",fetch = FetchType.LAZY)
     private List<Usage> usages;
 
 }
