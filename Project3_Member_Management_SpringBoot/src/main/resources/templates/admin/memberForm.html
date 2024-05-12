@@ -15,26 +15,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/admin/membersList">Admin</a></li>
                     <li class="breadcrumb-item" aria-current="page"><a href="/admin/membersList">Member</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Add Member</li>
+                    <li class="breadcrumb-item active" aria-current="page" th:text="${param.memberId != null ? 'Edit Member' : 'Add Member'}" >...</li>
                 </ol>
             </nav>
             <div class="d-flex flex-column mb-4">
-                <h3 class="fw-bold">Add Member</h2>
-                    <hr style="margin: 0;" />
+                <h3 class="fw-bold" th:text="${param.memberId != null ? 'Edit Member' : 'Add Member'}"></h3>
+                <hr style="margin: 0;" />
             </div>
-
             <div>
-                <!--                <form action="#" th:action="@{/saveMember}" th:object="${member}" method="POST">
-                                    <input type="text" th:field="*{id}" class="form-control mb-4 w-25" placeholder="ID"/>
-                                    <input type="text" th:field="*{name}" class="form-control mb-4 w-25" placeholder="Name"/>
-                                    <input type="text" th:field="*{department}" class="form-control mb-4 w-25" placeholder="Department"/>
-                                    <input type="text" th:field="*{major}" class="form-control mb-4 w-25" placeholder="Major"/>
-                                    <input type="text" th:field="*{phone}" class="form-control mb-4 w-25" placeholder="Phone number"/>
-                                    <input type="text" th:field="*{email}" class="form-control mb-4 w-25" placeholder="Email"/>
-                                    <input type="text" th:field="*{password}" class="form-control mb-4 w-25" placeholder="Password"/>
-                
-                                    <button type="submit" class="btn btn-info col-2">Save</button>
-                                </form>-->
                 <form action="#" th:action="@{/admin/membersList/saveMember}" th:object="${member}" method="POST"
                       class="row align-items-center">
                     <div class="mb-2">
@@ -125,10 +113,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                placeholder="Password" th:field="*{password}" />
                     </div>
                     <div class="input-group mt-3">
-                        <button type="submit" class="btn btn-lg btn-primary w-100 fs-6">Add member</button>
+                        <button type="submit" class="btn btn-lg btn-primary w-100 fs-6" th:text="${param.memberId != null ? 'Save' : 'Add'}"></button>
                     </div>
                 </form>
-                <!--<a th:href="@{/membersList}">Back to Members List</a>-->
             </div>
         </div>
     </body>

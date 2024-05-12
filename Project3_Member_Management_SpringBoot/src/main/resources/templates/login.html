@@ -43,7 +43,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="idForm" class="form-label">ID</label>
-                            <input type="text" id="idForm" class="form-control form-control-lg bg-light fs-6" placeholder="Your ID" th:field="*{id}" maxlength="10" />
+                            <input type="text" id="idForm" pattern="[0-9]*" class="form-control form-control-lg bg-light fs-6" placeholder="Your ID" th:field="*{id}" maxlength="10" />
                         </div>
                         <div class="position-relative">
                             <label for="passwordForm" class="form-label">Password</label>

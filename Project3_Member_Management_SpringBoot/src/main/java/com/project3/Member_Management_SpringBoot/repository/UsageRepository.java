@@ -28,7 +28,7 @@ public interface UsageRepository extends CrudRepository<Usage, Integer> {
 
     @Query("SELECT u FROM Usage u WHERE u.member.id = :memberId AND u.reserveTime IS NOT NULL AND u.paidTime IS NULL")
     List<Usage> findByMemberIdAndReserveTimeNotNull(@Param("memberId") Integer memberId);
-    @Query("SELECT u FROM Usage u WHERE u.member.id = :memberId AND u.borrowedTime IS NOT NULL")
+    @Query("SELECT u FROM Usage u WHERE u.member.id = :memberId AND u.borrowedTime IS NOT NULL AND u.paidTime IS NOT NULL AND u.paidTime>=u.borrowedTime AND u.paidTime>=CURRENT_TIMESTAMP()")
     List<Usage> findByMemberIdAndBorrowedTimeNotNull(@Param("memberId") Integer memberId);
 
     @Query("SELECT u FROM Usage u WHERE u.device = ?1 AND DATE(u.reserveTime) = ?2")
@@ -45,8 +45,8 @@ public interface UsageRepository extends CrudRepository<Usage, Integer> {
     @Query("SELECT u FROM Usage u WHERE u.member.id = :memberId AND u.paidTime IS NOT NULL")
     public List<Usage> findByMemberIdAndBorrowedTimeIsNotNull(@Param("memberId") Integer memberId);
 
-    @Query("SELECT m FROM Member m JOIN FETCH m.usages WHERE m.id = :memberId")
-    Member findMemberWithUsages(@Param("memberId") Integer memberId);
+//    @Query("SELECT m FROM Member m JOIN FETCH m.usages WHERE m.id = :memberId")
+//    Member findMemberWithUsages(@Param("memberId") Integer memberId);
 
     @Query("SELECT u FROM Usage u where u.device.id = :deviceId AND u.paidTime IS NULL")
     List<Usage> findUsageListYetPaid(@Param("deviceId") Integer deviceId);
@@ -54,4 +54,12 @@ public interface UsageRepository extends CrudRepository<Usage, Integer> {
     @Query("SELECT u FROM Usage u WHERE CAST(u.device.id AS string) LIKE CONCAT(:deviceIdPattern, '%') AND u.paidTime IS NULL")
     List<Usage> findUsageListYetPaidLikeId(@Param("deviceIdPattern") int deviceId);
 
+    @Query("SELECT u FROM Usage u JOIN u.member m WHERE (:department IS NULL OR m.department = :department) AND (:major IS NULL OR m.major = :major) AND u.enteredTime IS NOT NULL AND (:startDate IS NULL OR u.enteredTime >= :startDate) AND (:endDate IS NULL OR u.enteredTime <= :endDate)")
+    List<Usage> statisticsMember(@Param("department") String department, @Param("major") String major, @Param("startDate") Timestamp startDate, @Param("endDate") Timestamp endDate);
+
+    @Query("SELECT u FROM Usage u JOIN u.device d WHERE u.paidTime IS NOT NULL AND (:startDate IS NULL OR u.borrowedTime >= :startDate) AND (:endDate IS NULL OR u.paidTime <= :endDate) AND (:name IS NULL OR d.name LIKE :name)")
+    List<Usage> statisticsBorrowedDevice(@Param("name") String name, @Param("startDate") Timestamp startDate, @Param("endDate") Timestamp endDate);
+    
+    @Query("SELECT u FROM Usage u JOIN u.device d WHERE u.borrowedTime IS NOT NULL AND u.paidTime IS NULL AND (:startDate IS NULL OR u.borrowedTime >= :startDate) AND (:endDate IS NULL OR u.borrowedTime <= :endDate)")
+    List<Usage> statisticsBorrowingDevice(@Param("startDate") Timestamp startDate, @Param("endDate") Timestamp endDate);
 }

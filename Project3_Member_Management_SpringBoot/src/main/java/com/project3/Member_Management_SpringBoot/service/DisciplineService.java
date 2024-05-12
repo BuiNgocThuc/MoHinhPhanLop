@@ -7,6 +7,7 @@ package com.project3.Member_Management_SpringBoot.service;
 import com.project3.Member_Management_SpringBoot.model.Discipline;
 import com.project3.Member_Management_SpringBoot.model.Member;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,10 @@ public interface DisciplineService {
 
     Integer findSumFine();
 
-     List<Discipline> getAllDiscipline();
-     void saveDiscipline(Discipline discipline);
+    List<Discipline> getAllDiscipline();
+    void saveDiscipline(Discipline discipline);
+    
+    Discipline findById(Integer id);
+    
+    void deleteById(Integer id);
 }

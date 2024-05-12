@@ -9,11 +9,14 @@ import com.project3.Member_Management_SpringBoot.model.Discipline;
 import com.project3.Member_Management_SpringBoot.model.Member;
 import com.project3.Member_Management_SpringBoot.repository.MemberRepository;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -67,11 +70,13 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void deleteByActiveYear(String activeYear) {
         String subID = activeYear.substring(2);
+        System.out.println(subID);
         List<Member> memberList = getAllMembers();
         for (Member member : memberList)
         {
             int memberID = member.getId();
             String memberIDStr = String.valueOf(memberID).substring(1, 3);
+            System.out.println(memberIDStr);
             if (subID.equals(memberIDStr))
             {
                 deleteById(memberID);
@@ -80,19 +85,27 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public Integer statisticsMember(String department, String major, Date startDate, Date endDate) {
+    public Integer statisticsTotalMember(String department, String major, String startDateStr, String endDateStr) {
         Timestamp startDateTimestamp = null;
         Timestamp endDateTimestamp = null;
-        if (startDate != null)
+        if (startDateStr != null && !startDateStr.isBlank() && !startDateStr.isEmpty())
         {
-            startDateTimestamp = new Timestamp(startDate.getTime());
+            LocalDate startDateLocal = LocalDate.parse(startDateStr);
+            startDateTimestamp = Timestamp.valueOf(startDateLocal.atStartOfDay());
         }
-        if (endDate != null)
+        if (endDateStr != null && !endDateStr.isBlank() && !endDateStr.isEmpty())
         {
-            endDateTimestamp = new Timestamp(endDate.getTime());
+            LocalDate endDateLocal = LocalDate.parse(endDateStr);
+            endDateTimestamp = Timestamp.valueOf(endDateLocal.atStartOfDay());
         }
-        List<Member> members = memberRepository.statisticsMember(department, major, startDateTimestamp, endDateTimestamp);
-
-        return members.size();
+        
+        return memberRepository.statisticsTotalMember(department, major, startDateTimestamp, endDateTimestamp);
     }
+
+    @Override
+    public Page<Member> findAllByNameOrID(String query, Pageable pageable) {
+        return memberRepository.findAllByNameOrID(query, pageable);
+    }
+
+    
 }
