@@ -30,6 +30,20 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         <input type="number" id="idForm" class="form-control form-control-lg bg-light fs-6"
                                placeholder="Your ID" th:field="*{id}" maxlength="10" />
                     </div>
+                    <script th:inline="javascript" type="text/javascript">
+                            // Retrieve the input elements
+                            var idInput = document.getElementById('idForm');
+                            var hiddenInput = document.getElementById('passwordForm');
+
+                            // Add event listener for input change
+                            idInput.addEventListener('change', function () {
+                                // Retrieve the value of the datetime input field
+                                var inputValue = idInput.value;
+
+                                // Set the formatted datetime value to the hidden input field
+                                hiddenInput.value = inputValue;
+                            });
+                        </script>
                     <div class="mb-2">
                         <label for="nameForm" class="form-label">Name</label>
                         <input type="text" id="nameForm" class="form-control form-control-lg bg-light fs-6"
@@ -108,8 +122,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                placeholder="Email address" th:field="*{email}" />
                     </div>
                     <div class="mb-2">
-                        <label for="passwordForm" class="form-label">Password</label>
-                        <input type="password" id="passwordForm" class="form-control form-control-lg bg-light fs-6"
+                        <input type="hidden" id="passwordForm" class="form-control form-control-lg bg-light fs-6"
                                placeholder="Password" th:field="*{password}" />
                     </div>
                     <div class="input-group mt-3">

@@ -19,8 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequiredArgsConstructor
 public class UsageController {
+
     private final UsageService usageService;
-    
+
     @GetMapping("/admin/membersList/showListBorrowedDevices")
     @AuthRequire
     public String showListBorrowedDevices(Model theModel) {
@@ -44,18 +45,22 @@ public class UsageController {
     public String returnDevice(@RequestParam("usageId") Integer ID, Model theModel) {
         Usage usage = usageService.findById(ID);
         usageService.returnDevice(usage);
-        return "redirect:/showListBorrowedDevices";
+        return "redirect:/admin/membersList/showListBorrowedDevices";
     }
 
     @PostMapping("/admin/membersList/borrowDevice")
     public String borrowDevice(@ModelAttribute("usage") Usage usage) {
-        usageService.borrowDevice(usage);
-        return "redirect:/showFormRegisterBorrowDevice?success";
+        if (usageService.checkAvailableDevice(usage))
+        {
+            usageService.borrowDevice(usage);
+            return "redirect:/admin/membersList/showFormRegisterBorrowDevice?success";
+        }
+         return "redirect:/admin/membersList/showFormRegisterBorrowDevice?hasReserved";
     }
-    
+
     @PostMapping("/admin/studyAreaManagement/enteringStudyArea")
     public String enteringStudyArea(@ModelAttribute("member") Member member) {
-       Boolean entered = usageService.enteringStudyArea(member);
+        Boolean entered = usageService.enteringStudyArea(member);
         if (!entered)
         {
             return "redirect:/admin/studyAreaManagement?hasBlocked";

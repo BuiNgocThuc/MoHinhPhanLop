@@ -67,7 +67,7 @@
                                 <td th:text="${device.name}">...</td>
                                 <td th:text="${device.description}">...</td>
                                 <td>
-                                    <button type="button" class="btn btn-info btn-borrow" th:attr="onclick=|setId(${device.id})|">Borrow</button>
+                                    <button type="button" class="btn btn-info btn-borrow" th:attr="onclick=|setId(${device.id})|">Reserve</button>
                                     <script th:inline="javascript">
                                         window.setId = (id) => {
                                             document.querySelector("#deviceId").value = id;
