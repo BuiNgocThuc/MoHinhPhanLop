@@ -51,7 +51,7 @@ public class ProfileController {
         }
         member.setPassword(newPassword);
         memberService.saveMember(member);
-        return "redirect:/?changePasswordSuccess";
+        return "redirect:/?changePasswordSuccess=true";
     }
 
     @PostMapping(value = "/send-email")

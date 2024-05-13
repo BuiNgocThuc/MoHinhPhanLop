@@ -28,7 +28,6 @@ com\project3\Member_Management_SpringBoot\repository\TokenRepository.class
 com\project3\Member_Management_SpringBoot\controller\MemberController.class
 com\project3\Member_Management_SpringBoot\controller\user\ProfileController.class
 com\project3\Member_Management_SpringBoot\service\UsageService.class
-com\project3\Member_Management_SpringBoot\component\ResponseMessage.class
 com\project3\Member_Management_SpringBoot\controller\DisciplineController.class
 com\project3\Member_Management_SpringBoot\service\FileService.class
 com\project3\Member_Management_SpringBoot\controller\user\ReservationController.class

@@ -33,7 +33,11 @@
                         <td th:text="${state.description}">...</td>
                         <td th:text="${state.fine}">...</td>
                         <td th:text="${state.date}">...</td>
-                        <td th:text="${state.status}">...</td>
+<!--                        <td th:text="${state.status}">...</td>-->
+                        <td style="vertical-align: middle">
+                                   <span th:if="${state.status == 0}" class="badge bg-success">Đã xử lý</span>
+                                   <span th:if="${state.status == 1}" class="badge bg-danger">Chưa xử lý</span>
+                        </td> 
                     </tr>
                 </tbody>
             </table>
