@@ -24,4 +24,6 @@ public interface DisciplineRepository extends CrudRepository<Discipline, Integer
     
     @Query("SELECT SUM(d.fine) FROM Discipline d WHERE d.status = 0")
     Integer findSumFine();
+    
+    List<Discipline> findByMemberAndStatus(Member member, Integer status);
 }

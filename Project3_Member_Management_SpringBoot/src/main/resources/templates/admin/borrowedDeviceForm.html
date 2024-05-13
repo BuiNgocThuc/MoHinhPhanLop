@@ -33,6 +33,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         <div th:if="${param.hasReserved}">
                             <div class="alert alert-danger">This device has been reserved</div>
                         </div>
+                        <div th:if="${param.hasViolated}">
+                            <div class="alert alert-danger">This account has been blocked</div>
+                        </div>
                         <div class="mb-2">
                             <label class="form-label">Member ID</label>
                             <input type="text" class="form-control w-50" placeholder="Member ID" required th:field="*{member.id}"/>

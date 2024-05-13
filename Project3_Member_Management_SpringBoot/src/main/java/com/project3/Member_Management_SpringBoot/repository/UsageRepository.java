@@ -42,7 +42,7 @@ public interface UsageRepository extends CrudRepository<Usage, Integer> {
     @Query("SELECT d FROM Device d LEFT JOIN Usage u ON d.id = u.device.id AND u.paidTime IS NULL AND u.borrowedTime IS NOT NULL WHERE u.device IS NULL")
     List<Device> findAvailableDevices();
 
-    @Query("SELECT u FROM Usage u WHERE u.member.id = :memberId AND u.paidTime IS NOT NULL")
+    @Query("SELECT u FROM Usage u WHERE u.member.id = :memberId AND u.borrowedTime IS NOT NULL AND u.paidTime IS NOT NULL")
     List<Usage> findByMemberIdAndBorrowedTimeIsNotNull(@Param("memberId") Integer memberId);
 
 //    @Query("SELECT m FROM Member m JOIN FETCH m.usages WHERE m.id = :memberId")

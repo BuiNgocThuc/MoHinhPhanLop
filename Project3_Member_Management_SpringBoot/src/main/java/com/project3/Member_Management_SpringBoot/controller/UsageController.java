@@ -50,12 +50,17 @@ public class UsageController {
 
     @PostMapping("/admin/membersList/borrowDevice")
     public String borrowDevice(@ModelAttribute("usage") Usage usage) {
-        if (usageService.checkAvailableDevice(usage))
+        if (!usageService.checkAvailableDevice(usage))
         {
-            usageService.borrowDevice(usage);
-            return "redirect:/admin/membersList/showFormRegisterBorrowDevice?success";
+            return "redirect:/admin/membersList/showFormRegisterBorrowDevice?hasReserved";
+
         }
-         return "redirect:/admin/membersList/showFormRegisterBorrowDevice?hasReserved";
+        if (usageService.checkHasViolated(usage))
+        {
+            return "redirect:/admin/membersList/showFormRegisterBorrowDevice?hasViolated";
+        }
+        usageService.borrowDevice(usage);
+        return "redirect:/admin/membersList/showFormRegisterBorrowDevice?success";
     }
 
     @PostMapping("/admin/studyAreaManagement/enteringStudyArea")

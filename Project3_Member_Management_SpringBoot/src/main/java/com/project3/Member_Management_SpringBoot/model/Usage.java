@@ -40,23 +40,4 @@ public class Usage {
     @ManyToOne
     @JoinColumn(name = "MaTB", nullable = true)
     private Device device;
-
-    // private String borrowedTimeString;
-    // private String reserveTimeString;
-
-    // public String getBorrowedTimeString() {
-    //     return borrowedTimeString;
-    // }
-
-    // public void setBorrowedTimeString(String borrowedTimeString) {
-    //     this.borrowedTimeString = borrowedTimeString;
-    // }
-
-    // public String getReserveTimeString() {
-    //     return reserveTimeString;
-    // }
-
-    // public void setReserveTimeString(String reserveTimeString) {
-    //     this.reserveTimeString = reserveTimeString;
-    // }
 }

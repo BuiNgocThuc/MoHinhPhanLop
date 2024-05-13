@@ -238,4 +238,13 @@ public class UsageServiceImpl implements UsageService {
         }
         return false;
     }
+
+    @Override
+    public Boolean checkHasViolated(Usage usage) {
+          Integer memberID = usage.getMember().getId();
+          Member member = memberService.findById(memberID);
+          return disciplineService.checkViolate(member, 1);
+    }
+    
+    
 }

@@ -77,7 +77,7 @@ public class AuthController {
     @PostMapping("/register")
     public String register(@ModelAttribute("member") Member member) {
         memberService.saveMember(member);
-        return "redirect:/loginPage?successSignUp";
+        return "redirect:/login?successSignUp";
     }
 
     @GetMapping("/logout")

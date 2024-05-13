@@ -62,4 +62,10 @@ public class DisciplineServiceImpl implements DisciplineService {
         disciplineRepository.deleteById(id);
     }
 
+    @Override
+    public Boolean checkViolate(Member member, Integer status) {
+        List<Discipline> hasViolated = disciplineRepository.findByMemberAndStatus(member, status);
+        return !hasViolated.isEmpty();
+    }
+
 }

@@ -67,4 +67,6 @@ public interface UsageService {
    Boolean enteringStudyArea(Member member);
 
     Boolean checkAvailableDevice(Usage usage);
+
+    Boolean checkHasViolated(Usage usage);
 }
