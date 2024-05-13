@@ -28,7 +28,7 @@ public class ScheduledTasks {
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private final UsageService usageService;
     
-    @Scheduled(fixedRate = 3600000)
+    @Scheduled(fixedRate = 60000) // 1 minute = 60000 milliseconds
     public void deleteReservationAutomatically() {
         List<Usage> overdueReservation = findOverdueReservation();
         if (!overdueReservation.isEmpty())
@@ -46,7 +46,7 @@ public class ScheduledTasks {
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
         
         
-        String formattedTimestamp = dateFormat.format(currentTime);
+//        String formattedTimestamp = dateFormat.format(currentTime);
         
         
         return usageService.findOverdueReservation(currentTime);

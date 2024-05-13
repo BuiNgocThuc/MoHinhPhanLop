@@ -34,4 +34,6 @@ public interface DisciplineService {
     Discipline findById(Integer id);
     
     void deleteById(Integer id);
+    
+    Boolean checkViolate(Member member, Integer status);
 }
