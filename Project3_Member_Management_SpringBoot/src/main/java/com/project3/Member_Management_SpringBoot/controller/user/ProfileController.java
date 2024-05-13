@@ -23,6 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ProfileController {
@@ -42,7 +43,7 @@ public class ProfileController {
     }
 
     @PostMapping("/changePassword")
-    public String changePassword(HttpSession session,
+    public String changePassword(HttpSession session,RedirectAttributes model,
             @RequestParam("oldPassword") String oldPassword,
             @RequestParam("newPassword") String newPassword) {
         Member member = (Member) session.getAttribute("user");
@@ -51,7 +52,8 @@ public class ProfileController {
         }
         member.setPassword(newPassword);
         memberService.saveMember(member);
-        return "redirect:/?changePasswordSuccess=true";
+        model.addFlashAttribute("changePasswordSuccess",true);
+        return "redirect:/";
     }
 
     @PostMapping(value = "/send-email")
