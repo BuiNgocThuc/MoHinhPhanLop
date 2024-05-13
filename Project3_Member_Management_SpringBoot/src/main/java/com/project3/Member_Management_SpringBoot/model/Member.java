@@ -21,6 +21,7 @@ import java.util.List;
 @Entity
 @Table(name = "thanhvien")
 public class Member {
+
     @Id
     @Column(name = "MaTV")
     private Integer id;
@@ -43,9 +44,11 @@ public class Member {
     @Column(name = "Password")
     private String password;
 
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "member")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "member")
     private List<Discipline> disciplines;
 
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "member")
+    //@OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "member", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "member",fetch = FetchType.LAZY)
     private List<Usage> usages;
+
 }

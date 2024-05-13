@@ -1,5 +1,7 @@
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Other/javascript.js to edit this template
- */
-
+window.onload = function () {
+    var input = document.getElementById('usernameForm');
+    input.addEventListener('input', function (e) {
+        // Loại bỏ tất cả các ký tự không phải là số từ giá trị nhập
+        this.value = this.value.replace(/\D/g, '');
+    });
+};
